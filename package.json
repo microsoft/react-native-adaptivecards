@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "@types/react": "^16.0.23",
+    "@types/react-native": "^0.50.7",
+    "react-native-typescript-transformer": "^1.1.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "react": "^16.1.1",
+    "react-native": "^0.50.3"
+  }
+}

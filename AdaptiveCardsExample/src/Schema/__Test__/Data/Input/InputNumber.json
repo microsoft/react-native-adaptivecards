@@ -1,0 +1,10 @@
+{
+    "type": "Input.Number",
+    "id": "number",
+    "placeholder": "Enter a number",
+    "min": 1,
+    "max": 10,
+    "value": 3,
+    "spacing": "test spacing",
+    "separator": true
+}

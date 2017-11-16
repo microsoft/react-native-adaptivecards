@@ -1,0 +1,10 @@
+{
+    "type": "Input.Time",
+    "id": "time",
+    "placeholder": "Enter a time",
+    "min": "9:00 AM",
+    "max": "5:00 PM",
+    "value": "11:00 AM",
+    "spacing": "test spacing",
+    "separator": false
+}
