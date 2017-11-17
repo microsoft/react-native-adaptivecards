@@ -5,10 +5,18 @@ import {
     StyleSheet,
 } from 'react-native';
 
-import AdaptiveCard from './src';
 import mockData from './mockData';
+import AdaptiveCard from './AdaptiveCards';
 
-const GAP_CARD = 20;
+const cardGap = 20;
+const cardOverrideStyle = {
+    image: {
+        imageSize: {
+            small: 32,
+            medium: 64,
+        }
+    },
+};
 
 export default class App extends React.Component<any, any> {
     render() {
@@ -22,35 +30,35 @@ export default class App extends React.Component<any, any> {
                 backgroundColor: 'whitesmoke',
             }}
         >
-            <AdaptiveCard adaptiveCard={mockData.adaptiveUpdate} />
+            <AdaptiveCard adaptiveCard={mockData.adaptiveUpdate} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.flightItinerary} />
+            <AdaptiveCard adaptiveCard={mockData.flightItinerary} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.flightUpdate} />
+            <AdaptiveCard adaptiveCard={mockData.flightUpdate} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.foodOrder} />
+            <AdaptiveCard adaptiveCard={mockData.foodOrder} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.imageGallery} />
+            <AdaptiveCard adaptiveCard={mockData.imageGallery} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.inputForm} />
+            <AdaptiveCard adaptiveCard={mockData.inputForm} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.inputs} />
+            <AdaptiveCard adaptiveCard={mockData.inputs} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.restaurant} />
+            <AdaptiveCard adaptiveCard={mockData.restaurant} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.solitaire} />
+            <AdaptiveCard adaptiveCard={mockData.solitaire} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.sportsGameUpdate} />
+            <AdaptiveCard adaptiveCard={mockData.sportsGameUpdate} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.stockUpdate} />
+            <AdaptiveCard adaptiveCard={mockData.stockUpdate} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.weatherCompact} />
+            <AdaptiveCard adaptiveCard={mockData.weatherCompact} overrideStyle={cardOverrideStyle} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.weatherLarge} />
+            <AdaptiveCard adaptiveCard={mockData.weatherLarge} overrideStyle={cardOverrideStyle} />
         </ScrollView>;
     }
 
     private renderGap() {
-        return <View style={{ height: GAP_CARD }} />;
+        return <View style={{ height: cardGap }} />;
     }
 }

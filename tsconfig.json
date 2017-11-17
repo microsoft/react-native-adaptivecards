@@ -1,9 +1,8 @@
 {
     "compilerOptions": {
-        "allowJs": true,
         "target": "es2015",
         "module": "es2015",
-        "baseUrl": "./",
+        "baseUrl": "./src/",
         "jsx": "react",
         "moduleResolution": "node",
         "noImplicitAny": true,
@@ -16,15 +15,15 @@
             "name": "tslint-language-service"
         }],
         "typeRoots": [
-            "node_modules/@types",
-            "./typings"
+            "node_modules/@types"
         ],
         "paths": {
             "react": ["node_modules/@types/react"]
         }
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "AdaptiveCardsExample"
     ],
     "compileOnSave": false
 }

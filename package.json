@@ -1,12 +1,26 @@
 {
-  "devDependencies": {
-    "@types/react": "^16.0.23",
-    "@types/react-native": "^0.50.7",
-    "react-native-typescript-transformer": "^1.1.4"
-  },
-  "dependencies": {
-    "lodash": "^4.17.4",
-    "react": "^16.1.1",
-    "react-native": "^0.50.3"
-  }
+    "name": "adaptivecardsreactnative",
+    "version": "0.1.0",
+    "repository": {
+        "url": "https://msasg.visualstudio.com/DefaultCollection/Bing_Cortana/_git/AdaptiveCardsReactNative",
+        "type": "git"
+    },
+    "license": "UNLICENSED",
+    "main": "dist/index",
+    "types": "./src/tuype.d.ts",    
+    "devDependencies": {
+        "@types/lodash": "^4.14.85",
+        "@types/react": "^16.0.23",
+        "@types/react-native": "^0.50.7",
+        "gulp": "^3.9.1",
+        "gulp-tslint": "^8.1.2",
+        "gulp-typescript": "^3.2.3",
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1"
+    },
+    "dependencies": {
+        "lodash": "^4.17.4",
+        "react": "^16.1.1",
+        "react-native": "^0.50.3"
+    }
 }
