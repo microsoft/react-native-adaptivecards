@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es2015",
+        "baseUrl": "./src/",
+        "jsx": "react",
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "experimentalDecorators": true,
+        "preserveConstEnums": true,
+        "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "plugins": [{
+            "name": "tslint-language-service"
+        }],
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "paths": {
+            "react": ["node_modules/@types/react"]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "AdaptiveCardsExample"
+    ],
+    "compileOnSave": false
+}
