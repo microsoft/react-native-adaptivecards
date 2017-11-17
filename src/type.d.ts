@@ -1,7 +1,7 @@
 import AdaptiveCard from './index';
 import StyleConfig from './View/Style/styleConfig';
 
-declare module 'AdaptiveCardReactNative' {
+declare module 'adaptivecardsreactnative' {
     export const AdaptiveCardView: JSX.Element;
 }
 

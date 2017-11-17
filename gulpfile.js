@@ -1,6 +1,8 @@
+var del = require('del');
 var gulp = require('gulp');
-var typescript = require('gulp-typescript');
 var gulpTslint = require('gulp-tslint');
+var runSequence = require('run-sequence');
+var typescript = require('gulp-typescript');
 var tslint = require('tslint');
 
 var tsProject = typescript.createProject('tsconfig.json');
@@ -44,8 +46,10 @@ gulp.task('compile-ts', function () {
         .pipe(gulp.dest(path.example));
 });
 
-gulp.task('default', [
-    'lint-ts',
-    'copy-json',
-    'compile-ts',
-]);
+gulp.task('default', function (cb) {
+    runSequence('clean', [
+        'lint-ts',
+        'compile-ts',
+        'copy-json',
+    ], cb);
+});
