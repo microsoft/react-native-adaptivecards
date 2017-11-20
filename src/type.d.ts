@@ -1,8 +1,10 @@
-import AdaptiveCard from './index';
-import StyleConfig from './View/Style/styleConfig';
+import { ComponentClass } from 'react';
+import StyleConfig from './View/Style/styleConfig.d';
 
-declare module 'adaptivecardsreactnative' {
-    export const AdaptiveCardView: JSX.Element;
+interface AdaptiveCardsProps {
+    adaptiveCard: any;
+    overrideStyle?: StyleConfig;
 }
 
-export interface AdaptiveCardStyle extends StyleConfig { }
+declare const AdaptiveCardView: ComponentClass<AdaptiveCardsProps>;
+export default AdaptiveCardView;
