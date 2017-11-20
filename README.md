@@ -1,20 +1,50 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# Introduction
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+React Native renderer for [AdaptiveCards](http://adaptivecards.io/).
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+![Sample Screenshot](./screenshot.gif "Sample Screenshot")
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+## Getting Started
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+### Basic Usage
+
+1. Installation
+
+  ```bash
+  $ npm install git+https://msasg.visualstudio.com/DefaultCollection/Bing_Cortana/_git/react-native-adaptivecards
+  ```
+
+  or by Yarn
+
+  ```bash
+  $ yarn add git+https://msasg.visualstudio.com/DefaultCollection/Bing_Cortana/_git/react-native-adaptivecards
+  ```
+
+2. Impementation
+
+- Import to the component where you want to show an AdaptiveCards
+
+```ts
+import AdaptiveCard from 'react-native-adaptivecards';
+```
+
+- Send initial props
+
+```jsx
+    <AdaptiveCard adaptiveCard={} overrideStyle={} />
+```
+
+### Properties
+
+| Prop          | default                                     |  Type     | Description              |
+| ------------- | -------------------------------------------:| ---------:| ------------------------:|
+| adaptiveCard  | -                                           | object    | Json object based on AdaptiveCards schema |
+| overrideStyle | [{...}](./src/View/Style/styleConfig.d.ts)  | object    | Customized styles        |
+
+### Examples
+
+```bash
+$ cd examples
+$ yarn
+$ react-native run-ios
+```
