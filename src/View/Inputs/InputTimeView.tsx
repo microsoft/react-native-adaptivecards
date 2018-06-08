@@ -38,7 +38,15 @@ export default class InputTexTimeView extends React.PureComponent<IProps, IState
         return (
             <TouchableOpacity
                 onPress={this.showDatePicker}>
-                <View style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}>
+                <View style={{
+                    borderColor: 'gray',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    paddingHorizontal: 10,
+                    paddingVertical: 6,
+                    marginVertical: 6,
+                    height: 38
+                }}>
                     <Text>
                         {this.state.time}
                     </Text>

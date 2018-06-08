@@ -21,7 +21,15 @@ export default class InputTextView extends React.PureComponent<IProps, IState> {
         }
 
         return <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            style={{
+                borderColor: 'gray',
+                borderWidth: 1,
+                borderRadius: 4,
+                paddingHorizontal: 10,
+                paddingVertical: 6,
+                marginVertical: 6,
+                height: inputText.isMultiline ? 116 : 38
+            }}
             multiline={inputText.isMultiline}
             blurOnSubmit={true}
             placeholder={inputText.placeholder}

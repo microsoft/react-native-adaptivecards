@@ -43,8 +43,28 @@ export default class InputTexTimeView extends React.PureComponent {
         if (!inputTime || !inputTime.isValid()) {
             return null;
         }
-        return (React.createElement(TouchableOpacity, { onPress: this.showDatePicker },
-            React.createElement(View, { style: { height: 40, borderColor: 'gray', borderWidth: 1 } },
-                React.createElement(Text, null, this.state.time))));
+        return (
+            React.createElement(
+                TouchableOpacity,
+                {
+                    onPress: this.showDatePicker
+                },
+                React.createElement(
+                    View,
+                    {
+                        style: {
+                            borderColor: 'gray',
+                            borderWidth: 1,
+                            borderRadius: 4,
+                            paddingHorizontal: 10,
+                            paddingVertical: 6,
+                            marginVertical: 6,
+                            height: 38
+                        }
+                    },
+                    React.createElement(Text, null, this.state.time)
+                )
+            )
+        );
     }
 }
