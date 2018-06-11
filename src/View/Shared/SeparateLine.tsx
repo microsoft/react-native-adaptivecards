@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-    View,
     PixelRatio,
     Platform,
+    View,
 } from 'react-native';
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
     color?: string;
 }
 
-export default class SeparateLine extends React.PureComponent<IProps, any> {
+export class SeparateLine extends React.PureComponent<IProps, any> {
     static defaultProps = {
         isHorizontal: false,
         margin: 0,
@@ -43,9 +43,17 @@ export default class SeparateLine extends React.PureComponent<IProps, any> {
                 marginBottom: margin,
             };
 
-        return <View {...this.props} style={[{
-            flex: 1,
-            backgroundColor: color,
-        }, style]} />;
+        return (
+            <View
+                {...this.props}
+                style={[
+                    {
+                        flex: 1,
+                        backgroundColor: color,
+                    },
+                    style]
+                }
+            />
+        );
     }
 }

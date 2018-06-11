@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, } from 'react-native';
-import styleManager from '../Style/styleManager';
-import AdaptiveCardText from '../Shared/AdaptiveCardText';
-export default class FactView extends React.PureComponent {
+import { View } from 'react-native';
+import { AdaptiveCardText } from '../Shared/AdaptiveCardText';
+import { styleManager } from '../Styles/StyleManager';
+export class FactView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.styleConfig = styleManager.getStyle();

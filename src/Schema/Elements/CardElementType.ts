@@ -1,4 +1,4 @@
-enum CardElementType {
+export enum CardElementType {
     Column = 'Column',
     ColumnSet = 'ColumnSet',
     Container = 'Container',
@@ -8,10 +8,8 @@ enum CardElementType {
     TextBlock = 'TextBlock',
     InputText = 'Input.Text',
     InputNumber = 'Input.Number',
-    InputDate = 'Input.Date',
-    InputTime = 'Input.Time',
+    DateInput = 'Input.Date',
+    TimeInput = 'Input.Time',
     InputToggle = 'Input.Toggle',
     InputChoiceSet = 'Input.ChoiceSet',
 }
-
-export default CardElementType;

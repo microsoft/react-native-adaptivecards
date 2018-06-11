@@ -1,6 +1,7 @@
-import { isValidValue } from '../utils';
+import { Utils } from '../utils';
+import { ActionElement } from './Actions/Action';
 
-export default abstract class TypedElement {
+export abstract class TypedElement {
     // Required
     readonly type: string;
     isValidJSON: boolean = true;
@@ -15,6 +16,16 @@ export default abstract class TypedElement {
 
     abstract getTypeName(): string;
     abstract getRequiredProperties(): Array<string>;
+    public supportAction() {
+        return false;
+    }
+
+    public getAction(): ActionElement {
+        return undefined;
+    }
+    public getActions(): ActionElement[] {
+        return [];
+    }
 
     private noTypeName(): void {
         this.isValidJSON = false;
@@ -36,7 +47,7 @@ export default abstract class TypedElement {
         if (requiredProperties) {
             for (let i = 0; i < requiredProperties.length; i++) {
                 let property = requiredProperties[i];
-                if (!isValidValue(json[property])) {
+                if (!Utils.isValidValue(json[property])) {
                     this.invalidRequiredProperty(property);
                     return;
                 }

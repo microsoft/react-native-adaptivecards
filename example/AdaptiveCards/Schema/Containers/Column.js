@@ -1,15 +1,15 @@
-import { ColumnWidth, } from '../enums';
-import { getStringEnumValueOrDefault } from '../../utils';
-import { createAction } from '../Actions/Creator';
-import CardElement from '../Elements/CardElement';
-import CardElementType from '../Elements/CardElementType';
-import { createCardElementSet } from '../Elements/Creator';
-export default class Column extends CardElement {
+import { Utils } from '../../utils';
+import { ActionFactory } from '../Actions/ActionFactory';
+import { CardElement } from '../Elements/CardElement';
+import { CardElementFactory } from '../Elements/CardElementFactory';
+import { CardElementType } from '../Elements/CardElementType';
+import { ColumnWidth } from '../enums';
+export class ColumnElement extends CardElement {
     constructor(json) {
         super(json);
         if (this.isValidJSON) {
-            this.items = createCardElementSet(json.items);
-            this.selectAction = createAction(json.selectAction);
+            this.items = CardElementFactory.createSet(json.items);
+            this.selectAction = ActionFactory.create(json.selectAction);
             if (json.width && !isNaN(json.width)) {
                 let columnWidth = parseInt(json.width, 10);
                 if (columnWidth > 100) {
@@ -23,7 +23,7 @@ export default class Column extends CardElement {
                 }
             }
             else {
-                this.width = getStringEnumValueOrDefault(ColumnWidth, json.width, ColumnWidth.Auto);
+                this.width = Utils.getStringEnumValueOrDefault(ColumnWidth, json.width, ColumnWidth.Auto);
             }
         }
     }
@@ -32,6 +32,15 @@ export default class Column extends CardElement {
     }
     getRequiredProperties() {
         return ['items'];
+    }
+    supportAction() {
+        return true;
+    }
+    getAction() {
+        return this.selectAction;
+    }
+    getActions() {
+        return [this.getAction()];
     }
     hasItems() {
         return this.items && this.items.length > 0;

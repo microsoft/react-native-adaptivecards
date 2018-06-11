@@ -1,6 +1,6 @@
-import TypedElement from '../TypedElement';
+import { TypedElement } from '../TypedElement';
 
-export default class Fact extends TypedElement {
+export class FactElement extends TypedElement {
     // Required
     readonly title?: String;
     readonly value?: String;

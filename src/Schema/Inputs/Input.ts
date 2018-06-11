@@ -1,6 +1,6 @@
-import CardElement from '../Elements/CardElement';
+import { CardElement } from '../Elements/CardElement';
 
-export default abstract class Input extends CardElement {
+export abstract class InputElement extends CardElement {
     // Required
     readonly id: string;
     // Optional

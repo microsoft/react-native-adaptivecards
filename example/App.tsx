@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import mockData from './mockData';
-import AdaptiveCard from './AdaptiveCards';
+import AdaptiveCard from '../src/index';
 
 const cardGap = 20;
 const cardOverrideStyle = {

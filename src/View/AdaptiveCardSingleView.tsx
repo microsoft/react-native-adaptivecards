@@ -4,26 +4,26 @@ import {
     ViewStyle,
 } from 'react-native';
 
-import ImageBackground from './Shared/ImageBackground';
-import StyleConfig from './Style/styleConfig.d';
-import styleManager from './Style/styleManager';
-import AdaptiveCard from '../Schema/AdaptiveCard';
-import Action from '../Schema/Actions/Action';
-import CardElement from '../Schema/Elements/CardElement';
-import ActionView from './Actions/ActionView';
-import CardElementView from './Elements/CardElementView';
+import { ActionElement } from '../Schema/Actions/Action';
+import { AdaptiveCardElement } from '../Schema/AdaptiveCard';
+import { CardElement } from '../Schema/Elements/CardElement';
+import { ActionView } from './Actions/ActionView';
+import { CardElementView } from './Elements/CardElementView';
+import { IFormProps } from './Shared/BaseProps';
+import { ImageBackground } from './Shared/ImageBackground';
+import { StyleConfig } from './Styles/StyleConfig';
+import { styleManager } from './Styles/StyleManager';
 
-interface IProps {
-    adaptiveCard: any;
-    onShowCard?: { (card: AdaptiveCard): void };
+interface IProps extends IFormProps {
+    adaptiveCard: AdaptiveCardElement;
     style?: ViewStyle;
 }
 interface IState {
 }
 
-export default class AdaptiveCardView extends React.PureComponent<IProps, IState> {
+export class AdaptiveCardSingleView extends React.PureComponent<IProps, IState> {
     private readonly styleConfig: StyleConfig;
-    private adaptiveCard: AdaptiveCard;
+    private adaptiveCard: AdaptiveCardElement;
 
     constructor(props: IProps) {
         super(props);
@@ -31,13 +31,13 @@ export default class AdaptiveCardView extends React.PureComponent<IProps, IState
         this.styleConfig = styleManager.getStyle();
 
         // Serialize given JSON data
-        this.adaptiveCard = new AdaptiveCard(props.adaptiveCard);
+        this.adaptiveCard = new AdaptiveCardElement(props.adaptiveCard);
         console.log('AdaptiveCard', this.adaptiveCard);
     }
 
     componentWillReceiveProps(nextProps: IProps) {
         if (nextProps.adaptiveCard) {
-            this.adaptiveCard = new AdaptiveCard(nextProps.adaptiveCard);
+            this.adaptiveCard = new AdaptiveCardElement(nextProps.adaptiveCard);
         }
     }
 
@@ -56,24 +56,33 @@ export default class AdaptiveCardView extends React.PureComponent<IProps, IState
         }, this.props.style);
 
         if (this.adaptiveCard.backgroundImage) {
-            return <ImageBackground
-                containerStyle={cardStyle}
-                imageStyle={{
-                    borderRadius: this.styleConfig.card.borderRadius,
-                }}
-                source={{ uri: this.adaptiveCard.backgroundImage }}>
-                <View style={{ flex: 1, padding: this.styleConfig.card.padding }}>
+            return (
+                <ImageBackground
+                    containerStyle={cardStyle}
+                    imageStyle={{
+                        borderRadius: this.styleConfig.card.borderRadius,
+                    }}
+                    source={{ uri: this.adaptiveCard.backgroundImage }}
+                >
+                    <View
+                        style={{ flex: 1, padding: this.styleConfig.card.padding }}
+                    >
+                        {this.renderBody()}
+                        {this.renderActions()}
+                    </View>
+                </ImageBackground>
+            );
+        } else {
+            return (
+                <View
+                    style={[cardStyle, {
+                        padding: this.styleConfig.card.padding,
+                    }]}
+                >
                     {this.renderBody()}
                     {this.renderActions()}
                 </View>
-            </ImageBackground>;
-        } else {
-            return <View style={[cardStyle, {
-                padding: this.styleConfig.card.padding,
-            }]}>
-                {this.renderBody()}
-                {this.renderActions()}
-            </View>;
+            );
         }
     }
 
@@ -81,18 +90,21 @@ export default class AdaptiveCardView extends React.PureComponent<IProps, IState
         if (!this.adaptiveCard.hasBody()) {
             return null;
         }
-
-        return <View style={{ flex: 1 }}>
-            {
-                this.adaptiveCard.body.map((cardElement: CardElement, index: number) =>
-                    <CardElementView
-                        key={'body' + index}
-                        index={index}
-                        cardElement={cardElement}
-                    />
-                )
-            }
-        </View>;
+        return (
+            <View
+                style={{ flex: 1 }}
+            >
+                {
+                    this.adaptiveCard.body.map((cardElement: CardElement, index: number) =>
+                        <CardElementView
+                            key={'body' + index}
+                            index={index}
+                            cardElement={cardElement}
+                        />
+                    )
+                }
+            </View>
+        );
     }
 
     private renderActions(): JSX.Element {
@@ -100,22 +112,25 @@ export default class AdaptiveCardView extends React.PureComponent<IProps, IState
             return null;
         }
 
-        return <View style={{
-            flex: 1,
-            flexDirection: styleManager.getActionSetFlexDirectionValue(),
-            alignItems: 'stretch',
-            marginTop: this.styleConfig.action.actionSet.spacing,
-        }}>
-            {
-                this.adaptiveCard.actions.map((action: Action, index: number) =>
-                    <ActionView
-                        key={'action' + index}
-                        index={index}
-                        action={action}
-                        onShowCard={this.props.onShowCard}
-                    />
-                )
-            }
-        </View>;
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    flexDirection: styleManager.getActionSetFlexDirectionValue(),
+                    alignItems: 'stretch',
+                    marginTop: this.styleConfig.action.actionSet.spacing,
+                }}
+            >
+                {
+                    this.adaptiveCard.actions.map((action: ActionElement, index: number) =>
+                        <ActionView
+                            key={index}
+                            action={action}
+                            index={index}
+                        />
+                    )
+                }
+            </View>
+        );
     }
 }

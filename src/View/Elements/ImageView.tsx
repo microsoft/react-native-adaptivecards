@@ -1,23 +1,23 @@
 import React from 'react';
 import {
-    View,
-    Text,
+    FlexAlignType,
     Image,
     LayoutChangeEvent,
-    FlexAlignType,
     StyleSheet,
+    Text,
+    View,
 } from 'react-native';
 
+import { ImageElement } from '../../Schema/Elements/Image';
 import {
+    FlexImageAlignment,
     HorizontalAlignment,
     ImageSize,
     ImageStyle,
-    FlexImageAlignment,
 } from '../../Schema/enums';
-import styleManager from '../Style/styleManager';
-import { ICardElementViewProps } from '../view.d';
-import CardElementWrapper from '../Shared/CardElementWrapper';
-import AdaptiveImage from '../../Schema/Elements/Image';
+import { ICardElementViewProps } from '../Shared/BaseProps';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
+import { styleManager } from '../Styles/StyleManager';
 
 const IMAGEMINSIZE = 18;
 const enum ImageFit {
@@ -26,8 +26,9 @@ const enum ImageFit {
 }
 
 interface IProps extends ICardElementViewProps {
-    image: AdaptiveImage;
+    image: ImageElement;
 }
+
 interface IState {
     viewWidth: number;
     viewHeight: number;
@@ -35,7 +36,7 @@ interface IState {
     imageLoadSuccess: boolean;
 }
 
-export default class ImageView extends React.PureComponent<IProps, IState> {
+export class ImageView extends React.PureComponent<IProps, IState> {
     private isComponentUnmounted: Boolean;
     private fitStyle?: ImageFit;
 
@@ -71,51 +72,65 @@ export default class ImageView extends React.PureComponent<IProps, IState> {
             dimensions.width / 2 :
             undefined;
 
-        return <CardElementWrapper cardElement={image} index={index} style={
-            styleManager.isHorizontalImageSet() ? undefined : { flex: 1 }
-        }>
-            <View style={{ flex: 1 }} onLayout={this.onLayout}>
-                {
-                    this.state.imageLoadSuccess ?
-                        undefined :
-                        this.renderPlaceholder()
+        return (
+            <CardElementWrapper
+                cardElement={image}
+                index={index}
+                style={
+                    styleManager.isHorizontalImageSet() ? undefined : { flex: 1 }
                 }
-                <Image
-                    accessible={!!image.altText}
-                    accessibilityLabel={image.altText || undefined}
-                    style={{
-                        overflow: 'hidden',
-                        width: dimensions ? dimensions.width : undefined,
-                        height: dimensions ? dimensions.height : undefined,
-                        alignSelf: this.getImageAlignment(image.horizontalAlignment, image.size),
-                        borderRadius: borderRadius
-                    }}
-                    source={{ uri: image.url }}
-                    onLoad={this.onLoad}
-                    onError={this.onError}
-                    resizeMode={'cover'}
-                    resizeMethod={'auto'}
-                />
-            </View>
-        </CardElementWrapper>;
+            >
+                <View
+                    style={{ flex: 1 }}
+                    onLayout={this.onLayout}
+                >
+                    {
+                        this.state.imageLoadSuccess ?
+                            undefined :
+                            this.renderPlaceholder()
+                    }
+                    <Image
+                        accessible={!!image.altText}
+                        accessibilityLabel={image.altText || undefined}
+                        style={{
+                            overflow: 'hidden',
+                            width: dimensions ? dimensions.width : undefined,
+                            height: dimensions ? dimensions.height : undefined,
+                            alignSelf: this.getImageAlignment(image.horizontalAlignment, image.size),
+                            borderRadius: borderRadius
+                        }}
+                        source={{ uri: image.url }}
+                        onLoad={this.onLoad}
+                        onError={this.onError}
+                        resizeMode={'cover'}
+                        resizeMethod={'auto'}
+                    />
+                </View>
+            </CardElementWrapper>
+        );
     }
 
     private renderPlaceholder() {
-        return <View style={[
-            StyleSheet.absoluteFill,
-            {
-                alignItems: 'center',
-                justifyContent: 'center'
-            }
-        ]} >
-            <Text style={{
-                fontSize: 32,
-                color: 'rgba(0, 0, 0, 0.5)',
-                textAlign: 'center'
-            }}>
-                {'\uE601'}
-            </Text>
-        </View>;
+        return (
+            <View
+                style={[
+                    StyleSheet.absoluteFill,
+                    {
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }
+                ]}
+            >
+                <Text
+                    style={{
+                        fontSize: 32,
+                        color: 'rgba(0, 0, 0, 0.5)',
+                        textAlign: 'center'
+                    }}
+                >
+                    {'\uE601'}
+                </Text>
+            </View>);
     }
 
     private onLayout = (event?: LayoutChangeEvent) => {

@@ -1,14 +1,14 @@
+import { Utils } from '../../utils';
 import {
-    HorizontalAlignment,
-    TextColor,
     FontSize,
-    FontWeight
+    FontWeight,
+    HorizontalAlignment,
+    TextColor
 } from '../enums';
-import { getStringEnumValueOrDefault } from '../../utils';
-import CardElement from './CardElement';
-import CardElementType from './CardElementType';
+import { CardElement } from './CardElement';
+import { CardElementType } from './CardElementType';
 
-export default class TextBlock extends CardElement {
+export class TextBlockElement extends CardElement {
     // Required
     readonly text: string;
     // Optional
@@ -25,14 +25,14 @@ export default class TextBlock extends CardElement {
 
         if (this.isValidJSON) {
             this.text = json.text;
-            this.color = getStringEnumValueOrDefault(TextColor, json.color, TextColor.Default) as TextColor;
+            this.color = Utils.getStringEnumValueOrDefault(TextColor, json.color, TextColor.Default) as TextColor;
             this.horizontalAlignment =
-                getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
+                Utils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
                 HorizontalAlignment;
             this.isSubtle = json.isSubtle || false;
             this.maxLines = json.maxLines;
-            this.size = getStringEnumValueOrDefault(FontSize, json.size, FontSize.Default) as FontSize;
-            this.weight = getStringEnumValueOrDefault(FontWeight, json.weight, FontWeight.Default) as FontWeight;
+            this.size = Utils.getStringEnumValueOrDefault(FontSize, json.size, FontSize.Default) as FontSize;
+            this.weight = Utils.getStringEnumValueOrDefault(FontWeight, json.weight, FontWeight.Default) as FontWeight;
             this.wrap = json.wrap || false;
         }
     }

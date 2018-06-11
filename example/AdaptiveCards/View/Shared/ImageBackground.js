@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, View, StyleSheet, } from 'react-native';
-export default class ImageBackground extends React.PureComponent {
+import { Image, StyleSheet, View, } from 'react-native';
+export class ImageBackground extends React.PureComponent {
     render() {
         const { children, containerStyle, imageStyle, source } = this.props;
         return React.createElement(View, { style: [

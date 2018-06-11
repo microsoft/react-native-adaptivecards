@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, PixelRatio, Platform, } from 'react-native';
-export default class SeparateLine extends React.PureComponent {
+import { PixelRatio, Platform, View, } from 'react-native';
+export class SeparateLine extends React.PureComponent {
     render() {
         const { color, isHorizontal, margin } = this.props;
         const thickness = (Platform.OS === 'ios') ?

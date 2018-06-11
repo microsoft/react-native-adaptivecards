@@ -1,10 +1,10 @@
-import CardElement from '../Elements/CardElement';
-import CardElementType from '../Elements/CardElementType';
-import Fact from './Fact';
+import { CardElement } from '../Elements/CardElement';
+import { CardElementType } from '../Elements/CardElementType';
+import { FactElement } from './Fact';
 
-export default class FactSet extends CardElement {
+export class FactSetElement extends CardElement {
     // Required
-    readonly facts: Array<Fact> = [];
+    readonly facts: Array<FactElement> = [];
 
     constructor(json: any) {
         super(json);
@@ -21,11 +21,11 @@ export default class FactSet extends CardElement {
         return ['facts'];
     }
 
-    private createFactSet(json: any): Array<Fact> {
-        let factSet: Array<Fact> = [];
+    private createFactSet(json: any): Array<FactElement> {
+        let factSet: Array<FactElement> = [];
         if (json && json.length > 0) {
             json.forEach((item: any) => {
-                let fact: Fact = new Fact(item);
+                let fact: FactElement = new FactElement(item);
                 if (fact && fact.isValidJSON) {
                     factSet.push(fact);
                 }

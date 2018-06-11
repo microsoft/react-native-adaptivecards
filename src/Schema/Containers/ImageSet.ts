@@ -1,14 +1,12 @@
-import {
-    ImageSize,
-} from '../enums';
-import { getStringEnumValueOrDefault } from '../../utils';
-import CardElement from '../Elements/CardElement';
-import CardElementType from '../Elements/CardElementType';
-import Image from '../Elements/Image';
+import { Utils } from '../../utils';
+import { CardElement } from '../Elements/CardElement';
+import { CardElementType } from '../Elements/CardElementType';
+import { ImageElement } from '../Elements/Image';
+import { ImageSize } from '../enums';
 
-export default class ImageSet extends CardElement {
+export class ImageSetElement extends CardElement {
     // Required
-    readonly images: Array<Image> = [];
+    readonly images: Array<ImageElement> = [];
     // Optional
     readonly imageSize?: ImageSize = ImageSize.Auto;
 
@@ -17,22 +15,27 @@ export default class ImageSet extends CardElement {
 
         if (this.isValidJSON) {
             this.images = this.createImageSet(json.images);
-            this.imageSize = getStringEnumValueOrDefault(ImageSize, json.imageSize, ImageSize.Auto) as ImageSize;
+            this.imageSize = Utils.getStringEnumValueOrDefault(ImageSize, json.imageSize, ImageSize.Auto) as ImageSize;
         }
     }
 
     getTypeName(): string {
         return CardElementType.ImageSet;
     }
+
     getRequiredProperties(): Array<string> {
         return ['images'];
     }
 
-    private createImageSet(json: any): Array<Image> {
-        let imageSet: Array<Image> = [];
+    supportAction() {
+        return false;
+    }
+
+    private createImageSet(json: any): Array<ImageElement> {
+        let imageSet: Array<ImageElement> = [];
         if (json && json.length > 0) {
             json.forEach((item: any) => {
-                let image: Image = new Image(item);
+                let image: ImageElement = new ImageElement(item);
                 if (image && image.isValidJSON) {
                     imageSet.push(image);
                 }

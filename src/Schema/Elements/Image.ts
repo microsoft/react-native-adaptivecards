@@ -1,23 +1,21 @@
+import { Utils } from '../../utils';
+import { ActionElement } from '../Actions/Action';
+import { ActionFactory } from '../Actions/ActionFactory';
 import {
     HorizontalAlignment,
     ImageSize,
     ImageStyle,
 } from '../enums';
-import {
-    getStringEnumValueOrDefault
-} from '../../utils';
-import Action from '../Actions/Action';
-import { createAction } from '../Actions/Creator';
-import CardElement from './CardElement';
-import CardElementType from './CardElementType';
+import { CardElement } from './CardElement';
+import { CardElementType } from './CardElementType';
 
-export default class Image extends CardElement {
+export class ImageElement extends CardElement {
     // Required
     readonly url: string;
     // Optional
     readonly altText?: string;
     readonly horizontalAlignment?: HorizontalAlignment;
-    readonly selectAction?: Action;
+    readonly selectAction?: ActionElement;
     size?: ImageSize = ImageSize.Auto;
     readonly style?: ImageStyle;
 
@@ -28,23 +26,36 @@ export default class Image extends CardElement {
             this.url = json.url;
             this.altText = json.altText;
             this.horizontalAlignment =
-                getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
+                Utils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
                 HorizontalAlignment;
-            this.selectAction = createAction(json.selectAction);
-            this.size = getStringEnumValueOrDefault(ImageSize, json.size, ImageSize.Auto) as ImageSize;
-            this.style = getStringEnumValueOrDefault(ImageStyle, json.style, ImageStyle.Default) as ImageStyle;
+            this.selectAction = ActionFactory.create(json.selectAction);
+            this.size = Utils.getStringEnumValueOrDefault(ImageSize, json.size, ImageSize.Auto) as ImageSize;
+            this.style = Utils.getStringEnumValueOrDefault(ImageStyle, json.style, ImageStyle.Default) as ImageStyle;
         }
     }
 
     getTypeName(): string {
         return CardElementType.Image;
     }
+
     getRequiredProperties(): Array<string> {
         return ['url'];
     }
 
+    supportAction() {
+        return true;
+    }
+
+    getAction() {
+        return this.selectAction;
+    }
+
+    getActions() {
+        return [this.getAction()];
+    }
+
     setSize(size: ImageSize): void {
-        this.size = getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto) as ImageSize;
+        this.size = Utils.getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto) as ImageSize;
     }
 
     isFixedSize(): boolean {

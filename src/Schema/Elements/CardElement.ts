@@ -1,10 +1,8 @@
-import {
-    Spacing,
-} from '../enums';
-import { getStringEnumValueOrDefault } from '../../utils';
-import TypedElement from '../TypedElement';
+import { Utils } from '../../utils';
+import { Spacing } from '../enums';
+import { TypedElement } from '../TypedElement';
 
-export default abstract class CardElement extends TypedElement {
+export abstract class CardElement extends TypedElement {
     // Optional
     readonly id?: string;
     readonly spacing?: Spacing;
@@ -15,7 +13,7 @@ export default abstract class CardElement extends TypedElement {
 
         if (this.isValidJSON) {
             this.id = json.id;
-            this.spacing = getStringEnumValueOrDefault(Spacing, json.spacing, Spacing.Default) as Spacing;
+            this.spacing = Utils.getStringEnumValueOrDefault(Spacing, json.spacing, Spacing.Default) as Spacing;
             this.separator = json.separator || false;
         }
     }

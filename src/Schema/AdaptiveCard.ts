@@ -1,10 +1,10 @@
-import TypedElement from './TypedElement';
-import Action from './Actions/Action';
-import { createActionSet } from './Actions/Creator';
-import CardElement from './Elements/CardElement';
-import { createCardElementSet } from './Elements/Creator';
+import { ActionElement } from './Actions/Action';
+import { ActionFactory } from './Actions/ActionFactory';
+import { CardElement } from './Elements/CardElement';
+import { CardElementFactory } from './Elements/CardElementFactory';
+import { TypedElement } from './TypedElement';
 
-export default class AdaptiveCard extends TypedElement {
+export class AdaptiveCardElement extends TypedElement {
     // Required
     readonly version: string;
     // Optional
@@ -12,7 +12,7 @@ export default class AdaptiveCard extends TypedElement {
     readonly fallbackText?: string;
     readonly backgroundImage?: string;
     readonly speak?: string;
-    readonly actions?: Array<Action> = [];
+    readonly actions?: Array<ActionElement> = [];
     readonly body?: Array<CardElement> = [];
 
     constructor(json: any) {
@@ -24,8 +24,8 @@ export default class AdaptiveCard extends TypedElement {
             this.fallbackText = json.fallbackText;
             this.backgroundImage = json.backgroundImage;
             this.speak = json.speak;
-            this.actions = createActionSet(json.actions);
-            this.body = createCardElementSet(json.body);
+            this.actions = ActionFactory.createSet(json.actions);
+            this.body = CardElementFactory.createSet(json.body);
         }
     }
 

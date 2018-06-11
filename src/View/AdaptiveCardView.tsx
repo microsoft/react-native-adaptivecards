@@ -1,22 +1,29 @@
 import React from 'react';
 import {
+    Linking,
     View,
 } from 'react-native';
 
-import StyleConfig from './Style/styleConfig.d';
-import styleManager from './Style/styleManager';
-import AdaptiveCard from '../Schema/AdaptiveCard';
-import AdaptiveCardSingleView from './AdaptiveCardSingleView';
+import { ActionContext } from '../Context/ActionContext';
+import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
+import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
+import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
+import { AdaptiveCardElement } from '../Schema/AdaptiveCard';
+import { AdaptiveCardSingleView } from './AdaptiveCardSingleView';
+import { StyleConfig } from './Styles/StyleConfig';
+import { styleManager } from './Styles/StyleManager';
 
-interface IProps {
-    adaptiveCard: any;
+export interface IProps {
+    adaptiveCard: AdaptiveCardElement;
     overrideStyle?: StyleConfig;
-}
-interface IState {
-    actionCard: AdaptiveCard;
+    onSubmit?: (data: any) => void;
 }
 
-export default class AdaptiveCardView extends React.PureComponent<IProps, IState> {
+interface IState {
+    actionCard: AdaptiveCardElement;
+}
+
+export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
     private styleConfig: StyleConfig;
     private isComponentUnmounted: Boolean;
 
@@ -30,6 +37,11 @@ export default class AdaptiveCardView extends React.PureComponent<IProps, IState
         this.state = {
             actionCard: null,
         };
+
+        let actionContext = ActionContext.getInstance();
+        actionContext.registerOpenUrlHandler(this.onOpenUrl);
+        actionContext.registerShowCardHandler(this.onShowCard);
+        actionContext.registerSubmitHandler(this.onSubmit);
     }
 
     componentWillReceiveProps(nextProps: IProps) {
@@ -49,28 +61,50 @@ export default class AdaptiveCardView extends React.PureComponent<IProps, IState
             return null;
         }
 
-        return <View style={{ flex: 1 }}>
-            <AdaptiveCardSingleView
-                adaptiveCard={adaptiveCard}
-                onShowCard={this.onShowCard} />
-            {
-                this.state.actionCard ?
-                    <AdaptiveCardSingleView
-                        adaptiveCard={this.state.actionCard}
-                        style={{
-                            marginTop: this.styleConfig.card.spacing,
-                        }} />
-                    :
-                    null
-            }
-        </View>;
+        return (
+            <View
+                style={{ flex: 1 }}
+            >
+                <AdaptiveCardSingleView
+                    formId='root'
+                    adaptiveCard={adaptiveCard}
+                />
+                {
+                    this.state.actionCard ?
+                        <AdaptiveCardSingleView
+                            formId='first'
+                            adaptiveCard={this.state.actionCard}
+                            style={{
+                                marginTop: this.styleConfig.card.spacing,
+                            }}
+                        />
+                        :
+                        null
+                }
+            </View>
+        );
     }
 
-    private onShowCard = (actionCard: AdaptiveCard) => {
+    private onOpenUrl = (action: OpenUrlActionElement) => {
+        // TODO: Is URL valid? Handle failure case
+        Linking.canOpenURL(action.url).then((supported) => {
+            if (supported) {
+                Linking.openURL(action.url);
+            }
+        });
+    }
+
+    private onShowCard = (action: ShowCardActionElement) => {
         if (!this.isComponentUnmounted) {
             this.setState({
-                actionCard,
+                actionCard: action.card,
             });
+        }
+    }
+
+    private onSubmit = (action: SubmitActionElement) => {
+        if (this.props.onSubmit) {
+            this.props.onSubmit(action.data);
         }
     }
 }

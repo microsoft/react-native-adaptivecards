@@ -1,35 +1,49 @@
-import Action from '../Actions/Action';
-import { createAction } from '../Actions/Creator';
-import CardElement from '../Elements/CardElement';
-import CardElementType from '../Elements/CardElementType';
-import Column from './Column';
+import { ActionFactory } from '../Actions/ActionFactory';
+import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
+import { SubmitActionElement } from '../Actions/SubmitAction';
+import { CardElement } from '../Elements/CardElement';
+import { CardElementType } from '../Elements/CardElementType';
+import { ColumnElement } from './Column';
 
-export default class ColumnSet extends CardElement {
+export class ColumnSetElement extends CardElement {
     // Optional
-    readonly columns: Array<Column>;
-    readonly selectAction?: Action;
+    readonly columns: Array<ColumnElement>;
+    readonly selectAction?: OpenUrlActionElement | SubmitActionElement;
 
     constructor(json: any) {
         super(json);
 
         if (this.isValidJSON) {
             this.columns = this.createColumnSet(json.columns);
-            this.selectAction = createAction(json.selectAction);
+            this.selectAction = ActionFactory.create(json.selectAction);
         }
     }
 
     getTypeName(): string {
         return CardElementType.ColumnSet;
     }
+
     getRequiredProperties(): Array<string> {
         return [];
     }
 
-    private createColumnSet(json: any): Array<Column> {
-        let columnSet: Array<Column> = [];
+    supportAction() {
+        return true;
+    }
+
+    getAction() {
+        return this.selectAction;
+    }
+
+    getActions() {
+        return [this.getAction()];
+    }
+
+    private createColumnSet(json: any): Array<ColumnElement> {
+        let columnSet: Array<ColumnElement> = [];
         if (json && json.length > 0) {
             json.forEach((item: any) => {
-                let column: Column = new Column(item);
+                let column: ColumnElement = new ColumnElement(item);
                 if (column && column.isValidJSON) {
                     columnSet.push(column);
                 }

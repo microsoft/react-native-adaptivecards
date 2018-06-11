@@ -1,7 +1,7 @@
-import CardElement from '../Elements/CardElement';
-import CardElementType from '../Elements/CardElementType';
-import Fact from './Fact';
-export default class FactSet extends CardElement {
+import { CardElement } from '../Elements/CardElement';
+import { CardElementType } from '../Elements/CardElementType';
+import { FactElement } from './Fact';
+export class FactSetElement extends CardElement {
     constructor(json) {
         super(json);
         this.facts = [];
@@ -19,7 +19,7 @@ export default class FactSet extends CardElement {
         let factSet = [];
         if (json && json.length > 0) {
             json.forEach((item) => {
-                let fact = new Fact(item);
+                let fact = new FactElement(item);
                 if (fact && fact.isValidJSON) {
                     factSet.push(fact);
                 }

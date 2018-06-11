@@ -1,25 +1,16 @@
 import React from 'react';
-import { TouchableOpacity, Linking, } from 'react-native';
-import styleManager from '../Style/styleManager';
-import AdaptiveCardText from '../Shared/AdaptiveCardText';
-import ActionType from '../../Schema/Actions/ActionType';
-export default class ActionView extends React.Component {
+import { TouchableOpacity, } from 'react-native';
+import { ActionContext } from '../../Context/ActionContext';
+import { AdaptiveCardText } from '../Shared/AdaptiveCardText';
+import { styleManager } from '../Styles/StyleManager';
+export class ActionView extends React.Component {
     constructor(props) {
         super(props);
         this.onPress = () => {
-            const { action } = this.props;
-            switch (action.type) {
-                case ActionType.OpenUrl:
-                    this.onOpenUrlAction(action);
-                    break;
-                case ActionType.ShowCard:
-                    this.onShowCardAction(action);
-                    break;
-                case ActionType.Submit:
-                    this.onSubmitAction(action);
-                    break;
-                default:
-                    break;
+            let actionContext = ActionContext.getInstance();
+            let callback = actionContext.getActionHandler();
+            if (callback) {
+                callback(this.props.action);
             }
         };
         this.styleConfig = styleManager.getStyle();
@@ -29,7 +20,7 @@ export default class ActionView extends React.Component {
         if (!action || !action.isValid()) {
             return;
         }
-        return React.createElement(TouchableOpacity, { style: [{
+        return (React.createElement(TouchableOpacity, { style: [{
                     flex: 1,
                     flexDirection: 'row',
                     justifyContent: 'center',
@@ -44,23 +35,7 @@ export default class ActionView extends React.Component {
             React.createElement(AdaptiveCardText, { style: {
                     fontSize: this.styleConfig.action.button.fontSize,
                     color: this.styleConfig.action.button.textColor,
-                }, numberOfLines: 1 }, action.title));
-    }
-    onOpenUrlAction(action) {
-        Linking.canOpenURL(action.url).then((supported) => {
-            if (supported) {
-                Linking.openURL(action.url);
-            }
-        });
-    }
-    onShowCardAction(action) {
-        const { onShowCard } = this.props;
-        if (typeof onShowCard === 'function') {
-            onShowCard(action.card);
-        }
-    }
-    onSubmitAction(action) {
-        return;
+                }, numberOfLines: 1 }, action.title)));
     }
 }
 ActionView.defaultProps = {

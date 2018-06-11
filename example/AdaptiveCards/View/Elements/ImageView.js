@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, } from 'react-native';
-import { HorizontalAlignment, ImageSize, ImageStyle, FlexImageAlignment, } from '../../Schema/enums';
-import styleManager from '../Style/styleManager';
-import CardElementWrapper from '../Shared/CardElementWrapper';
+import { Image, StyleSheet, Text, View, } from 'react-native';
+import { FlexImageAlignment, HorizontalAlignment, ImageSize, ImageStyle, } from '../../Schema/enums';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
+import { styleManager } from '../Styles/StyleManager';
 const IMAGEMINSIZE = 18;
 var ImageFit;
 (function (ImageFit) {
     ImageFit[ImageFit["FlexibleWidth"] = 0] = "FlexibleWidth";
     ImageFit[ImageFit["FlexibleHeight"] = 1] = "FlexibleHeight";
 })(ImageFit || (ImageFit = {}));
-export default class ImageView extends React.PureComponent {
+export class ImageView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.onLayout = (event) => {
@@ -105,7 +105,7 @@ export default class ImageView extends React.PureComponent {
         const borderRadius = image.style === ImageStyle.Person && dimensions ?
             dimensions.width / 2 :
             undefined;
-        return React.createElement(CardElementWrapper, { cardElement: image, index: index, style: styleManager.isHorizontalImageSet() ? undefined : { flex: 1 } },
+        return (React.createElement(CardElementWrapper, { cardElement: image, index: index, style: styleManager.isHorizontalImageSet() ? undefined : { flex: 1 } },
             React.createElement(View, { style: { flex: 1 }, onLayout: this.onLayout },
                 this.state.imageLoadSuccess ?
                     undefined :
@@ -116,10 +116,10 @@ export default class ImageView extends React.PureComponent {
                         height: dimensions ? dimensions.height : undefined,
                         alignSelf: this.getImageAlignment(image.horizontalAlignment, image.size),
                         borderRadius: borderRadius
-                    }, source: { uri: image.url }, onLoad: this.onLoad, onError: this.onError, resizeMode: 'cover', resizeMethod: 'auto' })));
+                    }, source: { uri: image.url }, onLoad: this.onLoad, onError: this.onError, resizeMode: 'cover', resizeMethod: 'auto' }))));
     }
     renderPlaceholder() {
-        return React.createElement(View, { style: [
+        return (React.createElement(View, { style: [
                 StyleSheet.absoluteFill,
                 {
                     alignItems: 'center',
@@ -130,7 +130,7 @@ export default class ImageView extends React.PureComponent {
                     fontSize: 32,
                     color: 'rgba(0, 0, 0, 0.5)',
                     textAlign: 'center'
-                } }, '\uE601'));
+                } }, '\uE601')));
     }
     getImageAlignment(alignment, imageSize) {
         let imageAlignment;

@@ -1,5 +1,5 @@
-import { isValidValue } from '../utils';
-export default class TypedElement {
+import { Utils } from '../utils';
+export class TypedElement {
     constructor(json) {
         this.isValidJSON = true;
         this.type = this.getTypeName();
@@ -7,6 +7,15 @@ export default class TypedElement {
             this.noTypeName();
         }
         this.validateJSON(json, this.getRequiredProperties());
+    }
+    supportAction() {
+        return false;
+    }
+    getAction() {
+        return undefined;
+    }
+    getActions() {
+        return [];
     }
     noTypeName() {
         this.isValidJSON = false;
@@ -27,7 +36,7 @@ export default class TypedElement {
         if (requiredProperties) {
             for (let i = 0; i < requiredProperties.length; i++) {
                 let property = requiredProperties[i];
-                if (!isValidValue(json[property])) {
+                if (!Utils.isValidValue(json[property])) {
                     this.invalidRequiredProperty(property);
                     return;
                 }

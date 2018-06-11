@@ -4,19 +4,15 @@ import {
     TextProperties,
 } from 'react-native';
 
-import styleManager from '../Style/styleManager';
+import { styleManager } from '../Styles/StyleManager';
 
 interface IProps extends TextProperties {
 }
 interface IState {
 }
 
-export default class AdaptiveCardText extends React.PureComponent<IProps, IState> {
+export class AdaptiveCardText extends React.PureComponent<IProps, IState> {
     fontFamily: string;
-
-    static defaultProps = {
-        ...Text.defaultProps,
-    };
 
     constructor(props: IProps) {
         super(props);
@@ -27,11 +23,18 @@ export default class AdaptiveCardText extends React.PureComponent<IProps, IState
     render(): JSX.Element {
         const { style, children } = this.props;
 
-        return <Text {...this.props} style={[{
-            fontFamily: this.fontFamily || undefined,
-        }, style]}
-        >
-            {children}
-        </Text>;
+        return (
+            <Text
+                {...this.props}
+                style={[
+                    {
+                        fontFamily: this.fontFamily || undefined,
+                    },
+                    style
+                ]}
+            >
+                {children}
+            </Text>
+        );
     }
 }

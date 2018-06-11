@@ -1,16 +1,26 @@
 {
     "rules": {
-        "align": [true, "statements"],
+        "align": [
+            true,
+            "statements"
+        ],
         "class-name": true,
         "curly": true,
         "eofline": true,
         "forin": true,
-        "indent": [true, "spaces"],
+        "indent": [
+            true,
+            "spaces"
+        ],
         "label-position": true,
-        "max-line-length": [true, 140],
+        "max-line-length": [
+            true,
+            140
+        ],
         "no-arg": true,
         "no-bitwise": false,
-        "no-console": [true,
+        "no-console": [
+            true,
             "debug",
             "info",
             "time",
@@ -28,18 +38,32 @@
         "no-unused-expression": true,
         "no-unused-variable": true,
         "no-use-before-declare": true,
-        "one-line": [true,
+        "one-line": [
+            true,
             "check-open-brace",
             "check-catch",
             "check-else",
             "check-whitespace"
         ],
-        "quotemark": [true, "single"],
+        "ordered-imports": [
+            true,
+            {
+                "grouped-inports": true
+            }
+        ],
+        "quotemark": [
+            true,
+            "single"
+        ],
         "radix": true,
         "semicolon": true,
-        "triple-equals": [true, "allow-null-check"],
+        "triple-equals": [
+            true,
+            "allow-null-check"
+        ],
         "variable-name": false,
-        "whitespace": [true,
+        "whitespace": [
+            true,
             "check-branch",
             "check-decl",
             "check-operator",

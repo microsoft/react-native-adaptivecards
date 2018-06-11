@@ -10,19 +10,26 @@
         "experimentalDecorators": true,
         "preserveConstEnums": true,
         "sourceMap": true,
+        "declaration": true,
         "allowSyntheticDefaultImports": true,
-        "plugins": [{
-            "name": "tslint-language-service"
-        }],
+        "skipLibCheck": true,
+        "plugins": [
+            {
+                "name": "tslint-language-service"
+            }
+        ],
         "typeRoots": [
             "node_modules/@types"
         ],
         "paths": {
-            "react": ["node_modules/@types/react"]
+            "react": [
+                "node_modules/@types/react"
+            ]
         }
     },
     "exclude": [
         "node_modules",
+        "typings",
         "AdaptiveCardsExample"
     ],
     "compileOnSave": false

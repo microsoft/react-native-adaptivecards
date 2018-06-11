@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, } from 'react-native';
-import styleManager from '../Style/styleManager';
-import AdaptiveCardText from '../Shared/AdaptiveCardText';
-import CardElementWrapper from '../Shared/CardElementWrapper';
-export default class TextBlockView extends React.PureComponent {
+import { AdaptiveCardText } from '../Shared/AdaptiveCardText';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
+import { styleManager } from '../Styles/StyleManager';
+export class TextBlockView extends React.PureComponent {
     render() {
         const { textBlock, index } = this.props;
         if (!textBlock || !textBlock.isValid()) {

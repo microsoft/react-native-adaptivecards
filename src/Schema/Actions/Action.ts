@@ -1,6 +1,6 @@
-import TypedElement from '../TypedElement';
+import { TypedElement } from '../TypedElement';
 
-export default abstract class Action extends TypedElement {
+export abstract class ActionElement extends TypedElement {
     // Optional
     readonly title?: string;
 
@@ -10,5 +10,9 @@ export default abstract class Action extends TypedElement {
         if (this.isValidJSON) {
             this.title = json.title;
         }
+    }
+
+    public supportAction() {
+        return true;
     }
 }

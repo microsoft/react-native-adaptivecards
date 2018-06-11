@@ -1,9 +1,9 @@
 import React from 'react';
 import { FlatList, View, } from 'react-native';
-import styleManager from '../Style/styleManager';
-import CardElementWrapper from '../Shared/CardElementWrapper';
-import CardElementView from '../Elements/CardElementView';
-export default class ImageSetView extends React.PureComponent {
+import { CardElementView } from '../Elements/CardElementView';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
+import { styleManager } from '../Styles/StyleManager';
+export class ImageSetView extends React.PureComponent {
     constructor() {
         super(...arguments);
         this.renderImage = (image, index) => {

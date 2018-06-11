@@ -1,11 +1,11 @@
 import React from 'react';
 import {
     Image,
-    ImageStyle,
     ImageProperties,
+    ImageStyle,
+    StyleSheet,
     View,
     ViewStyle,
-    StyleSheet,
 } from 'react-native';
 
 interface IProps extends ImageProperties {
@@ -15,21 +15,27 @@ interface IProps extends ImageProperties {
 interface IState {
 }
 
-export default class ImageBackground extends React.PureComponent<IProps, IState> {
+export class ImageBackground extends React.PureComponent<IProps, IState> {
     render() {
         const { children, containerStyle, imageStyle, source } = this.props;
 
-        return <View style={[
-            containerStyle,
-            {
-                position: 'relative',
-            }
-        ]}>
-            <Image source={source} style={[
-                StyleSheet.absoluteFill,
-                imageStyle,
-            ]} />
-            {children}
-        </View>;
+        return (
+            <View
+                style={[
+                    containerStyle,
+                    {
+                        position: 'relative',
+                    }
+                ]}
+            >
+                <Image
+                    source={source} style={[
+                        StyleSheet.absoluteFill,
+                        imageStyle,
+                    ]}
+                />
+                {children}
+            </View>
+        );
     }
 }

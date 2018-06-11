@@ -1,30 +1,32 @@
 import React from 'react';
 
-import CardElement from '../../Schema/Elements/CardElement';
-import CardElementType from '../../Schema/Elements/CardElementType';
-import Image from '../../Schema/Elements/Image';
-import ImageSet from '../../Schema/Containers/ImageSet';
-import TextBlock from '../../Schema/Elements/TextBlock';
-import FactSet from '../../Schema/Containers/FactSet';
-import Column from '../../Schema/Containers/Column';
-import ColumnSet from '../../Schema/Containers/ColumnSet';
-import Container from '../../Schema/Containers/Container';
-import InputText from '../../Schema/Inputs/InputText';
-import InputDate from '../../Schema/Inputs/InputDate';
-import InputTime from '../../Schema/Inputs/InputTime';
+import { ColumnElement } from '../../Schema/Containers/Column';
+import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
+import { ContainerElement } from '../../Schema/Containers/Container';
+import { FactSetElement } from '../../Schema/Containers/FactSet';
+import { ImageSetElement } from '../../Schema/Containers/ImageSet';
+import { CardElement } from '../../Schema/Elements/CardElement';
+import { CardElementType } from '../../Schema/Elements/CardElementType';
+import { ImageElement } from '../../Schema/Elements/Image';
+import { TextBlockElement } from '../../Schema/Elements/TextBlock';
+import { DateInputElement } from '../../Schema/Inputs/DateInput';
+import { TextInputElement } from '../../Schema/Inputs/TextInput';
+import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 
-import TextBlockView from './TextBlockView';
-import ImageView from './ImageView';
-import ImageSetView from '../Containers/ImageSetView';
-import FactSetView from '../Containers/FactSetView';
-import ColumnView from '../Containers/ColumnView';
-import ColumnSetView from '../Containers/ColumnSetView';
-import ContainerView from '../Containers/ContainerView';
-import InputTextView from '../Inputs/InputTextView';
-import InputDateView from '../Inputs/InputDateView';
-import InputTimeView from '../Inputs/InputTimeView';
+import { ColumnSetView } from '../Containers/ColumnSetView';
+import { ColumnView } from '../Containers/ColumnView';
+import { ContainerView } from '../Containers/ContainerView';
+import { FactSetView } from '../Containers/FactSetView';
+import { ImageSetView } from '../Containers/ImageSetView';
+import { DateInputView } from '../Inputs/DateInputView';
+import { TextInputView } from '../Inputs/TextInputView';
+import { TimeInputView } from '../Inputs/TimeInputView';
+import { ImageView } from './ImageView';
+import { TextBlockView } from './TextBlockView';
 
 interface IProps {
+    id?: string;
+    containerId?: string;
     cardElement: CardElement;
     index?: number;
     containerWidth?: number;
@@ -32,7 +34,7 @@ interface IProps {
 interface IState {
 }
 
-export default class CardElementView extends React.PureComponent<IProps, IState> {
+export class CardElementView extends React.PureComponent<IProps, IState> {
     render(): JSX.Element {
         const { cardElement, index, containerWidth } = this.props;
 
@@ -42,25 +44,81 @@ export default class CardElementView extends React.PureComponent<IProps, IState>
 
         switch (cardElement.type) {
             case CardElementType.TextBlock:
-                return <TextBlockView textBlock={cardElement as TextBlock} index={index} />;
+                return (
+                    <TextBlockView
+                        textBlock={cardElement as TextBlockElement}
+                        index={index} />
+                );
             case CardElementType.Image:
-                return <ImageView image={cardElement as Image} index={index} />;
+                return (
+                    <ImageView
+                        image={cardElement as ImageElement}
+                        index={index}
+                    />
+                );
             case CardElementType.ImageSet:
-                return <ImageSetView imageSet={cardElement as ImageSet} index={index} />;
+                return (
+                    <ImageSetView
+                        imageSet={cardElement as ImageSetElement}
+                        index={index}
+                    />
+                );
             case CardElementType.Container:
-                return <ContainerView container={cardElement as Container} index={index} />;
+                return (
+                    <ContainerView
+                        container={cardElement as ContainerElement}
+                        index={index}
+                    />
+                );
             case CardElementType.Column:
-                return <ColumnView column={cardElement as Column} containerWidth={containerWidth} index={index} />;
+                return (
+                    <ColumnView
+                        column={cardElement as ColumnElement}
+                        containerWidth={containerWidth}
+                        index={index}
+                    />
+                );
             case CardElementType.ColumnSet:
-                return <ColumnSetView columnSet={cardElement as ColumnSet} index={index} />;
+                return (
+                    <ColumnSetView
+                        columnSet={cardElement as ColumnSetElement}
+                        index={index}
+                    />
+                );
             case CardElementType.FactSet:
-                return <FactSetView factSet={cardElement as FactSet} index={index} />;
+                return (
+                    <FactSetView
+                        factSet={cardElement as FactSetElement}
+                        index={index}
+                    />
+                );
             case CardElementType.InputText:
-                return <InputTextView inputText={cardElement as InputText} index={index} />;
-            case CardElementType.InputDate:
-                return <InputDateView inputDate={cardElement as InputDate} index={index} />;
-            case CardElementType.InputTime:
-                return <InputTimeView inputTime={cardElement as InputTime} index={index} />;
+                return (
+                    <TextInputView
+                        inputFieldId={cardElement.id}
+                        containerId={this.props.containerId}
+                        inputText={cardElement as TextInputElement}
+                        index={index}
+                    />
+                );
+            case CardElementType.DateInput:
+                return (
+                    <DateInputView
+                        inputFieldId={cardElement.id}
+                        containerId={this.props.containerId}
+                        inputDate={cardElement as DateInputElement}
+                        index={index}
+                    />
+                );
+            case CardElementType.TimeInput:
+                return (
+                    <TimeInputView
+                        inputFieldId={cardElement.id}
+                        containerId={this.props.containerId}
+                        inputTime={cardElement as TimeInputElement}
+                        index={index}
+                    />
+                );
             default:
                 return null;
         }

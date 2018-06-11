@@ -1,26 +1,29 @@
 import React from 'react';
 import {
+    TouchableOpacity,
     View,
     ViewStyle,
 } from 'react-native';
 
+import { ActionContext } from '../../Context/ActionContext';
+import { CardElement } from '../../Schema/Elements/CardElement';
 import {
     Spacing,
 } from '../../Schema/enums';
-import StyleConfig from '../Style/styleConfig.d';
-import styleManager from '../Style/styleManager';
-import CardElement from '../../Schema/Elements/CardElement';
-import SeparateLine from './SeparateLine';
+import { StyleConfig } from '../Styles/StyleConfig';
+import { styleManager } from '../Styles/StyleManager';
+import { SeparateLine } from './SeparateLine';
 
 interface IProps {
     cardElement: CardElement;
     index?: number;
     style?: ViewStyle;
 }
+
 interface IState {
 }
 
-export default class CardElementWrapper extends React.PureComponent<IProps, IState> {
+export class CardElementWrapper extends React.PureComponent<IProps, IState> {
     private readonly styleConfig: StyleConfig;
 
     static defaultProps = {
@@ -31,43 +34,103 @@ export default class CardElementWrapper extends React.PureComponent<IProps, ISta
         super(props);
 
         this.styleConfig = styleManager.getStyle();
+        this.onClick = this.onClick.bind(this);
     }
 
-    render(): JSX.Element {
-        const { cardElement, index, style } = this.props;
-
-        if (!cardElement || !cardElement.isValid()) {
+    public render() {
+        if (!this.props.cardElement || !this.props.cardElement.isValid()) {
             return null;
         }
 
-        const isHorizontalLayout = styleManager.isHorizontalCardElement(cardElement.type);
+        if (this.props.cardElement.supportAction() && this.props.cardElement.getAction() !== undefined) {
+            return this.renderActionView();
+        }
+        return this.renderNonActionView();
+    }
 
-        if (cardElement.separator) {
-            return <View style={style}>
-                {this.renderSeparator(cardElement.spacing, isHorizontalLayout)}
-                {this.renderWrapper(cardElement.spacing, 0, isHorizontalLayout, { flex: 1 })}
-            </View>;
+    private renderActionView() {
+        const isHorizontalLayout = styleManager.isHorizontalCardElement(this.props.cardElement.type);
+
+        if (this.props.cardElement.separator) {
+            return (
+                <TouchableOpacity
+                    style={this.props.style}
+                    onPress={this.onClick}
+                >
+                    {this.renderSeparator(this.props.cardElement.spacing, isHorizontalLayout)}
+                    {this.renderWrapper(this.props.cardElement.spacing, 0, isHorizontalLayout, { flex: 1 })}
+                </TouchableOpacity>
+            );
         } else {
-            return this.renderWrapper(cardElement.spacing, index, isHorizontalLayout, style);
+            return this.renderTouchableWrapper(this.props.cardElement.spacing, this.props.index, isHorizontalLayout, this.props.style);
         }
     }
 
+    private renderNonActionView() {
+        const isHorizontalLayout = styleManager.isHorizontalCardElement(this.props.cardElement.type);
+
+        if (this.props.cardElement.separator) {
+            return (
+                <View
+                    style={this.props.style}
+                >
+                    {this.renderSeparator(this.props.cardElement.spacing, isHorizontalLayout)}
+                    {this.renderWrapper(this.props.cardElement.spacing, 0, isHorizontalLayout, { flex: 1 })}
+                </View>
+            );
+        } else {
+            return this.renderWrapper(this.props.cardElement.spacing, this.props.index, isHorizontalLayout, this.props.style);
+        }
+    }
+
+    private renderTouchableWrapper(spacing: Spacing, index: number, isHorizontalLayout: boolean, wrapperStyle: ViewStyle): JSX.Element {
+        return (
+            <TouchableOpacity
+                style={[
+                    wrapperStyle,
+                    styleManager.getCardElementSpacingStyle(spacing, index, isHorizontalLayout)
+                ]}
+                onPress={this.onClick}
+            >
+                {this.props.children}
+            </TouchableOpacity>
+        );
+    }
+
     private renderWrapper(spacing: Spacing, index: number, isHorizontalLayout: boolean, wrapperStyle: ViewStyle): JSX.Element {
-        return <View
-            style={[
-                wrapperStyle,
-                styleManager.getCardElementSpacingStyle(spacing, index, isHorizontalLayout)
-            ]}
-        >
-            {this.props.children}
-        </View>;
+        return (
+            <View
+                style={[
+                    wrapperStyle,
+                    styleManager.getCardElementSpacingStyle(spacing, index, isHorizontalLayout)
+                ]}
+            >
+                {this.props.children}
+            </View>
+        );
     }
 
     private renderSeparator(spacing: Spacing, isHorizontalLayout: boolean): JSX.Element {
-        return <SeparateLine
-            isHorizontal={isHorizontalLayout}
-            margin={styleManager.getCardElementMargin(spacing)}
-            color={this.styleConfig.element.separateLineColor}
-        />;
+        return (
+            <SeparateLine
+                isHorizontal={isHorizontalLayout}
+                margin={styleManager.getCardElementMargin(spacing)}
+                color={this.styleConfig.element.separateLineColor}
+            />
+        );
+    }
+
+    private onClick() {
+        let actionContext = ActionContext.getInstance();
+        let callback = actionContext.getActionHandler();
+        if (callback) {
+            const element = this.props.cardElement;
+            if (element.supportAction()) {
+                let action = element.getAction();
+                if (action) {
+                    callback(action);
+                }
+            }
+        }
     }
 }

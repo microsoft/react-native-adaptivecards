@@ -1,5 +1,5 @@
-import CardElement from '../Elements/CardElement';
-export default class Input extends CardElement {
+import { CardElement } from '../Elements/CardElement';
+export class InputElement extends CardElement {
     constructor(json) {
         super(json);
         if (this.isValidJSON) {

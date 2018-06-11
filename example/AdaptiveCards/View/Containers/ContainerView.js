@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { ContainerStyle, } from '../../Schema/enums';
-import styleManager from '../Style/styleManager';
-import CardElementWrapper from '../Shared/CardElementWrapper';
-import CardElementView from '../Elements/CardElementView';
-export default class ContainerView extends React.PureComponent {
+import { ContainerStyle } from '../../Schema/enums';
+import { CardElementView } from '../Elements/CardElementView';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
+import { styleManager } from '../Styles/StyleManager';
+export class ContainerView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.styleConfig = styleManager.getStyle();

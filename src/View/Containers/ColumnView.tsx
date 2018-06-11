@@ -1,27 +1,27 @@
 import React from 'react';
 import {
+    FlexAlignType,
     View,
     ViewStyle,
-    FlexAlignType,
 } from 'react-native';
 
+import { ColumnElement } from '../../Schema/Containers/Column';
+import { CardElement } from '../../Schema/Elements/CardElement';
 import {
     ColumnWidth,
 } from '../../Schema/enums';
-import CardElement from '../../Schema/Elements/CardElement';
-import Column from '../../Schema/Containers/Column';
-import { ICardElementViewProps } from '../view.d';
-import CardElementWrapper from '../Shared/CardElementWrapper';
-import CardElementView from '../Elements/CardElementView';
+import { CardElementView } from '../Elements/CardElementView';
+import { ICardElementViewProps } from '../Shared/BaseProps';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
 
 interface IProps extends ICardElementViewProps {
-    column: Column;
+    column: ColumnElement;
     containerWidth?: number;
 }
 interface IState {
 }
 
-export default class ColumnView extends React.PureComponent<IProps, IState> {
+export class ColumnView extends React.PureComponent<IProps, IState> {
     render(): JSX.Element {
         const { column, index } = this.props;
 
@@ -29,19 +29,27 @@ export default class ColumnView extends React.PureComponent<IProps, IState> {
             return null;
         }
 
-        return <CardElementWrapper cardElement={column} index={index} style={this.getViewStyle()}>
-            <View style={{ flex: 1 }}>
-                {
-                    column.items.map((cardElement: CardElement, index: number) =>
-                        <CardElementView
-                            key={'containerItems' + index}
-                            index={index}
-                            cardElement={cardElement}
-                        />
-                    )
-                }
-            </View>
-        </CardElementWrapper>;
+        return (
+            <CardElementWrapper
+                cardElement={column}
+                index={index}
+                style={this.getViewStyle()}
+            >
+                <View
+                    style={{ flex: 1 }}
+                >
+                    {
+                        column.items.map((cardElement: CardElement, index: number) =>
+                            <CardElementView
+                                key={'containerItems' + index}
+                                index={index}
+                                cardElement={cardElement}
+                            />
+                        )
+                    }
+                </View>
+            </CardElementWrapper>
+        );
     }
 
     private getViewStyle(): ViewStyle {

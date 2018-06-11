@@ -1,2 +1,2 @@
-import AdaptiveCard from './View/AdaptiveCardView';
-export default AdaptiveCard;
+import { AdaptiveCardView } from './View/AdaptiveCardView';
+export default AdaptiveCardView;

@@ -1,23 +1,24 @@
 import React from 'react';
 import {
-    View,
     LayoutChangeEvent,
+    View,
 } from 'react-native';
 
-import Column from '../../Schema/Containers/Column';
-import ColumnSet from '../../Schema/Containers/ColumnSet';
-import { ICardElementViewProps } from '../view.d';
-import CardElementWrapper from '../Shared/CardElementWrapper';
-import CardElementView from '../Elements/CardElementView';
+import { ColumnElement } from '../../Schema/Containers/Column';
+import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
+import { CardElementView } from '../Elements/CardElementView';
+import { ICardElementViewProps } from '../Shared/BaseProps';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
 
 interface IProps extends ICardElementViewProps {
-    columnSet: ColumnSet;
+    columnSet: ColumnSetElement;
 }
+
 interface IState {
     viewWidth: number;
 }
 
-export default class ColumnSetView extends React.PureComponent<IProps, IState> {
+export class ColumnSetView extends React.PureComponent<IProps, IState> {
     private isComponentUnmounted: Boolean;
     private hasFixedWidthColumns: Boolean;
     private isEqualDistribution: Boolean;
@@ -56,30 +57,39 @@ export default class ColumnSetView extends React.PureComponent<IProps, IState> {
             return null;
         }
 
-        return <CardElementWrapper cardElement={columnSet} index={index} style={{
-            flex: 1,
-        }}>
-            <View style={{
-                flex: 1,
-                flexDirection: 'row',
-                justifyContent: this.isEqualDistribution ? 'space-between' : 'flex-start',
-            }}
-                onLayout={this.onLayout}
+        return (
+            <CardElementWrapper
+                cardElement={columnSet}
+                index={index}
+                style={{
+                    flex: 1,
+                }}
             >
-                {
-                    columnSet.columns.map(this.renderColumn)
-                }
-            </View>
-        </CardElementWrapper>;
+                <View
+                    style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: this.isEqualDistribution ? 'space-between' : 'flex-start',
+                    }}
+                    onLayout={this.onLayout}
+                >
+                    {
+                        columnSet.columns.map(this.renderColumn)
+                    }
+                </View>
+            </CardElementWrapper>
+        );
     }
 
-    private renderColumn = (column: Column, index: number) => {
-        return <CardElementView
-            key={'column' + index}
-            index={index}
-            containerWidth={this.state.viewWidth}
-            cardElement={column}
-        />;
+    private renderColumn = (column: ColumnElement, index: number) => {
+        return (
+            <CardElementView
+                key={'column' + index}
+                index={index}
+                containerWidth={this.state.viewWidth}
+                cardElement={column}
+            />
+        );
     }
 
     private onLayout = (event?: LayoutChangeEvent) => {

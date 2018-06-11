@@ -1,20 +1,18 @@
 import React from 'react';
-import {
-    View,
-} from 'react-native';
+import { View } from 'react-native';
 
-import StyleConfig from '../Style/styleConfig.d';
-import styleManager from '../Style/styleManager';
-import AdaptiveCardText from '../Shared/AdaptiveCardText';
-import Fact from '../../Schema/Containers/Fact';
+import { FactElement } from '../../Schema/Containers/Fact';
+import { AdaptiveCardText } from '../Shared/AdaptiveCardText';
+import { StyleConfig } from '../Styles/StyleConfig';
+import { styleManager } from '../Styles/StyleManager';
 
 interface IProps {
-    fact: Fact;
+    fact: FactElement;
 }
 interface IState {
 }
 
-export default class FactView extends React.PureComponent<IProps, IState> {
+export class FactView extends React.PureComponent<IProps, IState> {
     private readonly styleConfig: StyleConfig;
 
     constructor(props: IProps) {
@@ -30,26 +28,30 @@ export default class FactView extends React.PureComponent<IProps, IState> {
             return null;
         }
 
-        return <View style={{
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'flex-start'
-        }}
-        >
-            <AdaptiveCardText style={{
-                color: this.styleConfig.fact.titleColor,
-                marginRight: this.styleConfig.fact.spacing,
-            }}
+        return (
+            <View
+                style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    justifyContent: 'flex-start'
+                }}
             >
-                {fact.title}
-            </AdaptiveCardText>
-            <AdaptiveCardText style={{
-                color: this.styleConfig.fact.valueColor,
-                marginLeft: this.styleConfig.fact.spacing,
-            }}
-            >
-                {fact.value}
-            </AdaptiveCardText>
-        </View>;
+                <AdaptiveCardText
+                    style={{
+                        color: this.styleConfig.fact.titleColor,
+                        marginRight: this.styleConfig.fact.spacing,
+                    }}
+                >
+                    {fact.title}
+                </AdaptiveCardText>
+                <AdaptiveCardText
+                    style={{
+                        color: this.styleConfig.fact.valueColor,
+                        marginLeft: this.styleConfig.fact.spacing,
+                    }}
+                >
+                    {fact.value}
+                </AdaptiveCardText>
+            </View>);
     }
 }

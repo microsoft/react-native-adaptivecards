@@ -1,21 +1,19 @@
 import React from 'react';
-import {
-    View,
-} from 'react-native';
+import { View } from 'react-native';
 
-import Fact from '../../Schema/Containers/Fact';
-import FactSet from '../../Schema/Containers/FactSet';
-import { ICardElementViewProps } from '../view.d';
-import CardElementWrapper from '../Shared/CardElementWrapper';
-import FactView from './FactView';
+import { FactElement } from '../../Schema/Containers/Fact';
+import { FactSetElement } from '../../Schema/Containers/FactSet';
+import { ICardElementViewProps } from '../Shared/BaseProps';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
+import { FactView } from './FactView';
 
 interface IProps extends ICardElementViewProps {
-    factSet: FactSet;
+    factSet: FactSetElement;
 }
 interface IState {
 }
 
-export default class FactSetView extends React.PureComponent<IProps, IState> {
+export class FactSetView extends React.PureComponent<IProps, IState> {
     render(): JSX.Element {
         const { factSet, index } = this.props;
 
@@ -23,21 +21,29 @@ export default class FactSetView extends React.PureComponent<IProps, IState> {
             return null;
         }
 
-        return <CardElementWrapper cardElement={factSet} index={index} style={{
-            flex: 1,
-        }}>
-            <View style={{
-                flex: 1,
-            }}>
-                {
-                    factSet.facts.map((fact: Fact, index: number) =>
-                        <FactView
-                            key={'fact' + index}
-                            fact={fact}
-                        />
-                    )
-                }
-            </View>
-        </CardElementWrapper>;
+        return (
+            <CardElementWrapper
+                cardElement={factSet}
+                index={index}
+                style={{
+                    flex: 1,
+                }}
+            >
+                <View
+                    style={{
+                        flex: 1,
+                    }}
+                >
+                    {
+                        factSet.facts.map((fact: FactElement, index: number) =>
+                            <FactView
+                                key={'fact' + index}
+                                fact={fact}
+                            />
+                        )
+                    }
+                </View>
+            </CardElementWrapper>
+        );
     }
 }

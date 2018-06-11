@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, } from 'react-native';
-import styleManager from '../Style/styleManager';
-export default class AdaptiveCardText extends React.PureComponent {
+import { styleManager } from '../Styles/StyleManager';
+export class AdaptiveCardText extends React.PureComponent {
     constructor(props) {
         super(props);
         this.fontFamily = styleManager.getFontFamily();
@@ -13,4 +13,3 @@ export default class AdaptiveCardText extends React.PureComponent {
                 }, style] }), children);
     }
 }
-AdaptiveCardText.defaultProps = Object.assign({}, Text.defaultProps);

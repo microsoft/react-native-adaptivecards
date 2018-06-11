@@ -1,7 +1,7 @@
-import TypedElement from './TypedElement';
-import { createActionSet } from './Actions/Creator';
-import { createCardElementSet } from './Elements/Creator';
-export default class AdaptiveCard extends TypedElement {
+import { ActionFactory } from './Actions/ActionFactory';
+import { CardElementFactory } from './Elements/CardElementFactory';
+import { TypedElement } from './TypedElement';
+export class AdaptiveCardElement extends TypedElement {
     constructor(json) {
         super(json);
         this.actions = [];
@@ -12,8 +12,8 @@ export default class AdaptiveCard extends TypedElement {
             this.fallbackText = json.fallbackText;
             this.backgroundImage = json.backgroundImage;
             this.speak = json.speak;
-            this.actions = createActionSet(json.actions);
-            this.body = createCardElementSet(json.body);
+            this.actions = ActionFactory.createSet(json.actions);
+            this.body = CardElementFactory.createSet(json.body);
         }
     }
     getTypeName() {

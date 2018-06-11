@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, } from 'react-native';
 import { ColumnWidth, } from '../../Schema/enums';
-import CardElementWrapper from '../Shared/CardElementWrapper';
-import CardElementView from '../Elements/CardElementView';
-export default class ColumnView extends React.PureComponent {
+import { CardElementView } from '../Elements/CardElementView';
+import { CardElementWrapper } from '../Shared/CardElementWrapper';
+export class ColumnView extends React.PureComponent {
     render() {
         const { column, index } = this.props;
         if (!column || !column.isValid() || !column.hasItems()) {

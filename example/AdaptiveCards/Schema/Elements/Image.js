@@ -1,9 +1,9 @@
+import { Utils } from '../../utils';
+import { ActionFactory } from '../Actions/ActionFactory';
 import { HorizontalAlignment, ImageSize, ImageStyle, } from '../enums';
-import { getStringEnumValueOrDefault } from '../../utils';
-import { createAction } from '../Actions/Creator';
-import CardElement from './CardElement';
-import CardElementType from './CardElementType';
-export default class Image extends CardElement {
+import { CardElement } from './CardElement';
+import { CardElementType } from './CardElementType';
+export class ImageElement extends CardElement {
     constructor(json) {
         super(json);
         this.size = ImageSize.Auto;
@@ -11,10 +11,10 @@ export default class Image extends CardElement {
             this.url = json.url;
             this.altText = json.altText;
             this.horizontalAlignment =
-                getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left);
-            this.selectAction = createAction(json.selectAction);
-            this.size = getStringEnumValueOrDefault(ImageSize, json.size, ImageSize.Auto);
-            this.style = getStringEnumValueOrDefault(ImageStyle, json.style, ImageStyle.Default);
+                Utils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left);
+            this.selectAction = ActionFactory.create(json.selectAction);
+            this.size = Utils.getStringEnumValueOrDefault(ImageSize, json.size, ImageSize.Auto);
+            this.style = Utils.getStringEnumValueOrDefault(ImageStyle, json.style, ImageStyle.Default);
         }
     }
     getTypeName() {
@@ -23,8 +23,17 @@ export default class Image extends CardElement {
     getRequiredProperties() {
         return ['url'];
     }
+    supportAction() {
+        return true;
+    }
+    getAction() {
+        return this.selectAction;
+    }
+    getActions() {
+        return [this.getAction()];
+    }
     setSize(size) {
-        this.size = getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto);
+        this.size = Utils.getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto);
     }
     isFixedSize() {
         return this.size !== ImageSize.Auto && this.size !== ImageSize.Stretch;

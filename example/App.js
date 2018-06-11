@@ -13,13 +13,15 @@ const cardOverrideStyle = {
 };
 export default class App extends React.Component {
     render() {
-        return React.createElement(ScrollView, { style: {
+        return React.createElement(ScrollView, {
+            style: {
                 marginTop: 24,
                 flex: 1,
             }, contentContainerStyle: {
                 padding: 10,
                 backgroundColor: 'whitesmoke',
-            } },
+            }
+        },
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.adaptiveUpdate, overrideStyle: cardOverrideStyle }),
             this.renderGap(),
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.flightItinerary, overrideStyle: cardOverrideStyle }),
