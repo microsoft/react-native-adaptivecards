@@ -14,14 +14,14 @@ export class ContainerView extends React.PureComponent {
         if (!container || !container.isValid() || !container.hasItems()) {
             return null;
         }
-        return React.createElement(CardElementWrapper, { cardElement: container, index: index, style: {
+        return (React.createElement(CardElementWrapper, { cardElement: container, index: index, style: {
                 flex: 1,
             } },
             React.createElement(View, { style: [{
                         flex: 1,
                     },
                     this.getContainerStyle(container.style)
-                ] }, container.items.map((cardElement, index) => React.createElement(CardElementView, { key: 'containerItems' + index, index: index, cardElement: cardElement }))));
+                ] }, container.items.map((cardElement, index) => React.createElement(CardElementView, { key: 'containerItems' + index, index: index, cardElement: cardElement })))));
     }
     getContainerStyle(style) {
         let containerStyle;

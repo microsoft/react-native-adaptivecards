@@ -8,8 +8,11 @@ export class AdaptiveCardText extends React.PureComponent {
     }
     render() {
         const { style, children } = this.props;
-        return React.createElement(Text, Object.assign({}, this.props, { style: [{
+        return (React.createElement(Text, Object.assign({}, this.props, { style: [
+                {
                     fontFamily: this.fontFamily || undefined,
-                }, style] }), children);
+                },
+                style
+            ] }), children));
     }
 }

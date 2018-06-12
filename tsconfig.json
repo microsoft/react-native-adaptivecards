@@ -3,6 +3,8 @@
         "target": "es2015",
         "module": "es2015",
         "baseUrl": "./src/",
+        "rootDir": "src",
+        "outDir": "dist",
         "jsx": "react",
         "moduleResolution": "node",
         "noImplicitAny": true,
@@ -30,7 +32,8 @@
     "exclude": [
         "node_modules",
         "typings",
-        "AdaptiveCardsExample"
+        "example",
+        "dist"
     ],
     "compileOnSave": false
 }

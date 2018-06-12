@@ -12,7 +12,7 @@ export class FactView extends React.PureComponent {
         if (!fact || !fact.isValid()) {
             return null;
         }
-        return React.createElement(View, { style: {
+        return (React.createElement(View, { style: {
                 flex: 1,
                 flexDirection: 'row',
                 justifyContent: 'flex-start'
@@ -24,6 +24,6 @@ export class FactView extends React.PureComponent {
             React.createElement(AdaptiveCardText, { style: {
                     color: this.styleConfig.fact.valueColor,
                     marginLeft: this.styleConfig.fact.spacing,
-                } }, fact.value));
+                } }, fact.value)));
     }
 }

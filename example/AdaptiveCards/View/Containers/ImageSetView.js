@@ -9,7 +9,7 @@ export class ImageSetView extends React.PureComponent {
         this.renderImage = (image, index) => {
             const { imageSet } = this.props;
             image.setSize(imageSet.imageSize);
-            return React.createElement(CardElementView, { key: 'image' + index, index: index, cardElement: image });
+            return (React.createElement(CardElementView, { key: 'image' + index, index: index, cardElement: image }));
         };
     }
     render() {
@@ -17,7 +17,7 @@ export class ImageSetView extends React.PureComponent {
         if (!imageSet || !imageSet.isValid() || !imageSet.hasImages()) {
             return null;
         }
-        return React.createElement(CardElementWrapper, { cardElement: imageSet, index: index, style: {
+        return (React.createElement(CardElementWrapper, { cardElement: imageSet, index: index, style: {
                 flex: 1,
             } }, styleManager.isHorizontalImageSet() ?
             React.createElement(FlatList, { style: { flex: 1 }, horizontal: true, data: imageSet.images, renderItem: ({ item, index }) => this.renderImage(item, index), keyExtractor: (item, index) => 'image' + index, showsHorizontalScrollIndicator: false })
@@ -25,6 +25,6 @@ export class ImageSetView extends React.PureComponent {
                 React.createElement(View, { style: {
                         flex: 1,
                         flexWrap: 'wrap',
-                    } }, imageSet.images.map(this.renderImage)));
+                    } }, imageSet.images.map(this.renderImage))));
     }
 }

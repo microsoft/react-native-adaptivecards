@@ -9,8 +9,8 @@ export class ColumnView extends React.PureComponent {
         if (!column || !column.isValid() || !column.hasItems()) {
             return null;
         }
-        return React.createElement(CardElementWrapper, { cardElement: column, index: index, style: this.getViewStyle() },
-            React.createElement(View, { style: { flex: 1 } }, column.items.map((cardElement, index) => React.createElement(CardElementView, { key: 'containerItems' + index, index: index, cardElement: cardElement }))));
+        return (React.createElement(CardElementWrapper, { cardElement: column, index: index, style: this.getViewStyle() },
+            React.createElement(View, { style: { flex: 1 } }, column.items.map((cardElement, index) => React.createElement(CardElementView, { key: 'containerItems' + index, index: index, cardElement: cardElement })))));
     }
     getViewStyle() {
         const { column, containerWidth } = this.props;

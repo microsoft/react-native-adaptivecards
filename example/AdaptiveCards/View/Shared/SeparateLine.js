@@ -21,10 +21,13 @@ export class SeparateLine extends React.PureComponent {
                 marginTop: margin,
                 marginBottom: margin,
             };
-        return React.createElement(View, Object.assign({}, this.props, { style: [{
+        return (React.createElement(View, Object.assign({}, this.props, { style: [
+                {
                     flex: 1,
                     backgroundColor: color,
-                }, style] }));
+                },
+                style
+            ] })));
     }
 }
 SeparateLine.defaultProps = {

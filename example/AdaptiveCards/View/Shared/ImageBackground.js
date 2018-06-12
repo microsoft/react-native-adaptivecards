@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, } from 'react-native';
 export class ImageBackground extends React.PureComponent {
     render() {
         const { children, containerStyle, imageStyle, source } = this.props;
-        return React.createElement(View, { style: [
+        return (React.createElement(View, { style: [
                 containerStyle,
                 {
                     position: 'relative',
@@ -13,6 +13,6 @@ export class ImageBackground extends React.PureComponent {
                     StyleSheet.absoluteFill,
                     imageStyle,
                 ] }),
-            children);
+            children));
     }
 }

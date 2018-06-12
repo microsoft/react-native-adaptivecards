@@ -10,7 +10,7 @@ var tsProject = typescript.createProject('tsconfig.json');
 var path = {
     src: './src/',
     dist: './dist/',
-    example: './AdaptiveCardsExample/AdaptiveCards',
+    example: './example/AdaptiveCards',
 };
 
 // Clean destination folder

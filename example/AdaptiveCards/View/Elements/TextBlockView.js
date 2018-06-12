@@ -9,7 +9,7 @@ export class TextBlockView extends React.PureComponent {
         if (!textBlock || !textBlock.isValid()) {
             return null;
         }
-        return React.createElement(CardElementWrapper, { cardElement: textBlock, index: index, style: {
+        return (React.createElement(CardElementWrapper, { cardElement: textBlock, index: index, style: {
                 flex: 1,
             } },
             React.createElement(View, { style: {
@@ -19,9 +19,11 @@ export class TextBlockView extends React.PureComponent {
                         backgroundColor: 'transparent',
                         fontSize: styleManager.getFontSize(textBlock.size),
                         fontWeight: styleManager.getFontWeight(textBlock.weight),
-                        color: textBlock.isSubtle ? styleManager.getSubtleColor(textBlock.color) : styleManager.getColor(textBlock.color),
+                        color: textBlock.isSubtle ?
+                            styleManager.getSubtleColor(textBlock.color) :
+                            styleManager.getColor(textBlock.color),
                         textAlign: textBlock.horizontalAlignment,
                         flexWrap: styleManager.getWrapStyle(textBlock.wrap),
-                    }, numberOfLines: textBlock.maxLines || undefined }, textBlock.text)));
+                    }, numberOfLines: textBlock.maxLines || undefined }, textBlock.text))));
     }
 }
