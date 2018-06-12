@@ -34,6 +34,8 @@
     "typescript": "^2.9.1"
   },
   "dependencies": {
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.10",
+    "react": "^16.4.0",
+    "react-native": "^0.55.4"
   }
 }
