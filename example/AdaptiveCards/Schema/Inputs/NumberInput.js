@@ -1,3 +1,4 @@
+import { Utils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 export class NumberInputElement extends InputElement {
@@ -14,5 +15,15 @@ export class NumberInputElement extends InputElement {
     }
     getRequiredProperties() {
         return ['id'];
+    }
+    validateForm(value) {
+        if (value && value.length !== 0) {
+            console.log('pass length check');
+            if (Utils.isNumberStrict(value)) {
+                console.log('pass strict number check');
+                return Utils.isInRange(Number(value), this.min, this.max);
+            }
+        }
+        return true;
     }
 }

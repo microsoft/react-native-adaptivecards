@@ -6,7 +6,7 @@ import {
     View
 } from 'react-native';
 
-import { InputContext } from '../../Context/InputContext';
+import { FormContext } from '../../Context/FormContext';
 import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { ICardElementViewProps } from '../Shared/BaseProps';
 
@@ -79,7 +79,7 @@ export class DateInputView extends React.PureComponent<IProps, IState> {
     }
 
     private updateStore() {
-        InputContext.getInstance().updateField(
+        FormContext.getInstance().updateField(
             this.props.element.id,
             this.state.date
         );

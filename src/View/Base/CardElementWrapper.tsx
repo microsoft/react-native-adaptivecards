@@ -6,18 +6,17 @@ import {
 } from 'react-native';
 
 import { ActionContext } from '../../Context/ActionContext';
-import { InputContext } from '../../Context/InputContext';
+import { FormContext } from '../../Context/FormContext';
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import {
     Spacing,
 } from '../../Shared/Enums';
 import { SeparateLine } from '../Base/SeparateLine';
+import { ICardElementViewProps } from '../Shared/BaseProps';
 import { StyleConfig } from '../Styles/StyleConfig';
 import { styleManager } from '../Styles/StyleManager';
 
-interface IProps {
-    cardElement: ContentElement;
-    index?: number;
+interface IProps extends ICardElementViewProps<ContentElement> {
     style?: ViewStyle;
 }
 
@@ -39,48 +38,48 @@ export class CardElementWrapper extends React.PureComponent<IProps, IState> {
     }
 
     public render() {
-        if (!this.props.cardElement || !this.props.cardElement.isValid()) {
+        if (!this.props.element || !this.props.element.isValid()) {
             return null;
         }
 
-        if (this.props.cardElement.supportAction() && this.props.cardElement.getAction() !== undefined) {
+        if (this.props.element.supportAction() && this.props.element.getAction() !== undefined) {
             return this.renderActionView();
         }
         return this.renderNonActionView();
     }
 
     private renderActionView() {
-        const isHorizontalLayout = styleManager.isHorizontalCardElement(this.props.cardElement.type);
+        const isHorizontalLayout = styleManager.isHorizontalCardElement(this.props.element.type);
 
-        if (this.props.cardElement.separator) {
+        if (this.props.element.separator) {
             return (
                 <TouchableOpacity
                     style={this.props.style}
                     onPress={this.onClick}
                 >
-                    {this.renderSeparator(this.props.cardElement.spacing, isHorizontalLayout)}
-                    {this.renderWrapper(this.props.cardElement.spacing, 0, isHorizontalLayout, { flex: 1 })}
+                    {this.renderSeparator(this.props.element.spacing, isHorizontalLayout)}
+                    {this.renderWrapper(this.props.element.spacing, 0, isHorizontalLayout, { flex: 1 })}
                 </TouchableOpacity>
             );
         } else {
-            return this.renderTouchableWrapper(this.props.cardElement.spacing, this.props.index, isHorizontalLayout, this.props.style);
+            return this.renderTouchableWrapper(this.props.element.spacing, this.props.index, isHorizontalLayout, this.props.style);
         }
     }
 
     private renderNonActionView() {
-        const isHorizontalLayout = styleManager.isHorizontalCardElement(this.props.cardElement.type);
+        const isHorizontalLayout = styleManager.isHorizontalCardElement(this.props.element.type);
 
-        if (this.props.cardElement.separator) {
+        if (this.props.element.separator) {
             return (
                 <View
                     style={this.props.style}
                 >
-                    {this.renderSeparator(this.props.cardElement.spacing, isHorizontalLayout)}
-                    {this.renderWrapper(this.props.cardElement.spacing, 0, isHorizontalLayout, { flex: 1 })}
+                    {this.renderSeparator(this.props.element.spacing, isHorizontalLayout)}
+                    {this.renderWrapper(this.props.element.spacing, 0, isHorizontalLayout, { flex: 1 })}
                 </View>
             );
         } else {
-            return this.renderWrapper(this.props.cardElement.spacing, this.props.index, isHorizontalLayout, this.props.style);
+            return this.renderWrapper(this.props.element.spacing, this.props.index, isHorizontalLayout, this.props.style);
         }
     }
 
@@ -125,17 +124,23 @@ export class CardElementWrapper extends React.PureComponent<IProps, IState> {
         let actionContext = ActionContext.getInstance();
         let callback = actionContext.getActionEventHandler();
         if (callback) {
-            const element = this.props.cardElement;
+            const element = this.props.element;
             if (element.supportAction()) {
                 let action = element.getAction();
                 if (action) {
                     callback(
-                        this.props.cardElement,
+                        this.props.element,
                         (args) => {
-                            args.formData = {
-                                ...action.getData(),
-                                ...InputContext.getInstance().getFields(this.props.cardElement.getAllInputFieldIds())
-                            };
+                            args.formValidate = FormContext.getInstance().validateField(this.props.element);
+                            return args;
+                        },
+                        (args) => {
+                            if (args.formValidate) {
+                                args.formData = {
+                                    ...action.getData(),
+                                    ...FormContext.getInstance().getFields(this.props.element.getAllInputFieldIds())
+                                };
+                            }
                             return args;
                         }
                     );

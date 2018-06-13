@@ -14,7 +14,7 @@ export class ContainerView extends React.PureComponent {
         if (!element || !element.isValid() || !element.hasItems()) {
             return null;
         }
-        return (React.createElement(CardElementWrapper, { cardElement: element, index: index, style: {
+        return (React.createElement(CardElementWrapper, { element: element, index: index, style: {
                 flex: 1,
             } },
             React.createElement(View, { style: [{

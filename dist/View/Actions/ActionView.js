@@ -10,10 +10,7 @@ export class ActionView extends React.Component {
             let actionContext = ActionContext.getInstance();
             let callback = actionContext.getActionEventHandler();
             if (callback) {
-                callback(this.props.element, this.props.actionHook, (args) => {
-                    console.log(args.formData);
-                    return args;
-                });
+                callback(this.props.element, ...this.props.actionHooks);
             }
         };
         this.styleConfig = styleManager.getStyle();

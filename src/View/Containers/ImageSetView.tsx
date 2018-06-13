@@ -26,7 +26,7 @@ export class ImageSetView extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <CardElementWrapper cardElement={element} index={index} style={{
+            <CardElementWrapper element={element} index={index} style={{
                 flex: 1,
             }}>
                 {

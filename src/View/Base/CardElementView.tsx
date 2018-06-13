@@ -12,8 +12,8 @@ import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
 import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 
-import { CardElement } from 'Schema/Base/CardElement';
-import { NumberInputElement } from 'Schema/Inputs/NumberInput';
+import { CardElement } from '../../Schema/Base/CardElement';
+import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
 import { ImageView } from '../CardElements/ImageView';
 import { TextBlockView } from '../CardElements/TextBlockView';
 import { ColumnSetView } from '../Containers/ColumnSetView';

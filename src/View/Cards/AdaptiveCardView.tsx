@@ -4,8 +4,8 @@ import {
     ViewStyle,
 } from 'react-native';
 
-import { ActionEventHandlerArgs } from 'Context/ActionContext';
-import { InputContext } from '../../Context/InputContext';
+import { ActionEventHandlerArgs } from '../../Context/ActionContext';
+import { FormContext } from '../../Context/FormContext';
 import { ActionElement, ActionType } from '../../Schema/Base/ActionElement';
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import { AdaptiveCardElement } from '../../Schema/Cards/AdaptiveCard';
@@ -30,7 +30,8 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
-        this.submitActionHook = this.submitActionHook.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.extractFormFields = this.extractFormFields.bind(this);
 
         this.styleConfig = styleManager.getStyle();
 
@@ -131,7 +132,7 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
                             key={index}
                             element={action}
                             index={index}
-                            actionHook={this.submitActionHook}
+                            actionHooks={[this.validateForm, this.extractFormFields]}
                         />
                     )
                 }
@@ -139,12 +140,23 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
         );
     }
 
-    private submitActionHook(args: ActionEventHandlerArgs<ActionElement>) {
+    private validateForm(args: ActionEventHandlerArgs<ActionElement>) {
+        console.log('Validate Form');
         if (args.action.type === ActionType.Submit) {
-            args.formData = {
-                ...args.action.getData(),
-                ...InputContext.getInstance().getFields(this.element.getAllInputFieldIds())
-            };
+            args.formValidate = FormContext.getInstance().validateField(this.element);
+        }
+        return args;
+    }
+
+    private extractFormFields(args: ActionEventHandlerArgs<ActionElement>) {
+        if (args.action.type === ActionType.Submit) {
+            if (args.formValidate) {
+                console.log('Extract Data');
+                args.formData = {
+                    ...args.action.getData(),
+                    ...FormContext.getInstance().getFields(this.element.getAllInputFieldIds())
+                };
+            }
         }
         return args;
     }

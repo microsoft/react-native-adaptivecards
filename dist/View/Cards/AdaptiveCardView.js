@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { InputContext } from '../../Context/InputContext';
+import { FormContext } from '../../Context/FormContext';
 import { ActionType } from '../../Schema/Base/ActionElement';
 import { AdaptiveCardElement } from '../../Schema/Cards/AdaptiveCard';
 import { ActionView } from '../Actions/ActionView';
@@ -10,7 +10,8 @@ import { styleManager } from '../Styles/StyleManager';
 export class AdaptiveCardView extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.submitActionHook = this.submitActionHook.bind(this);
+        this.validateForm = this.validateForm.bind(this);
+        this.extractFormFields = this.extractFormFields.bind(this);
         this.styleConfig = styleManager.getStyle();
         this.element = new AdaptiveCardElement(props.element);
         console.log('AdaptiveCard', this.element);
@@ -62,11 +63,21 @@ export class AdaptiveCardView extends React.PureComponent {
                 flexDirection: styleManager.getActionSetFlexDirectionValue(),
                 alignItems: 'stretch',
                 marginTop: this.styleConfig.action.actionSet.spacing,
-            } }, this.element.actions.map((action, index) => React.createElement(ActionView, { key: index, element: action, index: index, actionHook: this.submitActionHook }))));
+            } }, this.element.actions.map((action, index) => React.createElement(ActionView, { key: index, element: action, index: index, actionHooks: [this.validateForm, this.extractFormFields] }))));
     }
-    submitActionHook(args) {
+    validateForm(args) {
+        console.log('Validate Form');
         if (args.action.type === ActionType.Submit) {
-            args.formData = Object.assign({}, args.action.getData(), InputContext.getInstance().getFields(this.element.getAllInputFieldIds()));
+            args.formValidate = FormContext.getInstance().validateField(this.element);
+        }
+        return args;
+    }
+    extractFormFields(args) {
+        if (args.action.type === ActionType.Submit) {
+            if (args.formValidate) {
+                console.log('Extract Data');
+                args.formData = Object.assign({}, args.action.getData(), FormContext.getInstance().getFields(this.element.getAllInputFieldIds()));
+            }
         }
         return args;
     }

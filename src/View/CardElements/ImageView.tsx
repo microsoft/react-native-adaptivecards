@@ -73,7 +73,7 @@ export class ImageView extends React.PureComponent<IProps, IState> {
 
         return (
             <CardElementWrapper
-                cardElement={element}
+                element={element}
                 index={index}
                 style={
                     styleManager.isHorizontalImageSet() ? undefined : { flex: 1 }

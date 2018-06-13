@@ -40,7 +40,8 @@ export class ActionContext {
                         break;
                 }
                 let args = {
-                    action: action
+                    action: action,
+                    formValidate: true
                 };
                 if (this.globalHooks) {
                     args = this.globalHooks.reduce((prev, current) => {

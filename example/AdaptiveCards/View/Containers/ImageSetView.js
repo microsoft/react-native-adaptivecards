@@ -17,7 +17,7 @@ export class ImageSetView extends React.PureComponent {
         if (!element || !element.isValid() || !element.hasImages()) {
             return null;
         }
-        return (React.createElement(CardElementWrapper, { cardElement: element, index: index, style: {
+        return (React.createElement(CardElementWrapper, { element: element, index: index, style: {
                 flex: 1,
             } }, styleManager.isHorizontalImageSet() ?
             React.createElement(FlatList, { style: { flex: 1 }, horizontal: true, data: element.images, renderItem: ({ item, index }) => this.renderImage(item, index), keyExtractor: (item, index) => 'image' + index, showsHorizontalScrollIndicator: false })

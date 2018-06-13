@@ -35,6 +35,14 @@ export abstract class CardElement {
         return false;
     }
 
+    public isForm() {
+        return false;
+    }
+
+    public validateForm(value?: any) {
+        return true;
+    }
+
     public getId(): string {
         return undefined;
     }

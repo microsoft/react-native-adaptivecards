@@ -37,4 +37,30 @@ export class Utils {
             value === null ||
             (typeof value === 'string' && !value));
     }
+    static isInRange(value, min, max) {
+        console.log('Range: ' + min + ' --- ' + max);
+        console.log('Value: ' + value);
+        if (value !== undefined && min !== undefined && max !== undefined) {
+            console.log('Check full range');
+            return (value >= min && value <= max);
+        }
+        if (value !== undefined && min !== undefined) {
+            console.log('Check min range');
+            return (value >= min);
+        }
+        if (value !== undefined && max !== undefined) {
+            console.log('Check ax range');
+            return (value <= max);
+        }
+        return false;
+    }
+    static isNumberStrict(value) {
+        return /^(\+|-)?\d+($|\.\d+$)/.test(value);
+    }
+    static isNumber(value) {
+        return /^(\+|-)?\d+($|\.\d*$)/.test(value);
+    }
+    static isSymbol(value) {
+        return /^(\+|-)?$/.test(value);
+    }
 }

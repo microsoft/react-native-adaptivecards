@@ -11,7 +11,7 @@ import { StyleConfig } from '../Styles/StyleConfig';
 import { styleManager } from '../Styles/StyleManager';
 
 export interface IActionViewProps<T extends ActionElement> extends ICardElementViewProps<T> {
-    actionHook: (args: ActionEventHandlerArgs<T>) => ActionEventHandlerArgs<T>;
+    actionHooks: ((args: ActionEventHandlerArgs<T>) => ActionEventHandlerArgs<T>)[];
 }
 
 interface IState {
@@ -72,11 +72,7 @@ export class ActionView<T extends ActionElement> extends React.Component<IAction
         if (callback) {
             callback(
                 this.props.element,
-                this.props.actionHook,
-                (args) => {
-                    console.log(args.formData);
-                    return args;
-                }
+                ...this.props.actionHooks
             );
         }
     }

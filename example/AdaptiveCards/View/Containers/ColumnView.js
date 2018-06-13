@@ -9,7 +9,7 @@ export class ColumnView extends React.PureComponent {
         if (!element || !element.isValid() || !element.hasItems()) {
             return null;
         }
-        return (React.createElement(CardElementWrapper, { cardElement: element, index: index, style: this.getViewStyle() },
+        return (React.createElement(CardElementWrapper, { element: element, index: index, style: this.getViewStyle() },
             React.createElement(View, { style: { flex: 1 } }, element.items.map((cardElement, index) => React.createElement(CardElementView, { key: 'containerItems' + index, index: index, element: cardElement })))));
     }
     getViewStyle() {

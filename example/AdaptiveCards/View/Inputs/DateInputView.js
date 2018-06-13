@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import React from 'react';
 import { DatePickerAndroid, Text, TouchableOpacity, View } from 'react-native';
-import { InputContext } from '../../Context/InputContext';
+import { FormContext } from '../../Context/FormContext';
 export class DateInputView extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -57,6 +57,6 @@ export class DateInputView extends React.PureComponent {
                 React.createElement(Text, null, this.state.date))));
     }
     updateStore() {
-        InputContext.getInstance().updateField(this.props.element.id, this.state.date);
+        FormContext.getInstance().updateField(this.props.element.id, this.state.date);
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, } from 'react-native';
-import { InputContext } from '../../Context/InputContext';
+import { FormContext } from '../../Context/FormContext';
 export class TextInputView extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -32,6 +32,6 @@ export class TextInputView extends React.PureComponent {
         }, this.updateStore);
     }
     updateStore() {
-        InputContext.getInstance().updateField(this.props.element.id, this.state.value);
+        FormContext.getInstance().updateField(this.props.element.id, this.state.value);
     }
 }

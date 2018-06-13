@@ -20,6 +20,12 @@ export class CardElement {
     isInput() {
         return false;
     }
+    isForm() {
+        return false;
+    }
+    validateForm(value) {
+        return true;
+    }
     getId() {
         return undefined;
     }

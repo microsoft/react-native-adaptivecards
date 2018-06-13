@@ -105,7 +105,7 @@ export class ImageView extends React.PureComponent {
         const borderRadius = element.style === ImageStyle.Person && dimensions ?
             dimensions.width / 2 :
             undefined;
-        return (React.createElement(CardElementWrapper, { cardElement: element, index: index, style: styleManager.isHorizontalImageSet() ? undefined : { flex: 1 } },
+        return (React.createElement(CardElementWrapper, { element: element, index: index, style: styleManager.isHorizontalImageSet() ? undefined : { flex: 1 } },
             React.createElement(View, { style: { flex: 1 }, onLayout: this.onLayout },
                 this.state.imageLoadSuccess ?
                     undefined :

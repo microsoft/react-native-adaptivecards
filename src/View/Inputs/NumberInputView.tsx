@@ -4,8 +4,9 @@ import {
     TextInput,
 } from 'react-native';
 
-import { NumberInputElement } from 'Schema/Inputs/NumberInput';
-import { InputContext } from '../../Context/InputContext';
+import { FormContext } from '../../Context/FormContext';
+import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
+import { Utils } from '../../Shared/Utils';
 import { ICardElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends ICardElementViewProps<NumberInputElement> {
@@ -20,7 +21,8 @@ export class NumberInputView extends React.PureComponent<IProps, IState> {
         super(props);
 
         this.onChangeText = this.onChangeText.bind(this);
-        if (this.isNumber(this.props.element.value.toString())) {
+        this.onBlur = this.onBlur.bind(this);
+        if (Utils.isNumber(this.props.element.value.toString())) {
             this.state = {
                 value: this.props.element.value.toString(),
             };
@@ -55,12 +57,13 @@ export class NumberInputView extends React.PureComponent<IProps, IState> {
                 underlineColorAndroid={'transparent'}
                 importantForAccessibility={'no-hide-descendants'}
                 onChangeText={this.onChangeText}
+                onBlur={this.onBlur}
             />
         );
     }
 
     private onChangeText(input: string) {
-        if (this.isSymbol(input) || this.isNumber(input)) {
+        if (Utils.isSymbol(input) || Utils.isNumber(input)) {
             console.log('change text');
             this.setState({
                 value: input
@@ -68,26 +71,15 @@ export class NumberInputView extends React.PureComponent<IProps, IState> {
         }
     }
 
-    private isNumber(value: string) {
-        return /^(\+|-)?\d+($|\.\d*$)/.test(value);
-    }
-
-    private isSymbol(value: string) {
-        return /^(\+|-)?$/.test(value);
+    private onBlur() {
+        if (this.props.element.validateForm(this.state.value)) {
+            console.log('NumberInput: valide');
+        } else {
+            console.log('NumberInput: invalide');
+        }
     }
 
     private updateStore() {
-        const value = this.state.value;
-        let finalValue: string;
-        if (this.isNumber(value)) {
-            finalValue = value;
-        }
-        if (this.isSymbol(value)) {
-            finalValue = this.props.element.value.toString();
-        }
-        if (finalValue.endsWith('.')) {
-            finalValue = value.slice(0, -1);
-        }
-        InputContext.getInstance().updateField(this.props.element.id, finalValue);
+        FormContext.getInstance().updateField(this.props.element.id, this.state.value);
     }
 }

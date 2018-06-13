@@ -103,8 +103,9 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
     }
 
     private onSubmit = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
+        console.log('Form validate: ' + args.formValidate);
         console.log(args.formData);
-        if (this.props.onSubmit) {
+        if (args.formValidate && this.props.onSubmit) {
             this.props.onSubmit(args.formData);
         }
     }

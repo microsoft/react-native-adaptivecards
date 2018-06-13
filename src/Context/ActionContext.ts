@@ -6,6 +6,7 @@ import { CardElement } from '../Schema/Base/CardElement';
 
 export class ActionEventHandlerArgs<T extends ActionElement> {
     formData?: { [id: string]: string };
+    formValidate: boolean;
     action: T;
 }
 
@@ -61,7 +62,8 @@ export class ActionContext {
                         break;
                 }
                 let args = {
-                    action: action
+                    action: action,
+                    formValidate: true
                 };
                 if (this.globalHooks) {
                     args = this.globalHooks.reduce((prev, current) => {

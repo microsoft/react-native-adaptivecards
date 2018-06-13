@@ -23,7 +23,7 @@ export class FactSetView extends React.PureComponent<IProps, IState> {
 
         return (
             <CardElementWrapper
-                cardElement={element}
+                element={element}
                 index={index}
                 style={{
                     flex: 1,

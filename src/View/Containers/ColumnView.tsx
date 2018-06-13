@@ -28,7 +28,7 @@ export class ColumnView extends React.PureComponent<IProps, IState> {
 
         return (
             <CardElementWrapper
-                cardElement={element}
+                element={element}
                 index={index}
                 style={this.getViewStyle()}
             >

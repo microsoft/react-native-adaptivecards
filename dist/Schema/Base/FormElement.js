@@ -1,3 +1,4 @@
+import { FormContext } from '../../Context/FormContext';
 import { ContentElement } from '../Base/ContentElement';
 import { ActionFactory } from '../Factories/ActionFactory';
 export class FormElement extends ContentElement {
@@ -20,7 +21,7 @@ export class FormElement extends ContentElement {
         let result = [];
         let children = this.getChildren();
         if (children) {
-            this.getChildren().forEach((element) => {
+            children.forEach((element) => {
                 result = [...result, ...element.getAllInputFieldIds()];
             });
         }
@@ -28,5 +29,17 @@ export class FormElement extends ContentElement {
     }
     isInput() {
         return false;
+    }
+    isForm() {
+        return true;
+    }
+    validateForm(value) {
+        let children = this.getChildren();
+        if (children) {
+            return children.reduce((prev, current) => {
+                return prev && FormContext.getInstance().validateField(current);
+            }, true);
+        }
+        return true;
     }
 }

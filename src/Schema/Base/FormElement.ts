@@ -1,3 +1,4 @@
+import { FormContext } from '../../Context/FormContext';
 import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
 import { SubmitActionElement } from '../Actions/SubmitAction';
 import { ContentElement } from '../Base/ContentElement';
@@ -32,7 +33,7 @@ export abstract class FormElement extends ContentElement {
         let result: string[] = [];
         let children = this.getChildren();
         if (children) {
-            this.getChildren().forEach((element: ContentElement) => {
+            children.forEach((element: ContentElement) => {
                 result = [...result, ...element.getAllInputFieldIds()];
             });
         }
@@ -41,5 +42,19 @@ export abstract class FormElement extends ContentElement {
 
     isInput() {
         return false;
+    }
+
+    isForm() {
+        return true;
+    }
+
+    validateForm(value?: any) {
+        let children = this.getChildren();
+        if (children) {
+            return children.reduce((prev, current) => {
+                return prev && FormContext.getInstance().validateField(current);
+            }, true);
+        }
+        return true;
     }
 }

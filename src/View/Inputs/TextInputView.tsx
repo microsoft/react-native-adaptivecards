@@ -3,7 +3,7 @@ import {
     TextInput,
 } from 'react-native';
 
-import { InputContext } from '../../Context/InputContext';
+import { FormContext } from '../../Context/FormContext';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
 import { ICardElementViewProps } from '../Shared/BaseProps';
 
@@ -63,6 +63,6 @@ export class TextInputView extends React.PureComponent<IProps, IState> {
     }
 
     private updateStore() {
-        InputContext.getInstance().updateField(this.props.element.id, this.state.value);
+        FormContext.getInstance().updateField(this.props.element.id, this.state.value);
     }
 }

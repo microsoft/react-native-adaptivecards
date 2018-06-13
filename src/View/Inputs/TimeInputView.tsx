@@ -6,7 +6,7 @@ import {
     View
 } from 'react-native';
 
-import { InputContext } from '../../Context/InputContext';
+import { FormContext } from '../../Context/FormContext';
 import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 import { ICardElementViewProps } from '../Shared/BaseProps';
 
@@ -80,7 +80,7 @@ export class TimeInputView extends React.PureComponent<IProps, IState> {
     }
 
     private updateStore() {
-        InputContext.getInstance().updateField(
+        FormContext.getInstance().updateField(
             this.props.element.id,
             this.state.time
         );
