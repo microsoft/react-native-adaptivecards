@@ -5,7 +5,10 @@ export class TextInputView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.onChangeText = this.onChangeText.bind(this);
-        this.onChangeText(this.props.element.value);
+        this.state = {
+            value: this.props.element.value,
+        };
+        this.updateStore();
     }
     render() {
         const { element } = this.props;
@@ -16,13 +19,19 @@ export class TextInputView extends React.PureComponent {
                 borderColor: 'gray',
                 borderWidth: 1,
                 borderRadius: 4,
+                fontSize: 16,
                 paddingHorizontal: 10,
                 paddingVertical: 6,
                 marginVertical: 6,
                 height: element.isMultiline ? 116 : 38
-            }, multiline: element.isMultiline, blurOnSubmit: true, placeholder: element.placeholder, value: element.value, returnKeyType: 'done', underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onChangeText }));
+            }, multiline: element.isMultiline, blurOnSubmit: true, placeholder: element.placeholder, value: this.state.value, returnKeyType: 'done', underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onChangeText }));
     }
     onChangeText(input) {
-        InputContext.getInstance().updateField(this.props.element.id, input);
+        this.setState({
+            value: input
+        }, this.updateStore);
+    }
+    updateStore() {
+        InputContext.getInstance().updateField(this.props.element.id, this.state.value);
     }
 }

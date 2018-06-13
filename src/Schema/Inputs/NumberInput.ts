@@ -18,7 +18,7 @@ export class NumberInputElement extends InputElement {
     }
 
     getTypeName(): string {
-        return ContentElementType.InputNumber;
+        return ContentElementType.NumberInput;
     }
 
     getRequiredProperties(): Array<string> {

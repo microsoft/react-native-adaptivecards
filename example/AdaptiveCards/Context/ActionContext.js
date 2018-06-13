@@ -2,7 +2,9 @@ import { ActionType } from '../Schema/Base/ActionElement';
 export class ActionEventHandlerArgs {
 }
 export class ActionContext {
-    constructor() { }
+    constructor() {
+        this.globalHooks = [];
+    }
     static getInstance() {
         if (ActionContext.sharedInstance === undefined) {
             ActionContext.sharedInstance = new ActionContext();
@@ -17,6 +19,9 @@ export class ActionContext {
     }
     registerSubmitHandler(handler) {
         this.onSubmit = handler;
+    }
+    registerGlobalHook(hook) {
+        this.globalHooks.push(hook);
     }
     getActionEventHandler() {
         return (target, ...hooks) => {
@@ -37,8 +42,13 @@ export class ActionContext {
                 let args = {
                     action: action
                 };
+                if (this.globalHooks) {
+                    args = this.globalHooks.reduce((prev, current) => {
+                        return current(prev);
+                    }, args);
+                }
                 if (hooks) {
-                    hooks.reduce((prev, current) => {
+                    args = hooks.reduce((prev, current) => {
                         return current(prev);
                     }, args);
                 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Linking, View, } from 'react-native';
 import { ActionContext } from '../Context/ActionContext';
-import { AdaptiveCardElementView } from './Cards/AdaptiveCardElementView';
+import { AdaptiveCardView } from './Cards/AdaptiveCardView';
 import { styleManager } from './Styles/StyleManager';
-export class AdaptiveCardView extends React.PureComponent {
+export class CardRootView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.onOpenUrl = (args) => {
@@ -21,6 +21,7 @@ export class AdaptiveCardView extends React.PureComponent {
             }
         };
         this.onSubmit = (args) => {
+            console.log(args.formData);
             if (this.props.onSubmit) {
                 this.props.onSubmit(args.formData);
             }
@@ -46,9 +47,9 @@ export class AdaptiveCardView extends React.PureComponent {
             return null;
         }
         return (React.createElement(View, { style: { flex: 1 } },
-            React.createElement(AdaptiveCardElementView, { formId: 'root', element: adaptiveCard }),
+            React.createElement(AdaptiveCardView, { formId: 'root', element: adaptiveCard }),
             this.state.actionCard ?
-                React.createElement(AdaptiveCardElementView, { formId: 'first', element: this.state.actionCard, style: {
+                React.createElement(AdaptiveCardView, { formId: 'first', element: this.state.actionCard, style: {
                         marginTop: this.styleConfig.card.spacing,
                     } })
                 :

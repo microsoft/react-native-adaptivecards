@@ -30,9 +30,7 @@ export class DateInputView extends React.PureComponent {
         this.onDateChange = (dateTime) => {
             this.setState({
                 date: dateTime.toString()
-            }, () => {
-                this.updateStore();
-            });
+            }, this.updateStore);
         };
         const { element } = props;
         this.state = {

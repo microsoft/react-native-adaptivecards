@@ -11,6 +11,7 @@ interface IProps extends ICardElementViewProps<TextInputElement> {
 }
 
 interface IState {
+    value: string;
 }
 
 export class TextInputView extends React.PureComponent<IProps, IState> {
@@ -18,7 +19,10 @@ export class TextInputView extends React.PureComponent<IProps, IState> {
         super(props);
 
         this.onChangeText = this.onChangeText.bind(this);
-        this.onChangeText(this.props.element.value);
+        this.state = {
+            value: this.props.element.value,
+        };
+        this.updateStore();
     }
 
     render(): JSX.Element {
@@ -34,6 +38,7 @@ export class TextInputView extends React.PureComponent<IProps, IState> {
                     borderColor: 'gray',
                     borderWidth: 1,
                     borderRadius: 4,
+                    fontSize: 16,
                     paddingHorizontal: 10,
                     paddingVertical: 6,
                     marginVertical: 6,
@@ -42,7 +47,7 @@ export class TextInputView extends React.PureComponent<IProps, IState> {
                 multiline={element.isMultiline}
                 blurOnSubmit={true}
                 placeholder={element.placeholder}
-                value={element.value}
+                value={this.state.value}
                 returnKeyType={'done'}
                 underlineColorAndroid={'transparent'}
                 importantForAccessibility={'no-hide-descendants'}
@@ -52,6 +57,12 @@ export class TextInputView extends React.PureComponent<IProps, IState> {
     }
 
     private onChangeText(input: string) {
-        InputContext.getInstance().updateField(this.props.element.id, input);
+        this.setState({
+            value: input
+        }, this.updateStore);
+    }
+
+    private updateStore() {
+        InputContext.getInstance().updateField(this.props.element.id, this.state.value);
     }
 }

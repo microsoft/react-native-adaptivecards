@@ -9,7 +9,7 @@ import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
 import { AdaptiveCardElement } from '../Schema/Cards/AdaptiveCard';
-import { AdaptiveCardElementView } from './Cards/AdaptiveCardElementView';
+import { AdaptiveCardView } from './Cards/AdaptiveCardView';
 import { StyleConfig } from './Styles/StyleConfig';
 import { styleManager } from './Styles/StyleManager';
 
@@ -23,7 +23,7 @@ interface IState {
     actionCard: AdaptiveCardElement;
 }
 
-export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
+export class CardRootView extends React.PureComponent<IProps, IState> {
     private styleConfig: StyleConfig;
     private isComponentUnmounted: Boolean;
 
@@ -65,13 +65,13 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
             <View
                 style={{ flex: 1 }}
             >
-                <AdaptiveCardElementView
+                <AdaptiveCardView
                     formId='root'
                     element={adaptiveCard}
                 />
                 {
                     this.state.actionCard ?
-                        <AdaptiveCardElementView
+                        <AdaptiveCardView
                             formId='first'
                             element={this.state.actionCard}
                             style={{
@@ -103,6 +103,7 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
     }
 
     private onSubmit = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
+        console.log(args.formData);
         if (this.props.onSubmit) {
             this.props.onSubmit(args.formData);
         }

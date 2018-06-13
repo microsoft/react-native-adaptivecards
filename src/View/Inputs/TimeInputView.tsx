@@ -76,9 +76,7 @@ export class TimeInputView extends React.PureComponent<IProps, IState> {
     private onTimeChange = (hour: number, minute: number) => {
         this.setState({
             time: hour.toString() + ' : ' + minute.toString()
-        }, () => {
-            this.updateStore();
-        });
+        }, this.updateStore);
     }
 
     private updateStore() {

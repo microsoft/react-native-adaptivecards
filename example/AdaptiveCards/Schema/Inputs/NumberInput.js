@@ -10,7 +10,7 @@ export class NumberInputElement extends InputElement {
         }
     }
     getTypeName() {
-        return ContentElementType.InputNumber;
+        return ContentElementType.NumberInput;
     }
     getRequiredProperties() {
         return ['id'];

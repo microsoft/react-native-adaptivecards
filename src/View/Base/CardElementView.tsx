@@ -13,6 +13,7 @@ import { TextInputElement } from '../../Schema/Inputs/TextInput';
 import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 
 import { CardElement } from 'Schema/Base/CardElement';
+import { NumberInputElement } from 'Schema/Inputs/NumberInput';
 import { ImageView } from '../CardElements/ImageView';
 import { TextBlockView } from '../CardElements/TextBlockView';
 import { ColumnSetView } from '../Containers/ColumnSetView';
@@ -21,6 +22,7 @@ import { ContainerView } from '../Containers/ContainerView';
 import { FactSetView } from '../Containers/FactSetView';
 import { ImageSetView } from '../Containers/ImageSetView';
 import { DateInputView } from '../Inputs/DateInputView';
+import { NumberInputView } from '../Inputs/NumberInputView';
 import { TextInputView } from '../Inputs/TextInputView';
 import { TimeInputView } from '../Inputs/TimeInputView';
 import { ICardElementViewProps } from '../Shared/BaseProps';
@@ -108,6 +110,13 @@ export class CardElementView extends React.PureComponent<IProps, IState> {
                 return (
                     <TimeInputView
                         element={element as TimeInputElement}
+                        index={index}
+                    />
+                );
+            case ContentElementType.NumberInput:
+                return (
+                    <NumberInputView
+                        element={element as NumberInputElement}
                         index={index}
                     />
                 );

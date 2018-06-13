@@ -8,6 +8,7 @@ import { ContainerView } from '../Containers/ContainerView';
 import { FactSetView } from '../Containers/FactSetView';
 import { ImageSetView } from '../Containers/ImageSetView';
 import { DateInputView } from '../Inputs/DateInputView';
+import { NumberInputView } from '../Inputs/NumberInputView';
 import { TextInputView } from '../Inputs/TextInputView';
 import { TimeInputView } from '../Inputs/TimeInputView';
 export class CardElementView extends React.PureComponent {
@@ -37,6 +38,8 @@ export class CardElementView extends React.PureComponent {
                 return (React.createElement(DateInputView, { element: element, index: index }));
             case ContentElementType.TimeInput:
                 return (React.createElement(TimeInputView, { element: element, index: index }));
+            case ContentElementType.NumberInput:
+                return (React.createElement(NumberInputView, { element: element, index: index }));
             default:
                 return null;
         }

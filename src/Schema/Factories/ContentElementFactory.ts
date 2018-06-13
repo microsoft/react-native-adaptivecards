@@ -7,6 +7,7 @@ import { ContainerElement } from '../Containers/Container';
 import { FactSetElement } from '../Containers/FactSet';
 import { ImageSetElement } from '../Containers/ImageSet';
 import { DateInputElement } from '../Inputs/DateInput';
+import { NumberInputElement } from '../Inputs/NumberInput';
 import { TextInputElement } from '../Inputs/TextInput';
 import { TimeInputElement } from '../Inputs/TimeInput';
 
@@ -46,6 +47,9 @@ export class CardElementFactory {
                 break;
             case ContentElementType.TimeInput:
                 cardElement = new TimeInputElement(json);
+                break;
+            case ContentElementType.NumberInput:
+                cardElement = new NumberInputElement(json);
                 break;
             default:
                 cardElement = null;

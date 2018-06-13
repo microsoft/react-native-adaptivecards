@@ -11,7 +11,7 @@ export enum ContentElementType {
     ImageSet = 'ImageSet',
     TextBlock = 'TextBlock',
     InputText = 'Input.Text',
-    InputNumber = 'Input.Number',
+    NumberInput = 'Input.Number',
     DateInput = 'Input.Date',
     TimeInput = 'Input.Time',
     InputToggle = 'Input.Toggle',

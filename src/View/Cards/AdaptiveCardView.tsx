@@ -23,7 +23,7 @@ interface IProps {
 interface IState {
 }
 
-export class AdaptiveCardElementView extends React.PureComponent<IProps, IState> {
+export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
     private readonly styleConfig: StyleConfig;
     private element: AdaptiveCardElement;
 

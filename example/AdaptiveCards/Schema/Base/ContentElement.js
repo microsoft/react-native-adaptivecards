@@ -11,7 +11,7 @@ export var ContentElementType;
     ContentElementType["ImageSet"] = "ImageSet";
     ContentElementType["TextBlock"] = "TextBlock";
     ContentElementType["InputText"] = "Input.Text";
-    ContentElementType["InputNumber"] = "Input.Number";
+    ContentElementType["NumberInput"] = "Input.Number";
     ContentElementType["DateInput"] = "Input.Date";
     ContentElementType["TimeInput"] = "Input.Time";
     ContentElementType["InputToggle"] = "Input.Toggle";

@@ -75,9 +75,7 @@ export class DateInputView extends React.PureComponent<IProps, IState> {
     private onDateChange = (dateTime: Date) => {
         this.setState({
             date: dateTime.toString()
-        }, () => {
-            this.updateStore();
-        });
+        }, this.updateStore);
     }
 
     private updateStore() {

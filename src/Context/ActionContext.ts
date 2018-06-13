@@ -14,6 +14,7 @@ export class ActionContext {
     private onOpenUrl: (args: ActionEventHandlerArgs<OpenUrlActionElement>) => void;
     private onShowCard: (args: ActionEventHandlerArgs<ShowCardActionElement>) => void;
     private onSubmit: (args: ActionEventHandlerArgs<SubmitActionElement>) => void;
+    private globalHooks: ((args: ActionEventHandlerArgs<ActionElement>) => ActionEventHandlerArgs<ActionElement>)[] = [];
 
     private constructor() { }
 
@@ -34,6 +35,10 @@ export class ActionContext {
 
     public registerSubmitHandler(handler: (args: ActionEventHandlerArgs<SubmitActionElement>) => void) {
         this.onSubmit = handler;
+    }
+
+    public registerGlobalHook(hook: ((args: ActionEventHandlerArgs<ActionElement>) => ActionEventHandlerArgs<ActionElement>)) {
+        this.globalHooks.push(hook);
     }
 
     public getActionEventHandler() {
@@ -58,8 +63,13 @@ export class ActionContext {
                 let args = {
                     action: action
                 };
+                if (this.globalHooks) {
+                    args = this.globalHooks.reduce((prev, current) => {
+                        return current(prev);
+                    }, args);
+                }
                 if (hooks) {
-                    hooks.reduce((prev, current) => {
+                    args = hooks.reduce((prev, current) => {
                         return current(prev);
                     }, args);
                 }

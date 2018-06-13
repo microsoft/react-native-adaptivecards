@@ -7,7 +7,7 @@ import { ActionView } from '../Actions/ActionView';
 import { CardElementView } from '../Base/CardElementView';
 import { ImageBackground } from '../Base/ImageBackground';
 import { styleManager } from '../Styles/StyleManager';
-export class AdaptiveCardElementView extends React.PureComponent {
+export class AdaptiveCardView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.submitActionHook = this.submitActionHook.bind(this);
