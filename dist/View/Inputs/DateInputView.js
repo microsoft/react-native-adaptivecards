@@ -57,6 +57,6 @@ export class DateInputView extends React.PureComponent {
                 React.createElement(Text, null, this.state.date))));
     }
     updateStore() {
-        FormContext.getInstance().updateField(this.props.element.id, this.state.date);
+        FormContext.getInstance().updateField(this.props.element.id, this.state.date, this.props.element.validateForm(this.state.date));
     }
 }

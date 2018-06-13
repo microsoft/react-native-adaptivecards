@@ -81,7 +81,8 @@ export class DateInputView extends React.PureComponent<IProps, IState> {
     private updateStore() {
         FormContext.getInstance().updateField(
             this.props.element.id,
-            this.state.date
+            this.state.date,
+            this.props.element.validateForm(this.state.date)
         );
     }
 }

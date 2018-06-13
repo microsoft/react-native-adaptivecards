@@ -49,12 +49,6 @@ export abstract class FormElement extends ContentElement {
     }
 
     validateForm(value?: any) {
-        let children = this.getChildren();
-        if (children) {
-            return children.reduce((prev, current) => {
-                return prev && FormContext.getInstance().validateField(current);
-            }, true);
-        }
-        return true;
+        return FormContext.getInstance().validateFields(this.getAllInputFieldIds());
     }
 }

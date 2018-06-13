@@ -63,6 +63,10 @@ export class TextInputView extends React.PureComponent<IProps, IState> {
     }
 
     private updateStore() {
-        FormContext.getInstance().updateField(this.props.element.id, this.state.value);
+        FormContext.getInstance().updateField(
+            this.props.element.id,
+            this.state.value,
+            this.props.element.validateForm(this.state.value)
+        );
     }
 }

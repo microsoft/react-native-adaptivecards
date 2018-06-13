@@ -65,11 +65,11 @@ export class CardElementWrapper extends React.PureComponent {
                 let action = element.getAction();
                 if (action) {
                     callback(this.props.element, (args) => {
-                        args.formValidate = FormContext.getInstance().validateField(this.props.element);
+                        args.formValidate = this.props.element.validateForm();
                         return args;
                     }, (args) => {
                         if (args.formValidate) {
-                            args.formData = Object.assign({}, action.getData(), FormContext.getInstance().getFields(this.props.element.getAllInputFieldIds()));
+                            args.formData = Object.assign({}, action.getData(), FormContext.getInstance().getFormData(this.props.element.getAllInputFieldIds()));
                         }
                         return args;
                     });

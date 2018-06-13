@@ -1,8 +1,11 @@
-import { CardElement } from '../Schema/Base/CardElement';
+export class FormField {
+    value: string;
+    validate: boolean;
+}
 
 export class FormContext {
     private static sharedInstance: FormContext;
-    private formFields: { [id: string]: string } = {};
+    private formFields: { [id: string]: FormField } = {};
 
     private constructor() { }
 
@@ -13,26 +16,47 @@ export class FormContext {
         return FormContext.sharedInstance;
     }
 
-    public updateField(id: string, value: string) {
+    public updateField(id: string, value: string, validate: boolean) {
         if (id) {
-            this.formFields[id] = value;
+            this.formFields[id] = {
+                value: value,
+                validate: validate
+            };
         }
     }
 
-    public getField(id: string) {
+    public getField(id: string): FormField {
         if (id) {
             return this.formFields[id];
         }
         return undefined;
     }
 
-    public getFields(ids: string[]): { [id: string]: string } {
+    public getFieldValue(id: string) {
+        let field = this.getField(id);
+        if (field) {
+            return field.value;
+        }
+        return undefined;
+    }
+
+    public getFields(ids: string[]): FormField[] {
+        let result: FormField[] = [];
+        if (ids) {
+            ids.forEach((id) => {
+                result.push(this.getField(id));
+            });
+        }
+        return result;
+    }
+
+    public getFormData(ids: string[]): { [id: string]: string } {
         if (ids) {
             return ids.reduce((prev, id) => {
-                let value = this.formFields[id];
+                let field = this.formFields[id];
                 let result: { [id: string]: string } = {};
-                if (value) {
-                    result[id] = value;
+                if (field) {
+                    result[id] = field.value;
                 } else {
                     result[id] = '';
                 }
@@ -42,34 +66,20 @@ export class FormContext {
         return {};
     }
 
-    public validateField(element: CardElement): boolean {
-        console.log('Validate Field');
-        if (element) {
-            console.log('Pass Element check');
-            if (element.isForm()) {
-                console.log('Check Form');
-                return element.validateForm();
-            }
-            if (element.isInput()) {
-                console.log('Check Input Field');
-                let id = element.getId();
-                if (id) {
-                    console.log('Pass id check');
-                    return element.validateForm(this.getField(id));
-                }
-            }
-            console.log('No need check');
-            return true;
+    public validateField(id: string): boolean {
+        let field = this.getField(id);
+        if (field) {
+            return field.validate;
         }
-        return false;
+        return true;
     }
 
-    public validateFields(elements: CardElement[]): boolean {
-        if (elements) {
-            return elements.reduce((prev, current) => {
+    public validateFields(ids: string[]): boolean {
+        if (ids) {
+            return ids.reduce((prev, current) => {
                 return prev && this.validateField(current);
             }, true);
         }
-        return false;
+        return true;
     }
 }

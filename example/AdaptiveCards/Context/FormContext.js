@@ -1,3 +1,5 @@
+export class FormField {
+}
 export class FormContext {
     constructor() {
         this.formFields = {};
@@ -8,9 +10,12 @@ export class FormContext {
         }
         return FormContext.sharedInstance;
     }
-    updateField(id, value) {
+    updateField(id, value, validate) {
         if (id) {
-            this.formFields[id] = value;
+            this.formFields[id] = {
+                value: value,
+                validate: validate
+            };
         }
     }
     getField(id) {
@@ -19,13 +24,29 @@ export class FormContext {
         }
         return undefined;
     }
+    getFieldValue(id) {
+        let field = this.getField(id);
+        if (field) {
+            return field.value;
+        }
+        return undefined;
+    }
     getFields(ids) {
+        let result = [];
+        if (ids) {
+            ids.forEach((id) => {
+                result.push(this.getField(id));
+            });
+        }
+        return result;
+    }
+    getFormData(ids) {
         if (ids) {
             return ids.reduce((prev, id) => {
-                let value = this.formFields[id];
+                let field = this.formFields[id];
                 let result = {};
-                if (value) {
-                    result[id] = value;
+                if (field) {
+                    result[id] = field.value;
                 }
                 else {
                     result[id] = '';
@@ -35,33 +56,19 @@ export class FormContext {
         }
         return {};
     }
-    validateField(element) {
-        console.log('Validate Field');
-        if (element) {
-            console.log('Pass Element check');
-            if (element.isForm()) {
-                console.log('Check Form');
-                return element.validateForm();
-            }
-            if (element.isInput()) {
-                console.log('Check Input Field');
-                let id = element.getId();
-                if (id) {
-                    console.log('Pass id check');
-                    return element.validateForm(this.getField(id));
-                }
-            }
-            console.log('No need check');
-            return true;
+    validateField(id) {
+        let field = this.getField(id);
+        if (field) {
+            return field.validate;
         }
-        return false;
+        return true;
     }
-    validateFields(elements) {
-        if (elements) {
-            return elements.reduce((prev, current) => {
+    validateFields(ids) {
+        if (ids) {
+            return ids.reduce((prev, current) => {
                 return prev && this.validateField(current);
             }, true);
         }
-        return false;
+        return true;
     }
 }

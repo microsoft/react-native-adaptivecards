@@ -82,7 +82,8 @@ export class TimeInputView extends React.PureComponent<IProps, IState> {
     private updateStore() {
         FormContext.getInstance().updateField(
             this.props.element.id,
-            this.state.time
+            this.state.time,
+            this.props.element.validateForm(this.state.time)
         );
     }
 }

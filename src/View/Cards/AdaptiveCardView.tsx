@@ -143,7 +143,7 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
     private validateForm(args: ActionEventHandlerArgs<ActionElement>) {
         console.log('Validate Form');
         if (args.action.type === ActionType.Submit) {
-            args.formValidate = FormContext.getInstance().validateField(this.element);
+            args.formValidate = this.element.validateForm();
         }
         return args;
     }
@@ -154,7 +154,7 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
                 console.log('Extract Data');
                 args.formData = {
                     ...args.action.getData(),
-                    ...FormContext.getInstance().getFields(this.element.getAllInputFieldIds())
+                    ...FormContext.getInstance().getFormData(this.element.getAllInputFieldIds())
                 };
             }
         }

@@ -68,7 +68,7 @@ export class AdaptiveCardView extends React.PureComponent {
     validateForm(args) {
         console.log('Validate Form');
         if (args.action.type === ActionType.Submit) {
-            args.formValidate = FormContext.getInstance().validateField(this.element);
+            args.formValidate = this.element.validateForm();
         }
         return args;
     }
@@ -76,7 +76,7 @@ export class AdaptiveCardView extends React.PureComponent {
         if (args.action.type === ActionType.Submit) {
             if (args.formValidate) {
                 console.log('Extract Data');
-                args.formData = Object.assign({}, args.action.getData(), FormContext.getInstance().getFields(this.element.getAllInputFieldIds()));
+                args.formData = Object.assign({}, args.action.getData(), FormContext.getInstance().getFormData(this.element.getAllInputFieldIds()));
             }
         }
         return args;
