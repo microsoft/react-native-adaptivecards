@@ -5,8 +5,8 @@ import {
 } from 'react-native';
 
 import { ContentElement } from '../../Schema/Base/ContentElement';
-import { ContainerStyle } from '../../Schema/Base/Enums';
 import { ContainerElement } from '../../Schema/Containers/Container';
+import { ContainerStyle } from '../../Shared/Enums';
 import { CardElementView } from '../Base/CardElementView';
 import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { ICardElementViewProps } from '../Shared/BaseProps';

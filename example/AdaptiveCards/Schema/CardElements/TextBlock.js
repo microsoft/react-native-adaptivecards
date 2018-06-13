@@ -1,6 +1,6 @@
-import { Utils } from '../../utils';
+import { FontSize, FontWeight, HorizontalAlignment, TextColor } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
-import { FontSize, FontWeight, HorizontalAlignment, TextColor } from '../Base/Enums';
 export class TextBlockElement extends ContentElement {
     constructor(json) {
         super(json);

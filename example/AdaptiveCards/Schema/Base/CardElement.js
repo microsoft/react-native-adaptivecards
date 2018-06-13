@@ -1,4 +1,4 @@
-import { Utils } from '../../utils';
+import { Utils } from '../../Shared/Utils';
 export class CardElement {
     constructor(json) {
         this.isValidJSON = true;

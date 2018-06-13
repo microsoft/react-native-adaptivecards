@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { ContainerStyle } from '../../Schema/Base/Enums';
+import { ContainerStyle } from '../../Shared/Enums';
 import { CardElementView } from '../Base/CardElementView';
 import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { styleManager } from '../Styles/StyleManager';

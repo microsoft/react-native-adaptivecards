@@ -1,11 +1,11 @@
-import { Utils } from '../../utils';
-import { ActionElement } from '../Base/ActionElement';
-import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import {
     HorizontalAlignment,
     ImageSize,
     ImageStyle,
-} from '../Base/Enums';
+} from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
+import { ActionElement } from '../Base/ActionElement';
+import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { ActionFactory } from '../Factories/ActionFactory';
 
 export class ImageElement extends ContentElement {

@@ -1,6 +1,6 @@
-import { Utils } from '../../utils';
+import { ContainerStyle } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
-import { ContainerStyle } from '../Base/Enums';
 import { FormElement } from '../Base/FormElement';
 import { CardElementFactory } from '../Factories/ContentElementFactory';
 export class ContainerElement extends FormElement {

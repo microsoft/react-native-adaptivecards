@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, } from 'react-native';
-import { FlexImageAlignment, HorizontalAlignment, ImageSize, ImageStyle, } from '../../Schema/Base/Enums';
+import { FlexImageAlignment, HorizontalAlignment, ImageSize, ImageStyle, } from '../../Shared/Enums';
 import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { styleManager } from '../Styles/StyleManager';
 const IMAGEMINSIZE = 18;

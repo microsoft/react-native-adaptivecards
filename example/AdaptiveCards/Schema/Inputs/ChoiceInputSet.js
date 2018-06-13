@@ -1,6 +1,6 @@
-import { Utils } from '../../utils';
+import { ChoiceSetStyle } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
-import { ChoiceSetStyle } from '../Base/Enums';
 import { InputElement } from '../Base/InputElement';
 import { ChoiceInputElement } from './ChoiceInput';
 export class ChoiceInputSetElement extends InputElement {

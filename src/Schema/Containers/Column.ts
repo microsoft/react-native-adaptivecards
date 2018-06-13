@@ -1,6 +1,6 @@
-import { Utils } from '../../utils';
+import { ColumnWidth } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
-import { ColumnWidth } from '../Base/Enums';
 import { FormElement } from '../Base/FormElement';
 import { CardElementFactory } from '../Factories/ContentElementFactory';
 

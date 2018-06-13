@@ -1,6 +1,6 @@
-import { Utils } from '../../utils';
+import { InputTextStyle } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
-import { InputTextStyle } from '../Base/Enums';
 import { InputElement } from '../Base/InputElement';
 export class TextInputElement extends InputElement {
     constructor(json) {

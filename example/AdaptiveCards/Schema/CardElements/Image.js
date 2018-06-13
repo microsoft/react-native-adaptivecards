@@ -1,6 +1,6 @@
-import { Utils } from '../../utils';
+import { HorizontalAlignment, ImageSize, ImageStyle, } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
-import { HorizontalAlignment, ImageSize, ImageStyle, } from '../Base/Enums';
 import { ActionFactory } from '../Factories/ActionFactory';
 export class ImageElement extends ContentElement {
     constructor(json) {

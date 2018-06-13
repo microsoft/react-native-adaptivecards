@@ -8,13 +8,13 @@ import {
     View,
 } from 'react-native';
 
+import { ImageElement } from '../../Schema/CardElements/Image';
 import {
     FlexImageAlignment,
     HorizontalAlignment,
     ImageSize,
     ImageStyle,
-} from '../../Schema/Base/Enums';
-import { ImageElement } from '../../Schema/CardElements/Image';
+} from '../../Shared/Enums';
 import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { ICardElementViewProps } from '../Shared/BaseProps';
 import { styleManager } from '../Styles/StyleManager';

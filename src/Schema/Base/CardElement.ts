@@ -1,4 +1,4 @@
-import { Utils } from '../../utils';
+import { Utils } from '../../Shared/Utils';
 import { ActionElement } from './ActionElement';
 
 export abstract class CardElement {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { ColumnWidth } from '../../Schema/Base/Enums';
+import { ColumnWidth } from '../../Shared/Enums';
 import { CardElementView } from '../Base/CardElementView';
 import { CardElementWrapper } from '../Base/CardElementWrapper';
 export class ColumnView extends React.PureComponent {

@@ -1,6 +1,6 @@
-import { Utils } from '../../utils';
+import { ImageSize } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
-import { ImageSize } from '../Base/Enums';
 import { ImageElement } from '../CardElements/Image';
 
 export class ImageSetElement extends ContentElement {

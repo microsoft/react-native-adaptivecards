@@ -10,7 +10,7 @@ import { InputContext } from '../../Context/InputContext';
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import {
     Spacing,
-} from '../../Schema/Base/Enums';
+} from '../../Shared/Enums';
 import { SeparateLine } from '../Base/SeparateLine';
 import { StyleConfig } from '../Styles/StyleConfig';
 import { styleManager } from '../Styles/StyleManager';

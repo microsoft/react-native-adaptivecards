@@ -12,8 +12,8 @@ import {
     FontWeight,
     Spacing,
     TextColor,
-} from '../../Schema/Base/Enums';
-import { Utils } from '../../utils';
+} from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { StyleConfig } from './StyleConfig';
 
 const defaultStyle = require('./DefaultStyle.json');

@@ -1,6 +1,6 @@
-import { Utils } from '../../utils';
+import { Spacing } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 import { CardElement } from '../Base/CardElement';
-import { Spacing } from '../Base/Enums';
 export var ContentElementType;
 (function (ContentElementType) {
     ContentElementType["Column"] = "Column";

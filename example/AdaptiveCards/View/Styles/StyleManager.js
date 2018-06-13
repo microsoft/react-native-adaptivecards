@@ -1,8 +1,8 @@
 import merge from 'lodash/merge';
 import { Platform, } from 'react-native';
 import { ContentElementType } from '../../Schema/Base/ContentElement';
-import { FlexDirection, FlexWrap, FontSize, FontWeight, Spacing, TextColor, } from '../../Schema/Base/Enums';
-import { Utils } from '../../utils';
+import { FlexDirection, FlexWrap, FontSize, FontWeight, Spacing, TextColor, } from '../../Shared/Enums';
+import { Utils } from '../../Shared/Utils';
 const defaultStyle = require('./DefaultStyle.json');
 class StyleManager {
     constructor(style = {}) {
