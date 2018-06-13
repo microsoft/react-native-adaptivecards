@@ -4,7 +4,7 @@ import {
     ViewStyle,
 } from 'react-native';
 
-import { CardElementType } from '../../Schema/Elements/CardElementType';
+import { ContentElementType } from '../../Schema/Base/ContentElement';
 import {
     FlexDirection,
     FlexWrap,
@@ -12,7 +12,7 @@ import {
     FontWeight,
     Spacing,
     TextColor,
-} from '../../Schema/enums';
+} from '../../Schema/Base/Enums';
 import { Utils } from '../../utils';
 import { StyleConfig } from './StyleConfig';
 
@@ -106,8 +106,8 @@ class StyleManager {
     }
 
     isHorizontalCardElement(type: string): boolean {
-        return type === CardElementType.Column ||
-            (type === CardElementType.Image && this.isHorizontalImageSet());
+        return type === ContentElementType.Column ||
+            (type === ContentElementType.Image && this.isHorizontalImageSet());
     }
 
     getCardElementMargin(spacing: Spacing): number {

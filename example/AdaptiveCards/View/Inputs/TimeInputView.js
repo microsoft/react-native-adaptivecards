@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import React from 'react';
 import { Text, TimePickerAndroid, TouchableOpacity, View } from 'react-native';
+import { InputContext } from '../../Context/InputContext';
 export class TimeInputView extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -30,17 +31,20 @@ export class TimeInputView extends React.PureComponent {
         this.onTimeChange = (hour, minute) => {
             this.setState({
                 time: hour.toString() + ' : ' + minute.toString()
+            }, () => {
+                this.updateStore();
             });
         };
-        const { inputTime } = props;
+        const { element } = props;
         this.state = {
-            time: inputTime.value,
-            inputTime: inputTime
+            time: element.value,
+            inputTime: element
         };
+        this.updateStore();
     }
     render() {
-        const { inputTime } = this.props;
-        if (!inputTime || !inputTime.isValid()) {
+        const { element } = this.props;
+        if (!element || !element.isValid()) {
             return null;
         }
         return (React.createElement(TouchableOpacity, { onPress: this.showDatePicker },
@@ -54,5 +58,8 @@ export class TimeInputView extends React.PureComponent {
                     height: 38
                 } },
                 React.createElement(Text, null, this.state.time))));
+    }
+    updateStore() {
+        InputContext.getInstance().updateField(this.props.element.id, this.state.time);
     }
 }

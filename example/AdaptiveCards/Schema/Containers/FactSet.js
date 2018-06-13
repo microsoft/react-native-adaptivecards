@@ -1,7 +1,6 @@
-import { CardElement } from '../Elements/CardElement';
-import { CardElementType } from '../Elements/CardElementType';
+import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { FactElement } from './Fact';
-export class FactSetElement extends CardElement {
+export class FactSetElement extends ContentElement {
     constructor(json) {
         super(json);
         this.facts = [];
@@ -10,7 +9,7 @@ export class FactSetElement extends CardElement {
         }
     }
     getTypeName() {
-        return CardElementType.FactSet;
+        return ContentElementType.FactSet;
     }
     getRequiredProperties() {
         return ['facts'];

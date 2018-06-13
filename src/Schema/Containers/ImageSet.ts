@@ -1,10 +1,9 @@
 import { Utils } from '../../utils';
-import { CardElement } from '../Elements/CardElement';
-import { CardElementType } from '../Elements/CardElementType';
-import { ImageElement } from '../Elements/Image';
-import { ImageSize } from '../enums';
+import { ContentElement, ContentElementType } from '../Base/ContentElement';
+import { ImageSize } from '../Base/Enums';
+import { ImageElement } from '../CardElements/Image';
 
-export class ImageSetElement extends CardElement {
+export class ImageSetElement extends ContentElement {
     // Required
     readonly images: Array<ImageElement> = [];
     // Optional
@@ -20,7 +19,7 @@ export class ImageSetElement extends CardElement {
     }
 
     getTypeName(): string {
-        return CardElementType.ImageSet;
+        return ContentElementType.ImageSet;
     }
 
     getRequiredProperties(): Array<string> {

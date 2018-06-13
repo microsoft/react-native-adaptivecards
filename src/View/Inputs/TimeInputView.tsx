@@ -6,11 +6,11 @@ import {
     View
 } from 'react-native';
 
+import { InputContext } from '../../Context/InputContext';
 import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
-import { ICardElementViewProps, IInputFieldProps } from '../Shared/BaseProps';
+import { ICardElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends ICardElementViewProps, IInputFieldProps {
-    inputTime: TimeInputElement;
+interface IProps extends ICardElementViewProps<TimeInputElement> {
 }
 interface IState {
     time: string;
@@ -21,17 +21,18 @@ export class TimeInputView extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
-        const { inputTime } = props;
+        const { element } = props;
 
         this.state = {
-            time: inputTime.value,
-            inputTime: inputTime
+            time: element.value,
+            inputTime: element
         };
+        this.updateStore();
     }
 
     render(): JSX.Element {
-        const { inputTime } = this.props;
-        if (!inputTime || !inputTime.isValid()) {
+        const { element } = this.props;
+        if (!element || !element.isValid()) {
             return null;
         }
 
@@ -75,6 +76,15 @@ export class TimeInputView extends React.PureComponent<IProps, IState> {
     private onTimeChange = (hour: number, minute: number) => {
         this.setState({
             time: hour.toString() + ' : ' + minute.toString()
+        }, () => {
+            this.updateStore();
         });
+    }
+
+    private updateStore() {
+        InputContext.getInstance().updateField(
+            this.props.element.id,
+            this.state.time
+        );
     }
 }

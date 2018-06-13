@@ -1,6 +1,5 @@
-import { AdaptiveCardElement } from '../AdaptiveCard';
-import { ActionElement } from './Action';
-import { ActionType } from './ActionType';
+import { ActionElement, ActionType } from '../Base/ActionElement';
+import { AdaptiveCardElement } from '../Cards/AdaptiveCard';
 export class ShowCardActionElement extends ActionElement {
     constructor(json) {
         super(json);
@@ -13,11 +12,5 @@ export class ShowCardActionElement extends ActionElement {
     }
     getRequiredProperties() {
         return ['card'];
-    }
-    getAction() {
-        return this;
-    }
-    getActions() {
-        return [this.getAction()];
     }
 }

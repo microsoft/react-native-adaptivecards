@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import React from 'react';
 import { DatePickerAndroid, Text, TouchableOpacity, View } from 'react-native';
+import { InputContext } from '../../Context/InputContext';
 export class DateInputView extends React.PureComponent {
     constructor(props) {
         super(props);
@@ -29,17 +30,20 @@ export class DateInputView extends React.PureComponent {
         this.onDateChange = (dateTime) => {
             this.setState({
                 date: dateTime.toString()
+            }, () => {
+                this.updateStore();
             });
         };
-        const { inputDate } = props;
+        const { element } = props;
         this.state = {
-            date: inputDate.value,
-            inputDate: inputDate
+            date: element.value,
+            inputDate: element
         };
+        this.updateStore();
     }
     render() {
-        const { inputDate } = this.props;
-        if (!inputDate || !inputDate.isValid()) {
+        const { element } = this.props;
+        if (!element || !element.isValid()) {
             return null;
         }
         return (React.createElement(TouchableOpacity, { onPress: this.showDatePicker },
@@ -53,5 +57,8 @@ export class DateInputView extends React.PureComponent {
                     height: 38
                 } },
                 React.createElement(Text, null, this.state.date))));
+    }
+    updateStore() {
+        InputContext.getInstance().updateField(this.props.element.id, this.state.date);
     }
 }

@@ -2,12 +2,13 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { FactElement } from '../../Schema/Containers/Fact';
-import { AdaptiveCardText } from '../Shared/AdaptiveCardText';
+import { CardText } from '../Base/CardText';
+import { ICardElementViewProps } from '../Shared/BaseProps';
 import { StyleConfig } from '../Styles/StyleConfig';
 import { styleManager } from '../Styles/StyleManager';
 
-interface IProps {
-    fact: FactElement;
+interface IProps extends ICardElementViewProps<FactElement> {
+    element: FactElement;
 }
 interface IState {
 }
@@ -22,9 +23,9 @@ export class FactView extends React.PureComponent<IProps, IState> {
     }
 
     render(): JSX.Element {
-        const { fact } = this.props;
+        const { element } = this.props;
 
-        if (!fact || !fact.isValid()) {
+        if (!element || !element.isValid()) {
             return null;
         }
 
@@ -36,22 +37,22 @@ export class FactView extends React.PureComponent<IProps, IState> {
                     justifyContent: 'flex-start'
                 }}
             >
-                <AdaptiveCardText
+                <CardText
                     style={{
                         color: this.styleConfig.fact.titleColor,
                         marginRight: this.styleConfig.fact.spacing,
                     }}
                 >
-                    {fact.title}
-                </AdaptiveCardText>
-                <AdaptiveCardText
+                    {element.title}
+                </CardText>
+                <CardText
                     style={{
                         color: this.styleConfig.fact.valueColor,
                         marginLeft: this.styleConfig.fact.spacing,
                     }}
                 >
-                    {fact.value}
-                </AdaptiveCardText>
+                    {element.value}
+                </CardText>
             </View>);
     }
 }

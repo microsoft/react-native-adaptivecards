@@ -1,42 +1,29 @@
-import { ActionFactory } from '../Actions/ActionFactory';
-import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
-import { SubmitActionElement } from '../Actions/SubmitAction';
-import { CardElement } from '../Elements/CardElement';
-import { CardElementType } from '../Elements/CardElementType';
+import { ContentElementType } from '../Base/ContentElement';
+import { FormElement } from '../Base/FormElement';
 import { ColumnElement } from './Column';
 
-export class ColumnSetElement extends CardElement {
+export class ColumnSetElement extends FormElement {
     // Optional
     readonly columns: Array<ColumnElement>;
-    readonly selectAction?: OpenUrlActionElement | SubmitActionElement;
 
     constructor(json: any) {
         super(json);
 
         if (this.isValidJSON) {
             this.columns = this.createColumnSet(json.columns);
-            this.selectAction = ActionFactory.create(json.selectAction);
         }
     }
 
     getTypeName(): string {
-        return CardElementType.ColumnSet;
+        return ContentElementType.ColumnSet;
     }
 
     getRequiredProperties(): Array<string> {
         return [];
     }
 
-    supportAction() {
-        return true;
-    }
-
-    getAction() {
-        return this.selectAction;
-    }
-
-    getActions() {
-        return [this.getAction()];
+    getChildren() {
+        return this.columns;
     }
 
     private createColumnSet(json: any): Array<ColumnElement> {

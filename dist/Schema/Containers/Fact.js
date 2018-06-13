@@ -1,5 +1,5 @@
-import { TypedElement } from '../TypedElement';
-export class FactElement extends TypedElement {
+import { CardElement } from '../Base/CardElement';
+export class FactElement extends CardElement {
     constructor(json) {
         super(json);
         if (this.isValidJSON) {

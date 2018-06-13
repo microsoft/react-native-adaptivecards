@@ -4,29 +4,29 @@ import {
     View,
 } from 'react-native';
 
+import { ImageElement } from '../../Schema/CardElements/Image';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
-import { ImageElement } from '../../Schema/Elements/Image';
-import { CardElementView } from '../Elements/CardElementView';
+import { CardElementView } from '../Base/CardElementView';
+import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { ICardElementViewProps } from '../Shared/BaseProps';
-import { CardElementWrapper } from '../Shared/CardElementWrapper';
 import { styleManager } from '../Styles/StyleManager';
 
-interface IProps extends ICardElementViewProps {
-    imageSet: ImageSetElement;
+interface IProps extends ICardElementViewProps<ImageSetElement> {
+    element: ImageSetElement;
 }
 interface IState {
 }
 
 export class ImageSetView extends React.PureComponent<IProps, IState> {
     render(): JSX.Element {
-        const { imageSet, index } = this.props;
+        const { element, index } = this.props;
 
-        if (!imageSet || !imageSet.isValid() || !imageSet.hasImages()) {
+        if (!element || !element.isValid() || !element.hasImages()) {
             return null;
         }
 
         return (
-            <CardElementWrapper cardElement={imageSet} index={index} style={{
+            <CardElementWrapper cardElement={element} index={index} style={{
                 flex: 1,
             }}>
                 {
@@ -34,7 +34,7 @@ export class ImageSetView extends React.PureComponent<IProps, IState> {
                         <FlatList
                             style={{ flex: 1 }}
                             horizontal={true}
-                            data={imageSet.images}
+                            data={element.images}
                             renderItem={({ item, index }) => this.renderImage(item, index)}
                             keyExtractor={(item, index) => 'image' + index}
                             showsHorizontalScrollIndicator={false}
@@ -47,7 +47,7 @@ export class ImageSetView extends React.PureComponent<IProps, IState> {
                             }}
                         >
                             {
-                                imageSet.images.map(this.renderImage)
+                                element.images.map(this.renderImage)
                             }
                         </View>
                 }
@@ -56,16 +56,16 @@ export class ImageSetView extends React.PureComponent<IProps, IState> {
     }
 
     private renderImage = (image: ImageElement, index: number) => {
-        const { imageSet } = this.props;
+        const { element } = this.props;
 
         // Images in the set have their sizes uniformally defined by the container view
-        image.setSize(imageSet.imageSize);
+        image.setSize(element.imageSize);
 
         return (
             <CardElementView
                 key={'image' + index}
                 index={index}
-                cardElement={image}
+                element={image}
             />
         );
     }

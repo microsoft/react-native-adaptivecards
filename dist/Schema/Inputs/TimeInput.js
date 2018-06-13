@@ -1,5 +1,5 @@
-import { CardElementType } from '../Elements/CardElementType';
-import { InputElement } from './Input';
+import { ContentElementType } from '../Base/ContentElement';
+import { InputElement } from '../Base/InputElement';
 export class TimeInputElement extends InputElement {
     constructor(json) {
         super(json);
@@ -10,7 +10,7 @@ export class TimeInputElement extends InputElement {
         }
     }
     getTypeName() {
-        return CardElementType.TimeInput;
+        return ContentElementType.TimeInput;
     }
     getRequiredProperties() {
         return ['id'];

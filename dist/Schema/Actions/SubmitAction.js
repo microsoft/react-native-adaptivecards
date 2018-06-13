@@ -1,5 +1,4 @@
-import { ActionElement } from './Action';
-import { ActionType } from './ActionType';
+import { ActionElement, ActionType } from '../Base/ActionElement';
 export class SubmitActionElement extends ActionElement {
     constructor(json) {
         super(json);
@@ -13,10 +12,7 @@ export class SubmitActionElement extends ActionElement {
     getRequiredProperties() {
         return [];
     }
-    getAction() {
-        return this;
-    }
-    getActions() {
-        return [this.getAction()];
+    getData() {
+        return this.data;
     }
 }

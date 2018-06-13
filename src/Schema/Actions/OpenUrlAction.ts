@@ -1,5 +1,4 @@
-import { ActionElement } from './Action';
-import { ActionType } from './ActionType';
+import { ActionElement, ActionType } from '../Base/ActionElement';
 
 export class OpenUrlActionElement extends ActionElement {
     // Required
@@ -18,13 +17,5 @@ export class OpenUrlActionElement extends ActionElement {
     }
     getRequiredProperties(): Array<string> {
         return ['url'];
-    }
-
-    getAction(): ActionElement {
-        return this;
-    }
-
-    getActions(): ActionElement[] {
-        return [this.getAction()];
     }
 }

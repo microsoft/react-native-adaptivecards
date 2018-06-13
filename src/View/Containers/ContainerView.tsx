@@ -4,17 +4,16 @@ import {
     ViewStyle,
 } from 'react-native';
 
+import { ContentElement } from '../../Schema/Base/ContentElement';
+import { ContainerStyle } from '../../Schema/Base/Enums';
 import { ContainerElement } from '../../Schema/Containers/Container';
-import { CardElement } from '../../Schema/Elements/CardElement';
-import { ContainerStyle } from '../../Schema/enums';
-import { CardElementView } from '../Elements/CardElementView';
+import { CardElementView } from '../Base/CardElementView';
+import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { ICardElementViewProps } from '../Shared/BaseProps';
-import { CardElementWrapper } from '../Shared/CardElementWrapper';
 import { StyleConfig } from '../Styles/StyleConfig';
 import { styleManager } from '../Styles/StyleManager';
 
-interface IProps extends ICardElementViewProps {
-    container: ContainerElement;
+interface IProps extends ICardElementViewProps<ContainerElement> {
 }
 interface IState {
 }
@@ -29,15 +28,15 @@ export class ContainerView extends React.PureComponent<IProps, IState> {
     }
 
     render(): JSX.Element {
-        const { container, index } = this.props;
+        const { element, index } = this.props;
 
-        if (!container || !container.isValid() || !container.hasItems()) {
+        if (!element || !element.isValid() || !element.hasItems()) {
             return null;
         }
 
         return (
             <CardElementWrapper
-                cardElement={container}
+                cardElement={element}
                 index={index}
                 style={{
                     flex: 1,
@@ -47,15 +46,15 @@ export class ContainerView extends React.PureComponent<IProps, IState> {
                     style={[{
                         flex: 1,
                     },
-                    this.getContainerStyle(container.style)
+                    this.getContainerStyle(element.style)
                     ]}
                 >
                     {
-                        container.items.map((cardElement: CardElement, index: number) =>
+                        element.items.map((cardElement: ContentElement, index: number) =>
                             <CardElementView
                                 key={'containerItems' + index}
                                 index={index}
-                                cardElement={cardElement}
+                                element={cardElement}
                             />
                         )
                     }

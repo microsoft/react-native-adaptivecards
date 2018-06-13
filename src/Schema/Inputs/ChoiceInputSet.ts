@@ -1,8 +1,8 @@
 import { Utils } from '../../utils';
-import { CardElementType } from '../Elements/CardElementType';
-import { ChoiceSetStyle } from '../enums';
+import { ContentElementType } from '../Base/ContentElement';
+import { ChoiceSetStyle } from '../Base/Enums';
+import { InputElement } from '../Base/InputElement';
 import { ChoiceInputElement } from './ChoiceInput';
-import { InputElement } from './Input';
 
 export class ChoiceInputSetElement extends InputElement {
     // Required 
@@ -23,8 +23,9 @@ export class ChoiceInputSetElement extends InputElement {
     }
 
     getTypeName(): string {
-        return CardElementType.InputChoiceSet;
+        return ContentElementType.InputChoiceSet;
     }
+
     getRequiredProperties(): Array<string> {
         return ['id', 'choices'];
     }

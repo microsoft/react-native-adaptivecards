@@ -1,6 +1,6 @@
-import { TypedElement } from '../TypedElement';
+import { CardElement } from '../Base/CardElement';
 
-export class ChoiceInputElement extends TypedElement {
+export class ChoiceInputElement extends CardElement {
     // Required
     readonly title: string;
     readonly value: string;

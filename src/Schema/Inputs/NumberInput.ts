@@ -1,5 +1,5 @@
-import { CardElementType } from '../Elements/CardElementType';
-import { InputElement } from './Input';
+import { ContentElementType } from '../Base/ContentElement';
+import { InputElement } from '../Base/InputElement';
 
 export class NumberInputElement extends InputElement {
     // Optional
@@ -18,8 +18,9 @@ export class NumberInputElement extends InputElement {
     }
 
     getTypeName(): string {
-        return CardElementType.InputNumber;
+        return ContentElementType.InputNumber;
     }
+
     getRequiredProperties(): Array<string> {
         return ['id'];
     }

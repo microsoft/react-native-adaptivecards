@@ -1,29 +1,21 @@
-import { ActionFactory } from '../Actions/ActionFactory';
-import { CardElement } from '../Elements/CardElement';
-import { CardElementType } from '../Elements/CardElementType';
+import { ContentElementType } from '../Base/ContentElement';
+import { FormElement } from '../Base/FormElement';
 import { ColumnElement } from './Column';
-export class ColumnSetElement extends CardElement {
+export class ColumnSetElement extends FormElement {
     constructor(json) {
         super(json);
         if (this.isValidJSON) {
             this.columns = this.createColumnSet(json.columns);
-            this.selectAction = ActionFactory.create(json.selectAction);
         }
     }
     getTypeName() {
-        return CardElementType.ColumnSet;
+        return ContentElementType.ColumnSet;
     }
     getRequiredProperties() {
         return [];
     }
-    supportAction() {
-        return true;
-    }
-    getAction() {
-        return this.selectAction;
-    }
-    getActions() {
-        return [this.getAction()];
+    getChildren() {
+        return this.columns;
     }
     createColumnSet(json) {
         let columnSet = [];

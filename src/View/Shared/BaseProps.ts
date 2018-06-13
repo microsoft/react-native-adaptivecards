@@ -1,19 +1,12 @@
-import { ActionElement } from '../../Schema/Actions/Action';
+import { CardElement } from 'Schema/Base/CardElement';
+import { ActionElement } from '../../Schema/Base/ActionElement';
 
-export interface ICardElementViewProps {
+export interface ICardElementViewProps<T extends CardElement> {
     index?: number;
-}
-
-export interface IFormProps {
-    formId: string;
+    element: T;
 }
 
 export interface IOptionalActionProps {
     action?: ActionElement;
     onActionTriggered?: (action: ActionElement) => void;
-}
-
-export interface IInputFieldProps {
-    inputFieldId: string;
-    containerId: string;
 }

@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 import { Platform, } from 'react-native';
-import { CardElementType } from '../../Schema/Elements/CardElementType';
-import { FlexDirection, FlexWrap, FontSize, FontWeight, Spacing, TextColor, } from '../../Schema/enums';
+import { ContentElementType } from '../../Schema/Base/ContentElement';
+import { FlexDirection, FlexWrap, FontSize, FontWeight, Spacing, TextColor, } from '../../Schema/Base/Enums';
 import { Utils } from '../../utils';
 const defaultStyle = require('./DefaultStyle.json');
 class StyleManager {
@@ -69,8 +69,8 @@ class StyleManager {
         return (wrap ? FlexWrap.Wrap : FlexWrap.NoWrap);
     }
     isHorizontalCardElement(type) {
-        return type === CardElementType.Column ||
-            (type === CardElementType.Image && this.isHorizontalImageSet());
+        return type === ContentElementType.Column ||
+            (type === ContentElementType.Image && this.isHorizontalImageSet());
     }
     getCardElementMargin(spacing) {
         let margin = 0;

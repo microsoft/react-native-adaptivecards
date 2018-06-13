@@ -1,6 +1,6 @@
-import { TypedElement } from '../TypedElement';
+import { CardElement } from '../Base/CardElement';
 
-export class FactElement extends TypedElement {
+export class FactElement extends CardElement {
     // Required
     readonly title?: String;
     readonly value?: String;

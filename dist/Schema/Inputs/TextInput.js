@@ -1,7 +1,7 @@
 import { Utils } from '../../utils';
-import { CardElementType } from '../Elements/CardElementType';
-import { InputTextStyle } from '../enums';
-import { InputElement } from './Input';
+import { ContentElementType } from '../Base/ContentElement';
+import { InputTextStyle } from '../Base/Enums';
+import { InputElement } from '../Base/InputElement';
 export class TextInputElement extends InputElement {
     constructor(json) {
         super(json);
@@ -13,7 +13,7 @@ export class TextInputElement extends InputElement {
         }
     }
     getTypeName() {
-        return CardElementType.InputText;
+        return ContentElementType.InputText;
     }
     getRequiredProperties() {
         return ['id'];

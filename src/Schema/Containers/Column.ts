@@ -1,17 +1,13 @@
 import { Utils } from '../../utils';
-import { ActionFactory } from '../Actions/ActionFactory';
-import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
-import { SubmitActionElement } from '../Actions/SubmitAction';
-import { CardElement } from '../Elements/CardElement';
-import { CardElementFactory } from '../Elements/CardElementFactory';
-import { CardElementType } from '../Elements/CardElementType';
-import { ColumnWidth } from '../enums';
+import { ContentElement, ContentElementType } from '../Base/ContentElement';
+import { ColumnWidth } from '../Base/Enums';
+import { FormElement } from '../Base/FormElement';
+import { CardElementFactory } from '../Factories/ContentElementFactory';
 
-export class ColumnElement extends CardElement {
+export class ColumnElement extends FormElement {
     // Required
-    readonly items: Array<CardElement>;
+    readonly items: Array<ContentElement>;
     // Optional
-    readonly selectAction?: OpenUrlActionElement | SubmitActionElement;
     // “auto”, “stretch”, or a number representing relative width of the column in the column group
     readonly width?: ColumnWidth | number;
 
@@ -20,7 +16,6 @@ export class ColumnElement extends CardElement {
 
         if (this.isValidJSON) {
             this.items = CardElementFactory.createSet(json.items);
-            this.selectAction = ActionFactory.create(json.selectAction);
             if (json.width && !isNaN(json.width)) {
                 let columnWidth = parseInt(json.width, 10);
                 if (columnWidth > 100) {
@@ -37,23 +32,15 @@ export class ColumnElement extends CardElement {
     }
 
     getTypeName(): string {
-        return CardElementType.Column;
+        return ContentElementType.Column;
     }
 
     getRequiredProperties(): Array<string> {
         return ['items'];
     }
 
-    supportAction() {
-        return true;
-    }
-
-    getAction() {
-        return this.selectAction;
-    }
-
-    getActions() {
-        return [this.getAction()];
+    getChildren() {
+        return this.items;
     }
 
     hasItems(): boolean {

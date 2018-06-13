@@ -1,5 +1,4 @@
-import { ActionElement } from './Action';
-import { ActionType } from './ActionType';
+import { ActionElement, ActionType } from '../Base/ActionElement';
 
 export class SubmitActionElement extends ActionElement {
     // Optional
@@ -21,11 +20,7 @@ export class SubmitActionElement extends ActionElement {
         return [];
     }
 
-    getAction(): ActionElement {
-        return this;
-    }
-
-    getActions(): ActionElement[] {
-        return [this.getAction()];
+    getData() {
+        return this.data;
     }
 }

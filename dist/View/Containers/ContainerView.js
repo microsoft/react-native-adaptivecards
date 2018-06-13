@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { ContainerStyle } from '../../Schema/enums';
-import { CardElementView } from '../Elements/CardElementView';
-import { CardElementWrapper } from '../Shared/CardElementWrapper';
+import { ContainerStyle } from '../../Schema/Base/Enums';
+import { CardElementView } from '../Base/CardElementView';
+import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { styleManager } from '../Styles/StyleManager';
 export class ContainerView extends React.PureComponent {
     constructor(props) {
@@ -10,18 +10,18 @@ export class ContainerView extends React.PureComponent {
         this.styleConfig = styleManager.getStyle();
     }
     render() {
-        const { container, index } = this.props;
-        if (!container || !container.isValid() || !container.hasItems()) {
+        const { element, index } = this.props;
+        if (!element || !element.isValid() || !element.hasItems()) {
             return null;
         }
-        return (React.createElement(CardElementWrapper, { cardElement: container, index: index, style: {
+        return (React.createElement(CardElementWrapper, { cardElement: element, index: index, style: {
                 flex: 1,
             } },
             React.createElement(View, { style: [{
                         flex: 1,
                     },
-                    this.getContainerStyle(container.style)
-                ] }, container.items.map((cardElement, index) => React.createElement(CardElementView, { key: 'containerItems' + index, index: index, cardElement: cardElement })))));
+                    this.getContainerStyle(element.style)
+                ] }, element.items.map((cardElement, index) => React.createElement(CardElementView, { key: 'containerItems' + index, index: index, element: cardElement })))));
     }
     getContainerStyle(style) {
         let containerStyle;

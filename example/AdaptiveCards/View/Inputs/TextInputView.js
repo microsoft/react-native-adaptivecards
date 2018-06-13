@@ -1,9 +1,15 @@
 import React from 'react';
 import { TextInput, } from 'react-native';
+import { InputContext } from '../../Context/InputContext';
 export class TextInputView extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.onChangeText = this.onChangeText.bind(this);
+        this.onChangeText(this.props.element.value);
+    }
     render() {
-        const { inputText } = this.props;
-        if (!inputText || !inputText.isValid()) {
+        const { element } = this.props;
+        if (!element || !element.isValid()) {
             return null;
         }
         return (React.createElement(TextInput, { style: {
@@ -13,7 +19,10 @@ export class TextInputView extends React.PureComponent {
                 paddingHorizontal: 10,
                 paddingVertical: 6,
                 marginVertical: 6,
-                height: inputText.isMultiline ? 116 : 38
-            }, multiline: inputText.isMultiline, blurOnSubmit: true, placeholder: inputText.placeholder, value: inputText.value, returnKeyType: 'done', underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants' }));
+                height: element.isMultiline ? 116 : 38
+            }, multiline: element.isMultiline, blurOnSubmit: true, placeholder: element.placeholder, value: element.value, returnKeyType: 'done', underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onChangeText }));
+    }
+    onChangeText(input) {
+        InputContext.getInstance().updateField(this.props.element.id, input);
     }
 }

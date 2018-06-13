@@ -6,12 +6,11 @@ import {
 
 import { ColumnElement } from '../../Schema/Containers/Column';
 import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
-import { CardElementView } from '../Elements/CardElementView';
+import { CardElementView } from '../Base/CardElementView';
+import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { ICardElementViewProps } from '../Shared/BaseProps';
-import { CardElementWrapper } from '../Shared/CardElementWrapper';
 
-interface IProps extends ICardElementViewProps {
-    columnSet: ColumnSetElement;
+interface IProps extends ICardElementViewProps<ColumnSetElement> {
 }
 
 interface IState {
@@ -36,12 +35,12 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
             viewWidth: 0,
         };
 
-        const { columnSet } = props;
+        const { element } = props;
 
-        this.hasFixedWidthColumns = columnSet.columns.some(item =>
+        this.hasFixedWidthColumns = element.columns.some(item =>
             item.isFixedWidth()
         );
-        this.isEqualDistribution = columnSet.columns.every(item =>
+        this.isEqualDistribution = element.columns.every(item =>
             item.isFixedWidth()
         );
     }
@@ -51,15 +50,15 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
     }
 
     render(): JSX.Element {
-        const { columnSet, index } = this.props;
+        const { element, index } = this.props;
 
-        if (!columnSet || !columnSet.isValid() || !columnSet.hasColumns()) {
+        if (!element || !element.isValid() || !element.hasColumns()) {
             return null;
         }
 
         return (
             <CardElementWrapper
-                cardElement={columnSet}
+                cardElement={element}
                 index={index}
                 style={{
                     flex: 1,
@@ -74,7 +73,7 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
                     onLayout={this.onLayout}
                 >
                     {
-                        columnSet.columns.map(this.renderColumn)
+                        element.columns.map(this.renderColumn)
                     }
                 </View>
             </CardElementWrapper>
@@ -87,7 +86,7 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
                 key={'column' + index}
                 index={index}
                 containerWidth={this.state.viewWidth}
-                cardElement={column}
+                element={column}
             />
         );
     }

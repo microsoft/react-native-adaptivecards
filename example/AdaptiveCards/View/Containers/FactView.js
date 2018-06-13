@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { AdaptiveCardText } from '../Shared/AdaptiveCardText';
+import { CardText } from '../Base/CardText';
 import { styleManager } from '../Styles/StyleManager';
 export class FactView extends React.PureComponent {
     constructor(props) {
@@ -8,8 +8,8 @@ export class FactView extends React.PureComponent {
         this.styleConfig = styleManager.getStyle();
     }
     render() {
-        const { fact } = this.props;
-        if (!fact || !fact.isValid()) {
+        const { element } = this.props;
+        if (!element || !element.isValid()) {
             return null;
         }
         return (React.createElement(View, { style: {
@@ -17,13 +17,13 @@ export class FactView extends React.PureComponent {
                 flexDirection: 'row',
                 justifyContent: 'flex-start'
             } },
-            React.createElement(AdaptiveCardText, { style: {
+            React.createElement(CardText, { style: {
                     color: this.styleConfig.fact.titleColor,
                     marginRight: this.styleConfig.fact.spacing,
-                } }, fact.title),
-            React.createElement(AdaptiveCardText, { style: {
+                } }, element.title),
+            React.createElement(CardText, { style: {
                     color: this.styleConfig.fact.valueColor,
                     marginLeft: this.styleConfig.fact.spacing,
-                } }, fact.value)));
+                } }, element.value)));
     }
 }

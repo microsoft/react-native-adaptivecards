@@ -1,17 +1,13 @@
 import { Utils } from '../../utils';
-import { ActionFactory } from '../Actions/ActionFactory';
-import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
-import { SubmitActionElement } from '../Actions/SubmitAction';
-import { CardElement } from '../Elements/CardElement';
-import { CardElementFactory } from '../Elements/CardElementFactory';
-import { CardElementType } from '../Elements/CardElementType';
-import { ContainerStyle } from '../enums';
+import { ContentElement, ContentElementType } from '../Base/ContentElement';
+import { ContainerStyle } from '../Base/Enums';
+import { FormElement } from '../Base/FormElement';
+import { CardElementFactory } from '../Factories/ContentElementFactory';
 
-export class ContainerElement extends CardElement {
+export class ContainerElement extends FormElement {
     // Required
-    readonly items: Array<CardElement> = [];
+    readonly items: Array<ContentElement> = [];
     // Optional
-    readonly selectAction?: OpenUrlActionElement | SubmitActionElement;
     readonly style?: ContainerStyle;
 
     constructor(json: any) {
@@ -19,28 +15,19 @@ export class ContainerElement extends CardElement {
 
         if (this.isValidJSON) {
             this.items = CardElementFactory.createSet(json.items);
-            this.selectAction = ActionFactory.create(json.selectAction);
             this.style = Utils.getStringEnumValueOrDefault(ContainerStyle, json.style, ContainerStyle.Default) as ContainerStyle;
         }
     }
 
     getTypeName(): string {
-        return CardElementType.Container;
+        return ContentElementType.Container;
     }
     getRequiredProperties(): Array<string> {
         return ['items'];
     }
 
-    supportAction() {
-        return true;
-    }
-
-    getAction() {
-        return this.selectAction;
-    }
-
-    getActions() {
-        return [this.getAction()];
+    getChildren() {
+        return this.items;
     }
 
     hasItems(): boolean {

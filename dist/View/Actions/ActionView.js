@@ -1,23 +1,26 @@
 import React from 'react';
 import { TouchableOpacity, } from 'react-native';
 import { ActionContext } from '../../Context/ActionContext';
-import { AdaptiveCardText } from '../Shared/AdaptiveCardText';
+import { CardText } from '../Base/CardText';
 import { styleManager } from '../Styles/StyleManager';
 export class ActionView extends React.Component {
     constructor(props) {
         super(props);
         this.onPress = () => {
             let actionContext = ActionContext.getInstance();
-            let callback = actionContext.getActionHandler();
+            let callback = actionContext.getActionEventHandler();
             if (callback) {
-                callback(this.props.action);
+                callback(this.props.element, this.props.actionHook, (args) => {
+                    console.log(args.formData);
+                    return args;
+                });
             }
         };
         this.styleConfig = styleManager.getStyle();
     }
     render() {
-        const { action, index } = this.props;
-        if (!action || !action.isValid()) {
+        const { element, index } = this.props;
+        if (!element || !element.isValid()) {
             return;
         }
         return (React.createElement(TouchableOpacity, { style: [{
@@ -32,10 +35,10 @@ export class ActionView extends React.Component {
                 },
                 styleManager.getActionButtonSpacingStyle(index)
             ], onPress: this.onPress },
-            React.createElement(AdaptiveCardText, { style: {
+            React.createElement(CardText, { style: {
                     fontSize: this.styleConfig.action.button.fontSize,
                     color: this.styleConfig.action.button.textColor,
-                }, numberOfLines: 1 }, action.title)));
+                }, numberOfLines: 1 }, element.title)));
     }
 }
 ActionView.defaultProps = {

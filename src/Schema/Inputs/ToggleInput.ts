@@ -1,5 +1,5 @@
-import { CardElementType } from '../Elements/CardElementType';
-import { InputElement } from './Input';
+import { ContentElementType } from '../Base/ContentElement';
+import { InputElement } from '../Base/InputElement';
 
 export class ToggleInputElement extends InputElement {
     // Required
@@ -19,8 +19,9 @@ export class ToggleInputElement extends InputElement {
     }
 
     getTypeName(): string {
-        return CardElementType.InputToggle;
+        return ContentElementType.InputToggle;
     }
+
     getRequiredProperties(): Array<string> {
         return ['id', 'title'];
     }

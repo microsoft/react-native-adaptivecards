@@ -1,28 +1,28 @@
 import React from 'react';
 import { Linking, View, } from 'react-native';
 import { ActionContext } from '../Context/ActionContext';
-import { AdaptiveCardSingleView } from './AdaptiveCardSingleView';
+import { AdaptiveCardElementView } from './Cards/AdaptiveCardElementView';
 import { styleManager } from './Styles/StyleManager';
 export class AdaptiveCardView extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.onOpenUrl = (action) => {
-            Linking.canOpenURL(action.url).then((supported) => {
+        this.onOpenUrl = (args) => {
+            Linking.canOpenURL(args.action.url).then((supported) => {
                 if (supported) {
-                    Linking.openURL(action.url);
+                    Linking.openURL(args.action.url);
                 }
             });
         };
-        this.onShowCard = (action) => {
+        this.onShowCard = (args) => {
             if (!this.isComponentUnmounted) {
                 this.setState({
-                    actionCard: action.card,
+                    actionCard: args.action.card,
                 });
             }
         };
-        this.onSubmit = (action) => {
+        this.onSubmit = (args) => {
             if (this.props.onSubmit) {
-                this.props.onSubmit(action.data);
+                this.props.onSubmit(args.formData);
             }
         };
         this.styleConfig = styleManager.addStyle(props.overrideStyle);
@@ -46,9 +46,9 @@ export class AdaptiveCardView extends React.PureComponent {
             return null;
         }
         return (React.createElement(View, { style: { flex: 1 } },
-            React.createElement(AdaptiveCardSingleView, { formId: 'root', adaptiveCard: adaptiveCard }),
+            React.createElement(AdaptiveCardElementView, { formId: 'root', element: adaptiveCard }),
             this.state.actionCard ?
-                React.createElement(AdaptiveCardSingleView, { formId: 'first', adaptiveCard: this.state.actionCard, style: {
+                React.createElement(AdaptiveCardElementView, { formId: 'first', element: this.state.actionCard, style: {
                         marginTop: this.styleConfig.card.spacing,
                     } })
                 :

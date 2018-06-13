@@ -1,15 +1,13 @@
 import { Utils } from '../../utils';
-import { ActionFactory } from '../Actions/ActionFactory';
-import { CardElement } from '../Elements/CardElement';
-import { CardElementFactory } from '../Elements/CardElementFactory';
-import { CardElementType } from '../Elements/CardElementType';
-import { ColumnWidth } from '../enums';
-export class ColumnElement extends CardElement {
+import { ContentElementType } from '../Base/ContentElement';
+import { ColumnWidth } from '../Base/Enums';
+import { FormElement } from '../Base/FormElement';
+import { CardElementFactory } from '../Factories/ContentElementFactory';
+export class ColumnElement extends FormElement {
     constructor(json) {
         super(json);
         if (this.isValidJSON) {
             this.items = CardElementFactory.createSet(json.items);
-            this.selectAction = ActionFactory.create(json.selectAction);
             if (json.width && !isNaN(json.width)) {
                 let columnWidth = parseInt(json.width, 10);
                 if (columnWidth > 100) {
@@ -28,19 +26,13 @@ export class ColumnElement extends CardElement {
         }
     }
     getTypeName() {
-        return CardElementType.Column;
+        return ContentElementType.Column;
     }
     getRequiredProperties() {
         return ['items'];
     }
-    supportAction() {
-        return true;
-    }
-    getAction() {
-        return this.selectAction;
-    }
-    getActions() {
-        return [this.getAction()];
+    getChildren() {
+        return this.items;
     }
     hasItems() {
         return this.items && this.items.length > 0;

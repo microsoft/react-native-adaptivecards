@@ -6,11 +6,11 @@ import {
     View
 } from 'react-native';
 
+import { InputContext } from '../../Context/InputContext';
 import { DateInputElement } from '../../Schema/Inputs/DateInput';
-import { ICardElementViewProps, IInputFieldProps } from '../Shared/BaseProps';
+import { ICardElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends ICardElementViewProps, IInputFieldProps {
-    inputDate: DateInputElement;
+interface IProps extends ICardElementViewProps<DateInputElement> {
 }
 interface IState {
     date: string;
@@ -21,17 +21,18 @@ export class DateInputView extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
-        const { inputDate } = props;
+        const { element } = props;
 
         this.state = {
-            date: inputDate.value,
-            inputDate: inputDate
+            date: element.value,
+            inputDate: element
         };
+        this.updateStore();
     }
 
     render(): JSX.Element {
-        const { inputDate } = this.props;
-        if (!inputDate || !inputDate.isValid()) {
+        const { element } = this.props;
+        if (!element || !element.isValid()) {
             return null;
         }
 
@@ -74,6 +75,15 @@ export class DateInputView extends React.PureComponent<IProps, IState> {
     private onDateChange = (dateTime: Date) => {
         this.setState({
             date: dateTime.toString()
+        }, () => {
+            this.updateStore();
         });
+    }
+
+    private updateStore() {
+        InputContext.getInstance().updateField(
+            this.props.element.id,
+            this.state.date
+        );
     }
 }

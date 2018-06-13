@@ -4,12 +4,12 @@ import {
     View,
 } from 'react-native';
 
-import { ActionContext } from '../Context/ActionContext';
+import { ActionContext, ActionEventHandlerArgs } from '../Context/ActionContext';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
-import { AdaptiveCardElement } from '../Schema/AdaptiveCard';
-import { AdaptiveCardSingleView } from './AdaptiveCardSingleView';
+import { AdaptiveCardElement } from '../Schema/Cards/AdaptiveCard';
+import { AdaptiveCardElementView } from './Cards/AdaptiveCardElementView';
 import { StyleConfig } from './Styles/StyleConfig';
 import { styleManager } from './Styles/StyleManager';
 
@@ -65,15 +65,15 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
             <View
                 style={{ flex: 1 }}
             >
-                <AdaptiveCardSingleView
+                <AdaptiveCardElementView
                     formId='root'
-                    adaptiveCard={adaptiveCard}
+                    element={adaptiveCard}
                 />
                 {
                     this.state.actionCard ?
-                        <AdaptiveCardSingleView
+                        <AdaptiveCardElementView
                             formId='first'
-                            adaptiveCard={this.state.actionCard}
+                            element={this.state.actionCard}
                             style={{
                                 marginTop: this.styleConfig.card.spacing,
                             }}
@@ -85,26 +85,26 @@ export class AdaptiveCardView extends React.PureComponent<IProps, IState> {
         );
     }
 
-    private onOpenUrl = (action: OpenUrlActionElement) => {
+    private onOpenUrl = (args: ActionEventHandlerArgs<OpenUrlActionElement>) => {
         // TODO: Is URL valid? Handle failure case
-        Linking.canOpenURL(action.url).then((supported) => {
+        Linking.canOpenURL(args.action.url).then((supported) => {
             if (supported) {
-                Linking.openURL(action.url);
+                Linking.openURL(args.action.url);
             }
         });
     }
 
-    private onShowCard = (action: ShowCardActionElement) => {
+    private onShowCard = (args: ActionEventHandlerArgs<ShowCardActionElement>) => {
         if (!this.isComponentUnmounted) {
             this.setState({
-                actionCard: action.card,
+                actionCard: args.action.card,
             });
         }
     }
 
-    private onSubmit = (action: SubmitActionElement) => {
+    private onSubmit = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
         if (this.props.onSubmit) {
-            this.props.onSubmit(action.data);
+            this.props.onSubmit(args.formData);
         }
     }
 }

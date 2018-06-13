@@ -1,4 +1,6 @@
-import { ActionType } from '../Schema/Actions/ActionType';
+import { ActionType } from '../Schema/Base/ActionElement';
+export class ActionEventHandlerArgs {
+}
 export class ActionContext {
     constructor() { }
     static getInstance() {
@@ -16,22 +18,33 @@ export class ActionContext {
     registerSubmitHandler(handler) {
         this.onSubmit = handler;
     }
-    getActionHandler() {
-        return (action) => {
+    getActionEventHandler() {
+        return (target, ...hooks) => {
             let callback;
-            switch (action.type) {
-                case ActionType.OpenUrl:
-                    callback = this.onOpenUrl;
-                    break;
-                case ActionType.ShowCard:
-                    callback = this.onShowCard;
-                    break;
-                case ActionType.Submit:
-                    callback = this.onSubmit;
-                    break;
-            }
-            if (callback && typeof callback === 'function') {
-                callback(action);
+            let action = target.getAction();
+            if (action) {
+                switch (action.type) {
+                    case ActionType.OpenUrl:
+                        callback = this.onOpenUrl;
+                        break;
+                    case ActionType.ShowCard:
+                        callback = this.onShowCard;
+                        break;
+                    case ActionType.Submit:
+                        callback = this.onSubmit;
+                        break;
+                }
+                let args = {
+                    action: action
+                };
+                if (hooks) {
+                    hooks.reduce((prev, current) => {
+                        return current(prev);
+                    }, args);
+                }
+                if (callback && typeof callback === 'function') {
+                    callback(args);
+                }
             }
         };
     }

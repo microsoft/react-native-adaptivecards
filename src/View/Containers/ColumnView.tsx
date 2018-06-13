@@ -5,17 +5,14 @@ import {
     ViewStyle,
 } from 'react-native';
 
+import { ContentElement } from '../../Schema/Base/ContentElement';
+import { ColumnWidth } from '../../Schema/Base/Enums';
 import { ColumnElement } from '../../Schema/Containers/Column';
-import { CardElement } from '../../Schema/Elements/CardElement';
-import {
-    ColumnWidth,
-} from '../../Schema/enums';
-import { CardElementView } from '../Elements/CardElementView';
+import { CardElementView } from '../Base/CardElementView';
+import { CardElementWrapper } from '../Base/CardElementWrapper';
 import { ICardElementViewProps } from '../Shared/BaseProps';
-import { CardElementWrapper } from '../Shared/CardElementWrapper';
 
-interface IProps extends ICardElementViewProps {
-    column: ColumnElement;
+interface IProps extends ICardElementViewProps<ColumnElement> {
     containerWidth?: number;
 }
 interface IState {
@@ -23,15 +20,15 @@ interface IState {
 
 export class ColumnView extends React.PureComponent<IProps, IState> {
     render(): JSX.Element {
-        const { column, index } = this.props;
+        const { element, index } = this.props;
 
-        if (!column || !column.isValid() || !column.hasItems()) {
+        if (!element || !element.isValid() || !element.hasItems()) {
             return null;
         }
 
         return (
             <CardElementWrapper
-                cardElement={column}
+                cardElement={element}
                 index={index}
                 style={this.getViewStyle()}
             >
@@ -39,11 +36,11 @@ export class ColumnView extends React.PureComponent<IProps, IState> {
                     style={{ flex: 1 }}
                 >
                     {
-                        column.items.map((cardElement: CardElement, index: number) =>
+                        element.items.map((cardElement: ContentElement, index: number) =>
                             <CardElementView
                                 key={'containerItems' + index}
                                 index={index}
-                                cardElement={cardElement}
+                                element={cardElement}
                             />
                         )
                     }
@@ -53,26 +50,26 @@ export class ColumnView extends React.PureComponent<IProps, IState> {
     }
 
     private getViewStyle(): ViewStyle {
-        const { column, containerWidth } = this.props;
+        const { element, containerWidth } = this.props;
 
-        if (column.isFixedWidth()) {
-            if (column.width < 10) {
+        if (element.isFixedWidth()) {
+            if (element.width < 10) {
                 return {
-                    flex: column.width as number,
+                    flex: element.width as number,
                 };
             } else if (containerWidth) {
                 // With legacy Adaptive Card "size" property a single digit numbers were treated
                 // as relative sizes, whereas anything bigger would be a percentage of the container view width.
                 return {
-                    width: containerWidth * (column.width as number / 100),
+                    width: containerWidth * (element.width as number / 100),
                 };
             } else {
                 return;
             }
         } else {
             return {
-                flex: column.width === ColumnWidth.Auto ? 0 : 1,
-                alignSelf: column.width as 'auto' | FlexAlignType,
+                flex: element.width === ColumnWidth.Auto ? 0 : 1,
+                alignSelf: element.width as 'auto' | FlexAlignType,
             };
         }
     }

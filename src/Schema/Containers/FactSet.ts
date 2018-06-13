@@ -1,8 +1,7 @@
-import { CardElement } from '../Elements/CardElement';
-import { CardElementType } from '../Elements/CardElementType';
+import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { FactElement } from './Fact';
 
-export class FactSetElement extends CardElement {
+export class FactSetElement extends ContentElement {
     // Required
     readonly facts: Array<FactElement> = [];
 
@@ -15,7 +14,7 @@ export class FactSetElement extends CardElement {
     }
 
     getTypeName(): string {
-        return CardElementType.FactSet;
+        return ContentElementType.FactSet;
     }
     getRequiredProperties(): Array<string> {
         return ['facts'];
