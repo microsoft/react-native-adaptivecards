@@ -38,6 +38,3 @@ export class ActionView extends React.Component {
                 }, numberOfLines: 1 }, element.title)));
     }
 }
-ActionView.defaultProps = {
-    index: 0,
-};

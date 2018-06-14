@@ -5,8 +5,12 @@ export class TextInputView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.onChangeText = this.onChangeText.bind(this);
+        let defaultValue = this.props.element.value;
+        if (defaultValue === undefined) {
+            defaultValue = '';
+        }
         this.state = {
-            value: this.props.element.value,
+            value: defaultValue,
         };
         this.updateStore();
     }

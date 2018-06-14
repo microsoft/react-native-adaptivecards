@@ -11,7 +11,8 @@ export class FormContext {
         return FormContext.sharedInstance;
     }
     updateField(id, value, validate) {
-        if (id) {
+        console.log(`Update Field id:${id} value:${value} validate:${validate}`);
+        if (id && value) {
             this.formFields[id] = {
                 value: value,
                 validate: validate
@@ -45,7 +46,7 @@ export class FormContext {
             return ids.reduce((prev, id) => {
                 let field = this.formFields[id];
                 let result = {};
-                if (field) {
+                if (field && field.value) {
                     result[id] = field.value;
                 }
                 else {
@@ -59,12 +60,14 @@ export class FormContext {
     validateField(id) {
         let field = this.getField(id);
         if (field) {
+            console.log(`id: ${id}, validate: ${field.validate}`);
             return field.validate;
         }
         return true;
     }
     validateFields(ids) {
         if (ids) {
+            console.log(`Field Ids: ${ids}`);
             return ids.reduce((prev, current) => {
                 return prev && this.validateField(current);
             }, true);

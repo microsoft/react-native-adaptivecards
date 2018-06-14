@@ -22,6 +22,10 @@ export class NumberInputView extends React.PureComponent<IProps, IState> {
 
         this.onChangeText = this.onChangeText.bind(this);
         this.onBlur = this.onBlur.bind(this);
+        let defaultValue = this.props.element.value;
+        if (defaultValue === undefined) {
+            defaultValue = '';
+        }
         if (Utils.isNumber(this.props.element.value.toString())) {
             this.state = {
                 value: this.props.element.value.toString(),

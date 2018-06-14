@@ -59,12 +59,16 @@
             "type": "Input.Date",
             "placeholder": "Due Date",
             "id": "DateVal",
+            "min": "2017-08-20",
+            "max": "2018-08-20",
             "value": "2017-09-20"
         },
         {
             "type": "Input.Time",
             "placeholder": "Start time",
             "id": "TimeVal",
+            "min": "16:00",
+            "max": "19:00",
             "value": "16:59"
         },
         {

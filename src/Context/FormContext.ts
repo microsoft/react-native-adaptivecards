@@ -17,7 +17,8 @@ export class FormContext {
     }
 
     public updateField(id: string, value: string, validate: boolean) {
-        if (id) {
+        console.log(`Update Field id:${id} value:${value} validate:${validate}`);
+        if (id && value) {
             this.formFields[id] = {
                 value: value,
                 validate: validate
@@ -55,7 +56,7 @@ export class FormContext {
             return ids.reduce((prev, id) => {
                 let field = this.formFields[id];
                 let result: { [id: string]: string } = {};
-                if (field) {
+                if (field && field.value) {
                     result[id] = field.value;
                 } else {
                     result[id] = '';
@@ -69,6 +70,7 @@ export class FormContext {
     public validateField(id: string): boolean {
         let field = this.getField(id);
         if (field) {
+            console.log(`id: ${id}, validate: ${field.validate}`);
             return field.validate;
         }
         return true;
@@ -76,6 +78,7 @@ export class FormContext {
 
     public validateFields(ids: string[]): boolean {
         if (ids) {
+            console.log(`Field Ids: ${ids}`);
             return ids.reduce((prev, current) => {
                 return prev && this.validateField(current);
             }, true);

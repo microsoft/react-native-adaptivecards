@@ -14,15 +14,8 @@ export interface IActionViewProps<T extends ActionElement> extends ICardElementV
     actionHooks: ((args: ActionEventHandlerArgs<T>) => ActionEventHandlerArgs<T>)[];
 }
 
-interface IState {
-}
-
-export class ActionView<T extends ActionElement> extends React.Component<IActionViewProps<T>, IState> {
+export class ActionView<T extends ActionElement> extends React.Component<IActionViewProps<T>> {
     private readonly styleConfig: StyleConfig;
-
-    static defaultProps = {
-        index: 0,
-    };
 
     constructor(props: IActionViewProps<T>) {
         super(props);

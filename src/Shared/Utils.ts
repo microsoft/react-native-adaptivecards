@@ -44,7 +44,7 @@ export class Utils {
             (typeof value === 'string' && !value));
     }
 
-    public static isInRange(value: number, min: number, max: number) {
+    public static isInRange<T extends number | Date>(value: T, min: T, max: T) {
         console.log('Range: ' + min + ' --- ' + max);
         console.log('Value: ' + value);
         if (value !== undefined && min !== undefined && max !== undefined) {
@@ -59,7 +59,7 @@ export class Utils {
             console.log('Check ax range');
             return (value <= max);
         }
-        return false;
+        return true;
     }
 
     public static isNumberStrict(value: string) {
@@ -72,5 +72,70 @@ export class Utils {
 
     public static isSymbol(value: string) {
         return /^(\+|-)?$/.test(value);
+    }
+
+    public static prettifyString(valueString: string, fix: string, length: number, position: 'pre' | 'post') {
+        if (valueString && valueString.length < length && fix && fix.length > 0) {
+            let result = valueString;
+            let count = length - valueString.length;
+            for (let i = 0; i < count; i++) {
+                if (position === 'pre') {
+                    result = fix[0] + result;
+                } else {
+                    result = result + fix[0];
+                }
+            }
+            return result;
+        }
+        return valueString;
+    }
+
+    public static isDate(value: string) {
+        return /^\d{4}(\-\d{2}){2}$/.test(value);
+    }
+
+    public static isTime(value: string) {
+        return /^\d{2}\:\d{2}$/.test(value);
+    }
+
+    public static extractDate(value: string) {
+        if (Utils.isDate(value)) {
+            let parts = value.split('-');
+            return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+        }
+        return undefined;
+    }
+
+    public static extractTime(value: string) {
+        if (Utils.isTime(value)) {
+            let parts = value.split(':');
+            return new Date(2020, 0, 1, Number(parts[0]), Number(parts[1]));
+        }
+        return undefined;
+    }
+
+    public static getDateString(date: Date) {
+        if (date) {
+            return (
+                `${Utils.prettifyString(date.getFullYear().toString(), '0', 2, 'pre')}-` +
+                `${Utils.prettifyString((date.getMonth() + 1).toString(), '0', 2, 'pre')}-` +
+                `${Utils.prettifyString(date.getDate().toString(), '0', 2, 'pre')}`
+            );
+        }
+        return undefined;
+    }
+
+    public static getTimeString(date: Date) {
+        if (date) {
+            return Utils.composeTimeString(date.getHours(), date.getMinutes());
+        }
+        return undefined;
+    }
+
+    public static composeTimeString(hour: number, minute: number) {
+        return (
+            `${Utils.prettifyString(hour.toString(), '0', 2, 'pre')}:` +
+            `${Utils.prettifyString(minute.toString(), '0', 2, 'pre')}`
+        );
     }
 }

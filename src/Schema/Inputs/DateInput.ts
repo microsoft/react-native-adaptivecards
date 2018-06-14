@@ -1,10 +1,11 @@
+import { Utils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 
 export class DateInputElement extends InputElement {
     // Optional
-    readonly max?: number;
-    readonly min?: number;
+    readonly max?: string;
+    readonly min?: string;
     readonly placeholder?: string;
 
     public constructor(json: any) {
@@ -23,5 +24,15 @@ export class DateInputElement extends InputElement {
 
     getRequiredProperties(): Array<string> {
         return ['id'];
+    }
+
+    validateForm(value?: string) {
+        if (value && value.length !== 0) {
+            let minTime = Utils.extractDate(this.min);
+            let maxTime = Utils.extractDate(this.max);
+            let time = Utils.extractDate(value);
+            return Utils.isInRange(time, minTime, maxTime);
+        }
+        return true;
     }
 }

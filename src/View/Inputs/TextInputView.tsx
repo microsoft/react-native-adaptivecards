@@ -19,8 +19,12 @@ export class TextInputView extends React.PureComponent<IProps, IState> {
         super(props);
 
         this.onChangeText = this.onChangeText.bind(this);
+        let defaultValue = this.props.element.value;
+        if (defaultValue === undefined) {
+            defaultValue = '';
+        }
         this.state = {
-            value: this.props.element.value,
+            value: defaultValue,
         };
         this.updateStore();
     }
