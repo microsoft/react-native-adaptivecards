@@ -15,9 +15,9 @@ import {
     ImageSize,
     ImageStyle,
 } from '../../Shared/Enums';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { ICardElementViewProps } from '../Shared/BaseProps';
-import { styleManager } from '../Styles/StyleManager';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { IElementViewProps } from '../Shared/BaseProps';
+import { StyleManager } from '../Styles/StyleManager';
 
 const IMAGEMINSIZE = 18;
 const enum ImageFit {
@@ -25,7 +25,7 @@ const enum ImageFit {
     FlexibleHeight
 }
 
-interface IProps extends ICardElementViewProps<ImageElement> {
+interface IProps extends IElementViewProps<ImageElement> {
 }
 
 interface IState {
@@ -50,11 +50,11 @@ export class ImageView extends React.PureComponent<IProps, IState> {
         };
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount() {
         this.isComponentUnmounted = true;
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element, index } = this.props;
 
         if (!element || !element.isValid()) {
@@ -63,8 +63,8 @@ export class ImageView extends React.PureComponent<IProps, IState> {
 
         const dimensions = element.isFixedSize() ?
             {
-                width: styleManager.getImageSize(element.size),
-                height: styleManager.getImageSize(element.size),
+                width: StyleManager.getInstance().getImageSize(element.size),
+                height: StyleManager.getInstance().getImageSize(element.size),
             } :
             this.getDimensionsForBestFit();
         const borderRadius = element.style === ImageStyle.Person && dimensions ?
@@ -72,11 +72,11 @@ export class ImageView extends React.PureComponent<IProps, IState> {
             undefined;
 
         return (
-            <CardElementWrapper
+            <DecCardElementWrapper
                 element={element}
                 index={index}
                 style={
-                    styleManager.isHorizontalImageSet() ? undefined : { flex: 1 }
+                    StyleManager.getInstance().isHorizontalImageSet() ? undefined : { flex: 1 }
                 }
             >
                 <View
@@ -105,7 +105,7 @@ export class ImageView extends React.PureComponent<IProps, IState> {
                         resizeMethod={'auto'}
                     />
                 </View>
-            </CardElementWrapper>
+            </DecCardElementWrapper>
         );
     }
 

@@ -5,108 +5,119 @@ import {
 } from 'react-native';
 
 import { ActionContext, ActionEventHandlerArgs } from '../Context/ActionContext';
+import { FormContext } from '../Context/FormContext';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
-import { AdaptiveCardElement } from '../Schema/Cards/AdaptiveCard';
-import { AdaptiveCardView } from './Cards/AdaptiveCardView';
+import { ActionType } from '../Schema/Base/ActionElement';
+import { CardElement } from '../Schema/Cards/Card';
+// import { DecCardView } from './Cards/DecCardView';
+import { CardView } from './Cards/CardView';
 import { StyleConfig } from './Styles/StyleConfig';
-import { styleManager } from './Styles/StyleManager';
+// import { StyleManager } from './Styles/StyleManager';
 
 export interface IProps {
-    adaptiveCard: AdaptiveCardElement;
+    adaptiveCard: any;
     overrideStyle?: StyleConfig;
     onSubmit?: (data: any) => void;
 }
 
 interface IState {
-    actionCard: AdaptiveCardElement;
+    rootCard: CardElement;
+    actionCard: CardElement;
 }
 
 export class CardRootView extends React.PureComponent<IProps, IState> {
-    private styleConfig: StyleConfig;
+    // private styleConfig: StyleConfig;
     private isComponentUnmounted: Boolean;
 
     constructor(props: IProps) {
         super(props);
 
         // Apply customized styles
-        this.styleConfig = styleManager.addStyle(props.overrideStyle);
+        // this.styleConfig = StyleManager.getInstance().addStyle(props.overrideStyle);
 
         // State initialization
         this.state = {
+            rootCard: new CardElement(this.props.adaptiveCard, undefined),
             actionCard: null,
         };
 
-        let actionContext = ActionContext.getInstance();
+        let actionContext = ActionContext.getGlobalInstance();
         actionContext.registerOpenUrlHandler(this.onOpenUrl);
         actionContext.registerShowCardHandler(this.onShowCard);
         actionContext.registerSubmitHandler(this.onSubmit);
+
+        actionContext.registerHook({ func: this.formValidation, name: 'formValidation', actionType: ActionType.Submit });
+        actionContext.registerHook({ func: this.populateFormData, name: 'populateFormData', actionType: ActionType.Submit });
     }
 
-    componentWillReceiveProps(nextProps: IProps) {
+    public componentWillReceiveProps(nextProps: IProps) {
         // Update customized styles
-        this.styleConfig = styleManager.addStyle(nextProps.overrideStyle);
+        // this.styleConfig = StyleManager.getInstance().addStyle(nextProps.overrideStyle);
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount() {
         this.isComponentUnmounted = true;
     }
 
-    render(): JSX.Element {
-        const { adaptiveCard } = this.props;
-
-        if (!adaptiveCard) {
-            // TODO: render error card
-            return null;
-        }
-
+    public render() {
         return (
             <View
                 style={{ flex: 1 }}
             >
-                <AdaptiveCardView
-                    formId='root'
-                    element={adaptiveCard}
+                <CardView
+                    element={this.state.rootCard}
                 />
-                {
-                    this.state.actionCard ?
-                        <AdaptiveCardView
-                            formId='first'
-                            element={this.state.actionCard}
-                            style={{
-                                marginTop: this.styleConfig.card.spacing,
-                            }}
-                        />
-                        :
-                        null
-                }
             </View>
         );
     }
 
     private onOpenUrl = (args: ActionEventHandlerArgs<OpenUrlActionElement>) => {
         // TODO: Is URL valid? Handle failure case
-        Linking.canOpenURL(args.action.url).then((supported) => {
-            if (supported) {
-                Linking.openURL(args.action.url);
-            }
-        });
-    }
-
-    private onShowCard = (args: ActionEventHandlerArgs<ShowCardActionElement>) => {
-        if (!this.isComponentUnmounted) {
-            this.setState({
-                actionCard: args.action.card,
+        if (args) {
+            Linking.canOpenURL(args.action.url).then((supported) => {
+                if (supported) {
+                    Linking.openURL(args.action.url);
+                }
             });
         }
     }
 
-    private onSubmit = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
-        console.log('Form validate: ' + args.formValidate);
-        console.log(args.formData);
-        if (args.formValidate && this.props.onSubmit) {
-            this.props.onSubmit(args.formData);
+    private onShowCard = (args: ActionEventHandlerArgs<ShowCardActionElement>) => {
+        if (args) {
+            if (!this.isComponentUnmounted) {
+                this.setState({
+                    actionCard: args.action.card,
+                });
+            }
         }
+    }
+
+    private onSubmit = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
+        if (args) {
+            console.log('Form validate: ' + args.formValidate);
+            console.log(args.formData);
+            if (args.formValidate && this.props.onSubmit) {
+                this.props.onSubmit(args.formData);
+            }
+        }
+    }
+
+    private formValidation = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
+        if (args) {
+            args.formValidate = args.target.getForm().validateForm();
+        }
+        return args;
+    }
+
+    private populateFormData = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
+        if (args && args.formValidate) {
+            args.formData = {
+                ...args.action.getData(),
+                ...FormContext.getInstance().getFormData(args.target.getForm().getAllInputFieldIds())
+            };
+        }
+        return args;
     }
 }

@@ -1,13 +1,23 @@
 import { ContentElement } from '../Base/ContentElement';
+import { AbstractElement } from './AbstractElement';
+
+export enum InputElementType {
+    TextInput = 'Input.Text',
+    NumberInput = 'Input.Number',
+    DateInput = 'Input.Date',
+    TimeInput = 'Input.Time',
+    ToggleInput = 'Input.Toggle',
+    ChoiceSetInput = 'Input.ChoiceSet',
+}
 
 export abstract class InputElement extends ContentElement {
     // Required
-    readonly id: string;
+    public readonly id: string;
     // Optional
-    readonly value?: string;
+    public readonly value?: string;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.id = json.id;

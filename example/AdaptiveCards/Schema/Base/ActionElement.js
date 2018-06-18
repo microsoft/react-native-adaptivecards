@@ -1,18 +1,18 @@
-import { CardElement } from '../Base/CardElement';
+import { AbstractElement } from '../Base/AbstractElement';
 export var ActionType;
 (function (ActionType) {
     ActionType["OpenUrl"] = "Action.OpenUrl";
     ActionType["Submit"] = "Action.Submit";
     ActionType["ShowCard"] = "Action.ShowCard";
 })(ActionType || (ActionType = {}));
-export class ActionElement extends CardElement {
-    constructor(json) {
-        super(json);
+export class ActionElement extends AbstractElement {
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
             this.title = json.title;
         }
     }
-    supportAction() {
+    hasAction() {
         return true;
     }
     getAction() {
@@ -21,7 +21,13 @@ export class ActionElement extends CardElement {
     getActions() {
         return [this.getAction()];
     }
+    getForm() {
+        return this.getParent().getForm();
+    }
     getData() {
         return {};
+    }
+    isAction() {
+        return true;
     }
 }

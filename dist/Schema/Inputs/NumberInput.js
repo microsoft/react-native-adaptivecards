@@ -2,8 +2,8 @@ import { Utils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 export class NumberInputElement extends InputElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
             this.max = json.max;
             this.min = json.min;

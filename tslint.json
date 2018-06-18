@@ -17,6 +17,23 @@
             true,
             140
         ],
+        "member-ordering": [
+            true,
+            {
+                "order": [
+                    "private-instance-field",
+                    "public-instance-field",
+                    "private-static-field",
+                    "public-static-field",
+                    "private-constructor",
+                    "public-constructor",
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method"
+                ]
+            }
+        ],
+        "member-access": true,
         "no-arg": true,
         "no-bitwise": false,
         "no-console": [

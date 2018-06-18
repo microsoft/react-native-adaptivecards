@@ -1,17 +1,16 @@
 import { HorizontalAlignment, ImageSize, ImageStyle, } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
-import { ContentElement, ContentElementType } from '../Base/ContentElement';
-import { ActionFactory } from '../Factories/ActionFactory';
-export class ImageElement extends ContentElement {
-    constructor(json) {
-        super(json);
+import { ContentElementType } from '../Base/ContentElement';
+import { FormElement } from '../Base/FormElement';
+export class ImageElement extends FormElement {
+    constructor(json, parent) {
+        super(json, parent);
         this.size = ImageSize.Auto;
         if (this.isValidJSON) {
             this.url = json.url;
             this.altText = json.altText;
             this.horizontalAlignment =
                 Utils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left);
-            this.selectAction = ActionFactory.create(json.selectAction);
             this.size = Utils.getStringEnumValueOrDefault(ImageSize, json.size, ImageSize.Auto);
             this.style = Utils.getStringEnumValueOrDefault(ImageStyle, json.style, ImageStyle.Default);
         }
@@ -22,14 +21,14 @@ export class ImageElement extends ContentElement {
     getRequiredProperties() {
         return ['url'];
     }
-    supportAction() {
-        return true;
-    }
     getAction() {
         return this.selectAction;
     }
     getActions() {
         return [this.getAction()];
+    }
+    getChildren() {
+        return [];
     }
     setSize(size) {
         this.size = Utils.getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto);

@@ -4,18 +4,18 @@ import {
 } from 'react-native';
 
 import { TextBlockElement } from '../../Schema/CardElements/TextBlock';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { CardText } from '../Base/CardText';
-import { ICardElementViewProps } from '../Shared/BaseProps';
-import { styleManager } from '../Styles/StyleManager';
+import { CardText } from '../Basic/CardText';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { IElementViewProps } from '../Shared/BaseProps';
+import { StyleManager } from '../Styles/StyleManager';
 
-interface IProps extends ICardElementViewProps<TextBlockElement> {
+interface IProps extends IElementViewProps<TextBlockElement> {
 }
 interface IState {
 }
 
 export class TextBlockView extends React.PureComponent<IProps, IState> {
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element, index } = this.props;
 
         if (!element || !element.isValid()) {
@@ -23,7 +23,7 @@ export class TextBlockView extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <CardElementWrapper
+            <DecCardElementWrapper
                 element={element}
                 index={index}
                 style={{
@@ -35,20 +35,20 @@ export class TextBlockView extends React.PureComponent<IProps, IState> {
                     <CardText
                         style={{
                             backgroundColor: 'transparent',
-                            fontSize: styleManager.getFontSize(element.size),
-                            fontWeight: styleManager.getFontWeight(element.weight),
+                            fontSize: StyleManager.getInstance().getFontSize(element.size),
+                            fontWeight: StyleManager.getInstance().getFontWeight(element.weight),
                             color: element.isSubtle ?
-                                styleManager.getSubtleColor(element.color) :
-                                styleManager.getColor(element.color),
+                                StyleManager.getInstance().getSubtleColor(element.color) :
+                                StyleManager.getInstance().getColor(element.color),
                             textAlign: element.horizontalAlignment,
-                            flexWrap: styleManager.getWrapStyle(element.wrap),
+                            flexWrap: StyleManager.getInstance().getWrapStyle(element.wrap),
                         }}
                         numberOfLines={element.maxLines || undefined}
                     >
                         {element.text}
                     </CardText>
                 </View>
-            </CardElementWrapper>
+            </DecCardElementWrapper>
         );
     }
 }

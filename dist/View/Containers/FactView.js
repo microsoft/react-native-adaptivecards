@@ -1,11 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
-import { CardText } from '../Base/CardText';
-import { styleManager } from '../Styles/StyleManager';
+import { CardText } from '../Basic/CardText';
+import { StyleManager } from '../Styles/StyleManager';
 export class FactView extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.styleConfig = styleManager.getStyle();
+        this.styleConfig = StyleManager.getInstance().getStyle();
     }
     render() {
         const { element } = this.props;

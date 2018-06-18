@@ -6,19 +6,19 @@ import {
 
 import { ImageElement } from '../../Schema/CardElements/Image';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
-import { CardElementView } from '../Base/CardElementView';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { ICardElementViewProps } from '../Shared/BaseProps';
-import { styleManager } from '../Styles/StyleManager';
+import { DecCardElementView } from '../Basic/DecCardElementView';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { IElementViewProps } from '../Shared/BaseProps';
+import { StyleManager } from '../Styles/StyleManager';
 
-interface IProps extends ICardElementViewProps<ImageSetElement> {
+interface IProps extends IElementViewProps<ImageSetElement> {
     element: ImageSetElement;
 }
 interface IState {
 }
 
 export class ImageSetView extends React.PureComponent<IProps, IState> {
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element, index } = this.props;
 
         if (!element || !element.isValid() || !element.hasImages()) {
@@ -26,11 +26,11 @@ export class ImageSetView extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <CardElementWrapper element={element} index={index} style={{
+            <DecCardElementWrapper element={element} index={index} style={{
                 flex: 1,
             }}>
                 {
-                    styleManager.isHorizontalImageSet() ?
+                    StyleManager.getInstance().isHorizontalImageSet() ?
                         <FlatList
                             style={{ flex: 1 }}
                             horizontal={true}
@@ -51,7 +51,7 @@ export class ImageSetView extends React.PureComponent<IProps, IState> {
                             }
                         </View>
                 }
-            </CardElementWrapper>
+            </DecCardElementWrapper>
         );
     }
 
@@ -62,7 +62,7 @@ export class ImageSetView extends React.PureComponent<IProps, IState> {
         image.setSize(element.imageSize);
 
         return (
-            <CardElementView
+            <DecCardElementView
                 key={'image' + index}
                 index={index}
                 element={image}

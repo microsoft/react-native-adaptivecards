@@ -7,9 +7,9 @@ import {
 import { FormContext } from '../../Context/FormContext';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
 import { Utils } from '../../Shared/Utils';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { IElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends ICardElementViewProps<NumberInputElement> {
+interface IProps extends IElementViewProps<NumberInputElement> {
 }
 
 interface IState {
@@ -34,7 +34,7 @@ export class NumberInputView extends React.PureComponent<IProps, IState> {
         }
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element } = this.props;
 
         if (!element || !element.isValid()) {

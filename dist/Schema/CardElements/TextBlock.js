@@ -2,8 +2,8 @@ import { FontSize, FontWeight, HorizontalAlignment, TextColor } from '../../Shar
 import { Utils } from '../../Shared/Utils';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 export class TextBlockElement extends ContentElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
             this.text = json.text;
             this.color = Utils.getStringEnumValueOrDefault(TextColor, json.color, TextColor.Default);

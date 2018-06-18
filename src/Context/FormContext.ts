@@ -1,11 +1,12 @@
-export class FormField {
+export interface FormField {
     value: string;
     validate: boolean;
 }
 
 export class FormContext {
-    private static sharedInstance: FormContext;
     private formFields: { [id: string]: FormField } = {};
+
+    private static sharedInstance: FormContext;
 
     private constructor() { }
 

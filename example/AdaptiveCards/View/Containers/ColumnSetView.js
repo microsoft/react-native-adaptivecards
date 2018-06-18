@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { CardElementView } from '../Base/CardElementView';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
+import { DecCardElementView } from '../Basic/DecCardElementView';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
 export class ColumnSetView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.renderColumn = (column, index) => {
-            return (React.createElement(CardElementView, { key: 'column' + index, index: index, containerWidth: this.state.viewWidth, element: column }));
+            return (React.createElement(DecCardElementView, { key: 'column' + index, index: index, containerWidth: this.state.viewWidth, element: column }));
         };
         this.onLayout = (event) => {
             if (!this.isComponentUnmounted && !this.state.viewWidth && this.hasFixedWidthColumns) {
@@ -30,7 +30,7 @@ export class ColumnSetView extends React.PureComponent {
         if (!element || !element.isValid() || !element.hasColumns()) {
             return null;
         }
-        return (React.createElement(CardElementWrapper, { element: element, index: index, style: {
+        return (React.createElement(DecCardElementWrapper, { element: element, index: index, style: {
                 flex: 1,
             } },
             React.createElement(View, { style: {
@@ -40,8 +40,3 @@ export class ColumnSetView extends React.PureComponent {
                 }, onLayout: this.onLayout }, element.columns.map(this.renderColumn))));
     }
 }
-ColumnSetView.defaultProps = {
-    isComponentUnmounted: false,
-    hasFixedWidthColumns: false,
-    isEqualDistribution: true,
-};

@@ -5,22 +5,23 @@ import {
     TextColor
 } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 
 export class TextBlockElement extends ContentElement {
     // Required
-    readonly text: string;
+    public readonly text: string;
     // Optional
-    readonly color?: TextColor;
-    readonly horizontalAlignment?: HorizontalAlignment;
-    readonly isSubtle?: boolean;
-    readonly maxLines?: number;
-    readonly size?: FontSize;
-    readonly weight?: FontWeight;
-    readonly wrap?: boolean;
+    public readonly color?: TextColor;
+    public readonly horizontalAlignment?: HorizontalAlignment;
+    public readonly isSubtle?: boolean;
+    public readonly maxLines?: number;
+    public readonly size?: FontSize;
+    public readonly weight?: FontWeight;
+    public readonly wrap?: boolean;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.text = json.text;
@@ -36,11 +37,11 @@ export class TextBlockElement extends ContentElement {
         }
     }
 
-    getTypeName(): string {
+    public getTypeName(): string {
         return ContentElementType.TextBlock;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return ['text'];
     }
 }

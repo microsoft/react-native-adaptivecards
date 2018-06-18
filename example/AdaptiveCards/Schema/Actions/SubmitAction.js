@@ -1,7 +1,7 @@
 import { ActionElement, ActionType } from '../Base/ActionElement';
 export class SubmitActionElement extends ActionElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
             this.data = json.data;
         }
@@ -11,6 +11,9 @@ export class SubmitActionElement extends ActionElement {
     }
     getRequiredProperties() {
         return [];
+    }
+    getActionType() {
+        return ActionType.Submit;
     }
     getData() {
         return this.data;

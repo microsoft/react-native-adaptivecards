@@ -1,15 +1,16 @@
+import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 
 export class ToggleInputElement extends InputElement {
     // Required
-    readonly title: string;
+    public readonly title: string;
     // Optional
-    readonly valueOff?: string;
-    readonly valueOn?: string;
+    public readonly valueOff?: string;
+    public readonly valueOn?: string;
 
-    public constructor(json: any) {
-        super(json);
+    public constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.title = json.title;
@@ -18,11 +19,11 @@ export class ToggleInputElement extends InputElement {
         }
     }
 
-    getTypeName(): string {
-        return ContentElementType.InputToggle;
+    public getTypeName(): string {
+        return ContentElementType.ToggleInput;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return ['id', 'title'];
     }
 }

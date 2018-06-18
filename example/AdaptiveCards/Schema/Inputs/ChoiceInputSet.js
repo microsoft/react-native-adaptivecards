@@ -4,8 +4,8 @@ import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 import { ChoiceInputElement } from './ChoiceInput';
 export class ChoiceInputSetElement extends InputElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         this.choices = [];
         if (this.isValidJSON) {
             this.isMultiSelect = json.isMultiSelect || false;
@@ -14,7 +14,7 @@ export class ChoiceInputSetElement extends InputElement {
         }
     }
     getTypeName() {
-        return ContentElementType.InputChoiceSet;
+        return ContentElementType.ChoiceSetInput;
     }
     getRequiredProperties() {
         return ['id', 'choices'];
@@ -23,7 +23,7 @@ export class ChoiceInputSetElement extends InputElement {
         let inputChoiceSet = [];
         if (json && json.length > 0) {
             json.forEach((item) => {
-                let inputChoice = new ChoiceInputElement(item);
+                let inputChoice = new ChoiceInputElement(item, this);
                 if (inputChoice && inputChoice.isValidJSON) {
                     inputChoiceSet.push(inputChoice);
                 }

@@ -1,8 +1,8 @@
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 export class ToggleInputElement extends InputElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
             this.title = json.title;
             this.valueOff = json.valueOff;
@@ -10,7 +10,7 @@ export class ToggleInputElement extends InputElement {
         }
     }
     getTypeName() {
-        return ContentElementType.InputToggle;
+        return ContentElementType.ToggleInput;
     }
     getRequiredProperties() {
         return ['id', 'title'];

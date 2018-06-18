@@ -1,6 +1,6 @@
 import { Spacing } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
-import { CardElement } from '../Base/CardElement';
+import { AbstractElement } from '../Base/AbstractElement';
 export var ContentElementType;
 (function (ContentElementType) {
     ContentElementType["Column"] = "Column";
@@ -10,16 +10,17 @@ export var ContentElementType;
     ContentElementType["Image"] = "Image";
     ContentElementType["ImageSet"] = "ImageSet";
     ContentElementType["TextBlock"] = "TextBlock";
-    ContentElementType["InputText"] = "Input.Text";
+    ContentElementType["TextInput"] = "Input.Text";
     ContentElementType["NumberInput"] = "Input.Number";
     ContentElementType["DateInput"] = "Input.Date";
     ContentElementType["TimeInput"] = "Input.Time";
-    ContentElementType["InputToggle"] = "Input.Toggle";
-    ContentElementType["InputChoiceSet"] = "Input.ChoiceSet";
+    ContentElementType["ToggleInput"] = "Input.Toggle";
+    ContentElementType["ChoiceSetInput"] = "Input.ChoiceSet";
+    ContentElementType["AdaptiveCard"] = "AdaptiveCard";
 })(ContentElementType || (ContentElementType = {}));
-export class ContentElement extends CardElement {
-    constructor(json) {
-        super(json);
+export class ContentElement extends AbstractElement {
+    constructor(json, parent) {
+        super(json, parent);
         this.separator = false;
         if (this.isValidJSON) {
             this.id = json.id;
@@ -29,5 +30,8 @@ export class ContentElement extends CardElement {
     }
     getId() {
         return this.id;
+    }
+    isContent() {
+        return true;
     }
 }

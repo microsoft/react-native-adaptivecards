@@ -4,11 +4,11 @@ import { ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
 import { CardElementFactory } from '../Factories/ContentElementFactory';
 export class ContainerElement extends FormElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         this.items = [];
         if (this.isValidJSON) {
-            this.items = CardElementFactory.createSet(json.items);
+            this.items = CardElementFactory.createSet(json.items, this);
             this.style = Utils.getStringEnumValueOrDefault(ContainerStyle, json.style, ContainerStyle.Default);
         }
     }

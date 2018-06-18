@@ -1,24 +1,13 @@
-import { CardElement } from '../Base/CardElement';
+import { AbstractElement } from '../Base/AbstractElement';
+import { ValueElement } from '../Base/ValueElement';
 
-export class ChoiceInputElement extends CardElement {
-    // Required
-    readonly title: string;
-    readonly value: string;
+export class ChoiceInputElement extends ValueElement {
 
-    constructor(json: any) {
-        super(json);
-
-        if (this.isValidJSON) {
-            this.title = json.title;
-            this.value = json.value;
-        }
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
     }
 
-    getTypeName(): string {
+    public getTypeName(): string {
         return 'Input.Choice';
-    }
-
-    getRequiredProperties(): Array<string> {
-        return ['title', 'value'];
     }
 }

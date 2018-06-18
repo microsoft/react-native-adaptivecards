@@ -11,9 +11,9 @@ import {
 import { FormContext } from '../../Context/FormContext';
 import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 import { Utils } from '../../Shared/Utils';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { IElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends ICardElementViewProps<TimeInputElement> {
+interface IProps extends IElementViewProps<TimeInputElement> {
 }
 interface IState {
     timeString: string;
@@ -36,7 +36,7 @@ export class TimeInputView extends React.PureComponent<IProps, IState> {
         this.updateStore();
     }
 
-    render(): JSX.Element {
+    public render() {
         const { element } = this.props;
         if (!element || !element.isValid()) {
             return null;

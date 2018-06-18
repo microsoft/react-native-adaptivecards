@@ -3,18 +3,18 @@ import { View } from 'react-native';
 
 import { FactElement } from '../../Schema/Containers/Fact';
 import { FactSetElement } from '../../Schema/Containers/FactSet';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { IElementViewProps } from '../Shared/BaseProps';
 import { FactView } from './FactView';
 
-interface IProps extends ICardElementViewProps<FactSetElement> {
+interface IProps extends IElementViewProps<FactSetElement> {
     element: FactSetElement;
 }
 interface IState {
 }
 
 export class FactSetView extends React.PureComponent<IProps, IState> {
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element, index } = this.props;
 
         if (!element || !element.isValid() || !element.hasFacts()) {
@@ -22,7 +22,7 @@ export class FactSetView extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <CardElementWrapper
+            <DecCardElementWrapper
                 element={element}
                 index={index}
                 style={{
@@ -43,7 +43,7 @@ export class FactSetView extends React.PureComponent<IProps, IState> {
                         )
                     }
                 </View>
-            </CardElementWrapper>
+            </DecCardElementWrapper>
         );
     }
 }

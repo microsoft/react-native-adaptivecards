@@ -4,10 +4,10 @@ import { ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
 import { CardElementFactory } from '../Factories/ContentElementFactory';
 export class ColumnElement extends FormElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
-            this.items = CardElementFactory.createSet(json.items);
+            this.items = CardElementFactory.createSet(json.items, this);
             if (json.width && !isNaN(json.width)) {
                 let columnWidth = parseInt(json.width, 10);
                 if (columnWidth > 100) {

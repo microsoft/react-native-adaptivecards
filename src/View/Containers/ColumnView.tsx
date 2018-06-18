@@ -8,18 +8,18 @@ import {
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import { ColumnElement } from '../../Schema/Containers/Column';
 import { ColumnWidth } from '../../Shared/Enums';
-import { CardElementView } from '../Base/CardElementView';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { DecCardElementView } from '../Basic/DecCardElementView';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { IElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends ICardElementViewProps<ColumnElement> {
+interface IProps extends IElementViewProps<ColumnElement> {
     containerWidth?: number;
 }
 interface IState {
 }
 
 export class ColumnView extends React.PureComponent<IProps, IState> {
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element, index } = this.props;
 
         if (!element || !element.isValid() || !element.hasItems()) {
@@ -27,7 +27,7 @@ export class ColumnView extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <CardElementWrapper
+            <DecCardElementWrapper
                 element={element}
                 index={index}
                 style={this.getViewStyle()}
@@ -37,7 +37,7 @@ export class ColumnView extends React.PureComponent<IProps, IState> {
                 >
                     {
                         element.items.map((cardElement: ContentElement, index: number) =>
-                            <CardElementView
+                            <DecCardElementView
                                 key={'containerItems' + index}
                                 index={index}
                                 element={cardElement}
@@ -45,7 +45,7 @@ export class ColumnView extends React.PureComponent<IProps, IState> {
                         )
                     }
                 </View>
-            </CardElementWrapper>
+            </DecCardElementWrapper>
         );
     }
 

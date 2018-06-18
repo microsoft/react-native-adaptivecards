@@ -6,11 +6,11 @@ import {
 
 import { ColumnElement } from '../../Schema/Containers/Column';
 import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
-import { CardElementView } from '../Base/CardElementView';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { DecCardElementView } from '../Basic/DecCardElementView';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { IElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends ICardElementViewProps<ColumnSetElement> {
+interface IProps extends IElementViewProps<ColumnSetElement> {
 }
 
 interface IState {
@@ -21,12 +21,6 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
     private isComponentUnmounted: Boolean;
     private hasFixedWidthColumns: Boolean;
     private isEqualDistribution: Boolean;
-
-    static defaultProps = {
-        isComponentUnmounted: false,
-        hasFixedWidthColumns: false,
-        isEqualDistribution: true,
-    };
 
     constructor(props: IProps) {
         super(props);
@@ -45,11 +39,11 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
         );
     }
 
-    componentWillUnmount() {
+    public componentWillUnmount() {
         this.isComponentUnmounted = true;
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element, index } = this.props;
 
         if (!element || !element.isValid() || !element.hasColumns()) {
@@ -57,7 +51,7 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <CardElementWrapper
+            <DecCardElementWrapper
                 element={element}
                 index={index}
                 style={{
@@ -76,13 +70,13 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
                         element.columns.map(this.renderColumn)
                     }
                 </View>
-            </CardElementWrapper>
+            </DecCardElementWrapper>
         );
     }
 
     private renderColumn = (column: ColumnElement, index: number) => {
         return (
-            <CardElementView
+            <DecCardElementView
                 key={'column' + index}
                 index={index}
                 containerWidth={this.state.viewWidth}

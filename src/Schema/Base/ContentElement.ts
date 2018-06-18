@@ -1,6 +1,6 @@
 import { Spacing } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
-import { CardElement } from '../Base/CardElement';
+import { AbstractElement } from '../Base/AbstractElement';
 
 export enum ContentElementType {
     Column = 'Column',
@@ -10,22 +10,23 @@ export enum ContentElementType {
     Image = 'Image',
     ImageSet = 'ImageSet',
     TextBlock = 'TextBlock',
-    InputText = 'Input.Text',
+    TextInput = 'Input.Text',
     NumberInput = 'Input.Number',
     DateInput = 'Input.Date',
     TimeInput = 'Input.Time',
-    InputToggle = 'Input.Toggle',
-    InputChoiceSet = 'Input.ChoiceSet',
+    ToggleInput = 'Input.Toggle',
+    ChoiceSetInput = 'Input.ChoiceSet',
+    AdaptiveCard = 'AdaptiveCard',
 }
 
-export abstract class ContentElement extends CardElement {
+export abstract class ContentElement extends AbstractElement {
     // Optional
-    readonly id?: string;
-    readonly spacing?: Spacing;
-    readonly separator?: boolean = false;
+    public readonly id?: string;
+    public readonly spacing?: Spacing;
+    public readonly separator?: boolean = false;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.id = json.id;
@@ -34,7 +35,11 @@ export abstract class ContentElement extends CardElement {
         }
     }
 
-    getId() {
+    public getId() {
         return this.id;
+    }
+
+    public isContent() {
+        return true;
     }
 }

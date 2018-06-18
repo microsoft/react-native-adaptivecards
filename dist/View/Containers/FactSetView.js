@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
 import { FactView } from './FactView';
 export class FactSetView extends React.PureComponent {
     render() {
@@ -8,7 +8,7 @@ export class FactSetView extends React.PureComponent {
         if (!element || !element.isValid() || !element.hasFacts()) {
             return null;
         }
-        return (React.createElement(CardElementWrapper, { element: element, index: index, style: {
+        return (React.createElement(DecCardElementWrapper, { element: element, index: index, style: {
                 flex: 1,
             } },
             React.createElement(View, { style: {

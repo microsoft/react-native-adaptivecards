@@ -3,8 +3,8 @@ import { Utils } from '../../Shared/Utils';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { ImageElement } from '../CardElements/Image';
 export class ImageSetElement extends ContentElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         this.images = [];
         this.imageSize = ImageSize.Auto;
         if (this.isValidJSON) {
@@ -18,22 +18,19 @@ export class ImageSetElement extends ContentElement {
     getRequiredProperties() {
         return ['images'];
     }
-    supportAction() {
-        return false;
+    hasImages() {
+        return this.images && this.images.length > 0;
     }
     createImageSet(json) {
         let imageSet = [];
         if (json && json.length > 0) {
             json.forEach((item) => {
-                let image = new ImageElement(item);
+                let image = new ImageElement(item, this);
                 if (image && image.isValidJSON) {
                     imageSet.push(image);
                 }
             });
         }
         return imageSet;
-    }
-    hasImages() {
-        return this.images && this.images.length > 0;
     }
 }

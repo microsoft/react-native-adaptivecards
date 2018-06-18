@@ -1,21 +1,22 @@
 import { ColumnWidth } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
 import { CardElementFactory } from '../Factories/ContentElementFactory';
 
 export class ColumnElement extends FormElement {
     // Required
-    readonly items: Array<ContentElement>;
+    public readonly items: Array<ContentElement>;
     // Optional
     // “auto”, “stretch”, or a number representing relative width of the column in the column group
-    readonly width?: ColumnWidth | number;
+    public readonly width?: ColumnWidth | number;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
-            this.items = CardElementFactory.createSet(json.items);
+            this.items = CardElementFactory.createSet(json.items, this);
             if (json.width && !isNaN(json.width)) {
                 let columnWidth = parseInt(json.width, 10);
                 if (columnWidth > 100) {
@@ -31,23 +32,23 @@ export class ColumnElement extends FormElement {
         }
     }
 
-    getTypeName(): string {
+    public getTypeName(): string {
         return ContentElementType.Column;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return ['items'];
     }
 
-    getChildren() {
+    public getChildren() {
         return this.items;
     }
 
-    hasItems(): boolean {
+    public hasItems(): boolean {
         return this.items && this.items.length > 0;
     }
 
-    isFixedWidth(): boolean {
+    public isFixedWidth(): boolean {
         return typeof this.width === 'number';
     }
 }

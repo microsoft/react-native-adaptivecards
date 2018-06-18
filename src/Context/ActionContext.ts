@@ -1,27 +1,37 @@
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
+import { AbstractElement } from '../Schema/Base/AbstractElement';
 import { ActionElement, ActionType } from '../Schema/Base/ActionElement';
-import { CardElement } from '../Schema/Base/CardElement';
 
-export class ActionEventHandlerArgs<T extends ActionElement> {
+export interface ActionEventHandlerArgs<T extends ActionElement> {
     formData?: { [id: string]: string };
     formValidate: boolean;
     action: T;
+    target: AbstractElement;
+}
+
+export interface ActionHook {
+    actionType: ActionType;
+    func: (args: ActionEventHandlerArgs<ActionElement>) => ActionEventHandlerArgs<ActionElement>;
+    name: string;
 }
 
 export class ActionContext {
-    private static sharedInstance: ActionContext;
     private onOpenUrl: (args: ActionEventHandlerArgs<OpenUrlActionElement>) => void;
     private onShowCard: (args: ActionEventHandlerArgs<ShowCardActionElement>) => void;
     private onSubmit: (args: ActionEventHandlerArgs<SubmitActionElement>) => void;
-    private globalHooks: ((args: ActionEventHandlerArgs<ActionElement>) => ActionEventHandlerArgs<ActionElement>)[] = [];
+    private hooks: { [actionType: string]: ActionHook[] } = {};
 
-    private constructor() { }
+    private static sharedInstance: ActionContext;
 
-    public static getInstance() {
+    public static createInstance() {
+        return new ActionContext();
+    }
+
+    public static getGlobalInstance() {
         if (ActionContext.sharedInstance === undefined) {
-            ActionContext.sharedInstance = new ActionContext();
+            ActionContext.sharedInstance = ActionContext.createInstance();
         }
         return ActionContext.sharedInstance;
     }
@@ -38,47 +48,90 @@ export class ActionContext {
         this.onSubmit = handler;
     }
 
-    public registerGlobalHook(hook: ((args: ActionEventHandlerArgs<ActionElement>) => ActionEventHandlerArgs<ActionElement>)) {
-        this.globalHooks.push(hook);
+    public registerHook(hook: ActionHook) {
+        if (hook) {
+            console.log('Register Hook: ' + hook.actionType);
+            if (this.hooks[hook.actionType] === undefined) {
+                this.hooks[hook.actionType] = [];
+            }
+            if (!this.hooks[hook.actionType].some(value => value.name === hook.name)) {
+                this.hooks[hook.actionType].push(hook);
+            }
+        }
     }
 
-    public getActionEventHandler() {
+    public getHooks(actionType: ActionType) {
+        console.log(this.hooks);
+        console.log(actionType);
+        if (actionType) {
+            return this.hooks[actionType];
+        }
+        return [];
+    }
+
+    public getActionEventHandler(target: AbstractElement) {
         return (
-            target: CardElement,
-            ...hooks: ((args: ActionEventHandlerArgs<ActionElement>) => ActionEventHandlerArgs<ActionElement>)[]
-        ) => {
-            let callback: (args: ActionEventHandlerArgs<ActionElement>) => void;
-            let action = target.getAction();
-            if (action) {
-                switch (action.type) {
-                    case ActionType.OpenUrl:
-                        callback = this.onOpenUrl;
-                        break;
-                    case ActionType.ShowCard:
-                        callback = this.onShowCard;
-                        break;
-                    case ActionType.Submit:
-                        callback = this.onSubmit;
-                        break;
-                }
-                let args = {
-                    action: action,
-                    formValidate: true
-                };
-                if (this.globalHooks) {
-                    args = this.globalHooks.reduce((prev, current) => {
+            (
+                ...externalHooks: ActionHook[]
+            ) => {
+                let action = target.getAction();
+                if (action) {
+                    let callback = this.selectCallback(action);
+                    let args = {
+                        action: action,
+                        formValidate: false,
+                        target: target,
+                    };
+                    let hookFuncs = this.getExcuteFuncs(action.type, externalHooks);
+
+                    args = hookFuncs.reduce((prev, current) => {
                         return current(prev);
                     }, args);
-                }
-                if (hooks) {
-                    args = hooks.reduce((prev, current) => {
-                        return current(prev);
-                    }, args);
-                }
-                if (callback && typeof callback === 'function') {
-                    callback(args);
+
+                    if (callback && typeof callback === 'function') {
+                        callback(args);
+                    }
                 }
             }
-        };
+        );
+    }
+
+    private selectCallback(action: ActionElement) {
+        let callback: (args: ActionEventHandlerArgs<ActionElement>) => void;
+        switch (action.type) {
+            case ActionType.OpenUrl:
+                callback = this.onOpenUrl;
+                break;
+            case ActionType.ShowCard:
+                callback = this.onShowCard;
+                break;
+            case ActionType.Submit:
+                callback = this.onSubmit;
+                break;
+        }
+        return callback;
+    }
+
+    private getExcuteFuncs(
+        actionType: string,
+        externalHooks: ActionHook[]
+    ) {
+        let hookFuncs: ((args: ActionEventHandlerArgs<ActionElement>) => ActionEventHandlerArgs<ActionElement>)[] = [];
+
+        if (this.hooks) {
+            let hookArrays = this.hooks[actionType];
+            if (hookArrays === undefined) {
+                hookArrays = [];
+            }
+            if (externalHooks) {
+                hookArrays = hookArrays.concat(externalHooks);
+            }
+            hookFuncs = hookFuncs.concat(
+                hookArrays.reduce((prev, current) => {
+                    return prev.concat(current.func);
+                }, [])
+            );
+        }
+        return hookFuncs;
     }
 }

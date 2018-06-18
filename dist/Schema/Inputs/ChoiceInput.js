@@ -1,16 +1,9 @@
-import { CardElement } from '../Base/CardElement';
-export class ChoiceInputElement extends CardElement {
-    constructor(json) {
-        super(json);
-        if (this.isValidJSON) {
-            this.title = json.title;
-            this.value = json.value;
-        }
+import { ValueElement } from '../Base/ValueElement';
+export class ChoiceInputElement extends ValueElement {
+    constructor(json, parent) {
+        super(json, parent);
     }
     getTypeName() {
         return 'Input.Choice';
-    }
-    getRequiredProperties() {
-        return ['title', 'value'];
     }
 }

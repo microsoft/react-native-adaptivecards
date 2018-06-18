@@ -1,15 +1,15 @@
 import React from 'react';
 import { FlatList, View, } from 'react-native';
-import { CardElementView } from '../Base/CardElementView';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { styleManager } from '../Styles/StyleManager';
+import { DecCardElementView } from '../Basic/DecCardElementView';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { StyleManager } from '../Styles/StyleManager';
 export class ImageSetView extends React.PureComponent {
     constructor() {
         super(...arguments);
         this.renderImage = (image, index) => {
             const { element } = this.props;
             image.setSize(element.imageSize);
-            return (React.createElement(CardElementView, { key: 'image' + index, index: index, element: image }));
+            return (React.createElement(DecCardElementView, { key: 'image' + index, index: index, element: image }));
         };
     }
     render() {
@@ -17,9 +17,9 @@ export class ImageSetView extends React.PureComponent {
         if (!element || !element.isValid() || !element.hasImages()) {
             return null;
         }
-        return (React.createElement(CardElementWrapper, { element: element, index: index, style: {
+        return (React.createElement(DecCardElementWrapper, { element: element, index: index, style: {
                 flex: 1,
-            } }, styleManager.isHorizontalImageSet() ?
+            } }, StyleManager.getInstance().isHorizontalImageSet() ?
             React.createElement(FlatList, { style: { flex: 1 }, horizontal: true, data: element.images, renderItem: ({ item, index }) => this.renderImage(item, index), keyExtractor: (item, index) => 'image' + index, showsHorizontalScrollIndicator: false })
             :
                 React.createElement(View, { style: {

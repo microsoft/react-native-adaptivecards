@@ -1,26 +1,31 @@
+import { AbstractElement } from '../Base/AbstractElement';
 import { ActionElement, ActionType } from '../Base/ActionElement';
 
 export class SubmitActionElement extends ActionElement {
     // Optional
-    readonly data?: any;
+    public readonly data?: any;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.data = json.data;
         }
     }
 
-    getTypeName(): string {
+    public getTypeName(): string {
         return ActionType.Submit;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return [];
     }
 
-    getData() {
+    public getActionType(): string {
+        return ActionType.Submit;
+    }
+
+    public getData() {
         return this.data;
     }
 }

@@ -7,13 +7,13 @@ import {
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import { ContainerElement } from '../../Schema/Containers/Container';
 import { ContainerStyle } from '../../Shared/Enums';
-import { CardElementView } from '../Base/CardElementView';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { DecCardElementView } from '../Basic/DecCardElementView';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { IElementViewProps } from '../Shared/BaseProps';
 import { StyleConfig } from '../Styles/StyleConfig';
-import { styleManager } from '../Styles/StyleManager';
+import { StyleManager } from '../Styles/StyleManager';
 
-interface IProps extends ICardElementViewProps<ContainerElement> {
+interface IProps extends IElementViewProps<ContainerElement> {
 }
 interface IState {
 }
@@ -24,10 +24,10 @@ export class ContainerView extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
-        this.styleConfig = styleManager.getStyle();
+        this.styleConfig = StyleManager.getInstance().getStyle();
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element, index } = this.props;
 
         if (!element || !element.isValid() || !element.hasItems()) {
@@ -35,7 +35,7 @@ export class ContainerView extends React.PureComponent<IProps, IState> {
         }
 
         return (
-            <CardElementWrapper
+            <DecCardElementWrapper
                 element={element}
                 index={index}
                 style={{
@@ -51,7 +51,7 @@ export class ContainerView extends React.PureComponent<IProps, IState> {
                 >
                     {
                         element.items.map((cardElement: ContentElement, index: number) =>
-                            <CardElementView
+                            <DecCardElementView
                                 key={'containerItems' + index}
                                 index={index}
                                 element={cardElement}
@@ -59,7 +59,7 @@ export class ContainerView extends React.PureComponent<IProps, IState> {
                         )
                     }
                 </View>
-            </CardElementWrapper>
+            </DecCardElementWrapper>
         );
     }
 

@@ -1,15 +1,16 @@
 import { Utils } from '../../Shared/Utils';
+import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 
 export class NumberInputElement extends InputElement {
     // Optional
-    readonly max?: number;
-    readonly min?: number;
-    readonly placeholder?: string;
+    public readonly max?: number;
+    public readonly min?: number;
+    public readonly placeholder?: string;
 
-    public constructor(json: any) {
-        super(json);
+    public constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.max = json.max;
@@ -18,15 +19,15 @@ export class NumberInputElement extends InputElement {
         }
     }
 
-    getTypeName(): string {
+    public getTypeName(): string {
         return ContentElementType.NumberInput;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return ['id'];
     }
 
-    validateForm(value?: string) {
+    public validateForm(value?: string) {
         if (value && value.length !== 0) {
             console.log('pass length check');
             if (Utils.isNumberStrict(value)) {

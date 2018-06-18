@@ -11,9 +11,9 @@ import {
 import { FormContext } from '../../Context/FormContext';
 import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { Utils } from '../../Shared/Utils';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { IElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends ICardElementViewProps<DateInputElement> {
+interface IProps extends IElementViewProps<DateInputElement> {
 }
 interface IState {
     dateString: string;
@@ -35,7 +35,7 @@ export class DateInputView extends React.PureComponent<IProps, IState> {
         this.updateStore();
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element } = this.props;
         if (!element || !element.isValid()) {
             return null;

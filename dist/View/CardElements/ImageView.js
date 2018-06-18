@@ -1,8 +1,8 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View, } from 'react-native';
 import { FlexImageAlignment, HorizontalAlignment, ImageSize, ImageStyle, } from '../../Shared/Enums';
-import { CardElementWrapper } from '../Base/CardElementWrapper';
-import { styleManager } from '../Styles/StyleManager';
+import { DecCardElementWrapper } from '../Basic/DecCardElementWrapper';
+import { StyleManager } from '../Styles/StyleManager';
 const IMAGEMINSIZE = 18;
 var ImageFit;
 (function (ImageFit) {
@@ -98,14 +98,14 @@ export class ImageView extends React.PureComponent {
         }
         const dimensions = element.isFixedSize() ?
             {
-                width: styleManager.getImageSize(element.size),
-                height: styleManager.getImageSize(element.size),
+                width: StyleManager.getInstance().getImageSize(element.size),
+                height: StyleManager.getInstance().getImageSize(element.size),
             } :
             this.getDimensionsForBestFit();
         const borderRadius = element.style === ImageStyle.Person && dimensions ?
             dimensions.width / 2 :
             undefined;
-        return (React.createElement(CardElementWrapper, { element: element, index: index, style: styleManager.isHorizontalImageSet() ? undefined : { flex: 1 } },
+        return (React.createElement(DecCardElementWrapper, { element: element, index: index, style: StyleManager.getInstance().isHorizontalImageSet() ? undefined : { flex: 1 } },
             React.createElement(View, { style: { flex: 1 }, onLayout: this.onLayout },
                 this.state.imageLoadSuccess ?
                     undefined :

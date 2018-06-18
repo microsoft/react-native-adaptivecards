@@ -5,9 +5,9 @@ import {
 
 import { FormContext } from '../../Context/FormContext';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { IElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends ICardElementViewProps<TextInputElement> {
+interface IProps extends IElementViewProps<TextInputElement> {
 }
 
 interface IState {
@@ -29,7 +29,7 @@ export class TextInputView extends React.PureComponent<IProps, IState> {
         this.updateStore();
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element } = this.props;
 
         if (!element || !element.isValid()) {

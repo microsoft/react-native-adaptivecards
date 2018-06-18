@@ -1,16 +1,17 @@
 import { ImageSize } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { ImageElement } from '../CardElements/Image';
 
 export class ImageSetElement extends ContentElement {
     // Required
-    readonly images: Array<ImageElement> = [];
+    public readonly images: Array<ImageElement> = [];
     // Optional
-    readonly imageSize?: ImageSize = ImageSize.Auto;
+    public readonly imageSize?: ImageSize = ImageSize.Auto;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.images = this.createImageSet(json.images);
@@ -18,32 +19,28 @@ export class ImageSetElement extends ContentElement {
         }
     }
 
-    getTypeName(): string {
+    public getTypeName(): string {
         return ContentElementType.ImageSet;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return ['images'];
     }
 
-    supportAction() {
-        return false;
+    public hasImages(): boolean {
+        return this.images && this.images.length > 0;
     }
 
     private createImageSet(json: any): Array<ImageElement> {
         let imageSet: Array<ImageElement> = [];
         if (json && json.length > 0) {
             json.forEach((item: any) => {
-                let image: ImageElement = new ImageElement(item);
+                let image: ImageElement = new ImageElement(item, this);
                 if (image && image.isValidJSON) {
                     imageSet.push(image);
                 }
             });
         }
         return imageSet;
-    }
-
-    hasImages(): boolean {
-        return this.images && this.images.length > 0;
     }
 }

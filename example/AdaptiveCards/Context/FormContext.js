@@ -1,5 +1,3 @@
-export class FormField {
-}
 export class FormContext {
     constructor() {
         this.formFields = {};

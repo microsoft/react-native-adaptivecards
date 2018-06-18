@@ -3,52 +3,60 @@ import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
 import { SubmitActionElement } from '../Actions/SubmitAction';
 import { ContentElement } from '../Base/ContentElement';
 import { ActionFactory } from '../Factories/ActionFactory';
+import { AbstractElement } from './AbstractElement';
+
+export enum FormElementType {
+    Column = 'Column',
+    ColumnSet = 'ColumnSet',
+    Container = 'Container',
+    Image = 'Image',
+    AdaptiveCard = 'AdaptiveCard',
+}
 
 export abstract class FormElement extends ContentElement {
-    readonly selectAction?: OpenUrlActionElement | SubmitActionElement;
+    public readonly selectAction?: OpenUrlActionElement | SubmitActionElement;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
-            this.selectAction = ActionFactory.create(json.selectAction);
+            this.selectAction = ActionFactory.create(json.selectAction, this);
         }
     }
 
-    supportAction() {
+    public hasAction() {
         return true;
     }
 
-    getAction() {
+    public getAction() {
         return this.selectAction;
     }
 
-    getActions() {
+    public getActions() {
         return [this.getAction()];
     }
 
-    abstract getChildren(): ContentElement[];
+    public abstract getChildren(): ContentElement[];
 
-    getAllInputFieldIds() {
-        let result: string[] = [];
+    public getForm(): AbstractElement {
+        return this;
+    }
+
+    public getAllInputFieldIds() {
         let children = this.getChildren();
-        if (children) {
-            children.forEach((element: ContentElement) => {
-                result = [...result, ...element.getAllInputFieldIds()];
-            });
-        }
-        return result;
+        return children.reduce(
+            (prev, current) => {
+                return prev.concat(current.getAllInputFieldIds());
+            },
+            []
+        );
     }
 
-    isInput() {
-        return false;
-    }
-
-    isForm() {
+    public isForm() {
         return true;
     }
 
-    validateForm(value?: any) {
+    public validateForm(value?: any) {
         return FormContext.getInstance().validateFields(this.getAllInputFieldIds());
     }
 }

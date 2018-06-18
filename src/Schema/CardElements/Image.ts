@@ -4,22 +4,21 @@ import {
     ImageStyle,
 } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
-import { ActionElement } from '../Base/ActionElement';
+import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
-import { ActionFactory } from '../Factories/ActionFactory';
+import { FormElement } from '../Base/FormElement';
 
-export class ImageElement extends ContentElement {
+export class ImageElement extends FormElement {
     // Required
-    readonly url: string;
+    public readonly url: string;
     // Optional
-    readonly altText?: string;
-    readonly horizontalAlignment?: HorizontalAlignment;
-    readonly selectAction?: ActionElement;
-    size?: ImageSize = ImageSize.Auto;
-    readonly style?: ImageStyle;
+    public readonly altText?: string;
+    public readonly horizontalAlignment?: HorizontalAlignment;
+    public size?: ImageSize = ImageSize.Auto;
+    public readonly style?: ImageStyle;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.url = json.url;
@@ -27,37 +26,36 @@ export class ImageElement extends ContentElement {
             this.horizontalAlignment =
                 Utils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
                 HorizontalAlignment;
-            this.selectAction = ActionFactory.create(json.selectAction);
             this.size = Utils.getStringEnumValueOrDefault(ImageSize, json.size, ImageSize.Auto) as ImageSize;
             this.style = Utils.getStringEnumValueOrDefault(ImageStyle, json.style, ImageStyle.Default) as ImageStyle;
         }
     }
 
-    getTypeName(): string {
+    public getTypeName(): string {
         return ContentElementType.Image;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return ['url'];
     }
 
-    supportAction() {
-        return true;
-    }
-
-    getAction() {
+    public getAction() {
         return this.selectAction;
     }
 
-    getActions() {
+    public getActions() {
         return [this.getAction()];
     }
 
-    setSize(size: ImageSize): void {
+    public getChildren(): ContentElement[] {
+        return [];
+    }
+
+    public setSize(size: ImageSize): void {
         this.size = Utils.getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto) as ImageSize;
     }
 
-    isFixedSize(): boolean {
+    public isFixedSize(): boolean {
         return this.size !== ImageSize.Auto && this.size !== ImageSize.Stretch;
     }
 }

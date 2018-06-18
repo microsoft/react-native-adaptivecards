@@ -1,23 +1,41 @@
+import { AbstractElement } from '../Base/AbstractElement';
 import { ActionElement, ActionType } from '../Base/ActionElement';
-import { AdaptiveCardElement } from '../Cards/AdaptiveCard';
+import { CardElement } from '../Cards/Card';
 
 export class ShowCardActionElement extends ActionElement {
     // Required
-    readonly card: AdaptiveCardElement;
+    public readonly card: CardElement;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
-            this.card = new AdaptiveCardElement(json.card);
+            this.card = new CardElement(json.card, parent);
         }
     }
 
-    getTypeName(): string {
+    public getTypeName(): string {
         return ActionType.ShowCard;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getActionType(): string {
+        return ActionType.ShowCard;
+    }
+
+    public getAllInputFieldIds() {
+        if (this.card) {
+            let children = this.card.getChildren();
+            return children.reduce(
+                (prev, current) => {
+                    return prev.concat(current.getAllInputFieldIds());
+                },
+                []
+            );
+        }
+        return [];
+    }
+
+    public getRequiredProperties(): Array<string> {
         return ['card'];
     }
 }

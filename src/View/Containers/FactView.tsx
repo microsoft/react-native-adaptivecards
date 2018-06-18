@@ -2,12 +2,12 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { FactElement } from '../../Schema/Containers/Fact';
-import { CardText } from '../Base/CardText';
-import { ICardElementViewProps } from '../Shared/BaseProps';
+import { CardText } from '../Basic/CardText';
+import { IElementViewProps } from '../Shared/BaseProps';
 import { StyleConfig } from '../Styles/StyleConfig';
-import { styleManager } from '../Styles/StyleManager';
+import { StyleManager } from '../Styles/StyleManager';
 
-interface IProps extends ICardElementViewProps<FactElement> {
+interface IProps extends IElementViewProps<FactElement> {
     element: FactElement;
 }
 interface IState {
@@ -19,10 +19,10 @@ export class FactView extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
-        this.styleConfig = styleManager.getStyle();
+        this.styleConfig = StyleManager.getInstance().getStyle();
     }
 
-    render(): JSX.Element {
+    public render(): JSX.Element {
         const { element } = this.props;
 
         if (!element || !element.isValid()) {

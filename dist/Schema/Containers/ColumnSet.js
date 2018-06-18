@@ -2,8 +2,8 @@ import { ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
 import { ColumnElement } from './Column';
 export class ColumnSetElement extends FormElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
             this.columns = this.createColumnSet(json.columns);
         }
@@ -17,19 +17,19 @@ export class ColumnSetElement extends FormElement {
     getChildren() {
         return this.columns;
     }
+    hasColumns() {
+        return this.columns && this.columns.length > 0;
+    }
     createColumnSet(json) {
         let columnSet = [];
         if (json && json.length > 0) {
             json.forEach((item) => {
-                let column = new ColumnElement(item);
+                let column = new ColumnElement(item, this);
                 if (column && column.isValidJSON) {
                     columnSet.push(column);
                 }
             });
         }
         return columnSet;
-    }
-    hasColumns() {
-        return this.columns && this.columns.length > 0;
     }
 }

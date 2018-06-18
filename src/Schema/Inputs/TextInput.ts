@@ -1,17 +1,18 @@
 import { InputTextStyle } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 
 export class TextInputElement extends InputElement {
     // Optional
-    readonly isMultiline?: boolean;
-    readonly maxLength?: number;
-    readonly placeholder?: string;
-    readonly style?: InputTextStyle;
+    public readonly isMultiline?: boolean;
+    public readonly maxLength?: number;
+    public readonly placeholder?: string;
+    public readonly style?: InputTextStyle;
 
-    public constructor(json: any) {
-        super(json);
+    public constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.isMultiline = json.isMultiline || false;
@@ -21,11 +22,11 @@ export class TextInputElement extends InputElement {
         }
     }
 
-    getTypeName(): string {
-        return ContentElementType.InputText;
+    public getTypeName(): string {
+        return ContentElementType.TextInput;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return ['id'];
     }
 }

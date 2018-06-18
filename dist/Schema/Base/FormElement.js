@@ -1,14 +1,22 @@
 import { FormContext } from '../../Context/FormContext';
 import { ContentElement } from '../Base/ContentElement';
 import { ActionFactory } from '../Factories/ActionFactory';
+export var FormElementType;
+(function (FormElementType) {
+    FormElementType["Column"] = "Column";
+    FormElementType["ColumnSet"] = "ColumnSet";
+    FormElementType["Container"] = "Container";
+    FormElementType["Image"] = "Image";
+    FormElementType["AdaptiveCard"] = "AdaptiveCard";
+})(FormElementType || (FormElementType = {}));
 export class FormElement extends ContentElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
-            this.selectAction = ActionFactory.create(json.selectAction);
+            this.selectAction = ActionFactory.create(json.selectAction, this);
         }
     }
-    supportAction() {
+    hasAction() {
         return true;
     }
     getAction() {
@@ -17,18 +25,14 @@ export class FormElement extends ContentElement {
     getActions() {
         return [this.getAction()];
     }
-    getAllInputFieldIds() {
-        let result = [];
-        let children = this.getChildren();
-        if (children) {
-            children.forEach((element) => {
-                result = [...result, ...element.getAllInputFieldIds()];
-            });
-        }
-        return result;
+    getForm() {
+        return this;
     }
-    isInput() {
-        return false;
+    getAllInputFieldIds() {
+        let children = this.getChildren();
+        return children.reduce((prev, current) => {
+            return prev.concat(current.getAllInputFieldIds());
+        }, []);
     }
     isForm() {
         return true;

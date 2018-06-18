@@ -3,8 +3,8 @@ import { Utils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 export class TextInputElement extends InputElement {
-    constructor(json) {
-        super(json);
+    constructor(json, parent) {
+        super(json, parent);
         if (this.isValidJSON) {
             this.isMultiline = json.isMultiline || false;
             this.maxLength = json.maxLength;
@@ -13,7 +13,7 @@ export class TextInputElement extends InputElement {
         }
     }
     getTypeName() {
-        return ContentElementType.InputText;
+        return ContentElementType.TextInput;
     }
     getRequiredProperties() {
         return ['id'];

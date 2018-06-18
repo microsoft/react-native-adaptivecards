@@ -4,9 +4,15 @@ import { ContentElementType } from '../../Schema/Base/ContentElement';
 import { FlexDirection, FlexWrap, FontSize, FontWeight, Spacing, TextColor, } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
 const defaultStyle = require('./DefaultStyle.json');
-class StyleManager {
+export class StyleManager {
     constructor(style = {}) {
         this.style = style;
+    }
+    static getInstance() {
+        if (StyleManager.sharedInstance === undefined) {
+            StyleManager.sharedInstance = new StyleManager(defaultStyle);
+        }
+        return StyleManager.sharedInstance;
     }
     addStyle(overrideStyle) {
         return merge(this.style, overrideStyle);
@@ -18,25 +24,6 @@ class StyleManager {
         return Platform.OS === 'ios' ?
             this.style.textBlock.fontFamily.ios :
             this.style.textBlock.fontFamily.android;
-    }
-    getFlexDirectionValue(direction) {
-        let directionStyle;
-        switch (direction.toLowerCase()) {
-            case FlexDirection.Row:
-            default:
-                directionStyle = FlexDirection.Row;
-                break;
-            case FlexDirection.Column:
-                directionStyle = FlexDirection.Column;
-                break;
-        }
-        return directionStyle;
-    }
-    isHorizontalSet(direction) {
-        if (direction.toLowerCase() === FlexDirection.Column.toLowerCase()) {
-            return false;
-        }
-        return true;
     }
     getImageSetFlexDirectionValue() {
         return this.getFlexDirectionValue(this.style.image.imageSet.direction);
@@ -119,5 +106,23 @@ class StyleManager {
         }
         return;
     }
+    getFlexDirectionValue(direction) {
+        let directionStyle;
+        switch (direction.toLowerCase()) {
+            case FlexDirection.Row:
+            default:
+                directionStyle = FlexDirection.Row;
+                break;
+            case FlexDirection.Column:
+                directionStyle = FlexDirection.Column;
+                break;
+        }
+        return directionStyle;
+    }
+    isHorizontalSet(direction) {
+        if (direction.toLowerCase() === FlexDirection.Column.toLowerCase()) {
+            return false;
+        }
+        return true;
+    }
 }
-export const styleManager = new StyleManager(defaultStyle);

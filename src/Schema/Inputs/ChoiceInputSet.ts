@@ -1,19 +1,20 @@
 import { ChoiceSetStyle } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 import { ChoiceInputElement } from './ChoiceInput';
 
 export class ChoiceInputSetElement extends InputElement {
     // Required 
-    readonly choices: Array<ChoiceInputElement> = [];
+    public readonly choices: Array<ChoiceInputElement> = [];
 
     // Optional
-    readonly isMultiSelect?: boolean;
-    readonly style?: ChoiceSetStyle;
+    public readonly isMultiSelect?: boolean;
+    public readonly style?: ChoiceSetStyle;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.isMultiSelect = json.isMultiSelect || false;
@@ -22,11 +23,11 @@ export class ChoiceInputSetElement extends InputElement {
         }
     }
 
-    getTypeName(): string {
-        return ContentElementType.InputChoiceSet;
+    public getTypeName(): string {
+        return ContentElementType.ChoiceSetInput;
     }
 
-    getRequiredProperties(): Array<string> {
+    public getRequiredProperties(): Array<string> {
         return ['id', 'choices'];
     }
 
@@ -35,7 +36,7 @@ export class ChoiceInputSetElement extends InputElement {
         let inputChoiceSet: Array<ChoiceInputElement> = [];
         if (json && json.length > 0) {
             json.forEach((item: any) => {
-                let inputChoice: ChoiceInputElement = new ChoiceInputElement(item);
+                let inputChoice: ChoiceInputElement = new ChoiceInputElement(item, this);
                 if (inputChoice && inputChoice.isValidJSON) {
                     inputChoiceSet.push(inputChoice);
                 }

@@ -1,4 +1,4 @@
-import { CardElement } from '../Base/CardElement';
+import { AbstractElement } from '../Base/AbstractElement';
 
 export enum ActionType {
     OpenUrl = 'Action.OpenUrl',
@@ -6,31 +6,41 @@ export enum ActionType {
     ShowCard = 'Action.ShowCard',
 }
 
-export abstract class ActionElement extends CardElement {
+export abstract class ActionElement extends AbstractElement {
     // Optional
-    readonly title?: string;
+    public readonly title?: string;
 
-    constructor(json: any) {
-        super(json);
+    constructor(json: any, parent: AbstractElement) {
+        super(json, parent);
 
         if (this.isValidJSON) {
             this.title = json.title;
         }
     }
 
-    public supportAction() {
+    public hasAction() {
         return true;
     }
 
-    getAction(): ActionElement {
+    public getAction(): ActionElement {
         return this;
     }
 
-    getActions(): ActionElement[] {
+    public getActions(): ActionElement[] {
         return [this.getAction()];
     }
 
-    getData() {
+    public abstract getActionType(): string;
+
+    public getForm() {
+        return this.getParent().getForm();
+    }
+
+    public getData() {
         return {};
+    }
+
+    public isAction() {
+        return true;
     }
 }
