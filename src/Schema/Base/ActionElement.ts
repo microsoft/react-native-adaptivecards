@@ -1,3 +1,4 @@
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 
 export enum ActionType {
@@ -37,6 +38,10 @@ export abstract class ActionElement extends AbstractElement {
     }
 
     public getData() {
+        return {};
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
         return {};
     }
 

@@ -1,3 +1,4 @@
+import { ElementStyleConfig } from 'Styles/StyleManager';
 import { Spacing } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
 import { AbstractElement } from '../Base/AbstractElement';
@@ -37,6 +38,12 @@ export abstract class ContentElement extends AbstractElement {
 
     public getId() {
         return this.id;
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            spacing: this.spacing
+        };
     }
 
     public isContent() {

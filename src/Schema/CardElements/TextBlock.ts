@@ -1,3 +1,4 @@
+import { ElementStyleConfig } from 'Styles/StyleManager';
 import {
     FontSize,
     FontWeight,
@@ -35,6 +36,18 @@ export class TextBlockElement extends ContentElement {
             this.weight = Utils.getStringEnumValueOrDefault(FontWeight, json.weight, FontWeight.Default) as FontWeight;
             this.wrap = json.wrap || false;
         }
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            color: this.color,
+            horizontalAlignment: this.horizontalAlignment,
+            isSubtle: this.isSubtle,
+            fontSize: this.size,
+            fontWeight: this.weight,
+            wrap: this.wrap,
+            spacing: this.spacing,
+        };
     }
 
     public getTypeName(): string {

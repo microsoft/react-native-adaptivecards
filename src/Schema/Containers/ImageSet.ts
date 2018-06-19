@@ -1,5 +1,6 @@
 import { ImageSize } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { ImageElement } from '../CardElements/Image';
@@ -25,6 +26,12 @@ export class ImageSetElement extends ContentElement {
 
     public getRequiredProperties(): Array<string> {
         return ['images'];
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            spacing: this.spacing,
+        };
     }
 
     public hasImages(): boolean {

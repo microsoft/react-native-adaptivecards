@@ -17,6 +17,11 @@ export class ColumnSetElement extends FormElement {
     getChildren() {
         return this.columns;
     }
+    getStyleConfig() {
+        return {
+            spacing: this.spacing,
+        };
+    }
     hasColumns() {
         return this.columns && this.columns.length > 0;
     }

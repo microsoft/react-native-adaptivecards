@@ -14,6 +14,11 @@ export class FactSetElement extends ContentElement {
     getRequiredProperties() {
         return ['facts'];
     }
+    getStyleConfig() {
+        return {
+            spacing: this.spacing,
+        };
+    }
     hasFacts() {
         return this.facts && this.facts.length > 0;
     }

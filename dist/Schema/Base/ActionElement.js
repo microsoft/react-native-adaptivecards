@@ -27,6 +27,9 @@ export class ActionElement extends AbstractElement {
     getData() {
         return {};
     }
+    getStyleConfig() {
+        return {};
+    }
     isAction() {
         return true;
     }
