@@ -31,6 +31,11 @@ export class ContentElement extends AbstractElement {
     getId() {
         return this.id;
     }
+    getStyleConfig() {
+        return {
+            spacing: this.spacing
+        };
+    }
     isContent() {
         return true;
     }

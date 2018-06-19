@@ -18,4 +18,7 @@ export class ValueElement extends AbstractElement {
     isValue() {
         return true;
     }
+    getStyleConfig() {
+        return {};
+    }
 }

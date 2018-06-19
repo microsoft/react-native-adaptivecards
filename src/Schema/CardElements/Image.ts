@@ -1,3 +1,4 @@
+import { ElementStyleConfig } from 'Styles/StyleManager';
 import {
     HorizontalAlignment,
     ImageSize,
@@ -49,6 +50,15 @@ export class ImageElement extends FormElement {
 
     public getChildren(): ContentElement[] {
         return [];
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            horizontalAlignment: this.horizontalAlignment,
+            imgSize: this.size,
+            style: this.style,
+            spacing: this.spacing,
+        };
     }
 
     public setSize(size: ImageSize): void {

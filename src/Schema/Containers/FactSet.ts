@@ -1,3 +1,4 @@
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { FactElement } from './Fact';
@@ -20,6 +21,12 @@ export class FactSetElement extends ContentElement {
 
     public getRequiredProperties(): Array<string> {
         return ['facts'];
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            spacing: this.spacing,
+        };
     }
 
     public hasFacts(): boolean {

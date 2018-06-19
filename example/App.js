@@ -22,6 +22,8 @@ export default class App extends React.Component {
                 backgroundColor: 'whitesmoke',
             }
         },
+            React.createElement(AdaptiveCard, { adaptiveCard: mockData.news, overrideStyle: cardOverrideStyle }),
+            this.renderGap(),
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.adaptiveUpdate, overrideStyle: cardOverrideStyle }),
             this.renderGap(),
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.flightItinerary, overrideStyle: cardOverrideStyle }),

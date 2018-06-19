@@ -16,6 +16,17 @@ export class TextBlockElement extends ContentElement {
             this.wrap = json.wrap || false;
         }
     }
+    getStyleConfig() {
+        return {
+            color: this.color,
+            horizontalAlignment: this.horizontalAlignment,
+            isSubtle: this.isSubtle,
+            fontSize: this.size,
+            fontWeight: this.weight,
+            wrap: this.wrap,
+            spacing: this.spacing,
+        };
+    }
     getTypeName() {
         return ContentElementType.TextBlock;
     }

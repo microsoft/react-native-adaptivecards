@@ -1,4 +1,5 @@
 import { Utils } from '../../Shared/Utils';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { ActionElement } from './ActionElement';
 
 export enum CardElementType {
@@ -56,6 +57,8 @@ export abstract class AbstractElement {
     public getForm(): AbstractElement {
         return undefined;
     }
+
+    public abstract getStyleConfig(): ElementStyleConfig;
 
     public hasAction() {
         return false;

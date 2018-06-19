@@ -30,6 +30,14 @@ export class ImageElement extends FormElement {
     getChildren() {
         return [];
     }
+    getStyleConfig() {
+        return {
+            horizontalAlignment: this.horizontalAlignment,
+            imgSize: this.size,
+            style: this.style,
+            spacing: this.spacing,
+        };
+    }
     setSize(size) {
         this.size = Utils.getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto);
     }

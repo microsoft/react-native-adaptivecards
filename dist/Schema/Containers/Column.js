@@ -34,6 +34,12 @@ export class ColumnElement extends FormElement {
     getChildren() {
         return this.items;
     }
+    getStyleConfig() {
+        return {
+            spacing: this.spacing,
+            columnWidth: this.width,
+        };
+    }
     hasItems() {
         return this.items && this.items.length > 0;
     }
