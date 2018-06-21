@@ -14,7 +14,7 @@ import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 
 import { AbstractElement } from '../../Schema/Base/AbstractElement';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
-import { ImageView } from '../CardElements/ImageView';
+import { DecImageView } from '../CardElements/DecImageView';
 import { TextBlockView } from '../CardElements/TextBlockView';
 import { ColumnSetView } from '../Containers/ColumnSetView';
 import { ColumnView } from '../Containers/ColumnView';
@@ -51,7 +51,7 @@ export class DecCardElementView extends React.PureComponent<IProps, IState> {
                 );
             case ContentElementType.Image:
                 return (
-                    <ImageView
+                    <DecImageView
                         element={element as ImageElement}
                         index={index}
                     />

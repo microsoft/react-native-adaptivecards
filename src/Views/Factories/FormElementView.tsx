@@ -5,7 +5,7 @@ import { CardElement } from '../../Schema/Cards/Card';
 import { ColumnElement } from '../../Schema/Containers/Column';
 import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
 import { ContainerElement } from '../../Schema/Containers/Container';
-import { ImageView } from '../CardElements/ImageView';
+import { DecImageView } from '../CardElements/DecImageView';
 import { CardView } from '../Cards/CardView';
 import { ColumnSetView } from '../Containers/ColumnSetView';
 import { ColumnView } from '../Containers/ColumnView';
@@ -26,7 +26,7 @@ export class FormElementView extends React.Component<IProps> {
             switch (this.props.element.type) {
                 case FormElementType.Image:
                     return (
-                        <ImageView
+                        <DecImageView
                             element={this.props.element as ImageElement}
                             index={this.props.index}
                         />

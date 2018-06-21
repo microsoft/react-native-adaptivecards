@@ -3,8 +3,8 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import { OpenUrlActionElement } from 'Schema/Actions/OpenUrlAction';
 import { ActionContext, ActionHook } from '../../Context/ActionContext';
+import { OpenUrlActionElement } from '../../Schema/Actions/OpenUrlAction';
 import { CardText } from '../Basic/CardText';
 import { IElementViewProps } from '../Shared/BaseProps';
 import { DecStyleConfig } from '../Styles/DecStyleConfig';

@@ -2,7 +2,6 @@
     "compilerOptions": {
         "target": "es2015",
         "module": "es2015",
-        "baseUrl": "./src/",
         "rootDir": "src",
         "outDir": "dist",
         "jsx": "react",
@@ -23,11 +22,6 @@
         "typeRoots": [
             "node_modules/@types"
         ],
-        "paths": {
-            "react": [
-                "node_modules/@types/react"
-            ]
-        }
     },
     "exclude": [
         "node_modules",

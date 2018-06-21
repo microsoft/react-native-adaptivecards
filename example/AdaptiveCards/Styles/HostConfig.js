@@ -10,7 +10,8 @@ export class HostConfigManager {
     }
     getDefaultStyle() {
         return {
-            alignSelf: this.getHorizontalAlignment(HorizontalAlignment.Center),
+            textAlign: this.getTextAlignment(HorizontalAlignment.Center),
+            alignSelf: this.getSelfAlignment(HorizontalAlignment.Center),
             color: this.getColor(TextColor.Default),
             flex: 1,
             fontSize: this.getFontSize(FontSize.Default),
@@ -44,19 +45,19 @@ export class HostConfigManager {
     getSubtleColor(color) {
         switch (color) {
             case TextColor.Accent:
-                return '#882E89FC';
+                return '#2E89FC88';
             case TextColor.Attention:
-                return '#DDFF0000';
+                return '#FF0000DD';
             case TextColor.Dark:
-                return '#66000000';
+                return '#00000066';
             case TextColor.Default:
-                return '#EE333333';
+                return '#333333EE';
             case TextColor.Good:
-                return '#DD54a254';
+                return '#54a254DD';
             case TextColor.Light:
-                return '#33000000';
+                return '#00000033';
             case TextColor.Warning:
-                return '#DDc3ab23';
+                return '#c3ab23dd';
             default:
                 return this.getSubtleColor(TextColor.Default);
         }
@@ -80,11 +81,11 @@ export class HostConfigManager {
     getFontWeight(weight) {
         switch (weight) {
             case FontWeight.Bolder:
-                return 600;
+                return '600';
             case FontWeight.Default:
-                return 400;
+                return '400';
             case FontWeight.Lighter:
-                return 200;
+                return '200';
             default:
                 return this.getFontWeight(FontWeight.Default);
         }
@@ -92,7 +93,7 @@ export class HostConfigManager {
     getImgSize(size) {
         switch (size) {
             case ImageSize.Auto:
-                return ImageSize.Auto;
+                return 0;
             case ImageSize.Large:
                 return 160;
             case ImageSize.Medium:
@@ -100,7 +101,7 @@ export class HostConfigManager {
             case ImageSize.Small:
                 return 40;
             case ImageSize.Stretch:
-                return ImageSize.Stretch;
+                return 0;
             default:
                 return this.getImgSize(ImageSize.Auto);
         }
@@ -125,7 +126,19 @@ export class HostConfigManager {
                 return this.getSpacing(Spacing.Default);
         }
     }
-    getHorizontalAlignment(align) {
+    getTextAlignment(align) {
+        switch (align) {
+            case HorizontalAlignment.Center:
+                return 'center';
+            case HorizontalAlignment.Left:
+                return 'left';
+            case HorizontalAlignment.Right:
+                return 'right';
+            default:
+                return this.getTextAlignment(HorizontalAlignment.Center);
+        }
+    }
+    getSelfAlignment(align) {
         switch (align) {
             case HorizontalAlignment.Center:
                 return 'center';
@@ -133,8 +146,10 @@ export class HostConfigManager {
                 return 'flex-start';
             case HorizontalAlignment.Right:
                 return 'flex-end';
+            case ImageSize.Stretch:
+                return 'stretch';
             default:
-                return this.getHorizontalAlignment(HorizontalAlignment.Center);
+                return this.getSelfAlignment(HorizontalAlignment.Center);
         }
     }
     getColumnWidth(width) {
@@ -149,5 +164,8 @@ export class HostConfigManager {
             default:
                 return this.getColumnWidth(ColumnWidth.Auto);
         }
+    }
+    getWrap(wrap) {
+        return wrap ? 'wrap' : 'nowrap';
     }
 }

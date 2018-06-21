@@ -3,8 +3,8 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-import { SubmitActionElement } from 'Schema/Actions/SubmitAction';
 import { ActionContext, ActionHook } from '../../Context/ActionContext';
+import { SubmitActionElement } from '../../Schema/Actions/SubmitAction';
 import { CardText } from '../Basic/CardText';
 import { IElementViewProps } from '../Shared/BaseProps';
 import { DecStyleConfig } from '../Styles/DecStyleConfig';

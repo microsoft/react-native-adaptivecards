@@ -1,6 +1,6 @@
 import React from 'react';
 import { ContentElementType } from '../../Schema/Base/ContentElement';
-import { ImageView } from '../CardElements/ImageView';
+import { DecImageView } from '../CardElements/DecImageView';
 import { TextBlockView } from '../CardElements/TextBlockView';
 import { ColumnSetView } from '../Containers/ColumnSetView';
 import { ColumnView } from '../Containers/ColumnView';
@@ -21,7 +21,7 @@ export class DecCardElementView extends React.PureComponent {
             case ContentElementType.TextBlock:
                 return (React.createElement(TextBlockView, { element: element, index: index }));
             case ContentElementType.Image:
-                return (React.createElement(ImageView, { element: element, index: index }));
+                return (React.createElement(DecImageView, { element: element, index: index }));
             case ContentElementType.ImageSet:
                 return (React.createElement(ImageSetView, { element: element, index: index }));
             case ContentElementType.Container:

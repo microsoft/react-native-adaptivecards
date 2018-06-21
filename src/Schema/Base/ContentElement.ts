@@ -1,6 +1,6 @@
-import { ElementStyleConfig } from 'Styles/StyleManager';
 import { Spacing } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 
 export enum ContentElementType {

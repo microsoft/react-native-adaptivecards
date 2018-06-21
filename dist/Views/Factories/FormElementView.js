@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FormElementType } from '../../Schema/Base/FormElement';
-import { ImageView } from '../CardElements/ImageView';
+import { DecImageView } from '../CardElements/DecImageView';
 import { CardView } from '../Cards/CardView';
 import { ColumnSetView } from '../Containers/ColumnSetView';
 import { ColumnView } from '../Containers/ColumnView';
@@ -13,7 +13,7 @@ export class FormElementView extends React.Component {
         if (this.props.element) {
             switch (this.props.element.type) {
                 case FormElementType.Image:
-                    return (React.createElement(ImageView, { element: this.props.element, index: this.props.index }));
+                    return (React.createElement(DecImageView, { element: this.props.element, index: this.props.index }));
                 case FormElementType.Container:
                     return (React.createElement(ContainerView, { element: this.props.element, index: this.props.index }));
                 case FormElementType.Column:
