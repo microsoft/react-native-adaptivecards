@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, View, } from 'react-native';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { DecStyleManager } from '../Styles/DecStyleManager';
 export class ImageSetView extends React.PureComponent {
     constructor() {
@@ -11,7 +11,7 @@ export class ImageSetView extends React.PureComponent {
         this.renderImage = (image, index) => {
             const { element } = this.props;
             image.setSize(element.imageSize);
-            return (React.createElement(ContentElementView, { key: 'img' + image.url, index: index, element: image }));
+            return ContentFactory.createView(image, index, true);
         };
         this.extractKey = (image) => {
             return 'img-set-img' + image.url;

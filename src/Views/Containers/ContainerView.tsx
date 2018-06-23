@@ -7,7 +7,7 @@ import {
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import { ContainerElement } from '../../Schema/Containers/Container';
 import { ContainerStyle } from '../../Shared/Enums';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
 import { DecStyleConfig } from '../Styles/DecStyleConfig';
 import { DecStyleManager } from '../Styles/DecStyleManager';
@@ -42,12 +42,8 @@ export class ContainerView extends React.PureComponent<IProps, IState> {
                 ]}
             >
                 {
-                    element.items.map((cardElement: ContentElement, index: number) =>
-                        <ContentElementView
-                            key={'containerItems' + index}
-                            index={index}
-                            element={cardElement}
-                        />
+                    element.items.map((contentElement: ContentElement, index: number) =>
+                        ContentFactory.createView(contentElement, index, false)
                     )
                 }
             </View>

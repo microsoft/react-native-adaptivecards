@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, } from 'react-native';
 import { ColumnWidth } from '../../Shared/Enums';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ContentFactory } from '../Factories/ContentFactory';
 export class ColumnView extends React.PureComponent {
     render() {
         const { element } = this.props;
         if (!element || !element.isValid() || !element.hasItems()) {
             return null;
         }
-        return (React.createElement(View, { style: this.getViewStyle() }, element.items.map((cardElement, index) => React.createElement(ContentElementView, { key: 'containerItems' + index, index: index, element: cardElement }))));
+        return (React.createElement(View, { style: this.getViewStyle() }, element.items.map((contentElement, index) => ContentFactory.createView(contentElement, index, false))));
     }
     getViewStyle() {
         const { element, containerWidth } = this.props;

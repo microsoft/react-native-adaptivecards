@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, } from 'react-native';
 import { ContainerStyle } from '../../Shared/Enums';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { DecStyleManager } from '../Styles/DecStyleManager';
 export class ContainerView extends React.PureComponent {
     constructor(props) {
@@ -17,7 +17,7 @@ export class ContainerView extends React.PureComponent {
                     flex: 1,
                 },
                 this.getContainerStyle(element.style)
-            ] }, element.items.map((cardElement, index) => React.createElement(ContentElementView, { key: 'containerItems' + index, index: index, element: cardElement }))));
+            ] }, element.items.map((contentElement, index) => ContentFactory.createView(contentElement, index, false))));
     }
     getContainerStyle(style) {
         let containerStyle;

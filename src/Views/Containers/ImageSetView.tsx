@@ -7,7 +7,7 @@ import {
 
 import { ImageElement } from '../../Schema/CardElements/Image';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
 import { DecStyleManager } from '../Styles/DecStyleManager';
 
@@ -58,13 +58,7 @@ export class ImageSetView extends React.PureComponent<IProps, IState> {
         // Images in the set have their sizes uniformally defined by the container view
         image.setSize(element.imageSize);
 
-        return (
-            <ContentElementView
-                key={'img' + image.url}
-                index={index}
-                element={image}
-            />
-        );
+        return ContentFactory.createView(image, index, true);
     }
 
     private extractKey = (image: ImageElement) => {

@@ -1,4 +1,9 @@
 import { ColumnWidth, FontSize, FontWeight, HorizontalAlignment, ImageSize, Spacing, TextColor } from '../Shared/Enums';
+export var SizeModeCode;
+(function (SizeModeCode) {
+    SizeModeCode[SizeModeCode["Auto"] = -1] = "Auto";
+    SizeModeCode[SizeModeCode["Stretch"] = -2] = "Stretch";
+})(SizeModeCode || (SizeModeCode = {}));
 export class HostConfigManager {
     constructor() {
     }
@@ -93,7 +98,7 @@ export class HostConfigManager {
     getImgSize(size) {
         switch (size) {
             case ImageSize.Auto:
-                return 0;
+                return 'auto';
             case ImageSize.Large:
                 return 160;
             case ImageSize.Medium:
@@ -101,7 +106,7 @@ export class HostConfigManager {
             case ImageSize.Small:
                 return 40;
             case ImageSize.Stretch:
-                return 0;
+                return 'stretch';
             default:
                 return this.getImgSize(ImageSize.Auto);
         }
@@ -158,9 +163,9 @@ export class HostConfigManager {
         }
         switch (width) {
             case ColumnWidth.Auto:
-                return ColumnWidth.Auto;
+                return 'auto';
             case ColumnWidth.Stretch:
-                return ColumnWidth.Stretch;
+                return 'stretch';
             default:
                 return this.getColumnWidth(ColumnWidth.Auto);
         }

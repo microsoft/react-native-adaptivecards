@@ -6,7 +6,7 @@ import {
 
 import { ColumnElement } from '../../Schema/Containers/Column';
 import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<ColumnSetElement> {
@@ -66,13 +66,7 @@ export class ColumnSetView extends React.PureComponent<IProps, IState> {
     }
 
     private renderColumn = (column: ColumnElement, index: number) => {
-        return (
-            <ContentElementView
-                key={'column' + index}
-                index={index}
-                element={column}
-            />
-        );
+        return ContentFactory.createView(column, index, true);
     }
 
     private onLayout = (event?: LayoutChangeEvent) => {

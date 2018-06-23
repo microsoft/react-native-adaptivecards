@@ -9,6 +9,11 @@ import {
     TextColor
 } from '../Shared/Enums';
 
+export enum SizeModeCode {
+    Auto = -1,
+    Stretch = -2,
+}
+
 export class HostConfigManager {
     // TODO: Support load HostConfig for all hard coded value.
     private static sharedInstance: HostConfigManager;
@@ -111,10 +116,10 @@ export class HostConfigManager {
         }
     }
 
-    public getImgSize(size: string): number | string {
+    public getImgSize(size: string): number | 'auto' | 'stretch' {
         switch (size) {
             case ImageSize.Auto:
-                return 0;
+                return 'auto';
             case ImageSize.Large:
                 return 160;
             case ImageSize.Medium:
@@ -122,7 +127,7 @@ export class HostConfigManager {
             case ImageSize.Small:
                 return 40;
             case ImageSize.Stretch:
-                return 0;
+                return 'stretch';
             default:
                 return this.getImgSize(ImageSize.Auto);
         }
@@ -177,15 +182,15 @@ export class HostConfigManager {
         }
     }
 
-    public getColumnWidth(width: string | number): string | number {
+    public getColumnWidth(width: string | number): number | 'auto' | 'stretch' {
         if (typeof width === 'number') {
             return width;
         }
         switch (width) {
             case ColumnWidth.Auto:
-                return ColumnWidth.Auto;
+                return 'auto';
             case ColumnWidth.Stretch:
-                return ColumnWidth.Stretch;
+                return 'stretch';
             default:
                 return this.getColumnWidth(ColumnWidth.Auto);
         }

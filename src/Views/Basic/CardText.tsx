@@ -8,6 +8,7 @@ import { DecStyleManager } from '../Styles/DecStyleManager';
 
 interface IProps extends TextProperties {
 }
+
 interface IState {
 }
 

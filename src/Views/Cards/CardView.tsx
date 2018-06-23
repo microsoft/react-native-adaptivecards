@@ -9,8 +9,8 @@ import { ActionElement, ActionType } from '../../Schema/Base/ActionElement';
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import { CardElement } from '../../Schema/Cards/Card';
 import { ImageBackground } from '../Basic/ImageBackground';
-import { ActionElementView } from '../Factories/ActionElementView';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ActionFactory } from '../Factories/ActionFactory';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { ICardElementViewProps } from '../Shared/BaseProps';
 import { DecStyleConfig } from '../Styles/DecStyleConfig';
 import { DecStyleManager } from '../Styles/DecStyleManager';
@@ -98,12 +98,8 @@ export class CardView extends React.Component<IProps, IState> {
                 style={{ flex: 1 }}
             >
                 {
-                    this.props.element.body.map((cardElement: ContentElement, index: number) =>
-                        <ContentElementView
-                            key={'body' + index}
-                            index={index}
-                            element={cardElement}
-                        />
+                    this.props.element.body.map((contentElement: ContentElement, index: number) =>
+                        ContentFactory.createComponents(contentElement, index)
                     )
                 }
             </View>
@@ -126,12 +122,7 @@ export class CardView extends React.Component<IProps, IState> {
             >
                 {
                     this.props.element.actions.map((action: ActionElement, index: number) =>
-                        <ActionElementView
-                            key={index}
-                            element={action}
-                            index={index}
-                            actionContext={this.actionContext}
-                        />
+                        ActionFactory.createView(action, index, this.actionContext)
                     )
                 }
             </View>

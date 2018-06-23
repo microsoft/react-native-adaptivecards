@@ -10,6 +10,7 @@ import { DecStyleManager } from '../Styles/DecStyleManager';
 interface IProps extends IElementViewProps<FactElement> {
     element: FactElement;
 }
+
 interface IState {
 }
 
@@ -53,6 +54,7 @@ export class FactView extends React.PureComponent<IProps, IState> {
                 >
                     {element.value}
                 </CardText>
-            </View>);
+            </View>
+        );
     }
 }

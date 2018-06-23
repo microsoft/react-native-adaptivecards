@@ -50,7 +50,7 @@ export class ActionContext {
                     formValidate: false,
                     target: target,
                 };
-                let hookFuncs = this.getExcuteFuncs(action.type, externalHooks);
+                let hookFuncs = this.getExecuteFuncs(action.type, externalHooks);
                 args = hookFuncs.reduce((prev, current) => {
                     return current(prev);
                 }, args);
@@ -75,7 +75,7 @@ export class ActionContext {
         }
         return callback;
     }
-    getExcuteFuncs(actionType, externalHooks) {
+    getExecuteFuncs(actionType, externalHooks) {
         let hookFuncs = [];
         if (this.hooks) {
             let hookArrays = this.hooks[actionType];

@@ -6,11 +6,12 @@ import {
 import { ActionContext, ActionHook } from '../../Context/ActionContext';
 import { OpenUrlActionElement } from '../../Schema/Actions/OpenUrlAction';
 import { CardText } from '../Basic/CardText';
-import { IElementViewProps } from '../Shared/BaseProps';
+import { IActionElementViewProps } from '../Shared/BaseProps';
 import { DecStyleConfig } from '../Styles/DecStyleConfig';
 import { DecStyleManager } from '../Styles/DecStyleManager';
 
-export interface IProps extends IElementViewProps<OpenUrlActionElement> {
+export interface IProps extends IActionElementViewProps<OpenUrlActionElement> {
+    key?: any;
     actionHooks?: ActionHook[];
 }
 

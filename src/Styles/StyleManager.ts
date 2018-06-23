@@ -15,6 +15,19 @@ export interface ElementStyleConfig {
     columnWidth?: string | number;
 }
 
+export interface StyleConfig {
+    textAlign: 'auto' | 'left' | 'right' | 'center' | 'justify';
+    alignSelf: 'auto' | 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
+    color: string;
+    flex: number;
+    fontSize: number;
+    imgSize: number | 'auto' | 'stretch';
+    fontWeight: 'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+    spacing: number;
+    columnWidth: number | 'auto' | 'stretch';
+    wrap: 'wrap' | 'nowrap';
+}
+
 export class StyleManager {
     private static sharedInstance: StyleManager;
 
@@ -27,7 +40,7 @@ export class StyleManager {
         return StyleManager.sharedInstance;
     }
 
-    public getStyle(element: AbstractElement) {
+    public getStyle(element: AbstractElement): StyleConfig {
         let elementConfig = element.getStyleConfig();
         let style = {
             textAlign: HostConfigManager.getInstance().getTextAlignment(elementConfig.horizontalAlignment),
@@ -37,13 +50,12 @@ export class StyleManager {
             fontSize: HostConfigManager.getInstance().getFontSize(elementConfig.fontSize),
             imgSize: HostConfigManager.getInstance().getImgSize(elementConfig.imgSize),
             fontWeight: HostConfigManager.getInstance().getFontWeight(elementConfig.fontWeight),
-            marginTop: HostConfigManager.getInstance().getSpacing(elementConfig.spacing),
+            spacing: HostConfigManager.getInstance().getSpacing(elementConfig.spacing),
             columnWidth: HostConfigManager.getInstance().getColumnWidth(elementConfig.columnWidth),
             wrap: HostConfigManager.getInstance().getWrap(elementConfig.wrap),
-            spacing: HostConfigManager.getInstance().getSpacing(elementConfig.spacing),
         };
         if (elementConfig.imgSize === ImageSize.Stretch) {
-            style.alignSelf = HostConfigManager.getInstance().getSelfAlignment(elementConfig.imgSize);
+            style.alignSelf = HostConfigManager.getInstance().getSelfAlignment(ImageSize.Stretch);
         }
         return style;
     }

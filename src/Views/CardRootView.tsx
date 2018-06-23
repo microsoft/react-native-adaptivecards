@@ -11,10 +11,8 @@ import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
 import { ActionType } from '../Schema/Base/ActionElement';
 import { CardElement } from '../Schema/Cards/Card';
-// import { DecCardView } from './Cards/DecCardView';
 import { CardView } from './Cards/CardView';
 import { DecStyleConfig } from './Styles/DecStyleConfig';
-// import { StyleManager } from './Styles/StyleManager';
 
 export interface IProps {
     adaptiveCard: any;

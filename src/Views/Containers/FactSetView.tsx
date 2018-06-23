@@ -31,6 +31,7 @@ export class FactSetView extends React.PureComponent<IProps, IState> {
                         <FactView
                             key={'fact' + index}
                             element={fact}
+                            index={index}
                         />
                     )
                 }

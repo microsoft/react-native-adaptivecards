@@ -8,7 +8,7 @@ import {
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import { ColumnElement } from '../../Schema/Containers/Column';
 import { ColumnWidth } from '../../Shared/Enums';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<ColumnElement> {
@@ -30,12 +30,8 @@ export class ColumnView extends React.PureComponent<IProps, IState> {
                 style={this.getViewStyle()}
             >
                 {
-                    element.items.map((cardElement: ContentElement, index: number) =>
-                        <ContentElementView
-                            key={'containerItems' + index}
-                            index={index}
-                            element={cardElement}
-                        />
+                    element.items.map((contentElement: ContentElement, index: number) =>
+                        ContentFactory.createView(contentElement, index, false)
                     )
                 }
             </View>

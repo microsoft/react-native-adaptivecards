@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ContentFactory } from '../Factories/ContentFactory';
 export class ColumnSetView extends React.PureComponent {
     constructor(props) {
         super(props);
         this.renderColumn = (column, index) => {
-            return (React.createElement(ContentElementView, { key: 'column' + index, index: index, element: column }));
+            return ContentFactory.createView(column, index, true);
         };
         this.onLayout = (event) => {
             if (!this.isComponentUnmounted && !this.state.viewWidth && this.hasFixedWidthColumns) {

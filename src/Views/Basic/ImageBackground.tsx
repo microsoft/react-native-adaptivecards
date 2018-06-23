@@ -12,6 +12,7 @@ interface IProps extends ImageProperties {
     containerStyle?: ViewStyle;
     imageStyle?: ImageStyle;
 }
+
 interface IState {
 }
 

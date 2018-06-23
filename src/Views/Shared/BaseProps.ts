@@ -7,12 +7,12 @@ import { ValueElement } from '../../Schema/Base/ValueElement';
 import { CardElement } from '../../Schema/Cards/Card';
 
 export interface IElementViewProps<T extends AbstractElement> {
-    index?: number;
+    index: number;
     element: T;
 }
 
 export interface IActionElementViewProps<T extends ActionElement> {
-    index?: number;
+    index: number;
     element: T;
 }
 
@@ -22,21 +22,21 @@ export interface ICardElementViewProps<T extends CardElement> {
 }
 
 export interface IContentElementViewProps<T extends ContentElement> {
-    index?: number;
+    index: number;
     element: T;
 }
 
 export interface IFormElementViewProps<T extends FormElement> {
-    index?: number;
+    index: number;
     element: T;
 }
 
 export interface IInputElementViewProps<T extends InputElement> {
-    index?: number;
+    index: number;
     element: T;
 }
 
 export interface IValueElementViewProps<T extends ValueElement> {
-    index?: number;
+    index: number;
     element: T;
 }

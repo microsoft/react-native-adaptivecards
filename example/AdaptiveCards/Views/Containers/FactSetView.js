@@ -9,6 +9,6 @@ export class FactSetView extends React.PureComponent {
         }
         return (React.createElement(View, { style: {
                 flex: 1,
-            } }, element.facts.map((fact, index) => React.createElement(FactView, { key: 'fact' + index, element: fact }))));
+            } }, element.facts.map((fact, index) => React.createElement(FactView, { key: 'fact' + index, element: fact, index: index }))));
     }
 }

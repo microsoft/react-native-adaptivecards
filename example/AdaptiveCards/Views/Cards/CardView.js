@@ -3,8 +3,8 @@ import { View, } from 'react-native';
 import { ActionContext } from '../../Context/ActionContext';
 import { ActionType } from '../../Schema/Base/ActionElement';
 import { ImageBackground } from '../Basic/ImageBackground';
-import { ActionElementView } from '../Factories/ActionElementView';
-import { ContentElementView } from '../Factories/ContentElementView';
+import { ActionFactory } from '../Factories/ActionFactory';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { DecStyleManager } from '../Styles/DecStyleManager';
 export class CardView extends React.Component {
     constructor(props) {
@@ -67,7 +67,7 @@ export class CardView extends React.Component {
         if (!this.props.element.hasBody()) {
             return null;
         }
-        return (React.createElement(View, { style: { flex: 1 } }, this.props.element.body.map((cardElement, index) => React.createElement(ContentElementView, { key: 'body' + index, index: index, element: cardElement }))));
+        return (React.createElement(View, { style: { flex: 1 } }, this.props.element.body.map((contentElement, index) => ContentFactory.createComponents(contentElement, index))));
     }
     renderActions() {
         if (!this.props.element.hasActions()) {
@@ -78,7 +78,7 @@ export class CardView extends React.Component {
                 flexDirection: DecStyleManager.getInstance().getActionSetFlexDirectionValue(),
                 alignItems: 'stretch',
                 marginTop: this.styleConfig.action.actionSet.spacing,
-            } }, this.props.element.actions.map((action, index) => React.createElement(ActionElementView, { key: index, element: action, index: index, actionContext: this.actionContext }))));
+            } }, this.props.element.actions.map((action, index) => ActionFactory.createView(action, index, this.actionContext))));
     }
     renderSubCard() {
         if (this.state.subCard) {

@@ -18,13 +18,12 @@ export class StyleManager {
             fontSize: HostConfigManager.getInstance().getFontSize(elementConfig.fontSize),
             imgSize: HostConfigManager.getInstance().getImgSize(elementConfig.imgSize),
             fontWeight: HostConfigManager.getInstance().getFontWeight(elementConfig.fontWeight),
-            marginTop: HostConfigManager.getInstance().getSpacing(elementConfig.spacing),
+            spacing: HostConfigManager.getInstance().getSpacing(elementConfig.spacing),
             columnWidth: HostConfigManager.getInstance().getColumnWidth(elementConfig.columnWidth),
             wrap: HostConfigManager.getInstance().getWrap(elementConfig.wrap),
-            spacing: HostConfigManager.getInstance().getSpacing(elementConfig.spacing),
         };
         if (elementConfig.imgSize === ImageSize.Stretch) {
-            style.alignSelf = HostConfigManager.getInstance().getSelfAlignment(elementConfig.imgSize);
+            style.alignSelf = HostConfigManager.getInstance().getSelfAlignment(ImageSize.Stretch);
         }
         return style;
     }
