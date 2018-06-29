@@ -115,17 +115,16 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         }
 
         return (
-            <Row
-                vIndex={1}
-                hIndex={0}
-                spacing={10}
-            >
-                {
-                    this.props.element.actions.map((action: ActionElement, index: number) =>
-                        ActionFactory.createAction(action, index, this.actionContext)
-                    )
-                }
-            </Row>
+            this.props.element.actions.map((action: ActionElement, index: number) => (
+                <Row
+                    key={'ActionRow' + index}
+                    vIndex={index + 1}
+                    hIndex={0}
+                    spacing={10}
+                >
+                    {ActionFactory.createAction(action, 0, this.actionContext)}
+                </Row>
+            ))
         );
     }
 

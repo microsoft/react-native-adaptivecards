@@ -76,7 +76,7 @@ export class AdaptiveCardView extends React.Component {
         if (!this.props.element.hasActions()) {
             return null;
         }
-        return (React.createElement(Row, { vIndex: 1, hIndex: 0, spacing: 10 }, this.props.element.actions.map((action, index) => ActionFactory.createAction(action, index, this.actionContext))));
+        return (this.props.element.actions.map((action, index) => (React.createElement(Row, { key: 'ActionRow' + index, vIndex: index + 1, hIndex: 0, spacing: 10 }, ActionFactory.createAction(action, 0, this.actionContext)))));
     }
     renderSubCard() {
         if (this.state.subCard) {
