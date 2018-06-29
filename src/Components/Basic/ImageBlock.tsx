@@ -5,6 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
+import { MediaContext } from '../../Contexts/MediaContext';
 import { IFlexProps } from '../BaseProps';
 import { FlexBox } from './FlexBox';
 
@@ -96,8 +97,17 @@ export class ImageBlock extends React.Component<IProps, IState> {
         return undefined;
     }
 
+    private fetchImageSize = () => {
+        let dimension = MediaContext.getInstance().fetchDimension(this.props.url);
+        if (dimension) {
+            this.onImageSize(dimension.width, dimension.height);
+        } else {
+            Image.getSize(this.props.url, this.onImageSize, this.onImageSizeError);
+        }
+    }
+
     private onLayoutChange = (width: number, height: number) => {
-        Image.getSize(this.props.url, this.onImageSize, this.onImageSizeError);
+        this.fetchImageSize();
     }
 
     private onImageSizeUpdate = (event: LayoutChangeEvent) => {
@@ -112,6 +122,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
 
     private onImageSize = (width: number, height: number) => {
         console.log(`Image at url:${this.props.url} get size succeed. Width: ${width}, height: ${height}`);
+        MediaContext.getInstance().cacheDimension(this.props.url, { width: width, height: height });
         let ratio = width > 0 ? height / width : height;
         if (this.props.width === 'auto') {
             this.applyAutoSize(width, ratio);
@@ -134,7 +145,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
         this.setState({
             loaded: true
         });
-        Image.getSize(this.props.url, this.onImageSize, this.onImageSizeError);
+        this.fetchImageSize();
     }
 
     private onImageError = () => {
