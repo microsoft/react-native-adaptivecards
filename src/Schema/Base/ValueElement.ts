@@ -1,4 +1,5 @@
-import { AbstractElement } from '../Base/AbstractElement';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
+import { AbstractElement } from './AbstractElement';
 
 export enum ValueElementType {
     Fact = 'Fact',
@@ -25,5 +26,9 @@ export abstract class ValueElement extends AbstractElement {
 
     public isValue() {
         return true;
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {};
     }
 }

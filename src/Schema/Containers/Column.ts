@@ -1,5 +1,6 @@
 import { ColumnWidth } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
@@ -42,6 +43,13 @@ export class ColumnElement extends FormElement {
 
     public getChildren() {
         return this.items;
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            spacing: this.spacing,
+            columnWidth: this.width,
+        };
     }
 
     public hasItems(): boolean {

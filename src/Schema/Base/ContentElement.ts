@@ -1,6 +1,7 @@
 import { Spacing } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
-import { AbstractElement } from '../Base/AbstractElement';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
+import { AbstractElement } from './AbstractElement';
 
 export enum ContentElementType {
     Column = 'Column',
@@ -37,6 +38,12 @@ export abstract class ContentElement extends AbstractElement {
 
     public getId() {
         return this.id;
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            spacing: this.spacing
+        };
     }
 
     public isContent() {

@@ -1,3 +1,4 @@
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
@@ -25,6 +26,12 @@ export class ColumnSetElement extends FormElement {
 
     public getChildren() {
         return this.columns;
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            spacing: this.spacing,
+        };
     }
 
     public hasColumns(): boolean {

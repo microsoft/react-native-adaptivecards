@@ -1,9 +1,9 @@
-import { FormContext } from '../../Context/FormContext';
+import { FormContext } from '../../Contexts/FormContext';
 import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
 import { SubmitActionElement } from '../Actions/SubmitAction';
-import { ContentElement } from '../Base/ContentElement';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { AbstractElement } from './AbstractElement';
+import { ContentElement } from './ContentElement';
 
 export enum FormElementType {
     Column = 'Column',

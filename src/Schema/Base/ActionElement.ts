@@ -1,4 +1,5 @@
-import { AbstractElement } from '../Base/AbstractElement';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
+import { AbstractElement } from './AbstractElement';
 
 export enum ActionType {
     OpenUrl = 'Action.OpenUrl',
@@ -30,13 +31,17 @@ export abstract class ActionElement extends AbstractElement {
         return [this.getAction()];
     }
 
-    public abstract getActionType(): string;
+    public abstract getActionType(): ActionType;
 
     public getForm() {
         return this.getParent().getForm();
     }
 
     public getData() {
+        return {};
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
         return {};
     }
 

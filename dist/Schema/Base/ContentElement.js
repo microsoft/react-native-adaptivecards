@@ -1,6 +1,6 @@
 import { Spacing } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
-import { AbstractElement } from '../Base/AbstractElement';
+import { AbstractElement } from './AbstractElement';
 export var ContentElementType;
 (function (ContentElementType) {
     ContentElementType["Column"] = "Column";
@@ -30,6 +30,11 @@ export class ContentElement extends AbstractElement {
     }
     getId() {
         return this.id;
+    }
+    getStyleConfig() {
+        return {
+            spacing: this.spacing
+        };
     }
     isContent() {
         return true;

@@ -17,7 +17,7 @@ export class OpenUrlActionElement extends ActionElement {
         return ActionType.OpenUrl;
     }
 
-    public getActionType(): string {
+    public getActionType(): ActionType {
         return ActionType.OpenUrl;
     }
 

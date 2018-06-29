@@ -18,6 +18,11 @@ export class ImageSetElement extends ContentElement {
     getRequiredProperties() {
         return ['images'];
     }
+    getStyleConfig() {
+        return {
+            spacing: this.spacing,
+        };
+    }
     hasImages() {
         return this.images && this.images.length > 0;
     }

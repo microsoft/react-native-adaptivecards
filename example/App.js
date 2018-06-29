@@ -22,6 +22,8 @@ export default class App extends React.Component {
                 backgroundColor: 'whitesmoke',
             }
         },
+            React.createElement(AdaptiveCard, { adaptiveCard: mockData.news, overrideStyle: cardOverrideStyle }),
+            this.renderGap(),
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.adaptiveUpdate, overrideStyle: cardOverrideStyle }),
             this.renderGap(),
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.flightItinerary, overrideStyle: cardOverrideStyle }),
@@ -46,7 +48,8 @@ export default class App extends React.Component {
             this.renderGap(),
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.weatherCompact, overrideStyle: cardOverrideStyle }),
             this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.weatherLarge, overrideStyle: cardOverrideStyle }));
+            React.createElement(AdaptiveCard, { adaptiveCard: mockData.weatherLarge, overrideStyle: cardOverrideStyle })
+        );
     }
     renderGap() {
         return React.createElement(View, { style: { height: cardGap } });

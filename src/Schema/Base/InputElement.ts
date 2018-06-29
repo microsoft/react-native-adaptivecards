@@ -1,5 +1,5 @@
-import { ContentElement } from '../Base/ContentElement';
 import { AbstractElement } from './AbstractElement';
+import { ContentElement } from './ContentElement';
 
 export enum InputElementType {
     TextInput = 'Input.Text',

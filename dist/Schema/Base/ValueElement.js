@@ -1,4 +1,4 @@
-import { AbstractElement } from '../Base/AbstractElement';
+import { AbstractElement } from './AbstractElement';
 export var ValueElementType;
 (function (ValueElementType) {
     ValueElementType["Fact"] = "Fact";
@@ -17,5 +17,8 @@ export class ValueElement extends AbstractElement {
     }
     isValue() {
         return true;
+    }
+    getStyleConfig() {
+        return {};
     }
 }

@@ -1,3 +1,3 @@
-import { CardRootView } from './View/CardRootView';
+import { CardRootView } from './Views/Root';
 
 export default CardRootView;

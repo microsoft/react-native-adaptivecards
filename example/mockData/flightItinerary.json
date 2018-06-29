@@ -3,7 +3,8 @@
 	"version": "1.0",
 	"type": "AdaptiveCard",
 	"speak": "Your flight is confirmed for you and 3 other passengers from San Francisco to Amsterdam on Friday, October 10 8:30 AM",
-	"body": [{
+	"body": [
+		{
 			"type": "TextBlock",
 			"text": "Passengers",
 			"weight": "bolder",
@@ -39,10 +40,12 @@
 		{
 			"type": "ColumnSet",
 			"separator": true,
-			"columns": [{
+			"columns": [
+				{
 					"type": "Column",
 					"width": 1,
-					"items": [{
+					"items": [
+						{
 							"type": "TextBlock",
 							"text": "San Francisco",
 							"isSubtle": true
@@ -59,22 +62,25 @@
 				{
 					"type": "Column",
 					"width": "auto",
-					"items": [{
+					"items": [
+						{
 							"type": "TextBlock",
 							"text": " "
 						},
 						{
 							"type": "Image",
-							"url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
+							"url": "https://messagecardplayground.azurewebsites.net/assets/airplane.png",
 							"size": "small",
-							"spacing": "none"
+							"spacing": "none",
+							"horizontalAlignment": "center"
 						}
 					]
 				},
 				{
 					"type": "Column",
 					"width": 1,
-					"items": [{
+					"items": [
+						{
 							"type": "TextBlock",
 							"horizontalAlignment": "right",
 							"text": "Amsterdam",
@@ -107,10 +113,12 @@
 		{
 			"type": "ColumnSet",
 			"separator": true,
-			"columns": [{
+			"columns": [
+				{
 					"type": "Column",
 					"width": 1,
-					"items": [{
+					"items": [
+						{
 							"type": "TextBlock",
 							"text": "Amsterdam",
 							"isSubtle": true
@@ -127,22 +135,25 @@
 				{
 					"type": "Column",
 					"width": "auto",
-					"items": [{
+					"items": [
+						{
 							"type": "TextBlock",
 							"text": " "
 						},
 						{
 							"type": "Image",
-							"url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
+							"url": "https://messagecardplayground.azurewebsites.net/assets/airplane.png",
 							"size": "small",
-							"spacing": "none"
+							"spacing": "none",
+							"horizontalAlignment": "center"
 						}
 					]
 				},
 				{
 					"type": "Column",
 					"width": 1,
-					"items": [{
+					"items": [
+						{
 							"type": "TextBlock",
 							"horizontalAlignment": "right",
 							"text": "San Francisco",
@@ -164,26 +175,31 @@
 		{
 			"type": "ColumnSet",
 			"spacing": "medium",
-			"columns": [{
+			"columns": [
+				{
 					"type": "Column",
 					"width": "1",
-					"items": [{
-						"type": "TextBlock",
-						"text": "Total",
-						"size": "medium",
-						"isSubtle": true
-					}]
+					"items": [
+						{
+							"type": "TextBlock",
+							"text": "Total",
+							"size": "medium",
+							"isSubtle": true
+						}
+					]
 				},
 				{
 					"type": "Column",
 					"width": 1,
-					"items": [{
-						"type": "TextBlock",
-						"horizontalAlignment": "right",
-						"text": "$4,032.54",
-						"size": "medium",
-						"weight": "bolder"
-					}]
+					"items": [
+						{
+							"type": "TextBlock",
+							"horizontalAlignment": "right",
+							"text": "$4,032.54",
+							"size": "medium",
+							"weight": "bolder"
+						}
+					]
 				}
 			]
 		}

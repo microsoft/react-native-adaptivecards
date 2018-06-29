@@ -21,7 +21,7 @@ export class SubmitActionElement extends ActionElement {
         return [];
     }
 
-    public getActionType(): string {
+    public getActionType(): ActionType {
         return ActionType.Submit;
     }
 

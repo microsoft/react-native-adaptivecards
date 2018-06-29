@@ -21,6 +21,11 @@ export class ContainerElement extends FormElement {
     getChildren() {
         return this.items;
     }
+    getStyleConfig() {
+        return {
+            spacing: this.spacing,
+        };
+    }
     hasItems() {
         return this.items && this.items.length > 0;
     }

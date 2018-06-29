@@ -1,4 +1,4 @@
-import { ContentElement } from '../Base/ContentElement';
+import { ContentElement } from './ContentElement';
 export var InputElementType;
 (function (InputElementType) {
     InputElementType["TextInput"] = "Input.Text";

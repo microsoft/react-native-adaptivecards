@@ -18,7 +18,7 @@ export class ShowCardActionElement extends ActionElement {
         return ActionType.ShowCard;
     }
 
-    public getActionType(): string {
+    public getActionType(): ActionType {
         return ActionType.ShowCard;
     }
 

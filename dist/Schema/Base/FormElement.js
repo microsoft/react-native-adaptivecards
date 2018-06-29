@@ -1,6 +1,6 @@
-import { FormContext } from '../../Context/FormContext';
-import { ContentElement } from '../Base/ContentElement';
+import { FormContext } from '../../Contexts/FormContext';
 import { ActionFactory } from '../Factories/ActionFactory';
+import { ContentElement } from './ContentElement';
 export var FormElementType;
 (function (FormElementType) {
     FormElementType["Column"] = "Column";

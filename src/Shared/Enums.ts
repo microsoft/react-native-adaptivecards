@@ -57,9 +57,6 @@ export enum FlexWrap {
     NoWrap = 'nowrap',
 }
 
-/**
- * Image
- */
 export enum ImageSize {
     Auto = 'auto',
     Stretch = 'stretch',
@@ -80,25 +77,16 @@ export enum FlexImageAlignment {
     Stretch = 'stretch',
 }
 
-/**
- * Column
- */
 export enum ColumnWidth {
     Auto = 'auto',
     Stretch = 'stretch',
 }
 
-/**
- * Container
- */
 export enum ContainerStyle {
     Default = 'default',
     Emphasis = 'emphasis',
 }
 
-/**
- * Others
- */
 export enum Size {
     Auto,
     Stretch,
@@ -106,6 +94,7 @@ export enum Size {
     Medium,
     Large,
 }
+
 export enum Padding {
     None,
     Default,
@@ -116,26 +105,31 @@ export enum VerticalAlignment {
     Center,
     Bottom,
 }
+
 export enum ActionAlignment {
     Left,
     Center,
     Right,
     Stretch,
 }
+
 export enum ShowCardActionMode {
     Inline,
     Popup,
 }
+
 export enum Orientation {
     Horizontal,
     Vertical,
 }
+
 export enum BackgroundImageMode {
     Stretch,
     RepeatHorizontally,
     RepeatVertically,
     Repeat,
 }
+
 export enum ValidationError {
     Hint,
     ActionTypeNotAllowed,
@@ -151,12 +145,14 @@ export enum ValidationError {
     UnknownElementType,
     UnsupportedCardVersion,
 }
+
 export enum InputTextStyle {
     Text,
     Tel,
     Url,
     Email,
 }
+
 export enum ChoiceSetStyle {
     Compact,
     Expanded,

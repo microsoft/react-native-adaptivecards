@@ -1,4 +1,4 @@
-import { AbstractElement } from '../Base/AbstractElement';
+import { AbstractElement } from './AbstractElement';
 export var ActionType;
 (function (ActionType) {
     ActionType["OpenUrl"] = "Action.OpenUrl";
@@ -25,6 +25,9 @@ export class ActionElement extends AbstractElement {
         return this.getParent().getForm();
     }
     getData() {
+        return {};
+    }
+    getStyleConfig() {
         return {};
     }
     isAction() {

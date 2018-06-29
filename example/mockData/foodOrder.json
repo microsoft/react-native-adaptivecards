@@ -1,7 +1,8 @@
 {
     "type": "AdaptiveCard",
     "version": "1.0",
-    "body": [{
+    "body": [
+        {
             "type": "TextBlock",
             "text": "Your registration is almost complete",
             "size": "medium",
@@ -15,28 +16,31 @@
         {
             "type": "ImageSet",
             "imageSize": "medium",
-            "images": [{
+            "images": [
+                {
                     "type": "Image",
-                    "url": "http://contososcubabot.azurewebsites.net/assets/steak.jpg"
+                    "url": "https://contososcubabot.azurewebsites.net/assets/steak.jpg"
                 },
                 {
                     "type": "Image",
-                    "url": "http://contososcubabot.azurewebsites.net/assets/chicken.jpg"
+                    "url": "https://contososcubabot.azurewebsites.net/assets/chicken.jpg"
                 },
                 {
                     "type": "Image",
-                    "url": "http://contososcubabot.azurewebsites.net/assets/tofu.jpg"
+                    "url": "https://contososcubabot.azurewebsites.net/assets/tofu.jpg"
                 }
             ]
         }
     ],
-    "actions": [{
+    "actions": [
+        {
             "type": "Action.ShowCard",
             "title": "Steak",
             "card": {
                 "type": "AdaptiveCard",
                 "version": "1.0",
-                "body": [{
+                "body": [
+                    {
                         "type": "TextBlock",
                         "text": "How would you like your steak prepared?",
                         "size": "medium",
@@ -46,7 +50,8 @@
                         "type": "Input.ChoiceSet",
                         "id": "SteakTemp",
                         "style": "expanded",
-                        "choices": [{
+                        "choices": [
+                            {
                                 "title": "Rare",
                                 "value": "rare"
                             },
@@ -67,10 +72,12 @@
                         "placeholder": "Any other preparation requestes?"
                     }
                 ],
-                "actions": [{
-                    "type": "Action.Submit",
-                    "title": "OK"
-                }]
+                "actions": [
+                    {
+                        "type": "Action.Submit",
+                        "title": "OK"
+                    }
+                ]
             }
         },
         {
@@ -79,7 +86,8 @@
             "card": {
                 "type": "AdaptiveCard",
                 "version": "1.0",
-                "body": [{
+                "body": [
+                    {
                         "type": "TextBlock",
                         "text": "Do you have any allergies?",
                         "size": "medium",
@@ -90,10 +98,12 @@
                         "id": "ChickenAllergy",
                         "style": "expanded",
                         "isMultiSelect": true,
-                        "choices": [{
-                            "title": "I'm allergic to peanuts",
-                            "value": "peanut"
-                        }]
+                        "choices": [
+                            {
+                                "title": "I'm allergic to peanuts",
+                                "value": "peanut"
+                            }
+                        ]
                     },
                     {
                         "type": "Input.Text",
@@ -102,10 +112,12 @@
                         "placeholder": "Any other preparation requestes?"
                     }
                 ],
-                "actions": [{
-                    "type": "Action.Submit",
-                    "title": "OK"
-                }]
+                "actions": [
+                    {
+                        "type": "Action.Submit",
+                        "title": "OK"
+                    }
+                ]
             }
         },
         {
@@ -114,7 +126,8 @@
             "card": {
                 "type": "AdaptiveCard",
                 "version": "1.0",
-                "body": [{
+                "body": [
+                    {
                         "type": "TextBlock",
                         "text": "Would you like it prepared vegan?",
                         "size": "medium",
@@ -134,10 +147,12 @@
                         "placeholder": "Any other preparation requestes?"
                     }
                 ],
-                "actions": [{
-                    "type": "Action.Http",
-                    "title": "OK"
-                }]
+                "actions": [
+                    {
+                        "type": "Action.Http",
+                        "title": "OK"
+                    }
+                ]
             }
         }
     ]

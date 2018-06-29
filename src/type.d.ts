@@ -1,9 +1,9 @@
 import { ComponentClass } from 'react';
-import { StyleConfig } from './View/Style/StyleConfig';
+import { DecStyleConfig } from './Views/Styles/DecStyleConfig';
 
 interface AdaptiveCardsProps {
     adaptiveCard: any;
-    overrideStyle?: StyleConfig;
+    overrideStyle?: DecStyleConfig;
     onSubmit?: (data: any) => void;
 }
 

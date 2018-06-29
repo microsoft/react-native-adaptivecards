@@ -4,6 +4,7 @@ import {
     ImageStyle,
 } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
@@ -49,6 +50,15 @@ export class ImageElement extends FormElement {
 
     public getChildren(): ContentElement[] {
         return [];
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            horizontalAlignment: this.horizontalAlignment,
+            imgSize: this.size,
+            style: this.style,
+            spacing: this.spacing,
+        };
     }
 
     public setSize(size: ImageSize): void {

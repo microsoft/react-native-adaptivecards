@@ -5,6 +5,7 @@ import {
     TextColor
 } from '../../Shared/Enums';
 import { Utils } from '../../Shared/Utils';
+import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 
@@ -35,6 +36,18 @@ export class TextBlockElement extends ContentElement {
             this.weight = Utils.getStringEnumValueOrDefault(FontWeight, json.weight, FontWeight.Default) as FontWeight;
             this.wrap = json.wrap || false;
         }
+    }
+
+    public getStyleConfig(): ElementStyleConfig {
+        return {
+            color: this.color,
+            horizontalAlignment: this.horizontalAlignment,
+            isSubtle: this.isSubtle,
+            fontSize: this.size,
+            fontWeight: this.weight,
+            wrap: this.wrap,
+            spacing: this.spacing,
+        };
     }
 
     public getTypeName(): string {
