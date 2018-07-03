@@ -110,6 +110,11 @@ export class DateInput extends React.Component<IProps, IState> {
                     let newDate = new Date(year, month, day);
                     this.onDateChange(newDate);
                 }
+                if (action === DatePickerAndroid.dismissedAction) {
+                    this.setState({
+                        showDatePicker: false
+                    });
+                }
             } catch ({ code, message }) {
                 console.warn('Cannot open date picker', message);
             }
@@ -140,12 +145,14 @@ export class DateInput extends React.Component<IProps, IState> {
     }
 
     private onDateChange = (date: Date) => {
-        if (this.props.onValueChange) {
-            let timeString = TimeUtils.getDateString(date);
-            console.log(timeString);
-            this.setState({
-                showDatePicker: false,
-            }, () => this.props.onValueChange(timeString));
-        }
+        this.setState({
+            showDatePicker: false,
+        }, () => {
+            if (this.props.onValueChange) {
+                let timeString = TimeUtils.getDateString(date);
+                console.log(timeString);
+                this.props.onValueChange(timeString);
+            }
+        });
     }
 }

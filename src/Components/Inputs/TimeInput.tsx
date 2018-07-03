@@ -115,6 +115,11 @@ export class TimeInput extends React.Component<IProps, IState> {
                 if (action === TimePickerAndroid.timeSetAction) {
                     this.onTimeChange(hour, minute);
                 }
+                if (action === TimePickerAndroid.dismissedAction) {
+                    this.setState({
+                        showTimePicker: false
+                    });
+                }
             } catch ({ code, message }) {
                 console.warn('Cannot open date picker', message);
             }
@@ -148,12 +153,14 @@ export class TimeInput extends React.Component<IProps, IState> {
     }
 
     private onTimeChange = (hour: number, minute: number) => {
-        if (this.props.onValueChange) {
-            let timeString = TimeUtils.composeTimeString(hour, minute);
-            console.log(timeString);
-            this.setState({
-                showTimePicker: false,
-            }, () => this.props.onValueChange(timeString));
-        }
+        this.setState({
+            showTimePicker: false,
+        }, () => {
+            if (this.props.onValueChange) {
+                let timeString = TimeUtils.composeTimeString(hour, minute);
+                console.log(timeString);
+                this.props.onValueChange(timeString);
+            }
+        });
     }
 }

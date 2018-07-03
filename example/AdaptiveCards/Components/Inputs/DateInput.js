@@ -51,13 +51,15 @@ export class DateInput extends React.Component {
             }
         };
         this.onDateChange = (date) => {
-            if (this.props.onValueChange) {
-                let timeString = TimeUtils.getDateString(date);
-                console.log(timeString);
-                this.setState({
-                    showDatePicker: false,
-                }, () => this.props.onValueChange(timeString));
-            }
+            this.setState({
+                showDatePicker: false,
+            }, () => {
+                if (this.props.onValueChange) {
+                    let timeString = TimeUtils.getDateString(date);
+                    console.log(timeString);
+                    this.props.onValueChange(timeString);
+                }
+            });
         };
         this.showDatePickerAndroid = this.showDatePickerAndroid.bind(this);
         this.showDatePicker = this.showDatePicker.bind(this);
@@ -81,6 +83,11 @@ export class DateInput extends React.Component {
                     if (action === DatePickerAndroid.dateSetAction) {
                         let newDate = new Date(year, month, day);
                         this.onDateChange(newDate);
+                    }
+                    if (action === DatePickerAndroid.dismissedAction) {
+                        this.setState({
+                            showDatePicker: false
+                        });
                     }
                 }
                 catch ({ code, message }) {

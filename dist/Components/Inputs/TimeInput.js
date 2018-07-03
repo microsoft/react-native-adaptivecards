@@ -56,13 +56,15 @@ export class TimeInput extends React.Component {
             this.onTimeChange(date.getHours(), date.getMinutes());
         };
         this.onTimeChange = (hour, minute) => {
-            if (this.props.onValueChange) {
-                let timeString = TimeUtils.composeTimeString(hour, minute);
-                console.log(timeString);
-                this.setState({
-                    showTimePicker: false,
-                }, () => this.props.onValueChange(timeString));
-            }
+            this.setState({
+                showTimePicker: false,
+            }, () => {
+                if (this.props.onValueChange) {
+                    let timeString = TimeUtils.composeTimeString(hour, minute);
+                    console.log(timeString);
+                    this.props.onValueChange(timeString);
+                }
+            });
         };
         this.showTimePickerAndroid = this.showTimePickerAndroid.bind(this);
         this.showDatePicker = this.showDatePicker.bind(this);
@@ -87,6 +89,11 @@ export class TimeInput extends React.Component {
                     });
                     if (action === TimePickerAndroid.timeSetAction) {
                         this.onTimeChange(hour, minute);
+                    }
+                    if (action === TimePickerAndroid.dismissedAction) {
+                        this.setState({
+                            showTimePicker: false
+                        });
                     }
                 }
                 catch ({ code, message }) {
