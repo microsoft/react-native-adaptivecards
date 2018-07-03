@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import { Button } from '../../Components/Inputs/Button';
-import { ActionContext, ActionHook } from '../../Contexts/ActionContext';
+import { ActionContext } from '../../Contexts/ActionContext';
 import { SubmitActionElement } from '../../Schema/Actions/SubmitAction';
+import { ActionHook } from '../../Shared/Types';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<SubmitActionElement> {

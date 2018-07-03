@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import { Button } from '../../Components/Inputs/Button';
-import { ActionContext, ActionHook } from '../../Contexts/ActionContext';
+import { ActionContext } from '../../Contexts/ActionContext';
 import { OpenUrlActionElement } from '../../Schema/Actions/OpenUrlAction';
+import { ActionHook } from '../../Shared/Types';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<OpenUrlActionElement> {

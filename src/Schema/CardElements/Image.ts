@@ -3,7 +3,7 @@ import {
     ImageSize,
     ImageStyle,
 } from '../../Shared/Enums';
-import { Utils } from '../../Shared/Utils';
+import { EnumUtils } from '../../Shared/Utils';
 import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
@@ -25,10 +25,10 @@ export class ImageElement extends FormElement {
             this.url = json.url;
             this.altText = json.altText;
             this.horizontalAlignment =
-                Utils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
+                EnumUtils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
                 HorizontalAlignment;
-            this.size = Utils.getStringEnumValueOrDefault(ImageSize, json.size, ImageSize.Auto) as ImageSize;
-            this.style = Utils.getStringEnumValueOrDefault(ImageStyle, json.style, ImageStyle.Default) as ImageStyle;
+            this.size = EnumUtils.getStringEnumValueOrDefault(ImageSize, json.size, ImageSize.Auto) as ImageSize;
+            this.style = EnumUtils.getStringEnumValueOrDefault(ImageStyle, json.style, ImageStyle.Default) as ImageStyle;
         }
     }
 
@@ -62,7 +62,7 @@ export class ImageElement extends FormElement {
     }
 
     public setSize(size: ImageSize): void {
-        this.size = Utils.getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto) as ImageSize;
+        this.size = EnumUtils.getStringEnumValueOrDefault(ImageSize, size, ImageSize.Auto) as ImageSize;
     }
 
     public isFixedSize(): boolean {

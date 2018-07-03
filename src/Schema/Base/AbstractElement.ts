@@ -1,4 +1,4 @@
-import { Utils } from '../../Shared/Utils';
+import { JsonUtils } from '../../Shared/Utils';
 import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { ActionElement } from './ActionElement';
 
@@ -123,7 +123,7 @@ export abstract class AbstractElement {
         if (requiredProperties) {
             for (let i = 0; i < requiredProperties.length; i++) {
                 let property = requiredProperties[i];
-                if (!Utils.isValidValue(json[property])) {
+                if (!JsonUtils.isValidValue(json[property])) {
                     this.invalidRequiredProperty(property);
                     return;
                 }

@@ -4,13 +4,13 @@ import {
     View,
 } from 'react-native';
 
-import { ActionContext, ActionEventHandlerArgs } from '../Contexts/ActionContext';
+import { ActionContext } from '../Contexts/ActionContext';
 import { FormContext } from '../Contexts/FormContext';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
-import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
 import { ActionType } from '../Schema/Base/ActionElement';
 import { CardElement } from '../Schema/Cards/Card';
+import { ActionEventHandlerArgs } from '../Shared/Types';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
 
 export interface IProps {
@@ -20,12 +20,10 @@ export interface IProps {
 
 interface IState {
     rootCard: CardElement;
-    actionCard: CardElement;
 }
 
 export class CardRootView extends React.PureComponent<IProps, IState> {
     // private styleConfig: StyleConfig;
-    private isComponentUnmounted: Boolean;
 
     constructor(props: IProps) {
         super(props);
@@ -36,12 +34,10 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
         // State initialization
         this.state = {
             rootCard: new CardElement(this.props.adaptiveCard, undefined),
-            actionCard: null,
         };
 
         let actionContext = ActionContext.getGlobalInstance();
         actionContext.registerOpenUrlHandler(this.onOpenUrl);
-        actionContext.registerShowCardHandler(this.onShowCard);
         actionContext.registerSubmitHandler(this.onSubmit);
 
         actionContext.registerHook({ func: this.formValidation, name: 'formValidation', actionType: ActionType.Submit });
@@ -51,10 +47,6 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
     public componentWillReceiveProps(nextProps: IProps) {
         // Update customized styles
         // this.styleConfig = StyleManager.getInstance().addStyle(nextProps.overrideStyle);
-    }
-
-    public componentWillUnmount() {
-        this.isComponentUnmounted = true;
     }
 
     public render() {
@@ -79,16 +71,6 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
                     Linking.openURL(args.action.url);
                 }
             });
-        }
-    }
-
-    private onShowCard = (args: ActionEventHandlerArgs<ShowCardActionElement>) => {
-        if (args) {
-            if (!this.isComponentUnmounted) {
-                this.setState({
-                    actionCard: args.action.card,
-                });
-            }
         }
     }
 

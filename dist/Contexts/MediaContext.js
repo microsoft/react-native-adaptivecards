@@ -1,6 +1,7 @@
+import { Image } from 'react-native';
 export class MediaContext {
     constructor() {
-        this.mediaDimensions = {};
+        this.mediaSizes = {};
     }
     static getInstance() {
         if (MediaContext.sharedInstance === undefined) {
@@ -8,10 +9,22 @@ export class MediaContext {
         }
         return MediaContext.sharedInstance;
     }
-    cacheDimension(url, dimension) {
-        this.mediaDimensions[url] = dimension;
+    fetchImageSize(url, onSuccess, onFailure) {
+        let cache = this.getSize(url);
+        if (cache) {
+            onSuccess(cache.width, cache.height);
+        }
+        else {
+            Image.getSize(url, (width, height) => {
+                this.cacheSize(url, { width: width, height: height });
+                onSuccess(width, height);
+            }, onFailure);
+        }
     }
-    fetchDimension(url) {
-        return this.mediaDimensions[url];
+    cacheSize(url, size) {
+        this.mediaSizes[url] = size;
+    }
+    getSize(url) {
+        return this.mediaSizes[url];
     }
 }

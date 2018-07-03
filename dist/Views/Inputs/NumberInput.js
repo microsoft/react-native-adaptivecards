@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Row } from '../../Components/Containers/Row';
 import { NumberInput } from '../../Components/Inputs/NumberInput';
 import { FormContext } from '../../Contexts/FormContext';
-import { Utils } from '../../Shared/Utils';
+import { NumberUtils } from '../../Shared/Utils';
 import { StyleManager } from '../../Styles/StyleManager';
 export class NumberInputView extends React.Component {
     constructor(props) {
@@ -21,7 +21,7 @@ export class NumberInputView extends React.Component {
             if (defaultValue === undefined) {
                 defaultValue = '';
             }
-            if (Utils.isNumber(this.props.element.value.toString())) {
+            if (NumberUtils.isNumber(this.props.element.value.toString())) {
                 this.state = {
                     value: this.props.element.value.toString(),
                 };

@@ -13,6 +13,7 @@ interface IProps extends IElementViewProps<ImageElement> {
     containerHeight?: number;
     maxWidth?: number;
     maxHeight?: number;
+    fitAxis?: 'h' | 'v';
     vSpace?: number;
     hSpace?: number;
     onImageSize?: (width: number, height: number, url: string) => void;
@@ -71,6 +72,7 @@ export class ImageView extends React.Component<IProps, IState> {
                 containerHeight={this.props.containerHeight}
                 maxWidth={this.props.maxWidth}
                 maxHeight={this.props.maxHeight}
+                fitAxis={this.props.fitAxis}
                 imgStyle={this.getBorderRadius()}
                 onPress={element.selectAction ? this.onPress : undefined}
                 onImageSize={this.onImageSize}

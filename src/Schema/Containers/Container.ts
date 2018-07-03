@@ -1,5 +1,5 @@
 import { ContainerStyle } from '../../Shared/Enums';
-import { Utils } from '../../Shared/Utils';
+import { EnumUtils } from '../../Shared/Utils';
 import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
@@ -17,7 +17,7 @@ export class ContainerElement extends FormElement {
 
         if (this.isValidJSON) {
             this.items = CardElementFactory.createSet(json.items, this);
-            this.style = Utils.getStringEnumValueOrDefault(ContainerStyle, json.style, ContainerStyle.Default) as ContainerStyle;
+            this.style = EnumUtils.getStringEnumValueOrDefault(ContainerStyle, json.style, ContainerStyle.Default) as ContainerStyle;
         }
     }
 

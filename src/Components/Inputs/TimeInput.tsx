@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { Utils } from '../../Shared/Utils';
+import { TimeUtils } from '../../Shared/Utils';
 import { FlexBox } from '../Basic/FlexBox';
 
 interface IProps {
@@ -88,7 +88,7 @@ export class TimeInput extends React.Component<IProps, IState> {
     private showTimePickerIOS = () => {
         if (Platform.OS === 'ios') {
             if (this.state.showTimePicker) {
-                let time = Utils.extractTime(this.props.value);
+                let time = TimeUtils.extractTime(this.props.value);
                 console.log(time);
                 return (
                     <DatePickerIOS
@@ -149,7 +149,7 @@ export class TimeInput extends React.Component<IProps, IState> {
 
     private onTimeChange = (hour: number, minute: number) => {
         if (this.props.onValueChange) {
-            let timeString = Utils.composeTimeString(hour, minute);
+            let timeString = TimeUtils.composeTimeString(hour, minute);
             console.log(timeString);
             this.setState({
                 showTimePicker: false,

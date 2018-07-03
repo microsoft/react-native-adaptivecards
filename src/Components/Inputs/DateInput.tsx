@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { Utils } from '../../Shared/Utils';
+import { TimeUtils } from '../../Shared/Utils';
 import { FlexBox } from '../Basic/FlexBox';
 
 interface IProps {
@@ -84,7 +84,7 @@ export class DateInput extends React.Component<IProps, IState> {
     private renderInlineDatePicker = () => {
         if (Platform.OS === 'ios') {
             if (this.state.showDatePicker) {
-                let date = Utils.extractDate(this.props.value);
+                let date = TimeUtils.extractDate(this.props.value);
                 console.log(date);
                 return (
                     <DatePickerIOS
@@ -141,7 +141,7 @@ export class DateInput extends React.Component<IProps, IState> {
 
     private onDateChange = (date: Date) => {
         if (this.props.onValueChange) {
-            let timeString = Utils.getDateString(date);
+            let timeString = TimeUtils.getDateString(date);
             console.log(timeString);
             this.setState({
                 showDatePicker: false,

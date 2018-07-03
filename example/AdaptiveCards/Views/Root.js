@@ -17,15 +17,6 @@ export class CardRootView extends React.PureComponent {
                 });
             }
         };
-        this.onShowCard = (args) => {
-            if (args) {
-                if (!this.isComponentUnmounted) {
-                    this.setState({
-                        actionCard: args.action.card,
-                    });
-                }
-            }
-        };
         this.onSubmit = (args) => {
             if (args) {
                 console.log('Form validate: ' + args.formValidate);
@@ -49,19 +40,14 @@ export class CardRootView extends React.PureComponent {
         };
         this.state = {
             rootCard: new CardElement(this.props.adaptiveCard, undefined),
-            actionCard: null,
         };
         let actionContext = ActionContext.getGlobalInstance();
         actionContext.registerOpenUrlHandler(this.onOpenUrl);
-        actionContext.registerShowCardHandler(this.onShowCard);
         actionContext.registerSubmitHandler(this.onSubmit);
         actionContext.registerHook({ func: this.formValidation, name: 'formValidation', actionType: ActionType.Submit });
         actionContext.registerHook({ func: this.populateFormData, name: 'populateFormData', actionType: ActionType.Submit });
     }
     componentWillReceiveProps(nextProps) {
-    }
-    componentWillUnmount() {
-        this.isComponentUnmounted = true;
     }
     render() {
         return (React.createElement(View, { style: { flex: 1 } },

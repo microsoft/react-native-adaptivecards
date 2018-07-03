@@ -1,4 +1,4 @@
-import { Utils } from '../../Shared/Utils';
+import { JsonUtils } from '../../Shared/Utils';
 export var CardElementType;
 (function (CardElementType) {
     CardElementType["Column"] = "Column";
@@ -89,7 +89,7 @@ export class AbstractElement {
         if (requiredProperties) {
             for (let i = 0; i < requiredProperties.length; i++) {
                 let property = requiredProperties[i];
-                if (!Utils.isValidValue(json[property])) {
+                if (!JsonUtils.isValidValue(json[property])) {
                     this.invalidRequiredProperty(property);
                     return;
                 }

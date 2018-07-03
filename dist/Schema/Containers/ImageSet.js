@@ -1,5 +1,5 @@
 import { ImageSize } from '../../Shared/Enums';
-import { Utils } from '../../Shared/Utils';
+import { EnumUtils } from '../../Shared/Utils';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
 import { ImageElement } from '../CardElements/Image';
 export class ImageSetElement extends ContentElement {
@@ -9,7 +9,7 @@ export class ImageSetElement extends ContentElement {
         this.imageSize = ImageSize.Auto;
         if (this.isValidJSON) {
             this.images = this.createImageSet(json.images);
-            this.imageSize = Utils.getStringEnumValueOrDefault(ImageSize, json.imageSize, ImageSize.Auto);
+            this.imageSize = EnumUtils.getStringEnumValueOrDefault(ImageSize, json.imageSize, ImageSize.Auto);
         }
     }
     getTypeName() {
@@ -21,6 +21,7 @@ export class ImageSetElement extends ContentElement {
     getStyleConfig() {
         return {
             spacing: this.spacing,
+            imgSize: this.imageSize,
         };
     }
     hasImages() {

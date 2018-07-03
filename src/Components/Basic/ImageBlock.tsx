@@ -5,7 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
-import { MediaContext } from '../../Contexts/MediaContext';
+import { ImageUtils } from '../../Shared/Utils';
 import { IFlexProps } from '../BaseProps';
 import { FlexBox } from './FlexBox';
 
@@ -14,6 +14,7 @@ interface IProps extends IFlexProps {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    fitAxis?: 'h' | 'v';
     onImageSize?: (width: number, height: number) => void;
     onPress?: () => void;
     boxStyle?: any;
@@ -24,7 +25,6 @@ interface IState {
     loaded: boolean;
     width: number;
     height: number;
-    ratio: number;
 }
 
 export class ImageBlock extends React.Component<IProps, IState> {
@@ -35,7 +35,6 @@ export class ImageBlock extends React.Component<IProps, IState> {
             loaded: true,
             width: undefined,
             height: undefined,
-            ratio: 1,
         };
     }
 
@@ -98,12 +97,11 @@ export class ImageBlock extends React.Component<IProps, IState> {
     }
 
     private fetchImageSize = () => {
-        let dimension = MediaContext.getInstance().fetchDimension(this.props.url);
-        if (dimension) {
-            this.onImageSize(dimension.width, dimension.height);
-        } else {
-            Image.getSize(this.props.url, this.onImageSize, this.onImageSizeError);
-        }
+        ImageUtils.fetchSize(
+            this.props.url,
+            this.onImageSize,
+            this.onImageSizeError
+        );
     }
 
     private onLayoutChange = (width: number, height: number) => {
@@ -122,15 +120,13 @@ export class ImageBlock extends React.Component<IProps, IState> {
 
     private onImageSize = (width: number, height: number) => {
         console.log(`Image at url:${this.props.url} get size succeed. Width: ${width}, height: ${height}`);
-        MediaContext.getInstance().cacheDimension(this.props.url, { width: width, height: height });
-        let ratio = width > 0 ? height / width : height;
-        if (this.props.width === 'auto') {
-            this.applyAutoSize(width, ratio);
-        } else if (this.props.width === 'stretch') {
-            this.applyStretchSize(width, height, ratio);
-        } else {
-            this.applyFixSize(ratio);
-        }
+        let size = ImageUtils.calcSize(
+            { width: width, height: height },
+            { width: this.props.containerWidth, height: this.props.containerHeight },
+            this.props.width,
+            this.props.fitAxis
+        );
+        this.setState(size);
     }
 
     private onImageSizeError = () => {
@@ -155,78 +151,12 @@ export class ImageBlock extends React.Component<IProps, IState> {
         });
     }
 
-    private applyFixSize(ratio: number) {
-        if (typeof this.props.width === 'number') {
-            this.setState({
-                width: this.props.width,
-                height: this.props.width * ratio,
-                ratio: ratio,
-            });
-        }
-        // ignore other values.
-    }
-
-    private applyStretchSize(width: number, height: number, ratio: number) {
-        if (this.props.containerWidth) {
-            let finalWidth = this.props.containerWidth;
-            let finalHeight = finalWidth * ratio;
-            console.log(`Image at url:${this.props.url} get size succeed. Final width: ${finalWidth}, final height: ${finalHeight}`);
-            this.setState({
-                width: finalWidth,
-                height: finalHeight,
-                ratio: ratio
-            });
-        } else {
-            this.setState({
-                width: width,
-                height: height,
-                ratio: ratio
-            });
-        }
-    }
-
-    private applyAutoSize(width: number, ratio: number) {
-        let finalWidth = width;
-        if (finalWidth > this.props.containerWidth) {
-            finalWidth = this.props.containerWidth;
-        }
-        let finalHeight = finalWidth * ratio;
-        console.log(`Image at url:${this.props.url} get size succeed. Final width: ${finalWidth}, final height: ${finalHeight}`);
-        this.setState({
-            width: finalWidth,
-            height: finalHeight,
-            ratio: ratio
-        });
-    }
-
     private getSize() {
-        let finalWidth = this.state.width;
-        let finalHeight = this.state.height;
-        if (this.state.width && this.state.height) {
-            if (this.state.ratio <= 1) {
-                // Width is larger
-                if (this.props.maxWidth && finalWidth > this.props.maxWidth) {
-                    finalWidth = this.props.maxWidth;
-                }
-                finalHeight = finalWidth * this.state.ratio;
-                if (this.props.maxHeight && finalHeight > this.props.maxHeight) {
-                    finalHeight = this.props.maxHeight;
-                    finalWidth = this.state.ratio > 0 ? finalHeight / this.state.ratio : finalWidth;
-                }
-            } else {
-                // Height is larger
-                if (this.props.maxHeight && finalHeight > this.props.maxHeight) {
-                    finalHeight = this.props.maxHeight;
-                }
-                finalWidth = this.state.ratio > 0 ? finalHeight / this.state.ratio : finalWidth;
-                if (this.props.maxWidth && finalWidth > this.props.maxWidth) {
-                    finalWidth = this.props.maxWidth;
-                }
-            }
-        }
-        return {
-            width: finalWidth,
-            height: finalHeight,
-        };
+        return ImageUtils.fitSize(
+            this.state,
+            { width: this.props.maxWidth, height: this.props.maxHeight },
+            { width: this.props.maxWidth, height: this.props.maxHeight },
+            this.props.fitAxis,
+        );
     }
 }

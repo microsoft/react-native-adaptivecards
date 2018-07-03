@@ -3,7 +3,7 @@ import { Row } from '../../Components/Containers/Row';
 import { NumberInput } from '../../Components/Inputs/NumberInput';
 import { FormContext } from '../../Contexts/FormContext';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
-import { Utils } from '../../Shared/Utils';
+import { NumberUtils } from '../../Shared/Utils';
 import { StyleConfig, StyleManager } from '../../Styles/StyleManager';
 import { IElementViewProps } from '../Shared/BaseProps';
 
@@ -28,7 +28,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
                 defaultValue = '';
             }
 
-            if (Utils.isNumber(this.props.element.value.toString())) {
+            if (NumberUtils.isNumber(this.props.element.value.toString())) {
                 this.state = {
                     value: this.props.element.value.toString(),
                 };

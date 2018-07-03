@@ -1,5 +1,5 @@
 import { Spacing } from '../../Shared/Enums';
-import { Utils } from '../../Shared/Utils';
+import { EnumUtils } from '../../Shared/Utils';
 import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from './AbstractElement';
 
@@ -31,7 +31,7 @@ export abstract class ContentElement extends AbstractElement {
 
         if (this.isValidJSON) {
             this.id = json.id;
-            this.spacing = Utils.getStringEnumValueOrDefault(Spacing, json.spacing, Spacing.Default) as Spacing;
+            this.spacing = EnumUtils.getStringEnumValueOrDefault(Spacing, json.spacing, Spacing.Default) as Spacing;
             this.separator = json.separator || false;
         }
     }

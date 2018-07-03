@@ -1,32 +1,24 @@
 import * as React from 'react';
-import { ScrollView } from 'react-native';
-import { Row } from '../../Components/Containers/Row';
+import { FlatList } from 'react-native';
+import { ImageUtils } from '../../Shared/Utils';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
 export class ImageSetView extends React.Component {
     constructor(props) {
         super(props);
-        this.renderImages = () => {
+        this.keyExtractor = (item, index) => {
+            return `url: ${item.url}, index: ${index}`;
+        };
+        this.renderImage = (info) => {
             const { element } = this.props;
             if (!element || !element.isValid()) {
                 return undefined;
             }
-            return element.images.map((img, index) => (React.createElement(ImageView, { key: index, vIndex: 1, hIndex: index, element: img, size: element.imageSize, maxWidth: this.state.maxWidth, maxHeight: this.state.maxHeight, onImageSize: this.onImageSize, hSpace: 10 })));
+            return (React.createElement(ImageView, { key: info.index, vIndex: 1, hIndex: info.index, element: info.item, size: element.imageSize, maxWidth: this.state.maxWidth, maxHeight: this.state.maxHeight, fitAxis: 'v', onImageSize: this.onImageSize, hSpace: 10 }));
         };
-        this.onImageSize = (width, height, url) => {
-            console.log(`ImageSet adjust height: ${height}`);
-            let maxWidth = width;
-            let maxHeight = height;
-            let ratio = width > 0 ? height / width : height;
-            if (maxWidth > this.props.containerWidth) {
-                maxWidth = this.props.containerWidth;
-            }
-            maxHeight = maxWidth * ratio;
-            if (this.state.maxHeight !== undefined && this.state.maxHeight !== 0 && maxHeight > this.state.maxHeight) {
-                maxHeight = this.state.maxHeight;
-            }
+        this.onImageSize = (width, height) => {
             this.setState({
-                maxHeight: maxHeight
+                maxHeight: height
             });
         };
         const { element } = this.props;
@@ -36,14 +28,28 @@ export class ImageSetView extends React.Component {
         this.state = {
             maxWidth: undefined,
             maxHeight: undefined,
+            containerWidth: undefined,
+            containerHeight: undefined,
         };
+    }
+    componentDidUpdate() {
+        const { element, containerWidth, containerHeight } = this.props;
+        if (containerWidth && containerHeight &&
+            (containerWidth !== this.state.containerWidth || containerHeight !== this.state.containerHeight)) {
+            this.setState({
+                containerWidth: containerWidth,
+                containerHeight: containerHeight,
+            });
+            ImageUtils.fetchSetSize(element.images.map(img => img.url), { width: containerWidth, height: containerHeight }, this.styleConfig.imgSize, this.onImageSize, (error) => {
+                console.log(error);
+            });
+        }
     }
     render() {
         const { element } = this.props;
         if (!element || !element.isValid()) {
             return null;
         }
-        return (React.createElement(ScrollView, { flex: 1, horizontal: true, minHeight: this.state.maxHeight },
-            React.createElement(Row, { vIndex: 0, hIndex: 0, spacing: this.styleConfig.spacing, wrap: 'nowrap' }, this.renderImages())));
+        return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, minHeight: this.state.maxHeight + this.styleConfig.spacing }));
     }
 }

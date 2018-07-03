@@ -6,7 +6,7 @@ interface IProps {
     hIndex: number;
     style?: any;
     spacing?: number;
-    width?: number | string;
+    width?: number | 'auto' | 'stretch';
     wrap?: 'wrap' | 'nowrap';
     onPress?: () => void;
 }

@@ -1,5 +1,8 @@
+import { Image } from 'react-native';
+import { Dimension } from '../Shared/Types';
+
 export class MediaContext {
-    private mediaDimensions: { [url: string]: { width: number, height: number } } = {};
+    private mediaSizes: { [url: string]: Dimension } = {};
     private static sharedInstance: MediaContext;
 
     private constructor() { }
@@ -11,11 +14,27 @@ export class MediaContext {
         return MediaContext.sharedInstance;
     }
 
-    public cacheDimension(url: string, dimension: { width: number, height: number }) {
-        this.mediaDimensions[url] = dimension;
+    public fetchImageSize(url: string, onSuccess: (width: number, height: number) => void, onFailure: (error: any) => void) {
+        let cache = this.getSize(url);
+        if (cache) {
+            onSuccess(cache.width, cache.height);
+        } else {
+            Image.getSize(
+                url,
+                (width, height) => {
+                    this.cacheSize(url, { width: width, height: height });
+                    onSuccess(width, height);
+                },
+                onFailure
+            );
+        }
     }
 
-    public fetchDimension(url: string) {
-        return this.mediaDimensions[url];
+    public cacheSize(url: string, size: Dimension) {
+        this.mediaSizes[url] = size;
+    }
+
+    public getSize(url: string) {
+        return this.mediaSizes[url];
     }
 }

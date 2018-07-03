@@ -1,4 +1,4 @@
-import { Utils } from '../../Shared/Utils';
+import { NumberUtils, TimeUtils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 export class TimeInputElement extends InputElement {
@@ -18,10 +18,10 @@ export class TimeInputElement extends InputElement {
     }
     validateForm(value) {
         if (value && value.length !== 0) {
-            let minTime = Utils.extractTime(this.min);
-            let maxTime = Utils.extractTime(this.max);
-            let time = Utils.extractTime(value);
-            return Utils.isInRange(time, minTime, maxTime);
+            let minTime = TimeUtils.extractTime(this.min);
+            let maxTime = TimeUtils.extractTime(this.max);
+            let time = TimeUtils.extractTime(value);
+            return NumberUtils.isInRange(time, minTime, maxTime);
         }
         return true;
     }

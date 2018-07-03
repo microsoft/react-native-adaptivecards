@@ -7,11 +7,12 @@ import {
 import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { Column } from '../../Components/Containers/Column';
 import { Row } from '../../Components/Containers/Row';
-import { ActionContext, ActionEventHandlerArgs } from '../../Contexts/ActionContext';
+import { ActionContext } from '../../Contexts/ActionContext';
 import { ShowCardActionElement } from '../../Schema/Actions/ShowCardAction';
 import { ActionElement, ActionType } from '../../Schema/Base/ActionElement';
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import { CardElement } from '../../Schema/Cards/Card';
+import { ActionEventHandlerArgs } from '../../Shared/Types';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';

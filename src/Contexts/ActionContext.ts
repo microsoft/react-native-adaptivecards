@@ -3,19 +3,7 @@ import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
 import { AbstractElement } from '../Schema/Base/AbstractElement';
 import { ActionElement, ActionType } from '../Schema/Base/ActionElement';
-
-export interface ActionEventHandlerArgs<T extends ActionElement> {
-    formData?: { [id: string]: string };
-    formValidate: boolean;
-    action: T;
-    target: AbstractElement;
-}
-
-export interface ActionHook {
-    actionType: ActionType;
-    func: (args: ActionEventHandlerArgs<ActionElement>) => ActionEventHandlerArgs<ActionElement>;
-    name: string;
-}
+import { ActionEventHandlerArgs, ActionHook } from '../Shared/Types';
 
 export class ActionContext {
     private onOpenUrl: (args: ActionEventHandlerArgs<OpenUrlActionElement>) => void;
@@ -34,6 +22,10 @@ export class ActionContext {
             ActionContext.sharedInstance = ActionContext.createInstance();
         }
         return ActionContext.sharedInstance;
+    }
+
+    public static clearGlobalInstance() {
+        ActionContext.sharedInstance = undefined;
     }
 
     public registerOpenUrlHandler(handler: (args: ActionEventHandlerArgs<OpenUrlActionElement>) => void) {

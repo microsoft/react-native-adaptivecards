@@ -4,7 +4,7 @@ import {
     HorizontalAlignment,
     TextColor
 } from '../../Shared/Enums';
-import { Utils } from '../../Shared/Utils';
+import { EnumUtils } from '../../Shared/Utils';
 import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
@@ -26,14 +26,14 @@ export class TextBlockElement extends ContentElement {
 
         if (this.isValidJSON) {
             this.text = json.text;
-            this.color = Utils.getStringEnumValueOrDefault(TextColor, json.color, TextColor.Default) as TextColor;
+            this.color = EnumUtils.getStringEnumValueOrDefault(TextColor, json.color, TextColor.Default) as TextColor;
             this.horizontalAlignment =
-                Utils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
+                EnumUtils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
                 HorizontalAlignment;
             this.isSubtle = json.isSubtle || false;
             this.maxLines = json.maxLines;
-            this.size = Utils.getStringEnumValueOrDefault(FontSize, json.size, FontSize.Default) as FontSize;
-            this.weight = Utils.getStringEnumValueOrDefault(FontWeight, json.weight, FontWeight.Default) as FontWeight;
+            this.size = EnumUtils.getStringEnumValueOrDefault(FontSize, json.size, FontSize.Default) as FontSize;
+            this.weight = EnumUtils.getStringEnumValueOrDefault(FontWeight, json.weight, FontWeight.Default) as FontWeight;
             this.wrap = json.wrap || false;
         }
     }

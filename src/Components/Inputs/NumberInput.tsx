@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform } from 'react-native';
-import { Utils } from '../../Shared/Utils';
+import { NumberUtils } from '../../Shared/Utils';
 import { InputBox } from './InputBox';
 
 interface IProps {
@@ -38,7 +38,7 @@ export class NumberInput extends React.Component<IProps> {
 
     private onChangeText = (input: string) => {
         if (this.props.onValueChange) {
-            if (Utils.isSymbol(input) || Utils.isNumber(input)) {
+            if (NumberUtils.isSymbol(input) || NumberUtils.isNumber(input)) {
                 console.log('change text');
                 this.props.onValueChange(input);
             }

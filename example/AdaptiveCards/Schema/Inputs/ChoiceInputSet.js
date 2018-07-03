@@ -1,5 +1,5 @@
 import { ChoiceSetStyle } from '../../Shared/Enums';
-import { Utils } from '../../Shared/Utils';
+import { EnumUtils } from '../../Shared/Utils';
 import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 import { ChoiceInputElement } from './ChoiceInput';
@@ -9,7 +9,7 @@ export class ChoiceInputSetElement extends InputElement {
         this.choices = [];
         if (this.isValidJSON) {
             this.isMultiSelect = json.isMultiSelect || false;
-            this.style = Utils.getEnumValueOrDefault(ChoiceSetStyle, json.style, ChoiceSetStyle.Compact);
+            this.style = EnumUtils.getEnumValueOrDefault(ChoiceSetStyle, json.style, ChoiceSetStyle.Compact);
             this.choices = this.createChoiceSet(json.choices);
         }
     }

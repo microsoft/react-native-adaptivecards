@@ -23,7 +23,7 @@ export class Column extends React.Component<IProps> {
                 alignSelf='stretch'
                 alignContent='flex-start'
                 alignItems='stretch'
-                justifyContent='space-between'
+                justifyContent='flex-start'
                 width={this.props.width}
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}

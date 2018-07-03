@@ -12,6 +12,9 @@ export class ActionContext {
         }
         return ActionContext.sharedInstance;
     }
+    static clearGlobalInstance() {
+        ActionContext.sharedInstance = undefined;
+    }
     registerOpenUrlHandler(handler) {
         this.onOpenUrl = handler;
     }

@@ -1,5 +1,5 @@
 import { ColumnWidth } from '../../Shared/Enums';
-import { Utils } from '../../Shared/Utils';
+import { EnumUtils } from '../../Shared/Utils';
 import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
@@ -28,7 +28,7 @@ export class ColumnElement extends FormElement {
                     this.width = columnWidth;
                 }
             } else {
-                this.width = Utils.getStringEnumValueOrDefault(ColumnWidth, json.width, ColumnWidth.Auto) as ColumnWidth;
+                this.width = EnumUtils.getStringEnumValueOrDefault(ColumnWidth, json.width, ColumnWidth.Auto) as ColumnWidth;
             }
         }
     }

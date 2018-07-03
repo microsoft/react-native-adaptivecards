@@ -1,5 +1,5 @@
 import { ImageSize } from '../../Shared/Enums';
-import { Utils } from '../../Shared/Utils';
+import { EnumUtils } from '../../Shared/Utils';
 import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
 import { ContentElement, ContentElementType } from '../Base/ContentElement';
@@ -16,7 +16,7 @@ export class ImageSetElement extends ContentElement {
 
         if (this.isValidJSON) {
             this.images = this.createImageSet(json.images);
-            this.imageSize = Utils.getStringEnumValueOrDefault(ImageSize, json.imageSize, ImageSize.Auto) as ImageSize;
+            this.imageSize = EnumUtils.getStringEnumValueOrDefault(ImageSize, json.imageSize, ImageSize.Auto) as ImageSize;
         }
     }
 
@@ -31,6 +31,7 @@ export class ImageSetElement extends ContentElement {
     public getStyleConfig(): ElementStyleConfig {
         return {
             spacing: this.spacing,
+            imgSize: this.imageSize,
         };
     }
 
