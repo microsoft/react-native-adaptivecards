@@ -11,7 +11,8 @@ const sportsGameUpdate = require('./sportsGameUpdate.json');
 const stockUpdate = require('./stockUpdate.json');
 const weatherCompact = require('./weatherCompact.json');
 const weatherLarge = require('./weatherLarge.json');
-
+const news = require('./latestNews.json');
+const email = require('./skills/search_email.json');
 export default {
     adaptiveUpdate,
     flightItinerary,
@@ -25,5 +26,7 @@ export default {
     sportsGameUpdate,
     stockUpdate,
     weatherCompact,
-    weatherLarge
+    weatherLarge,
+    news,
+    email
 };

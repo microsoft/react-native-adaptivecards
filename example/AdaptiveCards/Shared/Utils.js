@@ -143,7 +143,6 @@ export class ImageUtils {
                     height: fitSize.height,
                 };
                 let ratio = ImageUtils.calcRatio(current);
-                console.log(ratio);
                 if (finalSize.width > contract.width) {
                     finalSize.width = contract.width;
                 }
@@ -163,7 +162,6 @@ export class ImageUtils {
         return new Promise((resolve) => MediaContext.getInstance().fetchImageSize(url, (width, height) => {
             resolve({ width: width, height: height });
         }, (error) => {
-            console.log(`Image at urk: ${url} get size failed. Error: ${error}`);
             resolve({ width: 0, height: 0 });
         }));
     }

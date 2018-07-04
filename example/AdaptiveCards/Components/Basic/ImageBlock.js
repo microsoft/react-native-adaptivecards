@@ -30,31 +30,26 @@ export class ImageBlock extends React.Component {
         this.onImageSizeUpdate = (event) => {
             let width = event.nativeEvent.layout.width;
             let height = event.nativeEvent.layout.height;
-            console.log(`Image at url:${this.props.url} size updated. Width: ${width}, height: ${height}`);
             if (this.props.onImageSize) {
                 this.props.onImageSize(width, height);
             }
         };
         this.onImageSize = (width, height) => {
-            console.log(`Image at url:${this.props.url} get size succeed. Width: ${width}, height: ${height}`);
             let size = ImageUtils.calcSize({ width: width, height: height }, { width: this.props.containerWidth, height: this.props.containerHeight }, this.props.width, this.props.fitAxis);
             this.setState(size);
         };
         this.onImageSizeError = () => {
-            console.log(`Image at url:${this.props.url} get size failed.`);
             this.setState({
                 loaded: false
             });
         };
         this.onImageLoad = () => {
-            console.log(`Image at url:${this.props.url} load succeed.`);
             this.setState({
                 loaded: true
             });
             this.fetchImageSize();
         };
         this.onImageError = () => {
-            console.log(`Image at url:${this.props.url} load failed.`);
             this.setState({
                 loaded: false
             });

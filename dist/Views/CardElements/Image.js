@@ -20,7 +20,6 @@ export class ImageView extends React.Component {
                 width: width,
                 height: height
             }, () => {
-                console.log(`ImageView onImageSize width: ${width} height: ${height}`);
                 const { element } = this.props;
                 if (element && element.isValid()) {
                     if (this.props.onImageSize) {

@@ -112,14 +112,12 @@ export class ImageBlock extends React.Component<IProps, IState> {
         let width = event.nativeEvent.layout.width;
         let height = event.nativeEvent.layout.height;
 
-        console.log(`Image at url:${this.props.url} size updated. Width: ${width}, height: ${height}`);
         if (this.props.onImageSize) {
             this.props.onImageSize(width, height);
         }
     }
 
     private onImageSize = (width: number, height: number) => {
-        console.log(`Image at url:${this.props.url} get size succeed. Width: ${width}, height: ${height}`);
         let size = ImageUtils.calcSize(
             { width: width, height: height },
             { width: this.props.containerWidth, height: this.props.containerHeight },
@@ -130,14 +128,12 @@ export class ImageBlock extends React.Component<IProps, IState> {
     }
 
     private onImageSizeError = () => {
-        console.log(`Image at url:${this.props.url} get size failed.`);
         this.setState({
             loaded: false
         });
     }
 
     private onImageLoad = () => {
-        console.log(`Image at url:${this.props.url} load succeed.`);
         this.setState({
             loaded: true
         });
@@ -145,7 +141,6 @@ export class ImageBlock extends React.Component<IProps, IState> {
     }
 
     private onImageError = () => {
-        console.log(`Image at url:${this.props.url} load failed.`);
         this.setState({
             loaded: false
         });

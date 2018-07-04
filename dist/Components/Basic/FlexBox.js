@@ -33,7 +33,6 @@ export class FlexBox extends React.Component {
                 width: width,
                 height: height
             }, () => {
-                console.log(`FlexBox: width: ${width} height: ${height}`);
                 if (this.props.onLayoutChange) {
                     this.props.onLayoutChange(width, height);
                 }

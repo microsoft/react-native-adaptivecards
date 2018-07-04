@@ -30,31 +30,35 @@ export default class App extends React.Component<any, any> {
                 backgroundColor: 'whitesmoke',
             }}
         >
-            <AdaptiveCard adaptiveCard={mockData.adaptiveUpdate} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.email} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.flightItinerary} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.news} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.flightUpdate} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.adaptiveUpdate} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.foodOrder} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.flightItinerary} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.imageGallery} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.flightUpdate} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.inputForm} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.foodOrder} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.inputs} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.imageGallery} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.restaurant} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.inputForm} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.solitaire} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.inputs} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.sportsGameUpdate} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.restaurant} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.stockUpdate} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.solitaire} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.weatherCompact} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.sportsGameUpdate} />
             {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.weatherLarge} overrideStyle={cardOverrideStyle} />
+            <AdaptiveCard adaptiveCard={mockData.stockUpdate} />
+            {this.renderGap()}
+            <AdaptiveCard adaptiveCard={mockData.weatherCompact} />
+            {this.renderGap()}
+            <AdaptiveCard adaptiveCard={mockData.weatherLarge} />
         </ScrollView>;
     }
 
