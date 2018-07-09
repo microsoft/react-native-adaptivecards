@@ -3,7 +3,8 @@
     "type": "AdaptiveCard",
     "version": "1.0",
     "speak": "The forecast for Seattle January 20 is mostly clear with a High of 51 degrees and Low of 40 degrees",
-    "body": [{
+    "body": [
+        {
             "type": "TextBlock",
             "text": "Seattle, WA",
             "size": "large",
@@ -16,31 +17,37 @@
         },
         {
             "type": "ColumnSet",
-            "columns": [{
+            "columns": [
+                {
                     "type": "Column",
                     "width": "auto",
-                    "items": [{
-                        "type": "Image",
-                        "url": "http://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
-                        "size": "small"
-                    }]
+                    "items": [
+                        {
+                            "type": "Image",
+                            "url": "http://messagecardplayground.azurewebsites.net/assets/Mostly%20Cloudy-Square.png",
+                            "size": "small"
+                        }
+                    ]
                 },
                 {
                     "type": "Column",
                     "width": "auto",
-                    "items": [{
-                        "type": "TextBlock",
-                        "text": "42",
-                        "size": "extraLarge",
-                        "spacing": "none"
-                    }]
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "42",
+                            "size": "extraLarge",
+                            "spacing": "none"
+                        }
+                    ]
                 },
                 {
                     "type": "Column",
                     "width": "stretch",
-                    "items": [{
+                    "items": [
+                        {
                             "type": "TextBlock",
-                            "text": " ",
+                            "text": "",
                             "weight": "bolder",
                             "spacing": "small"
                         },
@@ -55,7 +62,8 @@
                 {
                     "type": "Column",
                     "width": "stretch",
-                    "items": [{
+                    "items": [
+                        {
                             "type": "TextBlock",
                             "text": "Hi 51",
                             "horizontalAlignment": "left"

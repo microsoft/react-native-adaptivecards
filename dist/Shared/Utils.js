@@ -3,7 +3,7 @@ export class JsonUtils {
     static isValidValue(value) {
         return !(value === undefined ||
             value === null ||
-            (typeof value === 'string' && !value));
+            (typeof value === 'string' && !value && value !== ''));
     }
 }
 export class NumberUtils {

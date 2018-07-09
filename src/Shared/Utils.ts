@@ -5,7 +5,7 @@ export class JsonUtils {
     public static isValidValue(value: any): boolean {
         return !(value === undefined ||
             value === null ||
-            (typeof value === 'string' && !value));
+            (typeof value === 'string' && !value && value !== ''));
     }
 }
 
