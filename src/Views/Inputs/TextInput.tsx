@@ -25,6 +25,7 @@ export class TextInputView extends React.Component<IProps, IState> {
             this.state = {
                 value: this.props.element.value,
             };
+            this.updateStore();
             this.styleConfig = StyleManager.getInstance().getStyle(element);
         }
     }

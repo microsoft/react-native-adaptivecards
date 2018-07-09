@@ -25,6 +25,7 @@ export class NumberInputView extends React.Component {
                 this.state = {
                     value: this.props.element.value.toString(),
                 };
+                this.updateStore();
             }
             this.styleConfig = StyleManager.getInstance().getStyle(element);
         }

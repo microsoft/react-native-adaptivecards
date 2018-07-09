@@ -16,6 +16,7 @@ export class TimeInputView extends React.Component {
             this.state = {
                 value: this.props.element.value,
             };
+            this.updateStore();
             this.styleConfig = StyleManager.getInstance().getStyle(element);
         }
     }
