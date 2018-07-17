@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { SeparateLine } from '../../Components/Basic/SeparateLine';
 import { ContentElementType } from '../../Schema/Base/ContentElement';
 import { HostConfigManager } from '../../Styles/HostConfig';
@@ -25,6 +26,15 @@ export class ContentFactory {
             return [elementView];
         }
         return null;
+    }
+    static createBackgroundImageView(node, background) {
+        console.log(background);
+        if (background) {
+            return (React.createElement(ImageBackground, { containerStyle: { flex: 1 }, source: { uri: background }, vIndex: 0, hIndex: 0 }, node));
+        }
+        else {
+            return null;
+        }
     }
     static createElement(element, index) {
         if (element) {

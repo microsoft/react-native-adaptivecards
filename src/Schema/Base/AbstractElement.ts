@@ -24,6 +24,8 @@ export enum CardElementType {
 export abstract class AbstractElement {
     private parent: AbstractElement;
 
+    public backgroundImage: { url: string } | string;
+
     // Required
     public readonly type: string;
 
@@ -35,6 +37,7 @@ export abstract class AbstractElement {
             this.noTypeName();
         }
         this.parent = parent;
+        this.backgroundImage = json.backgroundImage;
         this.validateJSON(json, this.getRequiredProperties());
     }
 
@@ -98,6 +101,19 @@ export abstract class AbstractElement {
 
     public isValid(): boolean {
         return this.isValidJSON;
+    }
+
+    public getBackgroundImageUrl() {
+        console.log('getBackgroundImageUrl');
+        console.log(this.backgroundImage);
+        if (typeof this.backgroundImage === 'string') {
+            return this.backgroundImage;
+        } else {
+            if (this.backgroundImage) {
+                return this.backgroundImage.url;
+            }
+        }
+        return undefined;
     }
 
     private noTypeName(): void {

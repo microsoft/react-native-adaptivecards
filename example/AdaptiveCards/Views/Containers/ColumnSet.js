@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Row } from '../../Components/Containers/Row';
 import { StyleManager } from '../../Styles/StyleManager';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { ColumnView } from './Column';
 export class ColumnSetView extends React.Component {
     constructor(props) {
@@ -24,6 +25,12 @@ export class ColumnSetView extends React.Component {
         if (!element || !element.isValid()) {
             return null;
         }
-        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: this.styleConfig.spacing }, this.renderColumns()));
+        const background = element.getBackgroundImageUrl();
+        if (background) {
+            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: this.styleConfig.spacing }, ContentFactory.createBackgroundImageView(this.renderColumns(), background)));
+        }
+        else {
+            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: this.styleConfig.spacing }, this.renderColumns()));
+        }
     }
 }

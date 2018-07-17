@@ -10,7 +10,6 @@ export class CardElement extends FormElement {
             this.version = json.version;
             this.minVersion = json.minVersion;
             this.fallbackText = json.fallbackText;
-            this.backgroundImage = json.backgroundImage;
             this.speak = json.speak;
             this.actions = ActionFactory.createSet(json.actions, this);
             this.body = CardElementFactory.createSet(json.body, this);

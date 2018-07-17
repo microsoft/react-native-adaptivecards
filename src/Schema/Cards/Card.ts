@@ -11,7 +11,6 @@ export class CardElement extends FormElement {
     // Optional
     public readonly minVersion?: string;
     public readonly fallbackText?: string;
-    public readonly backgroundImage?: string;
     public readonly speak?: string;
     public readonly actions?: Array<ActionElement> = [];
     public readonly body?: Array<ContentElement> = [];
@@ -23,7 +22,6 @@ export class CardElement extends FormElement {
             this.version = json.version;
             this.minVersion = json.minVersion;
             this.fallbackText = json.fallbackText;
-            this.backgroundImage = json.backgroundImage;
             this.speak = json.speak;
             this.actions = ActionFactory.createSet(json.actions, this);
             this.body = CardElementFactory.createSet(json.body, this);

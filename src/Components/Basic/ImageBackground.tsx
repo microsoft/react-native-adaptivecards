@@ -11,6 +11,9 @@ import {
 interface IProps extends ImageProperties {
     containerStyle?: ViewStyle;
     imageStyle?: ImageStyle;
+    vIndex: number;
+    hIndex: number;
+    spacing?: number;
 }
 
 interface IState {
@@ -26,6 +29,8 @@ export class ImageBackground extends React.PureComponent<IProps, IState> {
                     containerStyle,
                     {
                         position: 'relative',
+                        marginTop: this.props.vIndex > 0 ? this.props.spacing : 0,
+                        marginLeft: this.props.hIndex > 0 ? this.props.spacing : 0
                     }
                 ]}
             >

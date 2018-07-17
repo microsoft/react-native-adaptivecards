@@ -45,10 +45,11 @@ export class AdaptiveCardView extends React.Component {
             borderColor: '#777777',
             borderRadius: 4,
         }, this.props.style);
-        if (this.props.element.backgroundImage) {
+        const backgroundImage = this.props.element.getBackgroundImageUrl();
+        if (backgroundImage) {
             return (React.createElement(ImageBackground, { containerStyle: cardStyle, imageStyle: {
                     borderRadius: 4,
-                }, source: { uri: this.props.element.backgroundImage } },
+                }, source: { uri: backgroundImage }, vIndex: 0, hIndex: 0 },
                 React.createElement(View, { style: { flex: 1, padding: 10 } },
                     this.renderBody(),
                     this.renderActions(),

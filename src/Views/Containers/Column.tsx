@@ -28,17 +28,33 @@ export class ColumnView extends React.Component<IProps> {
             return null;
         }
 
-        return (
-            <Column
-                vIndex={this.props.vIndex}
-                hIndex={this.props.hIndex}
-                width={this.styleConfig.columnWidth}
-                onPress={element.selectAction ? this.onPress : undefined}
-                spacing={this.styleConfig.spacing}
-            >
-                {this.renderContents()}
-            </Column>
-        );
+        const background = element.getBackgroundImageUrl();
+        console.log(background);
+        if (background) {
+            return (
+                <Column
+                    vIndex={this.props.vIndex}
+                    hIndex={this.props.hIndex}
+                    width={this.styleConfig.columnWidth}
+                    onPress={element.selectAction ? this.onPress : undefined}
+                    spacing={this.styleConfig.spacing}
+                >
+                    {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
+                </Column>
+            );
+        } else {
+            return (
+                <Column
+                    vIndex={this.props.vIndex}
+                    hIndex={this.props.hIndex}
+                    width={this.styleConfig.columnWidth}
+                    onPress={element.selectAction ? this.onPress : undefined}
+                    spacing={this.styleConfig.spacing}
+                >
+                    {this.renderContents()}
+                </Column>
+            );
+        }
     }
 
     private renderContents = () => {

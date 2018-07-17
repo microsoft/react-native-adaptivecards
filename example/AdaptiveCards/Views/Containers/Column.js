@@ -33,6 +33,13 @@ export class ColumnView extends React.Component {
         if (!element || !element.isValid()) {
             return null;
         }
-        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: this.styleConfig.columnWidth, onPress: element.selectAction ? this.onPress : undefined, spacing: this.styleConfig.spacing }, this.renderContents()));
+        const background = element.getBackgroundImageUrl();
+        console.log(background);
+        if (background) {
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: this.styleConfig.columnWidth, onPress: element.selectAction ? this.onPress : undefined, spacing: this.styleConfig.spacing }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
+        }
+        else {
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: this.styleConfig.columnWidth, onPress: element.selectAction ? this.onPress : undefined, spacing: this.styleConfig.spacing }, this.renderContents()));
+        }
     }
 }

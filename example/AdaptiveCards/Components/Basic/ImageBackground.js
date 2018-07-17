@@ -7,6 +7,8 @@ export class ImageBackground extends React.PureComponent {
                 containerStyle,
                 {
                     position: 'relative',
+                    marginTop: this.props.vIndex > 0 ? this.props.spacing : 0,
+                    marginLeft: this.props.hIndex > 0 ? this.props.spacing : 0
                 }
             ] },
             React.createElement(Image, { source: source, style: [

@@ -26,6 +26,7 @@ export class AbstractElement {
             this.noTypeName();
         }
         this.parent = parent;
+        this.backgroundImage = json.backgroundImage;
         this.validateJSON(json, this.getRequiredProperties());
     }
     getParent() {
@@ -69,6 +70,19 @@ export class AbstractElement {
     }
     isValid() {
         return this.isValidJSON;
+    }
+    getBackgroundImageUrl() {
+        console.log('getBackgroundImageUrl');
+        console.log(this.backgroundImage);
+        if (typeof this.backgroundImage === 'string') {
+            return this.backgroundImage;
+        }
+        else {
+            if (this.backgroundImage) {
+                return this.backgroundImage.url;
+            }
+        }
+        return undefined;
     }
     noTypeName() {
         this.isValidJSON = false;

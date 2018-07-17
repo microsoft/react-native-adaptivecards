@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { SeparateLine } from '../../Components/Basic/SeparateLine';
 import { ContentElement, ContentElementType } from '../../Schema/Base/ContentElement';
 import { ImageElement } from '../../Schema/CardElements/Image';
@@ -40,6 +41,24 @@ export class ContentFactory {
             return [elementView];
         }
         return null;
+    }
+
+    public static createBackgroundImageView(node: React.ReactNode, background: string): JSX.Element {
+        console.log(background);
+        if (background) {
+            return (
+                <ImageBackground
+                    containerStyle={{ flex: 1 }}
+                    source={{ uri: background }}
+                    vIndex={0}
+                    hIndex={0}
+                >
+                    {node}
+                </ImageBackground>
+            );
+        } else {
+            return null;
+        }
     }
 
     public static createElement(element: ContentElement, index: number): JSX.Element {

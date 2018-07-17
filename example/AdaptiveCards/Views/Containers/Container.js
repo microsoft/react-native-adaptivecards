@@ -33,6 +33,12 @@ export class ContainerView extends React.Component {
         if (!element || !element.isValid()) {
             return null;
         }
-        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', onPress: element.selectAction ? this.onPress : undefined, spacing: this.styleConfig.spacing }, this.renderContents()));
+        const background = element.getBackgroundImageUrl();
+        if (background) {
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', onPress: element.selectAction ? this.onPress : undefined, spacing: this.styleConfig.spacing }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
+        }
+        else {
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', onPress: element.selectAction ? this.onPress : undefined, spacing: this.styleConfig.spacing }, this.renderContents()));
+        }
     }
 }

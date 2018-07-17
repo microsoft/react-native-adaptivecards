@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Row } from '../../Components/Containers/Row';
 import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
 import { StyleConfig, StyleManager } from '../../Styles/StyleManager';
+import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
 import { ColumnView } from './Column';
 
@@ -27,15 +28,29 @@ export class ColumnSetView extends React.Component<IProps> {
             return null;
         }
 
-        return (
-            <Row
-                vIndex={this.props.vIndex}
-                hIndex={this.props.hIndex}
-                spacing={this.styleConfig.spacing}
-            >
-                {this.renderColumns()}
-            </Row>
-        );
+        const background = element.getBackgroundImageUrl();
+
+        if (background) {
+            return (
+                <Row
+                    vIndex={this.props.vIndex}
+                    hIndex={this.props.hIndex}
+                    spacing={this.styleConfig.spacing}
+                >
+                    {ContentFactory.createBackgroundImageView(this.renderColumns(), background)}
+                </Row>
+            );
+        } else {
+            return (
+                <Row
+                    vIndex={this.props.vIndex}
+                    hIndex={this.props.hIndex}
+                    spacing={this.styleConfig.spacing}
+                >
+                    {this.renderColumns()}
+                </Row>
+            );
+        }
     }
 
     private renderColumns = () => {
