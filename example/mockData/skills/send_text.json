@@ -1,0 +1,48 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Message"
+                },
+                {
+                    "type": "FactSet",
+                    "facts": [
+                        {
+                            "title": "To",
+                            "value": "Bob"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Input.Text",
+            "id": "message",
+            "placeholder": "Enter Message",
+            "value": "play"
+        }
+    ],
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "data": {
+                "ux_send": "true",
+                "intent:confirm": "true"
+            },
+            "title": "Send"
+        },
+        {
+            "type": "Action.Submit",
+            "data": {
+                "intent:cancel": "true"
+            },
+            "title": "Cancel"
+        }
+    ]
+}

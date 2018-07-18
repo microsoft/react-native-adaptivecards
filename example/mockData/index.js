@@ -12,7 +12,11 @@ const stockUpdate = require('./stockUpdate.json');
 const weatherCompact = require('./weatherCompact.json');
 const weatherLarge = require('./weatherLarge.json');
 const news = require('./latestNews.json');
-const email = require('./skills/search_email.json');
+const readEmail = require('./skills/read_email.json');
+const searchEmail = require('./skills/search_email.json');
+const emailSent = require('./skills/email_sent.json');
+const sendText = require('./skills/send_text.json');
+const sendTextContact = require('./skills/send_text_contact_disam.json');
 export default {
     adaptiveUpdate,
     flightItinerary,
@@ -28,6 +32,10 @@ export default {
     weatherCompact,
     weatherLarge,
     news,
-    email
+    readEmail,
+    searchEmail,
+    emailSent,
+    sendText,
+    sendTextContact
 };
 //# sourceMappingURL=index.js.map

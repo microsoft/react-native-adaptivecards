@@ -12,23 +12,22 @@ export class TimeInputView extends React.Component {
             }, this.updateStore);
         };
         const { element } = this.props;
-        if (element && element.isValid()) {
+        if (element && element.isValid) {
             this.state = {
                 value: this.props.element.value,
             };
             this.updateStore();
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
         }
     }
     render() {
         const { element } = this.props;
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: this.styleConfig.spacing },
-            React.createElement(TimeInput, { vIndex: 0, hIndex: 0, value: this.state.value, onValueChange: this.onValueChange, validateInput: element.validateForm })));
+        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing) },
+            React.createElement(TimeInput, { vIndex: 0, hIndex: 0, value: this.state.value, onValueChange: this.onValueChange, validateInput: element.validate })));
     }
     updateStore() {
-        FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.props.element.validateForm(this.state.value));
+        FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.props.element.validate(this.state.value));
     }
 }

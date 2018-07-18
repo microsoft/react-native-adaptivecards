@@ -1,5 +1,5 @@
 import { ComponentClass } from 'react';
-import { DecStyleConfig } from './Views/Styles/DecStyleConfig';
+import { DecStyleConfig } from './Views/Style/DecStyleConfig';
 
 interface AdaptiveCardsProps {
     adaptiveCard: any;

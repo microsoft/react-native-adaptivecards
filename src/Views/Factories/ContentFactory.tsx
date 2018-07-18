@@ -12,7 +12,7 @@ import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
 import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
-import { HostConfigManager } from '../../Styles/HostConfig';
+import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
 import { ColumnSetView } from '../Containers/ColumnSet';
@@ -25,15 +25,15 @@ import { TextInputView } from '../Inputs/TextInput';
 import { TimeInputView } from '../Inputs/TimeInput';
 
 export class ContentFactory {
-    public static createView(element: ContentElement, index: number): JSX.Element[] {
+    public static createView(element: ContentElement, index: number, theme: 'default' | 'emphasis'): JSX.Element[] {
         if (element) {
-            let elementView = ContentFactory.createElement(element, index);
+            let elementView = ContentFactory.createElement(element, index, theme);
             if (index > 0 && element.separator) {
                 return [
                     <SeparateLine
                         key={'SeparateLine' + index}
                         color='#777777'
-                        margin={HostConfigManager.getInstance().getSpacing(element.spacing)}
+                        margin={StyleManager.getInstance().getSpacing(element.spacing)}
                     />,
                     elementView
                 ];
@@ -61,7 +61,7 @@ export class ContentFactory {
         }
     }
 
-    public static createElement(element: ContentElement, index: number): JSX.Element {
+    public static createElement(element: ContentElement, index: number, theme: 'default' | 'emphasis'): JSX.Element {
         if (element) {
             switch (element.type) {
                 case ContentElementType.TextInput:
@@ -71,6 +71,7 @@ export class ContentFactory {
                             element={element as TextInputElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.NumberInput:
@@ -80,6 +81,7 @@ export class ContentFactory {
                             element={element as NumberInputElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.DateInput:
@@ -89,6 +91,7 @@ export class ContentFactory {
                             element={element as DateInputElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.TimeInput:
@@ -98,6 +101,7 @@ export class ContentFactory {
                             element={element as TimeInputElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.Container:
@@ -107,6 +111,7 @@ export class ContentFactory {
                             element={element as ContainerElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.ColumnSet:
@@ -116,6 +121,7 @@ export class ContentFactory {
                             element={element as ColumnSetElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.TextBlock:
@@ -125,6 +131,7 @@ export class ContentFactory {
                             element={element as TextBlockElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.Image:
@@ -143,6 +150,7 @@ export class ContentFactory {
                             element={element as ImageSetElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.FactSet:
@@ -152,6 +160,7 @@ export class ContentFactory {
                             element={element as FactSetElement}
                             vIndex={index}
                             hIndex={0}
+                            theme={theme}
                         />
                     );
                 default:

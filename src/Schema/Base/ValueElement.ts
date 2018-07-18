@@ -1,4 +1,3 @@
-import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from './AbstractElement';
 
 export enum ValueElementType {
@@ -14,21 +13,13 @@ export abstract class ValueElement extends AbstractElement {
     constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.title = json.title;
             this.value = json.value;
         }
     }
 
-    public getRequiredProperties(): Array<string> {
+    protected getRequiredProperties(): Array<string> {
         return ['title', 'value'];
-    }
-
-    public isValue() {
-        return true;
-    }
-
-    public getStyleConfig(): ElementStyleConfig {
-        return {};
     }
 }

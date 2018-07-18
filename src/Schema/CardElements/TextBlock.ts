@@ -1,60 +1,35 @@
-import {
-    FontSize,
-    FontWeight,
-    HorizontalAlignment,
-    TextColor
-} from '../../Shared/Enums';
-import { EnumUtils } from '../../Shared/Utils';
-import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
-import { ContentElement, ContentElementType } from '../Base/ContentElement';
+import { ContentElement } from '../Base/ContentElement';
 
 export class TextBlockElement extends ContentElement {
     // Required
     public readonly text: string;
     // Optional
-    public readonly color?: TextColor;
-    public readonly horizontalAlignment?: HorizontalAlignment;
+    public readonly color?: 'default' | 'dark' | 'light' | 'accent' | 'good' | 'warning' | 'attention';
+    public readonly horizontalAlignment?: 'left' | 'center' | 'right';
     public readonly isSubtle?: boolean;
     public readonly maxLines?: number;
-    public readonly size?: FontSize;
-    public readonly weight?: FontWeight;
+    public readonly size?: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
+    public readonly weight?: 'default' | 'lighter' | 'bolder';
     public readonly wrap?: boolean;
+    public readonly children: AbstractElement[] = [];
 
     constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.text = json.text;
-            this.color = EnumUtils.getStringEnumValueOrDefault(TextColor, json.color, TextColor.Default) as TextColor;
-            this.horizontalAlignment =
-                EnumUtils.getStringEnumValueOrDefault(HorizontalAlignment, json.horizontalAlignment, HorizontalAlignment.Left) as
-                HorizontalAlignment;
+            this.color = json.color;
+            this.horizontalAlignment = json.horizontalAlignment;
             this.isSubtle = json.isSubtle || false;
             this.maxLines = json.maxLines;
-            this.size = EnumUtils.getStringEnumValueOrDefault(FontSize, json.size, FontSize.Default) as FontSize;
-            this.weight = EnumUtils.getStringEnumValueOrDefault(FontWeight, json.weight, FontWeight.Default) as FontWeight;
+            this.size = json.size;
+            this.weight = json.weight;
             this.wrap = json.wrap || false;
         }
     }
 
-    public getStyleConfig(): ElementStyleConfig {
-        return {
-            color: this.color,
-            horizontalAlignment: this.horizontalAlignment,
-            isSubtle: this.isSubtle,
-            fontSize: this.size,
-            fontWeight: this.weight,
-            wrap: this.wrap,
-            spacing: this.spacing,
-        };
-    }
-
-    public getTypeName(): string {
-        return ContentElementType.TextBlock;
-    }
-
-    public getRequiredProperties(): Array<string> {
-        return ['text'];
+    protected getRequiredProperties(): Array<string> {
+        return ['type', 'text'];
     }
 }

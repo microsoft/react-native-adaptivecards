@@ -29,7 +29,7 @@ export class ActionFactory {
         if (json && json.length > 0) {
             json.forEach((item) => {
                 let action = ActionFactory.create(item, parent);
-                if (action && action.isValidJSON) {
+                if (action && action.isValid) {
                     actionSet.push(action);
                 }
             });

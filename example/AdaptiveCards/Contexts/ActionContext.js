@@ -26,7 +26,6 @@ export class ActionContext {
     }
     registerHook(hook) {
         if (hook) {
-            console.log('Register Hook: ' + hook.actionType);
             if (this.hooks[hook.actionType] === undefined) {
                 this.hooks[hook.actionType] = [];
             }
@@ -36,8 +35,6 @@ export class ActionContext {
         }
     }
     getHooks(actionType) {
-        console.log(this.hooks);
-        console.log(actionType);
         if (actionType) {
             return this.hooks[actionType];
         }
@@ -45,13 +42,12 @@ export class ActionContext {
     }
     getActionEventHandler(target) {
         return ((...externalHooks) => {
-            let action = target.getAction();
+            let action = target.action;
             if (action) {
                 let callback = this.selectCallback(action);
                 let args = {
                     action: action,
                     formValidate: false,
-                    target: target,
                 };
                 let hookFuncs = this.getExecuteFuncs(action.type, externalHooks);
                 args = hookFuncs.reduce((prev, current) => {

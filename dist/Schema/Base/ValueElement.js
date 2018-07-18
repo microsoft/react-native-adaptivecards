@@ -7,18 +7,12 @@ export var ValueElementType;
 export class ValueElement extends AbstractElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.title = json.title;
             this.value = json.value;
         }
     }
     getRequiredProperties() {
         return ['title', 'value'];
-    }
-    isValue() {
-        return true;
-    }
-    getStyleConfig() {
-        return {};
     }
 }

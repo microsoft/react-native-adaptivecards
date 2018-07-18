@@ -1,28 +1,25 @@
-import { ActionElement, ActionType } from '../Base/ActionElement';
+import { ActionElement } from '../Base/ActionElement';
 import { CardElement } from '../Cards/Card';
 export class ShowCardActionElement extends ActionElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.card = new CardElement(json.card, parent);
         }
     }
-    getTypeName() {
-        return ActionType.ShowCard;
+    get scope() {
+        if (this.parent) {
+            return this.parent;
+        }
+        return undefined;
     }
-    getActionType() {
-        return ActionType.ShowCard;
-    }
-    getAllInputFieldIds() {
+    get children() {
         if (this.card) {
-            let children = this.card.getChildren();
-            return children.reduce((prev, current) => {
-                return prev.concat(current.getAllInputFieldIds());
-            }, []);
+            return [this.card];
         }
         return [];
     }
     getRequiredProperties() {
-        return ['card'];
+        return ['type', 'title', 'card'];
     }
 }

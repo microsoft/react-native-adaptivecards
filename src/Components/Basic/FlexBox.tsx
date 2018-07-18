@@ -38,11 +38,11 @@ export class FlexBox extends React.Component<IProps, IState> {
         return (
             <View
                 style={[
-                    this.getChildrenFlexStyle(),
-                    this.getFlexStyle(),
-                    this.getSizeStyle(),
-                    this.getVerticalMarginStyle(),
-                    this.getHorizontalMarginStyle(),
+                    this.childrenFlex,
+                    this.flex,
+                    this.size,
+                    this.verticalMargin,
+                    this.horizontalMargin,
                     this.props.style,
                 ]}
                 onLayout={this.onLayoutChange}
@@ -56,11 +56,11 @@ export class FlexBox extends React.Component<IProps, IState> {
         return (
             <TouchableOpacity
                 style={[
-                    this.getChildrenFlexStyle(),
-                    this.getFlexStyle(),
-                    this.getSizeStyle(),
-                    this.getVerticalMarginStyle(),
-                    this.getHorizontalMarginStyle(),
+                    this.childrenFlex,
+                    this.flex,
+                    this.size,
+                    this.verticalMargin,
+                    this.horizontalMargin,
                     this.props.style,
                 ]}
                 onLayout={this.onLayoutChange}
@@ -113,7 +113,7 @@ export class FlexBox extends React.Component<IProps, IState> {
         });
     }
 
-    private getFlexStyle = () => {
+    private get flex() {
         if (this.props.flex) {
             return {
                 flex: this.props.flex
@@ -122,18 +122,17 @@ export class FlexBox extends React.Component<IProps, IState> {
         return {};
     }
 
-    private getChildrenFlexStyle = () => {
-        let result: any = {
+    private get childrenFlex() {
+        return {
             flexDirection: this.props.flexDirection,
             alignItems: this.props.wrap === 'wrap' ? 'flex-start' : this.props.alignItems,
             justifyContent: this.props.justifyContent,
             height: this.props.height,
             flexWrap: this.props.wrap,
         };
-        return result;
     }
 
-    private getSizeStyle = () => {
+    private get size() {
         if (this.props.width === 'auto') {
             return {
                 flex: 0
@@ -154,19 +153,19 @@ export class FlexBox extends React.Component<IProps, IState> {
         };
     }
 
-    private getVerticalMarginStyle = () => {
+    private get verticalMargin() {
         if (this.props.vIndex > 0) {
             return {
-                marginTop: this.props.vSpace,
+                marginTop: this.props.vSpacing,
             };
         }
         return {};
     }
 
-    private getHorizontalMarginStyle = () => {
+    private get horizontalMargin() {
         if (this.props.hIndex > 0) {
             return {
-                marginLeft: this.props.hSpace,
+                marginLeft: this.props.hSpacing,
             };
         }
         return {};

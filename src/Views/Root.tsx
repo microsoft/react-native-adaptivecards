@@ -86,7 +86,7 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
 
     private formValidation = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
         if (args) {
-            args.formValidate = args.target.getForm().validateForm();
+            args.formValidate = args.action.scope.validateForm();
         }
         return args;
     }
@@ -94,8 +94,8 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
     private populateFormData = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
         if (args && args.formValidate) {
             args.formData = {
-                ...args.action.getData(),
-                ...FormContext.getInstance().getFormData(args.target.getForm().getAllInputFieldIds())
+                ...(args.action.data || {}),
+                ...FormContext.getInstance().getFormData(args.action.scope.inputFields)
             };
         }
         return args;

@@ -38,60 +38,6 @@ export class FlexBox extends React.Component {
                 }
             });
         };
-        this.getFlexStyle = () => {
-            if (this.props.flex) {
-                return {
-                    flex: this.props.flex
-                };
-            }
-            return {};
-        };
-        this.getChildrenFlexStyle = () => {
-            let result = {
-                flexDirection: this.props.flexDirection,
-                alignItems: this.props.wrap === 'wrap' ? 'flex-start' : this.props.alignItems,
-                justifyContent: this.props.justifyContent,
-                height: this.props.height,
-                flexWrap: this.props.wrap,
-            };
-            return result;
-        };
-        this.getSizeStyle = () => {
-            if (this.props.width === 'auto') {
-                return {
-                    flex: 0
-                };
-            }
-            if (this.props.width === 'stretch') {
-                return {
-                    flex: 1
-                };
-            }
-            if (this.props.relativeWidth && typeof this.props.width === 'number') {
-                return {
-                    flex: this.props.width
-                };
-            }
-            return {
-                width: this.props.width
-            };
-        };
-        this.getVerticalMarginStyle = () => {
-            if (this.props.vIndex > 0) {
-                return {
-                    marginTop: this.props.vSpace,
-                };
-            }
-            return {};
-        };
-        this.getHorizontalMarginStyle = () => {
-            if (this.props.hIndex > 0) {
-                return {
-                    marginLeft: this.props.hSpace,
-                };
-            }
-            return {};
-        };
         this.state = {
             width: 0,
             height: 0,
@@ -105,22 +51,75 @@ export class FlexBox extends React.Component {
     }
     renderBox() {
         return (React.createElement(View, { style: [
-                this.getChildrenFlexStyle(),
-                this.getFlexStyle(),
-                this.getSizeStyle(),
-                this.getVerticalMarginStyle(),
-                this.getHorizontalMarginStyle(),
+                this.childrenFlex,
+                this.flex,
+                this.size,
+                this.verticalMargin,
+                this.horizontalMargin,
                 this.props.style,
             ], onLayout: this.onLayoutChange }, this.renderChildren()));
     }
     renderTouchableBox() {
         return (React.createElement(TouchableOpacity, { style: [
-                this.getChildrenFlexStyle(),
-                this.getFlexStyle(),
-                this.getSizeStyle(),
-                this.getVerticalMarginStyle(),
-                this.getHorizontalMarginStyle(),
+                this.childrenFlex,
+                this.flex,
+                this.size,
+                this.verticalMargin,
+                this.horizontalMargin,
                 this.props.style,
             ], onLayout: this.onLayoutChange, onPress: this.props.onPress }, this.renderChildren()));
+    }
+    get flex() {
+        if (this.props.flex) {
+            return {
+                flex: this.props.flex
+            };
+        }
+        return {};
+    }
+    get childrenFlex() {
+        return {
+            flexDirection: this.props.flexDirection,
+            alignItems: this.props.wrap === 'wrap' ? 'flex-start' : this.props.alignItems,
+            justifyContent: this.props.justifyContent,
+            height: this.props.height,
+            flexWrap: this.props.wrap,
+        };
+    }
+    get size() {
+        if (this.props.width === 'auto') {
+            return {
+                flex: 0
+            };
+        }
+        if (this.props.width === 'stretch') {
+            return {
+                flex: 1
+            };
+        }
+        if (this.props.relativeWidth && typeof this.props.width === 'number') {
+            return {
+                flex: this.props.width
+            };
+        }
+        return {
+            width: this.props.width
+        };
+    }
+    get verticalMargin() {
+        if (this.props.vIndex > 0) {
+            return {
+                marginTop: this.props.vSpacing,
+            };
+        }
+        return {};
+    }
+    get horizontalMargin() {
+        if (this.props.hIndex > 0) {
+            return {
+                marginLeft: this.props.hSpacing,
+            };
+        }
+        return {};
     }
 }

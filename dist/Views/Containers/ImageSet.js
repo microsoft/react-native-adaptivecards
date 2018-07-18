@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { ImageUtils } from '../../Shared/Utils';
 import { StyleManager } from '../../Styles/StyleManager';
+import { ImageUtils } from '../../Utils/ImageUtils';
 import { ImageView } from '../CardElements/Image';
 export class ImageSetView extends React.Component {
     constructor(props) {
@@ -11,10 +11,10 @@ export class ImageSetView extends React.Component {
         };
         this.renderImage = (info) => {
             const { element } = this.props;
-            if (!element || !element.isValid()) {
+            if (!element || !element.isValid) {
                 return undefined;
             }
-            return (React.createElement(ImageView, { key: info.index, vIndex: 1, hIndex: info.index, element: info.item, size: element.imageSize, maxWidth: this.state.maxWidth, maxHeight: this.state.maxHeight, fitAxis: 'v', onImageSize: this.onImageSize, hSpace: 10 }));
+            return (React.createElement(ImageView, { key: info.index, vIndex: 1, hIndex: info.index, element: info.item, size: element.imageSize, maxWidth: this.state.maxWidth, maxHeight: this.state.maxHeight, fitAxis: 'v', hSpacing: 10 }));
         };
         this.onImageSize = (width, height) => {
             this.setState({
@@ -22,8 +22,8 @@ export class ImageSetView extends React.Component {
             });
         };
         const { element } = this.props;
-        if (element && element.isValid()) {
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
+        if (element && element.isValid) {
+            this.style = StyleManager.getInstance().getImageSetStyle(element);
         }
         this.state = {
             maxWidth: undefined,
@@ -40,16 +40,16 @@ export class ImageSetView extends React.Component {
                 containerWidth: containerWidth,
                 containerHeight: containerHeight,
             });
-            ImageUtils.fetchSetSize(element.images.map(img => img.url), { width: containerWidth, height: containerHeight }, this.styleConfig.imgSize, this.onImageSize, (error) => {
+            ImageUtils.fetchSetSize(element.images.map(img => img.url), { width: containerWidth, height: containerHeight }, this.style.imageSize, this.onImageSize, (error) => {
                 console.log(error);
             });
         }
     }
     render() {
         const { element } = this.props;
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, minHeight: this.state.maxHeight + this.styleConfig.spacing }));
+        return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, minHeight: this.state.maxHeight + this.style.spacing }));
     }
 }

@@ -1,6 +1,3 @@
-import { Spacing } from '../../Shared/Enums';
-import { EnumUtils } from '../../Shared/Utils';
-import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from './AbstractElement';
 
 export enum ContentElementType {
@@ -21,32 +18,17 @@ export enum ContentElementType {
 }
 
 export abstract class ContentElement extends AbstractElement {
-    // Optional
     public readonly id?: string;
-    public readonly spacing?: Spacing;
+    public readonly spacing?: 'none' | 'default' | 'small' | 'medium' | 'large' | 'extraLarge' | 'padding';
     public readonly separator?: boolean = false;
 
     constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.id = json.id;
-            this.spacing = EnumUtils.getStringEnumValueOrDefault(Spacing, json.spacing, Spacing.Default) as Spacing;
+            this.spacing = json.spacing;
             this.separator = json.separator || false;
         }
-    }
-
-    public getId() {
-        return this.id;
-    }
-
-    public getStyleConfig(): ElementStyleConfig {
-        return {
-            spacing: this.spacing
-        };
-    }
-
-    public isContent() {
-        return true;
     }
 }

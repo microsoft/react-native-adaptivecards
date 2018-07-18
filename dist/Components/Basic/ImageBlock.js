@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Image, Text, View } from 'react-native';
-import { ImageUtils } from '../../Shared/Utils';
+import { ImageUtils } from '../../Utils/ImageUtils';
 import { FlexBox } from './FlexBox';
 export class ImageBlock extends React.Component {
     constructor(props) {
@@ -69,11 +69,11 @@ export class ImageBlock extends React.Component {
             ], onLayoutChange: this.onLayoutChange, onPress: this.props.onPress, width: 'auto' }),
             this.renderPlaceholder(),
             React.createElement(Image, { accessible: !!this.props.alt, accessibilityLabel: this.props.alt, source: { uri: this.props.url }, style: [
-                    this.getSize(),
+                    this.size,
                     this.props.imgStyle
                 ], onLoad: this.onImageLoad, onError: this.onImageError, onLayout: this.onImageSizeUpdate })));
     }
-    getSize() {
+    get size() {
         return ImageUtils.fitSize(this.state, { width: this.props.maxWidth, height: this.props.maxHeight }, { width: this.props.maxWidth, height: this.props.maxHeight }, this.props.fitAxis);
     }
 }

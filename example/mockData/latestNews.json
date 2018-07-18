@@ -20,6 +20,7 @@
                             "url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=0425c04c3a6841f390f5c1ad60162df2&contentid=QwSQQwZoigUS7jBAJf06fw&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=70629021414711DB08FDA4208821ECA2&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=FD8E39E4387647E39553938ED0D06304&expire=1531631022&seemorefilter=NewsAnswerV2_CategoryNews&s=.apiScreenshotItem%3anth-child(1)&apiq=7RdTLqXz9yex6SGLYcr3UCYnqjwm1RaE6GIdqncgRpnI0DK7TL9Qor9yDD4HL10zgx_GNi4OVrBZMiR7PhDIe0JGXYk14hZUaAMlk8hGhvmvxJ2Ke0QOAi7fE6K6YWsCCaQKuAjsifYz5K0NN14dlrrbKhCy5pwjKNmKO-VWO8Y",
                             "selectAction": {
                                 "url": "http://www.ibtimes.com/study-finds-young-people-no-longer-getting-news-facebook-2691001",
+                                "title": "View",
                                 "type": "Action.OpenUrl"
                             },
                             "size": "auto",

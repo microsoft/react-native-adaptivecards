@@ -1,7 +1,4 @@
-import { InputTextStyle } from '../../Shared/Enums';
-import { EnumUtils } from '../../Shared/Utils';
 import { AbstractElement } from '../Base/AbstractElement';
-import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 
 export class TextInputElement extends InputElement {
@@ -9,24 +6,31 @@ export class TextInputElement extends InputElement {
     public readonly isMultiline?: boolean;
     public readonly maxLength?: number;
     public readonly placeholder?: string;
-    public readonly style?: InputTextStyle;
+    public readonly style?: 'text' | 'tel' | 'url' | 'email';
+    public readonly children: AbstractElement[] = [];
 
     public constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.isMultiline = json.isMultiline || false;
             this.maxLength = json.maxLength;
             this.placeholder = json.placeholder;
-            this.style = EnumUtils.getEnumValueOrDefault(InputTextStyle, json.style, InputTextStyle.Text);
+            this.style = json.style;
         }
     }
 
-    public getTypeName(): string {
-        return ContentElementType.TextInput;
+    public validate(input: string): boolean {
+        // TODO:: verify styles.
+        if (this.maxLength) {
+            if (input !== undefined && input.length > this.maxLength) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public getRequiredProperties(): Array<string> {
-        return ['id'];
+        return ['type', 'id'];
     }
 }

@@ -1,5 +1,3 @@
-import { Spacing } from '../../Shared/Enums';
-import { EnumUtils } from '../../Shared/Utils';
 import { AbstractElement } from './AbstractElement';
 export var ContentElementType;
 (function (ContentElementType) {
@@ -22,21 +20,10 @@ export class ContentElement extends AbstractElement {
     constructor(json, parent) {
         super(json, parent);
         this.separator = false;
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.id = json.id;
-            this.spacing = EnumUtils.getStringEnumValueOrDefault(Spacing, json.spacing, Spacing.Default);
+            this.spacing = json.spacing;
             this.separator = json.separator || false;
         }
-    }
-    getId() {
-        return this.id;
-    }
-    getStyleConfig() {
-        return {
-            spacing: this.spacing
-        };
-    }
-    isContent() {
-        return true;
     }
 }

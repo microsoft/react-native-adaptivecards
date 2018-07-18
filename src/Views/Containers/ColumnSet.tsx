@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Row } from '../../Components/Containers/Row';
 import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
-import { StyleConfig, StyleManager } from '../../Styles/StyleManager';
+import { StyleManager } from '../../Styles/StyleManager';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
 import { ColumnView } from './Column';
@@ -10,21 +10,14 @@ interface IProps extends IElementViewProps<ColumnSetElement> {
 }
 
 export class ColumnSetView extends React.Component<IProps> {
-    private styleConfig: StyleConfig;
-
     constructor(props: IProps) {
         super(props);
-
-        const { element } = this.props;
-        if (element && element.isValid()) {
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
-        }
     }
 
     public render() {
         const { element } = this.props;
 
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
 
@@ -35,7 +28,7 @@ export class ColumnSetView extends React.Component<IProps> {
                 <Row
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
-                    spacing={this.styleConfig.spacing}
+                    spacing={StyleManager.getInstance().getSpacing(element.spacing)}
                 >
                     {ContentFactory.createBackgroundImageView(this.renderColumns(), background)}
                 </Row>
@@ -45,7 +38,7 @@ export class ColumnSetView extends React.Component<IProps> {
                 <Row
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
-                    spacing={this.styleConfig.spacing}
+                    spacing={StyleManager.getInstance().getSpacing(element.spacing)}
                 >
                     {this.renderColumns()}
                 </Row>
@@ -56,17 +49,18 @@ export class ColumnSetView extends React.Component<IProps> {
     private renderColumns = () => {
         const { element } = this.props;
 
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return undefined;
         }
 
-        if (element.hasColumns()) {
+        if (element.columns) {
             return element.columns.map((column, index) => (
                 <ColumnView
                     key={index}
                     vIndex={0}
                     hIndex={index}
                     element={column}
+                    theme={this.props.theme}
                 />
             ));
         }

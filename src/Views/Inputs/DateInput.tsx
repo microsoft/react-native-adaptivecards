@@ -3,7 +3,7 @@ import { Row } from '../../Components/Containers/Row';
 import { DateInput } from '../../Components/Inputs/DateInput';
 import { FormContext } from '../../Contexts/FormContext';
 import { DateInputElement } from '../../Schema/Inputs/DateInput';
-import { StyleConfig, StyleManager } from '../../Styles/StyleManager';
+import { StyleManager } from '../../Styles/StyleManager';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<DateInputElement> {
@@ -14,26 +14,23 @@ interface IState {
 }
 
 export class DateInputView extends React.Component<IProps, IState> {
-    private styleConfig: StyleConfig;
-
     constructor(props: IProps) {
         super(props);
 
         const { element } = this.props;
 
-        if (element && element.isValid()) {
+        if (element && element.isValid) {
             this.state = {
                 value: this.props.element.value,
             };
             this.updateStore();
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
         }
     }
 
     public render() {
         const { element } = this.props;
 
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
 
@@ -41,14 +38,14 @@ export class DateInputView extends React.Component<IProps, IState> {
             <Row
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
-                spacing={this.styleConfig.spacing}
+                spacing={StyleManager.getInstance().getSpacing(element.spacing)}
             >
                 <DateInput
                     vIndex={0}
                     hIndex={0}
                     value={this.state.value}
                     onValueChange={this.onValueChange}
-                    validateInput={element.validateForm}
+                    validateInput={element.validate}
                 />
             </Row>
         );
@@ -64,7 +61,7 @@ export class DateInputView extends React.Component<IProps, IState> {
         FormContext.getInstance().updateField(
             this.props.element.id,
             this.state.value,
-            this.props.element.validateForm(this.state.value)
+            this.props.element.validate(this.state.value)
         );
     }
 }

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
-import { ImageElement } from 'Schema/CardElements/Image';
+import { ImageElement } from '../../Schema/CardElements/Image';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
-import { ImageUtils } from '../../Shared/Utils';
-import { StyleConfig, StyleManager } from '../../Styles/StyleManager';
+import { StyleManager } from '../../Styles/StyleManager';
+import { ImageSetStyle } from '../../Styles/Types';
+import { ImageUtils } from '../../Utils/ImageUtils';
 import { ImageView } from '../CardElements/Image';
 import { IElementViewProps } from '../Shared/BaseProps';
 
@@ -20,14 +21,14 @@ interface IState {
 }
 
 export class ImageSetView extends React.Component<IProps, IState> {
-    private styleConfig: StyleConfig;
+    private style: ImageSetStyle;
 
     constructor(props: IProps) {
         super(props);
 
         const { element } = this.props;
-        if (element && element.isValid()) {
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
+        if (element && element.isValid) {
+            this.style = StyleManager.getInstance().getImageSetStyle(element);
         }
 
         this.state = {
@@ -49,7 +50,7 @@ export class ImageSetView extends React.Component<IProps, IState> {
             ImageUtils.fetchSetSize(
                 element.images.map(img => img.url),
                 { width: containerWidth, height: containerHeight },
-                this.styleConfig.imgSize,
+                this.style.imageSize,
                 this.onImageSize,
                 (error: any) => {
                     console.log(error);
@@ -61,7 +62,7 @@ export class ImageSetView extends React.Component<IProps, IState> {
     public render() {
         const { element } = this.props;
 
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
 
@@ -71,7 +72,7 @@ export class ImageSetView extends React.Component<IProps, IState> {
                 renderItem={this.renderImage}
                 keyExtractor={this.keyExtractor}
                 horizontal={true}
-                minHeight={this.state.maxHeight + this.styleConfig.spacing}
+                minHeight={this.state.maxHeight + this.style.spacing}
             />
         );
     }
@@ -83,7 +84,7 @@ export class ImageSetView extends React.Component<IProps, IState> {
     private renderImage = (info: ListRenderItemInfo<ImageElement>) => {
         const { element } = this.props;
 
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return undefined;
         }
 
@@ -97,8 +98,7 @@ export class ImageSetView extends React.Component<IProps, IState> {
                 maxWidth={this.state.maxWidth}
                 maxHeight={this.state.maxHeight}
                 fitAxis='v'
-                onImageSize={this.onImageSize}
-                hSpace={10}
+                hSpacing={10}
             />
         );
     }

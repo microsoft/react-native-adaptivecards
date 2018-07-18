@@ -1,37 +1,28 @@
-import { ContentElement, ContentElementType } from '../Base/ContentElement';
+import { ContentElement } from '../Base/ContentElement';
 import { FactElement } from './Fact';
 export class FactSetElement extends ContentElement {
     constructor(json, parent) {
         super(json, parent);
         this.facts = [];
-        if (this.isValidJSON) {
-            this.facts = this.createFactSet(json.facts);
+        if (this.isValid) {
+            this.facts = [];
+            if (json.facts) {
+                json.facts.forEach((item) => {
+                    let fact = new FactElement(item, this);
+                    if (fact && fact.isValid) {
+                        this.facts.push(fact);
+                    }
+                });
+            }
         }
     }
-    getTypeName() {
-        return ContentElementType.FactSet;
+    get children() {
+        if (this.facts) {
+            return this.facts;
+        }
+        return [];
     }
     getRequiredProperties() {
-        return ['facts'];
-    }
-    getStyleConfig() {
-        return {
-            spacing: this.spacing,
-        };
-    }
-    hasFacts() {
-        return this.facts && this.facts.length > 0;
-    }
-    createFactSet(json) {
-        let factSet = [];
-        if (json && json.length > 0) {
-            json.forEach((item) => {
-                let fact = new FactElement(item, this);
-                if (fact && fact.isValidJSON) {
-                    factSet.push(fact);
-                }
-            });
-        }
-        return factSet;
+        return ['type', 'facts'];
     }
 }

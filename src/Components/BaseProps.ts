@@ -11,8 +11,8 @@ export interface IFlexProps {
     height?: number | string;
     vIndex: number;
     hIndex: number;
-    vSpace?: number;
-    hSpace?: number;
+    vSpacing?: number;
+    hSpacing?: number;
     containerWidth?: number;
     containerHeight?: number;
 }

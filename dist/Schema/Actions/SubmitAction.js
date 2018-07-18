@@ -1,21 +1,16 @@
-import { ActionElement, ActionType } from '../Base/ActionElement';
+import { ActionElement } from '../Base/ActionElement';
 export class SubmitActionElement extends ActionElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
+        this.children = [];
+        if (this.isValid) {
             this.data = json.data;
         }
     }
-    getTypeName() {
-        return ActionType.Submit;
+    get scope() {
+        return this.ancestorsAndSelf.find(element => element.parent === undefined);
     }
     getRequiredProperties() {
-        return [];
-    }
-    getActionType() {
-        return ActionType.Submit;
-    }
-    getData() {
-        return this.data;
+        return ['type', 'title'];
     }
 }

@@ -1,32 +1,21 @@
-import { ContainerStyle } from '../../Shared/Enums';
-import { EnumUtils } from '../../Shared/Utils';
-import { ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
-import { CardElementFactory } from '../Factories/ContentElementFactory';
+import { ContentElementFactory } from '../Factories/ContentElementFactory';
 export class ContainerElement extends FormElement {
     constructor(json, parent) {
         super(json, parent);
         this.items = [];
-        if (this.isValidJSON) {
-            this.items = CardElementFactory.createSet(json.items, this);
-            this.style = EnumUtils.getStringEnumValueOrDefault(ContainerStyle, json.style, ContainerStyle.Default);
+        if (this.isValid) {
+            this.style = json.style;
+            this.items = ContentElementFactory.createSet(json.items, this);
         }
     }
-    getTypeName() {
-        return ContentElementType.Container;
+    get children() {
+        if (this.items) {
+            return this.items;
+        }
+        return [];
     }
     getRequiredProperties() {
-        return ['items'];
-    }
-    getChildren() {
-        return this.items;
-    }
-    getStyleConfig() {
-        return {
-            spacing: this.spacing,
-        };
-    }
-    hasItems() {
-        return this.items && this.items.length > 0;
+        return ['type', 'items'];
     }
 }

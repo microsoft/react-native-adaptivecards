@@ -1,7 +1,4 @@
-import { ChoiceSetStyle } from '../../Shared/Enums';
-import { EnumUtils } from '../../Shared/Utils';
 import { AbstractElement } from '../Base/AbstractElement';
-import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 import { ChoiceInputElement } from './ChoiceInput';
 
@@ -11,37 +8,38 @@ export class ChoiceInputSetElement extends InputElement {
 
     // Optional
     public readonly isMultiSelect?: boolean;
-    public readonly style?: ChoiceSetStyle;
+    public readonly style?: 'compact' | 'expanded';
 
     constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.isMultiSelect = json.isMultiSelect || false;
-            this.style = EnumUtils.getEnumValueOrDefault(ChoiceSetStyle, json.style, ChoiceSetStyle.Compact);
-            this.choices = this.createChoiceSet(json.choices);
+            this.style = json.style;
+            this.choices = [];
+            if (json.choices) {
+                json.choices.forEach((item: any) => {
+                    let inputChoice: ChoiceInputElement = new ChoiceInputElement(item, this);
+                    if (inputChoice && inputChoice.isValid) {
+                        this.choices.push(inputChoice);
+                    }
+                });
+            }
         }
     }
 
-    public getTypeName(): string {
-        return ContentElementType.ChoiceSetInput;
-    }
-
-    public getRequiredProperties(): Array<string> {
-        return ['id', 'choices'];
-    }
-
-    // TODO: Try to use generic type.
-    private createChoiceSet(json: any): Array<ChoiceInputElement> {
-        let inputChoiceSet: Array<ChoiceInputElement> = [];
-        if (json && json.length > 0) {
-            json.forEach((item: any) => {
-                let inputChoice: ChoiceInputElement = new ChoiceInputElement(item, this);
-                if (inputChoice && inputChoice.isValidJSON) {
-                    inputChoiceSet.push(inputChoice);
-                }
-            });
+    public get children(): AbstractElement[] {
+        if (this.choices) {
+            return this.choices;
         }
-        return inputChoiceSet;
+        return [];
+    }
+
+    public validate(input: string): boolean {
+        return true;
+    }
+
+    protected getRequiredProperties(): Array<string> {
+        return ['type', 'id', 'choices'];
     }
 }

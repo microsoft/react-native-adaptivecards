@@ -1,4 +1,5 @@
-import { JsonUtils } from '../../Shared/Utils';
+import { ConsoleUtils } from '../../Utils/ConsoleUtils';
+import { JsonUtils } from '../../Utils/JsonUtils';
 export var CardElementType;
 (function (CardElementType) {
     CardElementType["Column"] = "Column";
@@ -20,94 +21,31 @@ export var CardElementType;
 })(CardElementType || (CardElementType = {}));
 export class AbstractElement {
     constructor(json, parent) {
-        this.isValidJSON = true;
-        this.type = this.getTypeName();
-        if (!this.type) {
-            this.noTypeName();
-        }
-        this.parent = parent;
-        this.backgroundImage = json.backgroundImage;
-        this.validateJSON(json, this.getRequiredProperties());
-    }
-    getParent() {
-        return this.parent;
-    }
-    getAction() {
-        return undefined;
-    }
-    getActions() {
-        return [];
-    }
-    getForm() {
-        return undefined;
-    }
-    hasAction() {
-        return false;
-    }
-    isAction() {
-        return false;
-    }
-    isContent() {
-        return false;
-    }
-    isForm() {
-        return false;
-    }
-    isInput() {
-        return false;
-    }
-    isValue() {
-        return false;
-    }
-    validateForm(value) {
-        return true;
-    }
-    getId() {
-        return undefined;
-    }
-    getAllInputFieldIds() {
-        return [];
-    }
-    isValid() {
-        return this.isValidJSON;
-    }
-    getBackgroundImageUrl() {
-        console.log('getBackgroundImageUrl');
-        console.log(this.backgroundImage);
-        if (typeof this.backgroundImage === 'string') {
-            return this.backgroundImage;
+        let validation = JsonUtils.isValidateJson(json, this.getRequiredProperties());
+        if (!validation.isValid) {
+            ConsoleUtils.error('AbstractElement', validation.message);
         }
         else {
-            if (this.backgroundImage) {
-                return this.backgroundImage.url;
-            }
+            this.isValid = validation.isValid;
+            this.type = json.type;
+            this.parent = parent;
         }
-        return undefined;
     }
-    noTypeName() {
-        this.isValidJSON = false;
-        console.error('Please return a valid type name in \'getTypeName()\' method.');
-    }
-    noDataFound() {
-        this.isValidJSON = false;
-        console.error(this.getTypeName() + ': data not found');
-    }
-    invalidRequiredProperty(property) {
-        this.isValidJSON = false;
-        console.error(this.getTypeName() + ': ' + property + ' is required');
-    }
-    validateJSON(json, requiredProperties) {
-        if (!json) {
-            this.noDataFound();
+    get ancestors() {
+        if (this.parent) {
+            return [this.parent, ...this.parent.ancestors];
         }
-        if (requiredProperties) {
-            for (let i = 0; i < requiredProperties.length; i++) {
-                let property = requiredProperties[i];
-                if (!JsonUtils.isValidValue(json[property])) {
-                    this.invalidRequiredProperty(property);
-                    return;
-                }
-            }
-        }
+        return [];
+    }
+    get ancestorsAndSelf() {
+        return [this, ...this.ancestors];
+    }
+    get descends() {
+        return this.children.reduce((prev, current) => {
+            return prev.concat(current.descends);
+        }, this.children.slice());
+    }
+    get descendsAndSelf() {
+        return [this, ...this.descends];
     }
 }

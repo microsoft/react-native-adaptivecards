@@ -1,34 +1,33 @@
-import { ChoiceSetStyle } from '../../Shared/Enums';
-import { EnumUtils } from '../../Shared/Utils';
-import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 import { ChoiceInputElement } from './ChoiceInput';
 export class ChoiceInputSetElement extends InputElement {
     constructor(json, parent) {
         super(json, parent);
         this.choices = [];
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.isMultiSelect = json.isMultiSelect || false;
-            this.style = EnumUtils.getEnumValueOrDefault(ChoiceSetStyle, json.style, ChoiceSetStyle.Compact);
-            this.choices = this.createChoiceSet(json.choices);
+            this.style = json.style;
+            this.choices = [];
+            if (json.choices) {
+                json.choices.forEach((item) => {
+                    let inputChoice = new ChoiceInputElement(item, this);
+                    if (inputChoice && inputChoice.isValid) {
+                        this.choices.push(inputChoice);
+                    }
+                });
+            }
         }
     }
-    getTypeName() {
-        return ContentElementType.ChoiceSetInput;
+    get children() {
+        if (this.choices) {
+            return this.choices;
+        }
+        return [];
+    }
+    validate(input) {
+        return true;
     }
     getRequiredProperties() {
-        return ['id', 'choices'];
-    }
-    createChoiceSet(json) {
-        let inputChoiceSet = [];
-        if (json && json.length > 0) {
-            json.forEach((item) => {
-                let inputChoice = new ChoiceInputElement(item, this);
-                if (inputChoice && inputChoice.isValidJSON) {
-                    inputChoiceSet.push(inputChoice);
-                }
-            });
-        }
-        return inputChoiceSet;
+        return ['type', 'id', 'choices'];
     }
 }

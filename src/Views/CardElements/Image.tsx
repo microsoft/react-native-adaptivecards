@@ -3,8 +3,8 @@ import * as React from 'react';
 import { ImageBlock } from '../../Components/Basic/ImageBlock';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ImageElement } from '../../Schema/CardElements/Image';
-import { HostConfigManager } from '../../Styles/HostConfig';
-import { StyleConfig, StyleManager } from '../../Styles/StyleManager';
+import { StyleManager } from '../../Styles/StyleManager';
+import { ImageStyle } from '../../Styles/Types';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<ImageElement> {
@@ -14,8 +14,8 @@ interface IProps extends IElementViewProps<ImageElement> {
     maxWidth?: number;
     maxHeight?: number;
     fitAxis?: 'h' | 'v';
-    vSpace?: number;
-    hSpace?: number;
+    vSpacing?: number;
+    hSpacing?: number;
     onImageSize?: (width: number, height: number, url: string) => void;
 }
 
@@ -25,18 +25,21 @@ interface IState {
 }
 
 export class ImageView extends React.Component<IProps, IState> {
-    private styleConfig: StyleConfig;
+    private style: ImageStyle;
 
     constructor(props: IProps) {
         super(props);
 
         const { element } = this.props;
-        if (element && element.isValid()) {
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
+        if (element && element.isValid) {
+            this.style = StyleManager.getInstance().getImageStyle(element);
 
             if (this.props.size) {
                 // Override the element's size if the size is set by parent.
-                this.styleConfig.imgSize = HostConfigManager.getInstance().getImgSize(this.props.size);
+                this.style.size = StyleManager.getInstance().getImageSize(element.size);
+                if (this.style.size === 'stretch') {
+                    this.style.align = 'stretch';
+                }
             }
 
             this.state = {
@@ -49,7 +52,7 @@ export class ImageView extends React.Component<IProps, IState> {
     public render() {
         const { element } = this.props;
 
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
 
@@ -61,29 +64,29 @@ export class ImageView extends React.Component<IProps, IState> {
                 url={element.url}
                 alt={element.altText}
                 flexDirection='row'
-                alignSelf={this.styleConfig.alignSelf}
-                alignItems={this.styleConfig.alignSelf}
+                alignSelf={this.style.align}
+                alignItems={this.style.align}
                 alignContent='center'
                 justifyContent='center'
-                width={this.styleConfig.imgSize}
-                vSpace={this.styleConfig.spacing || this.props.vSpace}
-                hSpace={this.props.hSpace}
+                width={this.style.size}
+                vSpacing={this.style.spacing || this.props.vSpacing}
+                hSpacing={this.props.hSpacing}
                 containerWidth={this.props.containerWidth}
                 containerHeight={this.props.containerHeight}
                 maxWidth={this.props.maxWidth}
                 maxHeight={this.props.maxHeight}
                 fitAxis={this.props.fitAxis}
-                imgStyle={this.getBorderRadius()}
+                imgStyle={this.borderRadius}
                 onPress={element.selectAction ? this.onPress : undefined}
                 onImageSize={this.onImageSize}
             />
         );
     }
 
-    private getBorderRadius = () => {
+    private get borderRadius() {
         const { element } = this.props;
 
-        if (element && element.isValid() && element.style === 'person') {
+        if (element && element.isValid && element.style === 'person') {
             return {
                 borderRadius: this.state.width / 2,
             };
@@ -98,7 +101,7 @@ export class ImageView extends React.Component<IProps, IState> {
         }, () => {
             const { element } = this.props;
 
-            if (element && element.isValid()) {
+            if (element && element.isValid) {
                 if (this.props.onImageSize) {
                     this.props.onImageSize(width, height, element.url);
                 }
@@ -107,7 +110,6 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     private onPress = () => {
-        console.log('ImageView pressed');
         let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
         if (callback) {
             callback();

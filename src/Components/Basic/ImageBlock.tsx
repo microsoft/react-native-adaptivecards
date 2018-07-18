@@ -5,7 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
-import { ImageUtils } from '../../Shared/Utils';
+import { ImageUtils } from '../../Utils/ImageUtils';
 import { IFlexProps } from '../BaseProps';
 import { FlexBox } from './FlexBox';
 
@@ -58,7 +58,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
                     accessibilityLabel={this.props.alt}
                     source={{ uri: this.props.url }}
                     style={[
-                        this.getSize(),
+                        this.size,
                         this.props.imgStyle
                     ]}
                     onLoad={this.onImageLoad}
@@ -146,7 +146,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
         });
     }
 
-    private getSize() {
+    private get size() {
         return ImageUtils.fitSize(
             this.state,
             { width: this.props.maxWidth, height: this.props.maxHeight },

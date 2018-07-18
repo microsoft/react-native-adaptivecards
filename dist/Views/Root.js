@@ -28,13 +28,13 @@ export class CardRootView extends React.PureComponent {
         };
         this.formValidation = (args) => {
             if (args) {
-                args.formValidate = args.target.getForm().validateForm();
+                args.formValidate = args.action.scope.validateForm();
             }
             return args;
         };
         this.populateFormData = (args) => {
             if (args && args.formValidate) {
-                args.formData = Object.assign({}, args.action.getData(), FormContext.getInstance().getFormData(args.target.getForm().getAllInputFieldIds()));
+                args.formData = Object.assign({}, (args.action.data || {}), FormContext.getInstance().getFormData(args.action.scope.inputFields));
             }
             return args;
         };

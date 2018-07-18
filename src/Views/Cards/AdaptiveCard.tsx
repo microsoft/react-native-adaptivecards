@@ -13,6 +13,8 @@ import { ActionElement, ActionType } from '../../Schema/Base/ActionElement';
 import { ContentElement } from '../../Schema/Base/ContentElement';
 import { CardElement } from '../../Schema/Cards/Card';
 import { ActionEventHandlerArgs } from '../../Shared/Types';
+import { StyleManager } from '../../Styles/StyleManager';
+import { ShowCardStyle } from '../../Styles/Types';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
@@ -27,6 +29,7 @@ interface IState {
 
 export class AdaptiveCardView extends React.Component<IProps, IState> {
     private actionContext: ActionContext;
+    private showCardStyle: ShowCardStyle;
 
     constructor(props: IProps) {
         super(props);
@@ -39,10 +42,11 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
             name: 'showSubCard',
             actionType: ActionType.ShowCard
         });
+        this.showCardStyle = StyleManager.getInstance().getShowCardStyle();
     }
 
     public render(): JSX.Element {
-        if (!this.props.element.isValid()) {
+        if (!this.props.element.isValid) {
             // TODO: render error card
             return undefined;
         }
@@ -96,7 +100,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
     }
 
     private renderBody(): JSX.Element {
-        if (!this.props.element.hasBody()) {
+        if (!this.props.element.body) {
             return null;
         }
         return (
@@ -107,7 +111,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
             >
                 {
                     this.props.element.body.map((contentElement: ContentElement, index: number) =>
-                        ContentFactory.createView(contentElement, index)
+                        ContentFactory.createView(contentElement, index, this.props.theme)
                     )
                 }
             </Column>
@@ -115,22 +119,40 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
     }
 
     private renderActions() {
-        if (!this.props.element.hasActions()) {
+        if (!this.props.element.actions) {
             return null;
         }
 
-        return (
-            this.props.element.actions.map((action: ActionElement, index: number) => (
+        const hostActionStyle = StyleManager.getInstance().getActionContainerStyle();
+
+        if (hostActionStyle.direction === 'column') {
+            return (
+                this.props.element.actions.map((action: ActionElement, index: number) => (
+                    <Row
+                        key={'ActionRow' + index}
+                        vIndex={1}
+                        hIndex={0}
+                        spacing={10}
+                    >
+                        {ActionFactory.createAction(action, 0, 0, this.actionContext)}
+                    </Row>
+                ))
+            );
+        } else {
+            return (
                 <Row
-                    key={'ActionRow' + index}
-                    vIndex={index + 1}
+                    vIndex={1}
                     hIndex={0}
                     spacing={10}
                 >
-                    {ActionFactory.createAction(action, 0, this.actionContext)}
+                    {
+                        this.props.element.actions.map((action: ActionElement, index: number) =>
+                            ActionFactory.createAction(action, 0, index, this.actionContext)
+                        )
+                    }
                 </Row>
-            ))
-        );
+            );
+        }
     }
 
     private renderSubCard(): JSX.Element {
@@ -141,8 +163,9 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                     hIndex={0}
                     element={this.state.subCard}
                     style={{
-                        marginTop: 10,
+                        marginTop: this.showCardStyle.margin,
                     }}
+                    theme={this.showCardStyle.theme}
                 />
             );
         }
@@ -151,7 +174,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
 
     private showSubCard = (args: ActionEventHandlerArgs<ShowCardActionElement>) => {
         console.log('Show Card');
-        if (args && args.action && args.action.getActionType() === ActionType.ShowCard) {
+        if (args && args.action && args.action.type === ActionType.ShowCard) {
             if (this.state.subCard !== args.action.card) {
                 this.setState({
                     subCard: args.action.card

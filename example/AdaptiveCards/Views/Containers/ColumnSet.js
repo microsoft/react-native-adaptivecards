@@ -8,29 +8,25 @@ export class ColumnSetView extends React.Component {
         super(props);
         this.renderColumns = () => {
             const { element } = this.props;
-            if (!element || !element.isValid()) {
+            if (!element || !element.isValid) {
                 return undefined;
             }
-            if (element.hasColumns()) {
-                return element.columns.map((column, index) => (React.createElement(ColumnView, { key: index, vIndex: 0, hIndex: index, element: column })));
+            if (element.columns) {
+                return element.columns.map((column, index) => (React.createElement(ColumnView, { key: index, vIndex: 0, hIndex: index, element: column, theme: this.props.theme })));
             }
         };
-        const { element } = this.props;
-        if (element && element.isValid()) {
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
-        }
     }
     render() {
         const { element } = this.props;
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
         const background = element.getBackgroundImageUrl();
         if (background) {
-            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: this.styleConfig.spacing }, ContentFactory.createBackgroundImageView(this.renderColumns(), background)));
+            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing) }, ContentFactory.createBackgroundImageView(this.renderColumns(), background)));
         }
         else {
-            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: this.styleConfig.spacing }, this.renderColumns()));
+            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing) }, this.renderColumns()));
         }
     }
 }

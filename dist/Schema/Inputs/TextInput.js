@@ -1,21 +1,24 @@
-import { InputTextStyle } from '../../Shared/Enums';
-import { EnumUtils } from '../../Shared/Utils';
-import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 export class TextInputElement extends InputElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
+        this.children = [];
+        if (this.isValid) {
             this.isMultiline = json.isMultiline || false;
             this.maxLength = json.maxLength;
             this.placeholder = json.placeholder;
-            this.style = EnumUtils.getEnumValueOrDefault(InputTextStyle, json.style, InputTextStyle.Text);
+            this.style = json.style;
         }
     }
-    getTypeName() {
-        return ContentElementType.TextInput;
+    validate(input) {
+        if (this.maxLength) {
+            if (input !== undefined && input.length > this.maxLength) {
+                return false;
+            }
+        }
+        return true;
     }
     getRequiredProperties() {
-        return ['id'];
+        return ['type', 'id'];
     }
 }

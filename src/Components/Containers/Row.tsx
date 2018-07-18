@@ -30,7 +30,7 @@ export class Row extends React.Component<IProps> {
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
                 style={this.props.style}
-                vSpace={this.props.spacing}
+                vSpacing={this.props.spacing}
                 onPress={this.props.onPress}
             >
                 {this.props.children}

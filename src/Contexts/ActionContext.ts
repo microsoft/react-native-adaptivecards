@@ -1,7 +1,6 @@
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
-import { AbstractElement } from '../Schema/Base/AbstractElement';
 import { ActionElement, ActionType } from '../Schema/Base/ActionElement';
 import { ActionEventHandlerArgs, ActionHook } from '../Shared/Types';
 
@@ -42,7 +41,6 @@ export class ActionContext {
 
     public registerHook(hook: ActionHook) {
         if (hook) {
-            console.log('Register Hook: ' + hook.actionType);
             if (this.hooks[hook.actionType] === undefined) {
                 this.hooks[hook.actionType] = [];
             }
@@ -53,24 +51,21 @@ export class ActionContext {
     }
 
     public getHooks(actionType: ActionType) {
-        console.log(this.hooks);
-        console.log(actionType);
         if (actionType) {
             return this.hooks[actionType];
         }
         return [];
     }
 
-    public getActionEventHandler(target: AbstractElement) {
+    public getActionEventHandler(target: ActionElement) {
         return (
             (...externalHooks: ActionHook[]) => {
-                let action = target.getAction();
+                let action = target.action;
                 if (action) {
                     let callback = this.selectCallback(action);
                     let args = {
                         action: action,
                         formValidate: false,
-                        target: target,
                     };
                     let hookFuncs = this.getExecuteFuncs(action.type, externalHooks);
 

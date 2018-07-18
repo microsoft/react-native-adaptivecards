@@ -3,6 +3,7 @@ import * as React from 'react';
 import { TextBlock } from '../../Components/Basic/TextBlock';
 import { Row } from '../../Components/Containers/Row';
 import { FactElement } from '../../Schema/Containers/Fact';
+import { StyleManager } from '../../Styles/StyleManager';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<FactElement> {
@@ -17,7 +18,7 @@ export class FactView extends React.Component<IProps> {
     public render() {
         const { element } = this.props;
 
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
 
@@ -31,7 +32,7 @@ export class FactView extends React.Component<IProps> {
                     hIndex={0}
                     width='auto'
                     textStyle={{
-                        color: '#333333',
+                        color: StyleManager.getInstance().getColor('default', false, this.props.theme),
                     }}
                 >
                     {element.title}
@@ -41,7 +42,7 @@ export class FactView extends React.Component<IProps> {
                     hIndex={1}
                     width='auto'
                     textStyle={{
-                        color: '#777777',
+                        color: StyleManager.getInstance().getColor('default', true, this.props.theme),
                     }}
                 >
                     {element.value}

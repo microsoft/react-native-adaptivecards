@@ -8,38 +8,32 @@ export class ColumnView extends React.Component {
         super(props);
         this.renderContents = () => {
             const { element } = this.props;
-            if (!element || !element.isValid()) {
+            if (!element || !element.isValid) {
                 return undefined;
             }
-            if (element.hasItems()) {
-                return element.items.map((content, index) => ContentFactory.createView(content, index));
+            if (element.items) {
+                return element.items.map((content, index) => ContentFactory.createView(content, index, this.props.theme));
             }
             return undefined;
         };
         this.onPress = () => {
-            console.log('ColumnView onPress');
             let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
             if (callback) {
                 callback();
             }
         };
-        const { element } = this.props;
-        if (element && element.isValid()) {
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
-        }
     }
     render() {
         const { element } = this.props;
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
         const background = element.getBackgroundImageUrl();
-        console.log(background);
         if (background) {
-            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: this.styleConfig.columnWidth, onPress: element.selectAction ? this.onPress : undefined, spacing: this.styleConfig.spacing }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), onPress: element.selectAction ? this.onPress : undefined, spacing: StyleManager.getInstance().getSpacing(element.spacing) }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
         }
         else {
-            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: this.styleConfig.columnWidth, onPress: element.selectAction ? this.onPress : undefined, spacing: this.styleConfig.spacing }, this.renderContents()));
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), onPress: element.selectAction ? this.onPress : undefined, spacing: StyleManager.getInstance().getSpacing(element.spacing) }, this.renderContents()));
         }
     }
 }

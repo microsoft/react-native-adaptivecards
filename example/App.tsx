@@ -30,7 +30,11 @@ export default class App extends React.Component<any, any> {
                 backgroundColor: 'whitesmoke',
             }}
         >
-            <AdaptiveCard adaptiveCard={mockData.email} />
+            <AdaptiveCard adaptiveCard={mockData.emailSent} />
+            {this.renderGap()}
+            <AdaptiveCard adaptiveCard={mockData.searchEmail} />
+            {this.renderGap()}
+            <AdaptiveCard adaptiveCard={mockData.readEmail} />
             {this.renderGap()}
             <AdaptiveCard adaptiveCard={mockData.news} />
             {this.renderGap()}

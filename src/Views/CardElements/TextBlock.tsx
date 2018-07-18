@@ -2,28 +2,29 @@ import * as React from 'react';
 
 import { TextBlock } from '../../Components/Basic/TextBlock';
 import { TextBlockElement } from '../../Schema/CardElements/TextBlock';
-import { StyleConfig, StyleManager } from '../../Styles/StyleManager';
+import { StyleManager } from '../../Styles/StyleManager';
+import { TextBlockStyle } from '../../Styles/Types';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<TextBlockElement> {
 }
 
 export class TextBlockView extends React.Component<IProps> {
-    private styleConfig: StyleConfig;
+    private style: TextBlockStyle;
 
     constructor(props: IProps) {
         super(props);
 
         const { element } = this.props;
-        if (element && element.isValid()) {
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
+        if (element && element.isValid) {
+            this.style = StyleManager.getInstance().getTextStyle(element, this.props.theme);
         }
     }
 
     public render(): JSX.Element {
         const { element } = this.props;
 
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
 
@@ -32,23 +33,14 @@ export class TextBlockView extends React.Component<IProps> {
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
                 width='stretch'
-                boxStyle={[
-                    {
-                        backgroundColor: 'transparent'
-                    }
-                ]}
-                textStyle={[
-                    {
-                        backgroundColor: 'transparent',
-                        fontSize: this.styleConfig.fontSize,
-                        fontWeight: this.styleConfig.fontWeight,
-                        color: this.styleConfig.color,
-                        textAlign: this.styleConfig.textAlign,
-                        flexWrap: this.styleConfig.wrap,
-                    }
-                ]}
-                horizontalAlign={this.styleConfig.inboxTextAlign}
-                spacing={this.styleConfig.spacing}
+                fontSize={this.style.fontSize}
+                fontWeight={this.style.fontWeight}
+                color={this.style.color}
+                backgroundColor='transparent'
+                textAlign={this.style.textAlign}
+                wrap={this.style.wrap}
+                horizontalAlign={this.style.inboxTextAlign}
+                spacing={this.style.spacing}
                 numberOfLines={element.maxLines}
             >
                 {element.text}

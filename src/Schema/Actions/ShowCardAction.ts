@@ -1,5 +1,6 @@
 import { AbstractElement } from '../Base/AbstractElement';
-import { ActionElement, ActionType } from '../Base/ActionElement';
+import { ActionElement } from '../Base/ActionElement';
+import { FormElement } from '../Base/FormElement';
 import { CardElement } from '../Cards/Card';
 
 export class ShowCardActionElement extends ActionElement {
@@ -9,33 +10,26 @@ export class ShowCardActionElement extends ActionElement {
     constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.card = new CardElement(json.card, parent);
         }
     }
 
-    public getTypeName(): string {
-        return ActionType.ShowCard;
+    public get scope(): FormElement {
+        if (this.parent) {
+            return this.parent as FormElement;
+        }
+        return undefined;
     }
 
-    public getActionType(): ActionType {
-        return ActionType.ShowCard;
-    }
-
-    public getAllInputFieldIds() {
+    public get children(): AbstractElement[] {
         if (this.card) {
-            let children = this.card.getChildren();
-            return children.reduce(
-                (prev, current) => {
-                    return prev.concat(current.getAllInputFieldIds());
-                },
-                []
-            );
+            return [this.card];
         }
         return [];
     }
 
-    public getRequiredProperties(): Array<string> {
-        return ['card'];
+    protected getRequiredProperties(): string[] {
+        return ['type', 'title', 'card'];
     }
 }

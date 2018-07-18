@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import * as React from 'react';
 import { DatePickerAndroid, DatePickerIOS, Platform, Text, TouchableOpacity, View } from 'react-native';
-import { TimeUtils } from '../../Shared/Utils';
+import { TimeUtils } from '../../Utils/TimeUtils';
 import { FlexBox } from '../Basic/FlexBox';
 export class DateInput extends React.Component {
     constructor(props) {
@@ -34,7 +34,6 @@ export class DateInput extends React.Component {
             if (Platform.OS === 'ios') {
                 if (this.state.showDatePicker) {
                     let date = TimeUtils.extractDate(this.props.value);
-                    console.log(date);
                     return (React.createElement(DatePickerIOS, { date: date, mode: 'date', onDateChange: this.onDateChange, style: { flex: 1 } }));
                 }
             }
@@ -56,7 +55,6 @@ export class DateInput extends React.Component {
             }, () => {
                 if (this.props.onValueChange) {
                     let timeString = TimeUtils.getDateString(date);
-                    console.log(timeString);
                     this.props.onValueChange(timeString);
                 }
             });

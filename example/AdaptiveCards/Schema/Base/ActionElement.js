@@ -8,29 +8,11 @@ export var ActionType;
 export class ActionElement extends AbstractElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.title = json.title;
         }
     }
-    hasAction() {
-        return true;
-    }
-    getAction() {
+    get action() {
         return this;
-    }
-    getActions() {
-        return [this.getAction()];
-    }
-    getForm() {
-        return this.getParent().getForm();
-    }
-    getData() {
-        return {};
-    }
-    getStyleConfig() {
-        return {};
-    }
-    isAction() {
-        return true;
     }
 }

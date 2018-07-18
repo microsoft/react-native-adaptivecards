@@ -1,18 +1,16 @@
-import { ActionElement, ActionType } from '../Base/ActionElement';
+import { ActionElement } from '../Base/ActionElement';
 export class OpenUrlActionElement extends ActionElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
+        this.children = [];
+        if (this.isValid) {
             this.url = json.url;
         }
     }
-    getTypeName() {
-        return ActionType.OpenUrl;
-    }
-    getActionType() {
-        return ActionType.OpenUrl;
+    get scope() {
+        return this.ancestorsAndSelf.find(element => element.parent === undefined);
     }
     getRequiredProperties() {
-        return ['url'];
+        return ['type', 'title', 'url'];
     }
 }

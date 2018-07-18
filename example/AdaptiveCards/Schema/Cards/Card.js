@@ -1,49 +1,33 @@
 import { FormElement } from '../Base/FormElement';
 import { ActionFactory } from '../Factories/ActionFactory';
-import { CardElementFactory } from '../Factories/ContentElementFactory';
+import { ContentElementFactory } from '../Factories/ContentElementFactory';
 export class CardElement extends FormElement {
     constructor(json, parent) {
         super(json, parent);
-        this.actions = [];
-        this.body = [];
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.version = json.version;
             this.minVersion = json.minVersion;
             this.fallbackText = json.fallbackText;
             this.speak = json.speak;
             this.actions = ActionFactory.createSet(json.actions, this);
-            this.body = CardElementFactory.createSet(json.body, this);
+            this.body = ContentElementFactory.createSet(json.body, this);
+            this.backgroundImage = json.backgroundImage;
         }
     }
-    getTypeName() {
-        return 'AdaptiveCard';
+    get children() {
+        let result = [];
+        if (this.body) {
+            result = result.concat(this.body);
+        }
+        if (this.actions) {
+            result = result.concat(this.actions);
+        }
+        return result;
+    }
+    getBackgroundImageUrl() {
+        return this.backgroundImage;
     }
     getRequiredProperties() {
-        return ['version'];
-    }
-    getChildren() {
-        return this.body;
-    }
-    getActions() {
-        return this.actions;
-    }
-    getAllInputFieldIds() {
-        let children = this.getChildren().concat(this.getActions());
-        return children.reduce((prev, current) => {
-            return prev.concat(current.getAllInputFieldIds());
-        }, []);
-    }
-    getForm() {
-        let parent = this.getParent();
-        if (parent) {
-            return parent.getForm();
-        }
-        return super.getForm();
-    }
-    hasActions() {
-        return this.actions && this.actions.length > 0;
-    }
-    hasBody() {
-        return this.body && this.body.length > 0;
+        return ['type', 'version'];
     }
 }

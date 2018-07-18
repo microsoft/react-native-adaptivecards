@@ -12,7 +12,7 @@ import { NumberInputElement } from '../Inputs/NumberInput';
 import { TextInputElement } from '../Inputs/TextInput';
 import { TimeInputElement } from '../Inputs/TimeInput';
 
-export class CardElementFactory {
+export class ContentElementFactory {
     public static create(json: any, parent: AbstractElement): ContentElement {
         if (!json) {
             return null;
@@ -63,8 +63,8 @@ export class CardElementFactory {
         let cardElementSet: Array<ContentElement> = [];
         if (json && json.length > 0) {
             json.forEach((item: any) => {
-                let cardElement: ContentElement = CardElementFactory.create(item, parent);
-                if (cardElement && cardElement.isValidJSON) {
+                let cardElement: ContentElement = ContentElementFactory.create(item, parent);
+                if (cardElement && cardElement.isValid) {
                     cardElementSet.push(cardElement);
                 }
             });

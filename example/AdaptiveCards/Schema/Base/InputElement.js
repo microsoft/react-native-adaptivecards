@@ -11,15 +11,9 @@ export var InputElementType;
 export class InputElement extends ContentElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.id = json.id;
             this.value = json.value;
         }
-    }
-    isInput() {
-        return true;
-    }
-    getAllInputFieldIds() {
-        return [this.getId()];
     }
 }

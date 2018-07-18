@@ -5,28 +5,15 @@ export class TextBlockView extends React.Component {
     constructor(props) {
         super(props);
         const { element } = this.props;
-        if (element && element.isValid()) {
-            this.styleConfig = StyleManager.getInstance().getStyle(element);
+        if (element && element.isValid) {
+            this.style = StyleManager.getInstance().getTextStyle(element, this.props.theme);
         }
     }
     render() {
         const { element } = this.props;
-        if (!element || !element.isValid()) {
+        if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(TextBlock, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', boxStyle: [
-                {
-                    backgroundColor: 'transparent'
-                }
-            ], textStyle: [
-                {
-                    backgroundColor: 'transparent',
-                    fontSize: this.styleConfig.fontSize,
-                    fontWeight: this.styleConfig.fontWeight,
-                    color: this.styleConfig.color,
-                    textAlign: this.styleConfig.textAlign,
-                    flexWrap: this.styleConfig.wrap,
-                }
-            ], horizontalAlign: this.styleConfig.inboxTextAlign, spacing: this.styleConfig.spacing, numberOfLines: element.maxLines }, element.text));
+        return (React.createElement(TextBlock, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', fontSize: this.style.fontSize, fontWeight: this.style.fontWeight, color: this.style.color, backgroundColor: 'transparent', textAlign: this.style.textAlign, wrap: this.style.wrap, horizontalAlign: this.style.inboxTextAlign, spacing: this.style.spacing, numberOfLines: element.maxLines }, element.text));
     }
 }

@@ -19,17 +19,11 @@ export abstract class InputElement extends ContentElement {
     constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.id = json.id;
             this.value = json.value;
         }
     }
 
-    public isInput() {
-        return true;
-    }
-
-    public getAllInputFieldIds() {
-        return [this.getId()];
-    }
+    public abstract validate(input: string): boolean;
 }

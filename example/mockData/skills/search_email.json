@@ -5,6 +5,7 @@
     "body": [
         {
             "type": "Container",
+            "separator": true,
             "items": [
                 {
                     "type": "ColumnSet",
@@ -41,32 +42,116 @@
                             ]
                         }
                     ]
-                },
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "title": "Select",
+                "data": {
+                    "ux:position_ref": "1"
+                }
+            }
+        },
+        {
+            "type": "Container",
+            "separator": true,
+            "items": [
                 {
-                    "type": "Container",
-                    "width": "stretch",
-                    "separator": true,
-                    "items": [
+                    "type": "ColumnSet",
+                    "columns": [
                         {
-                            "type": "TextBlock",
-                            "spacing": "none",
-                            "text": "Content Placeholder",
-                            "wrap": true
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "url": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg",
+                                    "size": "small",
+                                    "style": "person"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Sender Placeholder",
+                                    "weight": "bolder",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "spacing": "none",
+                                    "text": "Title Placeholder",
+                                    "isSubtle": true,
+                                    "wrap": true
+                                }
+                            ]
                         }
                     ]
                 }
-            ]
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "title": "Select",
+                "data": {
+                    "ux:position_ref": "2"
+                }
+            }
+        },
+        {
+            "type": "Container",
+            "separator": true,
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "url": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg",
+                                    "size": "small",
+                                    "style": "person"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Sender Placeholder",
+                                    "weight": "bolder",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "spacing": "none",
+                                    "text": "Title Placeholder",
+                                    "isSubtle": true,
+                                    "wrap": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "title": "Select",
+                "data": {
+                    "ux:position_ref": "3"
+                }
+            }
         }
     ],
     "actions": [
-        {
-            "type": "Action.Submit",
-            "title": "Reply",
-            "data": {
-                "intent:confirm": "true",
-                "email_action": "Reply"
-            }
-        },
         {
             "type": "Action.Submit",
             "title": "Cancel",

@@ -1,40 +1,27 @@
-import { ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
 import { ColumnElement } from './Column';
 export class ColumnSetElement extends FormElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
-            this.columns = this.createColumnSet(json.columns);
+        if (this.isValid) {
+            this.columns = [];
+            if (json.columns) {
+                json.columns.forEach((item) => {
+                    let column = new ColumnElement(item, this);
+                    if (column && column.isValid) {
+                        this.columns.push(column);
+                    }
+                });
+            }
         }
     }
-    getTypeName() {
-        return ContentElementType.ColumnSet;
-    }
-    getRequiredProperties() {
+    get children() {
+        if (this.columns) {
+            return this.columns;
+        }
         return [];
     }
-    getChildren() {
-        return this.columns;
-    }
-    getStyleConfig() {
-        return {
-            spacing: this.spacing,
-        };
-    }
-    hasColumns() {
-        return this.columns && this.columns.length > 0;
-    }
-    createColumnSet(json) {
-        let columnSet = [];
-        if (json && json.length > 0) {
-            json.forEach((item) => {
-                let column = new ColumnElement(item, this);
-                if (column && column.isValidJSON) {
-                    columnSet.push(column);
-                }
-            });
-        }
-        return columnSet;
+    getRequiredProperties() {
+        return ['type'];
     }
 }

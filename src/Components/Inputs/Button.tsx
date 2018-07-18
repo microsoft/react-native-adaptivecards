@@ -6,6 +6,8 @@ import { TextBlock } from '../Basic/TextBlock';
 interface IProps {
     vIndex: number;
     hIndex: number;
+    vSpace?: number;
+    hSpace?: number;
     title: string;
     onPress: () => void;
     boxStyle?: any;
@@ -30,7 +32,7 @@ export class Button extends React.Component<IProps> {
                 alignContent='center'
                 justifyContent='center'
                 width='stretch'
-                hSpace={10}
+                hSpacing={10}
                 style={[
                     {
                         paddingVertical: 10,
@@ -38,6 +40,7 @@ export class Button extends React.Component<IProps> {
                         borderRadius: 4,
                         backgroundColor: '#277BDF',
                     },
+                    this.spacing,
                     this.props.boxStyle
                 ]}
                 onPress={this.props.onPress}
@@ -61,4 +64,19 @@ export class Button extends React.Component<IProps> {
             </FlexBox>
         );
     }
+
+    private get spacing() {
+        let result = {
+            marginTop: 0,
+            marginLeft: 0,
+        };
+        if (this.props.vIndex > 0 && this.props.vSpace) {
+            result.marginTop = this.props.vSpace;
+        }
+        if (this.props.hIndex > 0 && this.props.hSpace) {
+            result.marginLeft = this.props.hSpace;
+        }
+        return result;
+    }
+
 }

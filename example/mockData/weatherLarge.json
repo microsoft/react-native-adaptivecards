@@ -87,6 +87,7 @@
 					],
 					"selectAction": {
 						"type": "Action.OpenUrl",
+						"title": "View",
 						"url": "http://www.microsoft.com"
 					}
 				},
@@ -122,6 +123,7 @@
 					],
 					"selectAction": {
 						"type": "Action.OpenUrl",
+						"title": "View",
 						"url": "http://www.microsoft.com"
 					}
 				},
@@ -157,6 +159,7 @@
 					],
 					"selectAction": {
 						"type": "Action.OpenUrl",
+						"title": "View",
 						"url": "http://www.microsoft.com"
 					}
 				},
@@ -192,6 +195,7 @@
 					],
 					"selectAction": {
 						"type": "Action.OpenUrl",
+						"title": "View",
 						"url": "http://www.microsoft.com"
 					}
 				}

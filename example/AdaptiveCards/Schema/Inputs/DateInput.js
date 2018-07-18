@@ -1,28 +1,26 @@
-import { NumberUtils, TimeUtils } from '../../Shared/Utils';
-import { ContentElementType } from '../Base/ContentElement';
+import { NumberUtils } from '../../Utils/NumberUtils';
+import { TimeUtils } from '../../Utils/TimeUtils';
 import { InputElement } from '../Base/InputElement';
 export class DateInputElement extends InputElement {
     constructor(json, parent) {
         super(json, parent);
-        if (this.isValidJSON) {
+        this.children = [];
+        if (this.isValid) {
             this.max = json.max;
             this.min = json.min;
             this.placeholder = json.placeholder;
         }
     }
-    getTypeName() {
-        return ContentElementType.DateInput;
-    }
-    getRequiredProperties() {
-        return ['id'];
-    }
-    validateForm(value) {
-        if (value && value.length !== 0) {
+    validate(input) {
+        if (input && input.length !== 0) {
             let minTime = TimeUtils.extractDate(this.min);
             let maxTime = TimeUtils.extractDate(this.max);
-            let time = TimeUtils.extractDate(value);
+            let time = TimeUtils.extractDate(input);
             return NumberUtils.isInRange(time, minTime, maxTime);
         }
         return true;
+    }
+    getRequiredProperties() {
+        return ['type', 'id'];
     }
 }

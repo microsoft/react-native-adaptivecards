@@ -1,6 +1,5 @@
-import { NumberUtils } from '../../Shared/Utils';
+import { NumberUtils } from '../../Utils/NumberUtils';
 import { AbstractElement } from '../Base/AbstractElement';
-import { ContentElementType } from '../Base/ContentElement';
 import { InputElement } from '../Base/InputElement';
 
 export class NumberInputElement extends InputElement {
@@ -8,33 +7,28 @@ export class NumberInputElement extends InputElement {
     public readonly max?: number;
     public readonly min?: number;
     public readonly placeholder?: string;
+    public readonly children: AbstractElement[] = [];
 
     public constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
+        if (this.isValid) {
             this.max = json.max;
             this.min = json.min;
             this.placeholder = json.placeholder;
         }
     }
 
-    public getTypeName(): string {
-        return ContentElementType.NumberInput;
-    }
-
-    public getRequiredProperties(): Array<string> {
-        return ['id'];
-    }
-
-    public validateForm(value?: string) {
-        if (value && value.length !== 0) {
-            console.log('pass length check');
-            if (NumberUtils.isNumberStrict(value)) {
-                console.log('pass strict number check');
-                return NumberUtils.isInRange(Number(value), this.min, this.max);
+    public validate(input: string) {
+        if (input && input.length !== 0) {
+            if (NumberUtils.isNumberStrict(input)) {
+                return NumberUtils.isInRange(Number(input), this.min, this.max);
             }
         }
         return true;
+    }
+
+    protected getRequiredProperties(): Array<string> {
+        return ['type', 'id'];
     }
 }

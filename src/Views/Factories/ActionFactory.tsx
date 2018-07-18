@@ -9,37 +9,37 @@ import { ShowCardActionView } from '../Actions/ShowCardAction';
 import { SubmitActionView } from '../Actions/SubmitAction';
 
 export class ActionFactory {
-    public static createAction(element: ActionElement, index: number, context: ActionContext): JSX.Element {
+    public static createAction(element: ActionElement, vIndex: number, hIndex: number, context: ActionContext): JSX.Element {
         if (element) {
             switch (element.type) {
                 case ActionType.OpenUrl:
                     return (
                         <OpenUrlActionView
-                            key={'OpenUrlActionView' + index}
-                            vIndex={0}
-                            hIndex={index}
+                            key={'OpenUrlActionView' + hIndex}
+                            vIndex={vIndex}
+                            hIndex={hIndex}
                             element={element as OpenUrlActionElement}
-                            actionHooks={this.getHooks(context, element.getActionType())}
+                            actionHooks={this.getHooks(context, element.type)}
                         />
                     );
                 case ActionType.ShowCard:
                     return (
                         <ShowCardActionView
-                            key={'ShowCardActionView' + index}
-                            vIndex={0}
-                            hIndex={index}
+                            key={'ShowCardActionView' + hIndex}
+                            vIndex={vIndex}
+                            hIndex={hIndex}
                             element={element as ShowCardActionElement}
-                            actionHooks={this.getHooks(context, element.getActionType())}
+                            actionHooks={this.getHooks(context, element.type)}
                         />
                     );
                 case ActionType.Submit:
                     return (
                         <SubmitActionView
-                            key={'SubmitActionView' + index}
-                            vIndex={0}
-                            hIndex={index}
+                            key={'SubmitActionView' + hIndex}
+                            vIndex={vIndex}
+                            hIndex={hIndex}
                             element={element as SubmitActionElement}
-                            actionHooks={this.getHooks(context, element.getActionType())}
+                            actionHooks={this.getHooks(context, element.type)}
                         />
                     );
                 default:

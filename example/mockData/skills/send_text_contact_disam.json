@@ -1,0 +1,92 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "small",
+                                    "style": "person",
+                                    "url": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "weight": "bolder",
+                                    "text": "Bill",
+                                    "spacing": "none",
+                                    "separation": "none"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": " ",
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ],
+                            "spacing": "medium"
+                        }
+                    ]
+                }
+            ],
+            "style": "emphasis"
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Mobile",
+                    "spacing": "none",
+                    "separation": "none"
+                },
+                {
+                    "type": "TextBlock",
+                    "size": "medium",
+                    "weight": "bolder",
+                    "text": "22122333",
+                    "spacing": "none",
+                    "separation": "none"
+                },
+                {
+                    "type": "TextBlock",
+                    "text": "Work",
+                    "spacing": "none",
+                    "separation": "none"
+                },
+                {
+                    "type": "TextBlock",
+                    "size": "medium",
+                    "weight": "bolder",
+                    "text": "15850039265",
+                    "spacing": "none",
+                    "separation": "none"
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "data": {
+                    "ux:Position_ref": "1"
+                },
+                "title": ""
+            },
+            "spacing": "medium"
+        }
+    ]
+}

@@ -1,53 +1,35 @@
-import { ElementStyleConfig } from '../../Styles/StyleManager';
 import { AbstractElement } from '../Base/AbstractElement';
-import { ContentElementType } from '../Base/ContentElement';
 import { FormElement } from '../Base/FormElement';
 import { ColumnElement } from './Column';
 
 export class ColumnSetElement extends FormElement {
     // Optional
-    public readonly columns: Array<ColumnElement>;
+    public readonly columns?: ColumnElement[];
 
     constructor(json: any, parent: AbstractElement) {
         super(json, parent);
 
-        if (this.isValidJSON) {
-            this.columns = this.createColumnSet(json.columns);
+        if (this.isValid) {
+            this.columns = [];
+            if (json.columns) {
+                json.columns.forEach((item: any) => {
+                    let column: ColumnElement = new ColumnElement(item, this);
+                    if (column && column.isValid) {
+                        this.columns.push(column);
+                    }
+                });
+            }
         }
     }
 
-    public getTypeName(): string {
-        return ContentElementType.ColumnSet;
-    }
-
-    public getRequiredProperties(): Array<string> {
+    public get children() {
+        if (this.columns) {
+            return this.columns;
+        }
         return [];
     }
 
-    public getChildren() {
-        return this.columns;
-    }
-
-    public getStyleConfig(): ElementStyleConfig {
-        return {
-            spacing: this.spacing,
-        };
-    }
-
-    public hasColumns(): boolean {
-        return this.columns && this.columns.length > 0;
-    }
-
-    private createColumnSet(json: any): Array<ColumnElement> {
-        let columnSet: Array<ColumnElement> = [];
-        if (json && json.length > 0) {
-            json.forEach((item: any) => {
-                let column: ColumnElement = new ColumnElement(item, this);
-                if (column && column.isValidJSON) {
-                    columnSet.push(column);
-                }
-            });
-        }
-        return columnSet;
+    protected getRequiredProperties(): Array<string> {
+        return ['type'];
     }
 }
