@@ -104,7 +104,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
         );
     }
 
-    private onLayoutChange = (width: number, height: number) => {
+    private onLayoutChange = () => {
         this.fetchImageSize();
     }
 

@@ -1,5 +1,5 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
+import { IElement } from '../Interfaces/IElement';
 import { ChoiceInputElement } from './ChoiceInput';
 
 export class ChoiceInputSetElement extends InputElement {
@@ -10,7 +10,7 @@ export class ChoiceInputSetElement extends InputElement {
     public readonly isMultiSelect?: boolean;
     public readonly style?: 'compact' | 'expanded';
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -28,7 +28,7 @@ export class ChoiceInputSetElement extends InputElement {
         }
     }
 
-    public get children(): AbstractElement[] {
+    public get children() {
         if (this.choices) {
             return this.choices;
         }
@@ -39,7 +39,7 @@ export class ChoiceInputSetElement extends InputElement {
         return true;
     }
 
-    protected getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type', 'id', 'choices'];
     }
 }

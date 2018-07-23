@@ -1,13 +1,13 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { ActionElement } from '../Base/ActionElement';
-import { FormElement } from '../Base/FormElement';
+import { ActionElement } from '../Abstract/ActionElement';
 import { CardElement } from '../Cards/Card';
+import { IElement } from '../Interfaces/IElement';
+import { IScope } from '../Interfaces/IScope';
 
 export class ShowCardActionElement extends ActionElement {
     // Required
     public readonly card: CardElement;
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -15,21 +15,21 @@ export class ShowCardActionElement extends ActionElement {
         }
     }
 
-    public get scope(): FormElement {
+    public get scope(): IScope {
         if (this.parent) {
-            return this.parent as FormElement;
+            return this.parent as IScope;
         }
         return undefined;
     }
 
-    public get children(): AbstractElement[] {
+    public get children() {
         if (this.card) {
             return [this.card];
         }
         return [];
     }
 
-    protected getRequiredProperties(): string[] {
+    public get requiredProperties() {
         return ['type', 'title', 'card'];
     }
 }

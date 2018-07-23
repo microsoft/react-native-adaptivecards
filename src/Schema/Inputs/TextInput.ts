@@ -1,5 +1,5 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
+import { IElement } from '../Interfaces/IElement';
 
 export class TextInputElement extends InputElement {
     // Optional
@@ -7,9 +7,9 @@ export class TextInputElement extends InputElement {
     public readonly maxLength?: number;
     public readonly placeholder?: string;
     public readonly style?: 'text' | 'tel' | 'url' | 'email';
-    public readonly children: AbstractElement[] = [];
+    public readonly children: IElement[] = [];
 
-    public constructor(json: any, parent: AbstractElement) {
+    public constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -20,7 +20,7 @@ export class TextInputElement extends InputElement {
         }
     }
 
-    public validate(input: string): boolean {
+    public validate(input: string) {
         // TODO:: verify styles.
         if (this.maxLength) {
             if (input !== undefined && input.length > this.maxLength) {
@@ -30,7 +30,7 @@ export class TextInputElement extends InputElement {
         return true;
     }
 
-    public getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type', 'id'];
     }
 }

@@ -1,5 +1,5 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
+import { IElement } from '../Interfaces/IElement';
 
 export class ToggleInputElement extends InputElement {
     // Required
@@ -7,9 +7,9 @@ export class ToggleInputElement extends InputElement {
     // Optional
     public readonly valueOff?: string;
     public readonly valueOn?: string;
-    public children: AbstractElement[] = [];
+    public children: IElement[] = [];
 
-    public constructor(json: any, parent: AbstractElement) {
+    public constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -22,7 +22,7 @@ export class ToggleInputElement extends InputElement {
         return true;
     }
 
-    public getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type', 'id', 'title'];
     }
 }

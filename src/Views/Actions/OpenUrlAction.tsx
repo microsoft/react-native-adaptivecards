@@ -29,10 +29,15 @@ export class OpenUrlActionView extends React.Component<IProps> {
             <Button
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
-                vSpace={hostStyle.marginTop}
-                hSpace={hostStyle.marginLeft}
+                vSpacing={hostStyle.marginTop}
+                hSpacing={hostStyle.marginLeft}
                 title={this.props.element.title}
                 onPress={this.onPress}
+                color='white'
+                backgroundColor='#277BDF'
+                borderColor='#277BDF'
+                borderRadius={4}
+                textAlign='center'
             />
         );
     }

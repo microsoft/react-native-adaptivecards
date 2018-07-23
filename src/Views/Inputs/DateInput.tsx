@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Row } from '../../Components/Containers/Row';
 import { DateInput } from '../../Components/Inputs/DateInput';
 import { FormContext } from '../../Contexts/FormContext';
+import { HostContext } from '../../Contexts/HostContext';
 import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { IElementViewProps } from '../Shared/BaseProps';
@@ -45,10 +46,28 @@ export class DateInputView extends React.Component<IProps, IState> {
                     hIndex={0}
                     value={this.state.value}
                     onValueChange={this.onValueChange}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
                     validateInput={element.validate}
                 />
             </Row>
         );
+    }
+
+    private onBlur = () => {
+        console.log('DateInputView onBlur');
+        let callback = HostContext.getInstance().getHandler('blur');
+        if (callback) {
+            callback();
+        }
+    }
+
+    private onFocus = () => {
+        console.log('DateInputView onFocus');
+        let callback = HostContext.getInstance().getHandler('focus');
+        if (callback) {
+            callback();
+        }
     }
 
     private onValueChange = (value: string) => {

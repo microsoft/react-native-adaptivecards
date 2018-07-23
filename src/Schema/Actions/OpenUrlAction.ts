@@ -1,13 +1,13 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { ActionElement } from '../Base/ActionElement';
-import { FormElement } from '../Base/FormElement';
+import { ActionElement } from '../Abstract/ActionElement';
+import { IElement } from '../Interfaces/IElement';
+import { IScope } from '../Interfaces/IScope';
 
 export class OpenUrlActionElement extends ActionElement {
     // Required
     public readonly url: string;
-    public readonly children: AbstractElement[] = [];
+    public readonly children: IElement[] = [];
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -15,11 +15,11 @@ export class OpenUrlActionElement extends ActionElement {
         }
     }
 
-    public get scope(): FormElement {
-        return this.ancestorsAndSelf.find(element => element.parent === undefined) as FormElement;
+    public get scope(): IScope {
+        return this.ancestorsAndSelf.find(element => element.parent === undefined) as IScope;
     }
 
-    protected getRequiredProperties(): string[] {
+    public get requiredProperties() {
         return ['type', 'title', 'url'];
     }
 }

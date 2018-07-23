@@ -22,6 +22,8 @@ export default class App extends React.Component {
                 backgroundColor: 'whitesmoke',
             }
         },
+            React.createElement(AdaptiveCard, { adaptiveCard: mockData.peaplePicker }),
+            this.renderGap(),
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.sendTextContact }),
             this.renderGap(),
             React.createElement(AdaptiveCard, { adaptiveCard: mockData.sendText }),

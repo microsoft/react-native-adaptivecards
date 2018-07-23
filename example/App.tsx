@@ -30,6 +30,8 @@ export default class App extends React.Component<any, any> {
                 backgroundColor: 'whitesmoke',
             }}
         >
+            <AdaptiveCard adaptiveCard={mockData.peaplePicker} />
+            {this.renderGap()}
             <AdaptiveCard adaptiveCard={mockData.emailSent} />
             {this.renderGap()}
             <AdaptiveCard adaptiveCard={mockData.searchEmail} />

@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { SeparateLine } from '../../Components/Basic/SeparateLine';
-import { ContentElementType } from '../../Schema/Base/ContentElement';
+import { ContentElementType } from '../../Schema/Abstract/ContentElement';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
+import { AdaptiveCardView } from '../Cards/AdaptiveCard';
 import { ColumnSetView } from '../Containers/ColumnSet';
 import { ContainerView } from '../Containers/Container';
 import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
+import { PeoplePickerView } from '../Inputs/PeoplePicker';
 import { TextInputView } from '../Inputs/TextInput';
 import { TimeInputView } from '../Inputs/TimeInput';
 export class ContentFactory {
@@ -47,6 +49,8 @@ export class ContentFactory {
                     return (React.createElement(DateInputView, { key: 'DateInputView' + index, element: element, vIndex: index, hIndex: 0, theme: theme }));
                 case ContentElementType.TimeInput:
                     return (React.createElement(TimeInputView, { key: 'TimeInputView' + index, element: element, vIndex: index, hIndex: 0, theme: theme }));
+                case ContentElementType.PeoplePicker:
+                    return (React.createElement(PeoplePickerView, { key: 'PeoplePickerView' + index, element: element, vIndex: index, hIndex: 0, theme: theme }));
                 case ContentElementType.Container:
                     return (React.createElement(ContainerView, { key: 'ContainerView' + index, element: element, vIndex: index, hIndex: 0, theme: theme }));
                 case ContentElementType.ColumnSet:
@@ -59,6 +63,8 @@ export class ContentFactory {
                     return (React.createElement(ImageSetView, { key: 'ImageSetView' + index, element: element, vIndex: index, hIndex: 0, theme: theme }));
                 case ContentElementType.FactSet:
                     return (React.createElement(FactSetView, { key: 'FactSetView' + index, element: element, vIndex: index, hIndex: 0, theme: theme }));
+                case ContentElementType.AdaptiveCard:
+                    return (React.createElement(AdaptiveCardView, { key: 'AdaptiveCardView' + index, element: element, vIndex: index, hIndex: 0, theme: theme }));
                 default:
                     return null;
             }

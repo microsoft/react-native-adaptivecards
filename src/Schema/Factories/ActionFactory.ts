@@ -1,15 +1,18 @@
+import { ActionElement, ActionType } from '../Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Actions/ShowCardAction';
 import { SubmitActionElement } from '../Actions/SubmitAction';
-import { AbstractElement } from '../Base/AbstractElement';
-import { ActionElement, ActionType } from '../Base/ActionElement';
+import { IAction } from '../Interfaces/IAction';
+import { IElement } from '../Interfaces/IElement';
 
 export class ActionFactory {
-    public static create(json: any, parent: AbstractElement): ActionElement {
+    public static create(json: any, parent: IElement): ActionElement {
         if (!json) {
             return undefined;
         }
         let action: ActionElement;
+        // Incase Action.Callback is not a clickable button and could only be used as an internal property,
+        // we should not create in this factory.
         switch (json.type) {
             case ActionType.OpenUrl:
                 action = new OpenUrlActionElement(json, parent);
@@ -27,8 +30,8 @@ export class ActionFactory {
         return action;
     }
 
-    public static createSet(json: any, parent: AbstractElement): Array<ActionElement> {
-        let actionSet: Array<ActionElement> = [];
+    public static createSet(json: any, parent: IElement) {
+        let actionSet: IAction[] = [];
         if (json && json.length > 0) {
             json.forEach((item: any) => {
                 let action: ActionElement = ActionFactory.create(item, parent);

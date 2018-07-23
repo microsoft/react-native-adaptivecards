@@ -1,22 +1,22 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { ActionElement } from '../Base/ActionElement';
-import { ContentElement } from '../Base/ContentElement';
-import { FormElement } from '../Base/FormElement';
+import { ScopeElement } from '../Abstract/ScopeElement';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentElementFactory } from '../Factories/ContentElementFactory';
+import { IAction } from '../Interfaces/IAction';
+import { IContent } from '../Interfaces/IContent';
+import { IElement } from '../Interfaces/IElement';
 
-export class CardElement extends FormElement {
+export class CardElement extends ScopeElement {
     // Required
     public readonly version: string;
     // Optional
     public readonly minVersion?: string;
     public readonly fallbackText?: string;
     public readonly speak?: string;
-    public readonly actions?: ActionElement[];
-    public readonly body?: ContentElement[];
+    public readonly actions?: IAction[];
+    public readonly body?: IContent[];
     public readonly backgroundImage?: string;
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -30,8 +30,8 @@ export class CardElement extends FormElement {
         }
     }
 
-    public get children(): AbstractElement[] {
-        let result: AbstractElement[] = [];
+    public get children() {
+        let result: IElement[] = [];
         if (this.body) {
             result = result.concat(this.body);
         }
@@ -45,7 +45,7 @@ export class CardElement extends FormElement {
         return this.backgroundImage;
     }
 
-    protected getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type', 'version'];
     }
 }

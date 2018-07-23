@@ -1,5 +1,5 @@
 import { NumberUtils } from '../../Utils/NumberUtils';
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
 export class NumberInputElement extends InputElement {
     constructor(json, parent) {
         super(json, parent);
@@ -18,7 +18,7 @@ export class NumberInputElement extends InputElement {
         }
         return true;
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'id'];
     }
 }

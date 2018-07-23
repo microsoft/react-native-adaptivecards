@@ -1,13 +1,8 @@
-import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
-import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
-import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
-import { ActionElement, ActionType } from '../Schema/Base/ActionElement';
+import { ActionElement, ActionType } from '../Schema/Abstract/ActionElement';
 import { ActionEventHandlerArgs, ActionHook } from '../Shared/Types';
+import { HostContext } from './HostContext';
 
 export class ActionContext {
-    private onOpenUrl: (args: ActionEventHandlerArgs<OpenUrlActionElement>) => void;
-    private onShowCard: (args: ActionEventHandlerArgs<ShowCardActionElement>) => void;
-    private onSubmit: (args: ActionEventHandlerArgs<SubmitActionElement>) => void;
     private hooks: { [actionType: string]: ActionHook[] } = {};
 
     private static sharedInstance: ActionContext;
@@ -25,18 +20,6 @@ export class ActionContext {
 
     public static clearGlobalInstance() {
         ActionContext.sharedInstance = undefined;
-    }
-
-    public registerOpenUrlHandler(handler: (args: ActionEventHandlerArgs<OpenUrlActionElement>) => void) {
-        this.onOpenUrl = handler;
-    }
-
-    public registerShowCardHandler(handler: (args: ActionEventHandlerArgs<ShowCardActionElement>) => void) {
-        this.onShowCard = handler;
-    }
-
-    public registerSubmitHandler(handler: (args: ActionEventHandlerArgs<SubmitActionElement>) => void) {
-        this.onSubmit = handler;
     }
 
     public registerHook(hook: ActionHook) {
@@ -57,15 +40,17 @@ export class ActionContext {
         return [];
     }
 
-    public getActionEventHandler(target: ActionElement) {
+    public getActionEventHandler(target: ActionElement, onFinish?: (data: any) => void, onError?: (error: any) => void) {
         return (
             (...externalHooks: ActionHook[]) => {
                 let action = target.action;
                 if (action) {
-                    let callback = this.selectCallback(action);
+                    let callback = HostContext.getInstance().getHandler(action.type as ActionType);
                     let args = {
                         action: action,
                         formValidate: false,
+                        onFinishCallback: onFinish,
+                        onErrorCallback: onError,
                     };
                     let hookFuncs = this.getExecuteFuncs(action.type, externalHooks);
 
@@ -79,22 +64,6 @@ export class ActionContext {
                 }
             }
         );
-    }
-
-    private selectCallback(action: ActionElement) {
-        let callback: (args: ActionEventHandlerArgs<ActionElement>) => void;
-        switch (action.type) {
-            case ActionType.OpenUrl:
-                callback = this.onOpenUrl;
-                break;
-            case ActionType.ShowCard:
-                callback = this.onShowCard;
-                break;
-            case ActionType.Submit:
-                callback = this.onSubmit;
-                break;
-        }
-        return callback;
     }
 
     private getExecuteFuncs(

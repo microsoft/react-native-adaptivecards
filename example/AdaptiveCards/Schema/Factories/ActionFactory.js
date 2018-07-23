@@ -1,7 +1,7 @@
+import { ActionType } from '../Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Actions/ShowCardAction';
 import { SubmitActionElement } from '../Actions/SubmitAction';
-import { ActionType } from '../Base/ActionElement';
 export class ActionFactory {
     static create(json, parent) {
         if (!json) {

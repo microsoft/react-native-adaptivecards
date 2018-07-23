@@ -1,4 +1,4 @@
-import { ActionElement } from '../Base/ActionElement';
+import { ActionElement } from '../Abstract/ActionElement';
 import { CardElement } from '../Cards/Card';
 export class ShowCardActionElement extends ActionElement {
     constructor(json, parent) {
@@ -19,7 +19,7 @@ export class ShowCardActionElement extends ActionElement {
         }
         return [];
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'title', 'card'];
     }
 }

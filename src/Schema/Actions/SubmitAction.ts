@@ -1,13 +1,13 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { ActionElement } from '../Base/ActionElement';
-import { FormElement } from '../Base/FormElement';
+import { ActionElement } from '../Abstract/ActionElement';
+import { ScopeElement } from '../Abstract/ScopeElement';
+import { IElement } from '../Interfaces/IElement';
 
 export class SubmitActionElement extends ActionElement {
     // Optional
     public readonly data?: any;
-    public readonly children: AbstractElement[] = [];
+    public readonly children: IElement[] = [];
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -15,11 +15,11 @@ export class SubmitActionElement extends ActionElement {
         }
     }
 
-    public get scope(): FormElement {
-        return this.ancestorsAndSelf.find(element => element.parent === undefined) as FormElement;
+    public get scope(): ScopeElement {
+        return this.ancestorsAndSelf.find(element => element.parent === undefined) as ScopeElement;
     }
 
-    protected getRequiredProperties(): string[] {
+    public get requiredProperties() {
         return ['type', 'title'];
     }
 }

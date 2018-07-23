@@ -1,26 +1,30 @@
 import * as React from 'react';
 import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { SeparateLine } from '../../Components/Basic/SeparateLine';
-import { ContentElement, ContentElementType } from '../../Schema/Base/ContentElement';
+import { ContentElement, ContentElementType } from '../../Schema/Abstract/ContentElement';
 import { ImageElement } from '../../Schema/CardElements/Image';
 import { TextBlockElement } from '../../Schema/CardElements/TextBlock';
+import { CardElement } from '../../Schema/Cards/Card';
 import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
 import { ContainerElement } from '../../Schema/Containers/Container';
 import { FactSetElement } from '../../Schema/Containers/FactSet';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
 import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
+import { PeoplePickerElement } from '../../Schema/Inputs/PeoplePicker';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
 import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
+import { AdaptiveCardView } from '../Cards/AdaptiveCard';
 import { ColumnSetView } from '../Containers/ColumnSet';
 import { ContainerView } from '../Containers/Container';
 import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
+import { PeoplePickerView } from '../Inputs/PeoplePicker';
 import { TextInputView } from '../Inputs/TextInput';
 import { TimeInputView } from '../Inputs/TimeInput';
 
@@ -104,6 +108,16 @@ export class ContentFactory {
                             theme={theme}
                         />
                     );
+                case ContentElementType.PeoplePicker:
+                    return (
+                        <PeoplePickerView
+                            key={'PeoplePickerView' + index}
+                            element={element as PeoplePickerElement}
+                            vIndex={index}
+                            hIndex={0}
+                            theme={theme}
+                        />
+                    );
                 case ContentElementType.Container:
                     return (
                         <ContainerView
@@ -158,6 +172,16 @@ export class ContentFactory {
                         <FactSetView
                             key={'FactSetView' + index}
                             element={element as FactSetElement}
+                            vIndex={index}
+                            hIndex={0}
+                            theme={theme}
+                        />
+                    );
+                case ContentElementType.AdaptiveCard:
+                    return (
+                        <AdaptiveCardView
+                            key={'AdaptiveCardView' + index}
+                            element={element as CardElement}
                             vIndex={index}
                             hIndex={0}
                             theme={theme}

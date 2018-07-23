@@ -7,39 +7,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as React from 'react';
-import { DatePickerAndroid, DatePickerIOS, Platform, Text, TouchableOpacity, View } from 'react-native';
+import { DatePickerAndroid, DatePickerIOS, Platform, } from 'react-native';
 import { TimeUtils } from '../../Utils/TimeUtils';
-import { FlexBox } from '../Basic/FlexBox';
+import { Column } from '../Containers/Column';
+import { Row } from '../Containers/Row';
+import { Button } from './Button';
 export class DateInput extends React.Component {
     constructor(props) {
         super(props);
         this.renderBtn = () => {
-            if (!this.state.showDatePicker) {
-                return (React.createElement(TouchableOpacity, { style: { flex: 1 }, onPress: this.showDatePicker },
-                    React.createElement(View, { style: {
-                            flex: 1,
-                            borderColor: 'gray',
-                            borderWidth: 1,
-                            borderRadius: 4,
-                            paddingHorizontal: 10,
-                            paddingVertical: 6,
-                            marginVertical: 6,
-                            height: 38,
-                        } },
-                        React.createElement(Text, null, this.props.value))));
-            }
-            return undefined;
+            return (React.createElement(Row, { vIndex: 0, hIndex: 0 },
+                React.createElement(Button, { vIndex: 0, hIndex: 0, title: this.props.value, onPress: this.showDatePicker, borderColor: '#777777', borderWidth: 1, borderRadius: 4 })));
         };
         this.renderInlineDatePicker = () => {
             if (Platform.OS === 'ios') {
                 if (this.state.showDatePicker) {
                     let date = TimeUtils.extractDate(this.props.value);
-                    return (React.createElement(DatePickerIOS, { date: date, mode: 'date', onDateChange: this.onDateChange, style: { flex: 1 } }));
+                    return (React.createElement(Row, { vIndex: 0, hIndex: 0 },
+                        React.createElement(DatePickerIOS, { date: date, mode: 'date', onDateChange: this.onDateChange, style: { flex: 1 } })));
                 }
             }
             return undefined;
         };
         this.onPickerClose = () => {
+            if (this.props.onBlur) {
+                this.props.onBlur();
+            }
             if (this.props.validateInput) {
                 if (this.props.validateInput(this.props.value)) {
                     console.log('DateInput: valid');
@@ -50,14 +43,10 @@ export class DateInput extends React.Component {
             }
         };
         this.onDateChange = (date) => {
-            this.setState({
-                showDatePicker: false,
-            }, () => {
-                if (this.props.onValueChange) {
-                    let timeString = TimeUtils.getDateString(date);
-                    this.props.onValueChange(timeString);
-                }
-            });
+            if (this.props.onValueChange) {
+                let timeString = TimeUtils.getDateString(date);
+                this.props.onValueChange(timeString);
+            }
         };
         this.showDatePickerAndroid = this.showDatePickerAndroid.bind(this);
         this.showDatePicker = this.showDatePicker.bind(this);
@@ -66,7 +55,7 @@ export class DateInput extends React.Component {
         };
     }
     render() {
-        return (React.createElement(FlexBox, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, relativeWidth: false, flexDirection: 'row', alignSelf: 'stretch', alignContent: 'flex-start', alignItems: 'stretch', justifyContent: 'space-between', width: 'stretch' },
+        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch' },
             this.renderBtn(),
             this.renderInlineDatePicker()));
     }
@@ -85,7 +74,7 @@ export class DateInput extends React.Component {
                     if (action === DatePickerAndroid.dismissedAction) {
                         this.setState({
                             showDatePicker: false
-                        });
+                        }, this.onPickerClose);
                     }
                 }
                 catch ({ code, message }) {
@@ -96,6 +85,9 @@ export class DateInput extends React.Component {
     }
     showDatePicker() {
         return __awaiter(this, void 0, void 0, function* () {
+            if (this.props.onFocus) {
+                this.props.onFocus();
+            }
             if (this.state.showDatePicker) {
                 this.setState({
                     showDatePicker: false

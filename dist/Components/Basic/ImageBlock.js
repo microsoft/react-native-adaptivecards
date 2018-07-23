@@ -24,7 +24,7 @@ export class ImageBlock extends React.Component {
         this.fetchImageSize = () => {
             ImageUtils.fetchSize(this.props.url, this.onImageSize, this.onImageSizeError);
         };
-        this.onLayoutChange = (width, height) => {
+        this.onLayoutChange = () => {
             this.fetchImageSize();
         };
         this.onImageSizeUpdate = (event) => {

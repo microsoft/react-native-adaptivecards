@@ -16,6 +16,7 @@ interface IProps {
     multiline?: boolean;
     style?: any;
     onValueChange?: (input: string) => void;
+    onFocus?: () => void;
     onBlur?: () => void;
 }
 
@@ -60,6 +61,7 @@ export class InputBox extends React.Component<IProps> {
                     underlineColorAndroid={'transparent'}
                     importantForAccessibility={'no-hide-descendants'}
                     onChangeText={this.props.onValueChange}
+                    onFocus={this.props.onFocus}
                     onBlur={this.props.onBlur}
                 />
             </FlexBox>

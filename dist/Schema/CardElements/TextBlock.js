@@ -1,4 +1,4 @@
-import { ContentElement } from '../Base/ContentElement';
+import { ContentElement } from '../Abstract/ContentElement';
 export class TextBlockElement extends ContentElement {
     constructor(json, parent) {
         super(json, parent);
@@ -14,7 +14,7 @@ export class TextBlockElement extends ContentElement {
             this.wrap = json.wrap || false;
         }
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'text'];
     }
 }

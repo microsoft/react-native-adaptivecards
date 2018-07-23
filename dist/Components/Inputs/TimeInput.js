@@ -7,41 +7,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import * as React from 'react';
-import { DatePickerIOS, Platform, Text, TimePickerAndroid, TouchableOpacity, View } from 'react-native';
+import { DatePickerIOS, Platform, TimePickerAndroid, } from 'react-native';
 import { TimeUtils } from '../../Utils/TimeUtils';
-import { FlexBox } from '../Basic/FlexBox';
+import { Column } from '../Containers/Column';
+import { Row } from '../Containers/Row';
+import { Button } from './Button';
 export class TimeInput extends React.Component {
     constructor(props) {
         super(props);
         this.renderBtn = () => {
-            if (!this.state.showTimePicker) {
-                return (React.createElement(TouchableOpacity, { style: { flex: 1 }, onPress: this.showDatePicker },
-                    React.createElement(View, { style: [
-                            {
-                                flex: 1,
-                                borderColor: 'gray',
-                                borderWidth: 1,
-                                borderRadius: 4,
-                                paddingHorizontal: 10,
-                                paddingVertical: 6,
-                                marginVertical: 6,
-                                height: 38,
-                            }
-                        ] },
-                        React.createElement(Text, null, this.props.value))));
-            }
-            return undefined;
+            return (React.createElement(Row, { vIndex: 0, hIndex: 0 },
+                React.createElement(Button, { vIndex: 0, hIndex: 0, title: this.props.value, onPress: this.showTimePicker, borderColor: '#777777', borderWidth: 1, borderRadius: 4 })));
         };
-        this.showTimePickerIOS = () => {
+        this.renderInlineTimePickerIOS = () => {
             if (Platform.OS === 'ios') {
                 if (this.state.showTimePicker) {
                     let time = TimeUtils.extractTime(this.props.value);
-                    return (React.createElement(DatePickerIOS, { date: time, mode: 'time', onDateChange: this.onTimeChangeIOS, style: { flex: 1 } }));
+                    return (React.createElement(Row, { vIndex: 0, hIndex: 0 },
+                        React.createElement(DatePickerIOS, { date: time, mode: 'time', onDateChange: this.onTimeChangeIOS, style: { flex: 1 } })));
                 }
             }
             return undefined;
         };
         this.onPickerClose = () => {
+            if (this.props.onBlur) {
+                this.props.onBlur();
+            }
             if (this.props.validateInput) {
                 if (this.props.validateInput(this.props.value)) {
                     console.log('TimeInput: valid');
@@ -55,25 +46,21 @@ export class TimeInput extends React.Component {
             this.onTimeChange(date.getHours(), date.getMinutes());
         };
         this.onTimeChange = (hour, minute) => {
-            this.setState({
-                showTimePicker: false,
-            }, () => {
-                if (this.props.onValueChange) {
-                    let timeString = TimeUtils.composeTimeString(hour, minute);
-                    this.props.onValueChange(timeString);
-                }
-            });
+            if (this.props.onValueChange) {
+                let timeString = TimeUtils.composeTimeString(hour, minute);
+                this.props.onValueChange(timeString);
+            }
         };
         this.showTimePickerAndroid = this.showTimePickerAndroid.bind(this);
-        this.showDatePicker = this.showDatePicker.bind(this);
+        this.showTimePicker = this.showTimePicker.bind(this);
         this.state = {
             showTimePicker: false,
         };
     }
     render() {
-        return (React.createElement(FlexBox, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, relativeWidth: false, flexDirection: 'row', alignSelf: 'stretch', alignContent: 'flex-start', alignItems: 'stretch', justifyContent: 'space-between', width: 'stretch' },
+        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch' },
             this.renderBtn(),
-            this.showTimePickerIOS()));
+            this.renderInlineTimePickerIOS()));
     }
     showTimePickerAndroid() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -91,7 +78,7 @@ export class TimeInput extends React.Component {
                     if (action === TimePickerAndroid.dismissedAction) {
                         this.setState({
                             showTimePicker: false
-                        });
+                        }, this.onPickerClose);
                     }
                 }
                 catch ({ code, message }) {
@@ -100,8 +87,11 @@ export class TimeInput extends React.Component {
             }
         });
     }
-    showDatePicker() {
+    showTimePicker() {
         return __awaiter(this, void 0, void 0, function* () {
+            if (this.props.onFocus) {
+                this.props.onFocus();
+            }
             if (this.state.showTimePicker) {
                 this.setState({
                     showTimePicker: false

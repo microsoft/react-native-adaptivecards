@@ -1,5 +1,5 @@
-import { FormElement } from '../Base/FormElement';
-export class ImageElement extends FormElement {
+import { ScopeElement } from '../Abstract/ScopeElement';
+export class ImageElement extends ScopeElement {
     constructor(json, parent) {
         super(json, parent);
         this.children = [];
@@ -11,7 +11,7 @@ export class ImageElement extends FormElement {
             this.style = json.style;
         }
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'url'];
     }
 }

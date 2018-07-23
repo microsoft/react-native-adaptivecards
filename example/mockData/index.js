@@ -17,6 +17,7 @@ const searchEmail = require('./skills/search_email.json');
 const emailSent = require('./skills/email_sent.json');
 const sendText = require('./skills/send_text.json');
 const sendTextContact = require('./skills/send_text_contact_disam.json');
+const peaplePicker = require('./peoplepicker.json');
 export default {
     adaptiveUpdate,
     flightItinerary,
@@ -36,6 +37,7 @@ export default {
     searchEmail,
     emailSent,
     sendText,
-    sendTextContact
+    sendTextContact,
+    peaplePicker
 };
 //# sourceMappingURL=index.js.map

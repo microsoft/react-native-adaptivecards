@@ -170,22 +170,7 @@ export class StyleTransformer {
             case 'right':
                 return 'right';
             default:
-                return 'center';
-        }
-    }
-
-    public static transformInboxTextAlign(align: 'left' | 'center' | 'right' | 'stretch') {
-        switch (align) {
-            case 'center':
-                return 'center';
-            case 'left':
-                return 'flex-start';
-            case 'right':
-                return 'flex-end';
-            case 'stretch':
-                return 'space-between';
-            default:
-                return 'flex-start';
+                return 'left';
         }
     }
 

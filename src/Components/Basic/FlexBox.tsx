@@ -73,27 +73,16 @@ export class FlexBox extends React.Component<IProps, IState> {
 
     private renderChildren = () => {
         if (this.props.children) {
-            return React.Children.map(this.props.children, (child, index) => {
+            return React.Children.map(this.props.children, (child) => {
                 if (child) {
                     if (typeof child !== 'string' && typeof child !== 'number') {
-                        if (this.props.width === 'auto') {
-                            return React.cloneElement(child, {
-                                // If auto, use the container's width as child's container's width,
-                                // this will allow the child to resize maximum to container's size.
-                                containerWidth: this.props.containerWidth,
-                                containerHeight: this.props.containerHeight
-                            });
-                        } else {
-                            return React.cloneElement(child, {
-                                // If not auto, this node will already have a size. Use this size as 
-                                // child's container size, will allow the child to resize maximum to 
-                                // this node's size.
-                                containerWidth: this.state.width,
-                                containerHeight: this.state.height
-                            });
-                        }
+                        return React.cloneElement(child, {
+                            containerWidth: this.containerWidth,
+                            containerHeight: this.containerHeight
+                        });
                     }
                 }
+                return undefined;
             });
         }
         return undefined;
@@ -113,6 +102,32 @@ export class FlexBox extends React.Component<IProps, IState> {
         });
     }
 
+    private get containerWidth() {
+        if (this.props.width === 'auto') {
+            // If auto, use the container's width as child's container's width,
+            // this will allow the child to resize maximum to container's size.
+            return this.props.containerWidth;
+        } else {
+            // If not auto, this node will already have a size. Use this size as 
+            // child's container size, will allow the child to resize maximum to 
+            // this node's size.
+            return this.state.width;
+        }
+    }
+
+    private get containerHeight() {
+        if (this.props.width === 'auto') {
+            // If auto, use the container's width as child's container's width,
+            // this will allow the child to resize maximum to container's size.
+            return this.props.containerHeight;
+        } else {
+            // If not auto, this node will already have a size. Use this size as 
+            // child's container size, will allow the child to resize maximum to 
+            // this node's size.
+            return this.state.height;
+        }
+    }
+
     private get flex() {
         if (this.props.flex) {
             return {
@@ -126,6 +141,7 @@ export class FlexBox extends React.Component<IProps, IState> {
         return {
             flexDirection: this.props.flexDirection,
             alignItems: this.props.wrap === 'wrap' ? 'flex-start' : this.props.alignItems,
+            alignContent: this.props.alignContent,
             justifyContent: this.props.justifyContent,
             height: this.props.height,
             flexWrap: this.props.wrap,

@@ -1,7 +1,7 @@
-import { FormElement } from '../Base/FormElement';
+import { ScopeElement } from '../Abstract/ScopeElement';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentElementFactory } from '../Factories/ContentElementFactory';
-export class CardElement extends FormElement {
+export class CardElement extends ScopeElement {
     constructor(json, parent) {
         super(json, parent);
         if (this.isValid) {
@@ -27,7 +27,7 @@ export class CardElement extends FormElement {
     getBackgroundImageUrl() {
         return this.backgroundImage;
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'version'];
     }
 }

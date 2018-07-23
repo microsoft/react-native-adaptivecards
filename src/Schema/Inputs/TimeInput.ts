@@ -1,16 +1,16 @@
 import { NumberUtils } from '../../Utils/NumberUtils';
 import { TimeUtils } from '../../Utils/TimeUtils';
-import { AbstractElement } from '../Base/AbstractElement';
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
+import { IElement } from '../Interfaces/IElement';
 
 export class TimeInputElement extends InputElement {
     // Optional
     public readonly max?: string;
     public readonly min?: string;
     public readonly placeholder?: string;
-    public readonly children: AbstractElement[] = [];
+    public readonly children: IElement[] = [];
 
-    public constructor(json: any, parent: AbstractElement) {
+    public constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -30,7 +30,7 @@ export class TimeInputElement extends InputElement {
         return true;
     }
 
-    protected getRequiredProperties(): Array<string> {
-        return ['id'];
+    public get requiredProperties() {
+        return ['type', 'id'];
     }
 }

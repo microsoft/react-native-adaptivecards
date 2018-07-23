@@ -19,6 +19,6 @@ export class InputBox extends React.Component {
                         height: 38,
                     },
                     this.props.style
-                ], multiline: this.props.multiline, keyboardType: this.props.keyboardType, blurOnSubmit: true, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.props.onValueChange, onBlur: this.props.onBlur })));
+                ], multiline: this.props.multiline, keyboardType: this.props.keyboardType, blurOnSubmit: true, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.props.onValueChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur })));
     }
 }

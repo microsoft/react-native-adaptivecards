@@ -2,13 +2,12 @@ import * as React from 'react';
 import {
     DatePickerIOS,
     Platform,
-    Text,
     TimePickerAndroid,
-    TouchableOpacity,
-    View
 } from 'react-native';
 import { TimeUtils } from '../../Utils/TimeUtils';
-import { FlexBox } from '../Basic/FlexBox';
+import { Column } from '../Containers/Column';
+import { Row } from '../Containers/Row';
+import { Button } from './Button';
 
 interface IProps {
     vIndex: number;
@@ -16,6 +15,8 @@ interface IProps {
     value: string;
     onValueChange?: (input: string) => void;
     validateInput?: (input: string) => boolean;
+    onFocus?: () => void;
+    onBlur?: () => void;
     style?: any;
 }
 
@@ -28,7 +29,7 @@ export class TimeInput extends React.Component<IProps, IState> {
         super(props);
 
         this.showTimePickerAndroid = this.showTimePickerAndroid.bind(this);
-        this.showDatePicker = this.showDatePicker.bind(this);
+        this.showTimePicker = this.showTimePicker.bind(this);
 
         this.state = {
             showTimePicker: false,
@@ -37,65 +38,52 @@ export class TimeInput extends React.Component<IProps, IState> {
 
     public render() {
         return (
-            <FlexBox
+            <Column
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
-                relativeWidth={false}
-                flexDirection='row'
-                alignSelf='stretch'
-                alignContent='flex-start'
-                alignItems='stretch'
-                justifyContent='space-between'
                 width='stretch'
             >
                 {this.renderBtn()}
-                {this.showTimePickerIOS()}
-            </FlexBox>
+                {this.renderInlineTimePickerIOS()}
+            </Column>
         );
     }
 
     private renderBtn = () => {
-        if (!this.state.showTimePicker) {
-            return (
-                <TouchableOpacity
-                    style={{ flex: 1 }}
-                    onPress={this.showDatePicker}
-                >
-                    <View
-                        style={[
-                            {
-                                flex: 1,
-                                borderColor: 'gray',
-                                borderWidth: 1,
-                                borderRadius: 4,
-                                paddingHorizontal: 10,
-                                paddingVertical: 6,
-                                marginVertical: 6,
-                                height: 38,
-                            }
-                        ]}
-                    >
-                        <Text>
-                            {this.props.value}
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-            );
-        }
-        return undefined;
+        return (
+            <Row
+                vIndex={0}
+                hIndex={0}
+            >
+                <Button
+                    vIndex={0}
+                    hIndex={0}
+                    title={this.props.value}
+                    onPress={this.showTimePicker}
+                    borderColor='#777777'
+                    borderWidth={1}
+                    borderRadius={4}
+                />
+            </Row>
+        );
     }
 
-    private showTimePickerIOS = () => {
+    private renderInlineTimePickerIOS = () => {
         if (Platform.OS === 'ios') {
             if (this.state.showTimePicker) {
                 let time = TimeUtils.extractTime(this.props.value);
                 return (
-                    <DatePickerIOS
-                        date={time}
-                        mode='time'
-                        onDateChange={this.onTimeChangeIOS}
-                        style={{ flex: 1 }}
-                    />
+                    <Row
+                        vIndex={0}
+                        hIndex={0}
+                    >
+                        <DatePickerIOS
+                            date={time}
+                            mode='time'
+                            onDateChange={this.onTimeChangeIOS}
+                            style={{ flex: 1 }}
+                        />
+                    </Row>
                 );
             }
         }
@@ -117,7 +105,7 @@ export class TimeInput extends React.Component<IProps, IState> {
                 if (action === TimePickerAndroid.dismissedAction) {
                     this.setState({
                         showTimePicker: false
-                    });
+                    }, this.onPickerClose);
                 }
             } catch ({ code, message }) {
                 console.warn('Cannot open date picker', message);
@@ -125,7 +113,10 @@ export class TimeInput extends React.Component<IProps, IState> {
         }
     }
 
-    private async showDatePicker() {
+    private async showTimePicker() {
+        if (this.props.onFocus) {
+            this.props.onFocus();
+        }
         if (this.state.showTimePicker) {
             this.setState({
                 showTimePicker: false
@@ -138,6 +129,9 @@ export class TimeInput extends React.Component<IProps, IState> {
     }
 
     private onPickerClose = () => {
+        if (this.props.onBlur) {
+            this.props.onBlur();
+        }
         if (this.props.validateInput) {
             if (this.props.validateInput(this.props.value)) {
                 console.log('TimeInput: valid');
@@ -152,13 +146,9 @@ export class TimeInput extends React.Component<IProps, IState> {
     }
 
     private onTimeChange = (hour: number, minute: number) => {
-        this.setState({
-            showTimePicker: false,
-        }, () => {
-            if (this.props.onValueChange) {
-                let timeString = TimeUtils.composeTimeString(hour, minute);
-                this.props.onValueChange(timeString);
-            }
-        });
+        if (this.props.onValueChange) {
+            let timeString = TimeUtils.composeTimeString(hour, minute);
+            this.props.onValueChange(timeString);
+        }
     }
 }

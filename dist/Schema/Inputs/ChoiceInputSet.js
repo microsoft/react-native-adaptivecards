@@ -1,4 +1,4 @@
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
 import { ChoiceInputElement } from './ChoiceInput';
 export class ChoiceInputSetElement extends InputElement {
     constructor(json, parent) {
@@ -27,7 +27,7 @@ export class ChoiceInputSetElement extends InputElement {
     validate(input) {
         return true;
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'id', 'choices'];
     }
 }

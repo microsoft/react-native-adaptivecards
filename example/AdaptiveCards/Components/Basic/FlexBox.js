@@ -5,23 +5,16 @@ export class FlexBox extends React.Component {
         super(props);
         this.renderChildren = () => {
             if (this.props.children) {
-                return React.Children.map(this.props.children, (child, index) => {
+                return React.Children.map(this.props.children, (child) => {
                     if (child) {
                         if (typeof child !== 'string' && typeof child !== 'number') {
-                            if (this.props.width === 'auto') {
-                                return React.cloneElement(child, {
-                                    containerWidth: this.props.containerWidth,
-                                    containerHeight: this.props.containerHeight
-                                });
-                            }
-                            else {
-                                return React.cloneElement(child, {
-                                    containerWidth: this.state.width,
-                                    containerHeight: this.state.height
-                                });
-                            }
+                            return React.cloneElement(child, {
+                                containerWidth: this.containerWidth,
+                                containerHeight: this.containerHeight
+                            });
                         }
                     }
+                    return undefined;
                 });
             }
             return undefined;
@@ -69,6 +62,22 @@ export class FlexBox extends React.Component {
                 this.props.style,
             ], onLayout: this.onLayoutChange, onPress: this.props.onPress }, this.renderChildren()));
     }
+    get containerWidth() {
+        if (this.props.width === 'auto') {
+            return this.props.containerWidth;
+        }
+        else {
+            return this.state.width;
+        }
+    }
+    get containerHeight() {
+        if (this.props.width === 'auto') {
+            return this.props.containerHeight;
+        }
+        else {
+            return this.state.height;
+        }
+    }
     get flex() {
         if (this.props.flex) {
             return {
@@ -81,6 +90,7 @@ export class FlexBox extends React.Component {
         return {
             flexDirection: this.props.flexDirection,
             alignItems: this.props.wrap === 'wrap' ? 'flex-start' : this.props.alignItems,
+            alignContent: this.props.alignContent,
             justifyContent: this.props.justifyContent,
             height: this.props.height,
             flexWrap: this.props.wrap,

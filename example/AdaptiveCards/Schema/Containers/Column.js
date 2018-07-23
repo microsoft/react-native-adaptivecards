@@ -1,6 +1,6 @@
-import { FormElement } from '../Base/FormElement';
+import { ScopeElement } from '../Abstract/ScopeElement';
 import { ContentElementFactory } from '../Factories/ContentElementFactory';
-export class ColumnElement extends FormElement {
+export class ColumnElement extends ScopeElement {
     constructor(json, parent) {
         super(json, parent);
         if (this.isValid) {
@@ -25,7 +25,7 @@ export class ColumnElement extends FormElement {
         }
         return [];
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'items'];
     }
 }

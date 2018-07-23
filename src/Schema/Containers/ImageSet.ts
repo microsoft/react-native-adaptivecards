@@ -1,6 +1,6 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { ContentElement } from '../Base/ContentElement';
+import { ContentElement } from '../Abstract/ContentElement';
 import { ImageElement } from '../CardElements/Image';
+import { IElement } from '../Interfaces/IElement';
 
 export class ImageSetElement extends ContentElement {
     // Required
@@ -8,7 +8,7 @@ export class ImageSetElement extends ContentElement {
     // Optional
     public readonly imageSize?: 'auto' | 'stretch' | 'small' | 'medium' | 'large';
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -25,14 +25,14 @@ export class ImageSetElement extends ContentElement {
         }
     }
 
-    public get children(): AbstractElement[] {
+    public get children() {
         if (this.images) {
             return this.images;
         }
         return [];
     }
 
-    protected getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type', 'images'];
     }
 }

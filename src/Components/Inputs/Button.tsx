@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { View } from 'react-native';
 
 import { FlexBox } from '../Basic/FlexBox';
 import { TextBlock } from '../Basic/TextBlock';
@@ -6,10 +7,16 @@ import { TextBlock } from '../Basic/TextBlock';
 interface IProps {
     vIndex: number;
     hIndex: number;
-    vSpace?: number;
-    hSpace?: number;
+    vSpacing?: number;
+    hSpacing?: number;
     title: string;
     onPress: () => void;
+    color?: string;
+    backgroundColor?: string;
+    borderColor?: string;
+    borderRadius?: number;
+    borderWidth?: number;
+    textAlign?: 'auto' | 'left' | 'right' | 'center' | 'justify';
     boxStyle?: any;
     textStyle?: any;
 }
@@ -28,8 +35,8 @@ export class Button extends React.Component<IProps> {
                 relativeWidth={false}
                 flex={1}
                 alignSelf='stretch'
-                alignItems='center'
-                alignContent='center'
+                alignItems='stretch'
+                alignContent='stretch'
                 justifyContent='center'
                 width='stretch'
                 hSpacing={10}
@@ -37,30 +44,37 @@ export class Button extends React.Component<IProps> {
                     {
                         paddingVertical: 10,
                         paddingHorizontal: 10,
-                        borderRadius: 4,
-                        backgroundColor: '#277BDF',
+                        borderRadius: this.props.borderRadius,
+                        backgroundColor: this.props.backgroundColor,
+                        borderColor: this.props.borderColor,
+                        borderWidth: this.props.borderWidth,
                     },
                     this.spacing,
                     this.props.boxStyle
                 ]}
                 onPress={this.props.onPress}
             >
-                <TextBlock
-                    vIndex={0}
-                    hIndex={0}
-                    width='stretch'
-                    horizontalAlign='center'
-                    textStyle={[
-                        {
-                            textAlign: 'center',
-                            color: 'white',
-                        },
-                        this.props.textStyle,
-                    ]}
-                    numberOfLines={1}
+                <View
+                    pointerEvents='none'
+                    flex={1}
                 >
-                    {this.props.title}
-                </TextBlock>
+                    <TextBlock
+                        vIndex={0}
+                        hIndex={0}
+                        width='stretch'
+                        horizontalAlign='center'
+                        textStyle={[
+                            {
+                                textAlign: this.props.textAlign,
+                                color: this.props.color,
+                            },
+                            this.props.textStyle,
+                        ]}
+                        numberOfLines={1}
+                    >
+                        {this.props.title}
+                    </TextBlock>
+                </View>
             </FlexBox>
         );
     }
@@ -70,13 +84,12 @@ export class Button extends React.Component<IProps> {
             marginTop: 0,
             marginLeft: 0,
         };
-        if (this.props.vIndex > 0 && this.props.vSpace) {
-            result.marginTop = this.props.vSpace;
+        if (this.props.vIndex > 0 && this.props.vSpacing) {
+            result.marginTop = this.props.vSpacing;
         }
-        if (this.props.hIndex > 0 && this.props.hSpace) {
-            result.marginLeft = this.props.hSpace;
+        if (this.props.hIndex > 0 && this.props.hSpacing) {
+            result.marginLeft = this.props.hSpacing;
         }
         return result;
     }
-
 }

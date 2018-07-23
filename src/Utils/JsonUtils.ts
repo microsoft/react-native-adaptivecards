@@ -23,6 +23,10 @@ export class JsonUtils {
                 isValid: isValid,
             };
         }
+        return {
+            isValid: true,
+            message: ''
+        };
     }
 
     public static isValidValue(value: any): boolean {

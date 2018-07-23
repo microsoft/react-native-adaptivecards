@@ -27,7 +27,6 @@ export class ImageUtils {
                 width: 0,
                 height: 0,
             });
-            console.log(`ImageUtils width: ${result.width} height: ${result.height}`);
             onSuccess(result.width, result.height);
         });
     }

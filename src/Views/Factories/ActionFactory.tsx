@@ -1,9 +1,9 @@
 import { ActionContext } from 'Contexts/ActionContext';
 import React from 'react';
+import { ActionElement, ActionType } from '../../Schema/Abstract/ActionElement';
 import { OpenUrlActionElement } from '../../Schema/Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../../Schema/Actions/SubmitAction';
-import { ActionElement, ActionType } from '../../Schema/Base/ActionElement';
 import { OpenUrlActionView } from '../Actions/OpenUrlAction';
 import { ShowCardActionView } from '../Actions/ShowCardAction';
 import { SubmitActionView } from '../Actions/SubmitAction';

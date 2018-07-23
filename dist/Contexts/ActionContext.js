@@ -1,4 +1,4 @@
-import { ActionType } from '../Schema/Base/ActionElement';
+import { HostContext } from './HostContext';
 export class ActionContext {
     constructor() {
         this.hooks = {};
@@ -14,15 +14,6 @@ export class ActionContext {
     }
     static clearGlobalInstance() {
         ActionContext.sharedInstance = undefined;
-    }
-    registerOpenUrlHandler(handler) {
-        this.onOpenUrl = handler;
-    }
-    registerShowCardHandler(handler) {
-        this.onShowCard = handler;
-    }
-    registerSubmitHandler(handler) {
-        this.onSubmit = handler;
     }
     registerHook(hook) {
         if (hook) {
@@ -40,14 +31,16 @@ export class ActionContext {
         }
         return [];
     }
-    getActionEventHandler(target) {
+    getActionEventHandler(target, onFinish, onError) {
         return ((...externalHooks) => {
             let action = target.action;
             if (action) {
-                let callback = this.selectCallback(action);
+                let callback = HostContext.getInstance().getHandler(action.type);
                 let args = {
                     action: action,
                     formValidate: false,
+                    onFinishCallback: onFinish,
+                    onErrorCallback: onError,
                 };
                 let hookFuncs = this.getExecuteFuncs(action.type, externalHooks);
                 args = hookFuncs.reduce((prev, current) => {
@@ -58,21 +51,6 @@ export class ActionContext {
                 }
             }
         });
-    }
-    selectCallback(action) {
-        let callback;
-        switch (action.type) {
-            case ActionType.OpenUrl:
-                callback = this.onOpenUrl;
-                break;
-            case ActionType.ShowCard:
-                callback = this.onShowCard;
-                break;
-            case ActionType.Submit:
-                callback = this.onSubmit;
-                break;
-        }
-        return callback;
     }
     getExecuteFuncs(actionType, externalHooks) {
         let hookFuncs = [];

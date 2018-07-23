@@ -1,7 +1,7 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { FormElement } from '../Base/FormElement';
+import { ScopeElement } from '../Abstract/ScopeElement';
+import { IElement } from '../Interfaces/IElement';
 
-export class ImageElement extends FormElement {
+export class ImageElement extends ScopeElement {
     // Required
     public readonly url: string;
     // Optional
@@ -10,9 +10,9 @@ export class ImageElement extends FormElement {
     public readonly size?: 'small' | 'medium' | 'large' | 'auto' | 'stretch';
     public readonly style?: 'person' | 'default';
 
-    public readonly children: AbstractElement[] = [];
+    public readonly children: IElement[] = [];
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -24,7 +24,7 @@ export class ImageElement extends FormElement {
         }
     }
 
-    protected getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type', 'url'];
     }
 }

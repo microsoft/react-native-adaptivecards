@@ -1,4 +1,4 @@
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
 export class TextInputElement extends InputElement {
     constructor(json, parent) {
         super(json, parent);
@@ -18,7 +18,7 @@ export class TextInputElement extends InputElement {
         }
         return true;
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'id'];
     }
 }

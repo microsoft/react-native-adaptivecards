@@ -25,6 +25,7 @@ export class SpacingConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class SeparatorConfig {
@@ -46,6 +47,7 @@ export class SeparatorConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class FontSizeConfig {
@@ -73,6 +75,7 @@ export class FontSizeConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class FontWeightConfig {
@@ -96,6 +99,7 @@ export class FontWeightConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class ColorConfig {
@@ -117,6 +121,7 @@ export class ColorConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class ColorSetConfig {
@@ -148,6 +153,7 @@ export class ColorSetConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class ThemeConfig {
@@ -169,6 +175,7 @@ export class ThemeConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class ContainerConfig {
@@ -190,6 +197,7 @@ export class ContainerConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class ImageSizeConfig {
@@ -213,6 +221,7 @@ export class ImageSizeConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class ShowCardActionConfig {
@@ -236,6 +245,7 @@ export class ShowCardActionConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class ActionConfig {
@@ -271,6 +281,7 @@ export class ActionConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class CardConfig {
@@ -290,6 +301,7 @@ export class CardConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class ImageSetConfig {
@@ -311,6 +323,7 @@ export class ImageSetConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class FactValueConfig {
@@ -322,6 +335,7 @@ export class FactValueConfig {
             this.weight = json['weight'];
             this.wrap = json['wrap'];
         }
+        return this;
     }
     combine(...args) {
         if (args) {
@@ -338,6 +352,7 @@ export class FactValueConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class FactTitleConfig {
@@ -367,6 +382,7 @@ export class FactTitleConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class FactSetConfig {
@@ -390,6 +406,7 @@ export class FactSetConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class MediaConfig {
@@ -411,6 +428,7 @@ export class MediaConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 export class HostConfig {
@@ -456,5 +474,6 @@ export class HostConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }

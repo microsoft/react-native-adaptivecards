@@ -8,9 +8,9 @@ import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { Column } from '../../Components/Containers/Column';
 import { Row } from '../../Components/Containers/Row';
 import { ActionContext } from '../../Contexts/ActionContext';
+import { ActionElement, ActionType } from '../../Schema/Abstract/ActionElement';
+import { ContentElement } from '../../Schema/Abstract/ContentElement';
 import { ShowCardActionElement } from '../../Schema/Actions/ShowCardAction';
-import { ActionElement, ActionType } from '../../Schema/Base/ActionElement';
-import { ContentElement } from '../../Schema/Base/ContentElement';
 import { CardElement } from '../../Schema/Cards/Card';
 import { ActionEventHandlerArgs } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -37,11 +37,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         this.state = {};
 
         this.actionContext = ActionContext.createInstance();
-        this.actionContext.registerHook({
-            func: this.showSubCard,
-            name: 'showSubCard',
-            actionType: ActionType.ShowCard
-        });
+        this.actionContext.registerHook({ func: this.showSubCard, name: 'showSubCard', actionType: ActionType.ShowCard });
         this.showCardStyle = StyleManager.getInstance().getShowCardStyle();
     }
 

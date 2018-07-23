@@ -1,6 +1,6 @@
-import { FormElement } from '../Base/FormElement';
+import { ScopeElement } from '../Abstract/ScopeElement';
 import { ColumnElement } from './Column';
-export class ColumnSetElement extends FormElement {
+export class ColumnSetElement extends ScopeElement {
     constructor(json, parent) {
         super(json, parent);
         if (this.isValid) {
@@ -21,7 +21,7 @@ export class ColumnSetElement extends FormElement {
         }
         return [];
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type'];
     }
 }

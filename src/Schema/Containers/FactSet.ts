@@ -1,12 +1,12 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { ContentElement } from '../Base/ContentElement';
+import { ContentElement } from '../Abstract/ContentElement';
+import { IElement } from '../Interfaces/IElement';
 import { FactElement } from './Fact';
 
 export class FactSetElement extends ContentElement {
     // Required
     public readonly facts: Array<FactElement> = [];
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -22,14 +22,14 @@ export class FactSetElement extends ContentElement {
         }
     }
 
-    public get children(): AbstractElement[] {
+    public get children() {
         if (this.facts) {
             return this.facts;
         }
         return [];
     }
 
-    protected getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type', 'facts'];
     }
 }

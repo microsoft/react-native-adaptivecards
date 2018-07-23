@@ -2,10 +2,25 @@ import * as React from 'react';
 import { Row } from '../../Components/Containers/Row';
 import { TimeInput } from '../../Components/Inputs/TimeInput';
 import { FormContext } from '../../Contexts/FormContext';
+import { HostContext } from '../../Contexts/HostContext';
 import { StyleManager } from '../../Styles/StyleManager';
 export class TimeInputView extends React.Component {
     constructor(props) {
         super(props);
+        this.onBlur = () => {
+            console.log('TimeInputView onBlur');
+            let callback = HostContext.getInstance().getHandler('blur');
+            if (callback) {
+                callback();
+            }
+        };
+        this.onFocus = () => {
+            console.log('TimeInputView onFocus');
+            let callback = HostContext.getInstance().getHandler('focus');
+            if (callback) {
+                callback();
+            }
+        };
         this.onValueChange = (value) => {
             this.setState({
                 value: value
@@ -25,7 +40,7 @@ export class TimeInputView extends React.Component {
             return null;
         }
         return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing) },
-            React.createElement(TimeInput, { vIndex: 0, hIndex: 0, value: this.state.value, onValueChange: this.onValueChange, validateInput: element.validate })));
+            React.createElement(TimeInput, { vIndex: 0, hIndex: 0, value: this.state.value, onValueChange: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, validateInput: element.validate })));
     }
     updateStore() {
         FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.props.element.validate(this.state.value));

@@ -1,10 +1,10 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { ValueElement } from '../Base/ValueElement';
+import { ValueElement } from '../Abstract/ValueElement';
+import { IElement } from '../Interfaces/IElement';
 
 export class ChoiceInputElement extends ValueElement {
-    public readonly children: AbstractElement[] = [];
+    public readonly children: IElement[] = [];
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
     }
 }

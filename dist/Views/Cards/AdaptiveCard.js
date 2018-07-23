@@ -4,7 +4,7 @@ import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { Column } from '../../Components/Containers/Column';
 import { Row } from '../../Components/Containers/Row';
 import { ActionContext } from '../../Contexts/ActionContext';
-import { ActionType } from '../../Schema/Base/ActionElement';
+import { ActionType } from '../../Schema/Abstract/ActionElement';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
@@ -29,11 +29,7 @@ export class AdaptiveCardView extends React.Component {
         };
         this.state = {};
         this.actionContext = ActionContext.createInstance();
-        this.actionContext.registerHook({
-            func: this.showSubCard,
-            name: 'showSubCard',
-            actionType: ActionType.ShowCard
-        });
+        this.actionContext.registerHook({ func: this.showSubCard, name: 'showSubCard', actionType: ActionType.ShowCard });
         this.showCardStyle = StyleManager.getInstance().getShowCardStyle();
     }
     render() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActionType } from '../../Schema/Base/ActionElement';
+import { ActionType } from '../../Schema/Abstract/ActionElement';
 import { OpenUrlActionView } from '../Actions/OpenUrlAction';
 import { ShowCardActionView } from '../Actions/ShowCardAction';
 import { SubmitActionView } from '../Actions/SubmitAction';

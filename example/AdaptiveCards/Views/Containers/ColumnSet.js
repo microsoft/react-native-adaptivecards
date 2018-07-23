@@ -8,12 +8,10 @@ export class ColumnSetView extends React.Component {
         super(props);
         this.renderColumns = () => {
             const { element } = this.props;
-            if (!element || !element.isValid) {
+            if (!element || !element.isValid || !element.columns || element.columns.length === 0) {
                 return undefined;
             }
-            if (element.columns) {
-                return element.columns.map((column, index) => (React.createElement(ColumnView, { key: index, vIndex: 0, hIndex: index, element: column, theme: this.props.theme })));
-            }
+            return element.columns.map((column, index) => (React.createElement(ColumnView, { key: index, vIndex: 0, hIndex: index, element: column, theme: this.props.theme })));
         };
     }
     render() {

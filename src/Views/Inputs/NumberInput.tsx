@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Row } from '../../Components/Containers/Row';
 import { NumberInput } from '../../Components/Inputs/NumberInput';
 import { FormContext } from '../../Contexts/FormContext';
+import { HostContext } from '../../Contexts/HostContext';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { NumberUtils } from '../../Utils/NumberUtils';
@@ -55,6 +56,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
                     value={this.state.value}
                     onValueChange={this.onValueChange}
                     onBlur={this.onBlur}
+                    onFocus={this.onFocus}
                     validateInput={element.validate}
                 />
             </Row>
@@ -63,6 +65,18 @@ export class NumberInputView extends React.Component<IProps, IState> {
 
     private onBlur = () => {
         console.log('NumberInputView onBlur');
+        let callback = HostContext.getInstance().getHandler('blur');
+        if (callback) {
+            callback();
+        }
+    }
+
+    private onFocus = () => {
+        console.log('NumberInputView onFocus');
+        let callback = HostContext.getInstance().getHandler('focus');
+        if (callback) {
+            callback();
+        }
     }
 
     private onValueChange = (value: string) => {

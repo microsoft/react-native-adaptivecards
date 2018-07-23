@@ -67,6 +67,18 @@ export class FormContext {
         return {};
     }
 
+    public getCallbackParamData(params: { [key: string]: string }): { [id: string]: string } {
+        if (params) {
+            return Object.keys(params).reduce((prev, current) => {
+                let formIndex = params[current];
+                console.log(formIndex);
+                prev[current] = this.getFieldValue(formIndex);
+                return prev;
+            }, {} as { [key: string]: string });
+        }
+        return {};
+    }
+
     public validateField(id: string): boolean {
         let field = this.getField(id);
         if (field) {

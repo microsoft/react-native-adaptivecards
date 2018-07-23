@@ -39,8 +39,7 @@ export class TextBlockView extends React.Component<IProps> {
                 backgroundColor='transparent'
                 textAlign={this.style.textAlign}
                 wrap={this.style.wrap}
-                horizontalAlign={this.style.inboxTextAlign}
-                spacing={this.style.spacing}
+                vSpacing={this.style.spacing}
                 numberOfLines={element.maxLines}
             >
                 {element.text}

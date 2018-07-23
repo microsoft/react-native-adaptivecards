@@ -1,6 +1,6 @@
-import { FormElement } from '../Base/FormElement';
+import { ScopeElement } from '../Abstract/ScopeElement';
 import { ContentElementFactory } from '../Factories/ContentElementFactory';
-export class ContainerElement extends FormElement {
+export class ContainerElement extends ScopeElement {
     constructor(json, parent) {
         super(json, parent);
         this.items = [];
@@ -15,7 +15,7 @@ export class ContainerElement extends FormElement {
         }
         return [];
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'items'];
     }
 }

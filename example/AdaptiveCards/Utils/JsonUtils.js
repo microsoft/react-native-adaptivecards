@@ -20,6 +20,10 @@ export class JsonUtils {
                 isValid: isValid,
             };
         }
+        return {
+            isValid: true,
+            message: ''
+        };
     }
     static isValidValue(value) {
         return !(value === undefined ||

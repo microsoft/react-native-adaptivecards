@@ -1,6 +1,9 @@
-import { ContentElementType } from '../Base/ContentElement';
+import { ContentElementType } from '../Abstract/ContentElement';
+import { InputElementType } from '../Abstract/InputElement';
+import { FormElementType } from '../Abstract/ScopeElement';
 import { ImageElement } from '../CardElements/Image';
 import { TextBlockElement } from '../CardElements/TextBlock';
+import { CardElement } from '../Cards/Card';
 import { ColumnElement } from '../Containers/Column';
 import { ColumnSetElement } from '../Containers/ColumnSet';
 import { ContainerElement } from '../Containers/Container';
@@ -8,6 +11,7 @@ import { FactSetElement } from '../Containers/FactSet';
 import { ImageSetElement } from '../Containers/ImageSet';
 import { DateInputElement } from '../Inputs/DateInput';
 import { NumberInputElement } from '../Inputs/NumberInput';
+import { PeoplePickerElement } from '../Inputs/PeoplePicker';
 import { TextInputElement } from '../Inputs/TextInput';
 import { TimeInputElement } from '../Inputs/TimeInput';
 export class ContentElementFactory {
@@ -23,13 +27,13 @@ export class ContentElementFactory {
             case ContentElementType.TextBlock:
                 cardElement = new TextBlockElement(json, parent);
                 break;
-            case ContentElementType.Column:
+            case FormElementType.Column:
                 cardElement = new ColumnElement(json, parent);
                 break;
-            case ContentElementType.ColumnSet:
+            case FormElementType.ColumnSet:
                 cardElement = new ColumnSetElement(json, parent);
                 break;
-            case ContentElementType.Container:
+            case FormElementType.Container:
                 cardElement = new ContainerElement(json, parent);
                 break;
             case ContentElementType.FactSet:
@@ -38,17 +42,23 @@ export class ContentElementFactory {
             case ContentElementType.ImageSet:
                 cardElement = new ImageSetElement(json, parent);
                 break;
-            case ContentElementType.TextInput:
+            case InputElementType.TextInput:
                 cardElement = new TextInputElement(json, parent);
                 break;
-            case ContentElementType.DateInput:
+            case InputElementType.DateInput:
                 cardElement = new DateInputElement(json, parent);
                 break;
-            case ContentElementType.TimeInput:
+            case InputElementType.TimeInput:
                 cardElement = new TimeInputElement(json, parent);
                 break;
-            case ContentElementType.NumberInput:
+            case InputElementType.NumberInput:
                 cardElement = new NumberInputElement(json, parent);
+                break;
+            case InputElementType.PeoplePicker:
+                cardElement = new PeoplePickerElement(json, parent);
+                break;
+            case ContentElementType.AdaptiveCard:
+                cardElement = new CardElement(json, parent);
                 break;
             default:
                 cardElement = null;

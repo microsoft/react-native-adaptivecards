@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Row } from '../../Components/Containers/Row';
 import { InputBox } from '../../Components/Inputs/InputBox';
 import { FormContext } from '../../Contexts/FormContext';
+import { HostContext } from '../../Contexts/HostContext';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { IElementViewProps } from '../Shared/BaseProps';
@@ -47,6 +48,7 @@ export class TextInputView extends React.Component<IProps, IState> {
                     placeholder={element.placeholder}
                     value={this.state.value}
                     onValueChange={this.onValueChange}
+                    onFocus={this.onFocus}
                     onBlur={this.onBlur}
                 />
             </Row>
@@ -55,6 +57,18 @@ export class TextInputView extends React.Component<IProps, IState> {
 
     private onBlur = () => {
         console.log('TextInputView onBlur');
+        let callback = HostContext.getInstance().getHandler('blur');
+        if (callback) {
+            callback();
+        }
+    }
+
+    private onFocus = () => {
+        console.log('TextInputView onFocus');
+        let callback = HostContext.getInstance().getHandler('focus');
+        if (callback) {
+            callback();
+        }
     }
 
     private onValueChange = (value: string) => {

@@ -7,7 +7,8 @@ import { FlexBox } from './FlexBox';
 interface IProps {
     vIndex: number;
     hIndex: number;
-    spacing?: number;
+    vSpacing?: number;
+    hSpacing?: number;
     color?: string;
     backgroundColor?: string;
     fontFamily?: string;
@@ -17,6 +18,7 @@ interface IProps {
     wrap?: 'wrap' | 'nowrap';
     horizontalAlign?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
     width: 'auto' | 'stretch';
+    onPress?: () => void;
     numberOfLines?: number;
     boxStyle?: any;
     textStyle?: any;
@@ -35,11 +37,13 @@ export class TextBlock extends React.PureComponent<IProps> {
                 flexDirection='row'
                 relativeWidth={false}
                 width={this.props.width}
-                vSpacing={this.props.spacing}
+                vSpacing={this.props.vSpacing}
+                hSpacing={this.props.hSpacing}
                 alignSelf='stretch'
                 alignItems='stretch'
                 alignContent='stretch'
-                justifyContent={this.props.horizontalAlign}
+                justifyContent={'center'}
+                onPress={this.props.onPress}
                 style={[
                     {
                         backgroundColor: this.props.backgroundColor
@@ -55,12 +59,14 @@ export class TextBlock extends React.PureComponent<IProps> {
                             fontSize: this.props.fontSize,
                             fontWeight: this.props.fontWeight,
                             textAlign: this.props.textAlign,
+                            flex: 1,
                             flexWrap: this.props.wrap,
                             backgroundColor: this.props.backgroundColor,
                         },
                         this.props.textStyle,
                     ]}
                     numberOfLines={this.props.numberOfLines}
+                    onPress={this.props.onPress}
                 >
                     {this.props.children}
                 </Text>

@@ -1,6 +1,6 @@
 import { NumberUtils } from '../../Utils/NumberUtils';
 import { TimeUtils } from '../../Utils/TimeUtils';
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
 export class DateInputElement extends InputElement {
     constructor(json, parent) {
         super(json, parent);
@@ -20,7 +20,7 @@ export class DateInputElement extends InputElement {
         }
         return true;
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'id'];
     }
 }

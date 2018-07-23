@@ -11,6 +11,7 @@ interface IProps {
     style?: any;
     onValueChange?: (input: string) => void;
     validateInput?: (input: string) => boolean;
+    onFocus?: () => void;
     onBlur?: () => void;
 }
 
@@ -32,6 +33,7 @@ export class NumberInput extends React.Component<IProps> {
                 returnKeyType={'done'}
                 onValueChange={this.onChangeText}
                 onBlur={this.onBlur}
+                onFocus={this.onFocus}
             />
         );
     }
@@ -54,6 +56,12 @@ export class NumberInput extends React.Component<IProps> {
         }
         if (this.props.onBlur) {
             this.props.onBlur();
+        }
+    }
+
+    private onFocus = () => {
+        if (this.props.onFocus) {
+            this.props.onFocus();
         }
     }
 }

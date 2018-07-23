@@ -1,4 +1,4 @@
-import { ContentElement } from '../Base/ContentElement';
+import { ContentElement } from '../Abstract/ContentElement';
 import { ImageElement } from '../CardElements/Image';
 export class ImageSetElement extends ContentElement {
     constructor(json, parent) {
@@ -23,7 +23,7 @@ export class ImageSetElement extends ContentElement {
         }
         return [];
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'images'];
     }
 }

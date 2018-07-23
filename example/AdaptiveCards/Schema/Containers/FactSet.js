@@ -1,4 +1,4 @@
-import { ContentElement } from '../Base/ContentElement';
+import { ContentElement } from '../Abstract/ContentElement';
 import { FactElement } from './Fact';
 export class FactSetElement extends ContentElement {
     constructor(json, parent) {
@@ -22,7 +22,7 @@ export class FactSetElement extends ContentElement {
         }
         return [];
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'facts'];
     }
 }

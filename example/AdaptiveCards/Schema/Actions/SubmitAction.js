@@ -1,4 +1,4 @@
-import { ActionElement } from '../Base/ActionElement';
+import { ActionElement } from '../Abstract/ActionElement';
 export class SubmitActionElement extends ActionElement {
     constructor(json, parent) {
         super(json, parent);
@@ -10,7 +10,7 @@ export class SubmitActionElement extends ActionElement {
     get scope() {
         return this.ancestorsAndSelf.find(element => element.parent === undefined);
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'title'];
     }
 }

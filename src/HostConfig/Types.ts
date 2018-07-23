@@ -35,6 +35,7 @@ export class SpacingConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -61,6 +62,7 @@ export class SeparatorConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -96,6 +98,7 @@ export class FontSizeConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -127,6 +130,7 @@ export class FontWeightConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -153,6 +157,7 @@ export class ColorConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -194,6 +199,7 @@ export class ColorSetConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -220,6 +226,7 @@ export class ThemeConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -246,6 +253,7 @@ export class ContainerConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -275,6 +283,7 @@ export class ImageSizeConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -304,6 +313,7 @@ export class ShowCardActionConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -351,6 +361,7 @@ export class ActionConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -374,6 +385,7 @@ export class CardConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -400,6 +412,7 @@ export class ImageSetConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -418,6 +431,7 @@ export class FactValueConfig {
             this.weight = json['weight'];
             this.wrap = json['wrap'];
         }
+        return this;
     }
 
     public combine(...args: FactValueConfig[]): FactValueConfig {
@@ -435,6 +449,7 @@ export class FactValueConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -473,6 +488,7 @@ export class FactTitleConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -502,6 +518,7 @@ export class FactSetConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -528,6 +545,7 @@ export class MediaConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }
 
@@ -589,5 +607,6 @@ export class HostConfig {
                 return prev;
             }, this);
         }
+        return this;
     }
 }

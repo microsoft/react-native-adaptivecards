@@ -79,7 +79,6 @@ export class StyleManager {
             fontSize: 14,
             fontWeight: '400',
             textAlign: 'center',
-            inboxTextAlign: 'center',
             wrap: 'nowrap',
             spacing: 0,
         };
@@ -92,7 +91,6 @@ export class StyleManager {
             result.fontWeight = StyleTransformer.transformFontWeight(element.weight, this.hostConfig);
             result.spacing = StyleTransformer.transformSpacing(element.spacing, this.hostConfig);
             result.textAlign = StyleTransformer.transformTextAlign(element.horizontalAlignment);
-            result.inboxTextAlign = StyleTransformer.transformInboxTextAlign(element.horizontalAlignment);
             result.wrap = element.wrap ? 'wrap' : 'nowrap';
         }
         return result;

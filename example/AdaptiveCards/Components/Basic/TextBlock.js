@@ -6,7 +6,7 @@ export class TextBlock extends React.PureComponent {
         super(props);
     }
     render() {
-        return (React.createElement(FlexBox, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, flexDirection: 'row', relativeWidth: false, width: this.props.width, vSpacing: this.props.spacing, alignSelf: 'stretch', alignItems: 'stretch', alignContent: 'stretch', justifyContent: this.props.horizontalAlign, style: [
+        return (React.createElement(FlexBox, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, flexDirection: 'row', relativeWidth: false, width: this.props.width, vSpacing: this.props.vSpacing, hSpacing: this.props.hSpacing, alignSelf: 'stretch', alignItems: 'stretch', alignContent: 'stretch', justifyContent: 'center', onPress: this.props.onPress, style: [
                 {
                     backgroundColor: this.props.backgroundColor
                 },
@@ -19,10 +19,11 @@ export class TextBlock extends React.PureComponent {
                         fontSize: this.props.fontSize,
                         fontWeight: this.props.fontWeight,
                         textAlign: this.props.textAlign,
+                        flex: 1,
                         flexWrap: this.props.wrap,
                         backgroundColor: this.props.backgroundColor,
                     },
                     this.props.textStyle,
-                ], numberOfLines: this.props.numberOfLines }, this.props.children)));
+                ], numberOfLines: this.props.numberOfLines, onPress: this.props.onPress }, this.props.children)));
     }
 }

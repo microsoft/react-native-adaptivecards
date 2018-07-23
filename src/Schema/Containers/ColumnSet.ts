@@ -1,12 +1,12 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { FormElement } from '../Base/FormElement';
+import { ScopeElement } from '../Abstract/ScopeElement';
+import { IElement } from '../Interfaces/IElement';
 import { ColumnElement } from './Column';
 
-export class ColumnSetElement extends FormElement {
+export class ColumnSetElement extends ScopeElement {
     // Optional
     public readonly columns?: ColumnElement[];
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -29,7 +29,7 @@ export class ColumnSetElement extends FormElement {
         return [];
     }
 
-    protected getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type'];
     }
 }

@@ -1,5 +1,5 @@
-import { AbstractElement } from '../Base/AbstractElement';
-import { ContentElement } from '../Base/ContentElement';
+import { ContentElement } from '../Abstract/ContentElement';
+import { IElement } from '../Interfaces/IElement';
 
 export class TextBlockElement extends ContentElement {
     // Required
@@ -12,9 +12,9 @@ export class TextBlockElement extends ContentElement {
     public readonly size?: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
     public readonly weight?: 'default' | 'lighter' | 'bolder';
     public readonly wrap?: boolean;
-    public readonly children: AbstractElement[] = [];
+    public readonly children: IElement[] = [];
 
-    constructor(json: any, parent: AbstractElement) {
+    constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
@@ -29,7 +29,7 @@ export class TextBlockElement extends ContentElement {
         }
     }
 
-    protected getRequiredProperties(): Array<string> {
+    public get requiredProperties() {
         return ['type', 'text'];
     }
 }

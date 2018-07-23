@@ -25,8 +25,13 @@ export class NumberInput extends React.Component {
                 this.props.onBlur();
             }
         };
+        this.onFocus = () => {
+            if (this.props.onFocus) {
+                this.props.onFocus();
+            }
+        };
     }
     render() {
-        return (React.createElement(InputBox, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, multiline: false, keyboardType: Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'numeric', placeholder: this.props.placeholder, value: this.props.value, returnKeyType: 'done', onValueChange: this.onChangeText, onBlur: this.onBlur }));
+        return (React.createElement(InputBox, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, multiline: false, keyboardType: Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'numeric', placeholder: this.props.placeholder, value: this.props.value, returnKeyType: 'done', onValueChange: this.onChangeText, onBlur: this.onBlur, onFocus: this.onFocus }));
     }
 }

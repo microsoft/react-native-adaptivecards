@@ -1,4 +1,4 @@
-import { InputElement } from '../Base/InputElement';
+import { InputElement } from '../Abstract/InputElement';
 export class ToggleInputElement extends InputElement {
     constructor(json, parent) {
         super(json, parent);
@@ -12,7 +12,7 @@ export class ToggleInputElement extends InputElement {
     validate(input) {
         return true;
     }
-    getRequiredProperties() {
+    get requiredProperties() {
         return ['type', 'id', 'title'];
     }
 }

@@ -2,7 +2,8 @@ import React from 'react';
 import { Linking, View, } from 'react-native';
 import { ActionContext } from '../Contexts/ActionContext';
 import { FormContext } from '../Contexts/FormContext';
-import { ActionType } from '../Schema/Base/ActionElement';
+import { HostContext } from '../Contexts/HostContext';
+import { ActionType } from '../Schema/Abstract/ActionElement';
 import { CardElement } from '../Schema/Cards/Card';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
 export class CardRootView extends React.PureComponent {
@@ -10,11 +11,33 @@ export class CardRootView extends React.PureComponent {
         super(props);
         this.onOpenUrl = (args) => {
             if (args) {
-                Linking.canOpenURL(args.action.url).then((supported) => {
-                    if (supported) {
-                        Linking.openURL(args.action.url);
-                    }
-                });
+                if (this.props.onOpenUrl) {
+                    this.props.onOpenUrl(args.action.url);
+                }
+                else {
+                    Linking.canOpenURL(args.action.url).then((supported) => {
+                        if (supported) {
+                            Linking.openURL(args.action.url);
+                        }
+                    });
+                }
+            }
+        };
+        this.onCallback = (args) => {
+            if (args) {
+                console.log('Form validate: ' + args.formValidate);
+                console.log(args.formData);
+                if (args.formValidate && this.props.onCallback) {
+                    this.props.onCallback(args.action.url, args.formData).then((data) => {
+                        if (args.onFinishCallback) {
+                            args.onFinishCallback(data);
+                        }
+                    }).catch((error) => {
+                        if (args.onErrorCallback) {
+                            args.onErrorCallback(error);
+                        }
+                    });
+                }
             }
         };
         this.onSubmit = (args) => {
@@ -26,9 +49,15 @@ export class CardRootView extends React.PureComponent {
                 }
             }
         };
-        this.formValidation = (args) => {
+        this.validateForm = (args) => {
             if (args) {
-                args.formValidate = args.action.scope.validateForm();
+                args.formValidate = args.action.scope.validateScope();
+            }
+            return args;
+        };
+        this.validateCallbackParams = (args) => {
+            if (args) {
+                args.formValidate = args.action.scope.validateScope();
             }
             return args;
         };
@@ -38,14 +67,42 @@ export class CardRootView extends React.PureComponent {
             }
             return args;
         };
+        this.populateCallbackParamData = (args) => {
+            if (args && args.formValidate) {
+                args.formData = FormContext.getInstance().getCallbackParamData(args.action.parameters);
+            }
+            return args;
+        };
         this.state = {
             rootCard: new CardElement(this.props.adaptiveCard, undefined),
         };
+        let hostContext = HostContext.getInstance();
+        hostContext.registerOpenUrlHandler(this.onOpenUrl);
+        hostContext.registerSubmitHandler(this.onSubmit);
+        hostContext.registerCallbackHandler(this.onCallback);
+        hostContext.registerFocusHandler(this.props.onFocus);
+        hostContext.registerBlurHandler(this.props.onBlur);
         let actionContext = ActionContext.getGlobalInstance();
-        actionContext.registerOpenUrlHandler(this.onOpenUrl);
-        actionContext.registerSubmitHandler(this.onSubmit);
-        actionContext.registerHook({ func: this.formValidation, name: 'formValidation', actionType: ActionType.Submit });
-        actionContext.registerHook({ func: this.populateFormData, name: 'populateFormData', actionType: ActionType.Submit });
+        actionContext.registerHook({
+            func: this.validateForm,
+            name: 'validateForm',
+            actionType: ActionType.Submit
+        });
+        actionContext.registerHook({
+            func: this.validateCallbackParams,
+            name: 'validateCallbackParams',
+            actionType: ActionType.Callback
+        });
+        actionContext.registerHook({
+            func: this.populateFormData,
+            name: 'populateFormData',
+            actionType: ActionType.Submit
+        });
+        actionContext.registerHook({
+            func: this.populateCallbackParamData,
+            name: 'populateCallbackParamData',
+            actionType: ActionType.Callback
+        });
     }
     componentWillReceiveProps(nextProps) {
     }
