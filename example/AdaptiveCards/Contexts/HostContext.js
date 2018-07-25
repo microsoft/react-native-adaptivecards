@@ -1,6 +1,8 @@
 import { ActionType } from '../Schema/Abstract/ActionElement';
 export class HostContext {
-    constructor() { }
+    constructor() {
+        this.hostRenderer = {};
+    }
     static getInstance() {
         if (HostContext.sharedInstance === undefined) {
             HostContext.sharedInstance = new HostContext();
@@ -24,6 +26,12 @@ export class HostContext {
     }
     registerCallbackHandler(handler) {
         this.onCallback = handler;
+    }
+    registerHostRenderer(type, renderer) {
+        this.hostRenderer[type] = renderer;
+    }
+    getHostRenderer(type) {
+        return this.hostRenderer[type];
     }
     getHandler(type) {
         let callback;

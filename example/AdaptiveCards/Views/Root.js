@@ -104,6 +104,9 @@ export class CardRootView extends React.PureComponent {
             actionType: ActionType.Callback
         });
     }
+    static registerCustomElementRender(type, renderer) {
+        HostContext.getInstance().registerHostRenderer(type, renderer);
+    }
     componentWillReceiveProps(nextProps) {
     }
     render() {

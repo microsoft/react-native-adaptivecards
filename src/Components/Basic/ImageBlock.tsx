@@ -5,6 +5,7 @@ import {
     Text,
     View
 } from 'react-native';
+import { HostContext } from '../../Contexts/HostContext';
 import { ImageUtils } from '../../Utils/ImageUtils';
 import { IFlexProps } from '../BaseProps';
 import { FlexBox } from './FlexBox';
@@ -53,19 +54,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
                 width='auto'
             >
                 {this.renderPlaceholder()}
-                <Image
-                    accessible={!!this.props.alt}
-                    accessibilityLabel={this.props.alt}
-                    source={{ uri: this.props.url }}
-                    style={[
-                        this.size,
-                        this.props.imgStyle
-                    ]}
-                    onLoad={this.onImageLoad}
-                    onError={this.onImageError}
-                    onLayout={this.onImageSizeUpdate}
-                >
-                </Image>
+                {this.renderImage()}
             </FlexBox>
         );
     }
@@ -94,6 +83,33 @@ export class ImageBlock extends React.Component<IProps, IState> {
             );
         }
         return undefined;
+    }
+
+    private renderImage() {
+        if (this.props.url && this.props.url.startsWith('data:image/svg+xml')) {
+            let renderer = HostContext.getInstance().getHostRenderer('svg');
+            if (renderer) {
+                return renderer(this.props);
+            } else {
+                return undefined;
+            }
+        } else {
+            return (
+                <Image
+                    accessible={!!this.props.alt}
+                    accessibilityLabel={this.props.alt}
+                    source={{ uri: this.props.url }}
+                    style={[
+                        this.size,
+                        this.props.imgStyle
+                    ]}
+                    onLoad={this.onImageLoad}
+                    onError={this.onImageError}
+                    onLayout={this.onImageSizeUpdate}
+                >
+                </Image>
+            );
+        }
     }
 
     private fetchImageSize = () => {

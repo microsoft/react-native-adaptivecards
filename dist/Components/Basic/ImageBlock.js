@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Image, Text, View } from 'react-native';
+import { HostContext } from '../../Contexts/HostContext';
 import { ImageUtils } from '../../Utils/ImageUtils';
 import { FlexBox } from './FlexBox';
 export class ImageBlock extends React.Component {
@@ -72,10 +73,24 @@ export class ImageBlock extends React.Component {
                 }
             ], onLayoutChange: this.onLayoutChange, onPress: this.props.onPress, width: 'auto' }),
             this.renderPlaceholder(),
-            React.createElement(Image, { accessible: !!this.props.alt, accessibilityLabel: this.props.alt, source: { uri: this.props.url }, style: [
+            this.renderImage()));
+    }
+    renderImage() {
+        if (this.props.url && this.props.url.startsWith('data:image/svg+xml')) {
+            let renderer = HostContext.getInstance().getHostRenderer('svg');
+            if (renderer) {
+                return renderer(this.props);
+            }
+            else {
+                return undefined;
+            }
+        }
+        else {
+            return (React.createElement(Image, { accessible: !!this.props.alt, accessibilityLabel: this.props.alt, source: { uri: this.props.url }, style: [
                     this.size,
                     this.props.imgStyle
-                ], onLoad: this.onImageLoad, onError: this.onImageError, onLayout: this.onImageSizeUpdate })));
+                ], onLoad: this.onImageLoad, onError: this.onImageError, onLayout: this.onImageSizeUpdate }));
+        }
     }
     get size() {
         return ImageUtils.fitSize(this.state, { width: this.props.maxWidth, height: this.props.maxHeight }, { width: this.props.maxWidth, height: this.props.maxHeight }, this.props.fitAxis);

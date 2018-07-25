@@ -13,6 +13,7 @@ export class HostContext {
     private onShowCard: (args?: ActionEventHandlerArgs<ShowCardActionElement>) => void;
     private onSubmit: (args?: ActionEventHandlerArgs<SubmitActionElement>) => void;
     private onCallback: (args?: ActionEventHandlerArgs<CallbackAction>) => void;
+    private hostRenderer: { [key: string]: ((data: any) => JSX.Element) } = {};
 
     private static sharedInstance: HostContext;
 
@@ -47,6 +48,14 @@ export class HostContext {
 
     public registerCallbackHandler(handler: (args?: ActionEventHandlerArgs<CallbackAction>) => void) {
         this.onCallback = handler;
+    }
+
+    public registerHostRenderer(type: string, renderer: (data: any) => JSX.Element) {
+        this.hostRenderer[type] = renderer;
+    }
+
+    public getHostRenderer(type: string) {
+        return this.hostRenderer[type];
     }
 
     public getHandler(type: ActionType | 'focus' | 'blur') {

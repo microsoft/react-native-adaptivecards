@@ -77,6 +77,10 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
         });
     }
 
+    public static registerCustomElementRender(type: string, renderer: (data: any) => JSX.Element) {
+        HostContext.getInstance().registerHostRenderer(type, renderer);
+    }
+
     public componentWillReceiveProps(nextProps: IProps) {
         // Update customized styles
         // this.styleConfig = StyleManager.getInstance().addStyle(nextProps.overrideStyle);

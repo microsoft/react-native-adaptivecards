@@ -1,9 +1,7 @@
-import { ComponentClass } from 'react';
-import { DecStyleConfig } from './Views/Style/DecStyleConfig';
+import { Component, ComponentClass } from 'react';
 
 interface AdaptiveCardsProps {
     adaptiveCard: any;
-    overrideStyle?: DecStyleConfig;
     onSubmit?: (data: any) => void;
     onOpenUrl?: (url: string) => void;
     onCallback?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
@@ -11,5 +9,6 @@ interface AdaptiveCardsProps {
     onBlur?: () => void;
 }
 
-declare const AdaptiveCardView: ComponentClass<AdaptiveCardsProps>;
-export default AdaptiveCardView;
+export class AdaptiveCard extends ComponentClass<AdaptiveCardsProps> {
+    public static registerCustomElementRender(type: string, renderer: (data: any) => JSX.Element);
+}
