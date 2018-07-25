@@ -22,11 +22,47 @@ interface IProps {
     numberOfLines?: number;
     boxStyle?: any;
     textStyle?: any;
+    containerWidth?: number;
+    containerHeight?: number;
 }
 
-export class TextBlock extends React.PureComponent<IProps> {
+interface IState {
+    containerWidth: number;
+    width: 'auto' | 'stretch' | number;
+}
+
+export class TextBlock extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
+
+        this.state = {
+            width: 'stretch',
+            containerWidth: 0,
+        };
+    }
+
+    public componentDidUpdate() {
+        if (this.state.containerWidth === 0) {
+            let fontSize = this.props.fontSize || 14;
+            let width = 0;
+            if (this.props.children && typeof this.props.children === 'string') {
+                width = this.props.children.length * fontSize;
+            }
+            this.setState({
+                width: width,
+            });
+        } else {
+            if (this.props.width === 'auto' || this.props.width === 'stretch') {
+                this.setState({
+                    width: this.state.width
+                });
+            }
+            if (typeof this.state.width === 'number' && this.state.containerWidth <= this.state.width) {
+                this.setState({
+                    width: this.state.containerWidth
+                });
+            }
+        }
     }
 
     public render() {
@@ -36,7 +72,7 @@ export class TextBlock extends React.PureComponent<IProps> {
                 hIndex={this.props.hIndex}
                 flexDirection='row'
                 relativeWidth={false}
-                width={this.props.width}
+                width={this.calcWidth}
                 vSpacing={this.props.vSpacing}
                 hSpacing={this.props.hSpacing}
                 alignSelf='stretch'
@@ -50,6 +86,7 @@ export class TextBlock extends React.PureComponent<IProps> {
                     },
                     this.props.boxStyle
                 ]}
+                onLayoutChange={this.onLayout}
             >
                 <Text
                     style={[
@@ -72,5 +109,19 @@ export class TextBlock extends React.PureComponent<IProps> {
                 </Text>
             </FlexBox>
         );
+    }
+
+    private onLayout = (width: number, height: number) => {
+        this.setState({ containerWidth: width });
+    }
+
+    private get calcWidth() {
+        if (this.state.containerWidth === 0) {
+            let fontSize = this.props.fontSize || 14;
+            if (this.props.children && typeof this.props.children === 'string') {
+                return this.props.children.length * fontSize;
+            }
+        }
+        return this.state.width;
     }
 }

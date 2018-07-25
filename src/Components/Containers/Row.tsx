@@ -25,7 +25,7 @@ export class Row extends React.Component<IProps> {
                 alignContent='flex-start'
                 alignItems='stretch'
                 wrap={this.props.wrap}
-                justifyContent='space-between'
+                justifyContent='flex-start'
                 width={this.props.width ? this.props.width : 'stretch'}
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}

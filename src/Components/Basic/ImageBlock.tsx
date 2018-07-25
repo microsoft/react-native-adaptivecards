@@ -118,6 +118,8 @@ export class ImageBlock extends React.Component<IProps, IState> {
     }
 
     private onImageSize = (width: number, height: number) => {
+        console.log(width);
+        console.log(height);
         let size = ImageUtils.calcSize(
             { width: width, height: height },
             { width: this.props.containerWidth, height: this.props.containerHeight },
@@ -127,7 +129,9 @@ export class ImageBlock extends React.Component<IProps, IState> {
         this.setState(size);
     }
 
-    private onImageSizeError = () => {
+    private onImageSizeError = (err: any) => {
+        console.log(err);
+        console.log(this.props.url);
         this.setState({
             loaded: false
         });

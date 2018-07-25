@@ -5,6 +5,6 @@ export class Row extends React.Component {
         super(props);
     }
     render() {
-        return (React.createElement(FlexBox, { flexDirection: 'row', relativeWidth: false, alignSelf: 'stretch', alignContent: 'flex-start', alignItems: 'stretch', wrap: this.props.wrap, justifyContent: 'space-between', width: this.props.width ? this.props.width : 'stretch', vIndex: this.props.vIndex, hIndex: this.props.hIndex, style: this.props.style, vSpacing: this.props.spacing, onPress: this.props.onPress }, this.props.children));
+        return (React.createElement(FlexBox, { flexDirection: 'row', relativeWidth: false, alignSelf: 'stretch', alignContent: 'flex-start', alignItems: 'stretch', wrap: this.props.wrap, justifyContent: 'flex-start', width: this.props.width ? this.props.width : 'stretch', vIndex: this.props.vIndex, hIndex: this.props.hIndex, style: this.props.style, vSpacing: this.props.spacing, onPress: this.props.onPress }, this.props.children));
     }
 }

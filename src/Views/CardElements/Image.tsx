@@ -100,7 +100,6 @@ export class ImageView extends React.Component<IProps, IState> {
             height: height
         }, () => {
             const { element } = this.props;
-
             if (element && element.isValid) {
                 if (this.props.onImageSize) {
                     this.props.onImageSize(width, height, element.url);
