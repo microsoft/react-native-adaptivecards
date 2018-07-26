@@ -18,7 +18,6 @@ const emailSent = require('./skills/email_sent.json');
 const sendText = require('./skills/send_text.json');
 const sendTextContact = require('./skills/send_text_contact_disam.json');
 const peaplePicker = require('./peoplepicker.json');
-
 export default {
     adaptiveUpdate,
     flightItinerary,
