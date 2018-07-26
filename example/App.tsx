@@ -2,11 +2,11 @@ import React from 'react';
 import {
     ScrollView,
     View,
+    StyleSheet,
 } from 'react-native';
 
 import mockData from './mockData';
-import bingAnswerData from './mockData/BingAnswer2';
-import AdaptiveCard from './AdaptiveCards';
+import AdaptiveCard from '../src/index';
 
 const cardGap = 20;
 const cardOverrideStyle = {
@@ -30,22 +30,6 @@ export default class App extends React.Component<any, any> {
                 backgroundColor: 'whitesmoke',
             }}
         >
-            <AdaptiveCard adaptiveCard={bingAnswerData.heightOfEiffelTower} overrideStyle={cardOverrideStyle} />
-            {this.renderGap()}
-            <AdaptiveCard adaptiveCard={bingAnswerData.highestMountionInTheWorld} overrideStyle={cardOverrideStyle} />
-            {this.renderGap()}
-            <AdaptiveCard adaptiveCard={bingAnswerData.latestNews} overrideStyle={cardOverrideStyle} />
-            {this.renderGap()}
-            <AdaptiveCard adaptiveCard={bingAnswerData.microsoftStock} overrideStyle={cardOverrideStyle} />
-            {this.renderGap()}
-            <AdaptiveCard adaptiveCard={bingAnswerData.showMeFunnyVideo} overrideStyle={cardOverrideStyle} />
-            {this.renderGap()}
-            <AdaptiveCard adaptiveCard={bingAnswerData.timeInLondon} overrideStyle={cardOverrideStyle} />
-            {this.renderGap()}
-            <AdaptiveCard adaptiveCard={bingAnswerData.whatIsTheWeather} overrideStyle={cardOverrideStyle} />
-            {this.renderGap()}
-            <AdaptiveCard adaptiveCard={mockData.adaptiveUpdate} overrideStyle={cardOverrideStyle} />
-            {this.renderGap()}
             <AdaptiveCard adaptiveCard={mockData.peaplePicker} />
             {this.renderGap()}
             <AdaptiveCard adaptiveCard={mockData.emailSent} />
