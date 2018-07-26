@@ -1,70 +1,98 @@
-import React from 'react';
-import { ScrollView, View, } from 'react-native';
-import mockData from './mockData';
-import AdaptiveCard from './AdaptiveCards';
-const cardGap = 20;
-const cardOverrideStyle = {
+"use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
+var react_1 = require("react");
+var react_native_1 = require("react-native");
+var mockData_1 = require("./mockData");
+var BingAnswer2_1 = require("./mockData/BingAnswer2");
+var AdaptiveCards_1 = require("./AdaptiveCards");
+var cardGap = 20;
+var cardOverrideStyle = {
     image: {
         imageSize: {
             small: 32,
-            medium: 64,
+            medium: 64
         }
-    },
+    }
 };
-export default class App extends React.Component {
-    render() {
-        return React.createElement(ScrollView, {
-            style: {
-                marginTop: 24,
-                flex: 1,
-            }, contentContainerStyle: {
-                padding: 10,
-                backgroundColor: 'whitesmoke',
-            }
-        },
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.peaplePicker }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.sendTextContact }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.sendText }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.emailSent }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.searchEmail }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.readEmail }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.news }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.adaptiveUpdate }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.flightItinerary }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.flightUpdate }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.foodOrder }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.imageGallery }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.inputForm }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.inputs }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.restaurant }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.solitaire }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.sportsGameUpdate }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.stockUpdate }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.weatherCompact }),
-            this.renderGap(),
-            React.createElement(AdaptiveCard, { adaptiveCard: mockData.weatherLarge })
-        );
+var App = (function (_super) {
+    __extends(App, _super);
+    function App() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    renderGap() {
-        return React.createElement(View, { style: { height: cardGap } });
-    }
-}
-//# sourceMappingURL=App.js.map
+    App.prototype.render = function () {
+        return <react_native_1.ScrollView style={{
+            marginTop: 24,
+            flex: 1
+        }} contentContainerStyle={{
+            padding: 10,
+            backgroundColor: 'whitesmoke'
+        }}>
+            <AdaptiveCards_1.default adaptiveCard={BingAnswer2_1["default"].heightOfEiffelTower} overrideStyle={cardOverrideStyle}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={BingAnswer2_1["default"].highestMountionInTheWorld} overrideStyle={cardOverrideStyle}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={BingAnswer2_1["default"].latestNews} overrideStyle={cardOverrideStyle}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={BingAnswer2_1["default"].microsoftStock} overrideStyle={cardOverrideStyle}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={BingAnswer2_1["default"].showMeFunnyVideo} overrideStyle={cardOverrideStyle}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={BingAnswer2_1["default"].timeInLondon} overrideStyle={cardOverrideStyle}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={BingAnswer2_1["default"].whatIsTheWeather} overrideStyle={cardOverrideStyle}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].adaptiveUpdate} overrideStyle={cardOverrideStyle}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].peaplePicker}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].emailSent}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].searchEmail}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].readEmail}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].news}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].adaptiveUpdate}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].flightItinerary}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].flightUpdate}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].foodOrder}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].imageGallery}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].inputForm}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].inputs}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].restaurant}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].solitaire}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].sportsGameUpdate}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].stockUpdate}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].weatherCompact}/>
+            {this.renderGap()}
+            <AdaptiveCards_1.default adaptiveCard={mockData_1["default"].weatherLarge}/>
+        </react_native_1.ScrollView>;
+    };
+    App.prototype.renderGap = function () {
+        return <react_native_1.View style={{ height: cardGap }}/>;
+    };
+    return App;
+}(react_1["default"].Component));
+exports["default"] = App;

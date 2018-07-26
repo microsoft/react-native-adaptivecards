@@ -1,0 +1,102 @@
+{
+	"-ms-height": "fixed",
+	"body": [{
+		"selectAction": {
+			"title": "Open In Bing",
+			"url": "https://www.bing.com/search?q=What's+the+weather?&elv=AXXfrEiqqD9r3GuelwApulrl!col*6AWacG3XVaSlhQgzsiuP*rcLsid4WIMaXj!VGazs4UAQNQo*ZwgYRPYhpBscEsz4s8r9uuW6alYn6Jw",
+			"type": "Action.OpenUrl"
+		},
+		"items": [{
+			"isSubtle": true,
+			"size": "small",
+			"text": "Tokyo  ·  June 15, 1:01 PM",
+			"type": "TextBlock"
+		}, {
+			"spacing": "none",
+			"separation": "none",
+			"items": [],
+			"height": "stretch",
+			"type": "Container"
+		}, {
+			"separation": "none",
+			"spacing": "none",
+			"columns": [{
+				"spacing": "small",
+				"items": [{
+					"horizontalAlignment": "center",
+					"url": "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 32 32' enable-background='new 0 0 32 32' xml:space='preserve' id='' focusable='false' role='presentation' tabindex='-1' aria-hidden='true'%3e%3ctitle%3e%3c/title%3e%3cpath class='hcFill1 hcStroke1 hpFill1 hpStroke2 thFill1 thStroke1' fill='%23FBE000' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' d=' M11.002 15.897c1.168-2.853 3.887-4.886 7.106-5.101C17.227 8.576 15.063 7 12.533 7c-3.309 0-6 2.691-6 6 c0 0.79 0.157 1.543 0.436 2.234c0.354-0.064 0.717-0.103 1.089-0.103C9.127 15.131 10.13 15.411 11.002 15.897z' /%3e%3cpath class='hcFill1 hcStroke1 hpFill1 hpStroke1 thFill1 thStroke1' fill='%23FFFFFF' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' d='M26.026 27.237 c2.75-0.02 4.974-2.254 4.974-5.008c0-2.509-1.847-4.582-4.254-4.947c-0.802-3.73-4.116-6.528-8.087-6.528 c-3.461 0-6.422 2.127-7.657 5.143c-0.872-0.486-1.875-0.766-2.944-0.766C4.712 15.131 2 17.843 2 21.189s2.712 6.058 6.058 6.058' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' x1='12.5' y1='4.25' x2='12.5' y2='1.25' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' x1='3.781' y1='13' x2='0.781' y2='13' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' x1='6.307' y1='6.673' x2='4.186' y2='4.552' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' x1='18.759' y1='6.673' x2='20.88' y2='4.552' /%3e%3cpath class='hcFill3 thFill2' fill='%2352A0E6' d='M15.539 28.423L13.5 24.377l-2.039 4.047c0 0-0.211 0.392-0.211 0.95c0 1.243 1.007 2.25 2.25 2.25 s2.25-1.007 2.25-2.25C15.75 28.816 15.539 28.423 15.539 28.423z' /%3e%3cpath class='hcFill3 thFill2' fill='%2352A0E6' d='M22.039 25.423L20 21.377l-2.039 4.047c0 0-0.211 0.392-0.211 0.95c0 1.243 1.007 2.25 2.25 2.25 s2.25-1.007 2.25-2.25C22.25 25.816 22.039 25.423 22.039 25.423z' /%3e%3c/svg%3e",
+					"size": "large",
+					"type": "Image"
+				}],
+				"width": "auto",
+				"type": "Column"
+			}, {
+				"spacing": "medium",
+				"items": [{
+					"spacing": "small",
+					"columns": [{
+						"items": [{
+							"textStyle": "display",
+							"size": "extraLarge",
+							"text": "17",
+							"type": "TextBlock"
+						}],
+						"width": "auto",
+						"type": "Column"
+					}, {
+						"items": [{
+							"spacing": "medium",
+							"weight": "bolder",
+							"text": "°C",
+							"type": "TextBlock"
+						}],
+						"width": "auto",
+						"type": "Column"
+					}, {
+						"spacing": "medium",
+						"items": [{
+							"items": [],
+							"height": "stretch",
+							"type": "Container"
+						}, {
+							"spacing": "small",
+							"text": "Hi 19",
+							"type": "TextBlock"
+						}, {
+							"spacing": "small",
+							"text": "Lo 17",
+							"type": "TextBlock"
+						}, {
+							"items": [],
+							"height": "stretch",
+							"type": "Container"
+						}],
+						"width": "auto",
+						"type": "Column"
+					}],
+					"type": "ColumnSet"
+				}, {
+					"separation": "none",
+					"spacing": "none",
+					"isSubtle": true,
+					"text": "Rain showers",
+					"type": "TextBlock"
+				}],
+				"width": "auto",
+				"type": "Column"
+			}],
+			"type": "ColumnSet"
+		}, {
+			"spacing": "none",
+			"separation": "none",
+			"items": [],
+			"height": "stretch",
+			"type": "Container"
+		}],
+		"height": "stretch",
+		"type": "Container"
+	}],
+	"-ms-source": "Bing",
+	"version": "1.0",
+	"type": "AdaptiveCard"
+}

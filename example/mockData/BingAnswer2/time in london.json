@@ -1,0 +1,43 @@
+{
+	"-ms-height": "fixed",
+	"body": [{
+		"selectAction": {
+			"title": "Open In Bing",
+			"url": "https://www.bing.com/search?q=Time+in+London.&elv=AXXfrEiqqD9r3GuelwApulrl!col*6AWacG3XVaSlhQgzsiuP*rcLsid4WIMaXj!VGazs4UAQNQo*ZwgYRPYhpBscEsz4s8r9uuW6alYn6Jw",
+			"type": "Action.OpenUrl"
+		},
+		"items": [{
+			"isSubtle": true,
+			"wrap": true,
+			"size": "small",
+			"text": "Current time in London, United Kingdom ‎(UTC+1)‎",
+			"type": "TextBlock"
+		}, {
+			"items": [],
+			"height": "stretch",
+			"type": "Container"
+		}, {
+			"maxLines": 2,
+			"textStyle": "display",
+			"weight": "bolder",
+			"wrap": true,
+			"size": "large",
+			"text": "6:05 AM",
+			"type": "TextBlock"
+		}, {
+			"maxLines": 10,
+			"wrap": true,
+			"text": "Fri, Jun 15, 2018",
+			"type": "TextBlock"
+		}, {
+			"items": [],
+			"height": "stretch",
+			"type": "Container"
+		}],
+		"height": "stretch",
+		"type": "Container"
+	}],
+	"-ms-source": "Bing",
+	"version": "1.0",
+	"type": "AdaptiveCard"
+}

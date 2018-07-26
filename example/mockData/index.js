@@ -1,43 +1,44 @@
-const adaptiveUpdate = require('./adaptiveUpdate.json');
-const flightItinerary = require('./flightItinerary.json');
-const flightUpdate = require('./flightUpdate.json');
-const foodOrder = require('./foodOrder.json');
-const imageGallery = require('./imageGallery.json');
-const inputForm = require('./inputForm.json');
-const inputs = require('./inputs.json');
-const restaurant = require('./restaurant.json');
-const solitaire = require('./solitaire.json');
-const sportsGameUpdate = require('./sportsGameUpdate.json');
-const stockUpdate = require('./stockUpdate.json');
-const weatherCompact = require('./weatherCompact.json');
-const weatherLarge = require('./weatherLarge.json');
-const news = require('./latestNews.json');
-const readEmail = require('./skills/read_email.json');
-const searchEmail = require('./skills/search_email.json');
-const emailSent = require('./skills/email_sent.json');
-const sendText = require('./skills/send_text.json');
-const sendTextContact = require('./skills/send_text_contact_disam.json');
-const peaplePicker = require('./peoplepicker.json');
-export default {
-    adaptiveUpdate,
-    flightItinerary,
-    flightUpdate,
-    foodOrder,
-    imageGallery,
-    inputForm,
-    inputs,
-    restaurant,
-    solitaire,
-    sportsGameUpdate,
-    stockUpdate,
-    weatherCompact,
-    weatherLarge,
-    news,
-    readEmail,
-    searchEmail,
-    emailSent,
-    sendText,
-    sendTextContact,
-    peaplePicker
+"use strict";
+exports.__esModule = true;
+var adaptiveUpdate = require('./adaptiveUpdate.json');
+var flightItinerary = require('./flightItinerary.json');
+var flightUpdate = require('./flightUpdate.json');
+var foodOrder = require('./foodOrder.json');
+var imageGallery = require('./imageGallery.json');
+var inputForm = require('./inputForm.json');
+var inputs = require('./inputs.json');
+var restaurant = require('./restaurant.json');
+var solitaire = require('./solitaire.json');
+var sportsGameUpdate = require('./sportsGameUpdate.json');
+var stockUpdate = require('./stockUpdate.json');
+var weatherCompact = require('./weatherCompact.json');
+var weatherLarge = require('./weatherLarge.json');
+var news = require('./latestNews.json');
+var readEmail = require('./skills/read_email.json');
+var searchEmail = require('./skills/search_email.json');
+var emailSent = require('./skills/email_sent.json');
+var sendText = require('./skills/send_text.json');
+var sendTextContact = require('./skills/send_text_contact_disam.json');
+var peaplePicker = require('./peoplepicker.json');
+exports["default"] = {
+    adaptiveUpdate: adaptiveUpdate,
+    flightItinerary: flightItinerary,
+    flightUpdate: flightUpdate,
+    foodOrder: foodOrder,
+    imageGallery: imageGallery,
+    inputForm: inputForm,
+    inputs: inputs,
+    restaurant: restaurant,
+    solitaire: solitaire,
+    sportsGameUpdate: sportsGameUpdate,
+    stockUpdate: stockUpdate,
+    weatherCompact: weatherCompact,
+    weatherLarge: weatherLarge,
+    news: news,
+    readEmail: readEmail,
+    searchEmail: searchEmail,
+    emailSent: emailSent,
+    sendText: sendText,
+    sendTextContact: sendTextContact,
+    peaplePicker: peaplePicker
 };
-//# sourceMappingURL=index.js.map

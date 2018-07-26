@@ -20,95 +20,13 @@
                     "separation": "none"
                 },
                 {
-                    "type": "ColumnSet",
-                    "columns": [
-                        {
-                            "type": "Column",
-                            "width": "auto",
-                            "items": [
-                                {
-                                    "type": "Image",
-                                    "size": "large",
-                                    "url": "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 32 32' enable-background='new 0 0 32 32' xml:space='preserve' id='' focusable='false' role='presentation' tabindex='-1' aria-hidden='true'%3e%3ctitle%3e%3c/title%3e%3cpath class='hcFill1 hcStroke1 hpFill1 hpStroke2 thFill1 thStroke1' fill='%23FBE000' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' d='M16 9.06 c-3.83 0-6.94 3.11-6.94 6.94c0 3.83 3.11 6.94 6.94 6.94s6.94-3.11 6.94-6.94C22.94 12.17 19.83 9.06 16 9.06z' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' x1='16' y1='1.25' x2='16' y2='5.75' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' x1='16' y1='26.25' x2='16' y2='30.75' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' x1='5.52' y1='5.52' x2='8.7' y2='8.7' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' x1='23.3' y1='23.3' x2='26.48' y2='26.48' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' x1='1.25' y1='16' x2='5.75' y2='16' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' x1='26.25' y1='16' x2='30.75' y2='16' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' x1='5.52' y1='26.48' x2='8.7' y2='23.3' /%3e%3cline class='hcStroke1 hpStroke2 thStroke1' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round' stroke-miterlimit='10' x1='23.3' y1='8.7' x2='26.48' y2='5.52' /%3e%3c/svg%3e",
-                                    "horizontalAlignment": "center"
-                                }
-                            ],
+                    "type": "Column",
+                    "width": "stretch",
+                    "items": [{
+                            "type": "TextBlock",
+                            "text": "°F",
+                            "weight": "bolder",
                             "spacing": "small"
-                        },
-                        {
-                            "type": "Column",
-                            "width": "auto",
-                            "items": [
-                                {
-                                    "type": "ColumnSet",
-                                    "columns": [
-                                        {
-                                            "type": "Column",
-                                            "width": "auto",
-                                            "items": [
-                                                {
-                                                    "type": "TextBlock",
-                                                    "size": "extraLarge",
-                                                    "text": "78",
-                                                    "textStyle": "display"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "Column",
-                                            "width": "auto",
-                                            "items": [
-                                                {
-                                                    "type": "Container",
-                                                    "items": []
-                                                },
-                                                {
-                                                    "type": "TextBlock",
-                                                    "weight": "bolder",
-                                                    "text": "°F",
-                                                    "spacing": "medium"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "type": "Column",
-                                            "width": "auto",
-                                            "items": [
-                                                {
-                                                    "type": "Container",
-                                                    "height": "stretch",
-                                                    "items": []
-                                                },
-                                                {
-                                                    "type": "TextBlock",
-                                                    "text": "高温 87",
-                                                    "spacing": "small"
-                                                },
-                                                {
-                                                    "type": "TextBlock",
-                                                    "text": "低温 64",
-                                                    "spacing": "small"
-                                                },
-                                                {
-                                                    "type": "Container",
-                                                    "height": "stretch",
-                                                    "items": []
-                                                }
-                                            ],
-                                            "spacing": "medium"
-                                        }
-                                    ],
-                                    "spacing": "small"
-                                },
-                                {
-                                    "type": "TextBlock",
-                                    "isSubtle": true,
-                                    "text": "晴",
-                                    "spacing": "none",
-                                    "separation": "none"
-                                }
-                            ],
-                            "spacing": "medium"
                         }
                     ],
                     "spacing": "none",
