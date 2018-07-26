@@ -37,7 +37,7 @@
     "exclude": [
         "node_modules",
         "typings",
-        "example",
+        "examples",
         "dist"
     ],
     "compileOnSave": false

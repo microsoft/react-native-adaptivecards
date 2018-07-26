@@ -70,19 +70,19 @@ export class TextBlock extends React.PureComponent<IProps, IState> {
             <FlexBox
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
-                flexDirection='row'
+                flexDirection='column'
                 relativeWidth={false}
-                width={this.calcWidth}
+                width={'stretch'}
                 vSpacing={this.props.vSpacing}
                 hSpacing={this.props.hSpacing}
                 alignSelf='stretch'
                 alignItems='stretch'
                 alignContent='stretch'
-                justifyContent={'center'}
+                justifyContent={'flex-start'}
                 onPress={this.props.onPress}
                 style={[
                     {
-                        backgroundColor: this.props.backgroundColor
+                        backgroundColor: this.props.backgroundColor,
                     },
                     this.props.boxStyle
                 ]}
@@ -95,10 +95,9 @@ export class TextBlock extends React.PureComponent<IProps, IState> {
                             fontFamily: this.props.fontFamily,
                             fontSize: this.props.fontSize,
                             fontWeight: this.props.fontWeight,
-                            textAlign: this.props.textAlign,
-                            flex: 1,
                             flexWrap: this.props.wrap,
                             backgroundColor: this.props.backgroundColor,
+                            textAlign: this.props.textAlign,
                         },
                         this.props.textStyle,
                     ]}
@@ -113,15 +112,5 @@ export class TextBlock extends React.PureComponent<IProps, IState> {
 
     private onLayout = (width: number, height: number) => {
         this.setState({ containerWidth: width });
-    }
-
-    private get calcWidth() {
-        if (this.state.containerWidth === 0) {
-            let fontSize = this.props.fontSize || 14;
-            if (this.props.children && typeof this.props.children === 'string') {
-                return this.props.children.length * fontSize;
-            }
-        }
-        return this.state.width;
     }
 }

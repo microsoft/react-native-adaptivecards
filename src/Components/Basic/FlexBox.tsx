@@ -150,9 +150,7 @@ export class FlexBox extends React.Component<IProps, IState> {
 
     private get size() {
         if (this.props.width === 'auto') {
-            return {
-                flex: 0
-            };
+            return {};
         }
         if (this.props.width === 'stretch') {
             return {

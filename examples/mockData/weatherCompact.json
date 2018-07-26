@@ -1,0 +1,124 @@
+{
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "Container",
+            "height": "stretch",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "size": "small",
+                    "isSubtle": true,
+                    "text": "西雅图, WA · July 24, 8:50 PM"
+                },
+                {
+                    "type": "Container",
+                    "height": "stretch",
+                    "items": [],
+                    "spacing": "none",
+                    "separation": "none"
+                },
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "https://nashvillegeek.com/wp-content/uploads/2016/05/cloud.jpg",
+                                    "horizontalAlignment": "center"
+                                }
+                            ],
+                            "spacing": "small"
+                        },
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "TextBlock",
+                                                    "size": "extraLarge",
+                                                    "text": "78",
+                                                    "textStyle": "display"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "TextBlock",
+                                                    "weight": "bolder",
+                                                    "text": "°F",
+                                                    "spacing": "medium"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "TextBlock",
+                                                    "text": "高温 87",
+                                                    "spacing": "small"
+                                                },
+                                                {
+                                                    "type": "TextBlock",
+                                                    "text": "低温 64",
+                                                    "spacing": "small"
+                                                }
+                                            ],
+                                            "spacing": "medium"
+                                        }
+                                    ],
+                                    "spacing": "small"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "晴",
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ],
+                            "spacing": "medium"
+                        }
+                    ],
+                    "spacing": "none",
+                    "separation": "none"
+                },
+                {
+                    "type": "Container",
+                    "height": "stretch",
+                    "items": [],
+                    "spacing": "none",
+                    "separation": "none"
+                }
+            ],
+            "selectAction": {
+                "type": "Action.OpenUrl",
+                "url": "https://www.bing.com/search?q=seattle+weather&elv=AXXfrEiqqD9r3GuelwApulq*CTgdM9fHsiB5XxuFECMD2NmeVOniG06Q3tEeftHc*XcVTvozsOCVVX9svbR8o*f*6a2S0kvZIYL0ELuq05MP",
+                "title": "Open In Bing"
+            }
+        }
+    ],
+    "-ms-attribution": {
+        "text": "Bing",
+        "icon": "https://www.bing.com/rms/rms%20answers%20Api%20BingLogo/ic/ef0cff20/d50405d4.png"
+    },
+    "-ms-source": "Bing",
+    "-ms-height": "fixed"
+}

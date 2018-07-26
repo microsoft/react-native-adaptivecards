@@ -29,7 +29,7 @@ export abstract class AbstractElement implements IElement {
     constructor(json: any, parent: IElement) {
         let validation = JsonUtils.isValidateJson(json, this.requiredProperties);
         if (!validation.isValid) {
-            ConsoleUtils.error('AbstractElement', validation.message);
+            ConsoleUtils.warning('AbstractElement', validation.message);
         } else {
             this.isValid = validation.isValid;
             this.type = json.type;
