@@ -9,6 +9,6 @@ interface AdaptiveCardsProps {
     onBlur?: () => void;
 }
 
-export class AdaptiveCard extends ComponentClass<AdaptiveCardsProps> {
+export default class AdaptiveCard extends ComponentClass<AdaptiveCardsProps> {
     public static registerCustomElementRender(type: string, renderer: (data: any) => JSX.Element);
 }
