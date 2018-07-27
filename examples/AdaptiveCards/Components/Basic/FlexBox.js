@@ -102,7 +102,7 @@ export class FlexBox extends React.Component {
         }
         if (this.props.width === 'stretch') {
             return {
-                flex: 1
+                flex: 1,
             };
         }
         if (this.props.relativeWidth && typeof this.props.width === 'number') {

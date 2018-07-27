@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Text,
 } from 'react-native';
-import { FlexBox } from './FlexBox';
 
 interface IProps {
     vIndex: number;
@@ -27,90 +26,29 @@ interface IProps {
 }
 
 interface IState {
-    containerWidth: number;
-    width: 'auto' | 'stretch' | number;
 }
 
 export class TextBlock extends React.PureComponent<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
-
-        this.state = {
-            width: 'stretch',
-            containerWidth: 0,
-        };
-    }
-
-    public componentDidUpdate() {
-        if (this.state.containerWidth === 0) {
-            let fontSize = this.props.fontSize || 14;
-            let width = 0;
-            if (this.props.children && typeof this.props.children === 'string') {
-                width = this.props.children.length * fontSize;
-            }
-            this.setState({
-                width: width,
-            });
-        } else {
-            if (this.props.width === 'auto' || this.props.width === 'stretch') {
-                this.setState({
-                    width: this.state.width
-                });
-            }
-            if (typeof this.state.width === 'number' && this.state.containerWidth <= this.state.width) {
-                this.setState({
-                    width: this.state.containerWidth
-                });
-            }
-        }
-    }
-
     public render() {
         return (
-            <FlexBox
-                vIndex={this.props.vIndex}
-                hIndex={this.props.hIndex}
-                flexDirection='column'
-                relativeWidth={false}
-                width={'stretch'}
-                vSpacing={this.props.vSpacing}
-                hSpacing={this.props.hSpacing}
-                alignSelf='stretch'
-                alignItems='stretch'
-                alignContent='stretch'
-                justifyContent={'flex-start'}
-                onPress={this.props.onPress}
+            <Text
                 style={[
                     {
+                        color: this.props.color,
+                        fontFamily: this.props.fontFamily,
+                        fontSize: this.props.fontSize,
+                        fontWeight: this.props.fontWeight,
+                        flexWrap: this.props.wrap,
                         backgroundColor: this.props.backgroundColor,
+                        textAlign: this.props.textAlign,
                     },
-                    this.props.boxStyle
+                    this.props.textStyle,
                 ]}
-                onLayoutChange={this.onLayout}
+                numberOfLines={this.props.numberOfLines}
+                onPress={this.props.onPress}
             >
-                <Text
-                    style={[
-                        {
-                            color: this.props.color,
-                            fontFamily: this.props.fontFamily,
-                            fontSize: this.props.fontSize,
-                            fontWeight: this.props.fontWeight,
-                            flexWrap: this.props.wrap,
-                            backgroundColor: this.props.backgroundColor,
-                            textAlign: this.props.textAlign,
-                        },
-                        this.props.textStyle,
-                    ]}
-                    numberOfLines={this.props.numberOfLines}
-                    onPress={this.props.onPress}
-                >
-                    {this.props.children}
-                </Text>
-            </FlexBox>
+                {this.props.children}
+            </Text>
         );
-    }
-
-    private onLayout = (width: number, height: number) => {
-        this.setState({ containerWidth: width });
     }
 }
