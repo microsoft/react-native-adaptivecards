@@ -8,7 +8,11 @@ interface AdaptiveCardsProps {
     onFocus?: () => void;
     onBlur?: () => void;
 }
-
-export default class AdaptiveCard extends ComponentClass<AdaptiveCardsProps> {
-    public static registerCustomElementRender(type: string, renderer: (data: any) => JSX.Element);
+interface AdaptiveCardClass<P = {}> extends ComponentClass<P> {
+    new(props: P, context?: any): AdaptiveCardClass<P, ComponentState>;
+    registerCustomElementRender(type: string, renderer: (data: any) => JSX.Element);
 }
+
+declare const AdaptiveCard: AdaptiveCardClass<AdaptiveCardsProps>;
+
+export default AdaptiveCard;
