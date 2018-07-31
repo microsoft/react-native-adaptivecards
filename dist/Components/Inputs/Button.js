@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { FlexBox } from '../Basic/FlexBox';
 import { TextBlock } from '../Basic/TextBlock';
+import { Column } from '../Containers/Column';
 export class Button extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
-        return (React.createElement(FlexBox, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, flexDirection: 'row', relativeWidth: false, flex: 1, alignSelf: 'stretch', alignItems: 'stretch', alignContent: 'stretch', justifyContent: 'center', width: 'stretch', hSpacing: 10, style: [
+        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', height: 'auto', hSpacing: 10, style: [
                 {
                     paddingVertical: 10,
                     paddingHorizontal: 10,

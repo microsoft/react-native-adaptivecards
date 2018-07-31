@@ -4,7 +4,8 @@ import {
     ReturnKeyTypeOptions,
     TextInput
 } from 'react-native';
-import { FlexBox } from '../Basic/FlexBox';
+
+import { Column } from '../Containers/Column';
 
 interface IProps {
     vIndex: number;
@@ -27,21 +28,16 @@ export class InputBox extends React.Component<IProps> {
 
     public render() {
         return (
-            <FlexBox
+            <Column
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
-                relativeWidth={false}
-                flexDirection='row'
-                alignSelf='stretch'
-                alignContent='flex-start'
-                alignItems='stretch'
-                justifyContent='space-between'
                 width='stretch'
+                height='auto'
             >
                 <TextInput
                     style={[
                         {
-                            flex: 1,
+                            alignSelf: 'stretch',
                             borderColor: 'gray',
                             borderWidth: 1,
                             borderRadius: 4,
@@ -64,7 +60,7 @@ export class InputBox extends React.Component<IProps> {
                     onFocus={this.props.onFocus}
                     onBlur={this.props.onBlur}
                 />
-            </FlexBox>
+            </Column>
         );
     }
 }

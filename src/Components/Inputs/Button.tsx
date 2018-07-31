@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 
-import { FlexBox } from '../Basic/FlexBox';
 import { TextBlock } from '../Basic/TextBlock';
+import { Column } from '../Containers/Column';
 
 interface IProps {
     vIndex: number;
@@ -28,17 +28,11 @@ export class Button extends React.Component<IProps> {
 
     public render() {
         return (
-            <FlexBox
+            <Column
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
-                flexDirection='row'
-                relativeWidth={false}
-                flex={1}
-                alignSelf='stretch'
-                alignItems='stretch'
-                alignContent='stretch'
-                justifyContent='center'
                 width='stretch'
+                height='auto'
                 hSpacing={10}
                 style={[
                     {
@@ -75,7 +69,7 @@ export class Button extends React.Component<IProps> {
                         {this.props.title}
                     </TextBlock>
                 </View>
-            </FlexBox>
+            </Column>
         );
     }
 

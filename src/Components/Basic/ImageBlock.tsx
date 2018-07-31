@@ -47,13 +47,13 @@ export class ImageBlock extends React.Component<IProps, IState> {
             boxStyle,
             alignSelf,
             onPress,
-            width,
+            size,
         } = this.props;
 
         if (url && url.startsWith('data:image/svg+xml')) {
             let svgRenderer: ISVGRenderer = HostContext.getInstance().getHostRenderer(HostRenderer.SVG);
-            let svgSize = typeof width === 'number' ?
-                width : StyleManager.getInstance().getImageSize('large') as number;
+            let svgSize = typeof size === 'number' ?
+                size : StyleManager.getInstance().getImageSize('large') as number;
             if (svgRenderer) {
                 return (
                     <FlexBox
@@ -65,7 +65,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
                             }
                         ]}
                         onPress={onPress}
-                        width='auto'
+                        size='auto'
                     >
                         {svgRenderer(decodeURIComponent(url), svgSize, svgSize)}
                     </FlexBox>
@@ -85,7 +85,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
                     ]}
                     onLayoutChange={this.onLayoutChange}
                     onPress={onPress}
-                    width='auto'
+                    size='auto'
                 >
                     {this.renderPlaceholder()}
                     {this.renderImage()}
@@ -165,7 +165,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
         let size = ImageUtils.calcSize(
             { width: width, height: height },
             { width: this.props.containerWidth, height: this.props.containerHeight },
-            this.props.width,
+            this.props.size,
             this.props.fitAxis
         );
         this.setState(size);

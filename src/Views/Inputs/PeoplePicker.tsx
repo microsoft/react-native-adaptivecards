@@ -54,29 +54,23 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
                 spacing={0}
-                width={'stretch'}
+                width='stretch'
+                height='auto'
             >
-                <Column
+                <Button
                     vIndex={0}
-                    hIndex={1}
-                    width='stretch'
-                    spacing={5}
-                >
-                    <Button
-                        vIndex={0}
-                        hIndex={0}
-                        vSpacing={0}
-                        hSpacing={0}
-                        title={this.state.value || element.placeholder}
-                        onPress={this.showModal}
-                        color='#333333'
-                        backgroundColor='white'
-                        borderColor='#777777'
-                        borderRadius={4}
-                        borderWidth={1}
-                        textAlign='left'
-                    />
-                </Column>
+                    hIndex={0}
+                    vSpacing={0}
+                    hSpacing={0}
+                    title={this.state.value || element.placeholder}
+                    onPress={this.showModal}
+                    color='#333333'
+                    backgroundColor='white'
+                    borderColor='#777777'
+                    borderRadius={4}
+                    borderWidth={1}
+                    textAlign='left'
+                />
                 {this.renderModal()}
             </Row>
         );
@@ -90,8 +84,9 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                 <Column
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
-                    spacing={0}
-                    width={'stretch'}
+                    vSPacing={0}
+                    width='stretch'
+                    height='stretch'
                 >
                     {this.renderModalHeader()}
                     {this.renderInputBox()}
@@ -107,6 +102,8 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                 vIndex={0}
                 hIndex={0}
                 spacing={0}
+                width='stretch'
+                height='auto'
             >
                 <LinkButton
                     vIndex={0}
@@ -153,7 +150,13 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
         }
 
         return (
-            <Row vIndex={0} hIndex={0} spacing={0}>
+            <Row
+                vIndex={0}
+                hIndex={0}
+                spacing={0}
+                width='stretch'
+                height='auto'
+            >
                 <InputBox
                     vIndex={0}
                     hIndex={0}
@@ -173,6 +176,8 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                     vIndex={1}
                     hIndex={0}
                     spacing={0}
+                    width='stretch'
+                    height='auto'
                 >
                     {ContentFactory.createView(this.state.autoSuggestion, 0, this.props.theme)}
                 </Row>

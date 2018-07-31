@@ -7,7 +7,7 @@ export interface IFlexProps {
     flex?: number;
     relativeWidth: boolean;
     wrap?: 'wrap' | 'nowrap';
-    width: 'auto' | 'stretch' | number;
+    size: 'auto' | 'stretch' | number;
     height?: number | string;
     vIndex: number;
     hIndex: number;

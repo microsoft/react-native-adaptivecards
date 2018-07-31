@@ -68,7 +68,7 @@ export class ImageView extends React.Component<IProps, IState> {
                 alignItems={this.style.align}
                 alignContent='center'
                 justifyContent='center'
-                width={this.style.size}
+                size={this.style.size}
                 vSpacing={this.style.spacing || this.props.vSpacing}
                 hSpacing={this.props.hSpacing}
                 containerWidth={this.props.containerWidth}

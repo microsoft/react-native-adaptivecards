@@ -103,7 +103,7 @@ export class FlexBox extends React.Component<IProps, IState> {
     }
 
     private get containerWidth() {
-        if (this.props.width === 'auto') {
+        if (this.props.size === 'auto') {
             // If auto, use the container's width as child's container's width,
             // this will allow the child to resize maximum to container's size.
             return this.props.containerWidth;
@@ -116,7 +116,7 @@ export class FlexBox extends React.Component<IProps, IState> {
     }
 
     private get containerHeight() {
-        if (this.props.width === 'auto') {
+        if (this.props.size === 'auto') {
             // If auto, use the container's width as child's container's width,
             // this will allow the child to resize maximum to container's size.
             return this.props.containerHeight;
@@ -149,21 +149,21 @@ export class FlexBox extends React.Component<IProps, IState> {
     }
 
     private get size() {
-        if (this.props.width === 'auto') {
+        if (this.props.size === 'auto') {
             return {};
         }
-        if (this.props.width === 'stretch') {
+        if (this.props.size === 'stretch') {
             return {
                 flex: 1,
             };
         }
-        if (this.props.relativeWidth && typeof this.props.width === 'number') {
+        if (this.props.relativeWidth && typeof this.props.size === 'number') {
             return {
-                flex: this.props.width
+                flex: this.props.size
             };
         }
         return {
-            width: this.props.width
+            width: this.props.size
         };
     }
 

@@ -41,6 +41,8 @@ export class TimeInputView extends React.Component<IProps, IState> {
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
                 spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                width='stretch'
+                height='auto'
             >
                 <TimeInput
                     vIndex={0}

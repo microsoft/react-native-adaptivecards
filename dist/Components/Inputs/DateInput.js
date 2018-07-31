@@ -16,14 +16,14 @@ export class DateInput extends React.Component {
     constructor(props) {
         super(props);
         this.renderBtn = () => {
-            return (React.createElement(Row, { vIndex: 0, hIndex: 0 },
+            return (React.createElement(Row, { vIndex: 0, hIndex: 0, width: 'stretch', height: 'auto' },
                 React.createElement(Button, { vIndex: 0, hIndex: 0, title: this.props.value, onPress: this.showDatePicker, borderColor: '#777777', borderWidth: 1, borderRadius: 4 })));
         };
         this.renderInlineDatePicker = () => {
             if (Platform.OS === 'ios') {
                 if (this.state.showDatePicker) {
                     let date = TimeUtils.extractDate(this.props.value);
-                    return (React.createElement(Row, { vIndex: 0, hIndex: 0 },
+                    return (React.createElement(Row, { vIndex: 0, hIndex: 0, width: 'stretch', height: 'auto' },
                         React.createElement(DatePickerIOS, { date: date, mode: 'date', onDateChange: this.onDateChange, style: { flex: 1 } })));
                 }
             }
@@ -55,7 +55,7 @@ export class DateInput extends React.Component {
         };
     }
     render() {
-        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch' },
+        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', height: 'auto' },
             this.renderBtn(),
             this.renderInlineDatePicker()));
     }

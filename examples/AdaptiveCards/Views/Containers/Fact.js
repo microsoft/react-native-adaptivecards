@@ -11,9 +11,10 @@ export class FactView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'auto' },
+        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', height: 'auto' },
             React.createElement(TextBlock, { vIndex: 0, hIndex: 0, width: 'auto', textStyle: {
                     color: StyleManager.getInstance().getColor('default', false, this.props.theme),
+                    marginRight: 16,
                 } }, element.title),
             React.createElement(TextBlock, { vIndex: 0, hIndex: 1, width: 'auto', textStyle: {
                     color: StyleManager.getInstance().getColor('default', true, this.props.theme),

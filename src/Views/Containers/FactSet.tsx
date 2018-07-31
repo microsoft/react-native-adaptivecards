@@ -24,8 +24,9 @@ export class FactSetView extends React.Component<IProps> {
             <Column
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
-                width='auto'
-                spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                width='stretch'
+                height='auto'
+                vSPacing={StyleManager.getInstance().getSpacing(element.spacing)}
             >
                 {this.renderFacts()}
             </Column>

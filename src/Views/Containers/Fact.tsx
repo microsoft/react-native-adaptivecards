@@ -26,7 +26,8 @@ export class FactView extends React.Component<IProps> {
             <Row
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
-                width='auto'
+                width='stretch'
+                height='auto'
             >
                 <TextBlock
                     vIndex={0}
@@ -34,6 +35,7 @@ export class FactView extends React.Component<IProps> {
                     width='auto'
                     textStyle={{
                         color: StyleManager.getInstance().getColor('default', false, this.props.theme),
+                        marginRight: 16,
                     }}
                 >
                     {element.title}

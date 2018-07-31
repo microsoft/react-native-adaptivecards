@@ -1,7 +1,7 @@
 {
     "choiceSetInputValueSeparator": ",",
     "supportsInteractivity": true,
-    "fontFamily": "Segoe UI",
+    "fontFamily": "Roboto",
     "spacing": {
         "small": 3,
         "default": 8,
@@ -27,16 +27,16 @@
         "bolder": 600
     },
     "imageSizes": {
-        "small": 40,
-        "medium": 80,
-        "large": 160
+        "small": 12,
+        "medium": 36,
+        "large": 64
     },
     "containerStyles": {
         "default": {
             "foregroundColors": {
                 "default": {
-                    "default": "#333333",
-                    "subtle": "#333333EE"
+                    "default": "#000000DE",
+                    "subtle": "#0000008A"
                 },
                 "dark": {
                     "default": "#000000",

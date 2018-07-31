@@ -13,7 +13,7 @@
 					"items": [
 						{
 							"type": "Image",
-							"size": "small",
+							"size": "medium",
 							"url": "https://messagecardplayground.azurewebsites.net/assets/Airplane.png"
 						}
 					]
@@ -205,7 +205,7 @@
 						{
 							"type": "Image",
 							"url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
-							"size": "small",
+							"size": "medium",
 							"horizontalAlignment": "center"
 						}
 					]

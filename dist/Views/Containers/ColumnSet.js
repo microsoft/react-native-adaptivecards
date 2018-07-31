@@ -21,10 +21,10 @@ export class ColumnSetView extends React.Component {
         }
         const background = element.getBackgroundImageUrl();
         if (background) {
-            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing) }, ContentFactory.createBackgroundImageView(this.renderColumns(), background)));
+            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: 'auto' }, ContentFactory.createBackgroundImageView(this.renderColumns(), background)));
         }
         else {
-            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing) }, this.renderColumns()));
+            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: 'auto' }, this.renderColumns()));
         }
     }
 }

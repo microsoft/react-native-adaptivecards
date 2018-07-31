@@ -220,9 +220,9 @@ export class StyleTransformer {
                 switch (color) {
                     case 'default':
                         if (subtle) {
-                            return '#333333EE';
+                            return '#0000008A';
                         }
-                        return '#333333';
+                        return '#000000DE';
                     case 'dark':
                         if (subtle) {
                             return '#00000066';

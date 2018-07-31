@@ -42,6 +42,7 @@ export class TimeInput extends React.Component<IProps, IState> {
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
                 width='stretch'
+                height='auto'
             >
                 {this.renderBtn()}
                 {this.renderInlineTimePickerIOS()}
@@ -54,6 +55,8 @@ export class TimeInput extends React.Component<IProps, IState> {
             <Row
                 vIndex={0}
                 hIndex={0}
+                width='stretch'
+                height='auto'
             >
                 <Button
                     vIndex={0}
@@ -76,6 +79,8 @@ export class TimeInput extends React.Component<IProps, IState> {
                     <Row
                         vIndex={0}
                         hIndex={0}
+                        width='stretch'
+                        height='auto'
                     >
                         <DatePickerIOS
                             date={time}

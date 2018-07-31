@@ -40,7 +40,7 @@ export class ImageBlock extends React.Component {
         this.onImageSize = (width, height) => {
             console.log(width);
             console.log(height);
-            let size = ImageUtils.calcSize({ width: width, height: height }, { width: this.props.containerWidth, height: this.props.containerHeight }, this.props.width, this.props.fitAxis);
+            let size = ImageUtils.calcSize({ width: width, height: height }, { width: this.props.containerWidth, height: this.props.containerHeight }, this.props.size, this.props.fitAxis);
             this.setState(size);
         };
         this.onImageSizeError = (err) => {
@@ -68,18 +68,18 @@ export class ImageBlock extends React.Component {
         };
     }
     render() {
-        const { url, boxStyle, alignSelf, onPress, width, } = this.props;
+        const { url, boxStyle, alignSelf, onPress, size, } = this.props;
         if (url && url.startsWith('data:image/svg+xml')) {
             let svgRenderer = HostContext.getInstance().getHostRenderer(HostRenderer.SVG);
-            let svgSize = typeof width === 'number' ?
-                width : StyleManager.getInstance().getImageSize('large');
+            let svgSize = typeof size === 'number' ?
+                size : StyleManager.getInstance().getImageSize('large');
             if (svgRenderer) {
                 return (React.createElement(FlexBox, Object.assign({}, this.props, { style: [
                         boxStyle,
                         {
                             alignSelf: alignSelf,
                         }
-                    ], onPress: onPress, width: 'auto' }), svgRenderer(decodeURIComponent(url), svgSize, svgSize)));
+                    ], onPress: onPress, size: 'auto' }), svgRenderer(decodeURIComponent(url), svgSize, svgSize)));
             }
             else {
                 return undefined;
@@ -91,7 +91,7 @@ export class ImageBlock extends React.Component {
                     {
                         alignSelf: alignSelf,
                     }
-                ], onLayoutChange: this.onLayoutChange, onPress: onPress, width: 'auto' }),
+                ], onLayoutChange: this.onLayoutChange, onPress: onPress, size: 'auto' }),
                 this.renderPlaceholder(),
                 this.renderImage()));
         }

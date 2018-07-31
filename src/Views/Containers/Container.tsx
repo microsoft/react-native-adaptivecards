@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Column } from '../../Components/Containers/Column';
+import { Row } from '../../Components/Containers/Row';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ContainerElement } from '../../Schema/Containers/Container';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -25,27 +26,47 @@ export class ContainerView extends React.Component<IProps> {
 
         if (background) {
             return (
-                <Column
+                <Row
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
-                    width='stretch'
-                    onPress={element.selectAction ? this.onPress : undefined}
                     spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    width='stretch'
+                    height='auto'
+                    onPress={element.selectAction ? this.onPress : undefined}
+                    style={{paddingVertical: 4}}
                 >
-                    {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
-                </Column>
+                    <Column
+                        vIndex={0}
+                        hIndex={0}
+                        width='stretch'
+                        height='auto'
+                        vSPacing={0}
+                    >
+                        {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
+                    </Column>
+                </Row>
             );
         } else {
             return (
-                <Column
+                <Row
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
-                    width='stretch'
-                    onPress={element.selectAction ? this.onPress : undefined}
                     spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    width='stretch'
+                    height='auto'
+                    onPress={element.selectAction ? this.onPress : undefined}
+                    style={{paddingVertical: 4}}
                 >
-                    {this.renderContents()}
-                </Column>
+                    <Column
+                        vIndex={0}
+                        hIndex={0}
+                        width='stretch'
+                        height='auto'
+                        vSPacing={0}
+                    >
+                        {this.renderContents()}
+                    </Column>
+                </Row>
             );
         }
     }

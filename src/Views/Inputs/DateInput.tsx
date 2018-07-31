@@ -40,6 +40,8 @@ export class DateInputView extends React.Component<IProps, IState> {
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
                 spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                width='stretch'
+                height='auto'
             >
                 <DateInput
                     vIndex={0}

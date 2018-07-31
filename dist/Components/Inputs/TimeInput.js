@@ -16,14 +16,14 @@ export class TimeInput extends React.Component {
     constructor(props) {
         super(props);
         this.renderBtn = () => {
-            return (React.createElement(Row, { vIndex: 0, hIndex: 0 },
+            return (React.createElement(Row, { vIndex: 0, hIndex: 0, width: 'stretch', height: 'auto' },
                 React.createElement(Button, { vIndex: 0, hIndex: 0, title: this.props.value, onPress: this.showTimePicker, borderColor: '#777777', borderWidth: 1, borderRadius: 4 })));
         };
         this.renderInlineTimePickerIOS = () => {
             if (Platform.OS === 'ios') {
                 if (this.state.showTimePicker) {
                     let time = TimeUtils.extractTime(this.props.value);
-                    return (React.createElement(Row, { vIndex: 0, hIndex: 0 },
+                    return (React.createElement(Row, { vIndex: 0, hIndex: 0, width: 'stretch', height: 'auto' },
                         React.createElement(DatePickerIOS, { date: time, mode: 'time', onDateChange: this.onTimeChangeIOS, style: { flex: 1 } })));
                 }
             }
@@ -58,7 +58,7 @@ export class TimeInput extends React.Component {
         };
     }
     render() {
-        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch' },
+        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', height: 'auto' },
             this.renderBtn(),
             this.renderInlineTimePickerIOS()));
     }

@@ -29,6 +29,8 @@ export class ColumnSetView extends React.Component<IProps> {
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
                     spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    width='stretch'
+                    height='auto'
                 >
                     {ContentFactory.createBackgroundImageView(this.renderColumns(), background)}
                 </Row>
@@ -39,6 +41,8 @@ export class ColumnSetView extends React.Component<IProps> {
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
                     spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    width='stretch'
+                    height='auto'
                 >
                     {this.renderColumns()}
                 </Row>

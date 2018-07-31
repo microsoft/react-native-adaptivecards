@@ -38,7 +38,7 @@ export default class App extends React.Component {
 			}}
 			contentContainerStyle={{
 				padding: 10,
-				backgroundColor: 'whitesmoke',
+				backgroundColor: 'white',
 			}}>
 				<AdaptiveCards adaptiveCard={mockData.weatherCompact} />
 				{this.renderGap()}

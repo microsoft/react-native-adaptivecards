@@ -30,10 +30,10 @@ export class ColumnView extends React.Component {
         }
         const background = element.getBackgroundImageUrl();
         if (background) {
-            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), onPress: element.selectAction ? this.onPress : undefined, spacing: StyleManager.getInstance().getSpacing(element.spacing) }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: 'auto', onPress: element.selectAction ? this.onPress : undefined, vSPacing: StyleManager.getInstance().getSpacing(element.spacing), hSpacing: 16 }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
         }
         else {
-            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), onPress: element.selectAction ? this.onPress : undefined, spacing: StyleManager.getInstance().getSpacing(element.spacing) }, this.renderContents()));
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: 'auto', onPress: element.selectAction ? this.onPress : undefined, vSPacing: StyleManager.getInstance().getSpacing(element.spacing), hSpacing: 16 }, this.renderContents()));
         }
     }
 }

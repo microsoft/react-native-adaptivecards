@@ -39,9 +39,16 @@ export class AdaptiveCardView extends React.Component {
         const cardStyle = Object.assign({
             flex: 1,
             backgroundColor: 'white',
-            borderWidth: 1,
-            borderColor: '#777777',
+            borderWidth: 0.5,
+            borderColor: '#00000019',
             borderRadius: 4,
+            shadowColor: '#00000026',
+            shadowOffset: {
+                width: 0,
+                height: 1
+            },
+            shadowRadius: 4,
+            shadowOpacity: 1.0
         }, this.props.style);
         const backgroundImage = this.props.element.getBackgroundImageUrl();
         if (backgroundImage) {
@@ -69,7 +76,7 @@ export class AdaptiveCardView extends React.Component {
         if (!this.props.element.body) {
             return null;
         }
-        return (React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch' }, this.props.element.body.map((contentElement, index) => ContentFactory.createView(contentElement, index, this.props.theme))));
+        return (React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch', height: 'stretch' }, this.props.element.body.map((contentElement, index) => ContentFactory.createView(contentElement, index, this.props.theme))));
     }
     renderActions() {
         if (!this.props.element.actions) {
@@ -77,10 +84,10 @@ export class AdaptiveCardView extends React.Component {
         }
         const hostActionStyle = StyleManager.getInstance().getActionContainerStyle();
         if (hostActionStyle.direction === 'column') {
-            return (this.props.element.actions.map((action, index) => (React.createElement(Row, { key: 'ActionRow' + index, vIndex: 1, hIndex: 0, spacing: 10 }, ActionFactory.createAction(action, 0, 0, this.actionContext)))));
+            return (this.props.element.actions.map((action, index) => (React.createElement(Row, { key: 'ActionRow' + index, vIndex: 1, hIndex: 0, spacing: 10, width: 'stretch', height: 'auto' }, ActionFactory.createAction(action, 0, 0, this.actionContext)))));
         }
         else {
-            return (React.createElement(Row, { vIndex: 1, hIndex: 0, spacing: 10 }, this.props.element.actions.map((action, index) => ActionFactory.createAction(action, 0, index, this.actionContext))));
+            return (React.createElement(Row, { vIndex: 1, hIndex: 0, spacing: 10, width: 'stretch', height: 'auto' }, this.props.element.actions.map((action, index) => ActionFactory.createAction(action, 0, index, this.actionContext))));
         }
     }
     renderSubCard() {

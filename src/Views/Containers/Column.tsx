@@ -30,8 +30,10 @@ export class ColumnView extends React.Component<IProps> {
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
                     width={StyleManager.getInstance().getColumnWidth(element)}
+                    height='auto'
                     onPress={element.selectAction ? this.onPress : undefined}
-                    spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    vSPacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    hSpacing={16}
                 >
                     {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
                 </Column>
@@ -42,8 +44,10 @@ export class ColumnView extends React.Component<IProps> {
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
                     width={StyleManager.getInstance().getColumnWidth(element)}
+                    height='auto'
                     onPress={element.selectAction ? this.onPress : undefined}
-                    spacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    vSPacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    hSpacing={16}
                 >
                     {this.renderContents()}
                 </Column>

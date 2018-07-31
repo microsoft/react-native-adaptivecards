@@ -82,20 +82,19 @@ export class PeoplePickerView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: 0, width: 'stretch' },
-            React.createElement(Column, { vIndex: 0, hIndex: 1, width: 'stretch', spacing: 5 },
-                React.createElement(Button, { vIndex: 0, hIndex: 0, vSpacing: 0, hSpacing: 0, title: this.state.value || element.placeholder, onPress: this.showModal, color: '#333333', backgroundColor: 'white', borderColor: '#777777', borderRadius: 4, borderWidth: 1, textAlign: 'left' })),
+        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: 0, width: 'stretch', height: 'auto' },
+            React.createElement(Button, { vIndex: 0, hIndex: 0, vSpacing: 0, hSpacing: 0, title: this.state.value || element.placeholder, onPress: this.showModal, color: '#333333', backgroundColor: 'white', borderColor: '#777777', borderRadius: 4, borderWidth: 1, textAlign: 'left' }),
             this.renderModal()));
     }
     renderModal() {
         return (React.createElement(ModalBox, { show: this.state.showModal },
-            React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: 0, width: 'stretch' },
+            React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, vSPacing: 0, width: 'stretch', height: 'stretch' },
                 this.renderModalHeader(),
                 this.renderInputBox(),
                 this.renderAutoSuggestion())));
     }
     renderModalHeader() {
-        return (React.createElement(Row, { vIndex: 0, hIndex: 0, spacing: 0 },
+        return (React.createElement(Row, { vIndex: 0, hIndex: 0, spacing: 0, width: 'stretch', height: 'auto' },
             React.createElement(LinkButton, { vIndex: 0, hIndex: 0, title: 'CANCEL', textAlign: 'left', wrap: 'wrap', numberOfLines: 1, onPress: this.closeModal }),
             React.createElement(TextBlock, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', fontSize: 16, fontWeight: 'bold', color: '#333333', backgroundColor: 'transparent', textAlign: 'center', wrap: 'wrap', vSpacing: 0, numberOfLines: 1 }, 'People Picker'),
             React.createElement(LinkButton, { vIndex: 0, hIndex: 0, title: 'SAVE', textAlign: 'right', wrap: 'wrap', numberOfLines: 1, onPress: this.closeModal })));
@@ -105,12 +104,12 @@ export class PeoplePickerView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(Row, { vIndex: 0, hIndex: 0, spacing: 0 },
+        return (React.createElement(Row, { vIndex: 0, hIndex: 0, spacing: 0, width: 'stretch', height: 'auto' },
             React.createElement(InputBox, { vIndex: 0, hIndex: 0, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur })));
     }
     renderAutoSuggestion() {
         if (this.state.autoSuggestion) {
-            return (React.createElement(Row, { vIndex: 1, hIndex: 0, spacing: 0 }, ContentFactory.createView(this.state.autoSuggestion, 0, this.props.theme)));
+            return (React.createElement(Row, { vIndex: 1, hIndex: 0, spacing: 0, width: 'stretch', height: 'auto' }, ContentFactory.createView(this.state.autoSuggestion, 0, this.props.theme)));
         }
         return undefined;
     }

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { TextInput } from 'react-native';
-import { FlexBox } from '../Basic/FlexBox';
+import { Column } from '../Containers/Column';
 export class InputBox extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
-        return (React.createElement(FlexBox, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, relativeWidth: false, flexDirection: 'row', alignSelf: 'stretch', alignContent: 'flex-start', alignItems: 'stretch', justifyContent: 'space-between', width: 'stretch' },
+        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', height: 'auto' },
             React.createElement(TextInput, { style: [
                     {
-                        flex: 1,
+                        alignSelf: 'stretch',
                         borderColor: 'gray',
                         borderWidth: 1,
                         borderRadius: 4,

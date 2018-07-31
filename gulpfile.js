@@ -1,5 +1,6 @@
 var del = require('del');
 var gulp = require('gulp');
+var imagemin = require('gulp-imagemin');
 var gulpTslint = require('gulp-tslint');
 var runSequence = require('run-sequence');
 var typescript = require('gulp-typescript');
@@ -10,12 +11,20 @@ var tsProject = typescript.createProject('tsconfig.json');
 var path = {
     src: './src/',
     dist: './dist/',
-    example: './examples/AdaptiveCards',
+    example: './examples/AdaptiveCards/',
 };
 
 // Clean destination folder
 gulp.task('clean', function () {
     return del([path.dist, path.example]);
+});
+
+// Minify images in place
+gulp.task('minify-img', function () {
+    return gulp.src(path.src + 'Assets/**/*.png')
+        .pipe(imagemin())
+        .pipe(gulp.dest(path.dist + 'Assets'))
+        .pipe(gulp.dest(path.example + 'Assets'));
 });
 
 // Checks your TypeScript code for readability, maintainability, and functionality errors.
@@ -48,6 +57,7 @@ gulp.task('compile-ts', function () {
 
 gulp.task('default', function (cb) {
     runSequence('clean', [
+        'minify-img',
         'lint-ts',
         'compile-ts',
         'copy-json',

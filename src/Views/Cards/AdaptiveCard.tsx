@@ -50,9 +50,16 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         const cardStyle: ViewStyle = Object.assign({
             flex: 1,
             backgroundColor: 'white',
-            borderWidth: 1,
-            borderColor: '#777777',
+            borderWidth: 0.5,
+            borderColor: '#00000019',
             borderRadius: 4,
+            shadowColor: '#00000026',
+            shadowOffset: {
+                width: 0,
+                height: 1
+            },
+            shadowRadius: 4,
+            shadowOpacity: 1.0
         }, this.props.style);
 
         const backgroundImage = this.props.element.getBackgroundImageUrl();
@@ -104,6 +111,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                 vIndex={0}
                 hIndex={0}
                 width='stretch'
+                height='stretch'
             >
                 {
                     this.props.element.body.map((contentElement: ContentElement, index: number) =>
@@ -129,6 +137,8 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                         vIndex={1}
                         hIndex={0}
                         spacing={10}
+                        width='stretch'
+                        height='auto'
                     >
                         {ActionFactory.createAction(action, 0, 0, this.actionContext)}
                     </Row>
@@ -140,6 +150,8 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                     vIndex={1}
                     hIndex={0}
                     spacing={10}
+                    width='stretch'
+                    height='auto'
                 >
                     {
                         this.props.element.actions.map((action: ActionElement, index: number) =>

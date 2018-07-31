@@ -63,7 +63,7 @@ export class FlexBox extends React.Component {
             ], onLayout: this.onLayoutChange, onPress: this.props.onPress }, this.renderChildren()));
     }
     get containerWidth() {
-        if (this.props.width === 'auto') {
+        if (this.props.size === 'auto') {
             return this.props.containerWidth;
         }
         else {
@@ -71,7 +71,7 @@ export class FlexBox extends React.Component {
         }
     }
     get containerHeight() {
-        if (this.props.width === 'auto') {
+        if (this.props.size === 'auto') {
             return this.props.containerHeight;
         }
         else {
@@ -97,21 +97,21 @@ export class FlexBox extends React.Component {
         };
     }
     get size() {
-        if (this.props.width === 'auto') {
+        if (this.props.size === 'auto') {
             return {};
         }
-        if (this.props.width === 'stretch') {
+        if (this.props.size === 'stretch') {
             return {
                 flex: 1,
             };
         }
-        if (this.props.relativeWidth && typeof this.props.width === 'number') {
+        if (this.props.relativeWidth && typeof this.props.size === 'number') {
             return {
-                flex: this.props.width
+                flex: this.props.size
             };
         }
         return {
-            width: this.props.width
+            width: this.props.size
         };
     }
     get verticalMargin() {
