@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Image, Text, View } from 'react-native';
 import { HostContext } from '../../Contexts/HostContext';
+import { HostRenderer } from '../../HostRenderer/HostRenderer';
+import { StyleManager } from '../../Styles/StyleManager';
 import { ImageUtils } from '../../Utils/ImageUtils';
 import { FlexBox } from './FlexBox';
 export class ImageBlock extends React.Component {
@@ -66,31 +68,39 @@ export class ImageBlock extends React.Component {
         };
     }
     render() {
-        return (React.createElement(FlexBox, Object.assign({}, this.props, { style: [
-                this.props.boxStyle,
-                {
-                    alignSelf: this.props.alignSelf,
-                }
-            ], onLayoutChange: this.onLayoutChange, onPress: this.props.onPress, width: 'auto' }),
-            this.renderPlaceholder(),
-            this.renderImage()));
-    }
-    renderImage() {
-        if (this.props.url && this.props.url.startsWith('data:image/svg+xml')) {
-            let renderer = HostContext.getInstance().getHostRenderer('svg');
-            if (renderer) {
-                return renderer(this.props);
+        const { url, boxStyle, alignSelf, onPress, width, } = this.props;
+        if (url && url.startsWith('data:image/svg+xml')) {
+            let svgRenderer = HostContext.getInstance().getHostRenderer(HostRenderer.SVG);
+            let svgSize = typeof width === 'number' ?
+                width : StyleManager.getInstance().getImageSize('large');
+            if (svgRenderer) {
+                return (React.createElement(FlexBox, Object.assign({}, this.props, { style: [
+                        boxStyle,
+                        {
+                            alignSelf: alignSelf,
+                        }
+                    ], onPress: onPress, width: 'auto' }), svgRenderer(decodeURIComponent(url), svgSize, svgSize)));
             }
             else {
                 return undefined;
             }
         }
         else {
-            return (React.createElement(Image, { accessible: !!this.props.alt, accessibilityLabel: this.props.alt, source: { uri: this.props.url }, style: [
-                    this.size,
-                    this.props.imgStyle
-                ], onLoad: this.onImageLoad, onError: this.onImageError, onLayout: this.onImageSizeUpdate }));
+            return (React.createElement(FlexBox, Object.assign({}, this.props, { style: [
+                    boxStyle,
+                    {
+                        alignSelf: alignSelf,
+                    }
+                ], onLayoutChange: this.onLayoutChange, onPress: onPress, width: 'auto' }),
+                this.renderPlaceholder(),
+                this.renderImage()));
         }
+    }
+    renderImage() {
+        return (React.createElement(Image, { accessible: !!this.props.alt, accessibilityLabel: this.props.alt, source: { uri: this.props.url }, style: [
+                this.size,
+                this.props.imgStyle
+            ], onLoad: this.onImageLoad, onError: this.onImageError, onLayout: this.onImageSizeUpdate }));
     }
     get size() {
         return ImageUtils.fitSize(this.state, { width: this.props.maxWidth, height: this.props.maxHeight }, { width: this.props.maxWidth, height: this.props.maxHeight }, this.props.fitAxis);

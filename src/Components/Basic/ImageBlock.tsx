@@ -6,6 +6,8 @@ import {
     View
 } from 'react-native';
 import { HostContext } from '../../Contexts/HostContext';
+import { HostRenderer, ISVGRenderer } from '../../HostRenderer/HostRenderer';
+import { StyleManager } from '../../Styles/StyleManager';
 import { ImageUtils } from '../../Utils/ImageUtils';
 import { IFlexProps } from '../BaseProps';
 import { FlexBox } from './FlexBox';
@@ -40,23 +42,56 @@ export class ImageBlock extends React.Component<IProps, IState> {
     }
 
     public render() {
-        return (
-            <FlexBox
-                {...this.props}
-                style={[
-                    this.props.boxStyle,
-                    {
-                        alignSelf: this.props.alignSelf,
-                    }
-                ]}
-                onLayoutChange={this.onLayoutChange}
-                onPress={this.props.onPress}
-                width='auto'
-            >
-                {this.renderPlaceholder()}
-                {this.renderImage()}
-            </FlexBox>
-        );
+        const {
+            url,
+            boxStyle,
+            alignSelf,
+            onPress,
+            width,
+        } = this.props;
+
+        if (url && url.startsWith('data:image/svg+xml')) {
+            let svgRenderer: ISVGRenderer = HostContext.getInstance().getHostRenderer(HostRenderer.SVG);
+            let svgSize = typeof width === 'number' ?
+                width : StyleManager.getInstance().getImageSize('large') as number;
+            if (svgRenderer) {
+                return (
+                    <FlexBox
+                        {...this.props}
+                        style={[
+                            boxStyle,
+                            {
+                                alignSelf: alignSelf,
+                            }
+                        ]}
+                        onPress={onPress}
+                        width='auto'
+                    >
+                        {svgRenderer(decodeURIComponent(url), svgSize, svgSize)}
+                    </FlexBox>
+                );
+            } else {
+                return undefined;
+            }
+        } else {
+            return (
+                <FlexBox
+                    {...this.props}
+                    style={[
+                        boxStyle,
+                        {
+                            alignSelf: alignSelf,
+                        }
+                    ]}
+                    onLayoutChange={this.onLayoutChange}
+                    onPress={onPress}
+                    width='auto'
+                >
+                    {this.renderPlaceholder()}
+                    {this.renderImage()}
+                </FlexBox>
+            );
+        }
     }
 
     private renderPlaceholder = () => {
@@ -86,30 +121,21 @@ export class ImageBlock extends React.Component<IProps, IState> {
     }
 
     private renderImage() {
-        if (this.props.url && this.props.url.startsWith('data:image/svg+xml')) {
-            let renderer = HostContext.getInstance().getHostRenderer('svg');
-            if (renderer) {
-                return renderer(this.props);
-            } else {
-                return undefined;
-            }
-        } else {
-            return (
-                <Image
-                    accessible={!!this.props.alt}
-                    accessibilityLabel={this.props.alt}
-                    source={{ uri: this.props.url }}
-                    style={[
-                        this.size,
-                        this.props.imgStyle
-                    ]}
-                    onLoad={this.onImageLoad}
-                    onError={this.onImageError}
-                    onLayout={this.onImageSizeUpdate}
-                >
-                </Image>
-            );
-        }
+        return (
+            <Image
+                accessible={!!this.props.alt}
+                accessibilityLabel={this.props.alt}
+                source={{ uri: this.props.url }}
+                style={[
+                    this.size,
+                    this.props.imgStyle
+                ]}
+                onLoad={this.onImageLoad}
+                onError={this.onImageError}
+                onLayout={this.onImageSizeUpdate}
+            >
+            </Image>
+        );
     }
 
     private fetchImageSize = () => {

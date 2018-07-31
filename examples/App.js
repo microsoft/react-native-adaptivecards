@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
+import SvgUri from 'react-native-svg-uri';
 
 import AdaptiveCards from './AdaptiveCards';
 import mockData from './mockData';
@@ -16,6 +17,19 @@ const cardOverrideStyle = {
 };
 
 export default class App extends React.Component {
+	constructor(props){
+		super(props);
+		
+		AdaptiveCards.registerSVGRenderer((svgXmlData, width, height) => {
+			return (
+				<SvgUri
+					width={width}
+					height={height}
+					svgXmlData={svgXmlData} />
+			);
+		})
+	}
+
 	render() {
 		return (
 			<ScrollView style={{

@@ -8,6 +8,7 @@ import { CallbackAction } from 'Schema/Internal/CallbackAction';
 import { ActionContext } from '../Contexts/ActionContext';
 import { FormContext } from '../Contexts/FormContext';
 import { HostContext } from '../Contexts/HostContext';
+import { HostRenderer, ISVGRenderer } from '../HostRenderer/HostRenderer';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
@@ -30,6 +31,10 @@ interface IState {
 
 export class CardRootView extends React.PureComponent<IProps, IState> {
     // private styleConfig: StyleConfig;
+
+    public static registerSVGRenderer(renderer: ISVGRenderer) {
+        HostContext.getInstance().registerHostRenderer(HostRenderer.SVG, renderer);
+    }
 
     constructor(props: IProps) {
         super(props);
@@ -75,10 +80,6 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
             name: 'populateCallbackParamData',
             actionType: ActionType.Callback
         });
-    }
-
-    public static registerCustomElementRender(type: string, renderer: (data: any) => JSX.Element) {
-        HostContext.getInstance().registerHostRenderer(type, renderer);
     }
 
     public componentWillReceiveProps(nextProps: IProps) {

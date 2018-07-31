@@ -3,6 +3,7 @@ import { Linking, View, } from 'react-native';
 import { ActionContext } from '../Contexts/ActionContext';
 import { FormContext } from '../Contexts/FormContext';
 import { HostContext } from '../Contexts/HostContext';
+import { HostRenderer } from '../HostRenderer/HostRenderer';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 import { CardElement } from '../Schema/Cards/Card';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
@@ -104,8 +105,8 @@ export class CardRootView extends React.PureComponent {
             actionType: ActionType.Callback
         });
     }
-    static registerCustomElementRender(type, renderer) {
-        HostContext.getInstance().registerHostRenderer(type, renderer);
+    static registerSVGRenderer(renderer) {
+        HostContext.getInstance().registerHostRenderer(HostRenderer.SVG, renderer);
     }
     componentWillReceiveProps(nextProps) {
     }

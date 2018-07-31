@@ -1,4 +1,5 @@
 import { Component, ComponentClass } from 'react';
+import { ISVGRenderer } from './HostRenderer/HostRenderer';
 
 interface AdaptiveCardsProps {
     adaptiveCard: any;
@@ -10,7 +11,7 @@ interface AdaptiveCardsProps {
 }
 interface AdaptiveCardClass<P = {}> extends ComponentClass<P> {
     new(props: P, context?: any): AdaptiveCardClass<P, ComponentState>;
-    registerCustomElementRender(type: string, renderer: (data: any) => JSX.Element);
+    registerSVGRenderer(renderer: ISVGRenderer): void;
 }
 
 declare const AdaptiveCard: AdaptiveCardClass<AdaptiveCardsProps>;

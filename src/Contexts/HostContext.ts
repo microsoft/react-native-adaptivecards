@@ -1,3 +1,4 @@
+import { HostRenderer, IHostRenderer } from '../HostRenderer/HostRenderer';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
@@ -13,7 +14,7 @@ export class HostContext {
     private onShowCard: (args?: ActionEventHandlerArgs<ShowCardActionElement>) => void;
     private onSubmit: (args?: ActionEventHandlerArgs<SubmitActionElement>) => void;
     private onCallback: (args?: ActionEventHandlerArgs<CallbackAction>) => void;
-    private hostRenderer: { [key: string]: ((data: any) => JSX.Element) } = {};
+    private hostRenderer: { [key: string]: IHostRenderer } = {};
 
     private static sharedInstance: HostContext;
 
@@ -50,11 +51,11 @@ export class HostContext {
         this.onCallback = handler;
     }
 
-    public registerHostRenderer(type: string, renderer: (data: any) => JSX.Element) {
+    public registerHostRenderer(type: HostRenderer, renderer: IHostRenderer) {
         this.hostRenderer[type] = renderer;
     }
 
-    public getHostRenderer(type: string) {
+    public getHostRenderer(type: HostRenderer): IHostRenderer {
         return this.hostRenderer[type];
     }
 
