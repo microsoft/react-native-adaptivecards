@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Column } from '../../Components/Containers/Column';
+import { Column } from '../../Abandon/Components/Containers/Column';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ColumnElement } from '../../Schema/Containers/Column';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -34,6 +34,7 @@ export class ColumnView extends React.Component<IProps> {
                     onPress={element.selectAction ? this.onPress : undefined}
                     vSPacing={StyleManager.getInstance().getSpacing(element.spacing)}
                     hSpacing={16}
+                    style={{minWidth: 25}}
                 >
                     {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
                 </Column>
@@ -48,6 +49,7 @@ export class ColumnView extends React.Component<IProps> {
                     onPress={element.selectAction ? this.onPress : undefined}
                     vSPacing={StyleManager.getInstance().getSpacing(element.spacing)}
                     hSpacing={16}
+                    style={{minWidth: 25}}
                 >
                     {this.renderContents()}
                 </Column>

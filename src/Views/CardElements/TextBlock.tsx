@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { TextBlock } from '../../Components/Basic/TextBlock';
+import { TextBlock } from '../../Abandon/Components/Basic/TextBlock';
 import { TextBlockElement } from '../../Schema/CardElements/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
 import { TextBlockStyle } from '../../Styles/Types';
@@ -30,8 +30,8 @@ export class TextBlockView extends React.Component<IProps> {
 
         return (
             <TextBlock
-                vIndex={this.props.vIndex}
-                hIndex={this.props.hIndex}
+                vIndex={0}
+                hIndex={0}
                 width='stretch'
                 fontSize={this.style.fontSize}
                 fontWeight={this.style.fontWeight}
@@ -39,7 +39,7 @@ export class TextBlockView extends React.Component<IProps> {
                 backgroundColor='transparent'
                 textAlign={this.style.textAlign}
                 wrap={this.style.wrap}
-                vSpacing={this.style.spacing}
+                vSpacing={0}
                 numberOfLines={element.maxLines}
             >
                 {element.text}

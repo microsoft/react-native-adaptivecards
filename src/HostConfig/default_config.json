@@ -47,29 +47,29 @@
                     "subtle": "#FFFFFF33"
                 },
                 "accent": {
-                    "default": "#2E89FC",
-                    "subtle": "#2E89FC88"
+                    "default": "#006ae2",
+                    "subtle": "#006ae2b2"
                 },
                 "good": {
-                    "default": "#54a254",
-                    "subtle": "#54a254DD"
+                    "default": "#048e2e",
+                    "subtle": "#048e2eb2"
                 },
                 "warning": {
-                    "default": "#c3ab23",
-                    "subtle": "#c3ab23DD"
+                    "default": "#eb7b07",
+                    "subtle": "#eb7b07b2"
                 },
                 "attention": {
-                    "default": "#FF0000",
-                    "subtle": "#FF0000DD"
+                    "default": "#c80000",
+                    "subtle": "#c80000b2"
                 }
             },
-            "backgroundColor": "#FFFFFF"
+            "backgroundColor": "#FFFFFF00"
         },
         "emphasis": {
             "foregroundColors": {
                 "default": {
-                    "default": "#333333",
-                    "subtle": "#333333EE"
+                    "default": "#ffffff",
+                    "subtle": "#ffffffb2"
                 },
                 "dark": {
                     "default": "#000000",
@@ -77,23 +77,23 @@
                 },
                 "light": {
                     "default": "#FFFFFF",
-                    "subtle": "#00000033"
+                    "subtle": "#FFFFFF33"
                 },
                 "accent": {
-                    "default": "#2E89FC",
-                    "subtle": "#2E89FC88"
+                    "default": "#006ae2",
+                    "subtle": "#006ae2b2"
                 },
                 "good": {
-                    "default": "#54a254",
-                    "subtle": "#54a254DD"
+                    "default": "#048e2e",
+                    "subtle": "#048e2eb2"
                 },
                 "warning": {
-                    "default": "#c3ab23",
-                    "subtle": "#c3ab23DD"
+                    "default": "#eb7b07",
+                    "subtle": "#eb7b07b2"
                 },
                 "attention": {
-                    "default": "#FF0000",
-                    "subtle": "#FF0000DD"
+                    "default": "#c80000",
+                    "subtle": "#c80000b2"
                 }
             },
             "backgroundColor": "#00000008"

@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { TextBlock } from '../../Components/Basic/TextBlock';
-import { Column } from '../../Components/Containers/Column';
-import { ModalBox } from '../../Components/Containers/ModalBox';
-import { Row } from '../../Components/Containers/Row';
-import { Button } from '../../Components/Inputs/Button';
-import { InputBox } from '../../Components/Inputs/InputBox';
-import { LinkButton } from '../../Components/Inputs/LinkButton';
+import { TextBlock } from '../../Abandon/Components/Basic/TextBlock';
+import { Column } from '../../Abandon/Components/Containers/Column';
+import { ModalBox } from '../../Abandon/Components/Containers/ModalBox';
+import { Row } from '../../Abandon/Components/Containers/Row';
+import { Button } from '../../Abandon/Components/Inputs/Button';
+import { InputBox } from '../../Abandon/Components/Inputs/InputBox';
+import { LinkButton } from '../../Abandon/Components/Inputs/LinkButton';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { FormContext } from '../../Contexts/FormContext';
 import { HostContext } from '../../Contexts/HostContext';
 import { ContentElementFactory } from '../../Schema/Factories/ContentElementFactory';
 import { PeoplePickerElement } from '../../Schema/Inputs/PeoplePicker';
 import { IContent } from '../../Schema/Interfaces/IContent';
+import { StyleManager } from '../../Styles/StyleManager';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
 
@@ -64,7 +65,7 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                     hSpacing={0}
                     title={this.state.value || element.placeholder}
                     onPress={this.showModal}
-                    color='#333333'
+                    color={StyleManager.getInstance().getColor('default', false, 'default')}
                     backgroundColor='white'
                     borderColor='#777777'
                     borderRadius={4}
@@ -118,9 +119,9 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
                     width='stretch'
-                    fontSize={16}
+                    fontSize={StyleManager.getInstance().getFontSize('default')}
                     fontWeight={'bold'}
-                    color={'#333333'}
+                    color={StyleManager.getInstance().getColor('default', false, 'default')}
                     backgroundColor='transparent'
                     textAlign={'center'}
                     wrap={'wrap'}
@@ -156,6 +157,7 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                 spacing={0}
                 width='stretch'
                 height='auto'
+                style={{ paddingVertical: 8 }}
             >
                 <InputBox
                     vIndex={0}

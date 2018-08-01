@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '../../Components/Inputs/Button';
+import { Button } from '../../Abandon/Components/Inputs/Button';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { OpenUrlActionElement } from '../../Schema/Actions/OpenUrlAction';
 import { ActionHook } from '../../Shared/Types';

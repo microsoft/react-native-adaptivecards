@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Column } from '../../Components/Containers/Column';
+import { Column } from '../../Abandon/Components/Containers/Column';
 import { StyleManager } from '../../Styles/StyleManager';
 import { FactView } from './Fact';
 export class FactSetView extends React.Component {

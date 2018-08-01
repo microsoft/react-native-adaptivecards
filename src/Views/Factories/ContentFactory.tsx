@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { ImageBackground } from '../../Components/Basic/ImageBackground';
-import { SeparateLine } from '../../Components/Basic/SeparateLine';
+import { ImageBackground } from '../../Abandon/Components/Basic/ImageBackground';
+import { SeparateLine } from '../../Abandon/Components/Basic/SeparateLine';
 import { ContentElement, ContentElementType } from '../../Schema/Abstract/ContentElement';
 import { ImageElement } from '../../Schema/CardElements/Image';
 import { TextBlockElement } from '../../Schema/CardElements/TextBlock';

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { TextBlock } from '../../Components/Basic/TextBlock';
-import { Row } from '../../Components/Containers/Row';
+import { TextBlock } from '../../Abandon/Components/Basic/TextBlock';
+import { Row } from '../../Abandon/Components/Containers/Row';
 import { StyleManager } from '../../Styles/StyleManager';
 export class FactView extends React.Component {
     constructor(props) {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, } from 'react-native';
-import { ImageBackground } from '../../Components/Basic/ImageBackground';
-import { Column } from '../../Components/Containers/Column';
-import { Row } from '../../Components/Containers/Row';
+import { ImageBackground } from '../../Abandon/Components/Basic/ImageBackground';
+import { Column } from '../../Abandon/Components/Containers/Column';
+import { Row } from '../../Abandon/Components/Containers/Row';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ActionType } from '../../Schema/Abstract/ActionElement';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -48,14 +48,14 @@ export class AdaptiveCardView extends React.Component {
                 height: 1
             },
             shadowRadius: 4,
-            shadowOpacity: 1.0
+            shadowOpacity: 1.0,
         }, this.props.style);
         const backgroundImage = this.props.element.getBackgroundImageUrl();
         if (backgroundImage) {
             return (React.createElement(ImageBackground, { containerStyle: cardStyle, imageStyle: {
                     borderRadius: 4,
                 }, source: { uri: backgroundImage }, vIndex: 0, hIndex: 0 },
-                React.createElement(View, { style: { flex: 1, padding: 10 } },
+                React.createElement(View, { style: { flex: 1, padding: 0 } },
                     this.renderBody(),
                     this.renderActions(),
                     this.renderSubCard())));
@@ -64,7 +64,7 @@ export class AdaptiveCardView extends React.Component {
             return (React.createElement(View, { style: [
                     cardStyle,
                     {
-                        padding: 20,
+                        padding: 12,
                     }
                 ] },
                 this.renderBody(),

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '../../Components/Inputs/Button';
+import { Button } from '../../Abandon/Components/Inputs/Button';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { SubmitActionElement } from '../../Schema/Actions/SubmitAction';
 import { ActionHook } from '../../Shared/Types';

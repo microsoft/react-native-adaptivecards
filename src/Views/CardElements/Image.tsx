@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { ImageBlock } from '../../Components/Basic/ImageBlock';
+import { ImageBlock } from '../../Abandon/Components/Basic/ImageBlock';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ImageElement } from '../../Schema/CardElements/Image';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -63,7 +63,7 @@ export class ImageView extends React.Component<IProps, IState> {
                 relativeWidth={false}
                 url={element.url}
                 alt={element.altText}
-                flexDirection='row'
+                flexDirection='column'
                 alignSelf={this.style.align}
                 alignItems={this.style.align}
                 alignContent='center'

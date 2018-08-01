@@ -113,6 +113,22 @@ export class StyleManager {
         return result;
     }
 
+    public getFontSize(size: 'default' | 'small' | 'medium' | 'large' | 'extraLarge') {
+        if (this.hostConfig) {
+            return StyleTransformer.transformFontSize(size, this.hostConfig);
+        } else {
+            return StyleTransformer.transformFontSize(size, HostConfigManager.getInstance().getDefaultConfig());
+        }
+    }
+
+    public getFontWeight(weight: 'default' | 'lighter' | 'bolder') {
+        if (this.hostConfig) {
+            return StyleTransformer.transformFontWeight(weight, this.hostConfig);
+        } else {
+            return StyleTransformer.transformFontWeight(weight, HostConfigManager.getInstance().getDefaultConfig());
+        }
+    }
+
     public getColor(color: 'default' | 'dark' | 'light' | 'accent' | 'good' | 'warning' | 'attention',
         subtle: boolean, theme: 'default' | 'emphasis') {
         if (this.hostConfig) {

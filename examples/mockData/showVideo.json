@@ -1,0 +1,80 @@
+{
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "backgroundImage": "https://www.bing.com/th?id=OVP.ZFbDbpyc-QaOAlKeD_oZYgHgFo",
+    "body": [
+        {
+            "type": "Container",
+            "height": "stretch",
+            "items": [
+                {
+                    "type": "Container",
+                    "height": "stretch",
+                    "items": [],
+                    "spacing": "none",
+                    "separation": "none"
+                },
+                {
+                    "type": "Container",
+                    "height": "stretch",
+                    "verticalContentAlignment": "center",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "size": "medium",
+                            "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADQAAAA0CAMAAADypuvZAAAA2FBMVEUAAACZmZnR0dHh4eHn5+fr6+vt7e3w8PDz8/P19fX29vb4+Pj5+fn6+voAAAAKCgr6+voaGhr6+vonJyf6+vo2Njb7+/tISEj7+/tWVlZfX19nZ2f7+/ttbW37+/uAgID7+/uMjIyWlpb8/Pybm5ugoKD6+vqmpqb6+vqvr6/6+vq6urr7+/vCwsL8/PzJycnKysr7+/vPz8/7+/v9/f3T09P9/f37+/va2tr7+/v9/f3j4+P8/Pzp6en9/f3s7Ozw8PDt7e3z8/P29vb7+/v8/Pz9/f3///9eBLbNAAAAQXRSTlMABQsRFRodIioxO0hbZGZoaG1vcHV2enx/gISIiYyQk5iaoKCkp6utsbS2vMLEx8rOztLS1tfb3+Lj6ezt9Pf4/N+al+cAAAJESURBVEjHnZZre+FQFIU3WkI5SmsMo7QUvSmjKak0rsla//8fzYfWIHIi6fqavM9e57b2FglQ0sg3Og+9XrNgJCWKErnOjHuaNrMnmfKcBLyNY1uW7axdgJxen4UQyTJILAZ1tVWpNXAAzq5TOubCJDGsKp9q4w04vQguc0u6w4oKUG3skb8C9iRtEnZdadRywKdzP5N9Ix6VXpUh+OarlZxw0y2qMN2DZubA2wfdljqhrsvX/Vo9oq1Oqu2xuWMuia6KoGfwcstk5hhHYVTJIr6XlXjlshIJUpUNO19QjrhXEdUHs9+FHL8NvUGHPRGRLOHf7fZIi7XBjIg0uDj6QqemK7VmQyQxw/MxRFd3bgN+ihj0qgEQqbFYB9NS5loFQhqLRZeX8gBLA2ks2uzJx/GStlCwxTEnMsedHgqy2CWE+BMCBVhskUJUwqBjizVSiFI4RN8LqPy80g/WFHv3+pzLNO45jWjKU9wb4bAj11zGvXt5MejVYt7y89jvaYSZiDSP/YW83Ks1f4uIESsj+kBGRBIvXJWiptHV4jv4ckQ/au49gsY2/tfVaEx1w9tdlr9Hy3Kbn+m9rvFYjAANwPxu4OhEivPuQX+SM5Pu3clN8Ph00HXPTLr94qmG8Zo+7NTGX2JQCulMYxx23K/+/kLYN2FzRC9gQko1SIwDD6z2Du667aFyExKWPzKKN+8uaeoHuMInieXw7n9AXbVGK4CzcuiwWJiSANyVbVn2wgVAmoXUqcky25iQJPAVFG8N4+iffzdM4pDZ/6fZAAAAAElFTkSuQmCC",
+                            "horizontalAlignment": "center"
+                        }
+                    ],
+                    "spacing": "none",
+                    "separation": "none"
+                },
+                {
+                    "type": "Container",
+                    "height": "stretch",
+                    "verticalContentAlignment": "bottom",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "backgroundImage": {
+                                "type": "BackgroundImage",
+                                "mode": "stretch",
+                                "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiqAcAAIgAgoGu+rEAAAAASUVORK5CYII="
+                            },
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "YouTube · 03:36 · 526,326,000+ 浏览人数",
+                                    "maxLines": 1
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "weight": "bolder",
+                                    "text": "Lady Gaga - Poker Face",
+                                    "maxLines": 1
+                                }
+                            ],
+                            "style": "emphasis"
+                        }
+                    ],
+                    "spacing": "none",
+                    "separation": "none"
+                }
+            ],
+            "selectAction": {
+                "type": "Action.OpenUrl",
+                "url": "https://www.bing.com/videos/search?q=youtube%20video&view=detail&mid=BAC845D123133E3C3642BAC845D123133E3C3642",
+                "title": "Open In Bing"
+            }
+        }
+    ],
+    "-ms-attribution": {
+        "text": "Bing",
+        "icon": "https://www.bing.com/rms/rms%20answers%20Api%20BingLogo/ic/ef0cff20/d50405d4.png"
+    },
+    "-ms-source": "Bing",
+    "-ms-height": "fixed"
+}

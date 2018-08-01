@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Column } from '../../Components/Containers/Column';
+import { Column } from '../../Abandon/Components/Containers/Column';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ContentFactory } from '../Factories/ContentFactory';
@@ -30,10 +30,10 @@ export class ColumnView extends React.Component {
         }
         const background = element.getBackgroundImageUrl();
         if (background) {
-            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: 'auto', onPress: element.selectAction ? this.onPress : undefined, vSPacing: StyleManager.getInstance().getSpacing(element.spacing), hSpacing: 16 }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: 'auto', onPress: element.selectAction ? this.onPress : undefined, vSPacing: StyleManager.getInstance().getSpacing(element.spacing), hSpacing: 16, style: { minWidth: 25 } }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
         }
         else {
-            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: 'auto', onPress: element.selectAction ? this.onPress : undefined, vSPacing: StyleManager.getInstance().getSpacing(element.spacing), hSpacing: 16 }, this.renderContents()));
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: 'auto', onPress: element.selectAction ? this.onPress : undefined, vSPacing: StyleManager.getInstance().getSpacing(element.spacing), hSpacing: 16, style: { minWidth: 25 } }, this.renderContents()));
         }
     }
 }

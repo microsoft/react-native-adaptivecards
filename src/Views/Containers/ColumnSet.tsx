@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Row } from '../../Components/Containers/Row';
+import { Row } from '../../Abandon/Components/Containers/Row';
 import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ContentFactory } from '../Factories/ContentFactory';

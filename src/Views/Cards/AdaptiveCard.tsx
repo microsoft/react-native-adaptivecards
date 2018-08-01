@@ -4,9 +4,9 @@ import {
     ViewStyle,
 } from 'react-native';
 
-import { ImageBackground } from '../../Components/Basic/ImageBackground';
-import { Column } from '../../Components/Containers/Column';
-import { Row } from '../../Components/Containers/Row';
+import { ImageBackground } from '../../Abandon/Components/Basic/ImageBackground';
+import { Column } from '../../Abandon/Components/Containers/Column';
+import { Row } from '../../Abandon/Components/Containers/Row';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ActionElement, ActionType } from '../../Schema/Abstract/ActionElement';
 import { ContentElement } from '../../Schema/Abstract/ContentElement';
@@ -59,7 +59,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                 height: 1
             },
             shadowRadius: 4,
-            shadowOpacity: 1.0
+            shadowOpacity: 1.0,
         }, this.props.style);
 
         const backgroundImage = this.props.element.getBackgroundImageUrl();
@@ -76,7 +76,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                     hIndex={0}
                 >
                     <View
-                        style={{ flex: 1, padding: 10 }}
+                        style={{ flex: 1, padding: 0 }}
                     >
                         {this.renderBody()}
                         {this.renderActions()}
@@ -90,7 +90,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                     style={[
                         cardStyle,
                         {
-                            padding: 20,
+                            padding: 12,
                         }
                     ]}
                 >

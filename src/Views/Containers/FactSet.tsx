@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Column } from '../../Components/Containers/Column';
+import { Column } from '../../Abandon/Components/Containers/Column';
 import { FactSetElement } from '../../Schema/Containers/FactSet';
 import { StyleManager } from '../../Styles/StyleManager';
 import { IElementViewProps } from '../Shared/BaseProps';

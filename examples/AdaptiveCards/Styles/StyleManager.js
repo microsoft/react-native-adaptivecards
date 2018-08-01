@@ -95,6 +95,22 @@ export class StyleManager {
         }
         return result;
     }
+    getFontSize(size) {
+        if (this.hostConfig) {
+            return StyleTransformer.transformFontSize(size, this.hostConfig);
+        }
+        else {
+            return StyleTransformer.transformFontSize(size, HostConfigManager.getInstance().getDefaultConfig());
+        }
+    }
+    getFontWeight(weight) {
+        if (this.hostConfig) {
+            return StyleTransformer.transformFontWeight(weight, this.hostConfig);
+        }
+        else {
+            return StyleTransformer.transformFontWeight(weight, HostConfigManager.getInstance().getDefaultConfig());
+        }
+    }
     getColor(color, subtle, theme) {
         if (this.hostConfig) {
             return StyleTransformer.transformColor(color, subtle, theme, this.hostConfig);

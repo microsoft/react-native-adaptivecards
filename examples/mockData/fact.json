@@ -1,0 +1,94 @@
+{
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "height": "stretch",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "2",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "large",
+                            "weight": "bolder",
+                            "text": "Facebook",
+                            "wrap": true,
+                            "maxLines": 2,
+                            "spacing": "none",
+                            "separation": "none",
+                            "textStyle": "display"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "股票价格: FB",
+                            "wrap": true,
+                            "maxLines": 2,
+                            "spacing": "small"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "成立日期: Feb 4, 2004 · Cambridge, MA",
+                            "wrap": true,
+                            "maxLines": 2,
+                            "spacing": "small"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "总部: Menlo Park, CA",
+                            "wrap": true,
+                            "maxLines": 2,
+                            "spacing": "small"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "首席执行官: Mark Zuckerberg (自 2004 起)",
+                            "wrap": true,
+                            "maxLines": 2,
+                            "spacing": "small"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "创始人: Mark Zuckerberg · Chris Hughes · Dustin Moskovitz · Eduardo Saverin · Andrew McCollum",
+                            "wrap": true,
+                            "maxLines": 2,
+                            "spacing": "small"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "子公司: WhatsApp · Instagram · Oculus VR · FriendFeed · Gowalla · TheFind.com · PrivateCore · WaveGroup Sound · ConnectU · Drop.io · Face.com · Tagtile · Atlas Solutions · Parakey · Snaptu · tbh · Jibbigo · Parse · Facebook Watch · History of Facebook · Lightbox.com · Spool · Onavo · Caffeinatedmind · Octazen · Quickfire Networks · Wit.ai · LiveRail · Hot Studio · MailRank · Chai Labs · osmeta · Infiniled · Faciometrics · ProtoGeo Oy · Monoidics · Sofa · Two Big Ears · Pebbles · Hot Potato · Glancee · Strobe · Acrylic Software · SportStream · Little Eye Labs · Ascenta · Threadsy · Karma · Surreal Vision · MSQRD · Rel8tion · Nextstop · Beluga · facebook.com domain name · Branch · DayTum · Push Pop Press · Friend.ly · ShareGrove · Spaceport · RecRec · Ozlo · CrowdTangle · Friendster patents · Endaga · Confirm · Nascent Objects",
+                            "wrap": true,
+                            "maxLines": 2,
+                            "spacing": "small"
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": "1",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "url": "https://www.bing.com/th?id=A14e5f895f295dc324f30352c6b259ece",
+                            "altText": ""
+                        }
+                    ],
+                    "spacing": "padding"
+                }
+            ],
+            "selectAction": {
+                "type": "Action.OpenUrl",
+                "url": "https://www.bing.com/entityexplore?q=Facebook&filters=sid:%224bc8f781-7083-d1a0-f781-9466e0eb62e7%22&elv=AXXfrEiqqD9r3GuelwApulrd312*DgvzdD57S2PrjlS57mI5hFTESUcq1hnfMyWi5GL90X92E3Kjb3Yik!o8A38slWUuYHAGDi9zJUkHQeEN",
+                "title": "Open In Bing"
+            }
+        }
+    ],
+    "-ms-attribution": {
+        "text": "Bing",
+        "icon": "https://www.bing.com/rms/rms%20answers%20Api%20BingLogo/ic/ef0cff20/d50405d4.png"
+    },
+    "-ms-source": "Bing",
+    "-ms-height": "fixed"
+}

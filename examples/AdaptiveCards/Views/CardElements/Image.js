@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ImageBlock } from '../../Components/Basic/ImageBlock';
+import { ImageBlock } from '../../Abandon/Components/Basic/ImageBlock';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { StyleManager } from '../../Styles/StyleManager';
 export class ImageView extends React.Component {
@@ -44,7 +44,7 @@ export class ImageView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(ImageBlock, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, relativeWidth: false, url: element.url, alt: element.altText, flexDirection: 'row', alignSelf: this.style.align, alignItems: this.style.align, alignContent: 'center', justifyContent: 'center', size: this.style.size, vSpacing: this.style.spacing || this.props.vSpacing, hSpacing: this.props.hSpacing, containerWidth: this.props.containerWidth, containerHeight: this.props.containerHeight, maxWidth: this.props.maxWidth, maxHeight: this.props.maxHeight, fitAxis: this.props.fitAxis, imgStyle: this.borderRadius, onPress: element.selectAction ? this.onPress : undefined, onImageSize: this.onImageSize }));
+        return (React.createElement(ImageBlock, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, relativeWidth: false, url: element.url, alt: element.altText, flexDirection: 'column', alignSelf: this.style.align, alignItems: this.style.align, alignContent: 'center', justifyContent: 'center', size: this.style.size, vSpacing: this.style.spacing || this.props.vSpacing, hSpacing: this.props.hSpacing, containerWidth: this.props.containerWidth, containerHeight: this.props.containerHeight, maxWidth: this.props.maxWidth, maxHeight: this.props.maxHeight, fitAxis: this.props.fitAxis, imgStyle: this.borderRadius, onPress: element.selectAction ? this.onPress : undefined, onImageSize: this.onImageSize }));
     }
     get borderRadius() {
         const { element } = this.props;

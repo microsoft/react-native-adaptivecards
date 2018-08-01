@@ -20,6 +20,8 @@ var emailSent = require('./skills/email_sent.json');
 var sendText = require('./skills/send_text.json');
 var sendTextContact = require('./skills/send_text_contact_disam.json');
 var peaplePicker = require('./peoplepicker.json');
+var showVideo = require('./showVideo.json');
+var fact = require('./fact.json');
 exports["default"] = {
     adaptiveUpdate: adaptiveUpdate,
     flightItinerary: flightItinerary,
@@ -40,5 +42,7 @@ exports["default"] = {
     emailSent: emailSent,
     sendText: sendText,
     sendTextContact: sendTextContact,
-    peaplePicker: peaplePicker
+    peaplePicker: peaplePicker,
+    showVideo: showVideo,
+    fact: fact,
 };

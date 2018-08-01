@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Column } from '../../Components/Containers/Column';
-import { Row } from '../../Components/Containers/Row';
+import { Column } from '../../Abandon/Components/Containers/Column';
+import { Row } from '../../Abandon/Components/Containers/Row';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ContainerElement } from '../../Schema/Containers/Container';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -24,6 +24,8 @@ export class ContainerView extends React.Component<IProps> {
 
         const background = element.getBackgroundImageUrl();
 
+        let backgroundColor = StyleManager.getInstance().getBackgroundColor(element.style);
+
         if (background) {
             return (
                 <Row
@@ -33,7 +35,10 @@ export class ContainerView extends React.Component<IProps> {
                     width='stretch'
                     height='auto'
                     onPress={element.selectAction ? this.onPress : undefined}
-                    style={{paddingVertical: 4}}
+                    style={{
+                        paddingVertical: 4,
+                        backgroundColor: backgroundColor,
+                    }}
                 >
                     <Column
                         vIndex={0}
@@ -55,7 +60,10 @@ export class ContainerView extends React.Component<IProps> {
                     width='stretch'
                     height='auto'
                     onPress={element.selectAction ? this.onPress : undefined}
-                    style={{paddingVertical: 4}}
+                    style={{
+                        paddingVertical: 4,
+                        backgroundColor: backgroundColor,
+                    }}
                 >
                     <Column
                         vIndex={0}
