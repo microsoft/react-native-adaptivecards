@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, } from 'react-native';
+import { Platform, StyleSheet, View, } from 'react-native';
 import { ImageBackground } from '../../Abandon/Components/Basic/ImageBackground';
 import { Column } from '../../Abandon/Components/Containers/Column';
 import { Row } from '../../Abandon/Components/Containers/Row';
@@ -36,20 +36,19 @@ export class AdaptiveCardView extends React.Component {
         if (!this.props.element.isValid) {
             return undefined;
         }
-        const cardStyle = Object.assign({
-            flex: 1,
-            backgroundColor: 'white',
-            borderWidth: 0.5,
-            borderColor: '#00000019',
-            borderRadius: 4,
-            shadowColor: '#00000026',
-            shadowOffset: {
-                width: 0,
-                height: 1
+        const cardStyle = Object.assign(Object.assign({ flex: 1, backgroundColor: '#fff', borderRadius: 4 }, Platform.select({
+            ios: {
+                borderWidth: StyleSheet.hairlineWidth,
+                borderColor: 'rgba(0, 0, 0, .1)',
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 0 },
+                shadowRadius: 3,
+                shadowOpacity: .08,
             },
-            shadowRadius: 4,
-            shadowOpacity: 1.0,
-        }, this.props.style);
+            android: {
+                elevation: 2,
+            }
+        })), this.props.style);
         const backgroundImage = this.props.element.getBackgroundImageUrl();
         if (backgroundImage) {
             return (React.createElement(ImageBackground, { containerStyle: cardStyle, imageStyle: {
