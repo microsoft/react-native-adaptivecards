@@ -23,6 +23,13 @@ export class OpenUrlActionView extends React.Component {
             return null;
         }
         const hostStyle = StyleManager.getInstance().getActionStyle();
-        return (React.createElement(Button, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, vSpacing: hostStyle.marginTop, hSpacing: hostStyle.marginLeft, title: this.props.element.title, onPress: this.onPress, color: 'white', backgroundColor: '#277BDF', borderColor: '#277BDF', borderRadius: 4, textAlign: 'center' }));
+        return (React.createElement(Button, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, vSpacing: hostStyle.marginTop, hSpacing: hostStyle.marginLeft, title: this.title, onPress: this.onPress, color: 'white', backgroundColor: '#277BDF', borderColor: '#277BDF', borderRadius: 4, textAlign: 'center' }));
+    }
+    get title() {
+        const { element } = this.props;
+        if (!element || !element.isValid) {
+            return '';
+        }
+        return this.props.element.title ? this.props.element.title : '';
     }
 }

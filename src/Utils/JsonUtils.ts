@@ -10,18 +10,22 @@ export class JsonUtils {
         }
 
         if (requiredProperties) {
-            let message = '';
-            let isValid = requiredProperties.every((property) => {
-                let validate = JsonUtils.isValidValue(json[property]);
-                if (!validate) {
-                    message = `${property} is required`;
+            return requiredProperties.reduce((prev, current) => {
+                if (prev.isValid) {
+                    prev.isValid = JsonUtils.isValidValue(json[current]);
+                    if (!prev.isValid) {
+                        // As lots of the skill team is violate the rule that title is required in all actions,
+                        // we apply a temp work around in client side to unblock click containers.
+                        /*****Fix starts here*****/
+                        if (current === 'title') {
+                            prev.isValid = true;
+                        }
+                        /*****Fix ends here*****/
+                        prev.message = `${current} is required`;
+                    }
                 }
-                return validate;
-            });
-            return {
-                message: message,
-                isValid: isValid,
-            };
+                return prev;
+            }, { isValid: true, message: '', });
         }
         return {
             isValid: true,

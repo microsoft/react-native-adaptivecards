@@ -31,7 +31,7 @@ export class SubmitActionView extends React.Component<IProps> {
                 hIndex={this.props.hIndex}
                 vSpacing={hostStyle.marginTop}
                 hSpacing={hostStyle.marginLeft}
-                title={this.props.element.title}
+                title={this.title}
                 onPress={this.onPress}
                 color='white'
                 backgroundColor='#277BDF'
@@ -52,4 +52,18 @@ export class SubmitActionView extends React.Component<IProps> {
             }
         }
     }
+
+    // As lots of the skill team is violate the rule that title is required in all actions,
+    // we apply a temp work around in client side to unblock click containers.
+    /*****Fix starts here*****/
+    private get title() {
+        const { element } = this.props;
+
+        if (!element || !element.isValid) {
+            return '';
+        }
+
+        return this.props.element.title ? this.props.element.title : '';
+    }
+    /*****Fix ends here*****/
 }
