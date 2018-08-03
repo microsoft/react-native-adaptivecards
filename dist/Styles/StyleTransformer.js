@@ -335,9 +335,9 @@ export class StyleTransformer {
                 case 'stretch':
                     return 'stretch';
                 default:
-                    return 'auto';
+                    return 'stretch';
             }
         }
-        return 'auto';
+        return 'stretch';
     }
 }

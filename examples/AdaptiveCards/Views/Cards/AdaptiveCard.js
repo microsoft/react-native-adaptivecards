@@ -34,7 +34,7 @@ export class AdaptiveCardView extends React.Component {
     }
     render() {
         if (!this.props.element.isValid) {
-            return undefined;
+            return null;
         }
         const cardStyle = Object.assign(Object.assign({ flex: 1, backgroundColor: '#fff', borderRadius: 4 }, Platform.select({
             ios: {

@@ -39,7 +39,9 @@ export default class App extends React.Component {
                 contentContainerStyle={{
                     padding: 10,
                     backgroundColor: 'white',
-				}}>
+                }}>
+                <AdaptiveCards adaptiveCard={mockData.vocabulary} />
+                {this.renderGap()}
 				<AdaptiveCards adaptiveCard={mockData.fact} />
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.showVideo} />
@@ -62,7 +64,7 @@ export default class App extends React.Component {
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.peaplePicker} />
+                <AdaptiveCards adaptiveCard={mockData.peoplePicker} />
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.emailSent} />
                 {this.renderGap()}

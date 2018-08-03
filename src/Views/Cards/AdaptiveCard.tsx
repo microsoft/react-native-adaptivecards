@@ -46,7 +46,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
     public render(): JSX.Element {
         if (!this.props.element.isValid) {
             // TODO: render error card
-            return undefined;
+            return null;
         }
 
         const cardStyle: ViewStyle = Object.assign({

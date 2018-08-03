@@ -19,9 +19,11 @@ var searchEmail = require('./skills/search_email.json');
 var emailSent = require('./skills/email_sent.json');
 var sendText = require('./skills/send_text.json');
 var sendTextContact = require('./skills/send_text_contact_disam.json');
-var peaplePicker = require('./peoplepicker.json');
+var peoplePicker = require('./peoplepicker.json');
 var showVideo = require('./showVideo.json');
 var fact = require('./fact.json');
+var vocabulary = require('./vocabulary.json');
+
 exports["default"] = {
     adaptiveUpdate: adaptiveUpdate,
     flightItinerary: flightItinerary,
@@ -42,7 +44,8 @@ exports["default"] = {
     emailSent: emailSent,
     sendText: sendText,
     sendTextContact: sendTextContact,
-    peaplePicker: peaplePicker,
+    peoplePicker: peoplePicker,
     showVideo: showVideo,
     fact: fact,
+    vocabulary: vocabulary,
 };
