@@ -18,6 +18,7 @@ import { AdaptiveCardView } from './Cards/AdaptiveCard';
 
 export interface IProps {
     adaptiveCard: any;
+    style?: any;
     onSubmit?: (data: any) => void;
     onOpenUrl?: (url: string) => void;
     onCallback?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
@@ -96,6 +97,7 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
                     vIndex={0}
                     hIndex={0}
                     element={this.state.rootCard}
+                    style={this.props.style}
                 />
             </View>
         );

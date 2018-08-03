@@ -112,6 +112,6 @@ export class CardRootView extends React.PureComponent {
     }
     render() {
         return (React.createElement(View, { style: { flex: 1 } },
-            React.createElement(AdaptiveCardView, { vIndex: 0, hIndex: 0, element: this.state.rootCard })));
+            React.createElement(AdaptiveCardView, { vIndex: 0, hIndex: 0, element: this.state.rootCard, style: this.props.style })));
     }
 }

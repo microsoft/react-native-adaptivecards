@@ -171,14 +171,18 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
 
     private renderSubCard(): JSX.Element {
         if (this.state.subCard) {
+            const style = this.props.style ? this.props.style : {};
             return (
                 <AdaptiveCardView
                     vIndex={2}
                     hIndex={0}
                     element={this.state.subCard}
-                    style={{
-                        marginTop: this.showCardStyle.margin,
-                    }}
+                    style={
+                        {
+                            marginTop: this.showCardStyle.margin,
+                            ...style
+                        }
+                    }
                     theme={this.showCardStyle.theme}
                 />
             );

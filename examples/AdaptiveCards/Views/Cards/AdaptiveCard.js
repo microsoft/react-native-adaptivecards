@@ -91,9 +91,8 @@ export class AdaptiveCardView extends React.Component {
     }
     renderSubCard() {
         if (this.state.subCard) {
-            return (React.createElement(AdaptiveCardView, { vIndex: 2, hIndex: 0, element: this.state.subCard, style: {
-                    marginTop: this.showCardStyle.margin,
-                }, theme: this.showCardStyle.theme }));
+            const style = this.props.style ? this.props.style : {};
+            return (React.createElement(AdaptiveCardView, { vIndex: 2, hIndex: 0, element: this.state.subCard, style: Object.assign({ marginTop: this.showCardStyle.margin }, style), theme: this.showCardStyle.theme }));
         }
         return undefined;
     }

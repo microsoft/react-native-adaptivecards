@@ -3,6 +3,7 @@ import { ISVGRenderer } from './HostRenderer/HostRenderer';
 
 interface AdaptiveCardsProps {
     adaptiveCard: any;
+    style?: any;
     onSubmit?: (data: any) => void;
     onOpenUrl?: (url: string) => void;
     onCallback?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
