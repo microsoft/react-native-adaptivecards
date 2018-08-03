@@ -40,6 +40,8 @@ export default class App extends React.Component {
                     padding: 10,
                     backgroundColor: 'white',
                 }}>
+                <AdaptiveCards adaptiveCard={mockData.dinning} />
+                {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.vocabulary} />
                 {this.renderGap()}
 				<AdaptiveCards adaptiveCard={mockData.fact} />

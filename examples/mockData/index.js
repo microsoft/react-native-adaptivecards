@@ -23,6 +23,7 @@ var peoplePicker = require('./peoplepicker.json');
 var showVideo = require('./showVideo.json');
 var fact = require('./fact.json');
 var vocabulary = require('./vocabulary.json');
+var dinning = require('./dinning.json');
 
 exports["default"] = {
     adaptiveUpdate: adaptiveUpdate,
@@ -48,4 +49,5 @@ exports["default"] = {
     showVideo: showVideo,
     fact: fact,
     vocabulary: vocabulary,
+    dinning: dinning,
 };

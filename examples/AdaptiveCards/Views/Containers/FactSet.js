@@ -18,6 +18,6 @@ export class FactSetView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', height: 'auto', vSPacing: StyleManager.getInstance().getSpacing(element.spacing) }, this.renderFacts()));
+        return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', height: 'auto', vSpacing: StyleManager.getInstance().getSpacing(element.spacing) }, this.renderFacts()));
     }
 }

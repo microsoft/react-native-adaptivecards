@@ -61,9 +61,11 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                     shadowOffset: { width: 0, height: 0 },
                     shadowRadius: 3,
                     shadowOpacity: .08,
+                    overflow: 'hidden',
                 } as any,
                 android: {
                     elevation: 2,
+                    overflow: 'hidden',
                 } as any
             }),
         }, this.props.style);

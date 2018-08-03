@@ -89,7 +89,7 @@ export class PeoplePickerView extends React.Component {
     }
     renderModal() {
         return (React.createElement(ModalBox, { show: this.state.showModal },
-            React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, vSPacing: 0, width: 'stretch', height: 'stretch' },
+            React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, vSpacing: 0, width: 'stretch', height: 'stretch' },
                 this.renderModalHeader(),
                 this.renderInputBox(),
                 this.renderAutoSuggestion())));

@@ -44,9 +44,11 @@ export class AdaptiveCardView extends React.Component {
                 shadowOffset: { width: 0, height: 0 },
                 shadowRadius: 3,
                 shadowOpacity: .08,
+                overflow: 'hidden',
             },
             android: {
                 elevation: 2,
+                overflow: 'hidden',
             }
         })), this.props.style);
         const backgroundImage = this.props.element.getBackgroundImageUrl();

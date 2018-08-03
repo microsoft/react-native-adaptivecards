@@ -32,9 +32,8 @@ export class ColumnView extends React.Component<IProps> {
                     width={StyleManager.getInstance().getColumnWidth(element)}
                     height='auto'
                     onPress={element.selectAction ? this.onPress : undefined}
-                    vSPacing={StyleManager.getInstance().getSpacing(element.spacing)}
-                    hSpacing={16}
-                    style={{minWidth: 25}}
+                    hSpacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    style={this.minWidth}
                 >
                     {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
                 </Column>
@@ -46,10 +45,8 @@ export class ColumnView extends React.Component<IProps> {
                     hIndex={this.props.hIndex}
                     width={StyleManager.getInstance().getColumnWidth(element)}
                     height='auto'
-                    onPress={element.selectAction ? this.onPress : undefined}
-                    vSPacing={StyleManager.getInstance().getSpacing(element.spacing)}
-                    hSpacing={16}
-                    style={{minWidth: 25}}
+                    hSpacing={StyleManager.getInstance().getSpacing(element.spacing)}
+                    style={this.minWidth}
                 >
                     {this.renderContents()}
                 </Column>
@@ -74,6 +71,16 @@ export class ColumnView extends React.Component<IProps> {
         let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
         if (callback) {
             callback();
+        }
+    }
+
+    private get minWidth() {
+        const { element } = this.props;
+
+        if (!element || !element.isValid || !element.items || element.items.length === 0) {
+            return { minWidth: 3 };
+        } else {
+            return {};
         }
     }
 }

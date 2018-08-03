@@ -85,7 +85,7 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                 <Column
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
-                    vSPacing={0}
+                    vSpacing={0}
                     width='stretch'
                     height='stretch'
                 >

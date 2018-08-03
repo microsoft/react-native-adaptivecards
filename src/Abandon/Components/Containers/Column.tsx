@@ -6,7 +6,7 @@ interface IProps {
     hIndex: number;
     height: 'auto' | 'stretch' | number;
     width: 'auto' | 'stretch' | number;
-    vSPacing?: number;
+    vSpacing?: number;
     hSpacing?: number;
     style?: any;
     onPress?: () => void;
@@ -30,7 +30,7 @@ export class Column extends React.Component<IProps> {
                 vIndex={this.props.vIndex}
                 hIndex={this.props.hIndex}
                 style={[this.props.style, this.alignSelf]}
-                vSpacing={this.props.vSPacing}
+                vSpacing={this.props.vSpacing}
                 hSpacing={this.props.hSpacing}
                 onPress={this.props.onPress}
             >

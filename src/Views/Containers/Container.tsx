@@ -35,17 +35,19 @@ export class ContainerView extends React.Component<IProps> {
                     width='stretch'
                     height='auto'
                     onPress={element.selectAction ? this.onPress : undefined}
-                    style={{
-                        paddingVertical: 4,
-                        backgroundColor: backgroundColor,
-                    }}
+                    style={[
+                        {
+                            backgroundColor: backgroundColor,
+                        },
+                        this.minHeight
+                    ]}
                 >
                     <Column
                         vIndex={0}
                         hIndex={0}
                         width='stretch'
                         height='auto'
-                        vSPacing={0}
+                        vSpacing={0}
                     >
                         {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
                     </Column>
@@ -60,17 +62,19 @@ export class ContainerView extends React.Component<IProps> {
                     width='stretch'
                     height='auto'
                     onPress={element.selectAction ? this.onPress : undefined}
-                    style={{
-                        paddingVertical: 4,
-                        backgroundColor: backgroundColor,
-                    }}
+                    style={[
+                        {
+                            backgroundColor: backgroundColor,
+                        },
+                        this.minHeight
+                    ]}
                 >
                     <Column
                         vIndex={0}
                         hIndex={0}
                         width='stretch'
                         height='auto'
-                        vSPacing={0}
+                        vSpacing={0}
                     >
                         {this.renderContents()}
                     </Column>
@@ -96,6 +100,16 @@ export class ContainerView extends React.Component<IProps> {
         let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
         if (callback) {
             callback();
+        }
+    }
+
+    private get minHeight() {
+        const { element } = this.props;
+
+        if (!element || !element.isValid || !element.items || element.items.length === 0) {
+            return { minHeight: 3 };
+        } else {
+            return {};
         }
     }
 }
