@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Image, Text, View } from 'react-native';
+import { Image, } from 'react-native';
 import { HostContext } from '../../../Contexts/HostContext';
 import { HostRenderer } from '../../../HostRenderer/HostRenderer';
 import { StyleManager } from '../../../Styles/StyleManager';
@@ -10,22 +10,25 @@ export class ImageBlock extends React.Component {
         super(props);
         this.renderPlaceholder = () => {
             if (!this.state.loaded) {
-                return (React.createElement(View, { style: [
-                        {
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }
-                    ] },
-                    React.createElement(Text, { style: {
-                            fontSize: 32,
-                            color: 'rgba(0, 0, 0, 0.5)',
-                            textAlign: 'center'
-                        } }, '\uE601')));
+                const source = this.props.mode === 'avatar' ?
+                    require('../../../Assets/Images/Placeholders/avatar_default.png') :
+                    require('../../../Assets/Images/Placeholders/image_default.png');
+                if (typeof (this.props.size) === 'number') {
+                    return (React.createElement(Image, { accessible: !!this.props.alt, accessibilityLabel: this.props.alt, source: source, style: [
+                            {
+                                width: this.props.size,
+                                height: this.props.size
+                            },
+                            this.props.imgStyle
+                        ] }));
+                }
             }
             return undefined;
         };
         this.fetchImageSize = () => {
-            ImageUtils.fetchSize(this.props.url, this.onImageSize, this.onImageSizeError);
+            if (this.props.source === 'external') {
+                ImageUtils.fetchSize(this.props.url, this.onImageSize, this.onImageSizeError);
+            }
         };
         this.onLayoutChange = () => {
             this.fetchImageSize();
@@ -38,10 +41,12 @@ export class ImageBlock extends React.Component {
             }
         };
         this.onImageSize = (width, height) => {
-            console.log(width);
-            console.log(height);
             let size = ImageUtils.calcSize({ width: width, height: height }, { width: this.props.containerWidth, height: this.props.containerHeight }, this.props.size, this.props.fitAxis);
-            this.setState(size);
+            this.setState({
+                loaded: true,
+                width: size.width,
+                height: size.height
+            });
         };
         this.onImageSizeError = (err) => {
             console.log(err);
@@ -50,19 +55,13 @@ export class ImageBlock extends React.Component {
                 loaded: false
             });
         };
-        this.onImageLoad = () => {
-            this.setState({
-                loaded: true
-            });
-            this.fetchImageSize();
-        };
         this.onImageError = () => {
             this.setState({
                 loaded: false
             });
         };
         this.state = {
-            loaded: true,
+            loaded: false,
             width: undefined,
             height: undefined,
         };
@@ -97,10 +96,13 @@ export class ImageBlock extends React.Component {
         }
     }
     renderImage() {
-        return (React.createElement(Image, { accessible: !!this.props.alt, accessibilityLabel: this.props.alt, source: { uri: this.props.url }, style: [
-                this.size,
-                this.props.imgStyle
-            ], onLoad: this.onImageLoad, onError: this.onImageError, onLayout: this.onImageSizeUpdate }));
+        if (this.props.source === 'external') {
+            return (React.createElement(Image, { accessible: !!this.props.alt, accessibilityLabel: this.props.alt, source: { uri: this.props.url }, style: [
+                    this.size,
+                    this.props.imgStyle
+                ], onError: this.onImageError, onLayout: this.onImageSizeUpdate }));
+        }
+        return undefined;
     }
     get size() {
         return ImageUtils.fitSize(this.state, { width: this.props.maxWidth, height: this.props.maxHeight }, { width: this.props.maxWidth, height: this.props.maxHeight }, this.props.fitAxis);

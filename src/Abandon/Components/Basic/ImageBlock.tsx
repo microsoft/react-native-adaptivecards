@@ -2,8 +2,6 @@ import * as React from 'react';
 import {
     Image,
     LayoutChangeEvent,
-    Text,
-    View
 } from 'react-native';
 import { HostContext } from '../../../Contexts/HostContext';
 import { HostRenderer, ISVGRenderer } from '../../../HostRenderer/HostRenderer';
@@ -22,6 +20,8 @@ interface IProps extends IFlexProps {
     onPress?: () => void;
     boxStyle?: any;
     imgStyle?: any;
+    source: 'internal' | 'external';
+    mode: 'default' | 'avatar';
 }
 
 interface IState {
@@ -35,7 +35,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
         super(props);
 
         this.state = {
-            loaded: true,
+            loaded: false,
             width: undefined,
             height: undefined,
         };
@@ -50,7 +50,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
             size,
         } = this.props;
 
-        if (url && (url.startsWith('data:image/svg+xml') ||  url.endsWith('.svg'))) {
+        if (url && (url.startsWith('data:image/svg+xml') || url.endsWith('.svg'))) {
             let svgRenderer: ISVGRenderer = HostContext.getInstance().getHostRenderer(HostRenderer.SVG);
             let svgSize = typeof size === 'number' ?
                 size : StyleManager.getInstance().getImageSize('large') as number;
@@ -96,54 +96,56 @@ export class ImageBlock extends React.Component<IProps, IState> {
 
     private renderPlaceholder = () => {
         if (!this.state.loaded) {
-            return (
-                <View
-                    style={[
-                        {
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }
-                    ]}
-                >
-                    <Text
-                        style={{
-                            fontSize: 32,
-                            color: 'rgba(0, 0, 0, 0.5)',
-                            textAlign: 'center'
-                        }}
-                    >
-                        {'\uE601'}
-                    </Text>
-                </View>
-            );
+            const source = this.props.mode === 'avatar' ?
+                require('../../../Assets/Images/Placeholders/avatar_default.png') :
+                require('../../../Assets/Images/Placeholders/image_default.png');
+            if (typeof (this.props.size) === 'number') {
+                return (
+                    <Image
+                        accessible={!!this.props.alt}
+                        accessibilityLabel={this.props.alt}
+                        source={source}
+                        style={[
+                            {
+                                width: this.props.size,
+                                height: this.props.size
+                            },
+                            this.props.imgStyle
+                        ]}
+                    />
+                );
+            }
         }
         return undefined;
     }
 
     private renderImage() {
-        return (
-            <Image
-                accessible={!!this.props.alt}
-                accessibilityLabel={this.props.alt}
-                source={{ uri: this.props.url }}
-                style={[
-                    this.size,
-                    this.props.imgStyle
-                ]}
-                onLoad={this.onImageLoad}
-                onError={this.onImageError}
-                onLayout={this.onImageSizeUpdate}
-            >
-            </Image>
-        );
+        if (this.props.source === 'external') {
+            return (
+                <Image
+                    accessible={!!this.props.alt}
+                    accessibilityLabel={this.props.alt}
+                    source={{ uri: this.props.url }}
+                    style={[
+                        this.size,
+                        this.props.imgStyle
+                    ]}
+                    onError={this.onImageError}
+                    onLayout={this.onImageSizeUpdate}
+                />
+            );
+        }
+        return undefined;
     }
 
     private fetchImageSize = () => {
-        ImageUtils.fetchSize(
-            this.props.url,
-            this.onImageSize,
-            this.onImageSizeError
-        );
+        if (this.props.source === 'external') {
+            ImageUtils.fetchSize(
+                this.props.url,
+                this.onImageSize,
+                this.onImageSizeError
+            );
+        }
     }
 
     private onLayoutChange = () => {
@@ -160,15 +162,17 @@ export class ImageBlock extends React.Component<IProps, IState> {
     }
 
     private onImageSize = (width: number, height: number) => {
-        console.log(width);
-        console.log(height);
         let size = ImageUtils.calcSize(
             { width: width, height: height },
             { width: this.props.containerWidth, height: this.props.containerHeight },
             this.props.size,
             this.props.fitAxis
         );
-        this.setState(size);
+        this.setState({
+            loaded: true,
+            width: size.width,
+            height: size.height
+        });
     }
 
     private onImageSizeError = (err: any) => {
@@ -177,13 +181,6 @@ export class ImageBlock extends React.Component<IProps, IState> {
         this.setState({
             loaded: false
         });
-    }
-
-    private onImageLoad = () => {
-        this.setState({
-            loaded: true
-        });
-        this.fetchImageSize();
     }
 
     private onImageError = () => {

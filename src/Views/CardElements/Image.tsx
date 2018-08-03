@@ -77,10 +77,32 @@ export class ImageView extends React.Component<IProps, IState> {
                 maxHeight={this.props.maxHeight}
                 fitAxis={this.props.fitAxis}
                 imgStyle={this.borderRadius}
+                source={this.source}
+                mode={this.mode}
                 onPress={element.selectAction ? this.onPress : undefined}
                 onImageSize={this.onImageSize}
             />
         );
+    }
+
+    private get mode() {
+        const { element } = this.props;
+
+        if (element && element.isValid && element.url.endsWith('avatar')) {
+            return 'avatar';
+        } else {
+            return 'default';
+        }
+    }
+
+    private get source() {
+        const { element } = this.props;
+
+        if (element && element.isValid && element.url.startsWith('device://')) {
+            return 'internal';
+        } else {
+            return 'external';
+        }
     }
 
     private get borderRadius() {
