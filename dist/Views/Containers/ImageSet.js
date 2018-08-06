@@ -40,7 +40,7 @@ export class ImageSetView extends React.Component {
                 containerWidth: containerWidth,
                 containerHeight: containerHeight,
             });
-            ImageUtils.fetchSetSize(element.images.map(img => img.url), { width: containerWidth, height: containerHeight }, this.style.imageSize, this.onImageSize, (error) => {
+            ImageUtils.fetchSetSize(element.images.map(img => img.url), { width: containerWidth, height: this.imageSize }, this.style.imageSize, this.onImageSize, (error) => {
                 console.log(error);
             });
         }
@@ -51,5 +51,13 @@ export class ImageSetView extends React.Component {
             return null;
         }
         return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, minHeight: this.state.maxHeight + this.style.spacing }));
+    }
+    get imageSize() {
+        if (this.style.imageSize) {
+            if (typeof this.style.imageSize === 'number') {
+                return this.style.imageSize;
+            }
+        }
+        return 0;
     }
 }

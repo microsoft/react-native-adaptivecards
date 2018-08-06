@@ -49,7 +49,7 @@ export class ImageSetView extends React.Component<IProps, IState> {
             });
             ImageUtils.fetchSetSize(
                 element.images.map(img => img.url),
-                { width: containerWidth, height: containerHeight },
+                { width: containerWidth, height: this.imageSize },
                 this.style.imageSize,
                 this.onImageSize,
                 (error: any) => {
@@ -107,5 +107,14 @@ export class ImageSetView extends React.Component<IProps, IState> {
         this.setState({
             maxHeight: height
         });
+    }
+
+    private get imageSize() {
+        if (this.style.imageSize) {
+            if (typeof this.style.imageSize === 'number') {
+                return this.style.imageSize;
+            }
+        }
+        return 0;
     }
 }

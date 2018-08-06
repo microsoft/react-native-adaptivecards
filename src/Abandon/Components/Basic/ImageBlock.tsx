@@ -165,8 +165,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
         let size = ImageUtils.calcSize(
             { width: width, height: height },
             { width: this.props.containerWidth, height: this.props.containerHeight },
-            this.props.size,
-            this.props.fitAxis
+            this.props.size
         );
         this.setState({
             loaded: true,

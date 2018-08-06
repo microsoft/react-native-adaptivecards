@@ -11,7 +11,7 @@ export class ImageUtils {
         Promise.all(urls.map(ImageUtils.fetchSizeAsync)).then((dimensions) => {
             let result = dimensions.reduce(
                 (prev, current) => {
-                    let fitSize = ImageUtils.calcSize(current, contract, sizeConfig, 'h');
+                    let fitSize = ImageUtils.calcSize(current, contract, sizeConfig);
                     if (fitSize.width === 0 || fitSize.height === 0) {
                         return prev;
                     }
@@ -20,12 +20,16 @@ export class ImageUtils {
                         height: fitSize.height,
                     };
                     let ratio = ImageUtils.calcRatio(current);
-                    if (finalSize.width > contract.width) {
-                        finalSize.width = contract.width;
+                    if (contract.height > 0 && finalSize.height > contract.height) {
+                        finalSize.height = contract.height;
                     }
-                    finalSize.height = finalSize.width * ratio;
-                    if (prev.height !== undefined && prev.height !== 0 && finalSize.height > prev.height) {
-                        finalSize.height = prev.height;
+                    if (ratio === 0) {
+                        finalSize.width = finalSize.height;
+                    } else {
+                        finalSize.width = finalSize.height / ratio;
+                    }
+                    if (prev.width !== undefined && prev.width !== 0 && finalSize.width > prev.width) {
+                        finalSize.width = prev.width;
                     }
                     return finalSize;
                 },
@@ -48,19 +52,19 @@ export class ImageUtils {
         );
     }
 
-    public static calcSize(imgSize: Dimension, containerSize: Dimension, sizeConfig: 'auto' | 'stretch' | number, fitAxis: 'h' | 'v') {
+    public static calcSize(imgSize: Dimension, containerSize: Dimension, sizeConfig: 'auto' | 'stretch' | number) {
         if (sizeConfig === 'auto') {
             return ImageUtils.calcAutoSize(imgSize, containerSize);
         } else if (sizeConfig === 'stretch') {
-            return ImageUtils.calcStretchSize(imgSize, containerSize, fitAxis);
+            return ImageUtils.calcStretchSize(imgSize, containerSize);
         } else {
-            return ImageUtils.calcFixSize(imgSize, sizeConfig, fitAxis);
+            return ImageUtils.calcFixSize(imgSize, sizeConfig);
         }
     }
 
-    public static calcFixSize(imgSize: Dimension, fixSize: number, fitAxis: 'h' | 'v') {
+    public static calcFixSize(imgSize: Dimension, fixSize: number) {
         let ratio = ImageUtils.calcRatio(imgSize);
-        if (fitAxis === 'v') {
+        if (ratio < 1) {
             return {
                 height: fixSize,
                 width: ratio > 0 ? fixSize / ratio : fixSize
@@ -73,9 +77,9 @@ export class ImageUtils {
         }
     }
 
-    public static calcStretchSize(imgSize: Dimension, containerSize: Dimension, fitAxis: 'h' | 'v') {
+    public static calcStretchSize(imgSize: Dimension, containerSize: Dimension) {
         let ratio = ImageUtils.calcRatio(imgSize);
-        if (fitAxis === 'v') {
+        if (ratio < 1) {
             if (containerSize.height) {
                 let finalSize = {
                     height: containerSize.height,

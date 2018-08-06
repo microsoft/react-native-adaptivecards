@@ -98,7 +98,8 @@ export class ImageView extends React.Component<IProps, IState> {
     private get source() {
         const { element } = this.props;
 
-        if (element && element.isValid && element.url.startsWith('schema://')) {
+        if (element && element.isValid && 
+            !(element.url.startsWith('http://') || element.url.startsWith('https://') || element.url.startsWith('ftp://'))) {
             return 'internal';
         } else {
             return 'external';

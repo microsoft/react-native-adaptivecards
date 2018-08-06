@@ -16,7 +16,7 @@
         },
         {
             "type": "ImageSet",
-            "imageSize": "medium",
+            "imageSize": "large",
             "images": [
                 {
                     "type": "Image",
@@ -32,11 +32,11 @@
                 },
                 {
                     "type": "Image",
-                    "url": "https://images4.fanpop.com/image/photos/14700000/So-cute-puppies-14749028-1600-1200.jpg"
+                    "url": "http://images4.fanpop.com/image/photos/14700000/So-cute-puppies-14749028-1600-1200.jpg"
                 },
                 {
                     "type": "Image",
-                    "url": "https://images4.fanpop.com/image/photos/22000000/Cute-Puppies-puppies-22040876-1280-800.jpg"
+                    "url": "http://images4.fanpop.com/image/photos/22000000/Cute-Puppies-puppies-22040876-1280-800.jpg"
                 },
                 {
                     "type": "Image",
@@ -48,11 +48,11 @@
                 },
                 {
                     "type": "Image",
-                    "url": "https://cutepuppydog.net/wallpapers/cute-puppies9.jpg"
+                    "url": "http://cutepuppydog.net/wallpapers/cute-puppies9.jpg"
                 },
                 {
                     "type": "Image",
-                    "url": "https://images1.fanpop.com/images/photos/1900000/Puppies-3-dogs-1993812-1024-768.jpg"
+                    "url": "http://images1.fanpop.com/images/photos/1900000/Puppies-3-dogs-1993812-1024-768.jpg"
                 }
             ]
         }

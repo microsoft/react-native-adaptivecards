@@ -41,7 +41,7 @@ export class ImageBlock extends React.Component {
             }
         };
         this.onImageSize = (width, height) => {
-            let size = ImageUtils.calcSize({ width: width, height: height }, { width: this.props.containerWidth, height: this.props.containerHeight }, this.props.size, this.props.fitAxis);
+            let size = ImageUtils.calcSize({ width: width, height: height }, { width: this.props.containerWidth, height: this.props.containerHeight }, this.props.size);
             this.setState({
                 loaded: true,
                 width: size.width,
