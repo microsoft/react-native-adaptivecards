@@ -105,6 +105,6 @@ export class ImageBlock extends React.Component {
         return undefined;
     }
     get size() {
-        return ImageUtils.fitSize(this.state, { width: this.props.maxWidth, height: this.props.maxHeight }, { width: this.props.maxWidth, height: this.props.maxHeight }, this.props.fitAxis);
+        return ImageUtils.fitSize(this.state, { width: this.props.containerWidth, height: this.props.containerHeight }, { width: this.props.maxWidth, height: this.props.maxHeight });
     }
 }

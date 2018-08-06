@@ -14,7 +14,7 @@ export class ImageSetView extends React.Component {
             if (!element || !element.isValid) {
                 return undefined;
             }
-            return (React.createElement(ImageView, { key: info.index, vIndex: 1, hIndex: info.index, element: info.item, size: element.imageSize, maxWidth: this.state.maxWidth, maxHeight: this.state.maxHeight, fitAxis: 'v', hSpacing: 10 }));
+            return (React.createElement(ImageView, { key: info.index, vIndex: 1, hIndex: info.index, element: info.item, size: element.imageSize, maxWidth: this.state.maxWidth, maxHeight: this.state.maxHeight, hSpacing: 10 }));
         };
         this.onImageSize = (width, height) => {
             this.setState({

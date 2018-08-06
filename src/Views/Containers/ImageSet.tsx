@@ -97,7 +97,6 @@ export class ImageSetView extends React.Component<IProps, IState> {
                 size={element.imageSize}
                 maxWidth={this.state.maxWidth}
                 maxHeight={this.state.maxHeight}
-                fitAxis='v'
                 hSpacing={10}
             />
         );

@@ -102,7 +102,7 @@ export class ImageUtils {
         finalSize.height = finalSize.width * ratio;
         return finalSize;
     }
-    static fitSize(imgSize, containerSize, maxSize, fitAxis) {
+    static fitSize(imgSize, containerSize, maxSize) {
         let finalSize = {
             width: imgSize.width,
             height: imgSize.height,
@@ -110,7 +110,7 @@ export class ImageUtils {
         let contract = ImageUtils.getContract(containerSize, maxSize);
         if (imgSize.width && imgSize.height) {
             let ratio = ImageUtils.calcRatio(imgSize);
-            if (fitAxis === 'v') {
+            if (ratio < 1) {
                 if (contract.height && finalSize.height > contract.height) {
                     finalSize.height = contract.height;
                 }

@@ -15,7 +15,6 @@ interface IProps extends IFlexProps {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
-    fitAxis?: 'h' | 'v';
     onImageSize?: (width: number, height: number) => void;
     onPress?: () => void;
     boxStyle?: any;
@@ -191,9 +190,8 @@ export class ImageBlock extends React.Component<IProps, IState> {
     private get size() {
         return ImageUtils.fitSize(
             this.state,
-            { width: this.props.maxWidth, height: this.props.maxHeight },
-            { width: this.props.maxWidth, height: this.props.maxHeight },
-            this.props.fitAxis,
+            { width: this.props.containerWidth, height: this.props.containerHeight },
+            { width: this.props.maxWidth, height: this.props.maxHeight }
         );
     }
 }
