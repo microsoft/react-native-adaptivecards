@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ImageBlock } from '../../Abandon/Components/Basic/ImageBlock';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { StyleManager } from '../../Styles/StyleManager';
+import { UrlUtils } from '../../Utils/UrlUtils';
 export class ImageView extends React.Component {
     constructor(props) {
         super(props);
@@ -57,8 +58,7 @@ export class ImageView extends React.Component {
     }
     get source() {
         const { element } = this.props;
-        if (element && element.isValid &&
-            !(element.url.startsWith('http://') || element.url.startsWith('https://') || element.url.startsWith('ftp://'))) {
+        if (element && element.isValid && !UrlUtils.isRemoteUrl(element.url)) {
             return 'internal';
         }
         else {

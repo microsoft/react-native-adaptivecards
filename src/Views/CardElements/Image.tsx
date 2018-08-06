@@ -5,6 +5,7 @@ import { ActionContext } from '../../Contexts/ActionContext';
 import { ImageElement } from '../../Schema/CardElements/Image';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageStyle } from '../../Styles/Types';
+import { UrlUtils } from '../../Utils/UrlUtils';
 import { IElementViewProps } from '../Shared/BaseProps';
 
 interface IProps extends IElementViewProps<ImageElement> {
@@ -96,8 +97,7 @@ export class ImageView extends React.Component<IProps, IState> {
     private get source() {
         const { element } = this.props;
 
-        if (element && element.isValid && 
-            !(element.url.startsWith('http://') || element.url.startsWith('https://') || element.url.startsWith('ftp://'))) {
+        if (element && element.isValid && !UrlUtils.isRemoteUrl(element.url)) {
             return 'internal';
         } else {
             return 'external';
