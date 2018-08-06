@@ -68,8 +68,8 @@
         "emphasis": {
             "foregroundColors": {
                 "default": {
-                    "default": "#ffffff",
-                    "subtle": "#ffffffb2"
+                    "default": "#000000",
+                    "subtle": "#00000066"
                 },
                 "dark": {
                     "default": "#000000",
