@@ -88,7 +88,7 @@ export class ImageView extends React.Component<IProps, IState> {
     private get mode() {
         const { element } = this.props;
 
-        if (element && element.isValid && element.url.endsWith('avatar')) {
+        if (element.style === 'person') {
             return 'avatar';
         } else {
             return 'default';
@@ -98,7 +98,7 @@ export class ImageView extends React.Component<IProps, IState> {
     private get source() {
         const { element } = this.props;
 
-        if (element && element.isValid && element.url.startsWith('device://')) {
+        if (element && element.isValid && element.url.startsWith('schema://')) {
             return 'internal';
         } else {
             return 'external';

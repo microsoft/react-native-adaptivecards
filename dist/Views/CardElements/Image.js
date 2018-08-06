@@ -48,7 +48,7 @@ export class ImageView extends React.Component {
     }
     get mode() {
         const { element } = this.props;
-        if (element && element.isValid && element.url.endsWith('avatar')) {
+        if (element.style === 'person') {
             return 'avatar';
         }
         else {
@@ -57,7 +57,7 @@ export class ImageView extends React.Component {
     }
     get source() {
         const { element } = this.props;
-        if (element && element.isValid && element.url.startsWith('device://')) {
+        if (element && element.isValid && element.url.startsWith('schema://')) {
             return 'internal';
         }
         else {

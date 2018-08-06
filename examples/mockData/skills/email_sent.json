@@ -15,7 +15,7 @@
                             "items": [
                                 {
                                     "type": "Image",
-                                    "url": "device://avatar",
+                                    "url": "schema://image_url_placeholder",
                                     "size": "medium",
                                     "style": "person"
                                 }
