@@ -44,9 +44,9 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
     }
 
     public render(): JSX.Element {
-        if (!this.props.element.isValid) {
+        if (!this.props.element || !this.props.element.isValid) {
             // TODO: render error card
-            return null;
+            return undefined;
         }
 
         const cardStyle: ViewStyle = Object.assign({
@@ -61,13 +61,33 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                     shadowOffset: { width: 0, height: 0 },
                     shadowRadius: 3,
                     shadowOpacity: .08,
-                    overflow: 'hidden',
                 } as any,
                 android: {
                     elevation: 2,
-                    overflow: 'hidden',
                 } as any
             }),
+        }, this.props.style);
+
+        return (
+            <View
+                style={cardStyle}
+            >
+                {this.renderCard()}
+            </View>
+        );
+    }
+
+    private renderCard(): JSX.Element {
+        if (!this.props.element.isValid) {
+            // TODO: render error card
+            return undefined;
+        }
+
+        const cardStyle: ViewStyle = Object.assign({
+            flex: 1,
+            backgroundColor: '#fff',
+            borderRadius: 4,
+            overflow: 'hidden',
         }, this.props.style);
 
         const backgroundImage = this.props.element.getBackgroundImageUrl();
