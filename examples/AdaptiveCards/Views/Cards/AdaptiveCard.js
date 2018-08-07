@@ -8,6 +8,21 @@ import { ActionType } from '../../Schema/Abstract/ActionElement';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
+const styles = StyleSheet.create({
+    cardContainer: Object.assign({ flex: 1, backgroundColor: '#fff', borderRadius: 4 }, Platform.select({
+        ios: {
+            borderWidth: StyleSheet.hairlineWidth,
+            borderColor: 'rgba(0, 0, 0, .1)',
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 0 },
+            shadowRadius: 3,
+            shadowOpacity: .08,
+        },
+        android: {
+            elevation: 2,
+        }
+    })),
+});
 export class AdaptiveCardView extends React.Component {
     constructor(props) {
         super(props);
@@ -36,31 +51,18 @@ export class AdaptiveCardView extends React.Component {
         if (!this.props.element || !this.props.element.isValid) {
             return undefined;
         }
-        const cardStyle = Object.assign(Object.assign({ flex: 1, backgroundColor: '#fff', borderRadius: 4 }, Platform.select({
-            ios: {
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: 'rgba(0, 0, 0, .1)',
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 0 },
-                shadowRadius: 3,
-                shadowOpacity: .08,
-            },
-            android: {
-                elevation: 2,
-            }
-        })), this.props.style);
-        return (React.createElement(View, { style: cardStyle }, this.renderCard()));
+        return (React.createElement(View, { style: this.props.style || styles.cardContainer }, this.renderCard()));
     }
     renderCard() {
         if (!this.props.element.isValid) {
             return undefined;
         }
-        const cardStyle = Object.assign({
+        const cardStyle = {
             flex: 1,
             backgroundColor: '#fff',
             borderRadius: 4,
             overflow: 'hidden',
-        }, this.props.style);
+        };
         const backgroundImage = this.props.element.getBackgroundImageUrl();
         if (backgroundImage) {
             return (React.createElement(ImageBackground, { containerStyle: cardStyle, imageStyle: {
@@ -103,8 +105,9 @@ export class AdaptiveCardView extends React.Component {
     }
     renderSubCard() {
         if (this.state.subCard) {
-            const style = this.props.style ? this.props.style : {};
-            return (React.createElement(AdaptiveCardView, { vIndex: 2, hIndex: 0, element: this.state.subCard, style: Object.assign({ marginTop: this.showCardStyle.margin }, style), theme: this.showCardStyle.theme }));
+            return (React.createElement(AdaptiveCardView, { vIndex: 2, hIndex: 0, element: this.state.subCard, style: {
+                    marginTop: this.showCardStyle.margin,
+                }, theme: this.showCardStyle.theme }));
         }
         return undefined;
     }
