@@ -26,11 +26,7 @@ export interface IProps {
     onBlur?: () => void;
 }
 
-interface IState {
-    rootCard: CardElement;
-}
-
-export class CardRootView extends React.PureComponent<IProps, IState> {
+export class CardRootView extends React.PureComponent<IProps> {
     // private styleConfig: StyleConfig;
 
     public static registerSVGRenderer(renderer: ISVGRenderer) {
@@ -42,11 +38,6 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
 
         // Apply customized styles
         // this.styleConfig = StyleManager.getInstance().addStyle(props.overrideStyle);
-
-        // State initialization
-        this.state = {
-            rootCard: new CardElement(this.props.adaptiveCard, undefined),
-        };
 
         let hostContext = HostContext.getInstance();
 
@@ -83,11 +74,6 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
         });
     }
 
-    public componentWillReceiveProps(nextProps: IProps) {
-        // Update customized styles
-        // this.styleConfig = StyleManager.getInstance().addStyle(nextProps.overrideStyle);
-    }
-
     public render() {
         return (
             <View
@@ -96,7 +82,7 @@ export class CardRootView extends React.PureComponent<IProps, IState> {
                 <AdaptiveCardView
                     vIndex={0}
                     hIndex={0}
-                    element={this.state.rootCard}
+                    element={new CardElement(this.props.adaptiveCard, undefined)}
                     style={this.props.style}
                 />
             </View>

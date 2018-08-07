@@ -74,9 +74,6 @@ export class CardRootView extends React.PureComponent {
             }
             return args;
         };
-        this.state = {
-            rootCard: new CardElement(this.props.adaptiveCard, undefined),
-        };
         let hostContext = HostContext.getInstance();
         hostContext.registerOpenUrlHandler(this.onOpenUrl);
         hostContext.registerSubmitHandler(this.onSubmit);
@@ -108,10 +105,8 @@ export class CardRootView extends React.PureComponent {
     static registerSVGRenderer(renderer) {
         HostContext.getInstance().registerHostRenderer(HostRenderer.SVG, renderer);
     }
-    componentWillReceiveProps(nextProps) {
-    }
     render() {
         return (React.createElement(View, { style: { flex: 1 } },
-            React.createElement(AdaptiveCardView, { vIndex: 0, hIndex: 0, element: this.state.rootCard, style: this.props.style })));
+            React.createElement(AdaptiveCardView, { vIndex: 0, hIndex: 0, element: new CardElement(this.props.adaptiveCard, undefined), style: this.props.style })));
     }
 }
