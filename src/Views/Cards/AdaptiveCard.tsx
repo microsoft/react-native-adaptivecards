@@ -21,6 +21,27 @@ import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { IElementViewProps } from '../Shared/BaseProps';
 
+const styles = StyleSheet.create({
+    cardContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+        borderRadius: 4,
+        ...Platform.select({
+            ios: {
+                borderWidth: StyleSheet.hairlineWidth,
+                borderColor: 'rgba(0, 0, 0, .1)',
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 0 },
+                shadowRadius: 3,
+                shadowOpacity: .08,
+            } as any,
+            android: {
+                elevation: 2,
+            } as any
+        }),
+    },
+}) as any;
+
 interface IProps extends IElementViewProps<CardElement> {
     style?: ViewStyle;
 }
@@ -49,28 +70,9 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
             return undefined;
         }
 
-        const cardStyle: ViewStyle = Object.assign({
-            flex: 1,
-            backgroundColor: '#fff',
-            borderRadius: 4,
-            ...Platform.select({
-                ios: {
-                    borderWidth: StyleSheet.hairlineWidth,
-                    borderColor: 'rgba(0, 0, 0, .1)',
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 0 },
-                    shadowRadius: 3,
-                    shadowOpacity: .08,
-                } as any,
-                android: {
-                    elevation: 2,
-                } as any
-            }),
-        }, this.props.style);
-
         return (
             <View
-                style={cardStyle}
+                style={this.props.style || styles.cardContainer}
             >
                 {this.renderCard()}
             </View>
@@ -83,12 +85,12 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
             return undefined;
         }
 
-        const cardStyle: ViewStyle = Object.assign({
+        const cardStyle: ViewStyle = {
             flex: 1,
             backgroundColor: '#fff',
             borderRadius: 4,
             overflow: 'hidden',
-        }, this.props.style);
+        };
 
         const backgroundImage = this.props.element.getBackgroundImageUrl();
 
@@ -104,7 +106,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                     hIndex={0}
                 >
                     <View
-                        style={{ flex: 1, padding: 0, minHeight: 150}}
+                        style={{ flex: 1, padding: 0, minHeight: 150 }}
                     >
                         {this.renderBody()}
                         {this.renderActions()}
@@ -193,18 +195,14 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
 
     private renderSubCard(): JSX.Element {
         if (this.state.subCard) {
-            const style = this.props.style ? this.props.style : {};
             return (
                 <AdaptiveCardView
                     vIndex={2}
                     hIndex={0}
                     element={this.state.subCard}
-                    style={
-                        {
-                            marginTop: this.showCardStyle.margin,
-                            ...style
-                        }
-                    }
+                    style={{
+                        marginTop: this.showCardStyle.margin,
+                    }}
                     theme={this.showCardStyle.theme}
                 />
             );
