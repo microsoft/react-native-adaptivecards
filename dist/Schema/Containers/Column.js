@@ -16,6 +16,7 @@ export class ColumnElement extends ScopeElement {
                     }
                     this.width = columnWidth;
                 }
+                this.height = json.height;
             }
         }
     }

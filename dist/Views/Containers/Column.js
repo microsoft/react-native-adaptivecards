@@ -30,16 +30,25 @@ export class ColumnView extends React.Component {
         }
         const background = element.getBackgroundImageUrl();
         if (background) {
-            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: 'auto', onPress: element.selectAction ? this.onPress : undefined, hSpacing: StyleManager.getInstance().getSpacing(element.spacing), style: this.minWidth }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: element.height, onPress: element.selectAction ? this.onPress : undefined, hSpacing: StyleManager.getInstance().getSpacing(element.spacing), style: [this.minWidth, this.minHeight] }, ContentFactory.createBackgroundImageView(this.renderContents(), background)));
         }
         else {
-            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: 'auto', hSpacing: StyleManager.getInstance().getSpacing(element.spacing), style: this.minWidth }, this.renderContents()));
+            return (React.createElement(Column, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: StyleManager.getInstance().getColumnWidth(element), height: element.height, hSpacing: StyleManager.getInstance().getSpacing(element.spacing), style: this.minWidth }, this.renderContents()));
         }
     }
     get minWidth() {
         const { element } = this.props;
         if (!element || !element.isValid || !element.items || element.items.length === 0) {
             return { minWidth: 3 };
+        }
+        else {
+            return {};
+        }
+    }
+    get minHeight() {
+        const { element } = this.props;
+        if (element && element.isValid && element.backgroundImage) {
+            return { minHeight: 150 };
         }
         else {
             return {};

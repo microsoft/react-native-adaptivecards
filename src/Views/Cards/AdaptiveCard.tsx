@@ -104,7 +104,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                     hIndex={0}
                 >
                     <View
-                        style={{ flex: 1, padding: 0 }}
+                        style={{ flex: 1, padding: 0, minHeight: 150}}
                     >
                         {this.renderBody()}
                         {this.renderActions()}

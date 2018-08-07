@@ -66,7 +66,7 @@ export class AdaptiveCardView extends React.Component {
             return (React.createElement(ImageBackground, { containerStyle: cardStyle, imageStyle: {
                     borderRadius: 4,
                 }, source: { uri: backgroundImage }, vIndex: 0, hIndex: 0 },
-                React.createElement(View, { style: { flex: 1, padding: 0 } },
+                React.createElement(View, { style: { flex: 1, padding: 0, minHeight: 150 } },
                     this.renderBody(),
                     this.renderActions(),
                     this.renderSubCard())));

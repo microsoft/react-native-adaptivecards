@@ -33,7 +33,7 @@ export class ContainerView extends React.Component<IProps> {
                     hIndex={this.props.hIndex}
                     spacing={StyleManager.getInstance().getSpacing(element.spacing)}
                     width='stretch'
-                    height='auto'
+                    height={element.height}
                     onPress={element.selectAction ? this.onPress : undefined}
                     style={[
                         {
@@ -46,7 +46,7 @@ export class ContainerView extends React.Component<IProps> {
                         vIndex={0}
                         hIndex={0}
                         width='stretch'
-                        height='auto'
+                        height={element.height}
                         vSpacing={0}
                     >
                         {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
@@ -60,7 +60,7 @@ export class ContainerView extends React.Component<IProps> {
                     hIndex={this.props.hIndex}
                     spacing={StyleManager.getInstance().getSpacing(element.spacing)}
                     width='stretch'
-                    height='auto'
+                    height={element.height}
                     onPress={element.selectAction ? this.onPress : undefined}
                     style={[
                         {
@@ -73,7 +73,7 @@ export class ContainerView extends React.Component<IProps> {
                         vIndex={0}
                         hIndex={0}
                         width='stretch'
-                        height='auto'
+                        height={element.height}
                         vSpacing={0}
                     >
                         {this.renderContents()}

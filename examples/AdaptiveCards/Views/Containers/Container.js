@@ -32,22 +32,22 @@ export class ContainerView extends React.Component {
         const background = element.getBackgroundImageUrl();
         let backgroundColor = StyleManager.getInstance().getBackgroundColor(element.style);
         if (background) {
-            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: 'auto', onPress: element.selectAction ? this.onPress : undefined, style: [
+            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: element.height, onPress: element.selectAction ? this.onPress : undefined, style: [
                     {
                         backgroundColor: backgroundColor,
                     },
                     this.minHeight
                 ] },
-                React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch', height: 'auto', vSpacing: 0 }, ContentFactory.createBackgroundImageView(this.renderContents(), background))));
+                React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch', height: element.height, vSpacing: 0 }, ContentFactory.createBackgroundImageView(this.renderContents(), background))));
         }
         else {
-            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: 'auto', onPress: element.selectAction ? this.onPress : undefined, style: [
+            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: element.height, onPress: element.selectAction ? this.onPress : undefined, style: [
                     {
                         backgroundColor: backgroundColor,
                     },
                     this.minHeight
                 ] },
-                React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch', height: 'auto', vSpacing: 0 }, this.renderContents())));
+                React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch', height: element.height, vSpacing: 0 }, this.renderContents())));
         }
     }
     get minHeight() {

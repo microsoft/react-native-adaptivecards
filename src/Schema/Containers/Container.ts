@@ -8,6 +8,7 @@ export class ContainerElement extends ScopeElement {
     public readonly items: Array<ContentElement> = [];
     // Optional
     public readonly style?: 'default' | 'emphasis';
+    public readonly height?: 'auto' | 'stretch';
 
     constructor(json: any, parent: IElement) {
         super(json, parent);
@@ -15,6 +16,7 @@ export class ContainerElement extends ScopeElement {
         if (this.isValid) {
             this.style = json.style;
             this.items = ContentElementFactory.createSet(json.items, this);
+            this.height = json.height;
         }
     }
 

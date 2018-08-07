@@ -9,6 +9,7 @@ export class ColumnElement extends ScopeElement {
     // Optional
     // “auto”, “stretch”, or a number representing relative width of the column in the column group
     public readonly width?: 'auto' | 'stretch' | number;
+    public readonly height?: 'auto' | 'stretch';
 
     constructor(json: any, parent: IElement) {
         super(json, parent);
@@ -25,6 +26,7 @@ export class ColumnElement extends ScopeElement {
                     }
                     this.width = columnWidth;
                 }
+                this.height = json.height;
             }
         }
     }

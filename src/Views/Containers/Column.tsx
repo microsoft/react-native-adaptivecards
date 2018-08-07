@@ -30,10 +30,10 @@ export class ColumnView extends React.Component<IProps> {
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
                     width={StyleManager.getInstance().getColumnWidth(element)}
-                    height='auto'
+                    height={element.height}
                     onPress={element.selectAction ? this.onPress : undefined}
                     hSpacing={StyleManager.getInstance().getSpacing(element.spacing)}
-                    style={this.minWidth}
+                    style={[this.minWidth, this.minHeight]}
                 >
                     {ContentFactory.createBackgroundImageView(this.renderContents(), background)}
                 </Column>
@@ -44,7 +44,7 @@ export class ColumnView extends React.Component<IProps> {
                     vIndex={this.props.vIndex}
                     hIndex={this.props.hIndex}
                     width={StyleManager.getInstance().getColumnWidth(element)}
-                    height='auto'
+                    height={element.height}
                     hSpacing={StyleManager.getInstance().getSpacing(element.spacing)}
                     style={this.minWidth}
                 >
@@ -79,6 +79,16 @@ export class ColumnView extends React.Component<IProps> {
 
         if (!element || !element.isValid || !element.items || element.items.length === 0) {
             return { minWidth: 3 };
+        } else {
+            return {};
+        }
+    }
+
+    private get minHeight() {
+        const { element } = this.props;
+
+        if (element && element.isValid && element.backgroundImage) {
+            return { minHeight: 150 };
         } else {
             return {};
         }
