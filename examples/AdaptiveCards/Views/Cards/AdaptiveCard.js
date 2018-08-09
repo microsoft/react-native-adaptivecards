@@ -78,6 +78,7 @@ export class AdaptiveCardView extends React.Component {
                     cardStyle,
                     {
                         padding: 12,
+                        minHeight: 150
                     }
                 ] },
                 this.renderBody(),

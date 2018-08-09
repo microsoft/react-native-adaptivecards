@@ -121,6 +121,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                         cardStyle,
                         {
                             padding: 12,
+                            minHeight: 150
                         }
                     ]}
                 >

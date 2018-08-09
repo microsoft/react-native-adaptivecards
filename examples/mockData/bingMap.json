@@ -1,0 +1,29 @@
+{
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "Container",
+            "height": "stretch",
+            "backgroundImage": {
+                "type": "BackgroundImage",
+                "mode": "stretch",
+                "url": "https://www.bing.com/maps/geoplat/REST/v1/Imagery/Map/Road/31.317165,120.621048/11?ms=285,150&heid=7839057509238177793,008200&fpp=31.3171653747559,120.621047973633;178&key=AnTcaqBi2ypp0xI-OZNi4W_ik2KhjgpqioTAtXLC8GzkMBQRMlyxvxyTnd5b73im&c=zh-CN&fmt=jpeg&od=2&logo=n",
+                "horizontalAlignment": "center",
+                "verticalAlignment": "center"
+            },
+            "items": [],
+            "selectAction": {
+                "type": "Action.OpenUrl",
+                "url": "https://www.bing.com/search?q=where+am+i&elv=AXXfrEiqqD9r3GuelwApuloMw5RMIuQXNzF9m4Sy9t3*TA13tZ3gTCduR8TLoNMkX0ufXh2qGKcYtT72dhkF!wgbAJblnaDhLjWlQs3LGpT8",
+                "title": "Open In Bing"
+            }
+        }
+    ],
+    "-ms-attribution": {
+        "text": "Bing",
+        "icon": "https://www.bing.com/rms/rms%20answers%20Api%20BingLogo/ic/ef0cff20/d50405d4.png"
+    },
+    "-ms-source": "Bing",
+    "-ms-height": "fixed"
+}
