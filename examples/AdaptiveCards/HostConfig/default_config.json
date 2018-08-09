@@ -24,7 +24,7 @@
     "fontWeights": {
         "lighter": 200,
         "default": 400,
-        "bolder": 600
+        "bolder": 500
     },
     "imageSizes": {
         "small": 12,
@@ -96,7 +96,7 @@
                     "subtle": "#c80000b2"
                 }
             },
-            "backgroundColor": "#00000008"
+            "backgroundColor": "#ffffff08"
         }
     },
     "actions": {
