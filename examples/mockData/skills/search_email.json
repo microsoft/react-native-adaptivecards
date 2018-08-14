@@ -6,6 +6,7 @@
         {
             "type": "Container",
             "separator": true,
+            "style": "emphasis",
             "items": [
                 {
                     "type": "ColumnSet",
