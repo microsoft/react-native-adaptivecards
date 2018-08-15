@@ -1,150 +1,80 @@
-import { MediaContext } from '../Contexts/MediaContext';
+import { Image } from 'react-native';
+import { StyleManager } from '../Styles/StyleManager';
+import { UrlUtils } from './UrlUtils';
 export class ImageUtils {
-    static fetchSize(url, onSuccess, onFailure) {
-        MediaContext.getInstance().fetchImageSize(url, onSuccess, onFailure);
-    }
-    static fetchSetSize(urls, contract, sizeConfig, onSuccess, onFailure) {
-        Promise.all(urls.map(ImageUtils.fetchSizeAsync)).then((dimensions) => {
-            let result = dimensions.reduce((prev, current) => {
-                let fitSize = ImageUtils.calcSize(current, contract, sizeConfig);
-                if (fitSize.width === 0 || fitSize.height === 0) {
-                    return prev;
-                }
-                let finalSize = {
-                    width: fitSize.width,
-                    height: fitSize.height,
-                };
-                let ratio = ImageUtils.calcRatio(current);
-                if (contract.height > 0 && finalSize.height > contract.height) {
-                    finalSize.height = contract.height;
-                }
-                if (ratio === 0) {
-                    finalSize.width = finalSize.height;
-                }
-                else {
-                    finalSize.width = finalSize.height / ratio;
-                }
-                if (prev.width !== undefined && prev.width !== 0 && finalSize.width > prev.width) {
-                    finalSize.width = prev.width;
-                }
-                return finalSize;
-            }, {
-                width: 0,
-                height: 0,
-            });
-            onSuccess(result.width, result.height);
-        });
-    }
-    static fetchSizeAsync(url) {
-        return new Promise((resolve) => MediaContext.getInstance().fetchImageSize(url, (width, height) => {
-            resolve({ width: width, height: height });
-        }, (error) => {
-            resolve({ width: 0, height: 0 });
-        }));
-    }
-    static calcSize(imgSize, containerSize, sizeConfig) {
-        if (sizeConfig === 'auto') {
-            return ImageUtils.calcAutoSize(imgSize, containerSize);
-        }
-        else if (sizeConfig === 'stretch') {
-            return ImageUtils.calcStretchSize(imgSize, containerSize);
+    static fetchSize(url, size, contract, onSize, onError) {
+        if (UrlUtils.isSvgXml(url) || UrlUtils.isDeepLink(url)) {
+            ImageUtils.fetchSizeFromConfig(size, contract, onSize);
         }
         else {
-            return ImageUtils.calcFixSize(imgSize, sizeConfig);
+            ImageUtils.fetchSizeFromImage(url, size, contract, onSize, onError);
         }
     }
-    static calcFixSize(imgSize, fixSize) {
-        let ratio = ImageUtils.calcRatio(imgSize);
-        if (ratio < 1) {
-            return {
-                height: fixSize,
-                width: ratio > 0 ? fixSize / ratio : fixSize
-            };
+    static fetchSizeFromConfig(size, contract, onSize) {
+        let width = StyleManager.getImageSize(size);
+        if (typeof width !== 'number') {
+            width = StyleManager.getImageSize('large');
         }
-        else {
-            return {
-                width: fixSize,
-                height: fixSize * ratio
-            };
+        if (onSize) {
+            onSize(ImageUtils.fitContract({ width: width, height: width }, contract));
         }
     }
-    static calcStretchSize(imgSize, containerSize) {
-        let ratio = ImageUtils.calcRatio(imgSize);
-        if (ratio < 1) {
-            if (containerSize.height) {
-                let finalSize = {
-                    height: containerSize.height,
-                    width: ratio > 0 ? containerSize.height / ratio : containerSize.height,
+    static fetchSizeFromImage(url, size, contract, onSize, onError) {
+        Image.getSize(url, (width, height) => {
+            if (width && height && width > 0 && height > 0) {
+                let basis = StyleManager.getImageSize(size);
+                let result = {
+                    width: width,
+                    height: height,
                 };
-                return finalSize;
+                if (typeof basis === 'number') {
+                    let ratio = result.width / result.height;
+                    if (ratio > 1) {
+                        result.height = basis;
+                        result.width = basis * ratio;
+                    }
+                    else {
+                        result.width = basis;
+                        result.height = basis / ratio;
+                    }
+                }
+                if (onSize) {
+                    onSize(ImageUtils.fitContract(result, contract));
+                }
             }
+        }, onError);
+    }
+    static fitContract(size, contract) {
+        if (contract) {
+            if (size && size.width && size.height && size.width > 0 && size.height > 0) {
+                let ratio = size.width / size.height;
+                let result = {
+                    width: size.width,
+                    height: size.height,
+                };
+                if (contract.height && result.height > contract.height) {
+                    result.height = contract.height;
+                    result.width = result.height * ratio;
+                }
+                if (contract.width && result.width > contract.width) {
+                    result.width = contract.width;
+                    result.height = result.width / ratio;
+                }
+                return result;
+            }
+            return contract;
         }
         else {
-            if (containerSize.width) {
-                let finalSize = {
-                    width: containerSize.width,
-                    height: containerSize.width * ratio,
-                };
-                return finalSize;
-            }
-        }
-        return imgSize;
-    }
-    static calcAutoSize(imgSize, containerSize) {
-        let ratio = ImageUtils.calcRatio(imgSize);
-        let finalSize = {
-            width: imgSize.width,
-            height: imgSize.height,
-        };
-        if (finalSize.width > containerSize.width) {
-            finalSize.width = containerSize.width;
-        }
-        finalSize.height = finalSize.width * ratio;
-        return finalSize;
-    }
-    static fitSize(imgSize, containerSize, maxSize) {
-        let finalSize = {
-            width: imgSize.width,
-            height: imgSize.height,
-        };
-        let contract = ImageUtils.getContract(containerSize, maxSize);
-        if (imgSize.width && imgSize.height) {
-            let ratio = ImageUtils.calcRatio(imgSize);
-            if (ratio < 1) {
-                if (contract.height && finalSize.height > contract.height) {
-                    finalSize.height = contract.height;
-                }
-                finalSize.width = ratio > 0 ? finalSize.height / ratio : finalSize.width;
-                if (contract.width && finalSize.width > contract.width) {
-                    finalSize.width = contract.width;
-                    finalSize.height = contract.width * ratio;
-                }
+            if (size && size.width && size.height && size.width > 0 && size.height > 0) {
+                return size;
             }
             else {
-                if (contract.width && finalSize.width > contract.width) {
-                    finalSize.width = contract.width;
-                }
-                finalSize.height = finalSize.width * ratio;
-                if (contract.height && finalSize.height > contract.height) {
-                    finalSize.height = contract.height;
-                    finalSize.width = ratio > 0 ? finalSize.height / ratio : finalSize.width;
-                }
+                let width = StyleManager.getImageSize('large');
+                return {
+                    width: width,
+                    height: width,
+                };
             }
         }
-        return finalSize;
-    }
-    static calcRatio(size) {
-        return size.width > 0 ? size.height / size.width : 0;
-    }
-    static getContract(containerSize, maxSize) {
-        let contract = {
-            width: containerSize.width,
-            height: containerSize.height,
-        };
-        if (contract.width > maxSize.width) {
-            contract.width = maxSize.width;
-        }
-        contract.height = maxSize.height;
-        return contract;
     }
 }

@@ -1,40 +1,37 @@
 import * as React from 'react';
-import { Column } from '../../Abandon/Components/Containers/Column';
+import { View } from 'react-native';
 import { FactSetElement } from '../../Schema/Containers/FactSet';
 import { StyleManager } from '../../Styles/StyleManager';
-import { IElementViewProps } from '../Shared/BaseProps';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { FactView } from './Fact';
 
-interface IProps extends IElementViewProps<FactSetElement> {
+interface IProps {
+    index: number;
+    element: FactSetElement;
+    theme: 'default' | 'emphasis';
 }
 
 export class FactSetView extends React.Component<IProps> {
-    constructor(props: IProps) {
-        super(props);
-    }
-
     public render() {
         const { element } = this.props;
 
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', 'error');
         }
 
         return (
-            <Column
-                vIndex={this.props.vIndex}
-                hIndex={this.props.hIndex}
-                width='stretch'
-                height='auto'
-                vSpacing={StyleManager.getInstance().getSpacing(element.spacing)}
+            <View
+                flexDirection='column'
+                marginTop={this.spacing}
+                alignSelf='stretch'
             >
                 {this.renderFacts()}
-            </Column>
+            </View>
         );
     }
 
     private renderFacts = () => {
-        const { element } = this.props;
+        const { element, theme } = this.props;
 
         if (!element || !element.isValid || !element.facts || element.facts.length === 0) {
             return undefined;
@@ -43,11 +40,16 @@ export class FactSetView extends React.Component<IProps> {
         return element.facts.map((fact, index) => (
             <FactView
                 key={index}
-                vIndex={0}
-                hIndex={index}
                 element={fact}
-                theme={this.props.theme}
+                theme={theme}
             />
         ));
+    }
+
+    private get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.element.spacing);
+        }
+        return 0;
     }
 }

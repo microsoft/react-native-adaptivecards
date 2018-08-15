@@ -1,13 +1,24 @@
+import { ConfigManager } from '../Config/ConfigManager';
+import { HostConfig } from '../Config/Types';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 export class HostContext {
     constructor() {
-        this.hostRenderer = {};
+        this.config = ConfigManager.getInstance().getDefaultConfig();
     }
     static getInstance() {
         if (HostContext.sharedInstance === undefined) {
             HostContext.sharedInstance = new HostContext();
         }
         return HostContext.sharedInstance;
+    }
+    registerErrorHandler(handler) {
+        this.onError = handler;
+    }
+    registerInfoHandler(handler) {
+        this.onInfo = handler;
+    }
+    registerWarningHandler(handler) {
+        this.onWarning = handler;
     }
     registerFocusHandler(handler) {
         this.onFocus = handler;
@@ -27,11 +38,11 @@ export class HostContext {
     registerCallbackHandler(handler) {
         this.onCallback = handler;
     }
-    registerHostRenderer(type, renderer) {
-        this.hostRenderer[type] = renderer;
+    applyConfig(configJson) {
+        this.config.combine(new HostConfig(configJson));
     }
-    getHostRenderer(type) {
-        return this.hostRenderer[type];
+    getConfig() {
+        return this.config;
     }
     getHandler(type) {
         let callback;
@@ -53,6 +64,15 @@ export class HostContext {
                 break;
             case 'blur':
                 callback = this.onBlur;
+                break;
+            case 'error':
+                callback = this.onError;
+                break;
+            case 'info':
+                callback = this.onInfo;
+                break;
+            case 'warning':
+                callback = this.onWarning;
                 break;
         }
         return callback;

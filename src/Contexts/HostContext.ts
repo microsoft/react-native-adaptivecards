@@ -1,4 +1,5 @@
-import { HostRenderer, IHostRenderer } from '../HostRenderer/HostRenderer';
+import { ConfigManager } from '../Config/ConfigManager';
+import { HostConfig } from '../Config/Types';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
@@ -8,23 +9,40 @@ import { CallbackAction } from '../Schema/Internal/CallbackAction';
 import { ActionEventHandlerArgs } from '../Shared/Types';
 
 export class HostContext {
-    private onFocus?: (args?: ActionEventHandlerArgs<OpenUrlActionElement>) => void;
-    private onBlur?: (args?: ActionEventHandlerArgs<OpenUrlActionElement>) => void;
+    private config: HostConfig;
+    private onError?: (error: any) => void;
+    private onInfo?: (info: any) => void;
+    private onWarning?: (warning: any) => void;
+    private onFocus?: () => void;
+    private onBlur?: () => void;
     private onOpenUrl: (args?: ActionEventHandlerArgs<OpenUrlActionElement>) => void;
     private onShowCard: (args?: ActionEventHandlerArgs<ShowCardActionElement>) => void;
     private onSubmit: (args?: ActionEventHandlerArgs<SubmitActionElement>) => void;
     private onCallback: (args?: ActionEventHandlerArgs<CallbackAction>) => void;
-    private hostRenderer: { [key: string]: IHostRenderer } = {};
 
     private static sharedInstance: HostContext;
 
-    private constructor() { }
+    private constructor() { 
+        this.config = ConfigManager.getInstance().getDefaultConfig();
+    }
 
     public static getInstance() {
         if (HostContext.sharedInstance === undefined) {
             HostContext.sharedInstance = new HostContext();
         }
         return HostContext.sharedInstance;
+    }
+
+    public registerErrorHandler(handler: (error: any) => void) {
+        this.onError = handler;
+    }
+
+    public registerInfoHandler(handler: (info: any) => void) {
+        this.onInfo = handler;
+    }
+
+    public registerWarningHandler(handler: (warning: any) => void) {
+        this.onWarning = handler;
     }
 
     public registerFocusHandler(handler: (args?: ActionEventHandlerArgs<OpenUrlActionElement>) => void) {
@@ -51,15 +69,15 @@ export class HostContext {
         this.onCallback = handler;
     }
 
-    public registerHostRenderer(type: HostRenderer, renderer: IHostRenderer) {
-        this.hostRenderer[type] = renderer;
+    public applyConfig(configJson: any) {
+        this.config.combine(new HostConfig(configJson));
     }
 
-    public getHostRenderer(type: HostRenderer): IHostRenderer {
-        return this.hostRenderer[type];
+    public getConfig() {
+        return this.config;
     }
 
-    public getHandler(type: ActionType | 'focus' | 'blur') {
+    public getHandler(type: ActionType | 'focus' | 'blur' | 'error' | 'warning' | 'info') {
         let callback: (args?: ActionEventHandlerArgs<IElement>) => void;
         switch (type) {
             case ActionType.OpenUrl:
@@ -79,6 +97,15 @@ export class HostContext {
                 break;
             case 'blur':
                 callback = this.onBlur;
+                break;
+            case 'error':
+                callback = this.onError;
+                break;
+            case 'info':
+                callback = this.onInfo;
+                break;
+            case 'warning':
+                callback = this.onWarning;
                 break;
         }
         return callback;

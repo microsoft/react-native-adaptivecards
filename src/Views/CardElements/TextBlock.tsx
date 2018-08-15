@@ -1,49 +1,43 @@
 import * as React from 'react';
-
-import { TextBlock } from '../../Abandon/Components/Basic/TextBlock';
+import { TextBlock } from '../../Components/Basic/TextBlock';
 import { TextBlockElement } from '../../Schema/CardElements/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
-import { TextBlockStyle } from '../../Styles/Types';
-import { IElementViewProps } from '../Shared/BaseProps';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps extends IElementViewProps<TextBlockElement> {
+interface IProps {
+    index: number;
+    element: TextBlockElement;
+    theme: 'default' | 'emphasis';
 }
 
 export class TextBlockView extends React.Component<IProps> {
-    private style: TextBlockStyle;
-
-    constructor(props: IProps) {
-        super(props);
-
-        const { element } = this.props;
-        if (element && element.isValid) {
-            this.style = StyleManager.getInstance().getTextStyle(element, this.props.theme);
-        }
-    }
-
-    public render(): JSX.Element {
+    public render() {
         const { element } = this.props;
 
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.text + ' is not valid', 'error');
         }
 
         return (
             <TextBlock
-                vIndex={0}
-                hIndex={0}
-                width='stretch'
-                fontSize={this.style.fontSize}
-                fontWeight={this.style.fontWeight}
-                color={this.style.color}
+                color={StyleManager.getColor(element.color, this.props.theme, element.isSubtle)}
+                fontSize={StyleManager.getFontSize(element.size)}
+                fontWeight={StyleManager.getFontWeight(element.weight)}
                 backgroundColor='transparent'
-                textAlign={this.style.textAlign}
-                wrap={this.style.wrap}
-                vSpacing={0}
+                textAlign={StyleManager.getTextAlign(element.horizontalAlignment)}
+                wrap={StyleManager.getWrap(element.wrap)}
                 numberOfLines={element.maxLines}
+                marginTop={this.spacing}
             >
                 {element.text}
             </TextBlock>
         );
+    }
+
+    private get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.element.spacing);
+        }
+        return 0;
     }
 }

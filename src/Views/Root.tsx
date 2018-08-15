@@ -4,36 +4,35 @@ import {
     View,
 } from 'react-native';
 
-import { CallbackAction } from 'Schema/Internal/CallbackAction';
 import { ActionContext } from '../Contexts/ActionContext';
 import { FormContext } from '../Contexts/FormContext';
 import { HostContext } from '../Contexts/HostContext';
-import { HostRenderer, ISVGRenderer } from '../HostRenderer/HostRenderer';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
 import { CardElement } from '../Schema/Cards/Card';
+import { CallbackAction } from '../Schema/Internal/CallbackAction';
 import { ActionEventHandlerArgs } from '../Shared/Types';
+import { StyleManager } from '../Styles/StyleManager';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
 
-export interface IProps {
+export interface IAdaptiveCardProps {
     adaptiveCard: any;
+    config?: any;
     style?: any;
     onSubmit?: (data: any) => void;
     onOpenUrl?: (url: string) => void;
     onCallback?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
     onFocus?: () => void;
     onBlur?: () => void;
+    onError?: (error: any) => void;
+    onInfo?: (info: any) => void;
+    onWarning?: (warning: any) => void;
 }
 
-export class CardRootView extends React.PureComponent<IProps> {
+export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
     // private styleConfig: StyleConfig;
-
-    public static registerSVGRenderer(renderer: ISVGRenderer) {
-        HostContext.getInstance().registerHostRenderer(HostRenderer.SVG, renderer);
-    }
-
-    constructor(props: IProps) {
+    constructor(props: IAdaptiveCardProps) {
         super(props);
 
         // Apply customized styles
@@ -41,11 +40,20 @@ export class CardRootView extends React.PureComponent<IProps> {
 
         let hostContext = HostContext.getInstance();
 
+        console.log(StyleManager.getColor('accent', 'default', false));
+
+        hostContext.applyConfig(this.props.config);
+
         hostContext.registerOpenUrlHandler(this.onOpenUrl);
         hostContext.registerSubmitHandler(this.onSubmit);
         hostContext.registerCallbackHandler(this.onCallback);
+
         hostContext.registerFocusHandler(this.props.onFocus);
         hostContext.registerBlurHandler(this.props.onBlur);
+
+        hostContext.registerErrorHandler(this.props.onError);
+        hostContext.registerInfoHandler(this.props.onInfo);
+        hostContext.registerWarningHandler(this.props.onWarning);
 
         let actionContext = ActionContext.getGlobalInstance();
 
@@ -78,11 +86,11 @@ export class CardRootView extends React.PureComponent<IProps> {
         return (
             <View
                 style={{ flex: 1 }}
-            >
+            >   
                 <AdaptiveCardView
-                    vIndex={0}
-                    hIndex={0}
+                    index={0}
                     element={new CardElement(this.props.adaptiveCard, undefined)}
+                    theme={'default'}
                     style={this.props.style}
                 />
             </View>

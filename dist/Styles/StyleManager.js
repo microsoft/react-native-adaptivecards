@@ -1,168 +1,193 @@
-import { HostConfigManager } from '../HostConfig/HostConfigManager';
-import { StyleTransformer } from './StyleTransformer';
+import { HostContext } from '../Contexts/HostContext';
 export class StyleManager {
-    constructor(hostConfig) {
-        this.hostConfig = hostConfig;
-    }
-    static getInstance(hostConfig) {
-        let config = hostConfig;
-        if (config === undefined) {
-            config = HostConfigManager.getInstance().getDefaultConfig();
+    static getSpacing(spacing) {
+        if (spacing === 'none') {
+            return 0;
         }
-        if (StyleManager.sharedInstance === undefined) {
-            StyleManager.sharedInstance = new StyleManager(config);
+        let config = HostContext.getInstance().getConfig();
+        let spacingConfig = config.spacing[spacing];
+        if (!spacingConfig) {
+            return config.spacing.default;
         }
-        return StyleManager.sharedInstance;
+        return spacingConfig;
     }
-    setConfig(hostConfig) {
-        if (this.hostConfig) {
-            this.hostConfig.combine(hostConfig);
+    static getFontSize(size) {
+        let config = HostContext.getInstance().getConfig();
+        let fontSize = config.fontSize[size];
+        if (!fontSize) {
+            return config.fontSize.default;
+        }
+        return fontSize;
+    }
+    static getFontWeight(weight) {
+        let config = HostContext.getInstance().getConfig();
+        let fontWeight = config.fontWeight[weight];
+        if (!fontWeight) {
+            return config.fontWeight.default;
+        }
+        return fontWeight;
+    }
+    static getTextAlign(align) {
+        if (align === 'left' || align === 'center' || align === 'right') {
+            return align;
+        }
+        return 'left';
+    }
+    static getHorizontalAlign(align) {
+        switch (align) {
+            case 'left':
+                return 'flex-start';
+            case 'right':
+                return 'flex-end';
+            case 'center':
+                return 'center';
+            default:
+                return 'center';
+        }
+    }
+    static getWrap(wrap) {
+        if (wrap) {
+            return 'wrap';
+        }
+        return 'nowrap';
+    }
+    static getImageSize(size) {
+        let config = HostContext.getInstance().getConfig();
+        if (size === undefined) {
+            return 'auto';
+        }
+        if (size === 'small' || size === 'medium' || size === 'large') {
+            return config.imageSize[size];
+        }
+        return size;
+    }
+    static getColor(color, theme, isSubtle) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.container[theme];
+        if (!themeConfig) {
+            themeConfig = config.container.default;
+        }
+        let colorConfig = themeConfig.foreground[color];
+        if (!colorConfig) {
+            colorConfig = themeConfig.foreground.default;
+        }
+        if (isSubtle) {
+            return colorConfig.subtle;
         }
         else {
-            this.hostConfig = hostConfig;
+            return colorConfig.default;
         }
     }
-    getActionContainerStyle() {
-        let result = {
-            align: 'flex-start',
-            direction: 'row',
-        };
-        if (this.hostConfig) {
-            result.align = StyleTransformer.transformAlign(this.hostConfig.action.align);
-            result.direction = StyleTransformer.transformDirection(this.hostConfig.action.direction);
+    static getBackgroundColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.container[theme];
+        if (!themeConfig) {
+            return config.container.default.background;
         }
-        return result;
+        return themeConfig.background;
     }
-    getActionStyle() {
-        let result = {
-            marginTop: 10,
-            marginLeft: 10,
-            iconPosition: 'LeftOfTitle',
-            iconSize: 18,
-        };
-        if (this.hostConfig) {
-            result.marginTop = StyleTransformer.transformSpacing(this.hostConfig.action.spacing, this.hostConfig);
-            result.marginLeft = this.hostConfig.action.actionSpacing;
-            result.iconPosition = this.hostConfig.action.iconPosition;
-            result.iconSize = this.hostConfig.action.iconSize;
-        }
-        return result;
+    static getFactTitleColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let color = config.factSet.title.color;
+        let isSubtle = config.factSet.title.isSubtle;
+        return StyleManager.getColor(color, theme, isSubtle);
     }
-    getImageStyle(element) {
-        let result = {
-            align: 'stretch',
-            size: 'auto',
-            spacing: 0,
-        };
-        if (element) {
-            result.size = StyleTransformer.transformImageSize(element.size, this.hostConfig);
-            result.spacing = StyleTransformer.transformSpacing(element.spacing, this.hostConfig);
-            result.align = StyleTransformer.transformAlign(element.horizontalAlignment);
-        }
-        if (result.size === 'stretch') {
-            result.align = 'stretch';
-        }
-        return result;
+    static getFactValueColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let color = config.factSet.value.color;
+        let isSubtle = config.factSet.value.isSubtle;
+        return StyleManager.getColor(color, theme, isSubtle);
     }
-    getImageSize(size) {
-        if (this.hostConfig) {
-            return StyleTransformer.transformImageSize(size, this.hostConfig);
+    static getInputColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.input[theme];
+        if (!themeConfig) {
+            themeConfig = config.input.default;
         }
-        else {
-            return StyleTransformer.transformImageSize(size, HostConfigManager.getInstance().getDefaultConfig());
-        }
+        return themeConfig.color;
     }
-    getTextStyle(element, theme) {
-        let result = {
-            color: '#000',
-            fontFamily: 'FullMDL2',
-            fontSize: 14,
-            fontWeight: '400',
-            textAlign: 'center',
-            wrap: 'nowrap',
-            spacing: 0,
-        };
-        if (element) {
-            if (this.hostConfig) {
-                result.fontFamily = this.hostConfig.fontFamily;
-            }
-            result.color = StyleTransformer.transformColor(element.color, element.isSubtle, theme, this.hostConfig);
-            result.fontSize = StyleTransformer.transformFontSize(element.size, this.hostConfig);
-            result.fontWeight = StyleTransformer.transformFontWeight(element.weight, this.hostConfig);
-            result.spacing = StyleTransformer.transformSpacing(element.spacing, this.hostConfig);
-            result.textAlign = StyleTransformer.transformTextAlign(element.horizontalAlignment);
-            result.wrap = element.wrap ? 'wrap' : 'nowrap';
+    static getInputBackgroundColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.input[theme];
+        if (!themeConfig) {
+            themeConfig = config.input.default;
         }
-        return result;
+        return themeConfig.backgroundColor;
     }
-    getFontSize(size) {
-        if (this.hostConfig) {
-            return StyleTransformer.transformFontSize(size, this.hostConfig);
+    static getInputBorderColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.input[theme];
+        if (!themeConfig) {
+            themeConfig = config.input.default;
         }
-        else {
-            return StyleTransformer.transformFontSize(size, HostConfigManager.getInstance().getDefaultConfig());
-        }
+        return themeConfig.borderColor;
     }
-    getFontWeight(weight) {
-        if (this.hostConfig) {
-            return StyleTransformer.transformFontWeight(weight, this.hostConfig);
+    static getInputFocusBorderColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.input[theme];
+        if (!themeConfig) {
+            themeConfig = config.input.default;
         }
-        else {
-            return StyleTransformer.transformFontWeight(weight, HostConfigManager.getInstance().getDefaultConfig());
-        }
+        return themeConfig.focusBorderColor;
     }
-    getColor(color, subtle, theme) {
-        if (this.hostConfig) {
-            return StyleTransformer.transformColor(color, subtle, theme, this.hostConfig);
-        }
-        else {
-            return StyleTransformer.transformColor(color, subtle, theme, HostConfigManager.getInstance().getDefaultConfig());
-        }
+    static get inSetImageSize() {
+        return HostContext.getInstance().getConfig().imageSet.imageSize;
     }
-    getBackgroundColor(theme) {
-        if (this.hostConfig) {
-            return StyleTransformer.transformBackgroundColor(theme, this.hostConfig);
-        }
-        else {
-            return StyleTransformer.transformBackgroundColor(theme, HostConfigManager.getInstance().getDefaultConfig());
-        }
+    static get inSetImageMaxHeight() {
+        return HostContext.getInstance().getConfig().imageSet.maxImageHeight;
     }
-    getSpacing(spacing) {
-        if (this.hostConfig) {
-            return StyleTransformer.transformSpacing(spacing, this.hostConfig);
-        }
-        else {
-            return StyleTransformer.transformSpacing(spacing, HostConfigManager.getInstance().getDefaultConfig());
-        }
+    static get factSetSpacing() {
+        return HostContext.getInstance().getConfig().factSet.margin;
     }
-    getImageSetStyle(element) {
-        let result = {
-            imageSize: 'auto',
-            spacing: 0,
-        };
-        if (element) {
-            result.imageSize = StyleTransformer.transformImageSize(element.imageSize, this.hostConfig);
-            result.spacing = StyleTransformer.transformSpacing(element.spacing, this.hostConfig);
-        }
-        return result;
+    static get factTitleFontSize() {
+        return StyleManager.getFontSize(HostContext.getInstance().getConfig().factSet.title.size);
     }
-    getColumnWidth(element) {
-        if (element) {
-            return StyleTransformer.transformColumnWidth(element.width);
-        }
-        return 'auto';
+    static get factTitleFontWeight() {
+        return StyleManager.getFontWeight(HostContext.getInstance().getConfig().factSet.title.weight);
     }
-    getShowCardStyle() {
-        let result = {
-            mode: 'Inline',
-            margin: 10,
-            theme: 'default',
-        };
-        if (this.hostConfig) {
-            result.mode = this.hostConfig.action.showCard.mode;
-            result.margin = this.hostConfig.action.showCard.margin;
-            result.theme = this.hostConfig.action.showCard.style;
-        }
-        return result;
+    static get factTitleWrap() {
+        return StyleManager.getWrap(HostContext.getInstance().getConfig().factSet.title.wrap);
+    }
+    static get factValueFontSize() {
+        return StyleManager.getFontSize(HostContext.getInstance().getConfig().factSet.value.size);
+    }
+    static get factValueFontWeight() {
+        return StyleManager.getFontWeight(HostContext.getInstance().getConfig().factSet.value.weight);
+    }
+    static get factValueWrap() {
+        return StyleManager.getWrap(HostContext.getInstance().getConfig().factSet.value.wrap);
+    }
+    static get fontFamily() {
+        return HostContext.getInstance().getConfig().fontFamily;
+    }
+    static get separatorThickness() {
+        return HostContext.getInstance().getConfig().separator.thickness;
+    }
+    static get separatorColor() {
+        return HostContext.getInstance().getConfig().separator.color;
+    }
+    static get separatorSpacing() {
+        return HostContext.getInstance().getConfig().separator.spacing;
+    }
+    static get maxActions() {
+        return HostContext.getInstance().getConfig().action.capacity;
+    }
+    static get actionSetSpacing() {
+        return StyleManager.getSpacing(HostContext.getInstance().getConfig().action.actionSetSpacing);
+    }
+    static get actionSpacing() {
+        return HostContext.getInstance().getConfig().action.actionSpacing;
+    }
+    static get actionDirection() {
+        return HostContext.getInstance().getConfig().action.direction;
+    }
+    static get actionAlignment() {
+        return HostContext.getInstance().getConfig().action.align;
+    }
+    static get subCardSpacing() {
+        return HostContext.getInstance().getConfig().action.showCard.margin;
+    }
+    static get subCardTheme() {
+        return HostContext.getInstance().getConfig().action.showCard.style;
     }
 }

@@ -1,132 +1,78 @@
 import * as React from 'react';
-
-import { ImageBlock } from '../../Abandon/Components/Basic/ImageBlock';
+import { LayoutChangeEvent } from 'react-native';
+import { ImageBlock } from '../../Components/Basic/ImageBlock';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ImageElement } from '../../Schema/CardElements/Image';
+import { Dimension } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { ImageStyle } from '../../Styles/Types';
-import { UrlUtils } from '../../Utils/UrlUtils';
-import { IElementViewProps } from '../Shared/BaseProps';
+import { ImageUtils } from '../../Utils/ImageUtils';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps extends IElementViewProps<ImageElement> {
+interface IProps {
+    index: number;
+    element: ImageElement;
     size?: 'auto' | 'stretch' | 'small' | 'medium' | 'large';
-    containerWidth?: number;
-    containerHeight?: number;
+    spacing?: number;
     maxWidth?: number;
     maxHeight?: number;
-    vSpacing?: number;
-    hSpacing?: number;
-    onImageSize?: (width: number, height: number, url: string) => void;
 }
 
 interface IState {
+    loaded: boolean;
     width: number;
     height: number;
 }
 
 export class ImageView extends React.Component<IProps, IState> {
-    private style: ImageStyle;
-
     constructor(props: IProps) {
         super(props);
 
-        const { element } = this.props;
+        this.state = {
+            loaded: false,
+            width: 0,
+            height: 0,
+        };
+    }
+
+    public componentDidMount() {
+        const { element, size, maxWidth, maxHeight } = this.props;
+
         if (element && element.isValid) {
-            this.style = StyleManager.getInstance().getImageStyle(element);
-
-            if (this.props.size) {
-                // Override the element's size if the size is set by parent.
-                this.style.size = StyleManager.getInstance().getImageSize(element.size);
-                if (this.style.size === 'stretch') {
-                    this.style.align = 'stretch';
-                }
-            }
-
-            this.state = {
-                width: 0,
-                height: 0,
-            };
+            ImageUtils.fetchSize(
+                element.url, 
+                size || element.size, 
+                { width: maxWidth, height: maxHeight }, 
+                this.onImageSize, 
+                this.onImageSizeError
+            );
         }
     }
 
     public render() {
-        const { element } = this.props;
+        const { element, spacing } = this.props;
 
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.url + ' is not valid', 'error');
         }
 
-        return (
-            <ImageBlock
-                vIndex={this.props.vIndex}
-                hIndex={this.props.hIndex}
-                relativeWidth={false}
-                url={element.url}
-                alt={element.altText}
-                flexDirection='column'
-                alignSelf={this.style.align}
-                alignItems={this.style.align}
-                alignContent='center'
-                justifyContent='center'
-                size={this.style.size}
-                vSpacing={this.style.spacing || this.props.vSpacing}
-                hSpacing={this.props.hSpacing}
-                containerWidth={this.props.containerWidth}
-                containerHeight={this.props.containerHeight}
-                maxWidth={this.props.maxWidth}
-                maxHeight={this.props.maxHeight}
-                imgStyle={this.borderRadius}
-                source={this.source}
-                mode={this.mode}
-                onPress={element.selectAction ? this.onPress : undefined}
-                onImageSize={this.onImageSize}
-            />
-        );
-    }
-
-    private get mode() {
-        const { element } = this.props;
-
-        if (element.style === 'person') {
-            return 'avatar';
-        } else {
-            return 'default';
+        if (this.state.loaded) {
+            return (
+                <ImageBlock
+                    url={element.url}
+                    alt={element.altText}
+                    flex={this.flex}
+                    alignSelf={StyleManager.getHorizontalAlign(element.horizontalAlignment)}
+                    width={this.state.width}
+                    height={this.state.height}
+                    onPress={element.selectAction ? this.onPress : undefined}
+                    onLayout={this.onLayout}
+                    marginTop={this.spacing}
+                    marginLeft={spacing}
+                    mode={element.style === 'person' ? 'avatar' : 'default'}
+                />
+            );
         }
-    }
-
-    private get source() {
-        const { element } = this.props;
-
-        if (element && element.isValid && !UrlUtils.isRemoteUrl(element.url)) {
-            return 'internal';
-        } else {
-            return 'external';
-        }
-    }
-
-    private get borderRadius() {
-        const { element } = this.props;
-
-        if (element && element.isValid && element.style === 'person') {
-            return {
-                borderRadius: this.state.width / 2,
-            };
-        }
-        return {};
-    }
-
-    private onImageSize = (width: number, height: number) => {
-        this.setState({
-            width: width,
-            height: height
-        }, () => {
-            const { element } = this.props;
-            if (element && element.isValid) {
-                if (this.props.onImageSize) {
-                    this.props.onImageSize(width, height, element.url);
-                }
-            }
-        });
+        return null;
     }
 
     private onPress = () => {
@@ -134,5 +80,54 @@ export class ImageView extends React.Component<IProps, IState> {
         if (callback) {
             callback();
         }
+    }
+
+    private onLayout = (event: LayoutChangeEvent) => {
+        let ratio = this.state.width > 0 && this.state.height > 0 ? this.state.width / this.state.height : 1;
+        let width = event.nativeEvent.layout.width;
+        if (width !== 0 && width !== this.state.width) {
+            this.setState({
+                width: width,
+                height: width / ratio
+            });
+        } 
+    }
+
+    private onImageSizeError = (error: any) => {
+        console.log(error);
+        this.setState({
+            loaded: false,
+        });
+    }
+
+    private onImageSize = (size: Dimension) => {
+        if (size) {
+            this.setState({
+                loaded: true,
+                width: size.width,
+                height: size.height,
+            });
+        }
+    }
+
+    private get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.element.spacing);
+        }
+        return 0;
+    }
+
+    private get flex() {
+        const { element, size } = this.props;
+
+        if (!element || !element.isValid) {
+            return undefined;
+        }
+
+        let finalSize = StyleManager.getImageSize(size || element.size);
+        if (finalSize === 'stretch') {
+            return 1;
+        }
+        return 0;
     }
 }

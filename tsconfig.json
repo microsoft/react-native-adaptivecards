@@ -1,8 +1,7 @@
 {
     "compilerOptions": {
-        "target": "es2015",
+        "target": "es2017",
         "module": "es2015",
-        "baseUrl": "./src/",
         "rootDir": "src",
         "outDir": "dist",
         "jsx": "react",
@@ -28,17 +27,15 @@
         "typeRoots": [
             "node_modules/@types"
         ],
-        "paths": {
-            "react": [
-                "node_modules/@types/react"
-            ]
-        }
     },
     "exclude": [
         "node_modules",
         "typings",
         "examples",
         "dist"
+    ],
+    "include": [
+        "src/**/*"
     ],
     "compileOnSave": false
 }

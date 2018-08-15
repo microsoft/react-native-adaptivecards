@@ -10,12 +10,16 @@ export class ColumnElement extends ScopeElement {
     // “auto”, “stretch”, or a number representing relative width of the column in the column group
     public readonly width?: 'auto' | 'stretch' | number;
     public readonly height?: 'auto' | 'stretch';
+    public readonly verticalContentAlignment?: 'top' | 'center' | 'bottom';
+    public readonly style?: 'default' | 'emphasis';
 
     constructor(json: any, parent: IElement) {
         super(json, parent);
 
         if (this.isValid) {
             this.items = ContentElementFactory.createSet(json.items, this);
+            this.style = json.style;
+            this.verticalContentAlignment = json.verticalContentAlignment;
             if (json.width) {
                 if (json.width === 'auto' || json.width === 'stretch') {
                     this.width = json.width;

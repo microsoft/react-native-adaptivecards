@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
-import { ImageUtils } from '../../Utils/ImageUtils';
 import { ImageView } from '../CardElements/Image';
 export class ImageSetView extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super(...arguments);
         this.keyExtractor = (item, index) => {
             return `url: ${item.url}, index: ${index}`;
         };
@@ -14,49 +13,37 @@ export class ImageSetView extends React.Component {
             if (!element || !element.isValid) {
                 return undefined;
             }
-            return (React.createElement(ImageView, { key: info.index, vIndex: 1, hIndex: info.index, element: info.item, size: element.imageSize, maxWidth: this.state.maxWidth, maxHeight: this.state.maxHeight, hSpacing: 10 }));
+            return (React.createElement(ImageView, { key: info.index, index: 0, element: info.item, size: this.size, maxHeight: StyleManager.inSetImageMaxHeight, spacing: this.getImageSpacing(info.index) }));
         };
-        this.onImageSize = (width, height) => {
-            this.setState({
-                maxHeight: height
-            });
-        };
-        const { element } = this.props;
-        if (element && element.isValid) {
-            this.style = StyleManager.getInstance().getImageSetStyle(element);
-        }
-        this.state = {
-            maxWidth: undefined,
-            maxHeight: undefined,
-            containerWidth: undefined,
-            containerHeight: undefined,
-        };
-    }
-    componentDidUpdate() {
-        const { element, containerWidth, containerHeight } = this.props;
-        if (containerWidth && containerHeight &&
-            (containerWidth !== this.state.containerWidth || containerHeight !== this.state.containerHeight)) {
-            this.setState({
-                containerWidth: containerWidth,
-                containerHeight: containerHeight,
-            });
-            ImageUtils.fetchSetSize(element.images.map(img => img.url), { width: containerWidth, height: this.imageSize }, this.style.imageSize, this.onImageSize, (error) => {
-                console.log(error);
-            });
-        }
     }
     render() {
         const { element } = this.props;
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, minHeight: this.state.maxHeight + this.style.spacing }));
+        return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, marginTop: this.spacing }));
     }
-    get imageSize() {
-        if (this.style.imageSize) {
-            if (typeof this.style.imageSize === 'number') {
-                return this.style.imageSize;
-            }
+    get size() {
+        const { element } = this.props;
+        if (!element || !element.isValid) {
+            return 'auto';
+        }
+        if (element.imageSize) {
+            return element.imageSize;
+        }
+        return StyleManager.inSetImageSize;
+    }
+    getImageSpacing(index) {
+        if (index > 0) {
+            return StyleManager.getSpacing('default');
+        }
+        else {
+            return 0;
+        }
+    }
+    get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.element.spacing);
         }
         return 0;
     }

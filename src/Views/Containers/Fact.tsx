@@ -1,56 +1,46 @@
 import * as React from 'react';
-
-import { TextBlock } from '../../Abandon/Components/Basic/TextBlock';
-import { Row } from '../../Abandon/Components/Containers/Row';
+import { View } from 'react-native';
+import { TextBlock } from '../../Components/Basic/TextBlock';
 import { FactElement } from '../../Schema/Containers/Fact';
 import { StyleManager } from '../../Styles/StyleManager';
-import { IElementViewProps } from '../Shared/BaseProps';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps extends IElementViewProps<FactElement> {
-
+interface IProps {
+    element: FactElement;
+    theme: 'default' | 'emphasis';
 }
 
 export class FactView extends React.Component<IProps> {
-    constructor(props: IProps) {
-        super(props);
-    }
-
     public render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
 
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.title + ' is not valid', 'error');
         }
 
         return (
-            <Row
-                vIndex={this.props.vIndex}
-                hIndex={this.props.hIndex}
-                width='stretch'
-                height='auto'
+            <View
+                flexDirection='row'
+                alignSelf='stretch'
             >
                 <TextBlock
-                    vIndex={0}
-                    hIndex={0}
-                    width='auto'
-                    textStyle={{
-                        color: StyleManager.getInstance().getColor('default', false, this.props.theme),
-                        marginRight: 16,
-                    }}
+                    color={StyleManager.getFactTitleColor(theme)}
+                    fontSize={StyleManager.factTitleFontSize}
+                    fontWeight={StyleManager.factTitleFontWeight}
+                    wrap={StyleManager.factTitleWrap}
+                    marginRight={16}
                 >
                     {element.title}
                 </TextBlock>
                 <TextBlock
-                    vIndex={0}
-                    hIndex={1}
-                    width='auto'
-                    textStyle={{
-                        color: StyleManager.getInstance().getColor('default', true, this.props.theme),
-                    }}
+                    color={StyleManager.getFactValueColor(theme)}
+                    fontSize={StyleManager.factValueFontSize}
+                    fontWeight={StyleManager.factValueFontWeight}
+                    wrap={StyleManager.factValueWrap}
                 >
                     {element.value}
                 </TextBlock>
-            </Row>
+            </View>
         );
     }
 }

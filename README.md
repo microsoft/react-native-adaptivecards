@@ -39,7 +39,7 @@ import AdaptiveCard from 'react-native-adaptivecards';
 | Prop          | default                                     |  Type     | Description              |
 | ------------- | -------------------------------------------:| ---------:| ------------------------:|
 | adaptiveCard  | -                                           | object    | Json object based on AdaptiveCards schema |
-| overrideStyle | [{...}](./src/View/Style/styleConfig.d.ts)  | object    | Customized styles        |
+| overrideStyle | [{...}](./src/View/Styles/styleConfig.d.ts)  | object    | Customized styles        |
 
 ### Examples
 

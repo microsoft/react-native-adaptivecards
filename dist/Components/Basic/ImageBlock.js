@@ -1,31 +1,101 @@
 import * as React from 'react';
-import { Image } from 'react-native';
+import { Image, View } from 'react-native';
+import { UrlUtils } from '../../Utils/UrlUtils';
+import { Svg } from './Svg';
+import { Touchable } from './Touchable';
 export class ImageBlock extends React.Component {
     constructor(props) {
         super(props);
+        this.onError = (err) => {
+            console.log(err);
+            this.setState({
+                loaded: false
+            });
+        };
         this.state = {
-            loaded: false,
-            width: 0,
-            height: 0
+            loaded: true,
         };
     }
-    componentWillMount() {
-        Image.getSize(this.props.url, (width, height) => {
-            this.setState({
-                width: width,
-                height: height,
-            });
-        }, (err) => {
-            console.log(err);
-        });
-    }
     render() {
-        return (React.createElement(Image, { source: { uri: this.props.url }, style: {
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                bottom: 0,
-                right: 0,
-            }, resizeMethod: 'resize', resizeMode: 'contain' }));
+        if (this.props.onPress) {
+            return this.renderTouchableBlock();
+        }
+        else {
+            return this.renderNonTouchableBlock();
+        }
+    }
+    renderTouchableBlock() {
+        return (React.createElement(Touchable, { onPress: this.props.onPress, onLayout: this.props.onLayout, style: {
+                flex: this.props.flex,
+                alignContent: 'center',
+                alignItems: 'center',
+                alignSelf: this.props.alignSelf,
+                marginTop: this.props.marginTop,
+                marginRight: this.props.marginRight,
+                marginBottom: this.props.marginBottom,
+                marginLeft: this.props.marginLeft,
+                paddingTop: this.props.paddingTop,
+                paddingRight: this.props.paddingRight,
+                paddingBottom: this.props.paddingBottom,
+                paddingLeft: this.props.paddingLeft,
+            } },
+            this.renderPlaceholder(),
+            this.renderImage()));
+    }
+    renderNonTouchableBlock() {
+        return (React.createElement(View, { flex: this.props.flex, alignContent: 'center', alignItems: 'center', alignSelf: this.props.alignSelf, marginTop: this.props.marginTop, marginRight: this.props.marginRight, marginBottom: this.props.marginBottom, marginLeft: this.props.marginLeft, paddingTop: this.props.paddingTop, paddingRight: this.props.paddingRight, paddingBottom: this.props.paddingBottom, paddingLeft: this.props.paddingLeft, onLayout: this.props.onLayout },
+            this.renderPlaceholder(),
+            this.renderImage()));
+    }
+    renderPlaceholder() {
+        if (this.state.loaded && !UrlUtils.isDeepLink(this.props.url)) {
+            return undefined;
+        }
+        let source = this.props.mode === 'avatar' ?
+            require('../../Assets/Images/Placeholders/avatar_default.png') :
+            require('../../Assets/Images/Placeholders/image_default.png');
+        return (React.createElement(Image, { source: source, accessible: !!this.props.alt, accessibilityLabel: this.props.alt, style: [
+                {
+                    maxHeight: '100%',
+                    maxWidth: '100%',
+                    width: this.props.width,
+                    height: this.props.height,
+                },
+                this.borderRadius,
+                this.props.style
+            ], resizeMethod: 'resize', resizeMode: 'contain' }));
+    }
+    renderImage() {
+        if (UrlUtils.isSvgXml(this.props.url)) {
+            return (React.createElement(Svg, { url: this.props.url, width: this.props.width, height: this.props.height, style: [
+                    this.borderRadius,
+                    this.props.style
+                ] }));
+        }
+        else {
+            if (UrlUtils.isDeepLink(this.props.url)) {
+                return undefined;
+            }
+            return (React.createElement(Image, { source: { uri: this.props.url }, accessible: !!this.props.alt, accessibilityLabel: this.props.alt, style: [
+                    {
+                        maxHeight: '100%',
+                        maxWidth: '100%',
+                        width: this.props.width,
+                        height: this.props.height,
+                    },
+                    this.borderRadius,
+                    this.props.style
+                ], resizeMethod: 'resize', resizeMode: 'contain', onError: this.onError }));
+        }
+    }
+    get borderRadius() {
+        if (this.props.mode === 'avatar') {
+            return {
+                borderRadius: this.props.width / 2,
+            };
+        }
+        else {
+            return {};
+        }
     }
 }

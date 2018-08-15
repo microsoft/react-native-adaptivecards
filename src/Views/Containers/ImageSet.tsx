@@ -3,62 +3,14 @@ import { FlatList, ListRenderItemInfo } from 'react-native';
 import { ImageElement } from '../../Schema/CardElements/Image';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
 import { StyleManager } from '../../Styles/StyleManager';
-import { ImageSetStyle } from '../../Styles/Types';
-import { ImageUtils } from '../../Utils/ImageUtils';
 import { ImageView } from '../CardElements/Image';
-import { IElementViewProps } from '../Shared/BaseProps';
 
-interface IProps extends IElementViewProps<ImageSetElement> {
-    containerWidth?: number;
-    containerHeight?: number;
+interface IProps {
+    index: number;
+    element: ImageSetElement;
 }
 
-interface IState {
-    maxWidth: number;
-    maxHeight: number;
-    containerWidth: number;
-    containerHeight: number;
-}
-
-export class ImageSetView extends React.Component<IProps, IState> {
-    private style: ImageSetStyle;
-
-    constructor(props: IProps) {
-        super(props);
-
-        const { element } = this.props;
-        if (element && element.isValid) {
-            this.style = StyleManager.getInstance().getImageSetStyle(element);
-        }
-
-        this.state = {
-            maxWidth: undefined,
-            maxHeight: undefined,
-            containerWidth: undefined,
-            containerHeight: undefined,
-        };
-    }
-
-    public componentDidUpdate() {
-        const { element, containerWidth, containerHeight } = this.props;
-        if (containerWidth && containerHeight &&
-            (containerWidth !== this.state.containerWidth || containerHeight !== this.state.containerHeight)) {
-            this.setState({
-                containerWidth: containerWidth,
-                containerHeight: containerHeight,
-            });
-            ImageUtils.fetchSetSize(
-                element.images.map(img => img.url),
-                { width: containerWidth, height: this.imageSize },
-                this.style.imageSize,
-                this.onImageSize,
-                (error: any) => {
-                    console.log(error);
-                }
-            );
-        }
-    }
-
+export class ImageSetView extends React.Component<IProps> {
     public render() {
         const { element } = this.props;
 
@@ -72,7 +24,7 @@ export class ImageSetView extends React.Component<IProps, IState> {
                 renderItem={this.renderImage}
                 keyExtractor={this.keyExtractor}
                 horizontal={true}
-                minHeight={this.state.maxHeight + this.style.spacing}
+                marginTop={this.spacing}
             />
         );
     }
@@ -91,28 +43,40 @@ export class ImageSetView extends React.Component<IProps, IState> {
         return (
             <ImageView
                 key={info.index}
-                vIndex={1}
-                hIndex={info.index}
+                index={0}
                 element={info.item}
-                size={element.imageSize}
-                maxWidth={this.state.maxWidth}
-                maxHeight={this.state.maxHeight}
-                hSpacing={10}
+                size={this.size}
+                maxHeight={StyleManager.inSetImageMaxHeight}
+                spacing={this.getImageSpacing(info.index)}
             />
         );
     }
 
-    private onImageSize = (width: number, height: number) => {
-        this.setState({
-            maxHeight: height
-        });
+    private get size() {
+        const { element } = this.props;
+
+        if (!element || !element.isValid) {
+            return 'auto';
+        }
+
+        if (element.imageSize) {
+            return element.imageSize;
+        }
+
+        return StyleManager.inSetImageSize;
     }
 
-    private get imageSize() {
-        if (this.style.imageSize) {
-            if (typeof this.style.imageSize === 'number') {
-                return this.style.imageSize;
-            }
+    private getImageSpacing(index: number) {
+        if (index > 0) {
+            return StyleManager.getSpacing('default');
+        } else {
+            return 0;
+        }
+    }
+
+    private get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.element.spacing);
         }
         return 0;
     }

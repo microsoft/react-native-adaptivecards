@@ -5,6 +5,8 @@ export class ColumnElement extends ScopeElement {
         super(json, parent);
         if (this.isValid) {
             this.items = ContentElementFactory.createSet(json.items, this);
+            this.style = json.style;
+            this.verticalContentAlignment = json.verticalContentAlignment;
             if (json.width) {
                 if (json.width === 'auto' || json.width === 'stretch') {
                     this.width = json.width;

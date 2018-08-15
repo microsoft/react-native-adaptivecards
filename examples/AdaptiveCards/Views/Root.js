@@ -3,9 +3,9 @@ import { Linking, View, } from 'react-native';
 import { ActionContext } from '../Contexts/ActionContext';
 import { FormContext } from '../Contexts/FormContext';
 import { HostContext } from '../Contexts/HostContext';
-import { HostRenderer } from '../HostRenderer/HostRenderer';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 import { CardElement } from '../Schema/Cards/Card';
+import { StyleManager } from '../Styles/StyleManager';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
 export class CardRootView extends React.PureComponent {
     constructor(props) {
@@ -75,11 +75,16 @@ export class CardRootView extends React.PureComponent {
             return args;
         };
         let hostContext = HostContext.getInstance();
+        console.log(StyleManager.getColor('accent', 'default', false));
+        hostContext.applyConfig(this.props.config);
         hostContext.registerOpenUrlHandler(this.onOpenUrl);
         hostContext.registerSubmitHandler(this.onSubmit);
         hostContext.registerCallbackHandler(this.onCallback);
         hostContext.registerFocusHandler(this.props.onFocus);
         hostContext.registerBlurHandler(this.props.onBlur);
+        hostContext.registerErrorHandler(this.props.onError);
+        hostContext.registerInfoHandler(this.props.onInfo);
+        hostContext.registerWarningHandler(this.props.onWarning);
         let actionContext = ActionContext.getGlobalInstance();
         actionContext.registerHook({
             func: this.validateForm,
@@ -102,11 +107,8 @@ export class CardRootView extends React.PureComponent {
             actionType: ActionType.Callback
         });
     }
-    static registerSVGRenderer(renderer) {
-        HostContext.getInstance().registerHostRenderer(HostRenderer.SVG, renderer);
-    }
     render() {
         return (React.createElement(View, { style: { flex: 1 } },
-            React.createElement(AdaptiveCardView, { vIndex: 0, hIndex: 0, element: new CardElement(this.props.adaptiveCard, undefined), style: this.props.style })));
+            React.createElement(AdaptiveCardView, { index: 0, element: new CardElement(this.props.adaptiveCard, undefined), theme: 'default', style: this.props.style })));
     }
 }

@@ -8,6 +8,7 @@ export class ContainerElement extends ScopeElement {
             this.style = json.style;
             this.items = ContentElementFactory.createSet(json.items, this);
             this.height = json.height;
+            this.verticalContentAlignment = json.verticalContentAlignment;
         }
     }
     get children() {

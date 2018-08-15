@@ -19,15 +19,6 @@ const cardOverrideStyle = {
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-
-        AdaptiveCards.registerSVGRenderer((svgXmlData, width, height) => {
-            return (
-                <SvgUri
-                    width={width}
-                    height={height}
-                    svgXmlData={svgXmlData} />
-            );
-        })
     }
 
     render() {

@@ -1,18 +1,16 @@
 import React from 'react';
 import { ActionType } from '../../Schema/Abstract/ActionElement';
-import { OpenUrlActionView } from '../Actions/OpenUrlAction';
-import { ShowCardActionView } from '../Actions/ShowCardAction';
-import { SubmitActionView } from '../Actions/SubmitAction';
+import { ActionView } from '../Actions/Action';
 export class ActionFactory {
-    static createAction(element, vIndex, hIndex, context) {
+    static createAction(element, index, theme, context) {
         if (element) {
             switch (element.type) {
                 case ActionType.OpenUrl:
-                    return (React.createElement(OpenUrlActionView, { key: 'OpenUrlActionView' + hIndex, vIndex: vIndex, hIndex: hIndex, element: element, actionHooks: this.getHooks(context, element.type) }));
+                    return (React.createElement(ActionView, { key: 'OpenUrlActionView' + index, index: index, element: element, theme: theme, actionHooks: this.getHooks(context, element.type) }));
                 case ActionType.ShowCard:
-                    return (React.createElement(ShowCardActionView, { key: 'ShowCardActionView' + hIndex, vIndex: vIndex, hIndex: hIndex, element: element, actionHooks: this.getHooks(context, element.type) }));
+                    return (React.createElement(ActionView, { key: 'ShowCardActionView' + index, index: index, element: element, theme: theme, actionHooks: this.getHooks(context, element.type) }));
                 case ActionType.Submit:
-                    return (React.createElement(SubmitActionView, { key: 'SubmitActionView' + hIndex, vIndex: vIndex, hIndex: hIndex, element: element, actionHooks: this.getHooks(context, element.type) }));
+                    return (React.createElement(ActionView, { key: 'SubmitActionView' + index, index: index, element: element, theme: theme, actionHooks: this.getHooks(context, element.type) }));
                 default:
                     return null;
             }

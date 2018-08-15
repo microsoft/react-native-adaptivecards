@@ -1,23 +1,16 @@
 import * as React from 'react';
-import { TextBlock } from '../../Abandon/Components/Basic/TextBlock';
-import { Row } from '../../Abandon/Components/Containers/Row';
+import { View } from 'react-native';
+import { TextBlock } from '../../Components/Basic/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class FactView extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.title + ' is not valid', 'error');
         }
-        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, width: 'stretch', height: 'auto' },
-            React.createElement(TextBlock, { vIndex: 0, hIndex: 0, width: 'auto', textStyle: {
-                    color: StyleManager.getInstance().getColor('default', false, this.props.theme),
-                    marginRight: 16,
-                } }, element.title),
-            React.createElement(TextBlock, { vIndex: 0, hIndex: 1, width: 'auto', textStyle: {
-                    color: StyleManager.getInstance().getColor('default', true, this.props.theme),
-                } }, element.value)));
+        return (React.createElement(View, { flexDirection: 'row', alignSelf: 'stretch' },
+            React.createElement(TextBlock, { color: StyleManager.getFactTitleColor(theme), fontSize: StyleManager.factTitleFontSize, fontWeight: StyleManager.factTitleFontWeight, wrap: StyleManager.factTitleWrap, marginRight: 16 }, element.title),
+            React.createElement(TextBlock, { color: StyleManager.getFactValueColor(theme), fontSize: StyleManager.factValueFontSize, fontWeight: StyleManager.factValueFontWeight, wrap: StyleManager.factValueWrap }, element.value)));
     }
 }

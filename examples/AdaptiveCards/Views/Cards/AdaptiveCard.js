@@ -1,13 +1,12 @@
-import React from 'react';
-import { Platform, StyleSheet, View, } from 'react-native';
-import { ImageBackground } from '../../Abandon/Components/Basic/ImageBackground';
-import { Column } from '../../Abandon/Components/Containers/Column';
-import { Row } from '../../Abandon/Components/Containers/Row';
+import * as React from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
+import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ActionType } from '../../Schema/Abstract/ActionElement';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 const styles = StyleSheet.create({
     cardContainer: Object.assign({ flex: 1, backgroundColor: '#fff', borderRadius: 4 }, Platform.select({
         ios: {
@@ -45,33 +44,32 @@ export class AdaptiveCardView extends React.Component {
         this.state = {};
         this.actionContext = ActionContext.createInstance();
         this.actionContext.registerHook({ func: this.showSubCard, name: 'showSubCard', actionType: ActionType.ShowCard });
-        this.showCardStyle = StyleManager.getInstance().getShowCardStyle();
     }
     render() {
-        if (!this.props.element || !this.props.element.isValid) {
-            return undefined;
+        const { element } = this.props;
+        if (!element || !element.isValid) {
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', 'error');
         }
         return (React.createElement(View, { style: this.props.style || styles.cardContainer }, this.renderCard()));
     }
     renderCard() {
-        if (!this.props.element.isValid) {
+        const { element, theme } = this.props;
+        if (!element || !element.isValid) {
             return undefined;
         }
         const cardStyle = {
             flex: 1,
-            backgroundColor: '#fff',
+            backgroundColor: StyleManager.getBackgroundColor(theme),
             borderRadius: 4,
             overflow: 'hidden',
         };
-        const backgroundImage = this.props.element.getBackgroundImageUrl();
+        const backgroundImage = element.getBackgroundImageUrl();
         if (backgroundImage) {
-            return (React.createElement(ImageBackground, { containerStyle: cardStyle, imageStyle: {
-                    borderRadius: 4,
-                }, source: { uri: backgroundImage }, vIndex: 0, hIndex: 0 },
+            return (React.createElement(ImageBackground, { url: backgroundImage, containerStyle: cardStyle, imageStyle: { borderRadius: 4 } },
                 React.createElement(View, { style: { flex: 1, padding: 0, minHeight: 150 } },
                     this.renderBody(),
-                    this.renderActions(),
-                    this.renderSubCard())));
+                    this.renderSubCard(),
+                    this.renderActions())));
         }
         else {
             return (React.createElement(View, { style: [
@@ -82,33 +80,44 @@ export class AdaptiveCardView extends React.Component {
                     }
                 ] },
                 this.renderBody(),
-                this.renderActions(),
-                this.renderSubCard()));
+                this.renderSubCard(),
+                this.renderActionSet()));
         }
     }
     renderBody() {
-        if (!this.props.element.body) {
-            return null;
+        const { element } = this.props;
+        if (!element || !element.isValid || !element.body) {
+            return undefined;
         }
-        return (React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch', height: 'stretch' }, this.props.element.body.map((contentElement, index) => ContentFactory.createView(contentElement, index, this.props.theme))));
+        return (React.createElement(View, { flexDirection: 'column', alignSelf: 'stretch', flex: 1 }, this.props.element.body.map((contentElement, index) => ContentFactory.createView(contentElement, index, this.props.theme))));
+    }
+    renderActionSet() {
+        const { element } = this.props;
+        if (!element || !element.isValid || !element.actions || element.actions.length === 0) {
+            return undefined;
+        }
+        return (React.createElement(View, { flexDirection: StyleManager.actionDirection === 'vertically' ? 'column' : 'row', alignSelf: 'stretch', marginTop: StyleManager.actionSetSpacing, justifyContent: 'center', borderTopWidth: 0, borderTopColor: StyleManager.separatorColor }, this.renderActions()));
     }
     renderActions() {
-        if (!this.props.element.actions) {
-            return null;
+        const { element, theme } = this.props;
+        if (!element || !element.isValid || !element.actions) {
+            return undefined;
         }
-        const hostActionStyle = StyleManager.getInstance().getActionContainerStyle();
-        if (hostActionStyle.direction === 'column') {
-            return (this.props.element.actions.map((action, index) => (React.createElement(Row, { key: 'ActionRow' + index, vIndex: 1, hIndex: 0, spacing: 10, width: 'stretch', height: 'auto' }, ActionFactory.createAction(action, 0, 0, this.actionContext)))));
-        }
-        else {
-            return (React.createElement(Row, { vIndex: 1, hIndex: 0, spacing: 10, width: 'stretch', height: 'auto' }, this.props.element.actions.map((action, index) => ActionFactory.createAction(action, 0, index, this.actionContext))));
-        }
+        let capacity = StyleManager.maxActions;
+        return element.actions.map((action, index) => {
+            if (index < capacity) {
+                return ActionFactory.createAction(action, index, theme, this.actionContext);
+            }
+            else {
+                return undefined;
+            }
+        });
     }
     renderSubCard() {
         if (this.state.subCard) {
-            return (React.createElement(AdaptiveCardView, { vIndex: 2, hIndex: 0, element: this.state.subCard, style: {
-                    marginTop: this.showCardStyle.margin,
-                }, theme: this.showCardStyle.theme }));
+            return (React.createElement(AdaptiveCardView, { index: 2, element: this.state.subCard, style: {
+                    marginTop: StyleManager.subCardSpacing
+                }, theme: StyleManager.subCardTheme }));
         }
         return undefined;
     }

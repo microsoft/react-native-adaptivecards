@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Row } from '../../Abandon/Components/Containers/Row';
-import { NumberInput } from '../../Abandon/Components/Inputs/NumberInput';
+import { NumberInput } from '../../Components/Inputs/NumberInput';
 import { FormContext } from '../../Contexts/FormContext';
 import { HostContext } from '../../Contexts/HostContext';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -10,17 +9,25 @@ export class NumberInputView extends React.Component {
         super(props);
         this.onBlur = () => {
             console.log('NumberInputView onBlur');
-            let callback = HostContext.getInstance().getHandler('blur');
-            if (callback) {
-                callback();
-            }
+            this.setState({
+                focused: false,
+            }, () => {
+                let callback = HostContext.getInstance().getHandler('blur');
+                if (callback) {
+                    callback();
+                }
+            });
         };
         this.onFocus = () => {
             console.log('NumberInputView onFocus');
-            let callback = HostContext.getInstance().getHandler('focus');
-            if (callback) {
-                callback();
-            }
+            this.setState({
+                focused: true,
+            }, () => {
+                let callback = HostContext.getInstance().getHandler('focus');
+                if (callback) {
+                    callback();
+                }
+            });
         };
         this.onValueChange = (value) => {
             this.setState({
@@ -36,6 +43,7 @@ export class NumberInputView extends React.Component {
             if (NumberUtils.isNumber(this.props.element.value.toString())) {
                 this.state = {
                     value: this.props.element.value.toString(),
+                    focused: false,
                 };
                 this.updateStore();
             }
@@ -46,10 +54,31 @@ export class NumberInputView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: 'auto' },
-            React.createElement(NumberInput, { vIndex: 0, hIndex: 0, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: element.validate })));
+        return (React.createElement(NumberInput, { color: StyleManager.getColor('default', this.theme, false), backgroundColor: StyleManager.getBackgroundColor(this.theme), borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: StyleManager.getFontSize('default'), fontWeight: StyleManager.getFontWeight('default'), placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: element.validate, marginTop: this.spacing, paddingLeft: 12, paddingRight: 12, paddingTop: 12, paddingBottom: 12 }));
     }
     updateStore() {
         FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.props.element.validate(this.state.value));
+    }
+    get borderColor() {
+        if (this.state.focused) {
+            return StyleManager.getColor('accent', this.theme, false);
+        }
+        else {
+            return StyleManager.getBackgroundColor(this.theme);
+        }
+    }
+    get theme() {
+        if (this.props.theme === 'emphasis') {
+            return 'default';
+        }
+        else {
+            return 'emphasis';
+        }
+    }
+    get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.element.spacing);
+        }
+        return 0;
     }
 }

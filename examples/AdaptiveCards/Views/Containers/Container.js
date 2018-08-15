@@ -1,13 +1,37 @@
 import * as React from 'react';
-import { Column } from '../../Abandon/Components/Containers/Column';
-import { Row } from '../../Abandon/Components/Containers/Row';
+import { View } from 'react-native';
+import { Touchable } from '../../Components/Basic/Touchable';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ContainerView extends React.Component {
-    constructor(props) {
-        super(props);
-        this.renderContents = () => {
+    constructor() {
+        super(...arguments);
+        this.renderTouchableBlock = (backgroundColor) => {
+            return (React.createElement(Touchable, { onPress: this.onPress, style: {
+                    flex: this.flex,
+                    alignSelf: 'stretch',
+                    justifyContent: this.justifyContent,
+                    marginTop: this.spacing,
+                    backgroundColor: backgroundColor,
+                } }, this.renderContent()));
+        };
+        this.renderNonTouchableBlock = (backgroundColor) => {
+            return (React.createElement(View, { flex: this.flex, alignSelf: 'stretch', justifyContent: this.justifyContent, marginTop: this.spacing, backgroundColor: backgroundColor }, this.renderContent()));
+        };
+        this.renderContent = () => {
+            const { element } = this.props;
+            if (!element || !element.isValid) {
+                return undefined;
+            }
+            const background = element.getBackgroundImageUrl();
+            if (background) {
+                return ContentFactory.createBackgroundImageView(this.renderItems(), background);
+            }
+            return this.renderItems();
+        };
+        this.renderItems = () => {
             const { element } = this.props;
             if (!element || !element.isValid) {
                 return undefined;
@@ -27,36 +51,46 @@ export class ContainerView extends React.Component {
     render() {
         const { element } = this.props;
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', 'error');
         }
-        const background = element.getBackgroundImageUrl();
-        let backgroundColor = StyleManager.getInstance().getBackgroundColor(element.style);
-        if (background) {
-            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: element.height, onPress: element.selectAction ? this.onPress : undefined, style: [
-                    {
-                        backgroundColor: backgroundColor,
-                    },
-                    this.minHeight
-                ] },
-                React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch', height: element.height, vSpacing: 0 }, ContentFactory.createBackgroundImageView(this.renderContents(), background))));
+        let backgroundColor = StyleManager.getBackgroundColor(element.style);
+        if (element.selectAction) {
+            return this.renderTouchableBlock(backgroundColor);
         }
         else {
-            return (React.createElement(Row, { vIndex: this.props.vIndex, hIndex: this.props.hIndex, spacing: StyleManager.getInstance().getSpacing(element.spacing), width: 'stretch', height: element.height, onPress: element.selectAction ? this.onPress : undefined, style: [
-                    {
-                        backgroundColor: backgroundColor,
-                    },
-                    this.minHeight
-                ] },
-                React.createElement(Column, { vIndex: 0, hIndex: 0, width: 'stretch', height: element.height, vSpacing: 0 }, this.renderContents())));
+            return this.renderNonTouchableBlock(backgroundColor);
         }
     }
-    get minHeight() {
+    get justifyContent() {
         const { element } = this.props;
-        if (!element || !element.isValid || !element.items || element.items.length === 0) {
-            return { minHeight: 3 };
+        if (!element || !element.isValid) {
+            return 'flex-start';
         }
-        else {
-            return {};
+        switch (element.verticalContentAlignment) {
+            case 'top':
+                return 'flex-start';
+            case 'center':
+                return 'center';
+            case 'bottom':
+                return 'flex-end';
+            default:
+                return 'center';
         }
+    }
+    get flex() {
+        const { element } = this.props;
+        if (!element || !element.isValid) {
+            return 0;
+        }
+        if (element.height === 'stretch') {
+            return 1;
+        }
+        return 0;
+    }
+    get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.element.spacing);
+        }
+        return 0;
     }
 }

@@ -1,19 +1,19 @@
 import * as React from 'react';
-import { TextBlock } from '../../Abandon/Components/Basic/TextBlock';
+import { TextBlock } from '../../Components/Basic/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class TextBlockView extends React.Component {
-    constructor(props) {
-        super(props);
-        const { element } = this.props;
-        if (element && element.isValid) {
-            this.style = StyleManager.getInstance().getTextStyle(element, this.props.theme);
-        }
-    }
     render() {
         const { element } = this.props;
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.text + ' is not valid', 'error');
         }
-        return (React.createElement(TextBlock, { vIndex: 0, hIndex: 0, width: 'stretch', fontSize: this.style.fontSize, fontWeight: this.style.fontWeight, color: this.style.color, backgroundColor: 'transparent', textAlign: this.style.textAlign, wrap: this.style.wrap, vSpacing: 0, numberOfLines: element.maxLines }, element.text));
+        return (React.createElement(TextBlock, { color: StyleManager.getColor(element.color, this.props.theme, element.isSubtle), fontSize: StyleManager.getFontSize(element.size), fontWeight: StyleManager.getFontWeight(element.weight), backgroundColor: 'transparent', textAlign: StyleManager.getTextAlign(element.horizontalAlignment), wrap: StyleManager.getWrap(element.wrap), numberOfLines: element.maxLines, marginTop: this.spacing }, element.text));
+    }
+    get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.element.spacing);
+        }
+        return 0;
     }
 }
