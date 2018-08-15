@@ -121,6 +121,15 @@ export class StyleManager {
         return themeConfig.color;
     }
 
+    public static getInputFocusColor(theme: 'default' | 'emphasis') {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.input[theme];
+        if (!themeConfig) {
+            themeConfig = config.input.default;
+        }
+        return themeConfig.focusColor;
+    }
+
     public static getInputBackgroundColor(theme: 'default' | 'emphasis') {
         let config = HostContext.getInstance().getConfig();
         let themeConfig = config.input[theme];
@@ -128,6 +137,15 @@ export class StyleManager {
             themeConfig = config.input.default;
         }
         return themeConfig.backgroundColor;
+    }
+
+    public static getInputFocusBackgroundColor(theme: 'default' | 'emphasis') {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.input[theme];
+        if (!themeConfig) {
+            themeConfig = config.input.default;
+        }
+        return themeConfig.focusBackgroundColor;
     }
 
     public static getInputBorderColor(theme: 'default' | 'emphasis') {

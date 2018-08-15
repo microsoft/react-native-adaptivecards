@@ -48,8 +48,8 @@ export class NumberInputView extends React.Component<IProps, IState> {
 
         return (
             <NumberInput
-                color={StyleManager.getColor('default', this.theme, false)}
-                backgroundColor={StyleManager.getBackgroundColor(this.theme)}
+                color={this.color}
+                backgroundColor={this.backgroundColor}
                 borderColor={this.borderColor}
                 borderRadius={4}
                 borderWidth={1}
@@ -108,19 +108,27 @@ export class NumberInputView extends React.Component<IProps, IState> {
         );
     }
 
-    private get borderColor() {
+    private get color() {
         if (this.state.focused) {
-            return StyleManager.getColor('accent', this.theme, false);
+            return StyleManager.getInputFocusColor(this.props.theme);
         } else {
-            return StyleManager.getBackgroundColor(this.theme);
+            return StyleManager.getInputColor(this.props.theme);
         }
     }
 
-    private get theme() {
-        if (this.props.theme === 'emphasis') {
-            return 'default';
+    private get backgroundColor() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
         } else {
-            return 'emphasis';
+            return StyleManager.getInputBackgroundColor(this.props.theme);
+        }
+    }
+
+    private get borderColor() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusBorderColor(this.props.theme);
+        } else {
+            return StyleManager.getInputBorderColor(this.props.theme);
         }
     }
 

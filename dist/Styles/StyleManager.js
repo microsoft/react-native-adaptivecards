@@ -106,6 +106,14 @@ export class StyleManager {
         }
         return themeConfig.color;
     }
+    static getInputFocusColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.input[theme];
+        if (!themeConfig) {
+            themeConfig = config.input.default;
+        }
+        return themeConfig.focusColor;
+    }
     static getInputBackgroundColor(theme) {
         let config = HostContext.getInstance().getConfig();
         let themeConfig = config.input[theme];
@@ -113,6 +121,14 @@ export class StyleManager {
             themeConfig = config.input.default;
         }
         return themeConfig.backgroundColor;
+    }
+    static getInputFocusBackgroundColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.input[theme];
+        if (!themeConfig) {
+            themeConfig = config.input.default;
+        }
+        return themeConfig.focusBackgroundColor;
     }
     static getInputBorderColor(theme) {
         let config = HostContext.getInstance().getConfig();

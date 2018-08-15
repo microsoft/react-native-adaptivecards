@@ -32,7 +32,7 @@ export class TextInputView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { element, theme } = this.props;
+        const { element } = this.props;
 
         if (!element || !element.isValid) {
             return null;
@@ -40,8 +40,8 @@ export class TextInputView extends React.Component<IProps, IState> {
 
         return (
             <InputBox
-                color={StyleManager.getInputColor(theme)}
-                backgroundColor={StyleManager.getInputBackgroundColor(theme)}
+                color={this.color}
+                backgroundColor={this.backgroundColor}
                 borderColor={this.borderColor}
                 borderRadius={4}
                 borderWidth={1}
@@ -97,6 +97,22 @@ export class TextInputView extends React.Component<IProps, IState> {
             this.state.value,
             this.props.element.validate(this.state.value)
         );
+    }
+
+    private get color() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusColor(this.props.theme);
+        } else {
+            return StyleManager.getInputColor(this.props.theme);
+        }
+    }
+
+    private get backgroundColor() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
+        } else {
+            return StyleManager.getInputBackgroundColor(this.props.theme);
+        }
     }
 
     private get borderColor() {

@@ -54,25 +54,33 @@ export class NumberInputView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(NumberInput, { color: StyleManager.getColor('default', this.theme, false), backgroundColor: StyleManager.getBackgroundColor(this.theme), borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: StyleManager.getFontSize('default'), fontWeight: StyleManager.getFontWeight('default'), placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: element.validate, marginTop: this.spacing, paddingLeft: 12, paddingRight: 12, paddingTop: 12, paddingBottom: 12 }));
+        return (React.createElement(NumberInput, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: StyleManager.getFontSize('default'), fontWeight: StyleManager.getFontWeight('default'), placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: element.validate, marginTop: this.spacing, paddingLeft: 12, paddingRight: 12, paddingTop: 12, paddingBottom: 12 }));
     }
     updateStore() {
         FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.props.element.validate(this.state.value));
     }
-    get borderColor() {
+    get color() {
         if (this.state.focused) {
-            return StyleManager.getColor('accent', this.theme, false);
+            return StyleManager.getInputFocusColor(this.props.theme);
         }
         else {
-            return StyleManager.getBackgroundColor(this.theme);
+            return StyleManager.getInputColor(this.props.theme);
         }
     }
-    get theme() {
-        if (this.props.theme === 'emphasis') {
-            return 'default';
+    get backgroundColor() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
         }
         else {
-            return 'emphasis';
+            return StyleManager.getInputBackgroundColor(this.props.theme);
+        }
+    }
+    get borderColor() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusBorderColor(this.props.theme);
+        }
+        else {
+            return StyleManager.getInputBorderColor(this.props.theme);
         }
     }
     get spacing() {

@@ -527,14 +527,18 @@ export class FactSetConfig {
 
 export class InputThemeConfig {
     public color: string;
+    public focusColor: string;
     public backgroundColor: string;
+    public focusBackgroundColor: string;
     public borderColor: string;
     public focusBorderColor: string;
 
     constructor(json?: any) {
         if (json) {
             this.color = json['color'];
+            this.focusColor = json['focusColor'];
             this.backgroundColor = json['backgroundColor'];
+            this.focusBackgroundColor = json['focusBackgroundColor'];
             this.borderColor = json['borderColor'];
             this.focusBorderColor = json['focusBorderColor'];
         }
@@ -546,7 +550,10 @@ export class InputThemeConfig {
                 if (current) {
                     return {
                         color: current.color !== undefined ? current.color : prev.color,
+                        focusColor: current.focusColor !== undefined ? current.focusColor : prev.focusColor,
                         backgroundColor: current.backgroundColor !== undefined ? current.backgroundColor : prev.backgroundColor,
+                        focusBackgroundColor:
+                            current.focusBackgroundColor !== undefined ? current.focusBackgroundColor : prev.focusBackgroundColor,
                         borderColor: current.borderColor !== undefined ? current.borderColor : prev.borderColor,
                         focusBorderColor: current.focusBorderColor !== undefined ? current.focusBorderColor : prev.focusBorderColor,
                     } as InputThemeConfig;
