@@ -66,7 +66,7 @@ export class NumberInput extends React.Component<IProps> {
                 paddingLeft={this.props.paddingLeft}
                 style={this.props.style}
                 onValueChange={this.onChangeText}
-                validateInput={this.onValidate}
+                validateInput={this.validateInput}
                 onBlur={this.onBlur}
                 onFocus={this.onFocus}
             />
@@ -87,7 +87,7 @@ export class NumberInput extends React.Component<IProps> {
         }
     }
 
-    private onValidate = (input: string) => {
+    private validateInput = (input: string) => {
         if (this.props.validateInput) {
             return this.props.validateInput(input);
         }
