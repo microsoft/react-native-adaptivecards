@@ -3,6 +3,29 @@ import { TextInput, } from 'react-native';
 export class InputBox extends React.Component {
     constructor(props) {
         super(props);
+        this.onChangeText = (input) => {
+            if (this.props.onValueChange) {
+                this.props.onValueChange(input);
+            }
+        };
+        this.onBlur = () => {
+            if (this.props.validateInput) {
+                if (this.props.validateInput(this.props.value)) {
+                    console.log('Input: valid');
+                }
+                else {
+                    console.log('Input: invalid');
+                }
+            }
+            if (this.props.onBlur) {
+                this.props.onBlur();
+            }
+        };
+        this.onFocus = () => {
+            if (this.props.onFocus) {
+                this.props.onFocus();
+            }
+        };
     }
     render() {
         return (React.createElement(TextInput, { style: [
@@ -28,7 +51,7 @@ export class InputBox extends React.Component {
                     paddingLeft: this.props.paddingLeft,
                 },
                 this.props.style
-            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.props.onValueChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
+            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onChangeText, onFocus: this.onFocus, onBlur: this.onBlur }));
     }
     get isMultiLine() {
         return this.props.numberOfLines && this.props.numberOfLines > 1;

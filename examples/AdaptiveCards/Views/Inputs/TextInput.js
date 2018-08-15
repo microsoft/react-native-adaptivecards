@@ -33,6 +33,12 @@ export class TextInputView extends React.Component {
                 value: value
             }, this.updateStore);
         };
+        this.validateInput = (input) => {
+            if (this.props.element) {
+                return this.props.element.validate(input);
+            }
+            return true;
+        };
         const { element } = this.props;
         if (element && element.isValid) {
             this.state = {
@@ -47,10 +53,10 @@ export class TextInputView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(InputBox, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, numberOfLines: this.numberOfLine, fontSize: this.fontSize, fontWeight: this.fontWeight, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical }));
+        return (React.createElement(InputBox, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, numberOfLines: this.numberOfLine, fontSize: this.fontSize, fontWeight: this.fontWeight, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, validateInput: this.validateInput, onFocus: this.onFocus, onBlur: this.onBlur, marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical }));
     }
     updateStore() {
-        FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.props.element.validate(this.state.value));
+        FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.validateInput(this.state.value));
     }
     get fontSize() {
         return StyleManager.getFontSize('default');

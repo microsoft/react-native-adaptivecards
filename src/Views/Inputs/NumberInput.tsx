@@ -60,7 +60,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
                 onValueChange={this.onValueChange}
                 onBlur={this.onBlur}
                 onFocus={this.onFocus}
-                validateInput={this.onValidate}
+                validateInput={this.validateInput}
                 marginTop={this.spacing}
                 paddingLeft={this.paddingHorizontal}
                 paddingRight={this.paddingHorizontal}
@@ -100,7 +100,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
         }, this.updateStore);
     }
 
-    private onValidate = (input: string) => {
+    private validateInput = (input: string) => {
         if (this.props.element) {
             return this.props.element.validate(input);
         }
@@ -111,7 +111,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
         FormContext.getInstance().updateField(
             this.props.element.id,
             this.state.value,
-            this.props.element.validate(this.state.value)
+            this.validateInput(this.state.value)
         );
     }
     

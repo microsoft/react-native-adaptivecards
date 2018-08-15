@@ -66,6 +66,7 @@ export class NumberInput extends React.Component<IProps> {
                 paddingLeft={this.props.paddingLeft}
                 style={this.props.style}
                 onValueChange={this.onChangeText}
+                validateInput={this.onValidate}
                 onBlur={this.onBlur}
                 onFocus={this.onFocus}
             />
@@ -81,17 +82,17 @@ export class NumberInput extends React.Component<IProps> {
     }
 
     private onBlur = () => {
-        if (this.props.validateInput) {
-            if (this.props.validateInput(this.props.value)) {
-                console.log('NumberInput: valid');
-            } else {
-                console.log('NumberInput: invalid');
-            }
-        }
         if (this.props.onBlur) {
             this.props.onBlur();
         }
     }
+
+    private onValidate = (input: string) => {
+        if (this.props.validateInput) {
+            return this.props.validateInput(input);
+        }
+        return true;
+    } 
 
     private onFocus = () => {
         if (this.props.onFocus) {

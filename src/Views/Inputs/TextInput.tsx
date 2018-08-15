@@ -52,6 +52,7 @@ export class TextInputView extends React.Component<IProps, IState> {
                 placeholder={element.placeholder}
                 value={this.state.value}
                 onValueChange={this.onValueChange}
+                validateInput={this.validateInput}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 marginTop={this.spacing}
@@ -93,11 +94,18 @@ export class TextInputView extends React.Component<IProps, IState> {
         }, this.updateStore);
     }
 
+    private validateInput = (input: string) => {
+        if (this.props.element) {
+            return this.props.element.validate(input);
+        }
+        return true;
+    }
+
     private updateStore() {
         FormContext.getInstance().updateField(
             this.props.element.id,
             this.state.value,
-            this.props.element.validate(this.state.value)
+            this.validateInput(this.state.value)
         );
     }
 

@@ -34,7 +34,7 @@ export class NumberInputView extends React.Component {
                 value: value
             }, this.updateStore);
         };
-        this.onValidate = (input) => {
+        this.validateInput = (input) => {
             if (this.props.element) {
                 return this.props.element.validate(input);
             }
@@ -60,10 +60,10 @@ export class NumberInputView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(NumberInput, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: this.fontSize, fontWeight: this.fontWeight, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: this.onValidate, marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical }));
+        return (React.createElement(NumberInput, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: this.fontSize, fontWeight: this.fontWeight, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: this.validateInput, marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical }));
     }
     updateStore() {
-        FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.props.element.validate(this.state.value));
+        FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.validateInput(this.state.value));
     }
     get fontSize() {
         return StyleManager.getFontSize('default');

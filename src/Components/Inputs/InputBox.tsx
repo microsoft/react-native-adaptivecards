@@ -36,6 +36,7 @@ interface IProps {
     onValueChange?: (input: string) => void;
     onFocus?: () => void;
     onBlur?: () => void;
+    validateInput?: (input: string) => boolean;
 }
 
 export class InputBox extends React.Component<IProps> {
@@ -79,11 +80,36 @@ export class InputBox extends React.Component<IProps> {
                 returnKeyType={this.props.returnKeyType}
                 underlineColorAndroid={'transparent'}
                 importantForAccessibility={'no-hide-descendants'}
-                onChangeText={this.props.onValueChange}
-                onFocus={this.props.onFocus}
-                onBlur={this.props.onBlur}
+                onChangeText={this.onChangeText}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
             />
         );
+    }
+
+    private onChangeText = (input: string) => {
+        if (this.props.onValueChange) {
+            this.props.onValueChange(input);
+        }
+    }
+
+    private onBlur = () => {
+        if (this.props.validateInput) {
+            if (this.props.validateInput(this.props.value)) {
+                console.log('Input: valid');
+            } else {
+                console.log('Input: invalid');
+            }
+        }
+        if (this.props.onBlur) {
+            this.props.onBlur();
+        }
+    }
+
+    private onFocus = () => {
+        if (this.props.onFocus) {
+            this.props.onFocus();
+        }
     }
 
     private get isMultiLine() {
