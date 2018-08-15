@@ -143,7 +143,7 @@ export class Button extends React.Component<IProps> {
                 allowFontScaling={true}
                 numberOfLines={1}
                 style={{
-                    flex: 1,
+                    flex: this.props.flex,
                     color: this.props.color,
                     fontFamily: this.props.fontFamily,
                     fontSize: this.props.fontSize,

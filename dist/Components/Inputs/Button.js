@@ -53,7 +53,7 @@ export class Button extends React.Component {
     }
     renderTitle() {
         return (React.createElement(Text, { accessible: false, adjustsFontSizeToFit: true, allowFontScaling: true, numberOfLines: 1, style: {
-                flex: 1,
+                flex: this.props.flex,
                 color: this.props.color,
                 fontFamily: this.props.fontFamily,
                 fontSize: this.props.fontSize,
