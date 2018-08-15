@@ -28,6 +28,9 @@ export class InputBox extends React.Component {
                     paddingLeft: this.props.paddingLeft,
                 },
                 this.props.style
-            ], multiline: this.props.multiline, keyboardType: this.props.keyboardType, blurOnSubmit: true, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.props.onValueChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
+            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.props.onValueChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
+    }
+    get isMultiLine() {
+        return this.props.numberOfLines && this.props.numberOfLines > 1;
     }
 }

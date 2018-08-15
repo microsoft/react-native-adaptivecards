@@ -54,10 +54,22 @@ export class NumberInputView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(NumberInput, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: StyleManager.getFontSize('default'), fontWeight: StyleManager.getFontWeight('default'), placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: element.validate, marginTop: this.spacing, paddingLeft: 12, paddingRight: 12, paddingTop: 12, paddingBottom: 12 }));
+        return (React.createElement(NumberInput, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: this.fontSize, fontWeight: this.fontWeight, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: element.validate, marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical }));
     }
     updateStore() {
         FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.props.element.validate(this.state.value));
+    }
+    get fontSize() {
+        return StyleManager.getFontSize('default');
+    }
+    get fontWeight() {
+        return StyleManager.getFontWeight('default');
+    }
+    get paddingVertical() {
+        return 12;
+    }
+    get paddingHorizontal() {
+        return 12;
     }
     get color() {
         if (this.state.focused) {

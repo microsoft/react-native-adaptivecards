@@ -43,7 +43,6 @@ export class NumberInput extends React.Component<IProps> {
             <InputBox
                 placeholder={this.props.placeholder}
                 value={this.props.value}
-                multiline={false}
                 keyboardType={Platform.OS === 'ios' ? 'numbers-and-punctuation' : 'numeric'}
                 returnKeyType={'done'}
                 flex={this.props.flex}

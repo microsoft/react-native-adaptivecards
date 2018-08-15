@@ -12,7 +12,7 @@ interface IProps {
     value: string;
     keyboardType?: KeyboardTypeOptions;
     returnKeyType?: ReturnKeyTypeOptions;
-    multiline?: boolean;
+    numberOfLines?: number;
     color?: string;
     backgroundColor?: string;
     fontFamily?: string;
@@ -70,10 +70,10 @@ export class InputBox extends React.Component<IProps> {
                     },
                     this.props.style
                 ]}
-                
-                multiline={this.props.multiline}
+                multiline={this.isMultiLine}
+                numberOfLines={this.props.numberOfLines}
                 keyboardType={this.props.keyboardType}
-                blurOnSubmit={true}
+                blurOnSubmit={!this.isMultiLine}
                 placeholder={this.props.placeholder}
                 value={this.props.value}
                 returnKeyType={this.props.returnKeyType}
@@ -84,5 +84,9 @@ export class InputBox extends React.Component<IProps> {
                 onBlur={this.props.onBlur}
             />
         );
+    }
+
+    private get isMultiLine() {
+        return this.props.numberOfLines && this.props.numberOfLines > 1;
     }
 }
