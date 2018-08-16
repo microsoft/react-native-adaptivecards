@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NumberInput } from '../../Components/Inputs/NumberInput';
+import { InputBox } from '../../Components/Inputs/InputBox';
 import { FormContext } from '../../Contexts/FormContext';
 import { HostContext } from '../../Contexts/HostContext';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
@@ -47,7 +47,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
         }
 
         return (
-            <NumberInput
+            <InputBox
                 color={this.color}
                 backgroundColor={this.backgroundColor}
                 borderColor={this.borderColor}

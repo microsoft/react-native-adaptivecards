@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NumberInput } from '../../Components/Inputs/NumberInput';
+import { InputBox } from '../../Components/Inputs/InputBox';
 import { FormContext } from '../../Contexts/FormContext';
 import { HostContext } from '../../Contexts/HostContext';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -60,7 +60,7 @@ export class NumberInputView extends React.Component {
         if (!element || !element.isValid) {
             return null;
         }
-        return (React.createElement(NumberInput, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: this.fontSize, fontWeight: this.fontWeight, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: this.validateInput, marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical }));
+        return (React.createElement(InputBox, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, fontSize: this.fontSize, fontWeight: this.fontWeight, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, validateInput: this.validateInput, marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical }));
     }
     updateStore() {
         FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.validateInput(this.state.value));
