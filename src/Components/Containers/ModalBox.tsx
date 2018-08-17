@@ -46,8 +46,6 @@ export class ModalBox extends React.Component<IProps> {
                         style={[
                             {
                                 width: '85%',
-                                height: '45%',
-                                maxHeight: '45%',
                             }
                         ]}
                     >

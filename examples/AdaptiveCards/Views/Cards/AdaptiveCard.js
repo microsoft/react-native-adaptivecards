@@ -36,7 +36,7 @@ export class AdaptiveCardView extends React.Component {
         if (!element || !element.isValid) {
             return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', theme, 'error');
         }
-        return (React.createElement(Card, { flex: 1, backgroundImageUrl: element.getBackgroundImageUrl(), style: [
+        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: element.getBackgroundImageUrl(), style: [
                 {
                     minHeight: 150,
                 }, this.props.style

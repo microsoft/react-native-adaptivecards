@@ -5,6 +5,7 @@ import { ImageBackground } from '../Basic/ImageBackground';
 
 interface IProps {
     flex?: number;
+    fit?: 'content' | 'container';
     theme?: 'default' | 'emphasis';
     backgroundImageUrl?: string;
     style?: StyleProp<ViewStyle>;
@@ -46,7 +47,7 @@ export class Card extends React.Component<IProps> {
                 <ImageBackground
                     url={this.props.backgroundImageUrl}
                     containerStyle={{
-                        flex: 1,
+                        flex: this.contentFlex,
                         backgroundColor: StyleManager.getBackgroundColor(this.props.theme),
                         borderRadius: 4,
                         overflow: 'hidden',
@@ -63,7 +64,7 @@ export class Card extends React.Component<IProps> {
         } else {
             return (
                 <View
-                    flex={1}
+                    flex={this.contentFlex}
                     backgroundColor={StyleManager.getBackgroundColor(this.props.theme)}
                     paddingTop={12}
                     paddingRight={12}
@@ -72,9 +73,17 @@ export class Card extends React.Component<IProps> {
                     borderRadius={4}
                     overflow='hidden'
                 >
-                    {this.props.children};
+                    {this.props.children}
                 </View>
             );
+        }
+    }
+
+    private get contentFlex() {
+        if (this.props.fit === 'container') {
+            return 1;
+        } else {
+            return 0;
         }
     }
 }

@@ -47,6 +47,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         return (
             <Card
                 flex={1}
+                fit='container'
                 backgroundImageUrl={element.getBackgroundImageUrl()}
                 style={[
                     {

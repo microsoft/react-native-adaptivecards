@@ -22,7 +22,7 @@ export class Card extends React.Component {
     renderCardContent() {
         if (this.props.backgroundImageUrl) {
             return (React.createElement(ImageBackground, { url: this.props.backgroundImageUrl, containerStyle: {
-                    flex: 1,
+                    flex: this.contentFlex,
                     backgroundColor: StyleManager.getBackgroundColor(this.props.theme),
                     borderRadius: 4,
                     overflow: 'hidden',
@@ -30,9 +30,15 @@ export class Card extends React.Component {
                 React.createElement(View, { style: { flex: 1, padding: 0, minHeight: 150 } }, this.props.children)));
         }
         else {
-            return (React.createElement(View, { flex: 1, backgroundColor: StyleManager.getBackgroundColor(this.props.theme), paddingTop: 12, paddingRight: 12, paddingBottom: 12, paddingLeft: 12, borderRadius: 4, overflow: 'hidden' },
-                this.props.children,
-                ";"));
+            return (React.createElement(View, { flex: this.contentFlex, backgroundColor: StyleManager.getBackgroundColor(this.props.theme), paddingTop: 12, paddingRight: 12, paddingBottom: 12, paddingLeft: 12, borderRadius: 4, overflow: 'hidden' }, this.props.children));
+        }
+    }
+    get contentFlex() {
+        if (this.props.fit === 'container') {
+            return 1;
+        }
+        else {
+            return 0;
         }
     }
 }

@@ -9,6 +9,7 @@ import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
 import { ContainerElement } from '../../Schema/Containers/Container';
 import { FactSetElement } from '../../Schema/Containers/FactSet';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
+import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
 import { ImageView } from '../CardElements/Image';
@@ -18,6 +19,7 @@ import { ColumnSetView } from '../Containers/ColumnSet';
 import { ContainerView } from '../Containers/Container';
 import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
+import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
 import { TextInputView } from '../Inputs/TextInput';
 
@@ -59,7 +61,7 @@ export class ContentFactory {
             switch (element.type) {
                 case ContentElementType.AdaptiveCard:
                     return (
-                        <AdaptiveCardView 
+                        <AdaptiveCardView
                             key={'TextBlockView' + index}
                             element={element as CardElement}
                             index={index}
@@ -132,8 +134,17 @@ export class ContentFactory {
                 case ContentElementType.NumberInput:
                     return (
                         <NumberInputView
-                            key={'TextInputView' + index}
+                            key={'NumberInput' + index}
                             element={element as NumberInputElement}
+                            index={index}
+                            theme={theme}
+                        />
+                    );
+                case ContentElementType.DateInput:
+                    return (
+                        <DateInputView
+                            key={'DateInputView' + index}
+                            element={element as DateInputElement}
                             index={index}
                             theme={theme}
                         />

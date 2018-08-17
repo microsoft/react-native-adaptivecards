@@ -9,6 +9,7 @@ import { ColumnSetView } from '../Containers/ColumnSet';
 import { ContainerView } from '../Containers/Container';
 import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
+import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
 import { TextInputView } from '../Inputs/TextInput';
 export class ContentFactory {
@@ -54,7 +55,9 @@ export class ContentFactory {
                 case ContentElementType.TextInput:
                     return (React.createElement(TextInputView, { key: 'TextInputView' + index, element: element, index: index, theme: theme }));
                 case ContentElementType.NumberInput:
-                    return (React.createElement(NumberInputView, { key: 'TextInputView' + index, element: element, index: index, theme: theme }));
+                    return (React.createElement(NumberInputView, { key: 'NumberInput' + index, element: element, index: index, theme: theme }));
+                case ContentElementType.DateInput:
+                    return (React.createElement(DateInputView, { key: 'DateInputView' + index, element: element, index: index, theme: theme }));
                 default:
                     return null;
             }

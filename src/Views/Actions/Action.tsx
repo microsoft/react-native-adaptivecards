@@ -26,10 +26,10 @@ export class ActionView<T extends ActionElement> extends React.Component<IProps<
             <Button
                 flex={1}
                 title={this.title}
-                color={StyleManager.getColor('accent', 'default', false)}
+                color={StyleManager.getColor('accent', theme, false)}
                 fontSize={StyleManager.getFontSize('default')}
                 fontWeight={StyleManager.getFontWeight('bolder')}
-                backgroundColor={StyleManager.getBackgroundColor('default')}
+                backgroundColor={StyleManager.getBackgroundColor(theme)}
                 textHorizontalAlign='center'
                 textVerticalAlign='center'
                 paddingTop={6}

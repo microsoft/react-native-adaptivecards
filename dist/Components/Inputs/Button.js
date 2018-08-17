@@ -26,7 +26,7 @@ export class Button extends React.Component {
                     borderWidth: this.props.borderWidth,
                 }, this.props.style
             ] },
-            React.createElement(View, { flexDirection: this.layoutDirection, flex: 1, justifyContent: this.props.textVerticalAlign, pointerEvents: 'none' },
+            React.createElement(View, { flexDirection: this.layoutDirection, flex: 0, justifyContent: this.props.textVerticalAlign, pointerEvents: 'none' },
                 this.renderIcon(),
                 this.renderTitle())));
     }

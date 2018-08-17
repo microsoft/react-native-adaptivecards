@@ -21,8 +21,6 @@ export class ModalBox extends React.Component {
                 React.createElement(View, { style: [
                         {
                             width: '85%',
-                            height: '45%',
-                            maxHeight: '45%',
                         }
                     ] }, this.props.children))));
     }
