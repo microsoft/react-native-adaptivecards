@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import { HostContext } from '../Contexts/HostContext';
 
 export class StyleManager {
@@ -207,7 +208,7 @@ export class StyleManager {
     }
 
     public static get separatorThickness() {
-        return HostContext.getInstance().getConfig().separator.thickness;
+        return HostContext.getInstance().getConfig().separator.thickness * StyleSheet.hairlineWidth;
     }
 
     public static get separatorColor() {

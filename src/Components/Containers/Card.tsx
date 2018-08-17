@@ -20,10 +20,6 @@ export class Card extends React.Component<IProps> {
                 borderWidth={1}
                 borderColor='rgba(0, 0, 0, .05)'
                 elevation={2}
-                paddingTop={12}
-                paddingRight={12}
-                paddingBottom={12}
-                paddingLeft={12}
                 style={[
                     Platform.select({
                         ios: {
@@ -69,6 +65,10 @@ export class Card extends React.Component<IProps> {
                 <View
                     flex={1}
                     backgroundColor={StyleManager.getBackgroundColor(this.props.theme)}
+                    paddingTop={12}
+                    paddingRight={12}
+                    paddingBottom={12}
+                    paddingLeft={12}
                     borderRadius={4}
                     overflow='hidden'
                 >

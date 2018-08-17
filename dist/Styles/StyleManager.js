@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import { HostContext } from '../Contexts/HostContext';
 export class StyleManager {
     static getSpacing(spacing) {
@@ -177,7 +178,7 @@ export class StyleManager {
         return HostContext.getInstance().getConfig().fontFamily;
     }
     static get separatorThickness() {
-        return HostContext.getInstance().getConfig().separator.thickness;
+        return HostContext.getInstance().getConfig().separator.thickness * StyleSheet.hairlineWidth;
     }
     static get separatorColor() {
         return HostContext.getInstance().getConfig().separator.color;

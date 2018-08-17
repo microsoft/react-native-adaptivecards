@@ -4,7 +4,7 @@ import { StyleManager } from '../../Styles/StyleManager';
 import { ImageBackground } from '../Basic/ImageBackground';
 export class Card extends React.Component {
     render() {
-        return (React.createElement(View, { flex: this.props.flex, backgroundColor: '#fff', borderRadius: 4, borderWidth: 1, borderColor: 'rgba(0, 0, 0, .05)', elevation: 2, paddingTop: 12, paddingRight: 12, paddingBottom: 12, paddingLeft: 12, style: [
+        return (React.createElement(View, { flex: this.props.flex, backgroundColor: '#fff', borderRadius: 4, borderWidth: 1, borderColor: 'rgba(0, 0, 0, .05)', elevation: 2, style: [
                 Platform.select({
                     ios: {
                         shadowColor: '#000',
@@ -30,7 +30,7 @@ export class Card extends React.Component {
                 React.createElement(View, { style: { flex: 1, padding: 0, minHeight: 150 } }, this.props.children)));
         }
         else {
-            return (React.createElement(View, { flex: 1, backgroundColor: StyleManager.getBackgroundColor(this.props.theme), borderRadius: 4, overflow: 'hidden' },
+            return (React.createElement(View, { flex: 1, backgroundColor: StyleManager.getBackgroundColor(this.props.theme), paddingTop: 12, paddingRight: 12, paddingBottom: 12, paddingLeft: 12, borderRadius: 4, overflow: 'hidden' },
                 this.props.children,
                 ";"));
         }

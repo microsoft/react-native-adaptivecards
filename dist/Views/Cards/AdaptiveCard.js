@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import { ButtonGroup } from '../../Components/Containers/ButtonGroup';
 import { Card } from '../../Components/Containers/Card';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ActionType } from '../../Schema/Abstract/ActionElement';
@@ -35,7 +36,7 @@ export class AdaptiveCardView extends React.Component {
         if (!element || !element.isValid) {
             return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', theme, 'error');
         }
-        return (React.createElement(Card, { flex: 1, style: [
+        return (React.createElement(Card, { flex: 1, backgroundImageUrl: element.getBackgroundImageUrl(), style: [
                 {
                     minHeight: 150,
                 }, this.props.style
@@ -56,7 +57,7 @@ export class AdaptiveCardView extends React.Component {
         if (!element || !element.isValid || !element.actions || element.actions.length === 0) {
             return undefined;
         }
-        return (React.createElement(View, { flexDirection: StyleManager.actionDirection === 'vertically' ? 'column' : 'row', alignSelf: 'stretch', marginTop: StyleManager.actionSetSpacing, justifyContent: 'center', borderTopWidth: 0, borderTopColor: StyleManager.separatorColor }, this.renderActions()));
+        return (React.createElement(ButtonGroup, null, this.renderActions()));
     }
     renderActions() {
         const { element, theme } = this.props;

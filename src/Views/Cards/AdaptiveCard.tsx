@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
+import { ButtonGroup } from '../../Components/Containers/ButtonGroup';
 import { Card } from '../../Components/Containers/Card';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ActionElement, ActionType } from '../../Schema/Abstract/ActionElement';
@@ -46,6 +47,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         return (
             <Card
                 flex={1}
+                backgroundImageUrl={element.getBackgroundImageUrl()}
                 style={[
                     {
                         minHeight: 150,
@@ -89,16 +91,9 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         }
 
         return (
-            <View
-                flexDirection={StyleManager.actionDirection === 'vertically' ? 'column' : 'row'}
-                alignSelf='stretch'
-                marginTop={StyleManager.actionSetSpacing}
-                justifyContent='center'
-                borderTopWidth={0}
-                borderTopColor={StyleManager.separatorColor}
-            >
+            <ButtonGroup>
                 {this.renderActions()}
-            </View>
+            </ButtonGroup>
         );
     }
 
