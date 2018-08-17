@@ -25,8 +25,8 @@ export class DatePanel extends React.Component {
             }
         };
     }
-    componentDidUpdate() {
-        if (Platform.OS === 'android' && this.props.show) {
+    componentDidUpdate(prevProps) {
+        if (Platform.OS === 'android' && this.props.show && !prevProps.show) {
             this.showPickerAndroid();
         }
     }
@@ -52,7 +52,7 @@ export class DatePanel extends React.Component {
     }
     async showPickerAndroid() {
         if (Platform.OS === 'android') {
-            const today = new Date();
+            const today = TimeUtils.extractDate(this.props.value);
             try {
                 const { action, year, month, day } = await DatePickerAndroid.open({
                     date: today,
