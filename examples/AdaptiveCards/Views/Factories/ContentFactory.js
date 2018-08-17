@@ -12,6 +12,7 @@ import { ImageSetView } from '../Containers/ImageSet';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
 import { TextInputView } from '../Inputs/TextInput';
+import { TimeInputView } from '../Inputs/TimeInput';
 export class ContentFactory {
     static createView(element, index, theme) {
         if (element) {
@@ -58,6 +59,8 @@ export class ContentFactory {
                     return (React.createElement(NumberInputView, { key: 'NumberInput' + index, element: element, index: index, theme: theme }));
                 case ContentElementType.DateInput:
                     return (React.createElement(DateInputView, { key: 'DateInputView' + index, element: element, index: index, theme: theme }));
+                case ContentElementType.TimeInput:
+                    return (React.createElement(TimeInputView, { key: 'TimeInputView' + index, element: element, index: index, theme: theme }));
                 default:
                     return null;
             }

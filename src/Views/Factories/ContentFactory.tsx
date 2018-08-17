@@ -12,6 +12,7 @@ import { ImageSetElement } from '../../Schema/Containers/ImageSet';
 import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
+import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
 import { AdaptiveCardView } from '../Cards/AdaptiveCard';
@@ -22,6 +23,7 @@ import { ImageSetView } from '../Containers/ImageSet';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
 import { TextInputView } from '../Inputs/TextInput';
+import { TimeInputView } from '../Inputs/TimeInput';
 
 export class ContentFactory {
     public static createView(element: ContentElement, index: number, theme: 'default' | 'emphasis'): JSX.Element[] {
@@ -145,6 +147,15 @@ export class ContentFactory {
                         <DateInputView
                             key={'DateInputView' + index}
                             element={element as DateInputElement}
+                            index={index}
+                            theme={theme}
+                        />
+                    );
+                case ContentElementType.TimeInput:
+                    return (
+                        <TimeInputView
+                            key={'TimeInputView' + index}
+                            element={element as TimeInputElement}
                             index={index}
                             theme={theme}
                         />
