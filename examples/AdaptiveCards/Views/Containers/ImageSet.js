@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FlatList } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ImageSetView extends React.Component {
     constructor() {
         super(...arguments);
@@ -9,17 +10,17 @@ export class ImageSetView extends React.Component {
             return `url: ${item.url}, index: ${index}`;
         };
         this.renderImage = (info) => {
-            const { element } = this.props;
+            const { element, theme } = this.props;
             if (!element || !element.isValid) {
                 return undefined;
             }
-            return (React.createElement(ImageView, { key: info.index, index: 0, element: info.item, size: this.size, maxHeight: StyleManager.inSetImageMaxHeight, spacing: this.getImageSpacing(info.index) }));
+            return (React.createElement(ImageView, { key: info.index, index: 0, element: info.item, size: this.size, maxHeight: StyleManager.inSetImageMaxHeight, spacing: this.getImageSpacing(info.index), theme: theme }));
         };
     }
     render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
         return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, marginTop: this.spacing }));
     }

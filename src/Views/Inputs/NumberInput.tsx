@@ -5,6 +5,7 @@ import { HostContext } from '../../Contexts/HostContext';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { NumberUtils } from '../../Utils/NumberUtils';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -14,7 +15,6 @@ interface IProps {
 
 interface IState {
     value: string;
-    focused: boolean;
 }
 
 export class NumberInputView extends React.Component<IProps, IState> {
@@ -24,15 +24,15 @@ export class NumberInputView extends React.Component<IProps, IState> {
         const { element } = this.props;
 
         if (element && element.isValid) {
-            let defaultValue = this.props.element.value;
+
+            let defaultValue = element.value;
             if (defaultValue === undefined) {
                 defaultValue = '';
             }
 
-            if (NumberUtils.isNumber(this.props.element.value.toString())) {
+            if (NumberUtils.isNumber(element.value.toString())) {
                 this.state = {
-                    value: this.props.element.value.toString(),
-                    focused: false,
+                    value: element.value.toString(),
                 };
                 this.updateStore();
             }
@@ -40,58 +40,42 @@ export class NumberInputView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
 
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
 
         return (
             <InputBox
-                color={this.color}
-                backgroundColor={this.backgroundColor}
-                borderColor={this.borderColor}
-                borderRadius={4}
-                borderWidth={1}
-                fontSize={this.fontSize}
-                fontWeight={this.fontWeight}
                 placeholder={element.placeholder}
                 value={this.state.value}
                 onValueChange={this.onValueChange}
                 onBlur={this.onBlur}
                 onFocus={this.onFocus}
                 validateInput={this.validateInput}
+                theme={theme}
                 marginTop={this.spacing}
-                paddingLeft={this.paddingHorizontal}
-                paddingRight={this.paddingHorizontal}
-                paddingTop={this.paddingVertical}
-                paddingBottom={this.paddingVertical}
             />
         );
     }
 
     private onBlur = () => {
         console.log('NumberInputView onBlur');
-        this.setState({
-            focused: false,
-        }, () => {
-            let callback = HostContext.getInstance().getHandler('blur');
-            if (callback) {
-                callback();
-            }
-        });
+
+        let callback = HostContext.getInstance().getHandler('blur');
+        if (callback) {
+            callback();
+        }
     }
 
     private onFocus = () => {
         console.log('NumberInputView onFocus');
-        this.setState({
-            focused: true,
-        }, () => {
-            let callback = HostContext.getInstance().getHandler('focus');
-            if (callback) {
-                callback();
-            }
-        });
+
+        let callback = HostContext.getInstance().getHandler('focus');
+        if (callback) {
+            callback();
+        }
     }
 
     private onValueChange = (value: string) => {
@@ -113,46 +97,6 @@ export class NumberInputView extends React.Component<IProps, IState> {
             this.state.value,
             this.validateInput(this.state.value)
         );
-    }
-    
-    private get fontSize() {
-        return StyleManager.getFontSize('default');
-    }
-
-    private get fontWeight() {
-        return StyleManager.getFontWeight('default');
-    }
-
-    private get paddingVertical() {
-        return 12;
-    }
-
-    private get paddingHorizontal() {
-        return 12;
-    }
-
-    private get color() {
-        if (this.state.focused) {
-            return StyleManager.getInputFocusColor(this.props.theme);
-        } else {
-            return StyleManager.getInputColor(this.props.theme);
-        }
-    }
-
-    private get backgroundColor() {
-        if (this.state.focused) {
-            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
-        } else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
-        }
-    }
-
-    private get borderColor() {
-        if (this.state.focused) {
-            return StyleManager.getInputFocusBorderColor(this.props.theme);
-        } else {
-            return StyleManager.getInputBorderColor(this.props.theme);
-        }
     }
 
     private get spacing() {

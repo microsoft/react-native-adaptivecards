@@ -16,10 +16,10 @@ interface IProps<T extends ActionElement> {
 
 export class ActionView<T extends ActionElement> extends React.Component<IProps<T>> {
     public render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
 
         if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.title + ' is not valid', 'error');
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.title + ' is not valid', theme, 'error');
         }
 
         return (

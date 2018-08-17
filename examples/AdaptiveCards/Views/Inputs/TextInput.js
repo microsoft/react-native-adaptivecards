@@ -3,30 +3,23 @@ import { InputBox } from '../../Components/Inputs/InputBox';
 import { FormContext } from '../../Contexts/FormContext';
 import { HostContext } from '../../Contexts/HostContext';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class TextInputView extends React.Component {
     constructor(props) {
         super(props);
         this.onBlur = () => {
             console.log('TextInputView onBlur');
-            this.setState({
-                focused: false
-            }, () => {
-                let callback = HostContext.getInstance().getHandler('blur');
-                if (callback) {
-                    callback();
-                }
-            });
+            let callback = HostContext.getInstance().getHandler('blur');
+            if (callback) {
+                callback();
+            }
         };
         this.onFocus = () => {
             console.log('TextInputView onFocus');
-            this.setState({
-                focused: true
-            }, () => {
-                let callback = HostContext.getInstance().getHandler('focus');
-                if (callback) {
-                    callback();
-                }
-            });
+            let callback = HostContext.getInstance().getHandler('focus');
+            if (callback) {
+                callback();
+            }
         };
         this.onValueChange = (value) => {
             this.setState({
@@ -41,67 +34,31 @@ export class TextInputView extends React.Component {
         };
         const { element } = this.props;
         if (element && element.isValid) {
+            let defaultValue = element.value;
+            if (defaultValue === undefined) {
+                defaultValue = '';
+            }
             this.state = {
-                value: this.props.element.value,
-                focused: false,
+                value: defaultValue
             };
             this.updateStore();
         }
     }
     render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
-        return (React.createElement(InputBox, { color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, numberOfLines: this.numberOfLine, fontSize: this.fontSize, fontWeight: this.fontWeight, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, validateInput: this.validateInput, onFocus: this.onFocus, onBlur: this.onBlur, marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical }));
+        return (React.createElement(InputBox, { numberOfLines: this.numberOfLine, placeholder: element.placeholder, value: this.state.value, onValueChange: this.onValueChange, validateInput: this.validateInput, onFocus: this.onFocus, onBlur: this.onBlur, theme: theme, marginTop: this.spacing }));
     }
     updateStore() {
         FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.validateInput(this.state.value));
-    }
-    get fontSize() {
-        return StyleManager.getFontSize('default');
-    }
-    get fontWeight() {
-        return StyleManager.getFontWeight('default');
-    }
-    get paddingVertical() {
-        return 12;
-    }
-    get paddingHorizontal() {
-        return 12;
     }
     get numberOfLine() {
         if (this.props.element.isMultiline) {
             return 4;
         }
         return 1;
-    }
-    get height() {
-        return this.fontSize * this.numberOfLine + this.paddingVertical * 2;
-    }
-    get color() {
-        if (this.state.focused) {
-            return StyleManager.getInputFocusColor(this.props.theme);
-        }
-        else {
-            return StyleManager.getInputColor(this.props.theme);
-        }
-    }
-    get backgroundColor() {
-        if (this.state.focused) {
-            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
-        }
-        else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
-        }
-    }
-    get borderColor() {
-        if (this.state.focused) {
-            return StyleManager.getInputFocusBorderColor(this.props.theme);
-        }
-        else {
-            return StyleManager.getInputBorderColor(this.props.theme);
-        }
     }
     get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {

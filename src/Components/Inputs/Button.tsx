@@ -3,7 +3,7 @@ import { StyleProp, Text, View, ViewStyle } from 'react-native';
 import { ImageBlock } from '../Basic/ImageBlock';
 import { Touchable } from '../Basic/Touchable';
 
-interface IProps {
+export interface IButtonProps {
     title: string;
     icon?: {
         url: string;
@@ -54,8 +54,8 @@ interface IProps {
     style?: StyleProp<ViewStyle>;
 }
 
-export class Button extends React.Component<IProps> {
-    constructor(props: IProps) {
+export class Button extends React.Component<IButtonProps> {
+    constructor(props: IButtonProps) {
         super(props);
     }
 

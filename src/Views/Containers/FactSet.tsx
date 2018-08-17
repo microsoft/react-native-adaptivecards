@@ -13,10 +13,10 @@ interface IProps {
 
 export class FactSetView extends React.Component<IProps> {
     public render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
 
         if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', 'error');
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
 
         return (

@@ -6,6 +6,7 @@ import {
     TextInput,
     TextStyle,
 } from 'react-native';
+import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps {
     placeholder: string;
@@ -13,14 +14,7 @@ interface IProps {
     keyboardType?: KeyboardTypeOptions;
     returnKeyType?: ReturnKeyTypeOptions;
     numberOfLines?: number;
-    color?: string;
-    backgroundColor?: string;
-    fontFamily?: string;
-    fontSize?: number;
-    fontWeight?: 'normal' | 'bold' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
-    borderColor?: string;
-    borderRadius?: number;
-    borderWidth?: number;
+    theme?: 'default' | 'emphasis';
     flex?: number;
     width?: number;
     height?: number;
@@ -28,10 +22,6 @@ interface IProps {
     marginBottom?: number;
     marginLeft?: number;
     marginRight?: number;
-    paddingTop?: number;
-    paddingBottom?: number;
-    paddingLeft?: number;
-    paddingRight?: number;
     style?: StyleProp<TextStyle>;
     onValueChange?: (input: string) => void;
     onFocus?: () => void;
@@ -39,9 +29,17 @@ interface IProps {
     validateInput?: (input: string) => boolean;
 }
 
-export class InputBox extends React.Component<IProps> {
+interface IState {
+    focused: boolean;
+}
+
+export class InputBox extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
+
+        this.state = {
+            focused: false,
+        };
     }
 
     public render() {
@@ -50,24 +48,23 @@ export class InputBox extends React.Component<IProps> {
                 style={[
                     {
                         flex: this.props.flex,
-                        color: this.props.color,
-                        fontFamily: this.props.fontFamily,
-                        fontSize: this.props.fontSize,
-                        fontWeight: this.props.fontWeight,
-                        backgroundColor: this.props.backgroundColor,
+                        color: this.color,
+                        fontSize: this.fontSize,
+                        fontWeight: this.fontWeight,
+                        backgroundColor: this.backgroundColor,
                         width: this.props.width,
-                        height: this.props.height,
-                        borderColor: this.props.borderColor,
-                        borderWidth: this.props.borderWidth,
-                        borderRadius: this.props.borderRadius,
+                        height: this.props.height || this.height,
+                        borderColor: this.borderColor,
+                        borderWidth: 1,
+                        borderRadius: 4,
                         marginTop: this.props.marginTop,
                         marginRight: this.props.marginRight,
                         marginBottom: this.props.marginBottom,
                         marginLeft: this.props.marginLeft,
-                        paddingTop: this.props.paddingTop,
-                        paddingRight: this.props.paddingRight,
-                        paddingBottom: this.props.paddingBottom,
-                        paddingLeft: this.props.paddingLeft,
+                        paddingTop: this.paddingVertical,
+                        paddingRight: this.paddingHorizontal,
+                        paddingBottom: this.paddingVertical,
+                        paddingLeft: this.paddingHorizontal,
                     },
                     this.props.style
                 ]}
@@ -80,20 +77,39 @@ export class InputBox extends React.Component<IProps> {
                 returnKeyType={this.props.returnKeyType}
                 underlineColorAndroid={'transparent'}
                 importantForAccessibility={'no-hide-descendants'}
-                onChangeText={this.onChangeText}
+                onChangeText={this.onValueChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
             />
         );
     }
 
-    private onChangeText = (input: string) => {
+    private onValueChange = (value: string) => {
         if (this.props.onValueChange) {
-            this.props.onValueChange(input);
+            this.props.onValueChange(value);
         }
     }
 
     private onBlur = () => {
+        this.setState({ focused: false }, () => {
+            this.validateInput();
+            if (this.props.onBlur) {
+                this.props.onBlur();
+            }
+        });
+    }
+
+    private onFocus = () => {
+        this.setState({
+            focused: true
+        }, () => {
+            if (this.props.onFocus) {
+                this.props.onFocus();
+            }
+        });
+    }
+
+    private validateInput() {
         if (this.props.validateInput) {
             if (this.props.validateInput(this.props.value)) {
                 console.log('Input: valid');
@@ -101,18 +117,60 @@ export class InputBox extends React.Component<IProps> {
                 console.log('Input: invalid');
             }
         }
-        if (this.props.onBlur) {
-            this.props.onBlur();
-        }
-    }
-
-    private onFocus = () => {
-        if (this.props.onFocus) {
-            this.props.onFocus();
-        }
     }
 
     private get isMultiLine() {
         return this.props.numberOfLines && this.props.numberOfLines > 1;
+    }
+
+    private get fontSize() {
+        return StyleManager.getFontSize('default');
+    }
+
+    private get fontWeight() {
+        return StyleManager.getFontWeight('default');
+    }
+
+    private get paddingVertical() {
+        return 12;
+    }
+
+    private get paddingHorizontal() {
+        return 12;
+    }
+
+    private get numberOfLine() {
+        if (this.props.numberOfLines && this.props.numberOfLines > 0) {
+            return this.props.numberOfLines;
+        }
+        return 1;
+    }
+
+    private get height() {
+        return this.fontSize * this.numberOfLine + this.paddingVertical * 2;
+    }
+
+    private get color() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusColor(this.props.theme);
+        } else {
+            return StyleManager.getInputColor(this.props.theme);
+        }
+    }
+
+    private get backgroundColor() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
+        } else {
+            return StyleManager.getInputBackgroundColor(this.props.theme);
+        }
+    }
+
+    private get borderColor() {
+        if (this.state.focused) {
+            return StyleManager.getInputFocusBorderColor(this.props.theme);
+        } else {
+            return StyleManager.getInputBorderColor(this.props.theme);
+        }
     }
 }

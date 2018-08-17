@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import { ImageBackground } from '../../Components/Basic/ImageBackground';
+import { StyleProp, View, ViewStyle } from 'react-native';
+import { Card } from '../../Components/Containers/Card';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ActionElement, ActionType } from '../../Schema/Abstract/ActionElement';
 import { ContentElement } from '../../Schema/Abstract/ContentElement';
@@ -11,27 +11,6 @@ import { StyleManager } from '../../Styles/StyleManager';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
-
-const styles = StyleSheet.create({
-    cardContainer: {
-        flex: 1,
-        backgroundColor: '#fff',
-        borderRadius: 4,
-        ...Platform.select({
-            ios: {
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: 'rgba(0, 0, 0, .1)',
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 0 },
-                shadowRadius: 3,
-                shadowOpacity: .08,
-            } as any,
-            android: {
-                elevation: 2,
-            } as any
-        }),
-    },
-}) as any;
 
 interface IProps {
     index: number;
@@ -58,70 +37,26 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
     }
 
     public render(): JSX.Element {
-        const { element } = this.props;
-        
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', 'error');
-        }
-
-        return (
-            <View
-                style={this.props.style || styles.cardContainer}
-            >
-                {this.renderCard()}
-            </View>
-        );
-    }
-
-    private renderCard(): JSX.Element {
         const { element, theme } = this.props;
 
         if (!element || !element.isValid) {
-            return undefined;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', theme, 'error');
         }
 
-        const cardStyle: ViewStyle = {
-            flex: 1,
-            backgroundColor: StyleManager.getBackgroundColor(theme),
-            borderRadius: 4,
-            overflow: 'hidden',
-        };
-
-        const backgroundImage = element.getBackgroundImageUrl();
-
-        if (backgroundImage) {
-            return (
-                <ImageBackground
-                    url={backgroundImage}
-                    containerStyle={cardStyle}
-                    imageStyle={{borderRadius: 4}}
-                >
-                    <View
-                        style={{ flex: 1, padding: 0, minHeight: 150 }}
-                    >
-                        {this.renderBody()}
-                        {this.renderSubCard()}
-                        {this.renderActions()}
-                    </View>
-                </ImageBackground>
-            );
-        } else {
-            return (
-                <View
-                    style={[
-                        cardStyle,
-                        {
-                            padding: 12,
-                            minHeight: 150
-                        }
-                    ]}
-                >
-                    {this.renderBody()}
-                    {this.renderSubCard()}
-                    {this.renderActionSet()}
-                </View>
-            );
-        }
+        return (
+            <Card
+                flex={1}
+                style={[
+                    {
+                        minHeight: 150,
+                    }, this.props.style
+                ]}
+            >
+                {this.renderBody()}
+                {this.renderSubCard()}
+                {this.renderActionSet()}
+            </Card>
+        );
     }
 
     private renderBody(): JSX.Element {

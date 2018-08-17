@@ -1,17 +1,18 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
+import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps {
     title: string;
-    color: string;
-    backgroundColor: string;
+    level: 'info' | 'warning' | 'error' | 'success';
+    theme: 'default' | 'emphasis';
 }
 
 export class Banner extends React.Component<IProps> {
     public render() {
         return (
             <View
-                backgroundColor={this.props.backgroundColor}
+                backgroundColor={this.backgroundColor}
                 paddingTop={8}
                 paddingRight={8}
                 paddingBottom={8}
@@ -23,7 +24,7 @@ export class Banner extends React.Component<IProps> {
             >
                 <Text
                     style={{
-                        color: this.props.color,
+                        color: this.color,
                     }}
                 >
                     {this.props.title}
@@ -31,5 +32,24 @@ export class Banner extends React.Component<IProps> {
                 {this.props.children}
             </View>
         );
+    }
+
+    private get backgroundColor() {
+        switch (this.props.level) {
+            case 'info':
+                return StyleManager.getColor('accent', this.props.theme, false);
+            case 'warning':
+                return StyleManager.getColor('warning', this.props.theme, false);
+            case 'error':
+                return StyleManager.getColor('attention', this.props.theme, false);
+            case 'success':
+                return StyleManager.getColor('good', this.props.theme, false);
+            default:
+                return StyleManager.getColor('accent', this.props.theme, false);
+        }
+    }
+
+    private get color() {
+        return StyleManager.getBackgroundColor(this.props.theme);
     }
 }

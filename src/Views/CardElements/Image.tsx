@@ -15,6 +15,7 @@ interface IProps {
     spacing?: number;
     maxWidth?: number;
     maxHeight?: number;
+    theme: 'emphasis' | 'default';
 }
 
 interface IState {
@@ -49,10 +50,10 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { element, spacing } = this.props;
+        const { element, spacing, theme } = this.props;
 
         if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.url + ' is not valid', 'error');
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.url + ' is not valid', theme, 'error');
         }
 
         if (this.state.loaded) {

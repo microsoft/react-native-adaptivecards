@@ -50,9 +50,9 @@ export class ColumnView extends React.Component {
         };
     }
     render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
         if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', 'error');
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
         let backgroundColor = StyleManager.getBackgroundColor(element.style);
         if (element.selectAction) {

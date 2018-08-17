@@ -42,11 +42,26 @@ export class Svg extends React.Component<IProps> {
                 <body 
                     style="margin:0; padding:0; overflow:hidden; background-color: 'transparent'; height:100%; width:100%;"
                 >
-                    <img src="${this.props.url.replace('"', '\'')}"
+                    <img src="${this.src}"
+                        alt="${this.alt}"
                         style="position:fixed; top:0; left:0; background-color: 'transparent'; height:100%; width:100%;"
                     />
                 </body>
             </html>`
         );
+    }
+
+    private get src() {
+        if (this.props.url) {
+            return this.props.url.replace('"', '\'');
+        }
+        return '';
+    }
+
+    private get alt() {
+        if (this.props.alt) {
+            return this.props.alt.replace('"', '\'');
+        }
+        return 'Image';
     }
 }

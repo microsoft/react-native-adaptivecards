@@ -15,9 +15,9 @@ export class FactSetView extends React.Component {
         };
     }
     render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
         if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', 'error');
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
         return (React.createElement(View, { flexDirection: 'column', marginTop: this.spacing, alignSelf: 'stretch' }, this.renderFacts()));
     }

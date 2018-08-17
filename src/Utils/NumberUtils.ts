@@ -1,6 +1,5 @@
 export class NumberUtils {
     public static isInRange<T extends number | Date>(value: T, min: T, max: T) {
-        console.log(value + ' ' + min + ' ' + max);
         if (value !== undefined && min !== undefined && max !== undefined) {
             return (value >= min && value <= max);
         }

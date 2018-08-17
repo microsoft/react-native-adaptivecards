@@ -1,27 +1,12 @@
 import * as React from 'react';
-import { Platform, StyleSheet, View } from 'react-native';
-import { ImageBackground } from '../../Components/Basic/ImageBackground';
+import { View } from 'react-native';
+import { Card } from '../../Components/Containers/Card';
 import { ActionContext } from '../../Contexts/ActionContext';
 import { ActionType } from '../../Schema/Abstract/ActionElement';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
-const styles = StyleSheet.create({
-    cardContainer: Object.assign({ flex: 1, backgroundColor: '#fff', borderRadius: 4 }, Platform.select({
-        ios: {
-            borderWidth: StyleSheet.hairlineWidth,
-            borderColor: 'rgba(0, 0, 0, .1)',
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 0 },
-            shadowRadius: 3,
-            shadowOpacity: .08,
-        },
-        android: {
-            elevation: 2,
-        }
-    })),
-});
 export class AdaptiveCardView extends React.Component {
     constructor(props) {
         super(props);
@@ -46,43 +31,18 @@ export class AdaptiveCardView extends React.Component {
         this.actionContext.registerHook({ func: this.showSubCard, name: 'showSubCard', actionType: ActionType.ShowCard });
     }
     render() {
-        const { element } = this.props;
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', 'error');
-        }
-        return (React.createElement(View, { style: this.props.style || styles.cardContainer }, this.renderCard()));
-    }
-    renderCard() {
         const { element, theme } = this.props;
         if (!element || !element.isValid) {
-            return undefined;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', theme, 'error');
         }
-        const cardStyle = {
-            flex: 1,
-            backgroundColor: StyleManager.getBackgroundColor(theme),
-            borderRadius: 4,
-            overflow: 'hidden',
-        };
-        const backgroundImage = element.getBackgroundImageUrl();
-        if (backgroundImage) {
-            return (React.createElement(ImageBackground, { url: backgroundImage, containerStyle: cardStyle, imageStyle: { borderRadius: 4 } },
-                React.createElement(View, { style: { flex: 1, padding: 0, minHeight: 150 } },
-                    this.renderBody(),
-                    this.renderSubCard(),
-                    this.renderActions())));
-        }
-        else {
-            return (React.createElement(View, { style: [
-                    cardStyle,
-                    {
-                        padding: 12,
-                        minHeight: 150
-                    }
-                ] },
-                this.renderBody(),
-                this.renderSubCard(),
-                this.renderActionSet()));
-        }
+        return (React.createElement(Card, { flex: 1, style: [
+                {
+                    minHeight: 150,
+                }, this.props.style
+            ] },
+            this.renderBody(),
+            this.renderSubCard(),
+            this.renderActionSet()));
     }
     renderBody() {
         const { element } = this.props;

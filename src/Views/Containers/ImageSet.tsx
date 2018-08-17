@@ -4,18 +4,20 @@ import { ImageElement } from '../../Schema/CardElements/Image';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
     element: ImageSetElement;
+    theme: 'default' | 'emphasis';
 }
 
 export class ImageSetView extends React.Component<IProps> {
     public render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
 
         if (!element || !element.isValid) {
-            return null;
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
 
         return (
@@ -34,7 +36,7 @@ export class ImageSetView extends React.Component<IProps> {
     }
 
     private renderImage = (info: ListRenderItemInfo<ImageElement>) => {
-        const { element } = this.props;
+        const { element, theme } = this.props;
 
         if (!element || !element.isValid) {
             return undefined;
@@ -48,6 +50,7 @@ export class ImageSetView extends React.Component<IProps> {
                 size={this.size}
                 maxHeight={StyleManager.inSetImageMaxHeight}
                 spacing={this.getImageSpacing(info.index)}
+                theme={theme}
             />
         );
     }

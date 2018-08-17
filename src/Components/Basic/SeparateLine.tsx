@@ -1,25 +1,17 @@
 import React from 'react';
 import { View } from 'react-native';
+import { StyleManager } from '../../Styles/StyleManager';
 
-interface IProps {
-    color?: string;
-    thick?: number;
-    marginTop?: number;
-    marginBottom?: number;
-    marginLeft?: number;
-    marginRight?: number;
-}
-
-export class SeparateLine extends React.PureComponent<IProps, any> {
+export class SeparateLine extends React.PureComponent {
     public render() {
         return (
             <View
-                backgroundColor={this.props.color}
-                height={this.props.thick}
-                marginTop={this.props.marginTop}
-                marginRight={this.props.marginRight}
-                marginBottom={this.props.marginBottom}
-                marginLeft={this.props.marginLeft}
+                backgroundColor={StyleManager.separatorColor}
+                height={StyleManager.separatorThickness}
+                marginTop={StyleManager.separatorSpacing}
+                marginRight={StyleManager.separatorSpacing}
+                marginBottom={StyleManager.separatorSpacing}
+                marginLeft={StyleManager.separatorSpacing}
             />
         );
     }

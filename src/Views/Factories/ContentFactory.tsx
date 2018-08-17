@@ -11,7 +11,6 @@ import { FactSetElement } from '../../Schema/Containers/FactSet';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
-import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
 import { AdaptiveCardView } from '../Cards/AdaptiveCard';
@@ -30,10 +29,6 @@ export class ContentFactory {
                 return [
                     <SeparateLine
                         key={'SeparateLine' + index}
-                        color={StyleManager.separatorColor}
-                        thick={StyleManager.separatorThickness}
-                        marginTop={StyleManager.separatorSpacing}
-                        marginBottom={StyleManager.separatorSpacing}
                     />,
                     elementView
                 ];
@@ -86,6 +81,7 @@ export class ContentFactory {
                             key={'ImageView' + index}
                             element={element as ImageElement}
                             index={index}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.Container:
@@ -121,6 +117,7 @@ export class ContentFactory {
                             key={'ImageSetView' + index}
                             element={element as ImageSetElement}
                             index={index}
+                            theme={theme}
                         />
                     );
                 case ContentElementType.TextInput:

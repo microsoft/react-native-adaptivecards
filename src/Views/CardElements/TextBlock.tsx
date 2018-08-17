@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { TextBlock } from '../../Components/Basic/TextBlock';
+import { Text } from 'react-native';
+
 import { TextBlockElement } from '../../Schema/CardElements/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
@@ -12,25 +13,28 @@ interface IProps {
 
 export class TextBlockView extends React.Component<IProps> {
     public render() {
-        const { element } = this.props;
+        const { element, theme } = this.props;
 
         if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.text + ' is not valid', 'error');
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.text + ' is not valid', theme, 'error');
         }
 
         return (
-            <TextBlock
-                color={StyleManager.getColor(element.color, this.props.theme, element.isSubtle)}
-                fontSize={StyleManager.getFontSize(element.size)}
-                fontWeight={StyleManager.getFontWeight(element.weight)}
-                backgroundColor='transparent'
-                textAlign={StyleManager.getTextAlign(element.horizontalAlignment)}
-                wrap={StyleManager.getWrap(element.wrap)}
+            <Text
+                accessible={true}
+                style={{
+                    color: StyleManager.getColor(element.color, this.props.theme, element.isSubtle),
+                    fontSize: StyleManager.getFontSize(element.size),
+                    fontWeight: StyleManager.getFontWeight(element.weight),
+                    backgroundColor: 'transparent',
+                    textAlign: StyleManager.getTextAlign(element.horizontalAlignment),
+                    flexWrap: StyleManager.getWrap(element.wrap),
+                    marginTop: this.spacing
+                }}
                 numberOfLines={element.maxLines}
-                marginTop={this.spacing}
             >
                 {element.text}
-            </TextBlock>
+            </Text>
         );
     }
 

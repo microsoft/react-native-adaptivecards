@@ -51,9 +51,9 @@ export class ImageView extends React.Component {
         }
     }
     render() {
-        const { element, spacing } = this.props;
+        const { element, spacing, theme } = this.props;
         if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.url + ' is not valid', 'error');
+            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.url + ' is not valid', theme, 'error');
         }
         if (this.state.loaded) {
             return (React.createElement(ImageBlock, { url: element.url, alt: element.altText, flex: this.flex, alignSelf: StyleManager.getHorizontalAlign(element.horizontalAlignment), width: this.state.width, height: this.state.height, onPress: element.selectAction ? this.onPress : undefined, onLayout: this.onLayout, marginTop: this.spacing, marginLeft: spacing, mode: element.style === 'person' ? 'avatar' : 'default' }));

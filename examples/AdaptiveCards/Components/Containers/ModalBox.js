@@ -5,7 +5,7 @@ export class ModalBox extends React.Component {
         super(props);
     }
     render() {
-        return (React.createElement(Modal, { visible: this.props.show, animationType: 'fade', transparent: true },
+        return (React.createElement(Modal, { visible: this.props.show, animationType: 'fade', transparent: true, onRequestClose: this.props.onRequestClose },
             React.createElement(TouchableWithoutFeedback, { onPress: this.props.onPressBackground },
                 React.createElement(View, { style: [
                         {
