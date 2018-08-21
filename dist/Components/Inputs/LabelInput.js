@@ -1,12 +1,13 @@
 import * as React from 'react';
-import { TextInput, } from 'react-native';
+import { ScrollView, Text, TextInput, View } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
-export class InputBox extends React.Component {
+import { SeparateLine } from '../Basic/SeparateLine';
+export class LabelInput extends React.Component {
     constructor(props) {
         super(props);
         this.onValueChange = (value) => {
-            if (this.props.onValueChange) {
-                this.props.onValueChange(value);
+            if (this.props.onRequestSuggestion) {
+                this.props.onRequestSuggestion(value);
             }
         };
         this.onBlur = () => {
@@ -27,26 +28,73 @@ export class InputBox extends React.Component {
             });
         };
         this.state = {
-            focused: false,
+            focused: this.props.focused,
         };
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevState.focused && this.props.focused) {
+            this.setState({
+                focused: true,
+            }, () => {
+                if (this.inputBox) {
+                    this.inputBox.focus();
+                }
+            });
+        }
+    }
     render() {
-        return (React.createElement(TextInput, { style: [
+        return (React.createElement(View, { style: {
+                flex: this.props.flex,
+            } },
+            this.renderInputArea(),
+            this.renderSuggestions()));
+    }
+    renderInputArea() {
+        return (React.createElement(View, { style: {
+                alignSelf: 'stretch',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                backgroundColor: this.backgroundColor,
+                borderColor: this.borderColor,
+                borderWidth: 1,
+                borderRadius: 4,
+                width: this.props.width,
+                marginTop: this.props.marginTop,
+                marginRight: this.props.marginRight,
+                marginBottom: this.props.marginBottom,
+                marginLeft: this.props.marginLeft,
+            } },
+            this.renderLabels(),
+            this.renderInputBox()));
+    }
+    renderLabels() {
+        if (this.props.labels) {
+            return this.props.labels.map((label, index) => {
+                return (React.createElement(Text, { key: 'Label' + index, style: {
+                        fontSize: this.fontSize,
+                        fontWeight: this.fontWeight,
+                        color: this.backgroundColor,
+                        backgroundColor: this.color,
+                        paddingTop: this.paddingVertical - 6,
+                        paddingBottom: this.paddingVertical - 6,
+                        borderRadius: 4,
+                        paddingLeft: 6,
+                        paddingRight: 6,
+                        marginTop: 6,
+                        marginBottom: 6,
+                        marginLeft: 6,
+                    } }, label.title));
+            });
+        }
+        return undefined;
+    }
+    renderInputBox() {
+        return (React.createElement(TextInput, { ref: ref => this.inputBox = ref, style: [
                 {
-                    flex: this.props.flex,
+                    flex: 1,
                     color: this.color,
                     fontSize: this.fontSize,
                     fontWeight: this.fontWeight,
-                    backgroundColor: this.backgroundColor,
-                    width: this.props.width,
-                    height: this.props.height || this.height,
-                    borderColor: this.borderColor,
-                    borderWidth: 1,
-                    borderRadius: 4,
-                    marginTop: this.props.marginTop,
-                    marginRight: this.props.marginRight,
-                    marginBottom: this.props.marginBottom,
-                    marginLeft: this.props.marginLeft,
                     paddingTop: this.paddingVertical,
                     paddingRight: this.paddingHorizontal,
                     paddingBottom: this.paddingVertical,
@@ -54,6 +102,17 @@ export class InputBox extends React.Component {
                 },
                 this.props.style
             ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur }));
+    }
+    renderSuggestions() {
+        if (this.props.suggestionView) {
+            return [
+                React.createElement(SeparateLine, { key: 0 }),
+                React.createElement(ScrollView, { key: 1, style: {
+                        maxHeight: 200
+                    } }, this.props.suggestionView)
+            ];
+        }
+        return undefined;
     }
     validateInput() {
         if (this.props.validateInput) {
@@ -79,15 +138,6 @@ export class InputBox extends React.Component {
     }
     get paddingHorizontal() {
         return 12;
-    }
-    get numberOfLine() {
-        if (this.props.numberOfLines && this.props.numberOfLines > 0) {
-            return this.props.numberOfLines;
-        }
-        return 1;
-    }
-    get height() {
-        return this.fontSize * this.numberOfLine + this.paddingVertical * 2 + 2;
     }
     get color() {
         if (this.state.focused) {

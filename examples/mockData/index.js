@@ -19,7 +19,8 @@ var searchEmail = require('./skills/search_email.json');
 var emailSent = require('./skills/email_sent.json');
 var sendText = require('./skills/send_text.json');
 var sendTextContact = require('./skills/send_text_contact_disam.json');
-var peoplePicker = require('./peoplepicker.json');
+var peoplePicker = require('./peoplePicker.json');
+var peopleSuggestion = require('./peopleSuggestion.json');
 var showVideo = require('./showVideo.json');
 var fact = require('./fact.json');
 var vocabulary = require('./vocabulary.json');
@@ -52,4 +53,5 @@ exports["default"] = {
     vocabulary: vocabulary,
     dinning: dinning,
     bingMap: bingMap,
+    peopleSuggestion: peopleSuggestion,
 };

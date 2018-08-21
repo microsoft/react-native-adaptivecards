@@ -9,6 +9,7 @@ import { FormContext } from '../Contexts/FormContext';
 import { HostContext } from '../Contexts/HostContext';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
+import { SelectActionElement } from '../Schema/Actions/SelectAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
 import { CardElement } from '../Schema/Cards/Card';
 import { CallbackAction } from '../Schema/Internal/CallbackAction';
@@ -47,6 +48,7 @@ export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
         hostContext.registerOpenUrlHandler(this.onOpenUrl);
         hostContext.registerSubmitHandler(this.onSubmit);
         hostContext.registerCallbackHandler(this.onCallback);
+        hostContext.registerSelectActionHandler(this.onSelectAction);
 
         hostContext.registerFocusHandler(this.props.onFocus);
         hostContext.registerBlurHandler(this.props.onBlur);
@@ -76,9 +78,9 @@ export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
         });
 
         actionContext.registerHook({
-            func: this.populateCallbackParamData,
-            name: 'populateCallbackParamData',
-            actionType: ActionType.Callback
+            func: this.populateSelectActionData,
+            name: 'populateSelectActionData',
+            actionType: ActionType.Select
         });
     }
 
@@ -140,6 +142,16 @@ export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
         }
     }
 
+    private onSelectAction = (args: ActionEventHandlerArgs<SelectActionElement>) => {
+        if (args) {
+            let currentValue = JSON.parse(FormContext.getInstance().getFieldValue(args.action.targetFormField)) as Array<any>;
+            if (currentValue) {
+                currentValue.push(args.formData);
+                FormContext.getInstance().updateField(args.action.targetFormField, JSON.stringify(currentValue), true);
+            }
+        }
+    }
+
     private validateForm = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
         if (args) {
             args.formValidate = args.action.scope.validateScope();
@@ -164,9 +176,11 @@ export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
         return args;
     }
 
-    private populateCallbackParamData = (args: ActionEventHandlerArgs<CallbackAction>) => {
-        if (args && args.formValidate) {
-            args.formData = FormContext.getInstance().getCallbackParamData(args.action.parameters);
+    private populateSelectActionData = (args: ActionEventHandlerArgs<SelectActionElement>) => {
+        if (args) {
+            args.formData = {
+                ...(args.action.data || {}),
+            };
         }
         return args;
     }

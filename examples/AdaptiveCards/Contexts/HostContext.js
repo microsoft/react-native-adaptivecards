@@ -38,6 +38,9 @@ export class HostContext {
     registerCallbackHandler(handler) {
         this.onCallback = handler;
     }
+    registerSelectActionHandler(handler) {
+        this.onSelectAction = handler;
+    }
     applyConfig(configJson) {
         this.config.combine(new HostConfig(configJson));
     }
@@ -58,6 +61,9 @@ export class HostContext {
                 break;
             case ActionType.Submit:
                 callback = this.onSubmit;
+                break;
+            case ActionType.Select:
+                callback = this.onSelectAction;
                 break;
             case 'focus':
                 callback = this.onFocus;

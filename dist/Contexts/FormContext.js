@@ -1,6 +1,7 @@
 export class FormContext {
     constructor() {
         this.formFields = {};
+        this.fieldListeners = {};
     }
     static getInstance() {
         if (FormContext.sharedInstance === undefined) {
@@ -14,6 +15,7 @@ export class FormContext {
                 value: value,
                 validate: validate
             };
+            this.getFieldListeners(id).forEach((listener) => listener(value));
         }
     }
     getField(id) {
@@ -54,17 +56,6 @@ export class FormContext {
         }
         return {};
     }
-    getCallbackParamData(params) {
-        if (params) {
-            return Object.keys(params).reduce((prev, current) => {
-                let formIndex = params[current];
-                console.log(formIndex);
-                prev[current] = this.getFieldValue(formIndex);
-                return prev;
-            }, {});
-        }
-        return {};
-    }
     validateField(id) {
         let field = this.getField(id);
         if (field) {
@@ -79,5 +70,20 @@ export class FormContext {
             }, true);
         }
         return true;
+    }
+    registerFieldListener(id, listener) {
+        if (!this.fieldListeners[id]) {
+            this.fieldListeners[id] = [listener];
+        }
+        else {
+            this.fieldListeners[id].push(listener);
+        }
+    }
+    getFieldListeners(id) {
+        let result = this.fieldListeners[id];
+        if (!result) {
+            result = [];
+        }
+        return result;
     }
 }

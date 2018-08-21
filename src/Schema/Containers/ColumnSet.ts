@@ -11,6 +11,7 @@ export class ColumnSetElement extends ScopeElement {
 
         if (this.isValid) {
             this.columns = [];
+            
             if (json.columns) {
                 json.columns.forEach((item: any) => {
                     let column: ColumnElement = new ColumnElement(item, this);

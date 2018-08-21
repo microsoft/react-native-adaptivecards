@@ -75,7 +75,7 @@ export class DateInputView extends React.Component {
         return 1;
     }
     get height() {
-        return this.fontSize * this.numberOfLine + this.paddingVertical * 2;
+        return this.fontSize * this.numberOfLine + this.paddingVertical * 2 + 2;
     }
     get color() {
         if (this.state.focused) {

@@ -1,5 +1,6 @@
 import { ActionType } from '../Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Actions/OpenUrlAction';
+import { SelectActionElement } from '../Actions/SelectAction';
 import { ShowCardActionElement } from '../Actions/ShowCardAction';
 import { SubmitActionElement } from '../Actions/SubmitAction';
 export class ActionFactory {
@@ -17,6 +18,9 @@ export class ActionFactory {
                 break;
             case ActionType.ShowCard:
                 action = new ShowCardActionElement(json, parent);
+                break;
+            case ActionType.Select:
+                action = new SelectActionElement(json, parent);
                 break;
             default:
                 action = undefined;

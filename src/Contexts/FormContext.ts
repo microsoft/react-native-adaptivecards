@@ -5,6 +5,7 @@ export interface FormField {
 
 export class FormContext {
     private formFields: { [id: string]: FormField } = {};
+    private fieldListeners: { [id: string]: Array<(value: string) => void> } = {};
 
     private static sharedInstance: FormContext;
 
@@ -23,6 +24,7 @@ export class FormContext {
                 value: value,
                 validate: validate
             };
+            this.getFieldListeners(id).forEach((listener) => listener(value));
         }
     }
 
@@ -67,18 +69,6 @@ export class FormContext {
         return {};
     }
 
-    public getCallbackParamData(params: { [key: string]: string }): { [id: string]: string } {
-        if (params) {
-            return Object.keys(params).reduce((prev, current) => {
-                let formIndex = params[current];
-                console.log(formIndex);
-                prev[current] = this.getFieldValue(formIndex);
-                return prev;
-            }, {} as { [key: string]: string });
-        }
-        return {};
-    }
-
     public validateField(id: string): boolean {
         let field = this.getField(id);
         if (field) {
@@ -94,5 +84,21 @@ export class FormContext {
             }, true);
         }
         return true;
+    }
+
+    public registerFieldListener(id: string, listener: (value: string) => void) {
+        if (!this.fieldListeners[id]) {
+            this.fieldListeners[id] = [listener];
+        } else {
+            this.fieldListeners[id].push(listener);
+        }
+    }
+
+    public getFieldListeners(id: string) {
+        let result = this.fieldListeners[id];
+        if (!result) {
+            result = [];
+        }
+        return result;
     }
 }

@@ -2,6 +2,7 @@ import { ConfigManager } from '../Config/ConfigManager';
 import { HostConfig } from '../Config/Types';
 import { ActionType } from '../Schema/Abstract/ActionElement';
 import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
+import { SelectActionElement } from '../Schema/Actions/SelectAction';
 import { ShowCardActionElement } from '../Schema/Actions/ShowCardAction';
 import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
 import { IElement } from '../Schema/Interfaces/IElement';
@@ -19,6 +20,7 @@ export class HostContext {
     private onShowCard: (args?: ActionEventHandlerArgs<ShowCardActionElement>) => void;
     private onSubmit: (args?: ActionEventHandlerArgs<SubmitActionElement>) => void;
     private onCallback: (args?: ActionEventHandlerArgs<CallbackAction>) => void;
+    private onSelectAction: (args?: ActionEventHandlerArgs<SelectActionElement>) => void;
 
     private static sharedInstance: HostContext;
 
@@ -69,6 +71,10 @@ export class HostContext {
         this.onCallback = handler;
     }
 
+    public registerSelectActionHandler(handler: (args?: ActionEventHandlerArgs<SelectActionElement>) => void) {
+        this.onSelectAction = handler;
+    }
+
     public applyConfig(configJson: any) {
         this.config.combine(new HostConfig(configJson));
     }
@@ -91,6 +97,9 @@ export class HostContext {
                 break;
             case ActionType.Submit:
                 callback = this.onSubmit;
+                break;
+            case ActionType.Select:
+                callback = this.onSelectAction;
                 break;
             case 'focus':
                 callback = this.onFocus;

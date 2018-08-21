@@ -5,6 +5,7 @@ import { AbstractElement } from './AbstractElement';
 
 export enum ActionType {
     OpenUrl = 'Action.OpenUrl',
+    Select = 'Action.Select',
     Submit = 'Action.Submit',
     ShowCard = 'Action.ShowCard',
     Callback = 'Action.Callback',

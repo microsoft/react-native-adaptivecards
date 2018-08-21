@@ -2,28 +2,34 @@ import * as React from 'react';
 import {
     KeyboardTypeOptions,
     ReturnKeyTypeOptions,
+    ScrollView,
     StyleProp,
+    Text,
     TextInput,
     TextStyle,
+    View
 } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { SeparateLine } from '../Basic/SeparateLine';
 
 interface IProps {
     placeholder: string;
     value: string;
+    labels: Array<{ title: string, }>;
+    suggestionView: JSX.Element;
+    focused: boolean;
     keyboardType?: KeyboardTypeOptions;
     returnKeyType?: ReturnKeyTypeOptions;
     numberOfLines?: number;
     theme?: 'default' | 'emphasis';
     flex?: number;
     width?: number;
-    height?: number;
     marginTop?: number;
     marginBottom?: number;
     marginLeft?: number;
     marginRight?: number;
     style?: StyleProp<TextStyle>;
-    onValueChange?: (input: string) => void;
+    onRequestSuggestion?: (input: string) => void;
     onFocus?: () => void;
     onBlur?: () => void;
     validateInput?: (input: string) => boolean;
@@ -33,34 +39,104 @@ interface IState {
     focused: boolean;
 }
 
-export class InputBox extends React.Component<IProps, IState> {
+export class LabelInput extends React.Component<IProps, IState> {
+    private inputBox: TextInput;
     constructor(props: IProps) {
         super(props);
 
         this.state = {
-            focused: false,
+            focused: this.props.focused,
         };
+    }
+
+    public componentDidUpdate(prevProps: IProps, prevState: IState) {
+        if (!prevState.focused && this.props.focused) {
+            this.setState({
+                focused: true,
+            }, () => {
+                if (this.inputBox) {
+                    this.inputBox.focus();
+                }
+            });
+        }
     }
 
     public render() {
         return (
+            <View
+                style={{
+                    flex: this.props.flex,
+                }}
+            >
+                {this.renderInputArea()}
+                {this.renderSuggestions()}
+            </View>
+        );
+    }
+
+    private renderInputArea() {
+        return (
+            <View
+                style={{
+                    alignSelf: 'stretch',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    backgroundColor: this.backgroundColor,
+                    borderColor: this.borderColor,
+                    borderWidth: 1,
+                    borderRadius: 4,
+                    width: this.props.width,
+                    marginTop: this.props.marginTop,
+                    marginRight: this.props.marginRight,
+                    marginBottom: this.props.marginBottom,
+                    marginLeft: this.props.marginLeft,
+                }}
+            >
+                {this.renderLabels()}
+                {this.renderInputBox()}
+            </View>
+        );
+    }
+
+    private renderLabels() {
+        if (this.props.labels) {
+            return this.props.labels.map((label, index) => {
+                return (
+                    <Text
+                        key={'Label' + index}
+                        style={{
+                            fontSize: this.fontSize,
+                            fontWeight: this.fontWeight,
+                            color: this.backgroundColor,
+                            backgroundColor: this.color,
+                            paddingTop: this.paddingVertical - 6,
+                            paddingBottom: this.paddingVertical - 6,
+                            borderRadius: 4,
+                            paddingLeft: 6,
+                            paddingRight: 6,
+                            marginTop: 6,
+                            marginBottom: 6,
+                            marginLeft: 6,
+                        }}
+                    >
+                        {label.title}
+                    </Text>
+                );
+            });
+        }
+        return undefined;
+    }
+
+    private renderInputBox() {
+        return (
             <TextInput
+                ref={ref => this.inputBox = ref}
                 style={[
                     {
-                        flex: this.props.flex,
+                        flex: 1,
                         color: this.color,
                         fontSize: this.fontSize,
                         fontWeight: this.fontWeight,
-                        backgroundColor: this.backgroundColor,
-                        width: this.props.width,
-                        height: this.props.height || this.height,
-                        borderColor: this.borderColor,
-                        borderWidth: 1,
-                        borderRadius: 4,
-                        marginTop: this.props.marginTop,
-                        marginRight: this.props.marginRight,
-                        marginBottom: this.props.marginBottom,
-                        marginLeft: this.props.marginLeft,
                         paddingTop: this.paddingVertical,
                         paddingRight: this.paddingHorizontal,
                         paddingBottom: this.paddingVertical,
@@ -84,9 +160,28 @@ export class InputBox extends React.Component<IProps, IState> {
         );
     }
 
+    private renderSuggestions() {
+        if (this.props.suggestionView) {
+            return [
+                <SeparateLine
+                    key={0}
+                />,
+                <ScrollView
+                    key={1}
+                    style={{
+                        maxHeight: 200
+                    }}
+                >
+                    {this.props.suggestionView}
+                </ScrollView>
+            ];
+        }
+        return undefined;
+    }
+
     private onValueChange = (value: string) => {
-        if (this.props.onValueChange) {
-            this.props.onValueChange(value);
+        if (this.props.onRequestSuggestion) {
+            this.props.onRequestSuggestion(value);
         }
     }
 
@@ -137,17 +232,6 @@ export class InputBox extends React.Component<IProps, IState> {
 
     private get paddingHorizontal() {
         return 12;
-    }
-
-    private get numberOfLine() {
-        if (this.props.numberOfLines && this.props.numberOfLines > 0) {
-            return this.props.numberOfLines;
-        }
-        return 1;
-    }
-
-    private get height() {
-        return this.fontSize * this.numberOfLine + this.paddingVertical * 2 + 2;
     }
 
     private get color() {

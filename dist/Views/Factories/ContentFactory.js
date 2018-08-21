@@ -11,6 +11,7 @@ import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
+import { PeoplePickerView } from '../Inputs/PeoplePicker';
 import { TextInputView } from '../Inputs/TextInput';
 import { TimeInputView } from '../Inputs/TimeInput';
 export class ContentFactory {
@@ -61,6 +62,8 @@ export class ContentFactory {
                     return (React.createElement(DateInputView, { key: 'DateInputView' + index, element: element, index: index, theme: theme }));
                 case ContentElementType.TimeInput:
                     return (React.createElement(TimeInputView, { key: 'TimeInputView' + index, element: element, index: index, theme: theme }));
+                case ContentElementType.PeoplePicker:
+                    return (React.createElement(PeoplePickerView, { key: 'PeoplePickerView' + index, element: element, index: index, theme: theme }));
                 default:
                     return null;
             }

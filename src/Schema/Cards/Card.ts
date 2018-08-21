@@ -15,6 +15,7 @@ export class CardElement extends ScopeElement {
     public readonly actions?: IAction[];
     public readonly body?: IContent[];
     public readonly backgroundImage?: string;
+    public readonly cardSource?: string;
 
     constructor(json: any, parent: IElement) {
         super(json, parent);

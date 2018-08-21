@@ -2,6 +2,7 @@ import { AbstractElement } from './AbstractElement';
 export var ActionType;
 (function (ActionType) {
     ActionType["OpenUrl"] = "Action.OpenUrl";
+    ActionType["Select"] = "Action.Select";
     ActionType["Submit"] = "Action.Submit";
     ActionType["ShowCard"] = "Action.ShowCard";
     ActionType["Callback"] = "Action.Callback";

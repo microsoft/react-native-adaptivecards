@@ -25,19 +25,23 @@ interface IProps {
 }
 
 export class Touchable extends React.Component<IProps> {
+    private testId: string;
+
     constructor(props: IProps) {
         super(props);
+
+        this.testId = this.props.testId + Guid.newGuid();
     }
 
     public componentDidMount() {
         if (Platform.OS === 'android') {
-            DeviceEventEmitter.addListener('KeyEnter' + this.props.testId, this.props.onPress);
+            DeviceEventEmitter.addListener('KeyEnter' + this.testId, this.props.onPress);
         }
     }
 
     public componentWillUnmount() {
         if (Platform.OS === 'android') {
-            DeviceEventEmitter.removeListener('KeyEnter' + this.props.testId, this.props.onPress);
+            DeviceEventEmitter.removeListener('KeyEnter' + this.testId, this.props.onPress);
         }
     }
 
@@ -62,7 +66,7 @@ export class Touchable extends React.Component<IProps> {
                     onPress={onPress}
                     onLongPress={onLongPress}
                     accessible={true}
-                    testID={this.uniqueTestId}
+                    testID={this.testId}
                     useForeground={true}
                     hitSlop={hitSlop}
                     background={TouchableNativeFeedback.SelectableBackground()}
@@ -81,7 +85,7 @@ export class Touchable extends React.Component<IProps> {
                     onPress={onPress}
                     onLongPress={onLongPress}
                     accessible={true}
-                    testID={this.uniqueTestId}
+                    testID={this.testId}
                     activeOpacity={activeOpacity}
                     style={style}
                     hitSlop={hitSlop}
@@ -92,9 +96,5 @@ export class Touchable extends React.Component<IProps> {
                 </TouchableOpacity>
             );
         }
-    }
-
-    private get uniqueTestId() {
-        return this.props.testId + Guid.newGuid();
     }
 }

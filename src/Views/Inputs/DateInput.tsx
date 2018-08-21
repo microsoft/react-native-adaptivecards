@@ -137,7 +137,7 @@ export class DateInputView extends React.Component<IProps, IState> {
     }
 
     private get height() {
-        return this.fontSize * this.numberOfLine + this.paddingVertical * 2;
+        return this.fontSize * this.numberOfLine + this.paddingVertical * 2 + 2;
     }
 
     private get color() {

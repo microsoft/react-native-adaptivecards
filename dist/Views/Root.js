@@ -50,6 +50,15 @@ export class CardRootView extends React.PureComponent {
                 }
             }
         };
+        this.onSelectAction = (args) => {
+            if (args) {
+                let currentValue = JSON.parse(FormContext.getInstance().getFieldValue(args.action.targetFormField));
+                if (currentValue) {
+                    currentValue.push(args.formData);
+                    FormContext.getInstance().updateField(args.action.targetFormField, JSON.stringify(currentValue), true);
+                }
+            }
+        };
         this.validateForm = (args) => {
             if (args) {
                 args.formValidate = args.action.scope.validateScope();
@@ -68,9 +77,9 @@ export class CardRootView extends React.PureComponent {
             }
             return args;
         };
-        this.populateCallbackParamData = (args) => {
-            if (args && args.formValidate) {
-                args.formData = FormContext.getInstance().getCallbackParamData(args.action.parameters);
+        this.populateSelectActionData = (args) => {
+            if (args) {
+                args.formData = Object.assign({}, (args.action.data || {}));
             }
             return args;
         };
@@ -80,6 +89,7 @@ export class CardRootView extends React.PureComponent {
         hostContext.registerOpenUrlHandler(this.onOpenUrl);
         hostContext.registerSubmitHandler(this.onSubmit);
         hostContext.registerCallbackHandler(this.onCallback);
+        hostContext.registerSelectActionHandler(this.onSelectAction);
         hostContext.registerFocusHandler(this.props.onFocus);
         hostContext.registerBlurHandler(this.props.onBlur);
         hostContext.registerErrorHandler(this.props.onError);
@@ -102,9 +112,9 @@ export class CardRootView extends React.PureComponent {
             actionType: ActionType.Submit
         });
         actionContext.registerHook({
-            func: this.populateCallbackParamData,
-            name: 'populateCallbackParamData',
-            actionType: ActionType.Callback
+            func: this.populateSelectActionData,
+            name: 'populateSelectActionData',
+            actionType: ActionType.Select
         });
     }
     render() {

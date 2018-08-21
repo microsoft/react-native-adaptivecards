@@ -11,6 +11,7 @@ import { FactSetElement } from '../../Schema/Containers/FactSet';
 import { ImageSetElement } from '../../Schema/Containers/ImageSet';
 import { DateInputElement } from '../../Schema/Inputs/DateInput';
 import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
+import { PeoplePickerElement } from '../../Schema/Inputs/PeoplePicker';
 import { TextInputElement } from '../../Schema/Inputs/TextInput';
 import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
 import { ImageView } from '../CardElements/Image';
@@ -22,6 +23,7 @@ import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
+import { PeoplePickerView } from '../Inputs/PeoplePicker';
 import { TextInputView } from '../Inputs/TextInput';
 import { TimeInputView } from '../Inputs/TimeInput';
 
@@ -156,6 +158,15 @@ export class ContentFactory {
                         <TimeInputView
                             key={'TimeInputView' + index}
                             element={element as TimeInputElement}
+                            index={index}
+                            theme={theme}
+                        />
+                    );
+                case ContentElementType.PeoplePicker:
+                    return (
+                        <PeoplePickerView 
+                            key={'PeoplePickerView' + index}
+                            element={element as PeoplePickerElement}
                             index={index}
                             theme={theme}
                         />

@@ -1,0 +1,397 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "Container",
+            "id": "peoplePickerContent",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "Auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "medium",
+                                    "style": "person",
+                                    "url": "/cortana/autosuggest/people/photo?provider=Office365&uid=Richard.Zhao%40microsoft.com",
+                                    "altText": "RZ"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "bolder",
+                                    "text": "Richard Zhao",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "Richard.Zhao@microsoft.com",
+                                    "wrap": true,
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.Select",
+                        "selectedTextTitle": "Richard Zhao",
+                        "selectedTextSubTitle": "@microsoft.com",
+                        "data": {
+                            "Name": "Richard Zhao",
+                            "Address": "Richard.Zhao@microsoft.com"
+                        }
+                    }
+                },
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "Auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "medium",
+                                    "style": "person",
+                                    "url": "/cortana/autosuggest/people/photo?provider=Office365&uid=quanliu%40microsoft.com",
+                                    "altText": "RL"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "bolder",
+                                    "text": "Richard Liu",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "quanliu@microsoft.com",
+                                    "wrap": true,
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.Select",
+                        "selectedTextTitle": "Richard Liu",
+                        "selectedTextSubTitle": "@microsoft.com",
+                        "data": {
+                            "Name": "Richard Liu",
+                            "Address": "quanliu@microsoft.com"
+                        }
+                    }
+                },
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "Auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "medium",
+                                    "style": "person",
+                                    "url": "/cortana/autosuggest/people/photo?provider=Office365&uid=richzdir%40microsoft.com",
+                                    "altText": "RD"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "bolder",
+                                    "text": "RichZ's directs",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "richzdir@microsoft.com",
+                                    "wrap": true,
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.Select",
+                        "selectedTextTitle": "RichZ's directs",
+                        "selectedTextSubTitle": "@microsoft.com",
+                        "data": {
+                            "Name": "RichZ's directs",
+                            "Address": "richzdir@microsoft.com"
+                        }
+                    }
+                },
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "Auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "medium",
+                                    "style": "person",
+                                    "url": "/cortana/autosuggest/people/photo?provider=Office365&uid=jordir%40microsoft.com",
+                                    "altText": "JR"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "bolder",
+                                    "text": "Jordi Ribas",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "jordir@microsoft.com",
+                                    "wrap": true,
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.Select",
+                        "selectedTextTitle": "Jordi Ribas",
+                        "selectedTextSubTitle": "@microsoft.com",
+                        "data": {
+                            "Name": "Jordi Ribas",
+                            "Address": "jordir@microsoft.com"
+                        }
+                    }
+                },
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "Auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "medium",
+                                    "style": "person",
+                                    "url": "/cortana/autosuggest/people/photo?provider=Office365&uid=richq%40microsoft.com",
+                                    "altText": "RQ"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "bolder",
+                                    "text": "Richard Qian",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "richq@microsoft.com",
+                                    "wrap": true,
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.Select",
+                        "selectedTextTitle": "Richard Qian",
+                        "selectedTextSubTitle": "@microsoft.com",
+                        "data": {
+                            "Name": "Richard Qian",
+                            "Address": "richq@microsoft.com"
+                        }
+                    }
+                },
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "Auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "medium",
+                                    "style": "person",
+                                    "url": "/cortana/autosuggest/people/photo?provider=Office365&uid=richard.zhao%40outlook.com",
+                                    "altText": "RZ"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "bolder",
+                                    "text": "Richard Zhao",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "richard.zhao@outlook.com",
+                                    "wrap": true,
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.Select",
+                        "selectedTextTitle": "Richard Zhao",
+                        "selectedTextSubTitle": "@outlook.com",
+                        "data": {
+                            "Name": "Richard Zhao",
+                            "Address": "richard.zhao@outlook.com"
+                        }
+                    }
+                },
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "Auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "medium",
+                                    "style": "person",
+                                    "url": "/cortana/autosuggest/people/photo?provider=Office365&uid=Eric.Carter%40microsoft.com",
+                                    "altText": "EC"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "bolder",
+                                    "text": "Eric Carter",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "Eric.Carter@microsoft.com",
+                                    "wrap": true,
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.Select",
+                        "selectedTextTitle": "Eric Carter",
+                        "selectedTextSubTitle": "@microsoft.com",
+                        "data": {
+                            "Name": "Eric Carter",
+                            "Address": "Eric.Carter@microsoft.com"
+                        }
+                    }
+                },
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "Auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "medium",
+                                    "style": "person",
+                                    "url": "/cortana/autosuggest/people/photo?provider=Office365&uid=eryang%40microsoft.com",
+                                    "altText": "EY"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "Stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "weight": "bolder",
+                                    "text": "Eric Yang",
+                                    "wrap": true
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "isSubtle": true,
+                                    "text": "eryang@microsoft.com",
+                                    "wrap": true,
+                                    "spacing": "none",
+                                    "separation": "none"
+                                }
+                            ]
+                        }
+                    ],
+                    "selectAction": {
+                        "type": "Action.Select",
+                        "selectedTextTitle": "Eric Yang",
+                        "selectedTextSubTitle": "@microsoft.com",
+                        "data": {
+                            "Name": "Eric Yang",
+                            "Address": "eryang@microsoft.com"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
