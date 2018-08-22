@@ -47,11 +47,12 @@ export class ColumnSetView extends React.Component<IProps> {
 
     private renderNonTouchableBlock = () => {
         return (
-            <View
-                flexDirection='row'
-                alignSelf='stretch'
-                justifyContent='flex-start'
-                marginTop={this.spacing}
+            <View style={{
+                    flexDirection: 'row',
+                    alignSelf: 'stretch',
+                    justifyContent: 'flex-start',
+                    marginTop: this.spacing
+                }}
             >
                 {this.renderContent()}
             </View>

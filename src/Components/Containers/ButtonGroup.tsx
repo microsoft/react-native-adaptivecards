@@ -8,14 +8,15 @@ interface IProps {
 export class ButtonGroup extends React.Component<IProps> {
     public render() {
         return (
-            <View
-                flexDirection={this.flexDirection}
-                alignSelf='stretch'
-                marginTop={StyleManager.actionSetSpacing}
-                paddingTop={12}
-                justifyContent='center'
-                borderTopWidth={StyleManager.separatorThickness}
-                borderTopColor={StyleManager.separatorColor}
+            <View style={{
+                flexDirection: this.flexDirection,
+                alignSelf: 'stretch',
+                marginTop: StyleManager.actionSetSpacing,
+                paddingTop: 12,
+                justifyContent: 'center',
+                borderTopWidth: StyleManager.separatorThickness,
+                borderTopColor: StyleManager.separatorColor
+            }}
             >
                 {this.props.children}
             </View>

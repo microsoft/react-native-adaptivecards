@@ -20,10 +20,11 @@ export class FactSetView extends React.Component<IProps> {
         }
 
         return (
-            <View
-                flexDirection='column'
-                marginTop={this.spacing}
-                alignSelf='stretch'
+            <View style={{
+                flexDirection: 'column',
+                marginTop: this.spacing,
+                alignSelf: 'stretch'
+            }}
             >
                 {this.renderFacts()}
             </View>

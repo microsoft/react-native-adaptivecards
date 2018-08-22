@@ -85,11 +85,11 @@ export class Button extends React.Component<IButtonProps> {
                     }, this.props.style
                 ]}
             >
-                <View
-                    flexDirection={this.layoutDirection}
-                    flex={0}
-                    justifyContent={this.props.textVerticalAlign}
-                    pointerEvents='none'
+                <View style={{
+                    flexDirection: this.layoutDirection,
+                    flex: 0,
+                    justifyContent: this.props.textVerticalAlign,
+                }} pointerEvents='none'
                 >
                     {this.renderIcon()}
                     {this.renderTitle()}

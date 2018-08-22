@@ -71,9 +71,11 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
 
         return (
             <View
-                flexDirection='column'
-                alignSelf='stretch'
-                flex={1}
+                style={{
+                    flexDirection: 'column',
+                    alignSelf: 'stretch',
+                    flex: 1
+                }}
             >
                 {
                     this.props.element.body.map((contentElement: ContentElement, index: number) =>

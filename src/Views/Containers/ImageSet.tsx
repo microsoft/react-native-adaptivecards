@@ -26,7 +26,9 @@ export class ImageSetView extends React.Component<IProps> {
                 renderItem={this.renderImage}
                 keyExtractor={this.keyExtractor}
                 horizontal={true}
-                marginTop={this.spacing}
+                style={{
+                    marginTop: this.spacing
+                }}
             />
         );
     }

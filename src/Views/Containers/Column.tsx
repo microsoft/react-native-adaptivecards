@@ -50,13 +50,15 @@ export class ColumnView extends React.Component<IProps> {
 
     private renderNonTouchableBlock = (backgroundColor: string) => {
         return (
-            <View
-                flex={this.flex}
-                flexDirection='column'
-                alignSelf={this.alignSelf}
-                justifyContent={this.justifyContent}
-                marginLeft={this.spacing}
-                backgroundColor={backgroundColor}
+            <View style={{
+                flex: this.flex,
+                flexDirection: 'column',
+                alignSelf: this.alignSelf,
+                justifyContent: this.justifyContent,
+                marginLeft: this.spacing,
+                backgroundColor: backgroundColor
+            }}
+
             >
                 {this.renderContent()}
             </View>

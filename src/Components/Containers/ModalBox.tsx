@@ -37,10 +37,12 @@ export class ModalBox extends React.Component<IProps> {
                     />
                 </TouchableWithoutFeedback>
                 <View
-                    flex={1}
-                    justifyContent='center'
-                    alignContent='center'
-                    alignItems='center'
+                    style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignContent: 'center',
+                        alignItems: 'center'
+                    }}
                 >
                     <View
                         style={[

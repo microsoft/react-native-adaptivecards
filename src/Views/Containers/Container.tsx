@@ -50,11 +50,13 @@ export class ContainerView extends React.Component<IProps> {
     private renderNonTouchableBlock = (backgroundColor: string) => {
         return (
             <View
-                flex={this.flex}
-                alignSelf='stretch'
-                justifyContent={this.justifyContent}
-                marginTop={this.spacing}
-                backgroundColor={backgroundColor}
+                style={{
+                    flex: this.flex,
+                    alignSelf: 'stretch',
+                    justifyContent: this.justifyContent,
+                    marginTop: this.spacing,
+                    backgroundColor: backgroundColor,
+                }}
             >
                 {this.renderContent()}
             </View>
