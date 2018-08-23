@@ -20,9 +20,9 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-native@latest":
-  version "0.56.9"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.56.9.tgz#87e5877b98aed2b1dcd1def6f69927b24c2bd7e5"
+"@types/react-native@^0.55.28":
+  version "0.55.28"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.55.28.tgz#b57d796f6e5ee26ef6fab2328d84ae6f3e67abdf"
   dependencies:
     "@types/react" "*"
 

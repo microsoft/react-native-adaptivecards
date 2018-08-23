@@ -25,7 +25,7 @@
   "devDependencies": {
     "@types/lodash": "latest",
     "@types/react": "latest",
-    "@types/react-native": "latest",
+    "@types/react-native": "^0.55.28",
     "del": "latest",
     "gulp": "latest",
     "gulp-imagemin": "latest",
