@@ -59,6 +59,7 @@ export class LabelInput extends React.Component {
                 borderWidth: 1,
                 borderRadius: 4,
                 width: this.props.width,
+                height: this.height,
                 marginTop: this.props.marginTop,
                 marginRight: this.props.marginRight,
                 marginBottom: this.props.marginBottom,
@@ -94,7 +95,11 @@ export class LabelInput extends React.Component {
                     flex: 1,
                     color: this.color,
                     fontSize: this.fontSize,
+                    lineHeight: this.lineHeight,
                     fontWeight: this.fontWeight,
+                    backgroundColor: this.backgroundColor,
+                    borderRadius: 4,
+                    height: this.height - 2,
                     paddingTop: this.paddingVertical,
                     paddingRight: this.paddingHorizontal,
                     paddingBottom: this.paddingVertical,
@@ -132,6 +137,12 @@ export class LabelInput extends React.Component {
     }
     get fontWeight() {
         return StyleManager.getFontWeight('default');
+    }
+    get lineHeight() {
+        return this.fontSize * 1.2;
+    }
+    get height() {
+        return this.lineHeight + this.paddingVertical * 2 + 2;
     }
     get paddingVertical() {
         return 12;

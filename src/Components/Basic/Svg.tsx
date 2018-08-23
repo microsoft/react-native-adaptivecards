@@ -22,10 +22,9 @@ export class Svg extends React.Component<IProps> {
                 scrollEnabled={false}
                 style={[
                     {
-                        width: this.props.width,
-                        height: this.props.height,
-                        maxWidth: this.props.width,
-                        maxHeight: this.props.height,
+                        
+                        flex: 1,
+                        alignSelf: 'stretch',
                         backgroundColor: 'transparent',
                     },
                     this.props.style

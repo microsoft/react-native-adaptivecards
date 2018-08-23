@@ -50,6 +50,7 @@ export class InputBox extends React.Component<IProps, IState> {
                         flex: this.props.flex,
                         color: this.color,
                         fontSize: this.fontSize,
+                        lineHeight: this.lineHeight,
                         fontWeight: this.fontWeight,
                         backgroundColor: this.backgroundColor,
                         width: this.props.width,
@@ -123,6 +124,10 @@ export class InputBox extends React.Component<IProps, IState> {
         return this.props.numberOfLines && this.props.numberOfLines > 1;
     }
 
+    private get lineHeight() {
+        return this.fontSize * 1.2;
+    }
+
     private get fontSize() {
         return StyleManager.getFontSize('default');
     }
@@ -147,7 +152,7 @@ export class InputBox extends React.Component<IProps, IState> {
     }
 
     private get height() {
-        return this.fontSize * this.numberOfLine + this.paddingVertical * 2 + 2;
+        return this.lineHeight * this.numberOfLine + this.paddingVertical * 2 + 2;
     }
 
     private get color() {

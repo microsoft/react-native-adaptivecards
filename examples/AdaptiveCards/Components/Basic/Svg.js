@@ -7,10 +7,8 @@ export class Svg extends React.Component {
     render() {
         return (React.createElement(WebView, { source: { html: this.html }, scalesPageToFit: true, scrollEnabled: false, style: [
                 {
-                    width: this.props.width,
-                    height: this.props.height,
-                    maxWidth: this.props.width,
-                    maxHeight: this.props.height,
+                    flex: 1,
+                    alignSelf: 'stretch',
                     backgroundColor: 'transparent',
                 },
                 this.props.style
