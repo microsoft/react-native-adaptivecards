@@ -1,7 +1,27 @@
 import * as React from 'react';
-import { Dimensions, Platform, StyleProp, View, ViewStyle } from 'react-native';
+import { Dimensions, Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageBackground } from '../Basic/ImageBackground';
+
+const styles = StyleSheet.create({
+    cardContainer: {
+        backgroundColor: '#fff',
+        borderRadius: 4,
+        ...Platform.select({
+            ios: {
+                borderWidth: StyleSheet.hairlineWidth,
+                borderColor: 'rgba(0, 0, 0, .1)',
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 0 },
+                shadowRadius: 3,
+                shadowOpacity: .08,
+            },
+            android: {
+                elevation: 2,
+            }
+        }),
+    },
+});
 
 interface IProps {
     flex?: number;
@@ -16,25 +36,11 @@ export class Card extends React.Component<IProps> {
         return (
             <View
                 style={[
+                    this.props.style || styles.cardContainer,
                     {
                         flex: this.props.flex,
-                        backgroundColor: '#fff',
-                        borderRadius: 4,
-                        borderWidth: 1,
-                        borderColor: 'rgba(0, 0, 0, .05)',
-                        elevation: 2,
                         minHeight: Dimensions.get('window').width * 150 / 285,
-                    }, Platform.select({
-                        ios: {
-                            shadowColor: '#000',
-                            shadowOffset: { width: 0, height: 0 },
-                            shadowRadius: 3,
-                            shadowOpacity: .08,
-                        },
-                        android: {
-                            elevation: 2,
-                        }
-                    }), this.props.style
+                    }
                 ]}
             >
                 {this.renderCardContent()}
