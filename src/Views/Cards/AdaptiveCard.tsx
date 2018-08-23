@@ -49,11 +49,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                 flex={1}
                 fit='container'
                 backgroundImageUrl={element.getBackgroundImageUrl()}
-                style={[
-                    {
-                        minHeight: 150,
-                    }, this.props.style
-                ]}
+                style={ this.props.style}
             >
                 {this.renderBody()}
                 {this.renderSubCard()}

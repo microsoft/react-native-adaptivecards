@@ -88,7 +88,7 @@ export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
         return (
             <View
                 style={{ flex: 1 }}
-            >   
+            >
                 <AdaptiveCardView
                     index={0}
                     element={new CardElement(this.props.adaptiveCard, undefined)}
@@ -119,8 +119,10 @@ export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
             console.log('Form validate: ' + args.formValidate);
             console.log(args.formData);
             if (args.formValidate && this.props.onCallback) {
+                console.log('Calling Callback');
                 this.props.onCallback(args.action.url, args.formData).then((data) => {
                     if (args.onFinishCallback) {
+                        console.log('Has on Callback');
                         args.onFinishCallback(data);
                     }
                 }).catch((error) => {

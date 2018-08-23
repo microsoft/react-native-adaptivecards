@@ -18,10 +18,11 @@ export class FactView extends React.Component<IProps> {
         }
 
         return (
-            <View style={{
-                flexDirection: 'row',
-                alignSelf: 'stretch'
-            }}
+            <View
+                style={{
+                    flexDirection: 'row',
+                    alignSelf: 'stretch'
+                }}
             >
                 <Text
                     accessible={true}

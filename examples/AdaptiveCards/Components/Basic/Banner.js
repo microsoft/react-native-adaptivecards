@@ -3,7 +3,17 @@ import { Text, View } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 export class Banner extends React.Component {
     render() {
-        return (React.createElement(View, { backgroundColor: this.backgroundColor, paddingTop: 8, paddingRight: 8, paddingBottom: 8, paddingLeft: 8, marginTop: 4, marginRight: 4, marginBottom: 4, marginLeft: 4 },
+        return (React.createElement(View, { style: {
+                backgroundColor: this.backgroundColor,
+                paddingTop: 8,
+                paddingRight: 8,
+                paddingBottom: 8,
+                paddingLeft: 8,
+                marginTop: 4,
+                marginRight: 4,
+                marginBottom: 4,
+                marginLeft: 4
+            } },
             React.createElement(Text, { style: {
                     color: this.color,
                 } }, this.props.title),

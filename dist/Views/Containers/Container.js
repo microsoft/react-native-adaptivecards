@@ -18,7 +18,13 @@ export class ContainerView extends React.Component {
                 } }, this.renderContent()));
         };
         this.renderNonTouchableBlock = (backgroundColor) => {
-            return (React.createElement(View, { flex: this.flex, alignSelf: 'stretch', justifyContent: this.justifyContent, marginTop: this.spacing, backgroundColor: backgroundColor }, this.renderContent()));
+            return (React.createElement(View, { style: {
+                    flex: this.flex,
+                    alignSelf: 'stretch',
+                    justifyContent: this.justifyContent,
+                    marginTop: this.spacing,
+                    backgroundColor: backgroundColor,
+                } }, this.renderContent()));
         };
         this.renderContent = () => {
             const { element } = this.props;

@@ -4,6 +4,7 @@ export class ColumnSetElement extends ScopeElement {
     constructor(json, parent) {
         super(json, parent);
         if (this.isValid) {
+            this.height = json.height;
             this.columns = [];
             if (json.columns) {
                 json.columns.forEach((item) => {

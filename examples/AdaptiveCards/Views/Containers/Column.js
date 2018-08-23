@@ -19,7 +19,14 @@ export class ColumnView extends React.Component {
                 } }, this.renderContent()));
         };
         this.renderNonTouchableBlock = (backgroundColor) => {
-            return (React.createElement(View, { flex: this.flex, flexDirection: 'column', alignSelf: this.alignSelf, justifyContent: this.justifyContent, marginLeft: this.spacing, backgroundColor: backgroundColor }, this.renderContent()));
+            return (React.createElement(View, { style: {
+                    flex: this.flex,
+                    flexDirection: 'column',
+                    alignSelf: this.alignSelf,
+                    justifyContent: this.justifyContent,
+                    marginLeft: this.spacing,
+                    backgroundColor: backgroundColor
+                } }, this.renderContent()));
         };
         this.renderContent = () => {
             const { element } = this.props;

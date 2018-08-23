@@ -71,10 +71,10 @@ export class Touchable extends React.Component<IProps> {
                     hitSlop={hitSlop}
                     background={TouchableNativeFeedback.SelectableBackground()}
                     accessibilityLabel={accessibilityLabel}
+                    onLayout={this.props.onLayout}
                 >
                     <View
                         style={style}
-                        onLayout={this.props.onLayout}
                         {...otherProps}
                     />
                 </TouchableNativeFeedback>);

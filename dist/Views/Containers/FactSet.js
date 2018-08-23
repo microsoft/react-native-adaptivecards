@@ -19,7 +19,11 @@ export class FactSetView extends React.Component {
         if (!element || !element.isValid) {
             return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
-        return (React.createElement(View, { flexDirection: 'column', marginTop: this.spacing, alignSelf: 'stretch' }, this.renderFacts()));
+        return (React.createElement(View, { style: {
+                flexDirection: 'column',
+                marginTop: this.spacing,
+                alignSelf: 'stretch'
+            } }, this.renderFacts()));
     }
     get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {

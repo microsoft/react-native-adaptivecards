@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleProp, View, ViewStyle } from 'react-native';
+import { Dimensions, Platform, StyleProp, View, ViewStyle } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageBackground } from '../Basic/ImageBackground';
 
@@ -14,25 +14,28 @@ interface IProps {
 export class Card extends React.Component<IProps> {
     public render() {
         return (
-            <View style={[{
-                flex: this.props.flex,
-                backgroundColor: '#fff',
-                borderRadius: 4,
-                borderWidth: 1,
-                borderColor: 'rgba(0, 0, 0, .05)',
-                elevation: 2,
-            }, Platform.select({
-                ios: {
-                    shadowColor: '#000',
-                    shadowOffset: { width: 0, height: 0 },
-                    shadowRadius: 3,
-                    shadowOpacity: .08,
-                },
-                android: {
-                    elevation: 2,
-                }
-            }), this.props.style
-            ]}
+            <View
+                style={[
+                    {
+                        flex: this.props.flex,
+                        backgroundColor: '#fff',
+                        borderRadius: 4,
+                        borderWidth: 1,
+                        borderColor: 'rgba(0, 0, 0, .05)',
+                        elevation: 2,
+                        minHeight: Dimensions.get('window').width * 150 / 285,
+                    }, Platform.select({
+                        ios: {
+                            shadowColor: '#000',
+                            shadowOffset: { width: 0, height: 0 },
+                            shadowRadius: 3,
+                            shadowOpacity: .08,
+                        },
+                        android: {
+                            elevation: 2,
+                        }
+                    }), this.props.style
+                ]}
             >
                 {this.renderCardContent()}
             </View>
@@ -61,16 +64,17 @@ export class Card extends React.Component<IProps> {
             );
         } else {
             return (
-                <View style={{
-                    flex: this.contentFlex,
-                    backgroundColor: StyleManager.getBackgroundColor(this.props.theme),
-                    paddingTop: 12,
-                    paddingRight: 12,
-                    paddingBottom: 12,
-                    paddingLeft: 12,
-                    borderRadius: 4,
-                    overflow: 'hidden'
-                }}
+                <View
+                    style={{
+                        flex: this.contentFlex,
+                        backgroundColor: StyleManager.getBackgroundColor(this.props.theme),
+                        paddingTop: 12,
+                        paddingRight: 12,
+                        paddingBottom: 12,
+                        paddingLeft: 12,
+                        borderRadius: 4,
+                        overflow: 'hidden'
+                    }}
                 >
                     {this.props.children}
                 </View>

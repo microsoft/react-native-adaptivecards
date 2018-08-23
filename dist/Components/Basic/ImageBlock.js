@@ -43,7 +43,20 @@ export class ImageBlock extends React.Component {
             this.renderImage()));
     }
     renderNonTouchableBlock() {
-        return (React.createElement(View, { flex: this.props.flex, alignContent: 'center', alignItems: 'center', alignSelf: this.props.alignSelf, marginTop: this.props.marginTop, marginRight: this.props.marginRight, marginBottom: this.props.marginBottom, marginLeft: this.props.marginLeft, paddingTop: this.props.paddingTop, paddingRight: this.props.paddingRight, paddingBottom: this.props.paddingBottom, paddingLeft: this.props.paddingLeft, onLayout: this.props.onLayout },
+        return (React.createElement(View, { style: {
+                flex: this.props.flex,
+                alignContent: 'center',
+                alignItems: 'center',
+                alignSelf: this.props.alignSelf,
+                marginTop: this.props.marginTop,
+                marginRight: this.props.marginRight,
+                marginBottom: this.props.marginBottom,
+                marginLeft: this.props.marginLeft,
+                paddingTop: this.props.paddingTop,
+                paddingRight: this.props.paddingRight,
+                paddingBottom: this.props.paddingBottom,
+                paddingLeft: this.props.paddingLeft,
+            }, onLayout: this.props.onLayout },
             this.renderPlaceholder(),
             this.renderImage()));
     }
@@ -67,10 +80,16 @@ export class ImageBlock extends React.Component {
     }
     renderImage() {
         if (UrlUtils.isSvgXml(this.props.url)) {
-            return (React.createElement(Svg, { url: this.props.url, width: this.props.width, height: this.props.height, style: [
+            return (React.createElement(View, { style: [
+                    {
+                        width: this.props.width,
+                        height: this.props.height,
+                        overflow: 'hidden',
+                    },
                     this.borderRadius,
                     this.props.style
-                ] }));
+                ] },
+                React.createElement(Svg, { url: this.props.url })));
         }
         else {
             if (UrlUtils.isDeepLink(this.props.url)) {

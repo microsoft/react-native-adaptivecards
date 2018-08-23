@@ -36,11 +36,7 @@ export class AdaptiveCardView extends React.Component {
         if (!element || !element.isValid) {
             return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', theme, 'error');
         }
-        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: element.getBackgroundImageUrl(), style: [
-                {
-                    minHeight: 150,
-                }, this.props.style
-            ] },
+        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: element.getBackgroundImageUrl(), style: this.props.style },
             this.renderBody(),
             this.renderSubCard(),
             this.renderActionSet()));
@@ -50,7 +46,11 @@ export class AdaptiveCardView extends React.Component {
         if (!element || !element.isValid || !element.body) {
             return undefined;
         }
-        return (React.createElement(View, { flexDirection: 'column', alignSelf: 'stretch', flex: 1 }, this.props.element.body.map((contentElement, index) => ContentFactory.createView(contentElement, index, this.props.theme))));
+        return (React.createElement(View, { style: {
+                flexDirection: 'column',
+                alignSelf: 'stretch',
+                flex: 1
+            } }, this.props.element.body.map((contentElement, index) => ContentFactory.createView(contentElement, index, this.props.theme))));
     }
     renderActionSet() {
         const { element } = this.props;

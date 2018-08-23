@@ -22,7 +22,9 @@ export class ImageSetView extends React.Component {
         if (!element || !element.isValid) {
             return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
         }
-        return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, marginTop: this.spacing }));
+        return (React.createElement(FlatList, { data: element.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, style: {
+                marginTop: this.spacing
+            } }));
     }
     get size() {
         const { element } = this.props;

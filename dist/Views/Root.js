@@ -29,8 +29,10 @@ export class CardRootView extends React.PureComponent {
                 console.log('Form validate: ' + args.formValidate);
                 console.log(args.formData);
                 if (args.formValidate && this.props.onCallback) {
+                    console.log('Calling Callback');
                     this.props.onCallback(args.action.url, args.formData).then((data) => {
                         if (args.onFinishCallback) {
+                            console.log('Has on Callback');
                             args.onFinishCallback(data);
                         }
                     }).catch((error) => {

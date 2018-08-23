@@ -34,6 +34,7 @@ export class ColumnSetView extends React.Component<IProps> {
             <Touchable
                 onPress={this.onPress}
                 style={{
+                    flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',
                     justifyContent: 'flex-start',
@@ -47,7 +48,9 @@ export class ColumnSetView extends React.Component<IProps> {
 
     private renderNonTouchableBlock = () => {
         return (
-            <View style={{
+            <View
+                style={{
+                    flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',
                     justifyContent: 'flex-start',
@@ -96,6 +99,20 @@ export class ColumnSetView extends React.Component<IProps> {
         if (callback) {
             callback();
         }
+    }
+
+    private get flex() {
+        const { element } = this.props;
+
+        if (!element || !element.isValid) {
+            return 0;
+        }
+
+        if (element.height === 'stretch') {
+            return 1;
+        }
+
+        return 0;
     }
 
     private get spacing() {

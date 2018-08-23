@@ -17,7 +17,12 @@ export class ModalBox extends React.Component {
                             backgroundColor: 'rgba(0, 0, 0, 0.3)'
                         }
                     ] })),
-            React.createElement(View, { flex: 1, justifyContent: 'center', alignContent: 'center', alignItems: 'center' },
+            React.createElement(View, { style: {
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    alignItems: 'center'
+                } },
                 React.createElement(View, { style: [
                         {
                             width: '85%',

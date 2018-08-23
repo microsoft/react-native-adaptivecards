@@ -8,7 +8,10 @@ export class FactView extends React.Component {
         if (!element || !element.isValid) {
             return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.title + ' is not valid', theme, 'error');
         }
-        return (React.createElement(View, { flexDirection: 'row', alignSelf: 'stretch' },
+        return (React.createElement(View, { style: {
+                flexDirection: 'row',
+                alignSelf: 'stretch'
+            } },
             React.createElement(Text, { accessible: true, style: {
                     color: StyleManager.getFactTitleColor(theme),
                     fontSize: StyleManager.factTitleFontSize,

@@ -11,6 +11,7 @@ export class ColumnSetView extends React.Component {
         super(...arguments);
         this.renderTouchableBlock = () => {
             return (React.createElement(Touchable, { onPress: this.onPress, style: {
+                    flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',
                     justifyContent: 'flex-start',
@@ -18,7 +19,13 @@ export class ColumnSetView extends React.Component {
                 } }, this.renderContent()));
         };
         this.renderNonTouchableBlock = () => {
-            return (React.createElement(View, { flexDirection: 'row', alignSelf: 'stretch', justifyContent: 'flex-start', marginTop: this.spacing }, this.renderContent()));
+            return (React.createElement(View, { style: {
+                    flex: this.flex,
+                    flexDirection: 'row',
+                    alignSelf: 'stretch',
+                    justifyContent: 'flex-start',
+                    marginTop: this.spacing
+                } }, this.renderContent()));
         };
         this.renderContent = () => {
             const { element } = this.props;
@@ -56,6 +63,16 @@ export class ColumnSetView extends React.Component {
         else {
             return this.renderNonTouchableBlock();
         }
+    }
+    get flex() {
+        const { element } = this.props;
+        if (!element || !element.isValid) {
+            return 0;
+        }
+        if (element.height === 'stretch') {
+            return 1;
+        }
+        return 0;
     }
     get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
