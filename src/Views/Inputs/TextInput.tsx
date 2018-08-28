@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { InputBox } from '../../Components/Inputs/InputBox';
-import { FormContext } from '../../Contexts/FormContext';
-import { HostContext } from '../../Contexts/HostContext';
-import { TextInputElement } from '../../Schema/Inputs/TextInput';
+import { TextInputModel } from '../../Models/Inputs/TextInput';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
-    element: TextInputElement;
+    model: TextInputModel;
     theme: 'default' | 'emphasis';
 }
 
@@ -17,13 +14,16 @@ interface IState {
 }
 
 export class TextInputView extends React.Component<IProps, IState> {
+    private mounted: boolean;
+
     constructor(props: IProps) {
         super(props);
 
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (element && element.isValid) {
-            let defaultValue = element.value;
+        if (model && model.isValueValid) {
+            model.onStoreUpdate = this.onStoreUpdate;
+            let defaultValue = model.value;
             if (defaultValue === undefined) {
                 defaultValue = '';
             }
@@ -31,24 +31,39 @@ export class TextInputView extends React.Component<IProps, IState> {
             this.state = {
                 value: defaultValue
             };
-            this.updateStore();
+            this.props.model.onInput(this.state.value);
+        }
+    }
+
+    public componentDidMount() {
+        this.mounted = true;
+    }
+
+    public componentWillUnmount() {
+        this.mounted = false;
+    }
+
+    // tslint:disable-next-line:max-line-length
+    public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) { 
+        if (this.mounted) {
+            
+            super.setState(state as any, callback);
         }
     }
 
     public render() {
-        const { element, theme } = this.props;
+        const { model, theme } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        // }
 
         return (
             <InputBox
                 numberOfLines={this.numberOfLine}
-                placeholder={element.placeholder}
+                placeholder={model.placeholder}
                 value={this.state.value}
                 onValueChange={this.onValueChange}
-                validateInput={this.validateInput}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 theme={theme}
@@ -59,45 +74,44 @@ export class TextInputView extends React.Component<IProps, IState> {
 
     private onBlur = () => {
         console.log('TextInputView onBlur');
+        const { model } = this.props;
 
-        let callback = HostContext.getInstance().getHandler('blur');
-        if (callback) {
-            callback();
+        if (model) {
+            let callback = model.context.blurHandler;
+            if (callback) {
+                callback();
+            }
         }
     }
 
     private onFocus = () => {
         console.log('TextInputView onFocus');
+        const { model } = this.props;
 
-        let callback = HostContext.getInstance().getHandler('focus');
-        if (callback) {
-            callback();
+        if (model) {
+            let callback = model.context.focusHandler;
+            if (callback) {
+                callback();
+            }
         }
     }
 
     private onValueChange = (value: string) => {
         this.setState({
             value: value
-        }, this.updateStore);
+        }, () => {
+            this.props.model.onInput(this.state.value);
+        });
     }
-
-    private validateInput = (input: string) => {
-        if (this.props.element) {
-            return this.props.element.validate(input);
-        }
-        return true;
-    }
-
-    private updateStore() {
-        FormContext.getInstance().updateField(
-            this.props.element.id,
-            this.state.value,
-            this.validateInput(this.state.value)
-        );
+    
+    private onStoreUpdate = (value: string) => {
+        this.setState({
+            value: value
+        });
     }
 
     private get numberOfLine() {
-        if (this.props.element.isMultiline) {
+        if (this.props.model.isMultiline) {
             return 4;
         }
         return 1;
@@ -105,7 +119,7 @@ export class TextInputView extends React.Component<IProps, IState> {
 
     private get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }

@@ -1,26 +1,24 @@
 import * as React from 'react';
 
 import { Button } from '../../Components/Inputs/Button';
-import { ActionContext } from '../../Contexts/ActionContext';
-import { ActionElement } from '../../Schema/Abstract/ActionElement';
-import { ActionHook } from '../../Shared/Types';
+import { OpenUrlActionModel } from '../../Models/Actions/OpenUrlAction';
+import { ShowCardActionModel } from '../../Models/Actions/ShowCardAction';
+import { SubmitActionModel } from '../../Models/Actions/SubmitAction';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps<T extends ActionElement> {
+interface IProps {
     index: number;
-    element: T;
+    model: OpenUrlActionModel | ShowCardActionModel | SubmitActionModel;
     theme: 'default' | 'emphasis';
-    actionHooks?: ActionHook[];
 }
 
-export class ActionView<T extends ActionElement> extends React.Component<IProps<T>> {
+export class ActionView extends React.Component<IProps> {
     public render() {
-        const { element, theme } = this.props;
+        const { theme } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.title + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
+        // }
 
         return (
             <Button
@@ -48,13 +46,17 @@ export class ActionView<T extends ActionElement> extends React.Component<IProps<
     }
 
     private onPress = () => {
-        let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element);
-        if (callback) {
-            if (this.props.actionHooks) {
-                callback(...this.props.actionHooks);
-            } else {
-                callback();
-            }
+        const { model } = this.props;
+
+        if (model && model.onAction) {
+            model.onAction(
+                () => {
+                    console.log('Action Success');
+                },
+                (error) => {
+                    console.log('Action Failed >> ', error);
+                }
+            );
         }
     }
 
@@ -76,13 +78,17 @@ export class ActionView<T extends ActionElement> extends React.Component<IProps<
     // we apply a temp work around in client side to unblock click containers.
     /*****Fix starts here*****/
     private get title() {
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (!element || !element.isValid) {
+        // if (!model || !model.isValid) {
+        //     return '';
+        // }
+
+        if (!model) {
             return '';
         }
 
-        return this.props.element.title ? this.props.element.title.toLocaleUpperCase() : '';
+        return model.title ? model.title.toLocaleUpperCase() : '';
     }
     /*****Fix ends here*****/
 }

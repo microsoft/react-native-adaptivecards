@@ -1,14 +1,12 @@
 import * as React from 'react';
 import { Button } from '../../Components/Inputs/Button';
 import { TimePanel } from '../../Components/Inputs/TimePanel';
-import { FormContext } from '../../Contexts/FormContext';
-import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
+import { TimeInputModel } from '../../Models/Inputs/TimeInput';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
-    element: TimeInputElement;
+    model: TimeInputModel;
     theme: 'default' | 'emphasis';
 }
 
@@ -18,26 +16,45 @@ interface IState {
 }
 
 export class TimeInputView extends React.Component<IProps, IState> {
+    private mounted: boolean;
+    
     private tempValue = '';
     constructor(props: IProps) {
         super(props);
 
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (element && element.isValid) {
+        if (model) {
+            model.onStoreUpdate = this.onStoreUpdate;
             this.state = {
                 focused: false,
-                value: element.value
+                value: model.value
             };
+            this.props.model.onInput(this.state.value);
+        }
+    }
+
+    public componentDidMount() {
+        this.mounted = true;
+    }
+
+    public componentWillUnmount() {
+        this.mounted = false;
+    }
+
+    // tslint:disable-next-line:max-line-length
+    public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) {
+        if (this.mounted) {
+            super.setState(state, callback);
         }
     }
 
     public render() {
-        const { element, index, theme } = this.props;
+        const { index } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        // }
 
         return (
             [
@@ -61,7 +78,7 @@ export class TimeInputView extends React.Component<IProps, IState> {
                     paddingBottom={this.paddingVertical}
                     onPress={this.onPress}
                 />,
-                <TimePanel 
+                <TimePanel
                     key={'TimePanel' + index}
                     value={this.state.value}
                     show={this.state.focused}
@@ -90,30 +107,45 @@ export class TimeInputView extends React.Component<IProps, IState> {
             value: this.tempValue,
             focused: false,
         }, () => {
-            this.updateStore();
+            const { model } = this.props;
+
+            if (model) {
+                model.onInput(this.state.value);
+                let callback = model.context.blurHandler;
+                if (callback) {
+                    callback();
+                }
+            }
         });
-    }
-
-    private validateInput = (input: string) => {
-        if (this.props.element) {
-            return this.props.element.validate(input);
-        }
-        return true;
-    }
-
-    private updateStore() {
-        FormContext.getInstance().updateField(
-            this.props.element.id,
-            this.state.value,
-            this.validateInput(this.state.value)
-        );
     }
 
     private onPress = () => {
         this.setState({
             focused: !this.state.focused,
+        }, () => {
+            const { model } = this.props;
+
+            if (model) {
+                if (this.state.focused) {
+                    let callback = model.context.focusHandler;
+                    if (callback) {
+                        callback();
+                    }
+                } else {
+                    let callback = model.context.blurHandler;
+                    if (callback) {
+                        callback();
+                    }
+                }
+            }
         });
         console.log('on press');
+    }
+
+    private onStoreUpdate = (value: string) => {
+        this.setState({
+            value: value
+        });
     }
 
     private get fontSize() {
@@ -166,7 +198,7 @@ export class TimeInputView extends React.Component<IProps, IState> {
 
     private get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }

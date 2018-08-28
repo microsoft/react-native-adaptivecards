@@ -1,16 +1,18 @@
 import * as React from 'react';
 import { ImageBlock } from '../../Components/Basic/ImageBlock';
-import { ActionContext } from '../../Contexts/ActionContext';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageUtils } from '../../Utils/ImageUtils';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ImageView extends React.Component {
     constructor(props) {
         super(props);
         this.onPress = () => {
-            let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
-            if (callback) {
-                callback();
+            const { model } = this.props;
+            if (model && model.selectAction && model.selectAction.onAction) {
+                model.selectAction.onAction(() => {
+                    console.log('Action Success');
+                }, (error) => {
+                    console.log('Action Failed >> ', error);
+                });
             }
         };
         this.onLayout = (event) => {
@@ -45,33 +47,30 @@ export class ImageView extends React.Component {
         };
     }
     componentDidMount() {
-        const { element, size, maxWidth, maxHeight } = this.props;
-        if (element && element.isValid) {
-            ImageUtils.fetchSize(element.url, size || element.size, { width: maxWidth, height: maxHeight }, this.onImageSize, this.onImageSizeError);
+        const { model, size, maxWidth, maxHeight } = this.props;
+        if (model) {
+            ImageUtils.fetchSize(model.url, size || model.size, { width: maxWidth, height: maxHeight }, this.onImageSize, this.onImageSizeError);
         }
     }
     render() {
-        const { element, spacing, theme } = this.props;
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.url + ' is not valid', theme, 'error');
-        }
+        const { model, spacing } = this.props;
         if (this.state.loaded) {
-            return (React.createElement(ImageBlock, { url: element.url, alt: element.altText, flex: this.flex, alignSelf: StyleManager.getHorizontalAlign(element.horizontalAlignment), width: this.state.width, height: this.state.height, onPress: element.selectAction ? this.onPress : undefined, onLayout: this.onLayout, marginTop: this.spacing, marginLeft: spacing, mode: element.style === 'person' ? 'avatar' : 'default' }));
+            return (React.createElement(ImageBlock, { url: model.url, alt: model.alt, flex: this.flex, alignSelf: StyleManager.getHorizontalAlign(model.horizontalAlignment), width: this.state.width, height: this.state.height, onPress: model.selectAction ? this.onPress : undefined, onLayout: this.onLayout, marginTop: this.spacing, marginLeft: spacing, mode: model.style === 'person' ? 'avatar' : 'default' }));
         }
         return null;
     }
     get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }
     get flex() {
-        const { element, size } = this.props;
-        if (!element || !element.isValid) {
+        const { model, size } = this.props;
+        if (!model) {
             return undefined;
         }
-        let finalSize = StyleManager.getImageSize(size || element.size);
+        let finalSize = StyleManager.getImageSize(size || model.size);
         if (finalSize === 'stretch') {
             return 1;
         }

@@ -1,28 +1,26 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
-import { ActionContext } from '../../Contexts/ActionContext';
-import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
+import { ColumnSetModel } from '../../Models/Containers/ColumnSet';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ContentFactory } from '../Factories/ContentFactory';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { ColumnView } from './Column';
 
 interface IProps {
     index: number;
-    element: ColumnSetElement;
+    model: ColumnSetModel;
     theme: 'default' | 'emphasis';
 }
 
 export class ColumnSetView extends React.Component<IProps> {
     public render() {
-        const { element, theme } = this.props;
+        const { model } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        // }
 
-        if (element.selectAction) {
+        if (model.selectAction) {
             return this.renderTouchableBlock();
         } else {
             return this.renderNonTouchableBlock();
@@ -63,13 +61,13 @@ export class ColumnSetView extends React.Component<IProps> {
     }
 
     private renderContent = () => {
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (!element || !element.isValid) {
+        if (!model) {
             return undefined;
         }
 
-        const background = element.getBackgroundImageUrl();
+        const background = model.backgroundImage;
 
         if (background) {
             return ContentFactory.createBackgroundImageView(this.renderColumns(), background);
@@ -78,37 +76,45 @@ export class ColumnSetView extends React.Component<IProps> {
     }
 
     private renderColumns = () => {
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (!element || !element.isValid || !element.columns || element.columns.length === 0) {
+        if (!model || !model.columns || model.columns.length === 0) {
             return undefined;
         }
 
-        return element.columns.map((column, index) => (
+        return model.columns.map((column, index) => (
             <ColumnView
                 key={index}
                 index={index}
-                element={column}
+                model={column}
                 theme={this.props.theme}
             />
         ));
     }
 
     private onPress = () => {
-        let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
-        if (callback) {
-            callback();
+        const { model } = this.props;
+
+        if (model && model.selectAction && model.selectAction.onAction) {
+            model.selectAction.onAction(
+                () => {
+                    console.log('Action Success');
+                },
+                (error) => {
+                    console.log('Action Failed >> ', error);
+                }
+            );
         }
     }
 
     private get flex() {
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (!element || !element.isValid) {
+        if (!model) {
             return 0;
         }
 
-        if (element.height === 'stretch') {
+        if (model.height === 'stretch') {
             return 1;
         }
 
@@ -117,7 +123,7 @@ export class ColumnSetView extends React.Component<IProps> {
 
     private get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }

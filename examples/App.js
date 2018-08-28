@@ -31,67 +31,67 @@ export default class App extends React.Component {
                     padding: 10,
                     backgroundColor: 'white',
                 }}>
-                <AdaptiveCards adaptiveCard={mockData.peoplePicker} onCallback={this.onCallback}/>
+                <AdaptiveCards adaptiveCard={mockData.peoplePicker} onCallback={this.onCallback} onSubmit={this.onSubmit}/>
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.bingMap} />
+                <AdaptiveCards adaptiveCard={mockData.bingMap} onSubmit={this.onSubmit}/>
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.dinning} />
+                <AdaptiveCards adaptiveCard={mockData.dinning} onSubmit={this.onSubmit}/>
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.vocabulary} />
+                <AdaptiveCards adaptiveCard={mockData.vocabulary} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-				<AdaptiveCards adaptiveCard={mockData.fact} />
+				<AdaptiveCards adaptiveCard={mockData.fact} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.showVideo} />
+                <AdaptiveCards adaptiveCard={mockData.showVideo} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.weatherCompact} />
+                <AdaptiveCards adaptiveCard={mockData.weatherCompact} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.heightOfEiffelTower} overrideStyle={cardOverrideStyle} />
+                <AdaptiveCards adaptiveCard={BingAnswer.heightOfEiffelTower} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.highestMountionInTheWorld} overrideStyle={cardOverrideStyle} />
+                <AdaptiveCards adaptiveCard={BingAnswer.highestMountionInTheWorld} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.latestNews} overrideStyle={cardOverrideStyle} />
+                <AdaptiveCards adaptiveCard={BingAnswer.latestNews} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.microsoftStock} overrideStyle={cardOverrideStyle} />
+                <AdaptiveCards adaptiveCard={BingAnswer.microsoftStock} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.showMeFunnyVideo} overrideStyle={cardOverrideStyle} />
+                <AdaptiveCards adaptiveCard={BingAnswer.showMeFunnyVideo} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.timeInLondon} overrideStyle={cardOverrideStyle} />
+                <AdaptiveCards adaptiveCard={BingAnswer.timeInLondon} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.whatIsTheWeather} overrideStyle={cardOverrideStyle} />
+                <AdaptiveCards adaptiveCard={BingAnswer.whatIsTheWeather} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} overrideStyle={cardOverrideStyle} />
+                <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.emailSent} />
+                <AdaptiveCards adaptiveCard={mockData.emailSent} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.searchEmail} />
+                <AdaptiveCards adaptiveCard={mockData.searchEmail} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.readEmail} />
+                <AdaptiveCards adaptiveCard={mockData.readEmail} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.news} />
+                <AdaptiveCards adaptiveCard={mockData.news} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} />
+                <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.flightItinerary} />
+                <AdaptiveCards adaptiveCard={mockData.flightItinerary} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.flightUpdate} />
+                <AdaptiveCards adaptiveCard={mockData.flightUpdate} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.foodOrder} />
+                <AdaptiveCards adaptiveCard={mockData.foodOrder} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.imageGallery} />
+                <AdaptiveCards adaptiveCard={mockData.imageGallery} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.inputForm} />
+                <AdaptiveCards adaptiveCard={mockData.inputForm} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.inputs} />
+                <AdaptiveCards adaptiveCard={mockData.inputs} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.restaurant} />
+                <AdaptiveCards adaptiveCard={mockData.restaurant} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.solitaire} />
+                <AdaptiveCards adaptiveCard={mockData.solitaire} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.sportsGameUpdate} />
+                <AdaptiveCards adaptiveCard={mockData.sportsGameUpdate} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.stockUpdate} />
+                <AdaptiveCards adaptiveCard={mockData.stockUpdate} onSubmit={this.onSubmit} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.weatherLarge} />
+                <AdaptiveCards adaptiveCard={mockData.weatherLarge} onSubmit={this.onSubmit} />
             </ScrollView>
         );
     }
@@ -100,7 +100,14 @@ export default class App extends React.Component {
         return <View style={{ height: cardGap }} />;
     };
 
+    onSubmit = (data) => {
+        console.log(data);
+        return Promise.resolve(true);
+    }
+
     onCallback = (url, data) => {
+        console.log(url);
+        console.log(data);
         return Promise.resolve(mockData.peopleSuggestion);
     }
 }

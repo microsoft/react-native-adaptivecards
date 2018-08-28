@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
-import { ActionContext } from '../../Contexts/ActionContext';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ContentFactory } from '../Factories/ContentFactory';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ColumnView extends React.Component {
     constructor() {
         super(...arguments);
@@ -29,40 +27,41 @@ export class ColumnView extends React.Component {
                 } }, this.renderContent()));
         };
         this.renderContent = () => {
-            const { element } = this.props;
-            if (!element || !element.isValid) {
+            const { model } = this.props;
+            if (!model) {
                 return undefined;
             }
-            const background = element.getBackgroundImageUrl();
+            const background = model.backgroundImage;
             if (background) {
                 return ContentFactory.createBackgroundImageView(this.renderItems(), background);
             }
             return this.renderItems();
         };
         this.renderItems = () => {
-            const { element } = this.props;
-            if (!element || !element.isValid) {
+            const { model } = this.props;
+            if (!model) {
                 return undefined;
             }
-            if (element.items) {
-                return element.items.map((content, index) => ContentFactory.createView(content, index, element.style || this.props.theme));
+            if (model.items) {
+                return model.items.map((content, index) => ContentFactory.createView(content, index, model.style || this.props.theme));
             }
             return undefined;
         };
         this.onPress = () => {
-            let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
-            if (callback) {
-                callback();
+            const { model } = this.props;
+            if (model && model.selectAction && model.selectAction.onAction) {
+                model.selectAction.onAction(() => {
+                    console.log('Action Success');
+                }, (error) => {
+                    console.log('Action Failed >> ', error);
+                });
             }
         };
     }
     render() {
-        const { element, theme } = this.props;
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        }
-        let backgroundColor = StyleManager.getBackgroundColor(element.style);
-        if (element.selectAction) {
+        const { model } = this.props;
+        let backgroundColor = StyleManager.getBackgroundColor(model.style);
+        if (model.selectAction) {
             return this.renderTouchableBlock(backgroundColor);
         }
         else {
@@ -70,11 +69,11 @@ export class ColumnView extends React.Component {
         }
     }
     get justifyContent() {
-        const { element } = this.props;
-        if (!element || !element.isValid) {
+        const { model } = this.props;
+        if (!model) {
             return 'flex-start';
         }
-        switch (element.verticalContentAlignment) {
+        switch (model.verticalContentAlignment) {
             case 'top':
                 return 'flex-start';
             case 'center':
@@ -86,28 +85,28 @@ export class ColumnView extends React.Component {
         }
     }
     get alignSelf() {
-        const { element } = this.props;
-        if (!element || !element.isValid) {
+        const { model } = this.props;
+        if (!model) {
             return 'flex-start';
         }
-        if (element.height === 'stretch') {
+        if (model.height === 'stretch') {
             return 'stretch';
         }
         return 'flex-start';
     }
     get flex() {
-        const { element } = this.props;
-        if (!element || !element.isValid || element.width === 'auto') {
+        const { model } = this.props;
+        if (!model || model.width === 'auto') {
             return 0;
         }
-        if (element.width === undefined || element.width === 'stretch') {
+        if (model.width === undefined || model.width === 'stretch') {
             return 1;
         }
-        return element.width;
+        return model.width;
     }
     get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }

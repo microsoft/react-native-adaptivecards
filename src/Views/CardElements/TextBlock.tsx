@@ -1,46 +1,45 @@
 import * as React from 'react';
 import { Text } from 'react-native';
 
-import { TextBlockElement } from '../../Schema/CardElements/TextBlock';
+import { TextBlockModel } from '../../Models/CardElements/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
-    element: TextBlockElement;
+    model: TextBlockModel;
     theme: 'default' | 'emphasis';
 }
 
 export class TextBlockView extends React.Component<IProps> {
     public render() {
-        const { element, theme } = this.props;
+        const { model } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.text + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
+        // }
 
         return (
             <Text
                 accessible={true}
                 style={{
-                    color: StyleManager.getColor(element.color, this.props.theme, element.isSubtle),
-                    fontSize: StyleManager.getFontSize(element.size),
-                    fontWeight: StyleManager.getFontWeight(element.weight),
+                    color: StyleManager.getColor(model.color, this.props.theme, model.isSubtle),
+                    fontSize: StyleManager.getFontSize(model.size),
+                    fontWeight: StyleManager.getFontWeight(model.weight),
                     backgroundColor: 'transparent',
-                    textAlign: StyleManager.getTextAlign(element.horizontalAlignment),
-                    flexWrap: StyleManager.getWrap(element.wrap),
+                    textAlign: StyleManager.getTextAlign(model.horizontalAlignment),
+                    flexWrap: StyleManager.getWrap(model.wrap),
                     marginTop: this.spacing
                 }}
-                numberOfLines={element.maxLines}
+                numberOfLines={model.maxLines}
             >
-                {element.text}
+                {model.text}
             </Text>
         );
     }
 
     private get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }

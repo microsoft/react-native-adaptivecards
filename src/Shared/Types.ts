@@ -1,6 +1,3 @@
-import { ActionType } from '../Schema/Abstract/ActionElement';
-import { IElement } from '../Schema/Interfaces/IElement';
-
 export interface ITreeNode<T> {
     parent: T;
     ancestors: T[];
@@ -8,6 +5,40 @@ export interface ITreeNode<T> {
     children: T[];
     descends: T[];
     descendsAndSelf: T[];
+}
+
+export abstract class TreeNode<T extends TreeNode<T>> implements ITreeNode<T> {
+    public parent: T;
+    
+    constructor(parent: T) {
+        this.parent = parent;
+    }
+
+    public get ancestors(): T[] {
+        if (this.parent) {
+            return [this.parent, ...this.parent.ancestors];
+        }
+        return [];
+    }
+
+    public get ancestorsAndSelf(): T[] {
+        return [this as any, ...this.ancestors];
+    }
+
+    public abstract get children(): T[];
+
+    public get descends(): T[] {
+        return this.children.reduce(
+            (prev, current) => {
+                return prev.concat(current.descends);
+            },
+            this.children.slice()
+        );
+    }
+
+    public get descendsAndSelf(): T[] {
+        return [this  as any, ...this.descends];
+    }
 }
 
 export interface ValidationResult {
@@ -20,16 +51,28 @@ export interface Dimension {
     height: number;
 }
 
-export interface ActionEventHandlerArgs<T extends IElement> {
-    formData?: { [id: string]: string };
-    formValidate: boolean;
-    action: T;
-    onFinishCallback: (data: any) => void;
-    onErrorCallback: (data: any) => void;
+export enum ActionType {
+    OpenUrl = 'Action.OpenUrl',
+    Select = 'Action.Select',
+    Submit = 'Action.Submit',
+    ShowCard = 'Action.ShowCard',
+    Callback = 'Action.Callback',
 }
 
-export interface ActionHook {
-    actionType: ActionType;
-    func: (args: ActionEventHandlerArgs<IElement>) => ActionEventHandlerArgs<IElement>;
-    name: string;
+export enum ContentType {
+    Column = 'Column',
+    ColumnSet = 'ColumnSet',
+    Container = 'Container',
+    FactSet = 'FactSet',
+    Image = 'Image',
+    ImageSet = 'ImageSet',
+    TextBlock = 'TextBlock',
+    TextInput = 'Input.Text',
+    NumberInput = 'Input.Number',
+    DateInput = 'Input.Date',
+    TimeInput = 'Input.Time',
+    ToggleInput = 'Input.Toggle',
+    ChoiceSetInput = 'Input.ChoiceSet',
+    PeoplePicker = 'Input.PeoplePicker',
+    AdaptiveCard = 'AdaptiveCard',
 }

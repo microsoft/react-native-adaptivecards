@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { LayoutChangeEvent } from 'react-native';
 import { ImageBlock } from '../../Components/Basic/ImageBlock';
-import { ActionContext } from '../../Contexts/ActionContext';
-import { ImageElement } from '../../Schema/CardElements/Image';
+import { ImageModel } from '../../Models/CardElements/Image';
 import { Dimension } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageUtils } from '../../Utils/ImageUtils';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
-    element: ImageElement;
+    model: ImageModel;
     size?: 'auto' | 'stretch' | 'small' | 'medium' | 'large';
     spacing?: number;
     maxWidth?: number;
@@ -36,40 +34,40 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     public componentDidMount() {
-        const { element, size, maxWidth, maxHeight } = this.props;
+        const { model, size, maxWidth, maxHeight } = this.props;
 
-        if (element && element.isValid) {
+        if (model) {
             ImageUtils.fetchSize(
-                element.url, 
-                size || element.size, 
-                { width: maxWidth, height: maxHeight }, 
-                this.onImageSize, 
+                model.url,
+                size || model.size,
+                { width: maxWidth, height: maxHeight },
+                this.onImageSize,
                 this.onImageSizeError
             );
         }
     }
 
     public render() {
-        const { element, spacing, theme } = this.props;
+        const { model, spacing } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.url + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.url + ' is not valid', theme, 'error');
+        // }
 
         if (this.state.loaded) {
             return (
                 <ImageBlock
-                    url={element.url}
-                    alt={element.altText}
+                    url={model.url}
+                    alt={model.alt}
                     flex={this.flex}
-                    alignSelf={StyleManager.getHorizontalAlign(element.horizontalAlignment)}
+                    alignSelf={StyleManager.getHorizontalAlign(model.horizontalAlignment)}
                     width={this.state.width}
                     height={this.state.height}
-                    onPress={element.selectAction ? this.onPress : undefined}
+                    onPress={model.selectAction ? this.onPress : undefined}
                     onLayout={this.onLayout}
                     marginTop={this.spacing}
                     marginLeft={spacing}
-                    mode={element.style === 'person' ? 'avatar' : 'default'}
+                    mode={model.style === 'person' ? 'avatar' : 'default'}
                 />
             );
         }
@@ -77,9 +75,17 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     private onPress = () => {
-        let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
-        if (callback) {
-            callback();
+        const { model } = this.props;
+
+        if (model && model.selectAction && model.selectAction.onAction) {
+            model.selectAction.onAction(
+                () => {
+                    console.log('Action Success');
+                },
+                (error) => {
+                    console.log('Action Failed >> ', error);
+                }
+            );
         }
     }
 
@@ -91,7 +97,7 @@ export class ImageView extends React.Component<IProps, IState> {
                 width: width,
                 height: width / ratio
             });
-        } 
+        }
     }
 
     private onImageSizeError = (error: any) => {
@@ -113,19 +119,19 @@ export class ImageView extends React.Component<IProps, IState> {
 
     private get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }
 
     private get flex() {
-        const { element, size } = this.props;
+        const { model, size } = this.props;
 
-        if (!element || !element.isValid) {
+        if (!model) {
             return undefined;
         }
 
-        let finalSize = StyleManager.getImageSize(size || element.size);
+        let finalSize = StyleManager.getImageSize(size || model.size);
         if (finalSize === 'stretch') {
             return 1;
         }

@@ -1,29 +1,23 @@
 import React from 'react';
 
-import { ActionContext } from '../../Contexts/ActionContext';
-import { ActionElement, ActionType } from '../../Schema/Abstract/ActionElement';
+import { OpenUrlActionModel } from '../../Models/Actions/OpenUrlAction';
+import { ShowCardActionModel } from '../../Models/Actions/ShowCardAction';
+import { SubmitActionModel } from '../../Models/Actions/SubmitAction';
 import { ActionView } from '../Actions/Action';
 
 export class ActionFactory {
-    public static createAction(element: ActionElement, index: number, theme: 'default' | 'emphasis', context: ActionContext): JSX.Element {
-        if (element) {
+    // tslint:disable-next-line:max-line-length
+    public static createAction(model: OpenUrlActionModel | ShowCardActionModel | SubmitActionModel, index: number, theme: 'default' | 'emphasis'): JSX.Element {
+        if (model) {
             return (
                 <ActionView 
-                    key={element.type + index}
+                    key={model.type + index}
                     index={index}
-                    element={element}
+                    model={model}
                     theme={theme}
-                    actionHooks={this.getHooks(context, element.type as ActionType)}
                 />
             );
         }
         return null;
-    }
-
-    private static getHooks(context: ActionContext, actionType: ActionType) {
-        if (context) {
-            return context.getHooks(actionType);
-        }
-        return undefined;
     }
 }

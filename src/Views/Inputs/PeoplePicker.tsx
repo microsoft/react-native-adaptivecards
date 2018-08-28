@@ -1,18 +1,12 @@
 import * as React from 'react';
 import { LabelInput } from '../../Components/Inputs/LabelInput';
-import { ActionContext } from '../../Contexts/ActionContext';
-import { FormContext } from '../../Contexts/FormContext';
-import { ActionType } from '../../Schema/Abstract/ActionElement';
-import { CardElement } from '../../Schema/Cards/Card';
-import { PeoplePickerElement } from '../../Schema/Inputs/PeoplePicker';
-import { CallbackAction } from '../../Schema/Internal/CallbackAction';
-import { ActionEventHandlerArgs } from '../../Shared/Types';
+import { CardModel } from '../../Models/Cards/Card';
+import { PeoplePickerModel } from '../../Models/Inputs/PeoplePicker';
 import { ContentFactory } from '../Factories/ContentFactory';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
-    element: PeoplePickerElement;
+    model: PeoplePickerModel;
     theme: 'default' | 'emphasis';
 }
 
@@ -20,37 +14,54 @@ interface IState {
     value: string;
     selected: Array<{ Name: string, Address: string }>;
     inputFocused: boolean;
-    suggestionCard: CardElement;
+    suggestionCard: CardModel;
 }
 
 export class PeoplePickerView extends React.Component<IProps, IState> {
+    private mounted: boolean;
+
     constructor(props: IProps) {
         super(props);
 
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (element && element.isValid) {
+        if (model && model.isValueValid) {
+            model.onStoreUpdate = this.onStoreUpdate;
+            model.onSuggestionReady = this.onSuggestionReady;
             this.state = {
                 value: '',
                 inputFocused: false,
                 selected: [],
                 suggestionCard: undefined,
             };
-            FormContext.getInstance().updateField(element.id, JSON.stringify([]), true);
-            FormContext.getInstance().registerFieldListener(element.id, this.storeListener);
+        }
+    }
+
+    public componentDidMount() {
+        this.mounted = true;
+    }
+
+    public componentWillUnmount() {
+        this.mounted = false;
+    }
+
+    // tslint:disable-next-line:max-line-length
+    public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) {
+        if (this.mounted) {
+            super.setState(state, callback);
         }
     }
 
     public render() {
-        const { element, theme } = this.props;
+        const { model, theme } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        // }
 
         return (
             <LabelInput
-                placeholder={element.placeholder}
+                placeholder={model.placeholder}
                 value={this.state.value}
                 focused={this.state.inputFocused}
                 labels={this.labels}
@@ -63,16 +74,32 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
     }
 
     private onBlur = () => {
-        this.setState({ inputFocused: false });
+        this.setState({
+            inputFocused: false
+        }, () => {
+            const { model } = this.props;
+
+            if (model) {
+                let callback = model.context.blurHandler;
+                if (callback) {
+                    callback();
+                }
+            }
+        });
     }
 
     private onFocus = () => {
-        this.setState({ inputFocused: true });
-    }
-
-    private onSuggestionCallback = (data: any) => {
         this.setState({
-            suggestionCard: new CardElement(data, this.props.element),
+            inputFocused: true
+        }, () => {
+            const { model } = this.props;
+
+            if (model) {
+                let callback = model.context.focusHandler;
+                if (callback) {
+                    callback();
+                }
+            }
         });
     }
 
@@ -80,54 +107,24 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
         this.setState({
             value: input,
         }, () => {
-            const { element } = this.props;
+            const { model } = this.props;
 
-            if (element.callback) {
-                let callback = ActionContext.getGlobalInstance().getActionEventHandler(element.callback, this.onSuggestionCallback);
-                if (callback) {
-                    callback({
-                        actionType: ActionType.Callback,
-                        func: this.populateApiParams,
-                        name: 'populateApiParams'
-                    });
-                }
+            if (model.onInput) {
+                model.onInput(this.state.value);
             }
         });
     }
 
-    private populateApiParams = (args: ActionEventHandlerArgs<CallbackAction>) => {
-        if (args && args.formValidate) {
-            args.formData = this.extractParamData();
-        }
-        return args;
+    private onSuggestionReady = (card: CardModel) => {
+        this.setState({
+            suggestionCard: card,
+        });
     }
 
-    private extractParamData = () => {
-        const { element } = this.props;
-
-        if (element.callback) {
-            const params = element.callback.parameters;
-            if (params) {
-                return Object.keys(params).reduce((prev, current) => {
-                    let formIndex = params[current];
-                    if (formIndex === element.id) {
-                        prev[current] = this.state.value;
-                    } else {
-                        prev[current] = FormContext.getInstance().getFieldValue(formIndex);
-                    }
-                    return prev;
-                }, {} as { [key: string]: string });
-            }
-        }
-        return {};
-    }
-
-    private storeListener = (value: string) => {
+    private onStoreUpdate = (value: string) => {
+        console.log(value);
         this.setState({
             selected: JSON.parse(value),
-            suggestionCard: undefined,
-            inputFocused: true,
-            value: '',
         });
     }
 

@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { FactElement } from '../../Schema/Containers/Fact';
+import { FactModel } from '../../Models/Containers/Fact';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
-    element: FactElement;
+    model: FactModel;
     theme: 'default' | 'emphasis';
 }
 
 export class FactView extends React.Component<IProps> {
     public render() {
-        const { element, theme } = this.props;
+        const { model, theme } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.title + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
+        // }
 
         return (
             <View
@@ -34,7 +33,7 @@ export class FactView extends React.Component<IProps> {
                         marginRight: 16,
                     }}
                 >
-                    {element.title}
+                    {model.title}
                 </Text>
                 <Text
                     style={{
@@ -45,7 +44,7 @@ export class FactView extends React.Component<IProps> {
                         marginRight: 16,
                     }}
                 >
-                    {element.value}
+                    {model.value}
                 </Text>
             </View>
         );

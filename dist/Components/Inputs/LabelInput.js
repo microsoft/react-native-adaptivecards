@@ -59,7 +59,6 @@ export class LabelInput extends React.Component {
                 borderWidth: 1,
                 borderRadius: 4,
                 width: this.props.width,
-                height: this.height,
                 marginTop: this.props.marginTop,
                 marginRight: this.props.marginRight,
                 marginBottom: this.props.marginBottom,

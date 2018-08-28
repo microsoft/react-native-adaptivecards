@@ -1,19 +1,20 @@
 import * as React from 'react';
 import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { SeparateLine } from '../../Components/Basic/SeparateLine';
-import { ContentElement, ContentElementType } from '../../Schema/Abstract/ContentElement';
-import { ImageElement } from '../../Schema/CardElements/Image';
-import { TextBlockElement } from '../../Schema/CardElements/TextBlock';
-import { CardElement } from '../../Schema/Cards/Card';
-import { ColumnSetElement } from '../../Schema/Containers/ColumnSet';
-import { ContainerElement } from '../../Schema/Containers/Container';
-import { FactSetElement } from '../../Schema/Containers/FactSet';
-import { ImageSetElement } from '../../Schema/Containers/ImageSet';
-import { DateInputElement } from '../../Schema/Inputs/DateInput';
-import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
-import { PeoplePickerElement } from '../../Schema/Inputs/PeoplePicker';
-import { TextInputElement } from '../../Schema/Inputs/TextInput';
-import { TimeInputElement } from '../../Schema/Inputs/TimeInput';
+import { ContentModel } from '../../Models/Abstract/ContentModel';
+import { ImageModel } from '../../Models/CardElements/Image';
+import { TextBlockModel } from '../../Models/CardElements/TextBlock';
+import { CardModel } from '../../Models/Cards/Card';
+import { ColumnSetModel } from '../../Models/Containers/ColumnSet';
+import { ContainerModel } from '../../Models/Containers/Container';
+import { FactSetModel } from '../../Models/Containers/FactSet';
+import { ImageSetModel } from '../../Models/Containers/ImageSet';
+import { DateInputModel } from '../../Models/Inputs/DateInput';
+import { NumberInputModel } from '../../Models/Inputs/NumberInput';
+import { PeoplePickerModel } from '../../Models/Inputs/PeoplePicker';
+import { TextInputModel } from '../../Models/Inputs/TextInput';
+import { TimeInputModel } from '../../Models/Inputs/TimeInput';
+import { ContentType } from '../../Shared/Types';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
 import { AdaptiveCardView } from '../Cards/AdaptiveCard';
@@ -28,10 +29,10 @@ import { TextInputView } from '../Inputs/TextInput';
 import { TimeInputView } from '../Inputs/TimeInput';
 
 export class ContentFactory {
-    public static createView(element: ContentElement, index: number, theme: 'default' | 'emphasis'): JSX.Element[] {
-        if (element) {
-            let elementView = ContentFactory.createElement(element, index, theme);
-            if (index > 0 && element.separator) {
+    public static createView(model: ContentModel, index: number, theme: 'default' | 'emphasis'): JSX.Element[] {
+        if (model) {
+            let elementView = ContentFactory.createElement(model, index, theme);
+            if (index > 0 && model.separator) {
                 return [
                     <SeparateLine
                         key={'SeparateLine' + index}
@@ -60,113 +61,113 @@ export class ContentFactory {
         }
     }
 
-    public static createElement(element: ContentElement, index: number, theme: 'default' | 'emphasis'): JSX.Element {
-        if (element) {
-            switch (element.type) {
-                case ContentElementType.AdaptiveCard:
+    public static createElement(model: ContentModel, index: number, theme: 'default' | 'emphasis'): JSX.Element {
+        if (model) {
+            switch (model.type) {
+                case ContentType.AdaptiveCard:
                     return (
                         <AdaptiveCardView
-                            key={'TextBlockView' + index}
-                            element={element as CardElement}
+                            key={'AdaptiveCardView' + index}
+                            model={model as CardModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.TextBlock:
+                case ContentType.TextBlock:
                     return (
                         <TextBlockView
                             key={'TextBlockView' + index}
-                            element={element as TextBlockElement}
+                            model={model as TextBlockModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.Image:
+                case ContentType.Image:
                     return (
                         <ImageView
                             key={'ImageView' + index}
-                            element={element as ImageElement}
+                            model={model as ImageModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.Container:
+                case ContentType.Container:
                     return (
                         <ContainerView
                             key={'ContainerView' + index}
-                            element={element as ContainerElement}
+                            model={model as ContainerModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.ColumnSet:
+                case ContentType.ColumnSet:
                     return (
                         <ColumnSetView
                             key={'ColumnSetView' + index}
-                            element={element as ColumnSetElement}
+                            model={model as ColumnSetModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.FactSet:
+                case ContentType.FactSet:
                     return (
                         <FactSetView
                             key={'FactSetView' + index}
-                            element={element as FactSetElement}
+                            model={model as FactSetModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.ImageSet:
+                case ContentType.ImageSet:
                     return (
                         <ImageSetView
                             key={'ImageSetView' + index}
-                            element={element as ImageSetElement}
+                            model={model as ImageSetModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.TextInput:
+                case ContentType.TextInput:
                     return (
                         <TextInputView
                             key={'TextInputView' + index}
-                            element={element as TextInputElement}
+                            model={model as TextInputModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.NumberInput:
+                case ContentType.NumberInput:
                     return (
                         <NumberInputView
                             key={'NumberInput' + index}
-                            element={element as NumberInputElement}
+                            model={model as NumberInputModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.DateInput:
+                case ContentType.DateInput:
                     return (
                         <DateInputView
                             key={'DateInputView' + index}
-                            element={element as DateInputElement}
+                            model={model as DateInputModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.TimeInput:
+                case ContentType.TimeInput:
                     return (
                         <TimeInputView
                             key={'TimeInputView' + index}
-                            element={element as TimeInputElement}
+                            model={model as TimeInputModel}
                             index={index}
                             theme={theme}
                         />
                     );
-                case ContentElementType.PeoplePicker:
+                case ContentType.PeoplePicker:
                     return (
                         <PeoplePickerView 
                             key={'PeoplePickerView' + index}
-                            element={element as PeoplePickerElement}
+                            model={model as PeoplePickerModel}
                             index={index}
                             theme={theme}
                         />

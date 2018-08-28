@@ -1,15 +1,12 @@
 import * as React from 'react';
 import { InputBox } from '../../Components/Inputs/InputBox';
-import { FormContext } from '../../Contexts/FormContext';
-import { HostContext } from '../../Contexts/HostContext';
-import { NumberInputElement } from '../../Schema/Inputs/NumberInput';
+import { NumberInputModel } from '../../Models/Inputs/NumberInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { NumberUtils } from '../../Utils/NumberUtils';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
-    element: NumberInputElement;
+    model: NumberInputModel;
     theme: 'default' | 'emphasis';
 }
 
@@ -18,42 +15,57 @@ interface IState {
 }
 
 export class NumberInputView extends React.Component<IProps, IState> {
+    private mounted: boolean;
+
     constructor(props: IProps) {
         super(props);
 
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (element && element.isValid) {
-
-            let defaultValue = element.value;
+        if (model && model.isValueValid) {
+            model.onStoreUpdate = this.onStoreUpdate;
+            let defaultValue = model.value;
             if (defaultValue === undefined) {
                 defaultValue = '';
             }
 
-            if (NumberUtils.isNumber(element.value.toString())) {
+            if (NumberUtils.isNumber(model.value.toString())) {
                 this.state = {
-                    value: element.value.toString(),
+                    value: model.value.toString(),
                 };
-                this.updateStore();
+                this.props.model.onInput(this.state.value);
             }
         }
     }
 
-    public render() {
-        const { element, theme } = this.props;
+    public componentDidMount() {
+        this.mounted = true;
+    }
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
+    public componentWillUnmount() {
+        this.mounted = false;
+    }
+
+    public setState(state: IState, callback?: () => void): void {
+        if (this.mounted) {
+            super.setState(state, callback);
         }
+    }
+
+    public render() {
+        const { model, theme } = this.props;
+
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        // }
 
         return (
             <InputBox
-                placeholder={element.placeholder}
+                placeholder={model.placeholder}
                 value={this.state.value}
                 onValueChange={this.onValueChange}
                 onBlur={this.onBlur}
                 onFocus={this.onFocus}
-                validateInput={this.validateInput}
                 theme={theme}
                 marginTop={this.spacing}
             />
@@ -62,46 +74,46 @@ export class NumberInputView extends React.Component<IProps, IState> {
 
     private onBlur = () => {
         console.log('NumberInputView onBlur');
+        const { model } = this.props;
 
-        let callback = HostContext.getInstance().getHandler('blur');
-        if (callback) {
-            callback();
+        if (model) {
+            let callback = model.context.blurHandler;
+            if (callback) {
+                callback();
+            }
         }
     }
 
     private onFocus = () => {
         console.log('NumberInputView onFocus');
 
-        let callback = HostContext.getInstance().getHandler('focus');
-        if (callback) {
-            callback();
+        const { model } = this.props;
+
+        if (model) {
+            let callback = model.context.focusHandler;
+            if (callback) {
+                callback();
+            }
         }
     }
 
     private onValueChange = (value: string) => {
         this.setState({
             value: value
-        }, this.updateStore);
+        }, () => {
+            this.props.model.onInput(this.state.value);
+        });
     }
-
-    private validateInput = (input: string) => {
-        if (this.props.element) {
-            return this.props.element.validate(input);
-        }
-        return true;
-    }
-
-    private updateStore() {
-        FormContext.getInstance().updateField(
-            this.props.element.id,
-            this.state.value,
-            this.validateInput(this.state.value)
-        );
+    
+    private onStoreUpdate = (value: string) => {
+        this.setState({
+            value: value
+        });
     }
 
     private get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }

@@ -1,10 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
-import { ActionContext } from '../../Contexts/ActionContext';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ContentFactory } from '../Factories/ContentFactory';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { ColumnView } from './Column';
 export class ColumnSetView extends React.Component {
     constructor() {
@@ -28,36 +26,37 @@ export class ColumnSetView extends React.Component {
                 } }, this.renderContent()));
         };
         this.renderContent = () => {
-            const { element } = this.props;
-            if (!element || !element.isValid) {
+            const { model } = this.props;
+            if (!model) {
                 return undefined;
             }
-            const background = element.getBackgroundImageUrl();
+            const background = model.backgroundImage;
             if (background) {
                 return ContentFactory.createBackgroundImageView(this.renderColumns(), background);
             }
             return this.renderColumns();
         };
         this.renderColumns = () => {
-            const { element } = this.props;
-            if (!element || !element.isValid || !element.columns || element.columns.length === 0) {
+            const { model } = this.props;
+            if (!model || !model.columns || model.columns.length === 0) {
                 return undefined;
             }
-            return element.columns.map((column, index) => (React.createElement(ColumnView, { key: index, index: index, element: column, theme: this.props.theme })));
+            return model.columns.map((column, index) => (React.createElement(ColumnView, { key: index, index: index, model: column, theme: this.props.theme })));
         };
         this.onPress = () => {
-            let callback = ActionContext.getGlobalInstance().getActionEventHandler(this.props.element.selectAction);
-            if (callback) {
-                callback();
+            const { model } = this.props;
+            if (model && model.selectAction && model.selectAction.onAction) {
+                model.selectAction.onAction(() => {
+                    console.log('Action Success');
+                }, (error) => {
+                    console.log('Action Failed >> ', error);
+                });
             }
         };
     }
     render() {
-        const { element, theme } = this.props;
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        }
-        if (element.selectAction) {
+        const { model } = this.props;
+        if (model.selectAction) {
             return this.renderTouchableBlock();
         }
         else {
@@ -65,18 +64,18 @@ export class ColumnSetView extends React.Component {
         }
     }
     get flex() {
-        const { element } = this.props;
-        if (!element || !element.isValid) {
+        const { model } = this.props;
+        if (!model) {
             return 0;
         }
-        if (element.height === 'stretch') {
+        if (model.height === 'stretch') {
             return 1;
         }
         return 0;
     }
     get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }

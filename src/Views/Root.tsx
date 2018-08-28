@@ -1,28 +1,20 @@
 import React from 'react';
 import {
-    Linking,
     View,
 } from 'react-native';
 
-import { ActionContext } from '../Contexts/ActionContext';
-import { FormContext } from '../Contexts/FormContext';
+import { HostConfig } from '../Config/Types';
+import { CardContext } from '../Contexts/CardContext';
 import { HostContext } from '../Contexts/HostContext';
-import { ActionType } from '../Schema/Abstract/ActionElement';
-import { OpenUrlActionElement } from '../Schema/Actions/OpenUrlAction';
-import { SelectActionElement } from '../Schema/Actions/SelectAction';
-import { SubmitActionElement } from '../Schema/Actions/SubmitAction';
-import { CardElement } from '../Schema/Cards/Card';
-import { CallbackAction } from '../Schema/Internal/CallbackAction';
-import { ActionEventHandlerArgs } from '../Shared/Types';
-import { StyleManager } from '../Styles/StyleManager';
+import { CardModel } from '../Models/Cards/Card';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
 
 export interface IAdaptiveCardProps {
     adaptiveCard: any;
-    config?: any;
+    config?: HostConfig;
     style?: any;
-    onSubmit?: (data: any) => void;
-    onOpenUrl?: (url: string) => void;
+    onSubmit?: (data: any) => Promise<any>;
+    onOpenUrl?: (url: string) => Promise<any>;
     onCallback?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
     onFocus?: () => void;
     onBlur?: () => void;
@@ -32,6 +24,7 @@ export interface IAdaptiveCardProps {
 }
 
 export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
+    public rootCardContext: CardContext;
     // private styleConfig: StyleConfig;
     constructor(props: IAdaptiveCardProps) {
         super(props);
@@ -41,47 +34,20 @@ export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
 
         let hostContext = HostContext.getInstance();
 
-        console.log(StyleManager.getColor('accent', 'default', false));
-
         hostContext.applyConfig(this.props.config);
 
-        hostContext.registerOpenUrlHandler(this.onOpenUrl);
-        hostContext.registerSubmitHandler(this.onSubmit);
-        hostContext.registerCallbackHandler(this.onCallback);
-        hostContext.registerSelectActionHandler(this.onSelectAction);
+        this.rootCardContext = CardContext.createInstance();
 
-        hostContext.registerFocusHandler(this.props.onFocus);
-        hostContext.registerBlurHandler(this.props.onBlur);
+        this.rootCardContext.registerOpenUrlActionHandler(this.props.onOpenUrl);
+        this.rootCardContext.registerSubmitActionHandler(this.props.onSubmit);
+        this.rootCardContext.registerCallbackActionHandler(this.props.onCallback);
 
-        hostContext.registerErrorHandler(this.props.onError);
-        hostContext.registerInfoHandler(this.props.onInfo);
-        hostContext.registerWarningHandler(this.props.onWarning);
+        this.rootCardContext.registerFocusHandler(this.props.onFocus);
+        this.rootCardContext.registerBlurHandler(this.props.onBlur);
 
-        let actionContext = ActionContext.getGlobalInstance();
-
-        actionContext.registerHook({
-            func: this.validateForm,
-            name: 'validateForm',
-            actionType: ActionType.Submit
-        });
-
-        actionContext.registerHook({
-            func: this.validateCallbackParams,
-            name: 'validateCallbackParams',
-            actionType: ActionType.Callback
-        });
-
-        actionContext.registerHook({
-            func: this.populateFormData,
-            name: 'populateFormData',
-            actionType: ActionType.Submit
-        });
-
-        actionContext.registerHook({
-            func: this.populateSelectActionData,
-            name: 'populateSelectActionData',
-            actionType: ActionType.Select
-        });
+        this.rootCardContext.registerErrorHandler(this.props.onError);
+        this.rootCardContext.registerInfoHandler(this.props.onInfo);
+        this.rootCardContext.registerWarningHandler(this.props.onWarning);
     }
 
     public render() {
@@ -91,99 +57,11 @@ export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
             >
                 <AdaptiveCardView
                     index={0}
-                    element={new CardElement(this.props.adaptiveCard, undefined)}
+                    model={new CardModel(this.props.adaptiveCard, undefined, this.rootCardContext)}
                     theme={'default'}
                     style={this.props.style}
                 />
             </View>
         );
-    }
-
-    private onOpenUrl = (args: ActionEventHandlerArgs<OpenUrlActionElement>) => {
-        // TODO: Is URL valid? Handle failure case
-        if (args) {
-            if (this.props.onOpenUrl) {
-                this.props.onOpenUrl(args.action.url);
-            } else {
-                Linking.canOpenURL(args.action.url).then((supported) => {
-                    if (supported) {
-                        Linking.openURL(args.action.url);
-                    }
-                });
-            }
-        }
-    }
-
-    private onCallback = (args: ActionEventHandlerArgs<CallbackAction>) => {
-        if (args) {
-            console.log('Form validate: ' + args.formValidate);
-            console.log(args.formData);
-            if (args.formValidate && this.props.onCallback) {
-                console.log('Calling Callback');
-                this.props.onCallback(args.action.url, args.formData).then((data) => {
-                    if (args.onFinishCallback) {
-                        console.log('Has on Callback');
-                        args.onFinishCallback(data);
-                    }
-                }).catch((error) => {
-                    if (args.onErrorCallback) {
-                        args.onErrorCallback(error);
-                    }
-                });
-            }
-        }
-    }
-
-    private onSubmit = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
-        if (args) {
-            console.log('Form validate: ' + args.formValidate);
-            console.log(args.formData);
-            if (args.formValidate && this.props.onSubmit) {
-                this.props.onSubmit(args.formData);
-            }
-        }
-    }
-
-    private onSelectAction = (args: ActionEventHandlerArgs<SelectActionElement>) => {
-        if (args) {
-            let currentValue = JSON.parse(FormContext.getInstance().getFieldValue(args.action.targetFormField)) as Array<any>;
-            if (currentValue) {
-                currentValue.push(args.formData);
-                FormContext.getInstance().updateField(args.action.targetFormField, JSON.stringify(currentValue), true);
-            }
-        }
-    }
-
-    private validateForm = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
-        if (args) {
-            args.formValidate = args.action.scope.validateScope();
-        }
-        return args;
-    }
-
-    private validateCallbackParams = (args: ActionEventHandlerArgs<CallbackAction>) => {
-        if (args) {
-            args.formValidate = args.action.scope.validateScope();
-        }
-        return args;
-    }
-
-    private populateFormData = (args: ActionEventHandlerArgs<SubmitActionElement>) => {
-        if (args && args.formValidate) {
-            args.formData = {
-                ...(args.action.data || {}),
-                ...FormContext.getInstance().getFormData(args.action.scope.inputFields)
-            };
-        }
-        return args;
-    }
-
-    private populateSelectActionData = (args: ActionEventHandlerArgs<SelectActionElement>) => {
-        if (args) {
-            args.formData = {
-                ...(args.action.data || {}),
-            };
-        }
-        return args;
     }
 }

@@ -1,28 +1,27 @@
 import * as React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
-import { ImageElement } from '../../Schema/CardElements/Image';
-import { ImageSetElement } from '../../Schema/Containers/ImageSet';
+import { ImageModel } from '../../Models/CardElements/Image';
+import { ImageSetModel } from '../../Models/Containers/ImageSet';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
-    element: ImageSetElement;
+    model: ImageSetModel;
     theme: 'default' | 'emphasis';
 }
 
 export class ImageSetView extends React.Component<IProps> {
     public render() {
-        const { element, theme } = this.props;
+        const { model } = this.props;
 
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        }
+        // if (!model || !model.isValid) {
+        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        // }
 
         return (
             <FlatList
-                data={element.images}
+                data={model.images}
                 renderItem={this.renderImage}
                 keyExtractor={this.keyExtractor}
                 horizontal={true}
@@ -33,14 +32,14 @@ export class ImageSetView extends React.Component<IProps> {
         );
     }
 
-    private keyExtractor = (item: ImageElement, index: number) => {
+    private keyExtractor = (item: ImageModel, index: number) => {
         return `url: ${item.url}, index: ${index}`;
     }
 
-    private renderImage = (info: ListRenderItemInfo<ImageElement>) => {
-        const { element, theme } = this.props;
+    private renderImage = (info: ListRenderItemInfo<ImageModel>) => {
+        const { model, theme } = this.props;
 
-        if (!element || !element.isValid) {
+        if (!model) {
             return undefined;
         }
 
@@ -48,7 +47,7 @@ export class ImageSetView extends React.Component<IProps> {
             <ImageView
                 key={info.index}
                 index={0}
-                element={info.item}
+                model={info.item}
                 size={this.size}
                 maxHeight={StyleManager.inSetImageMaxHeight}
                 spacing={this.getImageSpacing(info.index)}
@@ -58,14 +57,14 @@ export class ImageSetView extends React.Component<IProps> {
     }
 
     private get size() {
-        const { element } = this.props;
+        const { model } = this.props;
 
-        if (!element || !element.isValid) {
+        if (!model) {
             return 'auto';
         }
 
-        if (element.imageSize) {
-            return element.imageSize;
+        if (model.imageSize) {
+            return model.imageSize;
         }
 
         return StyleManager.inSetImageSize;
@@ -81,7 +80,7 @@ export class ImageSetView extends React.Component<IProps> {
 
     private get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }
