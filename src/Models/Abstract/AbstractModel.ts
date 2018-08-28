@@ -11,5 +11,8 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
         this.context = context;
 
         this.type = json.type;
+        if (this.context) {
+            this.context.fit = 'content';
+        }
     }
 }

@@ -18,6 +18,10 @@ export class CardModel extends ContentModel {
             Array<OpenUrlActionModel | SubmitActionModel | ShowCardActionModel>;
         this.body = ContentModelFactory.createSet(json.body, this, this.context);
         this.backgroundImage = json.backgroundImage;
+
+        if (this.backgroundImage) {
+            this.context.fit = 'background';
+        }
     }
 
     public get children() {

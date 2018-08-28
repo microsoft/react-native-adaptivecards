@@ -9,6 +9,9 @@ export class CardModel extends ContentModel {
         this.actions = ActionModelFactory.createSet(json.actions, this, this.context);
         this.body = ContentModelFactory.createSet(json.body, this, this.context);
         this.backgroundImage = json.backgroundImage;
+        if (this.backgroundImage) {
+            this.context.fit = 'background';
+        }
     }
     get children() {
         return [...this.body, ...this.actions];

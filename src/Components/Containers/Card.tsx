@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageBackground } from '../Basic/ImageBackground';
 
@@ -36,11 +36,11 @@ export class Card extends React.Component<IProps> {
         return (
             <View
                 style={[
-                    this.props.style || styles.cardContainer,
+                    styles.cardContainer,
                     {
                         flex: this.props.flex,
-                        minHeight: Dimensions.get('window').width * 150 / 285,
-                    }
+                    },
+                    this.props.style,
                 ]}
             >
                 {this.renderCardContent()}

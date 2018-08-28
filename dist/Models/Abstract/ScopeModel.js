@@ -11,6 +11,7 @@ export class ScopeModel extends ContentModel {
             else {
                 this.backgroundImage = json.backgroundImage.url;
             }
+            this.context.fit = 'background';
         }
     }
 }

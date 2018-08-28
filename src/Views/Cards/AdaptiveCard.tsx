@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
+import { Dimensions, StyleProp, View, ViewStyle } from 'react-native';
 import { ButtonGroup } from '../../Components/Containers/ButtonGroup';
 import { Card } from '../../Components/Containers/Card';
 import { CardModel } from '../../Models/Cards/Card';
@@ -39,7 +39,12 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                 flex={1}
                 fit='container'
                 backgroundImageUrl={model.backgroundImage}
-                style={ this.props.style}
+                style={[ 
+                    {
+                        minHeight: this.minHeight,
+                    },
+                    this.props.style
+                ]}
             >
                 {this.renderBody()}
                 {this.renderSubCard()}
@@ -128,5 +133,17 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
             });
         }
         return Promise.resolve(true);
+    }
+
+    private get minHeight() {
+        const { model } = this.props;
+
+        if (model) {
+            if (model.context && model.context.fit === 'background') {
+                // Fix for bing answer card
+                return Dimensions.get('window').width * (150 + 12 * 2) / (285 + 12 * 2);
+            }
+        }
+        return undefined;
     }
 }

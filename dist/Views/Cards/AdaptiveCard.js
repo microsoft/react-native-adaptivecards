@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { Dimensions, View } from 'react-native';
 import { ButtonGroup } from '../../Components/Containers/ButtonGroup';
 import { Card } from '../../Components/Containers/Card';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -22,7 +22,12 @@ export class AdaptiveCardView extends React.Component {
     }
     render() {
         const { model } = this.props;
-        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: model.backgroundImage, style: this.props.style },
+        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: model.backgroundImage, style: [
+                {
+                    minHeight: this.minHeight,
+                },
+                this.props.style
+            ] },
             this.renderBody(),
             this.renderSubCard(),
             this.renderActionSet()));
@@ -65,6 +70,15 @@ export class AdaptiveCardView extends React.Component {
             return (React.createElement(AdaptiveCardView, { index: 2, model: this.state.subCard, style: {
                     marginTop: StyleManager.subCardSpacing
                 }, theme: StyleManager.subCardTheme }));
+        }
+        return undefined;
+    }
+    get minHeight() {
+        const { model } = this.props;
+        if (model) {
+            if (model.context && model.context.fit === 'background') {
+                return Dimensions.get('window').width * (150 + 12 * 2) / (285 + 12 * 2);
+            }
         }
         return undefined;
     }

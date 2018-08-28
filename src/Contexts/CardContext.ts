@@ -15,6 +15,7 @@ export class CardContext extends TreeNode<CardContext> {
     private onSelectAction?: (data: any) => Promise<any>;
     public readonly form: FormStore;
     public readonly children: CardContext[] = [];
+    public fit: 'content' | 'background';
 
     private constructor(parent?: CardContext) {
         super(parent);
