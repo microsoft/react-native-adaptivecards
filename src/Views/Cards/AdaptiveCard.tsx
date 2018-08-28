@@ -141,7 +141,11 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         if (model) {
             if (model.context && model.context.fit === 'background') {
                 // Fix for bing answer card
-                return Dimensions.get('window').width * (150 + 12 * 2) / (285 + 12 * 2);
+                let padding = 12;
+                if (model.backgroundImage) {
+                    padding = 0;
+                }
+                return Dimensions.get('window').width * (150 + padding * 2) / (285 + padding * 2);
             }
         }
         return undefined;
