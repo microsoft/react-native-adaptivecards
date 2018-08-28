@@ -10,7 +10,7 @@ export class ShowCardActionModel extends ActionModel {
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(json, parent, context);
 
-        this.card = json.card;
+        this.card = new CardModel(json.card, this, CardContext.createInstance(this.context));
         this.title = json.title;
     }
 

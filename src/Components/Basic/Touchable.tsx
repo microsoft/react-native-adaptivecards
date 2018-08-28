@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-    AccessibilityTraits,
+    AccessibilityTrait,
     DeviceEventEmitter,
     LayoutChangeEvent,
     Platform,
@@ -15,7 +15,7 @@ interface IProps {
     disabled?: boolean;
     style?: object;
     accessibilityLabel?: string;
-    accessibilityTraits?: AccessibilityTraits | AccessibilityTraits[];
+    accessibilityTraits?: AccessibilityTrait | AccessibilityTrait[];
     accessibilityComponentType?: 'none' | 'button' | 'radiobutton_checked' | 'radiobutton_unchecked';
     hitSlop?: object;
     activeOpacity?: number;

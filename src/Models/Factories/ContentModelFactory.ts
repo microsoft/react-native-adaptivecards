@@ -60,7 +60,7 @@ export class ContentModelFactory {
                 cardElement = new PeoplePickerModel(json, parent, context);
                 break;
             case ContentType.AdaptiveCard:
-                cardElement = new CardModel(json, parent, context);
+                cardElement = new CardModel(json, parent, CardContext.createInstance(context));
                 break;
             default:
                 cardElement = null;

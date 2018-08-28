@@ -1,3 +1,4 @@
+import { CardContext } from '../../Contexts/CardContext';
 import { ContentType } from '../../Shared/Types';
 import { ImageModel } from '../CardElements/Image';
 import { TextBlockModel } from '../CardElements/TextBlock';
@@ -56,7 +57,7 @@ export class ContentModelFactory {
                 cardElement = new PeoplePickerModel(json, parent, context);
                 break;
             case ContentType.AdaptiveCard:
-                cardElement = new CardModel(json, parent, context);
+                cardElement = new CardModel(json, parent, CardContext.createInstance(context));
                 break;
             default:
                 cardElement = null;
