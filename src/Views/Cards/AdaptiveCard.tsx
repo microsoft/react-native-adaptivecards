@@ -145,7 +145,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                 if (model.backgroundImage) {
                     padding = 0;
                 }
-                return Dimensions.get('window').width * (150 + padding * 2) / (285 + padding * 2);
+                return (Dimensions.get('window').width - padding * 2) * 150 / 285 + padding * 2;
             }
         }
         return undefined;
