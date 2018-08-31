@@ -1,0 +1,13 @@
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.main-page {
+    flex: 1;
+    -ms-flex:1;
+    display: flex;
+    display: -webkit-flex;
+}

@@ -4,7 +4,6 @@ import { TreeNode } from '../../Shared/Types';
 export abstract class AbstractModel extends TreeNode<AbstractModel> {
     public readonly type: string;
     public context: CardContext;
-    public children: AbstractModel[] = [];
 
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(parent);
@@ -14,5 +13,9 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
         if (this.context) {
             this.context.fit = 'content';
         }
+    }
+
+    public get children(): AbstractModel[] {
+        return [];
     }
 }

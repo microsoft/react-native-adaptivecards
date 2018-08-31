@@ -1,0 +1,30 @@
+.button {
+    display: inline-block;
+    /*border: 1px solid #0078D7;*/
+
+    padding: 6px 10px 6px 10px;
+    margin: auto 4px;
+    min-width: 60px;
+
+    /*background-color: #dbe2ef;*/
+    color: #3f72af;
+
+    text-align: center;
+    vertical-align: center;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    border-radius: 5px;
+
+    transition: background-color 0.2s;
+}
+
+.active {
+    background-color: #dbe2ef;
+}
+
+.button:hover {
+    background-color: #dbe2ef;
+}

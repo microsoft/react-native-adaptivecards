@@ -1622,7 +1622,7 @@ gulp-imagemin@latest:
     imagemin-optipng "^5.2.1"
     imagemin-svgo "^6.0.0"
 
-gulp-rename@^1.2.0:
+gulp-rename@^1.2.0, gulp-rename@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/gulp-rename/-/gulp-rename-1.4.0.tgz#de1c718e7c4095ae861f7296ef4f3248648240bd"
 

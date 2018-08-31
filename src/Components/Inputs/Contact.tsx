@@ -39,8 +39,10 @@ export class Contact extends React.Component<IProps> {
     private renderNonTouchableBlock() {
         return (
             <View
-                alignSelf='stretch'
-                flexDirection='row'
+                style={{
+                    alignSelf: 'stretch',
+                    flexDirection: 'row'
+                }}
             >
                 {this.renderContent()}
             </View>

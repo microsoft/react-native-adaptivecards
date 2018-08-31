@@ -1,0 +1,1317 @@
+[
+  {
+    "name": "Activity update",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "1.0",
+      "body": [
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Publish Adaptive Card schema",
+              "weight": "bolder",
+              "size": "medium"
+            },
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg",
+                      "size": "medium",
+                      "style": "person"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "Matt Hidinger",
+                      "weight": "bolder",
+                      "wrap": true
+                    },
+                    {
+                      "type": "TextBlock",
+                      "spacing": "none",
+                      "text": "Created Tuesday, Feb 14, 2017",
+                      "isSubtle": true,
+                      "wrap": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "TextBlock",
+              "text": "Now that we have defined the main rules and features of the format, we need to produce a schema and publish it to GitHub. The schema will be the starting point of our reference documentation.",
+              "wrap": true
+            },
+            {
+              "type": "FactSet",
+              "facts": [
+                {
+                  "title": "Board:",
+                  "value": "Adaptive Card"
+                },
+                {
+                  "title": "List:",
+                  "value": "Backlog"
+                },
+                {
+                  "title": "Assigned to:",
+                  "value": "Matt Hidinger"
+                },
+                {
+                  "title": "Due date:",
+                  "value": "Not set"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "Action.ShowCard",
+          "title": "Set due date",
+          "card": {
+            "version": "1.0",
+            "type": "AdaptiveCard",
+            "body": [
+              {
+                "type": "Input.Date",
+                "id": "dueDate",
+                "title": "Select due date"
+              }
+            ],
+            "actions": [
+              {
+                "type": "Action.Submit",
+                "title": "OK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Action.ShowCard",
+          "title": "Comment",
+          "card": {
+            "version": "1.0",
+            "type": "AdaptiveCard",
+            "body": [
+              {
+                "type": "Input.Text",
+                "id": "comment",
+                "isMultiline": true,
+                "placeholder": "Enter your comment"
+              }
+            ],
+            "actions": [
+              {
+                "type": "Action.Submit",
+                "title": "OK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Action.OpenUrl",
+          "title": "View",
+          "url": "http://adaptivecards.io"
+        }
+      ]
+    }
+  },
+  {
+    "name": "Latest news",
+    "card": {
+      "body": [
+        {
+          "items": [
+            {
+              "items": [
+                {
+                  "horizontalAlignment": "center",
+                  "size": "medium",
+                  "text": "Here's the latest npr podcast.",
+                  "type": "TextBlock"
+                }
+              ],
+              "type": "Container"
+            },
+            {
+              "items": [
+                {
+                  "horizontalAlignment": "center",
+                  "url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=0425c04c3a6841f390f5c1ad60162df2&contentid=QwSQQwZoigUS7jBAJf06fw&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=70629021414711DB08FDA4208821ECA2&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=FD8E39E4387647E39553938ED0D06304&expire=1531631022&seemorefilter=NewsAnswerV2_CategoryNews&s=.apiScreenshotItem%3anth-child(1)&apiq=7RdTLqXz9yex6SGLYcr3UCYnqjwm1RaE6GIdqncgRpnI0DK7TL9Qor9yDD4HL10zgx_GNi4OVrBZMiR7PhDIe0JGXYk14hZUaAMlk8hGhvmvxJ2Ke0QOAi7fE6K6YWsCCaQKuAjsifYz5K0NN14dlrrbKhCy5pwjKNmKO-VWO8Y",
+                  "selectAction": {
+                    "url": "http://www.ibtimes.com/study-finds-young-people-no-longer-getting-news-facebook-2691001",
+                    "title": "View",
+                    "type": "Action.OpenUrl"
+                  },
+                  "size": "auto",
+                  "type": "Image"
+                }
+              ],
+              "type": "Container"
+            }
+          ],
+          "type": "Container"
+        }
+      ],
+      "version": "1.0",
+      "type": "AdaptiveCard"
+    }
+  },
+  {
+    "name": "Restaurant",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "0.5",
+      "body": [{
+        "speak": "Tom's Pie is a Pizza restaurant which is rated 9.3 by customers.",
+        "type": "ColumnSet",
+        "columns": [{
+          "type": "Column",
+          "width": 2,
+          "items": [{
+            "type": "TextBlock",
+            "text": "PIZZA"
+          },
+            {
+              "type": "TextBlock",
+              "text": "Tom's Pie",
+              "weight": "bolder",
+              "size": "extraLarge",
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "text": "4.2 ★★★☆ (93) · $$",
+              "isSubtle": true,
+              "spacing": "none"
+            },
+            {
+              "type": "TextBlock",
+              "text": "**Matt H. said** \"I'm compelled to give this place 5 stars due to the number of times I've chosen to eat here this past year!\"",
+              "size": "small",
+              "wrap": true
+            }
+          ]
+        },
+          {
+            "type": "Column",
+            "width": 1,
+            "items": [{
+              "type": "Image",
+              "url": "http://res.cloudinary.com/sagacity/image/upload/c_crop,h_670,w_635,x_0,y_0/c_scale,w_640/v1397425743/Untitled-4_lviznp.jpg",
+              "size": "auto"
+            }]
+          }
+        ]
+      }],
+      "actions": [{
+        "type": "Action.OpenUrl",
+        "title": "More Info",
+        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+      }]
+    }
+  },
+  {
+    "name": "Inputs",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "1.0",
+      "body": [
+        {
+          "type": "TextBlock",
+          "size": "medium",
+          "weight": "bolder",
+          "text": "Input.Text elements",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "Input.Text",
+          "placeholder": "Name",
+          "style": "text",
+          "maxLength": 0,
+          "id": "SimpleVal"
+        },
+        {
+          "type": "Input.Text",
+          "placeholder": "Homepage",
+          "style": "url",
+          "maxLength": 0,
+          "id": "UrlVal"
+        },
+        {
+          "type": "Input.Text",
+          "placeholder": "Email",
+          "style": "email",
+          "maxLength": 0,
+          "id": "EmailVal"
+        },
+        {
+          "type": "Input.Text",
+          "placeholder": "Phone",
+          "style": "tel",
+          "maxLength": 0,
+          "id": "TelVal"
+        },
+        {
+          "type": "Input.Text",
+          "placeholder": "Comments",
+          "style": "text",
+          "isMultiline": true,
+          "maxLength": 0,
+          "id": "MultiLineVal",
+          "value": "test"
+        },
+        {
+          "type": "Input.Number",
+          "placeholder": "Quantity",
+          "min": -15,
+          "max": 15,
+          "value": 0,
+          "id": "NumVal"
+        },
+        {
+          "type": "Input.Date",
+          "placeholder": "Due Date",
+          "id": "DateVal",
+          "min": "2017-08-20",
+          "max": "2018-08-20",
+          "value": "2017-09-20"
+        },
+        {
+          "type": "Input.Time",
+          "placeholder": "Start time",
+          "id": "TimeVal",
+          "min": "16:00",
+          "max": "19:00",
+          "value": "16:59"
+        },
+        {
+          "type": "TextBlock",
+          "size": "medium",
+          "weight": "bolder",
+          "text": "Input.ChoiceSet",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "TextBlock",
+          "text": "What color do you want? (compact)"
+        },
+        {
+          "type": "Input.ChoiceSet",
+          "id": "CompactSelectVal",
+          "style": "compact",
+          "placeholder": "Pick a color",
+          "value": "1",
+          "choices": [
+            {
+              "title": "Red",
+              "value": "1"
+            },
+            {
+              "title": "Green",
+              "value": "2"
+            },
+            {
+              "title": "Blue",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "What color do you want? (expanded)"
+        },
+        {
+          "type": "Input.ChoiceSet",
+          "id": "SingleSelectVal",
+          "style": "expanded",
+          "value": "1",
+          "choices": [
+            {
+              "title": "Red",
+              "value": "1"
+            },
+            {
+              "title": "Green",
+              "value": "2"
+            },
+            {
+              "title": "Blue",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "What colors do you want? (multiselect)"
+        },
+        {
+          "type": "Input.ChoiceSet",
+          "id": "MultiSelectVal",
+          "isMultiSelect": true,
+          "value": "1,3",
+          "choices": [
+            {
+              "title": "Red",
+              "value": "1"
+            },
+            {
+              "title": "Green",
+              "value": "2"
+            },
+            {
+              "title": "Blue",
+              "value": "3"
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "size": "medium",
+          "weight": "bolder",
+          "text": "Input.Toggle",
+          "horizontalAlignment": "center"
+        },
+        {
+          "type": "Input.Toggle",
+          "title": "I accept the terms and conditions (True/False)",
+          "valueOn": "true",
+          "valueOff": "false",
+          "id": "AcceptsTerms"
+        },
+        {
+          "type": "Input.Toggle",
+          "title": "Red cars are better than other cars",
+          "valueOn": "RedCars",
+          "valueOff": "NotRedCars",
+          "id": "ColorPreference"
+        }
+      ],
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Submit",
+          "data": {
+            "id": "1234567890"
+          }
+        },
+        {
+          "type": "Action.ShowCard",
+          "title": "Show Card",
+          "card": {
+            "version": "1.0",
+            "type": "AdaptiveCard",
+            "body": [
+              {
+                "type": "Input.Text",
+                "placeholder": "enter comment",
+                "style": "text",
+                "maxLength": 0,
+                "id": "CommentVal"
+              }
+            ],
+            "actions": [
+              {
+                "type": "Action.Submit",
+                "title": "OK"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Solitaire",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "0.5",
+      "backgroundImage": "https://download-ssl.msgamestudios.com/content/mgs/ce/production/SolitaireWin10/dev/adapative_card_assets/v1/card_background.png",
+      "body": [{
+        "type": "ColumnSet",
+        "columns": [{
+          "type": "Column",
+          "width": 1,
+          "items": [{
+            "type": "Image",
+            "url": "https://download-ssl.msgamestudios.com/content/mgs/ce/production/SolitaireWin10/dev/adapative_card_assets/v1/tile_spider.png",
+            "size": "stretch"
+          }]
+        },
+          {
+            "type": "Column",
+            "width": 1,
+            "items": [{
+              "type": "TextBlock",
+              "text": "Click here to play another game of Spider in Microsoft Solitaire Collection!",
+              "color": "light",
+              "weight": "bolder",
+              "wrap": true,
+              "size": "default",
+              "horizontalAlignment": "center"
+            }]
+          }
+        ]
+      }]
+    }
+  },
+  {
+    "name": "StockUpdate",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "0.5",
+      "speak": "Microsoft stock is trading at $62.30 a share, which is down .32%",
+      "body": [{
+        "type": "Container",
+        "items": [{
+          "type": "TextBlock",
+          "text": "Microsoft Corp (NASDAQ: MSFT)",
+          "size": "medium",
+          "isSubtle": true
+        },
+          {
+            "type": "TextBlock",
+            "text": "September 19, 4:00 PM EST",
+            "isSubtle": true
+          }
+        ]
+      },
+        {
+          "type": "Container",
+          "spacing": "none",
+          "items": [{
+            "type": "ColumnSet",
+            "columns": [{
+              "type": "Column",
+              "width": "stretch",
+              "items": [{
+                "type": "TextBlock",
+                "text": "75.30",
+                "size": "extraLarge"
+              },
+                {
+                  "type": "TextBlock",
+                  "text": "▼ 0.20 (0.32%)",
+                  "size": "small",
+                  "color": "attention",
+                  "spacing": "none"
+                }
+              ]
+            },
+              {
+                "type": "Column",
+                "width": "auto",
+                "items": [{
+                  "type": "FactSet",
+                  "facts": [{
+                    "title": "Open",
+                    "value": "62.24"
+                  },
+                    {
+                      "title": "High",
+                      "value": "62.98"
+                    },
+                    {
+                      "title": "Low",
+                      "value": "62.20"
+                    }
+                  ]
+                }]
+              }
+            ]
+          }]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Input form",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "1.0",
+      "body": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": 2,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Tell us about yourself",
+                  "weight": "bolder",
+                  "size": "medium"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "We just need a few more details to get you booked for the trip of a lifetime!",
+                  "isSubtle": true,
+                  "wrap": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Don't worry, we'll never share or sell your information.",
+                  "isSubtle": true,
+                  "wrap": true,
+                  "size": "small"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Your name",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "myName",
+                  "placeholder": "Last, First"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Your email",
+                  "wrap": true
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "myEmail",
+                  "placeholder": "youremail@example.com",
+                  "style": "email"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Phone Number"
+                },
+                {
+                  "type": "Input.Text",
+                  "id": "myTel",
+                  "placeholder": "xxx.xxx.xxxx",
+                  "style": "tel"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Diver_Silhouette%2C_Great_Barrier_Reef.jpg",
+                  "size": "stretch"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "Action.Submit",
+          "title": "Submit",
+          "data": {
+            "myData": "Test"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Image gallery",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "1.0",
+      "body": [
+        {
+          "type": "TextBlock",
+          "text": "Here are some cool photos",
+          "size": "large"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Sorry some of them are repeats",
+          "size": "medium",
+          "weight": "lighter"
+        },
+        {
+          "type": "ImageSet",
+          "imageSize": "large",
+          "images": [
+            {
+              "type": "Image",
+              "url": "https://connectorsdemo.azurewebsites.net/images/MicrosoftSurface_024_Cafe_OH-06315_VS_R1c.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "https://connectorsdemo.azurewebsites.net/images/WIN12_Scene_01.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "https://connectorsdemo.azurewebsites.net/images/WIN12_Anthony_02.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "http://images4.fanpop.com/image/photos/14700000/So-cute-puppies-14749028-1600-1200.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "http://images4.fanpop.com/image/photos/22000000/Cute-Puppies-puppies-22040876-1280-800.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "https://1.bp.blogspot.com/-4PGB-FXZrCI/UXmYyvR92eI/AAAAAAAAAYc/B_mRdYv24kU/s1600/alaskan_malamute_puppies(1).jpg"
+            },
+            {
+              "type": "Image",
+              "url": "https://4.bp.blogspot.com/-inMkTgEoMj4/T6LG__DWGaI/AAAAAAAAAJg/6kLgDyHeOc8/s1600/Cute-Puppy-puppies-15813268-1024-768.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "http://cutepuppydog.net/wallpapers/cute-puppies9.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "http://images1.fanpop.com/images/photos/1900000/Puppies-3-dogs-1993812-1024-768.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Food order",
+    "card": {
+      "type": "AdaptiveCard",
+      "version": "1.0",
+      "body": [
+        {
+          "type": "TextBlock",
+          "text": "Your registration is almost complete",
+          "size": "medium",
+          "weight": "bolder"
+        },
+        {
+          "type": "TextBlock",
+          "text": "What type of food do you prefer?",
+          "wrap": true
+        },
+        {
+          "type": "ImageSet",
+          "imageSize": "large",
+          "images": [
+            {
+              "type": "Image",
+              "url": "https://contososcubabot.azurewebsites.net/assets/steak.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "https://contososcubabot.azurewebsites.net/assets/chicken.jpg"
+            },
+            {
+              "type": "Image",
+              "url": "https://contososcubabot.azurewebsites.net/assets/tofu.jpg"
+            }
+          ]
+        }
+      ],
+      "actions": [
+        {
+          "type": "Action.ShowCard",
+          "title": "Steak",
+          "card": {
+            "type": "AdaptiveCard",
+            "version": "1.0",
+            "body": [
+              {
+                "type": "TextBlock",
+                "text": "How would you like your steak prepared?",
+                "size": "medium",
+                "wrap": true
+              },
+              {
+                "type": "Input.ChoiceSet",
+                "id": "SteakTemp",
+                "style": "expanded",
+                "choices": [
+                  {
+                    "title": "Rare",
+                    "value": "rare"
+                  },
+                  {
+                    "title": "Medium-Rare",
+                    "value": "medium-rare"
+                  },
+                  {
+                    "title": "Well-done",
+                    "value": "well-done"
+                  }
+                ]
+              },
+              {
+                "type": "Input.Text",
+                "id": "1",
+                "isMultiline": true,
+                "placeholder": "Any other preparation requestes?"
+              }
+            ],
+            "actions": [
+              {
+                "type": "Action.Submit",
+                "title": "OK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Action.ShowCard",
+          "title": "Chicken",
+          "card": {
+            "type": "AdaptiveCard",
+            "version": "1.0",
+            "body": [
+              {
+                "type": "TextBlock",
+                "text": "Do you have any allergies?",
+                "size": "medium",
+                "wrap": true
+              },
+              {
+                "type": "Input.ChoiceSet",
+                "id": "ChickenAllergy",
+                "style": "expanded",
+                "isMultiSelect": true,
+                "choices": [
+                  {
+                    "title": "I'm allergic to peanuts",
+                    "value": "peanut"
+                  }
+                ]
+              },
+              {
+                "type": "Input.Text",
+                "id": "2",
+                "isMultiline": true,
+                "placeholder": "Any other preparation requestes?"
+              }
+            ],
+            "actions": [
+              {
+                "type": "Action.Submit",
+                "title": "OK"
+              }
+            ]
+          }
+        },
+        {
+          "type": "Action.ShowCard",
+          "title": "Tofu (Vegetarian)",
+          "card": {
+            "type": "AdaptiveCard",
+            "version": "1.0",
+            "body": [
+              {
+                "type": "TextBlock",
+                "text": "Would you like it prepared vegan?",
+                "size": "medium",
+                "wrap": true
+              },
+              {
+                "type": "Input.Toggle",
+                "id": "Vegetarian",
+                "title": "Please prepare it vegan",
+                "valueOn": "vegan",
+                "valueOff": "notVegan"
+              },
+              {
+                "type": "Input.Text",
+                "id": "3",
+                "isMultiline": true,
+                "placeholder": "Any other preparation requestes?"
+              }
+            ],
+            "actions": [
+              {
+                "type": "Action.Submit",
+                "title": "OK"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "Flight itinerary",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "version": "1.0",
+      "type": "AdaptiveCard",
+      "speak": "Your flight is confirmed for you and 3 other passengers from San Francisco to Amsterdam on Friday, October 10 8:30 AM",
+      "body": [
+        {
+          "type": "TextBlock",
+          "text": "Passengers",
+          "weight": "bolder",
+          "isSubtle": false
+        },
+        {
+          "type": "TextBlock",
+          "text": "Sarah Hum",
+          "separator": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Jeremy Goldberg",
+          "spacing": "none"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Evan Litvak",
+          "spacing": "none"
+        },
+        {
+          "type": "TextBlock",
+          "text": "2 Stops",
+          "weight": "bolder",
+          "spacing": "medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Fri, October 10 8:30 AM",
+          "weight": "bolder",
+          "spacing": "none"
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "San Francisco",
+                  "isSubtle": true
+                },
+                {
+                  "type": "TextBlock",
+                  "size": "extraLarge",
+                  "color": "accent",
+                  "text": "SFO",
+                  "spacing": "none"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": " "
+                },
+                {
+                  "type": "Image",
+                  "url": "https://messagecardplayground.azurewebsites.net/assets/airplane.png",
+                  "size": "medium",
+                  "spacing": "none",
+                  "horizontalAlignment": "center"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "horizontalAlignment": "right",
+                  "text": "Amsterdam",
+                  "isSubtle": true
+                },
+                {
+                  "type": "TextBlock",
+                  "horizontalAlignment": "right",
+                  "size": "extraLarge",
+                  "color": "accent",
+                  "text": "AMS",
+                  "spacing": "none"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "TextBlock",
+          "text": "Non-Stop",
+          "weight": "bolder",
+          "spacing": "medium"
+        },
+        {
+          "type": "TextBlock",
+          "text": "Fri, October 18 9:50 PM",
+          "weight": "bolder",
+          "spacing": "none"
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Amsterdam",
+                  "isSubtle": true
+                },
+                {
+                  "type": "TextBlock",
+                  "size": "extraLarge",
+                  "color": "accent",
+                  "text": "AMS",
+                  "spacing": "none"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": " "
+                },
+                {
+                  "type": "Image",
+                  "url": "https://messagecardplayground.azurewebsites.net/assets/airplane.png",
+                  "size": "medium",
+                  "spacing": "none",
+                  "horizontalAlignment": "center"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "horizontalAlignment": "right",
+                  "text": "San Francisco",
+                  "isSubtle": true
+                },
+                {
+                  "type": "TextBlock",
+                  "topSpacing": "none",
+                  "horizontalAlignment": "right",
+                  "size": "extraLarge",
+                  "color": "accent",
+                  "text": "SFO",
+                  "spacing": "none"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "spacing": "medium",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "1",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Total",
+                  "size": "medium",
+                  "isSubtle": true
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "horizontalAlignment": "right",
+                  "text": "$4,032.54",
+                  "size": "medium",
+                  "weight": "bolder"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "Flight update",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "1.0",
+      "speak": "Flight KL0605 to San Fransisco has been delayed.It will not leave until 10:10 AM.",
+      "body": [
+        {
+          "type": "ColumnSet",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "Image",
+                  "size": "medium",
+                  "url": "https://messagecardplayground.azurewebsites.net/assets/Airplane.png"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Flight Status",
+                  "horizontalAlignment": "right",
+                  "isSubtle": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "DELAYED",
+                  "horizontalAlignment": "right",
+                  "spacing": "none",
+                  "size": "large",
+                  "color": "attention"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "separator": true,
+          "spacing": "medium",
+          "columns": [
+            {
+              "type": "Column",
+              "width": "stretch",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Passengers",
+                  "isSubtle": true,
+                  "weight": "bolder"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Sarah Hum",
+                  "spacing": "small"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Jeremy Goldberg",
+                  "spacing": "small"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Evan Litvak",
+                  "spacing": "small"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Seat",
+                  "horizontalAlignment": "right",
+                  "isSubtle": true,
+                  "weight": "bolder"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "14A",
+                  "horizontalAlignment": "right",
+                  "spacing": "small"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "14B",
+                  "horizontalAlignment": "right",
+                  "spacing": "small"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "14C",
+                  "horizontalAlignment": "right",
+                  "spacing": "small"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "spacing": "medium",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Flight",
+                  "isSubtle": true,
+                  "weight": "bolder"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "KL0605",
+                  "spacing": "small"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Departs",
+                  "isSubtle": true,
+                  "horizontalAlignment": "center",
+                  "weight": "bolder"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "10:10 AM",
+                  "color": "attention",
+                  "weight": "bolder",
+                  "horizontalAlignment": "center",
+                  "spacing": "small"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Arrives",
+                  "isSubtle": true,
+                  "horizontalAlignment": "right",
+                  "weight": "bolder"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "12:00 AM",
+                  "color": "attention",
+                  "horizontalAlignment": "right",
+                  "weight": "bolder",
+                  "spacing": "small"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "ColumnSet",
+          "spacing": "medium",
+          "separator": true,
+          "columns": [
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "Amsterdam",
+                  "isSubtle": true
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "AMS",
+                  "size": "extraLarge",
+                  "color": "accent",
+                  "spacing": "none"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": "auto",
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": " "
+                },
+                {
+                  "type": "Image",
+                  "url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
+                  "size": "medium",
+                  "horizontalAlignment": "center"
+                }
+              ]
+            },
+            {
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "San Francisco",
+                  "isSubtle": true,
+                  "horizontalAlignment": "right"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "SFO",
+                  "horizontalAlignment": "right",
+                  "size": "extraLarge",
+                  "color": "accent",
+                  "spacing": "none"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

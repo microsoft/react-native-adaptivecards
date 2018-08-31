@@ -1,0 +1,11 @@
+.sample-list {
+    flex: 0 1 15%;
+    padding: 10px 0 10px 0;
+    border-right: aliceblue 1px solid;
+}
+
+.sample-list-inner {
+    padding: 0 5px 10px 10px;
+    margin: 10px auto;
+    line-height: 9px;
+}
