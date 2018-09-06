@@ -1,5 +1,4 @@
 import { CardContext } from '../../Contexts/CardContext';
-import { FormField } from '../../Contexts/FormStore';
 import { NumberUtils } from '../../Utils/NumberUtils';
 import { TimeUtils } from '../../Utils/TimeUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
@@ -21,36 +20,14 @@ export class DateInputModel extends InputModel {
         }
     }
 
-    public onInput = (value: string) => {
-        if (value !== undefined) {
-            this.input = value;
-            if (this.context && this.context.form) {
-                this.context.form.write({
-                    id: this.id,
-                    value: value,
-                    isValid: this.isValueValid(this.input),
-                });
-            }
-        }
-    }
-
-    public storeListener = (field: FormField) => {
-        if (field) {
-            this.value = field.value;
-            if (this.onStoreUpdate) {
-                this.onStoreUpdate(this.value);
-            }
-        }
-    }
-
     public isValueValid = (value?: string) => {
-        let target = value !== undefined ? value : this.value;
-        if (target && target.length !== 0) {
-            let minTime = TimeUtils.extractDate(this.min);
-            let maxTime = TimeUtils.extractDate(this.max);
-            let time = TimeUtils.extractDate(target);
-            return NumberUtils.isInRange(time, minTime, maxTime);
-        }
-        return true;
+    let target = value !== undefined ? value : this.value;
+    if (target && target.length !== 0) {
+        let minTime = TimeUtils.extractDate(this.min);
+        let maxTime = TimeUtils.extractDate(this.max);
+        let time = TimeUtils.extractDate(target);
+        return NumberUtils.isInRange(time, minTime, maxTime);
     }
+    return true;
+}
 }

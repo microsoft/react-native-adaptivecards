@@ -14,6 +14,8 @@ import { ContainerSchema } from '../Schemas/Containers/Container';
 import { FactSchema } from '../Schemas/Containers/Fact';
 import { FactSetSchema } from '../Schemas/Containers/FactSet';
 import { ImageSetSchema } from '../Schemas/Containers/ImageSet';
+import { ChoiceInputSchema } from '../Schemas/Inputs/ChoiceInput';
+import { ChoiceSetSchema } from '../Schemas/Inputs/ChoiceSet';
 import { DateInputSchema } from '../Schemas/Inputs/DateInput';
 import { NumberInputSchema } from '../Schemas/Inputs/NumberInput';
 import { PeoplePickerSchema } from '../Schemas/Inputs/PeoplePicker';
@@ -50,6 +52,8 @@ export class SchemaStore {
         this.schemas[ContentType.DateInput] = new DateInputSchema();
         this.schemas[ContentType.TimeInput] = new TimeInputSchema();
         this.schemas[ContentType.PeoplePicker] = new PeoplePickerSchema();
+        this.schemas[ContentType.ChoiceSetInput] = new ChoiceSetSchema();
+        this.schemas['Input.Choice'] = new ChoiceInputSchema();
     }
 
     public static createInstance() {

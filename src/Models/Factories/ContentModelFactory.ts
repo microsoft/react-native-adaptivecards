@@ -10,6 +10,7 @@ import { ColumnSetModel } from '../Containers/ColumnSet';
 import { ContainerModel } from '../Containers/Container';
 import { FactSetModel } from '../Containers/FactSet';
 import { ImageSetModel } from '../Containers/ImageSet';
+import { ChoiceSetModel } from '../Inputs/ChoiceSet';
 import { DateInputModel } from '../Inputs/DateInput';
 import { NumberInputModel } from '../Inputs/NumberInput';
 import { PeoplePickerModel } from '../Inputs/PeoplePicker';
@@ -58,6 +59,9 @@ export class ContentModelFactory {
                 break;
             case ContentType.PeoplePicker:
                 cardElement = new PeoplePickerModel(json, parent, context);
+                break;
+            case ContentType.ChoiceSetInput:
+                cardElement = new ChoiceSetModel(json, parent, context);
                 break;
             case ContentType.AdaptiveCard:
                 cardElement = new CardModel(json, parent, CardContext.createInstance(context));
