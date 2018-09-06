@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { FactView } from './Fact';
 export class FactSetView extends React.Component {
     constructor() {
@@ -14,6 +15,10 @@ export class FactSetView extends React.Component {
         };
     }
     render() {
+        const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         return (React.createElement(View, { style: {
                 flexDirection: 'column',
                 marginTop: this.spacing,

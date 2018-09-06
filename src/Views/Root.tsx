@@ -25,6 +25,7 @@ export interface IAdaptiveCardProps {
 
 export class CardRootView extends React.PureComponent<IAdaptiveCardProps> {
     public rootCardContext: CardContext;
+
     // private styleConfig: StyleConfig;
     constructor(props: IAdaptiveCardProps) {
         super(props);

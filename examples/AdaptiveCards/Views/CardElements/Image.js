@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ImageBlock } from '../../Components/Basic/ImageBlock';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageUtils } from '../../Utils/ImageUtils';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ImageView extends React.Component {
     constructor(props) {
         super(props);
@@ -25,10 +26,32 @@ export class ImageView extends React.Component {
                 });
             }
         };
+        this.onImageLoad = (data) => {
+            const { model } = this.props;
+            if (model && model.context) {
+                let handler = model.context.infoHandler;
+                if (handler) {
+                    handler(data);
+                }
+            }
+        };
+        this.onImageError = (error) => {
+            this.handleError(error);
+        };
         this.onImageSizeError = (error) => {
-            console.log(error);
+            this.handleError(error);
+        };
+        this.handleError = (error) => {
             this.setState({
                 loaded: false,
+            }, () => {
+                const { model } = this.props;
+                if (model && model.context) {
+                    let handler = model.context.errorHandler;
+                    if (handler) {
+                        handler(error);
+                    }
+                }
             });
         };
         this.onImageSize = (size) => {
@@ -49,13 +72,22 @@ export class ImageView extends React.Component {
     componentDidMount() {
         const { model, size, maxWidth, maxHeight } = this.props;
         if (model) {
+            if (model.context) {
+                let handler = model.context.infoHandler;
+                if (handler) {
+                    handler(`AdaptiveCard >> Start load img >> ${model.url}`);
+                }
+            }
             ImageUtils.fetchSize(model.url, size || model.size, { width: maxWidth, height: maxHeight }, this.onImageSize, this.onImageSizeError);
         }
     }
     render() {
-        const { model, spacing } = this.props;
+        const { model, spacing, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.url + ' is not valid', theme, 'error');
+        }
         if (this.state.loaded) {
-            return (React.createElement(ImageBlock, { url: model.url, alt: model.alt, flex: this.flex, alignSelf: StyleManager.getHorizontalAlign(model.horizontalAlignment), width: this.state.width, height: this.state.height, onPress: model.selectAction ? this.onPress : undefined, onLayout: this.onLayout, marginTop: this.spacing, marginLeft: spacing, mode: model.style === 'person' ? 'avatar' : 'default' }));
+            return (React.createElement(ImageBlock, { url: model.url, alt: model.alt, flex: this.flex, alignSelf: StyleManager.getHorizontalAlign(model.horizontalAlignment), width: this.state.width, height: this.state.height, onPress: model.selectAction ? this.onPress : undefined, onLayout: this.onLayout, onLoad: this.onImageLoad, onError: this.onImageError, marginTop: this.spacing, marginLeft: spacing, mode: model.style === 'person' ? 'avatar' : 'default' }));
         }
         return null;
     }

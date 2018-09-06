@@ -36,6 +36,7 @@ export class TextInputModel extends InputModel {
         this.style = json.style;
         if (this.context.form) {
             this.context.form.registerListener(this.id, this.storeListener);
+            this.onInput(this.value);
         }
     }
 }

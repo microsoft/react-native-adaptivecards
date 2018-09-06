@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
 import { ColumnSetModel } from '../../Models/Containers/ColumnSet';
 import { StyleManager } from '../../Styles/StyleManager';
-import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { ColumnView } from './Column';
 
 interface IProps {
@@ -14,11 +14,11 @@ interface IProps {
 
 export class ColumnSetView extends React.Component<IProps> {
     public render() {
-        const { model } = this.props;
+        const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         if (model.selectAction) {
             return this.renderTouchableBlock();
@@ -67,11 +67,6 @@ export class ColumnSetView extends React.Component<IProps> {
             return undefined;
         }
 
-        const background = model.backgroundImage;
-
-        if (background) {
-            return ContentFactory.createBackgroundImageView(this.renderColumns(), background);
-        }
         return this.renderColumns();
     }
 

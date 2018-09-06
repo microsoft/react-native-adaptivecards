@@ -4,6 +4,7 @@ import { ImageModel } from '../../Models/CardElements/Image';
 import { ImageSetModel } from '../../Models/Containers/ImageSet';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -13,11 +14,11 @@ interface IProps {
 
 export class ImageSetView extends React.Component<IProps> {
     public render() {
-        const { model } = this.props;
+        const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         return (
             <FlatList

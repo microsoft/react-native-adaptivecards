@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { FactModel } from '../../Models/Containers/Fact';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     model: FactModel;
@@ -12,9 +13,9 @@ export class FactView extends React.Component<IProps> {
     public render() {
         const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
+        }
 
         return (
             <View

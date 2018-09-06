@@ -2,7 +2,9 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
 import { StyleManager } from '../../Styles/StyleManager';
+import { BackgroundImageView } from '../CardElements/BackgroundImage';
 import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ColumnView extends React.Component {
     constructor() {
         super(...arguments);
@@ -27,13 +29,13 @@ export class ColumnView extends React.Component {
                 } }, this.renderContent()));
         };
         this.renderContent = () => {
-            const { model } = this.props;
+            const { model, theme } = this.props;
             if (!model) {
                 return undefined;
             }
             const background = model.backgroundImage;
-            if (background) {
-                return ContentFactory.createBackgroundImageView(this.renderItems(), background);
+            if (background && background.url) {
+                return (React.createElement(BackgroundImageView, { model: background, theme: theme }, this.renderItems()));
             }
             return this.renderItems();
         };
@@ -59,7 +61,10 @@ export class ColumnView extends React.Component {
         };
     }
     render() {
-        const { model } = this.props;
+        const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         let backgroundColor = StyleManager.getBackgroundColor(model.style);
         if (model.selectAction) {
             return this.renderTouchableBlock(backgroundColor);

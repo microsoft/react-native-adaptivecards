@@ -3,6 +3,7 @@ import { LabelInput } from '../../Components/Inputs/LabelInput';
 import { CardModel } from '../../Models/Cards/Card';
 import { PeoplePickerModel } from '../../Models/Inputs/PeoplePicker';
 import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -55,9 +56,9 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
     public render() {
         const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         return (
             <LabelInput

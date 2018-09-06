@@ -5,6 +5,7 @@ import { Card } from '../../Components/Containers/Card';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class AdaptiveCardView extends React.Component {
     constructor(props) {
         super(props);
@@ -29,7 +30,10 @@ export class AdaptiveCardView extends React.Component {
         this.props.model.context.registerShowCardActionHandler(this.showSubCard);
     }
     render() {
-        const { model } = this.props;
+        const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: model.backgroundImage, onLayout: this.onLayout, style: [
                 {
                     minHeight: this.minHeight,

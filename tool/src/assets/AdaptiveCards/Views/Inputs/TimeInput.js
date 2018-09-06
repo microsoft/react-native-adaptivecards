@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button } from '../../Components/Inputs/Button';
 import { TimePanel } from '../../Components/Inputs/TimePanel';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class TimeInputView extends React.Component {
     constructor(props) {
         super(props);
@@ -51,7 +52,7 @@ export class TimeInputView extends React.Component {
                     }
                 }
             });
-            console.log('on press');
+            console.log('TimeInput onPress');
         };
         this.onStoreUpdate = (value) => {
             this.setState({
@@ -80,7 +81,10 @@ export class TimeInputView extends React.Component {
         }
     }
     render() {
-        const { index } = this.props;
+        const { model, index, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         return ([
             React.createElement(Button, { key: 'TimeInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPress }),
             React.createElement(TimePanel, { key: 'TimePanel' + index, value: this.state.value, show: this.state.focused, onValueChange: this.onValueChange, onSave: this.onSave, onCancel: this.onCancel })

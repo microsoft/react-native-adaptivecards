@@ -1,6 +1,7 @@
 import { CardModel } from '../Models/Cards/Card';
 import { TreeNode } from '../Shared/Types';
 import { FormStore } from './FormStore';
+import { SchemaStore } from './SchemaStore';
 
 export class CardContext extends TreeNode<CardContext> {
     private onError?: (error: any) => void;
@@ -14,6 +15,7 @@ export class CardContext extends TreeNode<CardContext> {
     private onCallbackAction?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
     private onSelectAction?: (data: any) => Promise<any>;
     public readonly form: FormStore;
+    public readonly schemas: SchemaStore;
     public readonly children: CardContext[] = [];
     public fit: 'content' | 'background';
 
@@ -21,9 +23,11 @@ export class CardContext extends TreeNode<CardContext> {
         super(parent);
         if (parent) {
             this.form = parent.form;
+            this.schemas = parent.schemas;
             parent.children.push(this);
         } else {
             this.form = FormStore.createInstance();
+            this.schemas = SchemaStore.createInstance();
         }
     }
 
@@ -114,7 +118,7 @@ export class CardContext extends TreeNode<CardContext> {
         }
         return undefined;
     }
-    
+
     public get blurHandler(): () => void {
         let context = this.findRequiredContext(context => context.onBlur !== undefined);
         if (context) {

@@ -34,6 +34,6 @@ export class Banner extends React.Component {
         }
     }
     get color() {
-        return StyleManager.getBackgroundColor(this.props.theme);
+        return StyleManager.getColor('light', this.props.theme, false);
     }
 }

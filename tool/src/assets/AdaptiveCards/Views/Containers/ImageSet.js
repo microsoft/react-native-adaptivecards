@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FlatList } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ImageSetView extends React.Component {
     constructor() {
         super(...arguments);
@@ -17,7 +18,10 @@ export class ImageSetView extends React.Component {
         };
     }
     render() {
-        const { model } = this.props;
+        const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         return (React.createElement(FlatList, { data: model.images, renderItem: this.renderImage, keyExtractor: this.keyExtractor, horizontal: true, style: {
                 marginTop: this.spacing
             } }));

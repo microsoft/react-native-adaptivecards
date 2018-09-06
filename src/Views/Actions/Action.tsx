@@ -5,6 +5,7 @@ import { OpenUrlActionModel } from '../../Models/Actions/OpenUrlAction';
 import { ShowCardActionModel } from '../../Models/Actions/ShowCardAction';
 import { SubmitActionModel } from '../../Models/Actions/SubmitAction';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -14,11 +15,11 @@ interface IProps {
 
 export class ActionView extends React.Component<IProps> {
     public render() {
-        const { theme } = this.props;
+        const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
+        }
 
         return (
             <Button

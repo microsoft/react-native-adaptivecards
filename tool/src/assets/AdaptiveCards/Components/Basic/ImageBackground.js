@@ -1,6 +1,19 @@
 import React from 'react';
 import { Image, StyleSheet, View, } from 'react-native';
 export class ImageBackground extends React.PureComponent {
+    constructor() {
+        super(...arguments);
+        this.onLoad = (data) => {
+            if (this.props.onLoad) {
+                this.props.onLoad(data);
+            }
+        };
+        this.onError = (error) => {
+            if (this.props.onError) {
+                this.props.onError(error);
+            }
+        };
+    }
     render() {
         return (React.createElement(View, { style: [{
                     flex: this.props.flex,
@@ -17,7 +30,7 @@ export class ImageBackground extends React.PureComponent {
             React.createElement(Image, { source: { uri: this.props.url }, style: [
                     StyleSheet.absoluteFill,
                     this.props.imageStyle
-                ] }),
+                ], onLoad: this.onLoad, onError: this.onError }),
             this.props.children));
     }
 }

@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Image, ImageStyle, LayoutChangeEvent, StyleProp, View } from 'react-native';
+import {
+    Image,
+    ImageStyle,
+    LayoutChangeEvent,
+    StyleProp,
+    View
+} from 'react-native';
 import { UrlUtils } from '../../Utils/UrlUtils';
 import { Svg } from './Svg';
 import { Touchable } from './Touchable';
@@ -23,6 +29,8 @@ interface IProps {
     style?: StyleProp<ImageStyle>;
     onPress?: () => void;
     onLayout?: (event: LayoutChangeEvent) => void;
+    onLoad?: (data: any) => void;
+    onError?: (error: any) => void;
 }
 
 interface IState {
@@ -167,6 +175,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
                     ]}
                     resizeMethod='resize'
                     resizeMode='contain'
+                    onLoad={this.onLoad}
                     onError={this.onError}
                 />
             );
@@ -177,7 +186,17 @@ export class ImageBlock extends React.Component<IProps, IState> {
         console.log(err);
         this.setState({
             loaded: false
+        }, () => {
+            if (this.props.onError) {
+                this.props.onError(err);
+            }
         });
+    }
+
+    private onLoad = (data: any) => {
+        if (this.props.onLoad) {
+            this.props.onLoad(data);
+        }
     }
 
     private get borderRadius() {

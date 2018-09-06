@@ -6,6 +6,7 @@ import { CardModel } from '../../Models/Cards/Card';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -32,11 +33,11 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
     }
 
     public render(): JSX.Element {
-        const { model } = this.props;
+        const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.type + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         return (
             <Card
@@ -44,7 +45,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                 fit='container'
                 backgroundImageUrl={model.backgroundImage}
                 onLayout={this.onLayout}
-                style={[ 
+                style={[
                     {
                         minHeight: this.minHeight,
                     },

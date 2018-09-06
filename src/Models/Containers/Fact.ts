@@ -6,6 +6,7 @@ export class FactModel extends AbstractModel {
     public value: string;
 
     constructor(json: any, parent: AbstractModel, context: CardContext) {
+        json.type = 'Fact',
         super(json, parent, context);
 
         this.title = json.title;

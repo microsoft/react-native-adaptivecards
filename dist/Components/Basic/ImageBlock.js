@@ -10,7 +10,16 @@ export class ImageBlock extends React.Component {
             console.log(err);
             this.setState({
                 loaded: false
+            }, () => {
+                if (this.props.onError) {
+                    this.props.onError(err);
+                }
             });
+        };
+        this.onLoad = (data) => {
+            if (this.props.onLoad) {
+                this.props.onLoad(data);
+            }
         };
         this.state = {
             loaded: true,
@@ -104,7 +113,7 @@ export class ImageBlock extends React.Component {
                     },
                     this.borderRadius,
                     this.props.style
-                ], resizeMethod: 'resize', resizeMode: 'contain', onError: this.onError }));
+                ], resizeMethod: 'resize', resizeMode: 'contain', onLoad: this.onLoad, onError: this.onError }));
         }
     }
     get borderRadius() {

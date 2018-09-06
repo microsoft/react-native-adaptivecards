@@ -5,6 +5,7 @@ import { ImageModel } from '../../Models/CardElements/Image';
 import { Dimension } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageUtils } from '../../Utils/ImageUtils';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -37,6 +38,13 @@ export class ImageView extends React.Component<IProps, IState> {
         const { model, size, maxWidth, maxHeight } = this.props;
 
         if (model) {
+            if (model.context) {
+                let handler = model.context.infoHandler;
+                if (handler) {
+                    handler(`AdaptiveCard >> Start load img >> ${model.url}`);
+                }
+            }
+
             ImageUtils.fetchSize(
                 model.url,
                 size || model.size,
@@ -48,11 +56,11 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { model, spacing } = this.props;
+        const { model, spacing, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.url + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.url + ' is not valid', theme, 'error');
+        }
 
         if (this.state.loaded) {
             return (
@@ -65,6 +73,8 @@ export class ImageView extends React.Component<IProps, IState> {
                     height={this.state.height}
                     onPress={model.selectAction ? this.onPress : undefined}
                     onLayout={this.onLayout}
+                    onLoad={this.onImageLoad}
+                    onError={this.onImageError}
                     marginTop={this.spacing}
                     marginLeft={spacing}
                     mode={model.style === 'person' ? 'avatar' : 'default'}
@@ -100,10 +110,35 @@ export class ImageView extends React.Component<IProps, IState> {
         }
     }
 
+    private onImageLoad = (data: any) => {
+        const { model } = this.props;
+        if (model && model.context) {
+            let handler = model.context.infoHandler;
+            if (handler) {
+                handler(data);
+            }
+        }
+    }
+
+    private onImageError = (error: any) => {
+        this.handleError(error);
+    }
+
     private onImageSizeError = (error: any) => {
-        console.log(error);
+        this.handleError(error);
+    }
+
+    private handleError = (error: any) => {
         this.setState({
             loaded: false,
+        }, () => {
+            const { model } = this.props;
+            if (model && model.context) {
+                let handler = model.context.errorHandler;
+                if (handler) {
+                    handler(error);
+                }
+            }
         });
     }
 

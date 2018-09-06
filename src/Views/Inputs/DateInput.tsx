@@ -3,6 +3,7 @@ import { Button } from '../../Components/Inputs/Button';
 import { DatePanel } from '../../Components/Inputs/DatePanel';
 import { DateInputModel } from '../../Models/Inputs/DateInput';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -52,12 +53,11 @@ export class DateInputView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { index } = this.props;
+        const { model, index, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        // }
-
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         return (
             [
                 <Button
@@ -141,7 +141,7 @@ export class DateInputView extends React.Component<IProps, IState> {
                 }
             }
         });
-        console.log('on press');
+        console.log('DateInput onPress');
     }
 
     private onStoreUpdate = (value: string) => {

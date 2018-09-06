@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { FactSetModel } from '../../Models/Containers/FactSet';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { FactView } from './Fact';
 
 interface IProps {
@@ -12,11 +13,12 @@ interface IProps {
 
 export class FactSetView extends React.Component<IProps> {
     public render() {
-        // const { element, theme } = this.props;
 
-        // if (!element || !element.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        // }
+        const { model, theme } = this.props;
+
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         return (
             <View

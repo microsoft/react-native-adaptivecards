@@ -2,6 +2,7 @@ import * as React from 'react';
 import { InputBox } from '../../Components/Inputs/InputBox';
 import { StyleManager } from '../../Styles/StyleManager';
 import { NumberUtils } from '../../Utils/NumberUtils';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class NumberInputView extends React.Component {
     constructor(props) {
         super(props);
@@ -65,6 +66,9 @@ export class NumberInputView extends React.Component {
     }
     render() {
         const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         return (React.createElement(InputBox, { placeholder: model.placeholder, value: this.state.value, onValueChange: this.onValueChange, onBlur: this.onBlur, onFocus: this.onFocus, theme: theme, marginTop: this.spacing }));
     }
     get spacing() {

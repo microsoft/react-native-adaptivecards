@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
             elevation: 2,
         },
         web: {
-            borderWidth: 0.4,
+            borderWidth: 0.5,
             borderColor: 'rgba(0, 0, 0, .1)',
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 0 },

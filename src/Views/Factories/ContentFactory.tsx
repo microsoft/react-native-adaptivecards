@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { SeparateLine } from '../../Components/Basic/SeparateLine';
 import { ContentModel } from '../../Models/Abstract/ContentModel';
 import { ImageModel } from '../../Models/CardElements/Image';
@@ -43,22 +42,6 @@ export class ContentFactory {
             return [elementView];
         }
         return null;
-    }
-
-    public static createBackgroundImageView(node: React.ReactNode, background: string): JSX.Element {
-        console.log(background);
-        if (background) {
-            return (
-                <ImageBackground
-                    url={background}
-                    flex={1}
-                >
-                    {node}
-                </ImageBackground>
-            );
-        } else {
-            return null;
-        }
     }
 
     public static createElement(model: ContentModel, index: number, theme: 'default' | 'emphasis'): JSX.Element {
@@ -165,7 +148,7 @@ export class ContentFactory {
                     );
                 case ContentType.PeoplePicker:
                     return (
-                        <PeoplePickerView 
+                        <PeoplePickerView
                             key={'PeoplePickerView' + index}
                             model={model as PeoplePickerModel}
                             index={index}

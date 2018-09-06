@@ -1,5 +1,8 @@
 import { StringUtils } from './StringUtils';
 export class TimeUtils {
+    static getFileTime() {
+        return (new Date()).getTime();
+    }
     static isDate(value) {
         return /^\d{4}(\-\d{2}){2}$/.test(value);
     }

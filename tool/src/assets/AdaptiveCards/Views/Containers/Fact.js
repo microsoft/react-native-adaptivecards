@@ -1,9 +1,13 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class FactView extends React.Component {
     render() {
         const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
+        }
         return (React.createElement(View, { style: {
                 flexDirection: 'row',
                 alignSelf: 'stretch'

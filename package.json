@@ -14,13 +14,23 @@
   ],
   "main": "dist/index",
   "scripts": {
-    "precommit": "gulp",
+    "pre-commit": "gulp",
     "devtools": "react-devtools",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp",
+    "build-tool": "yarn build && cd tool && yarn build",
+    "src": "yarn",
+    "example": "cd examples && yarn",
+    "tool": "cd tool && yarn",
+    "all": "yarn src && yarn example && yarn tool",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run-device": "yarn build && cd examples && yarn start",
+    "run-ios": "yarn build && cd examples && yarn ios",
+    "run-android": "yarn build && cd examples && yarn android",
+    "run-tool": "yarn build && cd tool && yarn dev"
   },
   "pre-commit": {
     "run": [
-      "precommit"
+      "pre-commit"
     ],
     "silent": true
   },

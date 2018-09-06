@@ -3,7 +3,9 @@ import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
 import { ColumnModel } from '../../Models/Containers/Column';
 import { StyleManager } from '../../Styles/StyleManager';
+import { BackgroundImageView } from '../CardElements/BackgroundImage';
 import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -13,11 +15,11 @@ interface IProps {
 
 export class ColumnView extends React.Component<IProps> {
     public render() {
-        const { model } = this.props;
+        const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         let backgroundColor = StyleManager.getBackgroundColor(model.style);
 
@@ -64,7 +66,7 @@ export class ColumnView extends React.Component<IProps> {
     }
 
     private renderContent = () => {
-        const { model } = this.props;
+        const { model, theme } = this.props;
 
         if (!model) {
             return undefined;
@@ -72,8 +74,15 @@ export class ColumnView extends React.Component<IProps> {
 
         const background = model.backgroundImage;
 
-        if (background) {
-            return ContentFactory.createBackgroundImageView(this.renderItems(), background);
+        if (background && background.url) {
+            return (
+                <BackgroundImageView
+                    model={background}
+                    theme={theme}
+                >
+                    {this.renderItems()}
+                </BackgroundImageView>
+            );
         }
         return this.renderItems();
     }

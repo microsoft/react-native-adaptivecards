@@ -21,6 +21,8 @@ interface IProps {
     paddingRight?: number;
     containerStyle?: StyleProp<ViewStyle>;
     imageStyle?: StyleProp<ImageStyle>;
+    onLoad?: (data: any) => void;
+    onError?: (error: any) => void;
 }
 
 export class ImageBackground extends React.PureComponent<IProps> {
@@ -46,9 +48,23 @@ export class ImageBackground extends React.PureComponent<IProps> {
                         StyleSheet.absoluteFill,
                         this.props.imageStyle
                     ]}
+                    onLoad={this.onLoad}
+                    onError={this.onError}
                 />
                 {this.props.children}
             </View>
         );
+    }
+
+    private onLoad = (data: any) => {
+        if (this.props.onLoad) {
+            this.props.onLoad(data);
+        }
+    }
+
+    private onError = (error: any) => {
+        if (this.props.onError) {
+            this.props.onError(error);
+        }
     }
 }

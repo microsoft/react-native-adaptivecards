@@ -3,6 +3,7 @@ import { Text } from 'react-native';
 
 import { TextBlockModel } from '../../Models/CardElements/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -12,11 +13,11 @@ interface IProps {
 
 export class TextBlockView extends React.Component<IProps> {
     public render() {
-        const { model } = this.props;
+        const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
+        }
 
         return (
             <Text

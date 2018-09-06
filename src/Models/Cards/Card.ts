@@ -14,6 +14,7 @@ export class CardModel extends ContentModel {
 
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(json, parent, context);
+
         this.actions = ActionModelFactory.createSet(json.actions, this, this.context) as
             Array<OpenUrlActionModel | SubmitActionModel | ShowCardActionModel>;
         this.body = ContentModelFactory.createSet(json.body, this, this.context);

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { InputBox } from '../../Components/Inputs/InputBox';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class TextInputView extends React.Component {
     constructor(props) {
         super(props);
@@ -62,6 +63,9 @@ export class TextInputView extends React.Component {
     }
     render() {
         const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         return (React.createElement(InputBox, { numberOfLines: this.numberOfLine, placeholder: model.placeholder, value: this.state.value, onValueChange: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, theme: theme, marginTop: this.spacing }));
     }
     get numberOfLine() {

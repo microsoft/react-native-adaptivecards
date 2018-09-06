@@ -1,15 +1,18 @@
 import { TreeNode } from '../Shared/Types';
 import { FormStore } from './FormStore';
+import { SchemaStore } from './SchemaStore';
 export class CardContext extends TreeNode {
     constructor(parent) {
         super(parent);
         this.children = [];
         if (parent) {
             this.form = parent.form;
+            this.schemas = parent.schemas;
             parent.children.push(this);
         }
         else {
             this.form = FormStore.createInstance();
+            this.schemas = SchemaStore.createInstance();
         }
     }
     static createInstance(parent) {

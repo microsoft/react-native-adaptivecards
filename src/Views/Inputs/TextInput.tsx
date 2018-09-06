@@ -2,6 +2,7 @@ import * as React from 'react';
 import { InputBox } from '../../Components/Inputs/InputBox';
 import { TextInputModel } from '../../Models/Inputs/TextInput';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -44,9 +45,9 @@ export class TextInputView extends React.Component<IProps, IState> {
     }
 
     // tslint:disable-next-line:max-line-length
-    public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) { 
+    public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) {
         if (this.mounted) {
-            
+
             super.setState(state as any, callback);
         }
     }
@@ -54,9 +55,9 @@ export class TextInputView extends React.Component<IProps, IState> {
     public render() {
         const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         return (
             <InputBox
@@ -103,7 +104,7 @@ export class TextInputView extends React.Component<IProps, IState> {
             this.props.model.onInput(this.state.value);
         });
     }
-    
+
     private onStoreUpdate = (value: string) => {
         this.setState({
             value: value

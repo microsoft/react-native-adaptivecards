@@ -3,6 +3,7 @@ import { InputBox } from '../../Components/Inputs/InputBox';
 import { NumberInputModel } from '../../Models/Inputs/NumberInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { NumberUtils } from '../../Utils/NumberUtils';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -55,9 +56,9 @@ export class NumberInputView extends React.Component<IProps, IState> {
     public render() {
         const { model, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         return (
             <InputBox
@@ -104,7 +105,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
             this.props.model.onInput(this.state.value);
         });
     }
-    
+
     private onStoreUpdate = (value: string) => {
         this.setState({
             value: value

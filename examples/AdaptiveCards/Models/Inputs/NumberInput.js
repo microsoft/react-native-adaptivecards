@@ -36,6 +36,7 @@ export class NumberInputModel extends InputModel {
         this.min = json.min;
         if (this.context.form) {
             this.context.form.registerListener(this.id, this.storeListener);
+            this.onInput(this.value);
         }
     }
 }

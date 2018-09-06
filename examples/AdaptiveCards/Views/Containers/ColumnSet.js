@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
 import { StyleManager } from '../../Styles/StyleManager';
-import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { ColumnView } from './Column';
 export class ColumnSetView extends React.Component {
     constructor() {
@@ -30,10 +30,6 @@ export class ColumnSetView extends React.Component {
             if (!model) {
                 return undefined;
             }
-            const background = model.backgroundImage;
-            if (background) {
-                return ContentFactory.createBackgroundImageView(this.renderColumns(), background);
-            }
             return this.renderColumns();
         };
         this.renderColumns = () => {
@@ -55,7 +51,10 @@ export class ColumnSetView extends React.Component {
         };
     }
     render() {
-        const { model } = this.props;
+        const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         if (model.selectAction) {
             return this.renderTouchableBlock();
         }

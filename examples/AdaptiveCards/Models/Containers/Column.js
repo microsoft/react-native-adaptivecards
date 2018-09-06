@@ -1,4 +1,5 @@
 import { ScopeModel } from '../Abstract/ScopeModel';
+import { BackgroundImageModel } from '../CardElements/BackgroundImage';
 import { ContentModelFactory } from '../Factories/ContentModelFactory';
 export class ColumnModel extends ScopeModel {
     constructor(json, parent, context) {
@@ -20,10 +21,14 @@ export class ColumnModel extends ScopeModel {
                 this.width = columnWidth;
             }
         }
+        if (json.backgroundImage) {
+            this.backgroundImage = new BackgroundImageModel(json.backgroundImage, this, this.context);
+            this.context.fit = 'background';
+        }
     }
     get children() {
         if (this.selectAction) {
-            return [...this.items, this.selectAction];
+            return [...this.items, this.selectAction, this.backgroundImage];
         }
         return this.items;
     }

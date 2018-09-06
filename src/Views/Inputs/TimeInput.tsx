@@ -3,6 +3,7 @@ import { Button } from '../../Components/Inputs/Button';
 import { TimePanel } from '../../Components/Inputs/TimePanel';
 import { TimeInputModel } from '../../Models/Inputs/TimeInput';
 import { StyleManager } from '../../Styles/StyleManager';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
     index: number;
@@ -17,7 +18,7 @@ interface IState {
 
 export class TimeInputView extends React.Component<IProps, IState> {
     private mounted: boolean;
-    
+
     private tempValue = '';
     constructor(props: IProps) {
         super(props);
@@ -50,11 +51,11 @@ export class TimeInputView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { index } = this.props;
+        const { model, index, theme } = this.props;
 
-        // if (!model || !model.isValid) {
-        //     return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        // }
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
 
         return (
             [
@@ -139,7 +140,7 @@ export class TimeInputView extends React.Component<IProps, IState> {
                 }
             }
         });
-        console.log('on press');
+        console.log('TimeInput onPress');
     }
 
     private onStoreUpdate = (value: string) => {

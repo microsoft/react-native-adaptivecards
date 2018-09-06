@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ImageBackground } from '../../Components/Basic/ImageBackground';
 import { SeparateLine } from '../../Components/Basic/SeparateLine';
 import { ContentType } from '../../Shared/Types';
 import { ImageView } from '../CardElements/Image';
@@ -27,15 +26,6 @@ export class ContentFactory {
             return [elementView];
         }
         return null;
-    }
-    static createBackgroundImageView(node, background) {
-        console.log(background);
-        if (background) {
-            return (React.createElement(ImageBackground, { url: background, flex: 1 }, node));
-        }
-        else {
-            return null;
-        }
     }
     static createElement(model, index, theme) {
         if (model) {

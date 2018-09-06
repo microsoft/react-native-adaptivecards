@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { LabelInput } from '../../Components/Inputs/LabelInput';
 import { ContentFactory } from '../Factories/ContentFactory';
+import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class PeoplePickerView extends React.Component {
     constructor(props) {
         super(props);
@@ -76,6 +77,9 @@ export class PeoplePickerView extends React.Component {
     }
     render() {
         const { model, theme } = this.props;
+        if (!model || !model.isSchemaCheckPassed) {
+            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
+        }
         return (React.createElement(LabelInput, { placeholder: model.placeholder, value: this.state.value, focused: this.state.inputFocused, labels: this.labels, suggestionView: ContentFactory.createElement(this.state.suggestionCard, 0, theme), onRequestSuggestion: this.onRequestSuggestion, onFocus: this.onFocus, onBlur: this.onBlur }));
     }
     get labels() {

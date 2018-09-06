@@ -9,9 +9,7 @@ export class SeparateLine extends React.PureComponent {
                 backgroundColor: StyleManager.separatorColor,
                 height: StyleManager.separatorThickness,
                 marginTop: StyleManager.separatorSpacing,
-                marginRight: StyleManager.separatorSpacing,
                 marginBottom: StyleManager.separatorSpacing,
-                marginLeft: StyleManager.separatorSpacing
             }}
             />
         );
