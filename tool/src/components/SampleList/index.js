@@ -11,6 +11,7 @@ class SampleList extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.handleAddEnter = this.handleAddEnter.bind(this);
     }
 
     handleClick(id, checked) {
@@ -20,6 +21,15 @@ class SampleList extends React.Component {
         this.props.setMode('card');
         // change editor text
         this.props.modifyCard(id, this.props.cards.find(x => x.id === id).card);
+    }
+
+    handleAddEnter(e) {
+        if (e.key === 'Enter') {
+            console.log(e.target.value);
+            this.props.addCard(e.target.value);
+            e.target.value = '';
+            e.target.blur();
+        }
     }
 
     render() {
@@ -33,6 +43,10 @@ class SampleList extends React.Component {
                     className="scrollbar"
                     {...this.props}>
                     <div className="sample-list-inner">
+                        <div className="add-sample">
+                            <input className="add-sample-input" placeholder="Add new card" onKeyPress={this.handleAddEnter}/>
+                        </div>
+                        <hr />
                         {this.props.cards.map((item) => <Sample key={item.id} id={item.id} name={item.name} selected={item.selected} clickHandler={this.handleClick}/>)}
                     </div>
                 </Scrollbars>
@@ -50,7 +64,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setCardSelected: (id, selected) => dispatch(setCardSelected(id, selected)),
-        addCard: (name, card) => dispatch(addCard(name, card)),
+        addCard: (name) => dispatch(addCard(name)),
         modifyCard: (id, card) => dispatch(modifyCard(id, card)),
         removeCard: (id) => dispatch(removeCard(id)),
         setMode: (mode) => dispatch(setMode(mode)),

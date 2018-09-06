@@ -10,7 +10,7 @@ export class ConfigManager {
     static loadConfig() {
         try {
             let rawConfig;
-            rawConfig = require('./default.json');
+            rawConfig = require('../Config/default.json');
             return new HostConfig(rawConfig);
         }
         catch (error) {

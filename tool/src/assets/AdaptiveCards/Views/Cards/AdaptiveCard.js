@@ -2,76 +2,71 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { ButtonGroup } from '../../Components/Containers/ButtonGroup';
 import { Card } from '../../Components/Containers/Card';
-import { ActionContext } from '../../Contexts/ActionContext';
-import { ActionType } from '../../Schema/Abstract/ActionElement';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ActionFactory } from '../Factories/ActionFactory';
 import { ContentFactory } from '../Factories/ContentFactory';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class AdaptiveCardView extends React.Component {
     constructor(props) {
         super(props);
-        this.showSubCard = (args) => {
+        this.showSubCard = (card) => {
             console.log('Show Card');
-            if (args && args.action && args.action.type === ActionType.ShowCard) {
-                if (this.state.subCard !== args.action.card) {
-                    this.setState({
-                        subCard: args.action.card
-                    });
-                }
-                else {
-                    this.setState({
-                        subCard: undefined
-                    });
-                }
+            if (card) {
+                this.setState({
+                    subCard: card
+                });
             }
-            return args;
+            return Promise.resolve(true);
         };
-        this.state = {};
-        this.actionContext = ActionContext.createInstance();
-        this.actionContext.registerHook({ func: this.showSubCard, name: 'showSubCard', actionType: ActionType.ShowCard });
+        this.onLayout = (event) => {
+            this.setState({
+                width: event.nativeEvent.layout.width,
+            });
+        };
+        this.state = {
+            subCard: undefined,
+            width: 0,
+        };
+        this.props.model.context.registerShowCardActionHandler(this.showSubCard);
     }
     render() {
-        const { element, theme } = this.props;
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.type + ' is not valid', theme, 'error');
-        }
-        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: element.getBackgroundImageUrl(), style: [
+        const { model } = this.props;
+        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: model.backgroundImage, onLayout: this.onLayout, style: [
                 {
-                    minHeight: 150,
-                }, this.props.style
+                    minHeight: this.minHeight,
+                },
+                this.props.style
             ] },
             this.renderBody(),
             this.renderSubCard(),
             this.renderActionSet()));
     }
     renderBody() {
-        const { element } = this.props;
-        if (!element || !element.isValid || !element.body) {
+        const { model } = this.props;
+        if (!model || !model.body) {
             return undefined;
         }
         return (React.createElement(View, { style: {
                 flexDirection: 'column',
                 alignSelf: 'stretch',
                 flex: 1
-            } }, this.props.element.body.map((contentElement, index) => ContentFactory.createView(contentElement, index, this.props.theme))));
+            } }, this.props.model.body.map((content, index) => ContentFactory.createView(content, index, this.props.theme))));
     }
     renderActionSet() {
-        const { element } = this.props;
-        if (!element || !element.isValid || !element.actions || element.actions.length === 0) {
+        const { model } = this.props;
+        if (!model || !model.actions || model.actions.length === 0) {
             return undefined;
         }
         return (React.createElement(ButtonGroup, null, this.renderActions()));
     }
     renderActions() {
-        const { element, theme } = this.props;
-        if (!element || !element.isValid || !element.actions) {
+        const { model, theme } = this.props;
+        if (!model || !model.actions) {
             return undefined;
         }
         let capacity = StyleManager.maxActions;
-        return element.actions.map((action, index) => {
+        return model.actions.map((action, index) => {
             if (index < capacity) {
-                return ActionFactory.createAction(action, index, theme, this.actionContext);
+                return ActionFactory.createAction(action, index, theme);
             }
             else {
                 return undefined;
@@ -80,9 +75,22 @@ export class AdaptiveCardView extends React.Component {
     }
     renderSubCard() {
         if (this.state.subCard) {
-            return (React.createElement(AdaptiveCardView, { index: 2, element: this.state.subCard, style: {
+            return (React.createElement(AdaptiveCardView, { index: 2, model: this.state.subCard, style: {
                     marginTop: StyleManager.subCardSpacing
                 }, theme: StyleManager.subCardTheme }));
+        }
+        return undefined;
+    }
+    get minHeight() {
+        const { model } = this.props;
+        if (model) {
+            if (model.context && model.context.fit === 'background') {
+                let padding = 12;
+                if (model.backgroundImage) {
+                    padding = 0;
+                }
+                return (this.state.width - padding * 2) * 150 / 285 + padding * 2;
+            }
         }
         return undefined;
     }

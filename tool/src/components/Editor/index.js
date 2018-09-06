@@ -51,6 +51,19 @@ class Editor extends React.Component {
             automaticLayout: true,
             fontSize: 13.5,
         };
+
+        // monaco.editor.defineTheme('myTheme', {
+        //     base: 'vs',
+        //     inherit: true,
+        //     rules: [{ background: 'F9F7F7' }],
+        //     colors: {
+        //         'editor.foreground': '#000000',
+        //         'editor.background': '#F9F7F7',
+        //     }
+        // });
+        // monaco.editor.setTheme('myTheme');
+
+
         return (
             <div className="editor" ref={(editor) => {this.editor = editor;}}>
                 <MonacoEditor

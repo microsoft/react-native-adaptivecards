@@ -32,7 +32,7 @@ export function setCardSelected(id, selected) {
 
 export function addCard(name) {
     return {
-        type: Constants.MODIFY_CARD,
+        type: Constants.ADD_CARD,
         name
     }
 }

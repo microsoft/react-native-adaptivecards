@@ -14,6 +14,14 @@ const styles = StyleSheet.create({
         },
         android: {
             elevation: 2,
+        },
+        web: {
+            borderWidth: 0.4,
+            borderColor: 'rgba(0, 0, 0, .1)',
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 0 },
+            shadowRadius: 3,
+            shadowOpacity: .08,
         }
     })),
 });
@@ -25,7 +33,7 @@ export class Card extends React.Component {
                     flex: this.props.flex,
                 },
                 this.props.style,
-            ] }, this.renderCardContent()));
+            ], onLayout: this.props.onLayout }, this.renderCardContent()));
     }
     renderCardContent() {
         if (this.props.backgroundImageUrl) {

@@ -2,12 +2,10 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
-
 module.exports = {
     entry: './src/index.js',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: './dist/bundle.js'
     },
     module: {
         rules: [
@@ -59,7 +57,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './public/index.html'
         }), new MonacoWebpackPlugin()
     ],
     resolve: {
@@ -67,4 +65,4 @@ module.exports = {
             'react-native$': 'react-native-web'
         }
     }
-}
+};

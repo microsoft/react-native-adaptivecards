@@ -27,7 +27,10 @@ export class Contact extends React.Component {
             } }, this.renderContent()));
     }
     renderNonTouchableBlock() {
-        return (React.createElement(View, { alignSelf: 'stretch', flexDirection: 'row' }, this.renderContent()));
+        return (React.createElement(View, { style: {
+                alignSelf: 'stretch',
+                flexDirection: 'row'
+            } }, this.renderContent()));
     }
     renderContent() {
         return [

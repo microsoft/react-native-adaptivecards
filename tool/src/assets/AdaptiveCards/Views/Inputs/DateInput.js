@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Button } from '../../Components/Inputs/Button';
 import { DatePanel } from '../../Components/Inputs/DatePanel';
-import { FormContext } from '../../Contexts/FormContext';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class DateInputView extends React.Component {
     constructor(props) {
         super(props);
@@ -23,41 +21,71 @@ export class DateInputView extends React.Component {
                 value: this.tempValue,
                 focused: false,
             }, () => {
-                this.updateStore();
+                const { model } = this.props;
+                if (model) {
+                    model.onInput(this.state.value);
+                    let callback = model.context.blurHandler;
+                    if (callback) {
+                        callback();
+                    }
+                }
             });
-        };
-        this.validateInput = (input) => {
-            if (this.props.element) {
-                return this.props.element.validate(input);
-            }
-            return true;
         };
         this.onPress = () => {
             this.setState({
                 focused: !this.state.focused,
+            }, () => {
+                const { model } = this.props;
+                if (model) {
+                    if (this.state.focused) {
+                        let callback = model.context.focusHandler;
+                        if (callback) {
+                            callback();
+                        }
+                    }
+                    else {
+                        let callback = model.context.blurHandler;
+                        if (callback) {
+                            callback();
+                        }
+                    }
+                }
             });
             console.log('on press');
         };
-        const { element } = this.props;
-        if (element && element.isValid) {
+        this.onStoreUpdate = (value) => {
+            this.setState({
+                value: value
+            });
+        };
+        this.mounted = false;
+        const { model } = this.props;
+        if (model && model.isValueValid) {
+            model.onStoreUpdate = this.onStoreUpdate;
             this.state = {
                 focused: false,
-                value: element.value
+                value: model.value
             };
+            model.onInput(this.state.value);
+        }
+    }
+    componentDidMount() {
+        this.mounted = true;
+    }
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+    setState(state, callback) {
+        if (this.mounted) {
+            super.setState(state, callback);
         }
     }
     render() {
-        const { element, index, theme } = this.props;
-        if (!element || !element.isValid) {
-            return DebugOutputFactory.createDebugOutputBanner(element.type + '>>' + element.id + ' is not valid', theme, 'error');
-        }
+        const { index } = this.props;
         return ([
             React.createElement(Button, { key: 'DateInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPress }),
             React.createElement(DatePanel, { key: 'DatePanel' + index, value: this.state.value, show: this.state.focused, onValueChange: this.onValueChange, onSave: this.onSave, onCancel: this.onCancel })
         ]);
-    }
-    updateStore() {
-        FormContext.getInstance().updateField(this.props.element.id, this.state.value, this.validateInput(this.state.value));
     }
     get fontSize() {
         return StyleManager.getFontSize('default');
@@ -75,7 +103,7 @@ export class DateInputView extends React.Component {
         return 1;
     }
     get height() {
-        return this.fontSize * this.numberOfLine + this.paddingVertical * 2;
+        return this.fontSize * this.numberOfLine + this.paddingVertical * 2 + 2;
     }
     get color() {
         if (this.state.focused) {
@@ -103,7 +131,7 @@ export class DateInputView extends React.Component {
     }
     get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.element.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
     }

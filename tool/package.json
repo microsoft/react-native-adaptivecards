@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
+  "homepage": "https://Aneureka.github.io",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "./node_modules/.bin/webpack-dev-server --mode development --inline --open --hot",
+    "dev": "webpack-dev-server --mode development --inline --open --hot",
     "build": "webpack-dev-server --mode production",
-    "lint": "eslint --ext .js --ignore-path .eslintignore src "
+    "lint": "eslint --ext .js --ignore-path .eslintignore src",
+    "predeploy": "webpack",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "Haobin Guo",
@@ -15,18 +19,15 @@
   "dependencies": {
     "antd": "^3.8.2",
     "prop-types": "^15.6.2",
-    "react": "^16.4.2",
-    "react-art": "^16.4.2",
+    "react": "16.3.1",
+    "react-art": "16.3.1",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.4.2",
+    "react-dom": "16.3.1",
     "react-monaco-editor": "^0.18.0",
     "react-native": "^0.56.0",
     "react-native-web": "0.6.0",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
-    "react-scripts": "^1.1.4",
-    "react-scroll": "^1.7.10",
-    "react-scrollbar": "^0.5.4",
     "redux": "^4.0.0"
   },
   "devDependencies": {
@@ -44,6 +45,7 @@
     "eslint-loader": "^2.1.0",
     "eslint-plugin-react": "^7.11.1",
     "file-loader": "^1.1.11",
+    "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
     "monaco-editor-webpack-plugin": "^1.5.1",
     "react-svg-loader": "^2.1.0",
@@ -52,6 +54,7 @@
     "url-loader": "^1.1.1",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.1.5",
+    "write-file-webpack-plugin": "^4.3.2"
   }
 }

@@ -11,7 +11,8 @@ class CardList extends React.Component {
     render() {
         const cards = this.props.cards.filter(item => item.selected).map(item => {return {...item, card: parseJson(item.card)}});
         const config = parseJson(this.props.config);
-        console.log("loading config: ", config);
+        console.log("=== Config: ", config);
+        console.log("=== Cards: ", cards);
         return (
             <div className="card-list">
                 <Scrollbars
@@ -22,7 +23,7 @@ class CardList extends React.Component {
                     className="scrollbar"
                     {...this.props}>
                     <div className="card-list-inner">
-                        {cards.map(card => <Card key={card.id} adaptiveCard={card.card} config={config}/>)}
+                        {cards.map(card => <Card key={card.id} adaptiveCard={card.card}/>)}
                     </div>
                 </Scrollbars>
             </div>

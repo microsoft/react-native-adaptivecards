@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import {LayoutChangeEvent, Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageBackground } from '../Basic/ImageBackground';
 
@@ -18,6 +18,14 @@ const styles = StyleSheet.create({
             },
             android: {
                 elevation: 2,
+            },
+            web: {
+                borderWidth: 0.5,
+                borderColor: 'rgba(0, 0, 0, .1)',
+                shadowColor: '#000',
+                shadowOffset: { width: 0, height: 0 },
+                shadowRadius: 3,
+                shadowOpacity: .08,
             }
         }),
     },
@@ -28,6 +36,7 @@ interface IProps {
     fit?: 'content' | 'container';
     theme?: 'default' | 'emphasis';
     backgroundImageUrl?: string;
+    onLayout?: (event: LayoutChangeEvent) => void;
     style?: StyleProp<ViewStyle>;
 }
 
@@ -42,6 +51,7 @@ export class Card extends React.Component<IProps> {
                     },
                     this.props.style,
                 ]}
+                onLayout={this.props.onLayout}
             >
                 {this.renderCardContent()}
             </View>

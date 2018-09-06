@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, StyleProp, View, ViewStyle } from 'react-native';
+import { LayoutChangeEvent, StyleProp, View, ViewStyle} from 'react-native';
 import { ButtonGroup } from '../../Components/Containers/ButtonGroup';
 import { Card } from '../../Components/Containers/Card';
 import { CardModel } from '../../Models/Cards/Card';
@@ -16,6 +16,7 @@ interface IProps {
 
 interface IState {
     subCard?: CardModel;
+    width: number;
 }
 
 export class AdaptiveCardView extends React.Component<IProps, IState> {
@@ -23,7 +24,10 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            subCard: undefined,
+            width: 0,
+        };
         this.props.model.context.registerShowCardActionHandler(this.showSubCard);
     }
 
@@ -39,6 +43,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                 flex={1}
                 fit='container'
                 backgroundImageUrl={model.backgroundImage}
+                onLayout={this.onLayout}
                 style={[ 
                     {
                         minHeight: this.minHeight,
@@ -135,6 +140,12 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         return Promise.resolve(true);
     }
 
+    private onLayout = (event: LayoutChangeEvent) => {
+        this.setState({
+            width: event.nativeEvent.layout.width,
+        });
+    }
+
     private get minHeight() {
         const { model } = this.props;
 
@@ -145,7 +156,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
                 if (model.backgroundImage) {
                     padding = 0;
                 }
-                return (Dimensions.get('window').width - padding * 2) * 150 / 285 + padding * 2;
+                return (this.state.width - padding * 2) * 150 / 285 + padding * 2;
             }
         }
         return undefined;

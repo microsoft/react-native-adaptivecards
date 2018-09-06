@@ -80,10 +80,16 @@ export class ImageBlock extends React.Component {
     }
     renderImage() {
         if (UrlUtils.isSvgXml(this.props.url)) {
-            return (React.createElement(Svg, { url: this.props.url, width: this.props.width, height: this.props.height, style: [
+            return (React.createElement(View, { style: [
+                    {
+                        width: this.props.width,
+                        height: this.props.height,
+                        overflow: 'hidden',
+                    },
                     this.borderRadius,
                     this.props.style
-                ] }));
+                ] },
+                React.createElement(Svg, { url: this.props.url })));
         }
         else {
             if (UrlUtils.isDeepLink(this.props.url)) {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, View } from 'react-native';
+import { View } from 'react-native';
 import { ButtonGroup } from '../../Components/Containers/ButtonGroup';
 import { Card } from '../../Components/Containers/Card';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -17,12 +17,20 @@ export class AdaptiveCardView extends React.Component {
             }
             return Promise.resolve(true);
         };
-        this.state = {};
+        this.onLayout = (event) => {
+            this.setState({
+                width: event.nativeEvent.layout.width,
+            });
+        };
+        this.state = {
+            subCard: undefined,
+            width: 0,
+        };
         this.props.model.context.registerShowCardActionHandler(this.showSubCard);
     }
     render() {
         const { model } = this.props;
-        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: model.backgroundImage, style: [
+        return (React.createElement(Card, { flex: 1, fit: 'container', backgroundImageUrl: model.backgroundImage, onLayout: this.onLayout, style: [
                 {
                     minHeight: this.minHeight,
                 },
@@ -81,7 +89,7 @@ export class AdaptiveCardView extends React.Component {
                 if (model.backgroundImage) {
                     padding = 0;
                 }
-                return (Dimensions.get('window').width - padding * 2) * 150 / 285 + padding * 2;
+                return (this.state.width - padding * 2) * 150 / 285 + padding * 2;
             }
         }
         return undefined;

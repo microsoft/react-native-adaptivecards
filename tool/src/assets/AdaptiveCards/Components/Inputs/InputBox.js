@@ -36,6 +36,7 @@ export class InputBox extends React.Component {
                     flex: this.props.flex,
                     color: this.color,
                     fontSize: this.fontSize,
+                    lineHeight: this.lineHeight,
                     fontWeight: this.fontWeight,
                     backgroundColor: this.backgroundColor,
                     width: this.props.width,
@@ -68,6 +69,9 @@ export class InputBox extends React.Component {
     get isMultiLine() {
         return this.props.numberOfLines && this.props.numberOfLines > 1;
     }
+    get lineHeight() {
+        return this.fontSize * 1.2;
+    }
     get fontSize() {
         return StyleManager.getFontSize('default');
     }
@@ -87,7 +91,7 @@ export class InputBox extends React.Component {
         return 1;
     }
     get height() {
-        return this.fontSize * this.numberOfLine + this.paddingVertical * 2;
+        return this.lineHeight * this.numberOfLine + this.paddingVertical * 2 + 2;
     }
     get color() {
         if (this.state.focused) {
