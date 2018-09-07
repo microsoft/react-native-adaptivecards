@@ -71,6 +71,7 @@ export class Touchable extends React.Component<IProps> {
                     hitSlop={hitSlop}
                     background={TouchableNativeFeedback.SelectableBackground()}
                     accessibilityLabel={accessibilityLabel}
+                    accessibilityComponentType={accessibilityComponentType}
                     onLayout={this.props.onLayout}
                 >
                     <View
@@ -90,6 +91,7 @@ export class Touchable extends React.Component<IProps> {
                     style={style}
                     hitSlop={hitSlop}
                     accessibilityLabel={accessibilityLabel}
+                    accessibilityTraits={accessibilityTraits}
                     onLayout={this.props.onLayout}
                 >
                     {otherProps.children}

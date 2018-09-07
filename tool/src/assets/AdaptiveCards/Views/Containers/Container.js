@@ -9,7 +9,7 @@ export class ContainerView extends React.Component {
     constructor() {
         super(...arguments);
         this.renderTouchableBlock = (backgroundColor) => {
-            return (React.createElement(Touchable, { onPress: this.onPress, style: {
+            return (React.createElement(Touchable, { onPress: this.onPress, accessibilityComponentType: 'button', style: {
                     flex: this.flex,
                     alignSelf: 'stretch',
                     justifyContent: this.justifyContent,

@@ -28,11 +28,11 @@ export class Touchable extends React.Component {
     render() {
         const _a = this.props, { onPress, onLongPress, disabled, accessibilityLabel, accessibilityTraits, accessibilityComponentType, activeOpacity, hitSlop, style } = _a, otherProps = __rest(_a, ["onPress", "onLongPress", "disabled", "accessibilityLabel", "accessibilityTraits", "accessibilityComponentType", "activeOpacity", "hitSlop", "style"]);
         if (Platform.OS === 'android') {
-            return (React.createElement(TouchableNativeFeedback, { disabled: disabled, onPress: onPress, onLongPress: onLongPress, accessible: true, testID: this.testId, useForeground: true, hitSlop: hitSlop, background: TouchableNativeFeedback.SelectableBackground(), accessibilityLabel: accessibilityLabel, onLayout: this.props.onLayout },
+            return (React.createElement(TouchableNativeFeedback, { disabled: disabled, onPress: onPress, onLongPress: onLongPress, accessible: true, testID: this.testId, useForeground: true, hitSlop: hitSlop, background: TouchableNativeFeedback.SelectableBackground(), accessibilityLabel: accessibilityLabel, accessibilityComponentType: accessibilityComponentType, onLayout: this.props.onLayout },
                 React.createElement(View, Object.assign({ style: style }, otherProps))));
         }
         else {
-            return (React.createElement(TouchableOpacity, { disabled: disabled, onPress: onPress, onLongPress: onLongPress, accessible: true, testID: this.testId, activeOpacity: activeOpacity, style: style, hitSlop: hitSlop, accessibilityLabel: accessibilityLabel, onLayout: this.props.onLayout }, otherProps.children));
+            return (React.createElement(TouchableOpacity, { disabled: disabled, onPress: onPress, onLongPress: onLongPress, accessible: true, testID: this.testId, activeOpacity: activeOpacity, style: style, hitSlop: hitSlop, accessibilityLabel: accessibilityLabel, accessibilityTraits: accessibilityTraits, onLayout: this.props.onLayout }, otherProps.children));
         }
     }
 }
