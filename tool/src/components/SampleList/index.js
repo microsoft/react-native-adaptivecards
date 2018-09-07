@@ -12,6 +12,7 @@ class SampleList extends React.Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
         this.handleAddEnter = this.handleAddEnter.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
     }
 
     handleClick(id, checked) {
@@ -23,9 +24,12 @@ class SampleList extends React.Component {
         this.props.modifyCard(id, this.props.cards.find(x => x.id === id).card);
     }
 
+    handleRemove(id) {
+        this.props.removeCard(id);
+    }
+
     handleAddEnter(e) {
         if (e.key === 'Enter') {
-            console.log(e.target.value);
             this.props.addCard(e.target.value);
             e.target.value = '';
             e.target.blur();
@@ -47,7 +51,10 @@ class SampleList extends React.Component {
                             <input className="add-sample-input" placeholder="Add new card" onKeyPress={this.handleAddEnter}/>
                         </div>
                         <hr />
-                        {this.props.cards.map((item) => <Sample key={item.id} id={item.id} name={item.name} selected={item.selected} clickHandler={this.handleClick}/>)}
+                        {this.props.cards.map((item) => <Sample key={item.id} id={item.id} name={item.name} selected={item.selected}
+                                                                clickHandler={this.handleClick}
+                                                                removeHandler={this.handleRemove} />
+                            )}
                     </div>
                 </Scrollbars>
             </div>

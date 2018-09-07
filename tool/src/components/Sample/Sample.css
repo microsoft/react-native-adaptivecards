@@ -6,6 +6,8 @@
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    z-index: 999;
+    /* swiping remove */
 }
 
 .sample label {
@@ -68,6 +70,14 @@
     visibility: hidden;
 }
 
+.remove-icon {
+    float: left;
+    line-height: 1;
+    background-color: transparent;
+    display: none;
+}
+
+
 .right-arrow-icon {
     float: right;
     line-height: 1;
@@ -77,4 +87,8 @@
 
 .active {
     visibility: visible;
+}
+
+.show {
+    display: inline-block;
 }

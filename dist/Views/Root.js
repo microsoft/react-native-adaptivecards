@@ -4,7 +4,7 @@ import { CardContext } from '../Contexts/CardContext';
 import { HostContext } from '../Contexts/HostContext';
 import { CardModel } from '../Models/Cards/Card';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
-export class CardRootView extends React.PureComponent {
+export class CardRootView extends React.Component {
     constructor(props) {
         super(props);
         let hostContext = HostContext.getInstance();
@@ -18,6 +18,15 @@ export class CardRootView extends React.PureComponent {
         this.rootCardContext.registerErrorHandler(this.props.onError);
         this.rootCardContext.registerInfoHandler(this.props.onInfo);
         this.rootCardContext.registerWarningHandler(this.props.onWarning);
+    }
+    shouldComponentUpdate(nextProps) {
+        if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {
+            if (JSON.stringify(nextProps.config) !== JSON.stringify(this.props.config)) {
+                HostContext.getInstance().applyConfig(nextProps.config);
+            }
+            return true;
+        }
+        return false;
     }
     render() {
         return (React.createElement(View, { style: { flex: 1 } },

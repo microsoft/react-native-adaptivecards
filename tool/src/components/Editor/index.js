@@ -43,7 +43,9 @@ class Editor extends React.Component {
     }
 
     render() {
-        const code = this.props.mode === 'card' ? this.props.cards.find(x => x.id === this.props.cardId).card : this.props.config;
+        const code = this.props.mode === 'card' ?
+                        (this.props.cardId ? this.props.cards.find(x => x.id === this.props.cardId).card : '')
+                        : this.props.config;
         const options = {
             lineNumber: 'on',
             selectOnLineNumbers: true,

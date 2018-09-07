@@ -26,7 +26,11 @@ export default function reducer(state={
         case Constants.SET_CARD_SELECTED:
             return {...state, cardId: action.id, cards: state.cards.map((item) => {return item.id === action.id ? {...item, selected: action.selected} : item})};
         case Constants.REMOVE_CARD:
-            return {...state, cards: state.cards.filter((item) => item.id !== action.id)};
+            return {
+                ...state,
+                cards: state.cards.filter((item) => item.id !== action.id),
+                cardId: action.id !== state.cardId ? state.cardId : ''
+            };
         case Constants.ADD_CARD:
             let newState = {...state, cards: state.cards.concat({name: action.name, card: '', selected: true, id: uuid()}), mode: 'card'};
             newState.cardId = newState.cards[newState.cards.length-1].id;

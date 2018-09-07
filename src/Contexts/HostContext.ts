@@ -17,11 +17,12 @@ export class HostContext {
         return this.sharedInstance;
     }
 
-    public applyConfig(config: HostConfig) {
+    public applyConfig(config: any) {
+        const parsedConfig = ConfigManager.parseConfig(config);
         if (this.config) {
-            this.config = this.config.combine(config);
+            this.config = this.config.combine(parsedConfig);
         } else {
-            this.config = config;
+            this.config = parsedConfig;
         }
     }
 

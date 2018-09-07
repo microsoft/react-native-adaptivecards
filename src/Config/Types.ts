@@ -23,14 +23,14 @@ export class SpacingConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        default: current.default !== undefined ? current.default : prev.default,
-                        small: current.small !== undefined ? current.small : prev.small,
-                        medium: current.medium !== undefined ? current.medium : prev.medium,
-                        large: current.large !== undefined ? current.large : prev.large,
-                        extraLarge: current.extraLarge !== undefined ? current.extraLarge : prev.extraLarge,
-                        padding: current.padding !== undefined ? current.padding : prev.padding,
-                    } as SpacingConfig;
+                    let combined = new SpacingConfig();
+                    combined.default = current.default !== undefined ? current.default : prev.default;
+                    combined.small = current.small !== undefined ? current.small : prev.small;
+                    combined.medium = current.medium !== undefined ? current.medium : prev.medium;
+                    combined.large = current.large !== undefined ? current.large : prev.large;
+                    combined.extraLarge = current.extraLarge !== undefined ? current.extraLarge : prev.extraLarge;
+                    combined.padding = current.padding !== undefined ? current.padding : prev.padding;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -56,11 +56,11 @@ export class SeparatorConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        thickness: current.thickness !== undefined ? current.thickness : prev.thickness,
-                        color: current.color !== undefined ? current.color : prev.color,
-                        spacing: current.spacing !== undefined ? current.spacing : prev.spacing,
-                    } as SeparatorConfig;
+                    let combined = new SeparatorConfig();
+                    combined.thickness = current.thickness !== undefined ? current.thickness : prev.thickness;
+                    combined.color = current.color !== undefined ? current.color : prev.color;
+                    combined.spacing = current.spacing !== undefined ? current.spacing : prev.spacing;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -90,13 +90,13 @@ export class FontSizeConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        default: current.default !== undefined ? current.default : prev.default,
-                        small: current.small !== undefined ? current.small : prev.small,
-                        medium: current.medium !== undefined ? current.medium : prev.medium,
-                        large: current.large !== undefined ? current.large : prev.large,
-                        extraLarge: current.extraLarge !== undefined ? current.extraLarge : prev.extraLarge,
-                    } as FontSizeConfig;
+                    let combined = new FontSizeConfig();
+                    combined.default = current.default !== undefined ? current.default : prev.default;
+                    combined.small = current.small !== undefined ? current.small : prev.small;
+                    combined.medium = current.medium !== undefined ? current.medium : prev.medium;
+                    combined.large = current.large !== undefined ? current.large : prev.large;
+                    combined.extraLarge = current.extraLarge !== undefined ? current.extraLarge : prev.extraLarge;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -124,11 +124,11 @@ export class FontWeightConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        default: current.default !== undefined ? current.default : prev.default,
-                        lighter: current.lighter !== undefined ? current.lighter : prev.lighter,
-                        bolder: current.bolder !== undefined ? current.bolder : prev.bolder,
-                    } as FontWeightConfig;
+                    let combined = new FontWeightConfig();
+                    combined.default = current.default !== undefined ? current.default : prev.default;
+                    combined.lighter = current.lighter !== undefined ? current.lighter : prev.lighter;
+                    combined.bolder = current.bolder !== undefined ? current.bolder : prev.bolder;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -152,10 +152,10 @@ export class ColorConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        default: current.default !== undefined ? current.default : prev.default,
-                        subtle: current.subtle !== undefined ? current.subtle : prev.subtle,
-                    } as ColorConfig;
+                    let combined = new ColorConfig();
+                    combined.default = current.default !== undefined ? current.default : prev.default;
+                    combined.subtle = current.subtle !== undefined ? current.subtle : prev.subtle;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -189,15 +189,15 @@ export class ColorSetConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        default: prev.default !== undefined ? prev.default.combine(current.default) : current.default,
-                        dark: prev.default !== undefined ? prev.dark.combine(current.dark) : current.dark,
-                        light: prev.light !== undefined ? prev.light.combine(current.light) : current.light,
-                        accent: prev.accent !== undefined ? prev.accent.combine(current.accent) : current.accent,
-                        attention: prev.attention !== undefined ? prev.attention.combine(current.attention) : current.attention,
-                        good: prev.good !== undefined ? prev.good.combine(current.good) : current.good,
-                        warning: prev.warning !== undefined ? prev.warning.combine(current.warning) : current.warning,
-                    } as ColorSetConfig;
+                    let combined = new ColorSetConfig();
+                    combined.default = prev.default !== undefined ? prev.default.combine(current.default) : current.default;
+                    combined.dark = prev.dark !== undefined ? prev.dark.combine(current.dark) : current.dark;
+                    combined.light = prev.light !== undefined ? prev.light.combine(current.light) : current.light;
+                    combined.accent = prev.accent !== undefined ? prev.accent.combine(current.accent) : current.accent;
+                    combined.attention = prev.attention !== undefined ? prev.attention.combine(current.attention) : current.attention;
+                    combined.good = prev.good !== undefined ? prev.good.combine(current.good) : current.good;
+                    combined.warning = prev.warning !== undefined ? prev.warning.combine(current.warning) : current.warning;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -221,10 +221,10 @@ export class ThemeConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        background: current.background !== undefined ? current.background : prev.background,
-                        foreground: prev.foreground !== undefined ? prev.foreground.combine(current.foreground) : current.foreground,
-                    } as ThemeConfig;
+                    let combined = new ThemeConfig();
+                    combined.background = current.background !== undefined ? current.background : prev.background;
+                    combined.foreground = prev.foreground !== undefined ? prev.foreground.combine(current.foreground) : current.foreground;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -248,10 +248,10 @@ export class ContainerConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        default: prev.default !== undefined ? prev.default.combine(current.default) : current.default,
-                        emphasis: prev.emphasis !== undefined ? prev.emphasis.combine(current.emphasis) : current.emphasis,
-                    } as ContainerConfig;
+                    let combined = new ContainerConfig();
+                    combined.default = prev.default !== undefined ? prev.default.combine(current.default) : current.default;
+                    combined.emphasis = prev.emphasis !== undefined ? prev.emphasis.combine(current.emphasis) : current.emphasis;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -265,7 +265,7 @@ export class ImageSizeConfig {
     public medium: number;
     public large: number;
 
-    constructor(json: any) {
+    constructor(json?: any) {
         if (json) {
             this.small = json['small'];
             this.medium = json['medium'];
@@ -277,11 +277,11 @@ export class ImageSizeConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        small: current.small !== undefined ? current.small : prev.small,
-                        medium: current.medium !== undefined ? current.medium : prev.medium,
-                        large: current.large !== undefined ? current.large : prev.large,
-                    } as ImageSizeConfig;
+                    let combined = new ImageSizeConfig();
+                    combined.small = current.small !== undefined ? current.small : prev.small;
+                    combined.medium = current.medium !== undefined ? current.medium : prev.medium;
+                    combined.large = current.large !== undefined ? current.large : prev.large;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -307,11 +307,11 @@ export class ShowCardActionConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        mode: current.mode !== undefined ? current.mode : prev.mode,
-                        margin: current.margin !== undefined ? current.margin : prev.margin,
-                        style: current.style !== undefined ? current.style : prev.style,
-                    } as ShowCardActionConfig;
+                    let combined = new ShowCardActionConfig();
+                    combined.mode = current.mode !== undefined ? current.mode : prev.mode;
+                    combined.margin = current.margin !== undefined ? current.margin : prev.margin;
+                    combined.style = current.style !== undefined ? current.style : prev.style;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -349,17 +349,17 @@ export class ActionConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        capacity: current.capacity !== undefined ? current.capacity : prev.capacity,
-                        actionSetSpacing: current.actionSetSpacing !== undefined ? current.actionSetSpacing : prev.actionSetSpacing,
-                        actionSpacing: current.actionSpacing !== undefined ? current.actionSpacing : prev.actionSpacing,
-                        showCard: prev.showCard !== undefined ? prev.showCard.combine(current.showCard) : current.showCard,
-                        cardExpanding: current.cardExpanding !== undefined ? current.cardExpanding : prev.cardExpanding,
-                        direction: current.direction !== undefined ? current.direction : prev.direction,
-                        align: current.align !== undefined ? current.align : prev.align,
-                        iconPosition: current.iconPosition !== undefined ? current.iconPosition : prev.iconPosition,
-                        iconSize: current.iconSize !== undefined ? current.iconSize : prev.iconSize,
-                    } as ActionConfig;
+                    let combined = new ActionConfig();
+                    combined.capacity = current.capacity !== undefined ? current.capacity : prev.capacity;
+                    combined.actionSetSpacing = current.actionSetSpacing !== undefined ? current.actionSetSpacing : prev.actionSetSpacing;
+                    combined.actionSpacing = current.actionSpacing !== undefined ? current.actionSpacing : prev.actionSpacing;
+                    combined.showCard = prev.showCard !== undefined ? prev.showCard.combine(current.showCard) : current.showCard;
+                    combined.cardExpanding = current.cardExpanding !== undefined ? current.cardExpanding : prev.cardExpanding;
+                    combined.direction = current.direction !== undefined ? current.direction : prev.direction;
+                    combined.align = current.align !== undefined ? current.align : prev.align;
+                    combined.iconPosition = current.iconPosition !== undefined ? current.iconPosition : prev.iconPosition;
+                    combined.iconSize = current.iconSize !== undefined ? current.iconSize : prev.iconSize;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -381,9 +381,9 @@ export class CardConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        allowCustomStyle: current.allowCustomStyle !== undefined ? current.allowCustomStyle : prev.allowCustomStyle,
-                    } as CardConfig;
+                    let combined = new CardConfig();
+                    combined.allowCustomStyle = current.allowCustomStyle !== undefined ? current.allowCustomStyle : prev.allowCustomStyle;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -407,10 +407,10 @@ export class ImageSetConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        imageSize: current.imageSize !== undefined ? current.imageSize : prev.imageSize,
-                        maxImageHeight: current.maxImageHeight !== undefined ? current.maxImageHeight : prev.maxImageHeight,
-                    } as ImageSetConfig;
+                    let combined = new ImageSetConfig();
+                    combined.imageSize = current.imageSize !== undefined ? current.imageSize : prev.imageSize;
+                    combined.maxImageHeight = current.maxImageHeight !== undefined ? current.maxImageHeight : prev.maxImageHeight;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -441,13 +441,13 @@ export class FactValueConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        size: current.size !== undefined ? current.size : prev.size,
-                        color: current.color !== undefined ? current.color : prev.color,
-                        isSubtle: current.isSubtle !== undefined ? current.isSubtle : prev.isSubtle,
-                        weight: current.weight !== undefined ? current.weight : prev.weight,
-                        wrap: current.wrap !== undefined ? current.wrap : prev.wrap,
-                    } as FactValueConfig;
+                    let combined = new FactValueConfig();
+                    combined.size = current.size !== undefined ? current.size : prev.size;
+                    combined.color = current.color !== undefined ? current.color : prev.color;
+                    combined.isSubtle = current.isSubtle !== undefined ? current.isSubtle : prev.isSubtle;
+                    combined.weight = current.weight !== undefined ? current.weight : prev.weight;
+                    combined.wrap = current.wrap !== undefined ? current.wrap : prev.wrap;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -479,14 +479,14 @@ export class FactTitleConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        size: current.size !== undefined ? current.size : prev.size,
-                        color: current.color !== undefined ? current.color : prev.color,
-                        isSubtle: current.isSubtle !== undefined ? current.isSubtle : prev.isSubtle,
-                        weight: current.weight !== undefined ? current.weight : prev.weight,
-                        wrap: current.wrap !== undefined ? current.wrap : prev.wrap,
-                        maxWidth: current.maxWidth !== undefined ? current.maxWidth : prev.maxWidth,
-                    } as FactTitleConfig;
+                    let combined = new FactTitleConfig();
+                    combined.size = current.size !== undefined ? current.size : prev.size;
+                    combined.color = current.color !== undefined ? current.color : prev.color;
+                    combined.isSubtle = current.isSubtle !== undefined ? current.isSubtle : prev.isSubtle;
+                    combined.weight = current.weight !== undefined ? current.weight : prev.weight;
+                    combined.wrap = current.wrap !== undefined ? current.wrap : prev.wrap;
+                    combined.maxWidth = current.maxWidth !== undefined ? current.maxWidth : prev.maxWidth;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -512,11 +512,11 @@ export class FactSetConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        title: prev.title !== undefined ? prev.title.combine(current.title) : current.title,
-                        value: prev.value !== undefined ? prev.value.combine(current.value) : current.value,
-                        margin: current.margin !== undefined ? current.margin : prev.margin,
-                    } as FactSetConfig;
+                    let combined = new FactSetConfig();
+                    combined.title = prev.title !== undefined ? prev.title.combine(current.title) : current.title;
+                    combined.value = prev.value !== undefined ? prev.value.combine(current.value) : current.value;
+                    combined.margin = current.margin !== undefined ? current.margin : prev.margin;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -548,15 +548,15 @@ export class InputThemeConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        color: current.color !== undefined ? current.color : prev.color,
-                        focusColor: current.focusColor !== undefined ? current.focusColor : prev.focusColor,
-                        backgroundColor: current.backgroundColor !== undefined ? current.backgroundColor : prev.backgroundColor,
-                        focusBackgroundColor:
-                            current.focusBackgroundColor !== undefined ? current.focusBackgroundColor : prev.focusBackgroundColor,
-                        borderColor: current.borderColor !== undefined ? current.borderColor : prev.borderColor,
-                        focusBorderColor: current.focusBorderColor !== undefined ? current.focusBorderColor : prev.focusBorderColor,
-                    } as InputThemeConfig;
+                    let combined = new InputThemeConfig();
+                    combined.color = current.color !== undefined ? current.color : prev.color;
+                    combined.focusColor = current.focusColor !== undefined ? current.focusColor : prev.focusColor;
+                    combined.backgroundColor = current.backgroundColor !== undefined ? current.backgroundColor : prev.backgroundColor;
+                    combined.focusBackgroundColor =
+                        current.focusBackgroundColor !== undefined ? current.focusBackgroundColor : prev.focusBackgroundColor;
+                    combined.borderColor = current.borderColor !== undefined ? current.borderColor : prev.borderColor;
+                    combined.focusBorderColor = current.focusBorderColor !== undefined ? current.focusBorderColor : prev.focusBorderColor;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -580,10 +580,10 @@ export class InputConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        default: prev.default !== undefined ? prev.default.combine(current.default) : current.default,
-                        emphasis: prev.emphasis !== undefined ? prev.emphasis.combine(current.emphasis) : current.emphasis,
-                    } as InputConfig;
+                    let combined = new InputConfig();
+                    combined.default = prev.default !== undefined ? prev.default.combine(current.default) : current.default;
+                    combined.emphasis = prev.emphasis !== undefined ? prev.emphasis.combine(current.emphasis) : current.emphasis;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -607,10 +607,10 @@ export class MediaConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        defaultPosterUrl: current.defaultPosterUrl !== undefined ? current.defaultPosterUrl : prev.defaultPosterUrl,
-                        playButtonUrl: current.playButtonUrl !== undefined ? current.playButtonUrl : prev.playButtonUrl,
-                    } as MediaConfig;
+                    let combined = new MediaConfig();
+                    combined.defaultPosterUrl = current.defaultPosterUrl !== undefined ? current.defaultPosterUrl : prev.defaultPosterUrl;
+                    combined.playButtonUrl = current.playButtonUrl !== undefined ? current.playButtonUrl : prev.playButtonUrl;
+                    return combined;
                 }
                 return prev;
             }, this);
@@ -660,25 +660,26 @@ export class HostConfig {
         if (args) {
             return args.reduce((prev, current) => {
                 if (current) {
-                    return {
-                        spacing: prev.spacing !== undefined ? prev.spacing.combine(current.spacing) : current.spacing,
-                        separator: prev.separator !== undefined ? prev.separator.combine(current.separator) : current.separator,
-                        supportInteractive: current.supportInteractive !== undefined ? current.supportInteractive : prev.supportInteractive,
-                        fontFamily: current.fontFamily !== undefined ? current.fontFamily : prev.fontFamily,
-                        fontSize: prev.fontSize !== undefined ? prev.fontSize.combine(current.fontSize) : current.fontSize,
-                        fontWeight: prev.fontWeight !== undefined ? prev.fontWeight.combine(current.fontWeight) : current.fontWeight,
-                        container: prev.container !== undefined ?
-                            prev.container.combine(current.container) :
-                            current.container,
-                        imageSize: prev.imageSize !== undefined ? prev.imageSize.combine(current.imageSize) : current.imageSize,
-                        action: prev.action !== undefined ? prev.action.combine(current.action) : current.action,
-                        card: prev.card !== undefined ? prev.card.combine(current.card) : current.card,
-                        imageSet: prev.imageSet !== undefined ? prev.imageSet.combine(current.imageSet) : current.imageSet,
-                        factSet: prev.factSet !== undefined ? prev.factSet.combine(current.factSet) : current.factSet,
-                        media: prev.media !== undefined ? prev.media.combine(current.media) : current.media,
-                        input: prev.input !== undefined ? prev.input.combine(current.input) : current.input,
-                        mode: current.mode !== undefined ? current.mode : prev.mode,
-                    } as HostConfig;
+                    let combined = new HostConfig();
+                    combined.spacing = prev.spacing !== undefined ? prev.spacing.combine(current.spacing) : current.spacing;
+                    combined.separator = prev.separator !== undefined ? prev.separator.combine(current.separator) : current.separator;
+                    combined.supportInteractive = current.supportInteractive !== undefined ?
+                        current.supportInteractive : prev.supportInteractive;
+                    combined.fontFamily = current.fontFamily !== undefined ? current.fontFamily : prev.fontFamily;
+                    combined.fontSize = prev.fontSize !== undefined ? prev.fontSize.combine(current.fontSize) : current.fontSize;
+                    combined.fontWeight = prev.fontWeight !== undefined ? prev.fontWeight.combine(current.fontWeight) : current.fontWeight;
+                    combined.container = prev.container !== undefined ?
+                        prev.container.combine(current.container) :
+                        current.container;
+                    combined.imageSize = prev.imageSize !== undefined ? prev.imageSize.combine(current.imageSize) : current.imageSize;
+                    combined.action = prev.action !== undefined ? prev.action.combine(current.action) : current.action;
+                    combined.card = prev.card !== undefined ? prev.card.combine(current.card) : current.card;
+                    combined.imageSet = prev.imageSet !== undefined ? prev.imageSet.combine(current.imageSet) : current.imageSet;
+                    combined.factSet = prev.factSet !== undefined ? prev.factSet.combine(current.factSet) : current.factSet;
+                    combined.media = prev.media !== undefined ? prev.media.combine(current.media) : current.media;
+                    combined.input = prev.input !== undefined ? prev.input.combine(current.input) : current.input;
+                    combined.mode = current.mode !== undefined ? current.mode : prev.mode;
+                    return combined;
                 }
                 return prev;
             }, this);
