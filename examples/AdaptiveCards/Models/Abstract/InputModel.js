@@ -8,7 +8,7 @@ export class InputModel extends ContentModel {
                 if (this.context && this.context.form) {
                     this.context.form.write({
                         id: this.id,
-                        value: value,
+                        value: this.input,
                         isValid: this.isValueValid(this.input),
                     });
                 }

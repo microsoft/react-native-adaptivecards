@@ -8,6 +8,7 @@ import { ColumnSetModel } from '../../Models/Containers/ColumnSet';
 import { ContainerModel } from '../../Models/Containers/Container';
 import { FactSetModel } from '../../Models/Containers/FactSet';
 import { ImageSetModel } from '../../Models/Containers/ImageSet';
+import { ChoiceSetModel } from '../../Models/Inputs/ChoiceSet';
 import { DateInputModel } from '../../Models/Inputs/DateInput';
 import { NumberInputModel } from '../../Models/Inputs/NumberInput';
 import { PeoplePickerModel } from '../../Models/Inputs/PeoplePicker';
@@ -21,6 +22,7 @@ import { ColumnSetView } from '../Containers/ColumnSet';
 import { ContainerView } from '../Containers/Container';
 import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
+import { ChoiceSetView } from '../Inputs/ChoiceSetInput';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
 import { PeoplePickerView } from '../Inputs/PeoplePicker';
@@ -142,6 +144,15 @@ export class ContentFactory {
                         <TimeInputView
                             key={'TimeInputView' + index}
                             model={model as TimeInputModel}
+                            index={index}
+                            theme={theme}
+                        />
+                    );
+                case ContentType.ChoiceSetInput:
+                    return (
+                        <ChoiceSetView
+                            key={'ChoiceSetView' + index}
+                            model={model as ChoiceSetModel}
                             index={index}
                             theme={theme}
                         />

@@ -8,6 +8,7 @@ import { ColumnSetView } from '../Containers/ColumnSet';
 import { ContainerView } from '../Containers/Container';
 import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
+import { ChoiceSetView } from '../Inputs/ChoiceSetInput';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
 import { PeoplePickerView } from '../Inputs/PeoplePicker';
@@ -52,6 +53,8 @@ export class ContentFactory {
                     return (React.createElement(DateInputView, { key: 'DateInputView' + index, model: model, index: index, theme: theme }));
                 case ContentType.TimeInput:
                     return (React.createElement(TimeInputView, { key: 'TimeInputView' + index, model: model, index: index, theme: theme }));
+                case ContentType.ChoiceSetInput:
+                    return (React.createElement(ChoiceSetView, { key: 'ChoiceSetView' + index, model: model, index: index, theme: theme }));
                 case ContentType.PeoplePicker:
                     return (React.createElement(PeoplePickerView, { key: 'PeoplePickerView' + index, model: model, index: index, theme: theme }));
                 default:

@@ -14,10 +14,9 @@
   ],
   "main": "dist/index",
   "scripts": {
-    "pre-commit": "gulp",
+    "pre-commit": "yarn build",
     "devtools": "react-devtools",
     "build": "gulp",
-    "build-tool": "yarn build && cd tool && yarn build",
     "src": "yarn",
     "example": "cd examples && yarn",
     "tool": "cd tool && yarn",

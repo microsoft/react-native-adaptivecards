@@ -31,67 +31,65 @@ export default class App extends React.Component {
                     padding: 10,
                     backgroundColor: 'white',
                 }}>
-                <AdaptiveCards adaptiveCard={mockData.peoplePicker} onCallback={this.onCallback} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.peoplePicker} onCallback={this.onCallback} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.bingMap} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.bingMap} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.dinning} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.dinning} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.vocabulary} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.vocabulary} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-				<AdaptiveCards adaptiveCard={mockData.fact} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.fact} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.showVideo} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.showVideo} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.weatherCompact} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.weatherCompact} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.heightOfEiffelTower} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={BingAnswer.heightOfEiffelTower} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.highestMountionInTheWorld} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={BingAnswer.highestMountionInTheWorld} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.latestNews} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={BingAnswer.latestNews} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.microsoftStock} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={BingAnswer.microsoftStock} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.showMeFunnyVideo} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={BingAnswer.showMeFunnyVideo} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.timeInLondon} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={BingAnswer.timeInLondon} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.whatIsTheWeather} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={BingAnswer.whatIsTheWeather} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.emailSent} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.emailSent} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.searchEmail} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.searchEmail} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.readEmail} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.readEmail} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.news} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.news} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.adaptiveUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.flightItinerary} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.flightItinerary} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.flightUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.flightUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.foodOrder} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.foodOrder} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.imageGallery} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.imageGallery} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.inputForm} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.inputForm} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.inputs} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.restaurant} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.restaurant} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.solitaire} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.solitaire} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.sportsGameUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.sportsGameUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.stockUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.stockUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
-                {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.weatherLarge} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning}/>
+                <AdaptiveCards adaptiveCard={mockData.weatherLarge} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
             </ScrollView>
         );
     }
