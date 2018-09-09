@@ -1,15 +1,17 @@
 import * as React from 'react';
 import {
     KeyboardTypeOptions,
+    NativeSyntheticEvent,
     ReturnKeyTypeOptions,
     ScrollView,
     StyleProp,
-    Text,
     TextInput,
+    TextInputKeyPressEventData,
     TextStyle,
     View
 } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { Label } from '../Basic/Label';
 import { SeparateLine } from '../Basic/SeparateLine';
 
 interface IProps {
@@ -32,11 +34,13 @@ interface IProps {
     onRequestSuggestion?: (input: string) => void;
     onFocus?: () => void;
     onBlur?: () => void;
+    onLabelRemove?: (index: number) => void;
     validateInput?: (input: string) => boolean;
 }
 
 interface IState {
     focused: boolean;
+    labelFocusIndex: number;
 }
 
 export class LabelInput extends React.Component<IProps, IState> {
@@ -46,16 +50,20 @@ export class LabelInput extends React.Component<IProps, IState> {
 
         this.state = {
             focused: this.props.focused,
+            labelFocusIndex: this.props.labels ? this.props.labels.length : 0
         };
     }
 
     public componentDidUpdate(prevProps: IProps, prevState: IState) {
-        if (!prevState.focused && this.props.focused) {
+        if ((!prevState.focused && this.props.focused) || (prevProps.labels.length !== this.labelLength)) {
             this.setState({
-                focused: true,
+                focused: this.props.focused,
+                labelFocusIndex: this.labelLength
             }, () => {
-                if (this.inputBox) {
-                    this.inputBox.focus();
+                if (this.state.focused) {
+                    if (this.inputBox) {
+                        this.inputBox.focus();
+                    }
                 }
             });
         }
@@ -101,26 +109,18 @@ export class LabelInput extends React.Component<IProps, IState> {
     private renderLabels() {
         if (this.props.labels) {
             return this.props.labels.map((label, index) => {
+                console.log(index, this.props.labels.length, this.state.labelFocusIndex);
                 return (
-                    <Text
+                    <Label
                         key={'Label' + index}
-                        style={{
-                            fontSize: this.fontSize,
-                            fontWeight: this.fontWeight,
-                            color: this.backgroundColor,
-                            backgroundColor: this.color,
-                            paddingTop: this.paddingVertical - 6,
-                            paddingBottom: this.paddingVertical - 6,
-                            borderRadius: 4,
-                            paddingLeft: 6,
-                            paddingRight: 6,
-                            marginTop: 6,
-                            marginBottom: 6,
-                            marginLeft: 6,
-                        }}
+                        index={index}
+                        title={label.title}
+                        focused={index === this.state.labelFocusIndex}
+                        theme={'default'}
+                        onPress={this.onLabelPress}
                     >
                         {label.title}
-                    </Text>
+                    </Label>
                 );
             });
         }
@@ -160,6 +160,7 @@ export class LabelInput extends React.Component<IProps, IState> {
                 onChangeText={this.onValueChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
+                onKeyPress={this.onKeyPress}
             />
         );
     }
@@ -186,6 +187,39 @@ export class LabelInput extends React.Component<IProps, IState> {
     private onValueChange = (value: string) => {
         if (this.props.onRequestSuggestion) {
             this.props.onRequestSuggestion(value);
+        }
+    }
+
+    private onLabelPress = (index: number) => {
+        if (index !== undefined) {
+            if (index === this.state.labelFocusIndex) {
+                this.setState({
+                    labelFocusIndex: this.labelLength,
+                });
+            } else {
+                this.setState({
+                    labelFocusIndex: index
+                });
+            }
+        }
+    }
+
+    private onKeyPress = (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
+        console.log(e.nativeEvent.key, this.props.labels.length, this.state.labelFocusIndex);
+        if (e.nativeEvent.key === 'Backspace') {
+            if (this.props.value === '') {
+                if (this.labelLength === this.state.labelFocusIndex) {
+                    if (this.state.labelFocusIndex > 0) {
+                        this.setState({
+                            labelFocusIndex: this.state.labelFocusIndex - 1
+                        });
+                    }
+                } else {
+                    if (this.props.onLabelRemove) {
+                        this.props.onLabelRemove(this.state.labelFocusIndex);
+                    }
+                }
+            }
         }
     }
 
@@ -218,6 +252,10 @@ export class LabelInput extends React.Component<IProps, IState> {
         }
     }
 
+    private get labelLength() {
+        return this.props.labels ? this.props.labels.length : 0;
+    }
+
     private get isMultiLine() {
         return this.props.numberOfLines && this.props.numberOfLines > 1;
     }
@@ -233,7 +271,7 @@ export class LabelInput extends React.Component<IProps, IState> {
     private get lineHeight() {
         return this.fontSize * 1.2;
     }
-    
+
     private get height() {
         return this.lineHeight + this.paddingVertical * 2 + 2;
     }

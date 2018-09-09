@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { ScrollView, Text, TextInput, View } from 'react-native';
+import { ScrollView, TextInput, View } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { Label } from '../Basic/Label';
 import { SeparateLine } from '../Basic/SeparateLine';
 export class LabelInput extends React.Component {
     constructor(props) {
@@ -8,6 +9,39 @@ export class LabelInput extends React.Component {
         this.onValueChange = (value) => {
             if (this.props.onRequestSuggestion) {
                 this.props.onRequestSuggestion(value);
+            }
+        };
+        this.onLabelPress = (index) => {
+            if (index !== undefined) {
+                if (index === this.state.labelFocusIndex) {
+                    this.setState({
+                        labelFocusIndex: this.labelLength,
+                    });
+                }
+                else {
+                    this.setState({
+                        labelFocusIndex: index
+                    });
+                }
+            }
+        };
+        this.onKeyPress = (e) => {
+            console.log(e.nativeEvent.key, this.props.labels.length, this.state.labelFocusIndex);
+            if (e.nativeEvent.key === 'Backspace') {
+                if (this.props.value === '') {
+                    if (this.labelLength === this.state.labelFocusIndex) {
+                        if (this.state.labelFocusIndex > 0) {
+                            this.setState({
+                                labelFocusIndex: this.state.labelFocusIndex - 1
+                            });
+                        }
+                    }
+                    else {
+                        if (this.props.onLabelRemove) {
+                            this.props.onLabelRemove(this.state.labelFocusIndex);
+                        }
+                    }
+                }
             }
         };
         this.onBlur = () => {
@@ -29,15 +63,19 @@ export class LabelInput extends React.Component {
         };
         this.state = {
             focused: this.props.focused,
+            labelFocusIndex: this.props.labels ? this.props.labels.length : 0
         };
     }
     componentDidUpdate(prevProps, prevState) {
-        if (!prevState.focused && this.props.focused) {
+        if ((!prevState.focused && this.props.focused) || (prevProps.labels.length !== this.labelLength)) {
             this.setState({
-                focused: true,
+                focused: this.props.focused,
+                labelFocusIndex: this.labelLength
             }, () => {
-                if (this.inputBox) {
-                    this.inputBox.focus();
+                if (this.state.focused) {
+                    if (this.inputBox) {
+                        this.inputBox.focus();
+                    }
                 }
             });
         }
@@ -70,20 +108,8 @@ export class LabelInput extends React.Component {
     renderLabels() {
         if (this.props.labels) {
             return this.props.labels.map((label, index) => {
-                return (React.createElement(Text, { key: 'Label' + index, style: {
-                        fontSize: this.fontSize,
-                        fontWeight: this.fontWeight,
-                        color: this.backgroundColor,
-                        backgroundColor: this.color,
-                        paddingTop: this.paddingVertical - 6,
-                        paddingBottom: this.paddingVertical - 6,
-                        borderRadius: 4,
-                        paddingLeft: 6,
-                        paddingRight: 6,
-                        marginTop: 6,
-                        marginBottom: 6,
-                        marginLeft: 6,
-                    } }, label.title));
+                console.log(index, this.props.labels.length, this.state.labelFocusIndex);
+                return (React.createElement(Label, { key: 'Label' + index, index: index, title: label.title, focused: index === this.state.labelFocusIndex, theme: 'default', onPress: this.onLabelPress }, label.title));
             });
         }
         return undefined;
@@ -105,7 +131,7 @@ export class LabelInput extends React.Component {
                     paddingLeft: this.paddingHorizontal,
                 },
                 this.props.style
-            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur }));
+            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
     }
     renderSuggestions() {
         if (this.props.suggestionView) {
@@ -127,6 +153,9 @@ export class LabelInput extends React.Component {
                 console.log('Input: invalid');
             }
         }
+    }
+    get labelLength() {
+        return this.props.labels ? this.props.labels.length : 0;
     }
     get isMultiLine() {
         return this.props.numberOfLines && this.props.numberOfLines > 1;

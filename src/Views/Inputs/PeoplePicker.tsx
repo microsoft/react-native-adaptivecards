@@ -2,6 +2,7 @@ import * as React from 'react';
 import { LabelInput } from '../../Components/Inputs/LabelInput';
 import { CardModel } from '../../Models/Cards/Card';
 import { PeoplePickerModel } from '../../Models/Inputs/PeoplePicker';
+import { NumberUtils } from '../../Utils/NumberUtils';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
@@ -70,8 +71,15 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                 onRequestSuggestion={this.onRequestSuggestion}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
+                onLabelRemove={this.onContactLabelRemove}
             />
         );
+    }
+
+    private onContactLabelRemove = (index: number) => {
+        if (this.state.selected && NumberUtils.isInRange(index, 0, this.state.selected.length - 1)) {
+            this.props.model.onRemoveContact(this.state.selected[index].Address);
+        }
     }
 
     private onBlur = () => {
@@ -126,6 +134,7 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
         console.log(value);
         this.setState({
             selected: JSON.parse(value),
+            value: '',
         });
     }
 

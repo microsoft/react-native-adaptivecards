@@ -1,10 +1,16 @@
 import * as React from 'react';
 import { LabelInput } from '../../Components/Inputs/LabelInput';
+import { NumberUtils } from '../../Utils/NumberUtils';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class PeoplePickerView extends React.Component {
     constructor(props) {
         super(props);
+        this.onContactLabelRemove = (index) => {
+            if (this.state.selected && NumberUtils.isInRange(index, 0, this.state.selected.length - 1)) {
+                this.props.model.onRemoveContact(this.state.selected[index].Address);
+            }
+        };
         this.onBlur = () => {
             this.setState({
                 inputFocused: false
@@ -50,6 +56,7 @@ export class PeoplePickerView extends React.Component {
             console.log(value);
             this.setState({
                 selected: JSON.parse(value),
+                value: '',
             });
         };
         const { model } = this.props;
@@ -80,7 +87,7 @@ export class PeoplePickerView extends React.Component {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
         }
-        return (React.createElement(LabelInput, { placeholder: model.placeholder, value: this.state.value, focused: this.state.inputFocused, labels: this.labels, suggestionView: ContentFactory.createElement(this.state.suggestionCard, 0, theme), onRequestSuggestion: this.onRequestSuggestion, onFocus: this.onFocus, onBlur: this.onBlur }));
+        return (React.createElement(LabelInput, { placeholder: model.placeholder, value: this.state.value, focused: this.state.inputFocused, labels: this.labels, suggestionView: ContentFactory.createElement(this.state.suggestionCard, 0, theme), onRequestSuggestion: this.onRequestSuggestion, onFocus: this.onFocus, onBlur: this.onBlur, onLabelRemove: this.onContactLabelRemove }));
     }
     get labels() {
         return this.state.selected.map((contact) => {

@@ -42,6 +42,24 @@ export class PeoplePickerModel extends InputModel {
         }
     }
 
+    public onRemoveContact = (address: String) => {
+        let field = this.context.form.read(this.id);
+        if (field) {
+            let currentValue = JSON.parse(field.value) as Array<any>;
+            if (currentValue) {
+                let index = currentValue.findIndex(v => v.Address === address);
+                if (index >= 0) {
+                    currentValue.splice(index, 1);
+                    this.context.form.write({
+                        id: this.id,
+                        value: JSON.stringify(currentValue),
+                        isValid: true,
+                    });
+                }
+            }
+        }
+    }
+
     public onSuggestionSelect = (data: any) => {
         console.log('Select Action >>', data, '>>', this.context.form);
         if (this.context && this.context.form) {
@@ -49,7 +67,7 @@ export class PeoplePickerModel extends InputModel {
             if (field) {
                 let currentValue = JSON.parse(field.value) as Array<any>;
                 if (currentValue) {
-                    if (data) {
+                    if (data && currentValue.findIndex(v => v.Address === data.Address) < 0) {
                         currentValue.push(data);
                         this.context.form.write({
                             id: this.id,
