@@ -4,6 +4,7 @@ export class AbstractModel extends TreeNode {
     constructor(json, parent, context) {
         super(parent);
         this.context = context;
+        this.rawData = json;
         this.type = json.type || this.type;
         this.schemaCheckResult = this.shallowCheckSchema(json);
         if (this.context) {

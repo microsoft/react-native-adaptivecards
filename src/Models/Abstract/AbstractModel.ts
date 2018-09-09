@@ -4,6 +4,7 @@ import { TreeNode } from '../../Shared/Types';
 
 export abstract class AbstractModel extends TreeNode<AbstractModel> {
     public readonly type: string;
+    public readonly rawData: any;
     public context: CardContext;
     protected schemaCheckResult: SchemaResult;
 
@@ -11,6 +12,7 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
         super(parent);
 
         this.context = context;
+        this.rawData = json;
 
         this.type = json.type || this.type;
 
