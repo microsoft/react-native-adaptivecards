@@ -66,7 +66,7 @@ export class PeoplePickerView extends React.Component {
             this.state = {
                 value: '',
                 inputFocused: false,
-                selected: [],
+                selected: JSON.parse(model.selected),
                 suggestionCard: undefined,
             };
         }

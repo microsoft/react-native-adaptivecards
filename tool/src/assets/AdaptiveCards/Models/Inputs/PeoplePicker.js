@@ -68,11 +68,12 @@ export class PeoplePickerModel extends InputModel {
         };
         this.callback = new CallbackActionModel(json.callback, this, this.context);
         this.placeholder = json.placeholder;
+        this.selected = this.value || JSON.stringify([]);
         if (this.context.form) {
             this.context.form.registerListener(this.id, this.storeListener);
             this.context.form.write({
                 id: this.id,
-                value: this.value || JSON.stringify([]),
+                value: this.selected,
                 isValid: true
             });
         }
