@@ -39,6 +39,6 @@ export class BackgroundImageView extends React.Component {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.url + ' is not valid', theme, 'error');
         }
-        return (React.createElement(ImageBackground, { url: model.url, flex: 1, onLoad: this.onImageLoad, onError: this.onError }, this.props.children));
+        return (React.createElement(ImageBackground, { url: model.url, flex: 1, resizeMode: model.mode, onLoad: this.onImageLoad, onError: this.onError }, this.props.children));
     }
 }
