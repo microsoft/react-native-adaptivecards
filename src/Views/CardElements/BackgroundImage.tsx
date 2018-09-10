@@ -34,6 +34,7 @@ export class BackgroundImageView extends React.Component<IProps> {
             <ImageBackground
                 url={model.url}
                 flex={1}
+                resizeMode={model.mode}
                 onLoad={this.onImageLoad}
                 onError={this.onError}
             >
