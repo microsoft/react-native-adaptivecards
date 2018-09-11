@@ -1,10 +1,13 @@
 import * as React from 'react';
-import { Modal, TouchableWithoutFeedback, View } from 'react-native';
+import { Modal, Platform, TouchableWithoutFeedback, View } from 'react-native';
 export class ModalBox extends React.Component {
     constructor(props) {
         super(props);
     }
     render() {
+        if (Platform.OS === 'web') {
+            return undefined;
+        }
         return (React.createElement(Modal, { visible: this.props.show, animationType: 'fade', transparent: true, onRequestClose: this.props.onRequestClose },
             React.createElement(TouchableWithoutFeedback, { onPress: this.props.onPressBackground },
                 React.createElement(View, { style: [
