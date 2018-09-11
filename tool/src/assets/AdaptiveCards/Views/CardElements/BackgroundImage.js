@@ -9,7 +9,7 @@ export class BackgroundImageView extends React.Component {
             if (model && model.context) {
                 let handler = model.context.infoHandler;
                 if (handler) {
-                    handler(data);
+                    handler(`AdaptiveCard >> Image Load Success >> ${model.url}`);
                 }
             }
         };

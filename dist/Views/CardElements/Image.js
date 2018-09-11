@@ -26,12 +26,12 @@ export class ImageView extends React.Component {
                 });
             }
         };
-        this.onImageLoad = (data) => {
+        this.onImageLoad = () => {
             const { model } = this.props;
             if (model && model.context) {
                 let handler = model.context.infoHandler;
                 if (handler) {
-                    handler(data);
+                    handler(`AdaptiveCard >> Image Load Success >> ${model.url}`);
                 }
             }
         };

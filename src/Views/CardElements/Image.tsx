@@ -110,12 +110,12 @@ export class ImageView extends React.Component<IProps, IState> {
         }
     }
 
-    private onImageLoad = (data: any) => {
+    private onImageLoad = () => {
         const { model } = this.props;
         if (model && model.context) {
             let handler = model.context.infoHandler;
             if (handler) {
-                handler(data);
+                handler(`AdaptiveCard >> Image Load Success >> ${model.url}`);
             }
         }
     }
