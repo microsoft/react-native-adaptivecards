@@ -13,8 +13,18 @@ export class ImageBackground extends React.Component {
                 this.props.onError(error);
             }
         };
+        this.onLayout = (event) => {
+            let width = event.nativeEvent.layout.width;
+            let height = event.nativeEvent.layout.height;
+            if (width > 0 && height > 0) {
+                this.setState({
+                    containerRatio: width / height,
+                });
+            }
+        };
         this.state = {
-            ratio: 1,
+            containerRatio: 1,
+            imgRatio: 1,
         };
     }
     componentDidMount() {
@@ -23,11 +33,11 @@ export class ImageBackground extends React.Component {
             Image.getSize(url, (width, height) => {
                 if (width > 0 && height > 0) {
                     this.setState({
-                        ratio: width / height,
+                        imgRatio: width / height,
                     });
                 }
             }, (error) => {
-                this.props.onError(error);
+                this.onError(error);
             });
         }
     }
@@ -45,7 +55,7 @@ export class ImageBackground extends React.Component {
                     paddingBottom: this.props.paddingBottom,
                     paddingLeft: this.props.paddingLeft
                 }, this.props.containerStyle
-            ] },
+            ], onLayout: this.onLayout },
             React.createElement(Image, { source: { uri: this.props.url }, style: [
                     StyleSheet.absoluteFill,
                     this.props.imageStyle
@@ -58,7 +68,7 @@ export class ImageBackground extends React.Component {
                 return 'repeat';
             case 'stretch':
             default:
-                if (this.state.ratio > 1) {
+                if (this.state.imgRatio > this.state.containerRatio) {
                     return 'contain';
                 }
                 else {

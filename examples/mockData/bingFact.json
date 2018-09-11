@@ -1,0 +1,67 @@
+{
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "height": "stretch",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "2",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "size": "small",
+                            "isSubtle": true,
+                            "text": "United States · 成立日期",
+                            "wrap": true
+                        },
+                        {
+                            "type": "Container",
+                            "height": "stretch",
+                            "items": []
+                        },
+                        {
+                            "type": "TextBlock",
+                            "size": "large",
+                            "weight": "bolder",
+                            "text": "Jul 4, 1776",
+                            "wrap": true,
+                            "maxLines": 2,
+                            "textStyle": "display"
+                        },
+                        {
+                            "type": "Container",
+                            "height": "stretch",
+                            "items": []
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "backgroundImage": {
+                        "type": "BackgroundImage",
+                        "mode": "stretch",
+                        "url": "https://www.bing.com/th?id=AMMS_ae5846a10190e76d928e9b9b3dfb9833",
+                        "horizontalAlignment": "center"
+                    },
+                    "width": "1",
+                    "items": [],
+                    "spacing": "padding"
+                }
+            ],
+            "selectAction": {
+                "type": "Action.OpenUrl",
+                "url": "https://www.bing.com/search?q=When+is+USA+founded&elv=AXXfrEiqqD9r3GuelwApuloujdgjdAymapdCEmHlXR2jJ6MT!YffY0lUXFpOj6OorD8xpjmZGNyPKIJ90TG*oxhJaE88MKA28yu2D2NbehOy",
+                "title": "Open In Bing"
+            }
+        }
+    ],
+    "-ms-attribution": {
+        "text": "Bing",
+        "icon": "https://www.bing.com/rms/rms%20answers%20Api%20BingLogo/ic/ef0cff20/d50405d4.png"
+    },
+    "-ms-source": "Bing",
+    "-ms-height": "fixed"
+}

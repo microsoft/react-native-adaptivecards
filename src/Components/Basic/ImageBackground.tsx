@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Image,
     ImageStyle,
+    LayoutChangeEvent,
     StyleProp,
     StyleSheet,
     View,
@@ -27,7 +28,8 @@ interface IProps {
 }
 
 interface IState {
-    ratio: number;
+    containerRatio: number;
+    imgRatio: number;
 }
 
 export class ImageBackground extends React.Component<IProps, IState> {
@@ -35,7 +37,8 @@ export class ImageBackground extends React.Component<IProps, IState> {
         super(props);
 
         this.state = {
-            ratio: 1,
+            containerRatio: 1,
+            imgRatio: 1,
         };
     }
 
@@ -48,12 +51,12 @@ export class ImageBackground extends React.Component<IProps, IState> {
                 (width, height) => {
                     if (width > 0 && height > 0) {
                         this.setState({
-                            ratio: width / height,
+                            imgRatio: width / height,
                         });
                     }
                 },
                 (error) => {
-                    this.props.onError(error);
+                    this.onError(error);
                 }
             );
         }
@@ -76,6 +79,7 @@ export class ImageBackground extends React.Component<IProps, IState> {
                         paddingLeft: this.props.paddingLeft
                     }, this.props.containerStyle
                 ]}
+                onLayout={this.onLayout}
             >
                 <Image
                     source={{ uri: this.props.url }}
@@ -111,11 +115,22 @@ export class ImageBackground extends React.Component<IProps, IState> {
                 return 'repeat';
             case 'stretch':
             default:
-                if (this.state.ratio > 1) {
+                if (this.state.imgRatio > this.state.containerRatio) {
                     return 'contain';
                 } else {
                     return 'cover';
                 }
+        }
+    }
+
+    private onLayout = (event: LayoutChangeEvent) => {
+        let width = event.nativeEvent.layout.width;
+        let height = event.nativeEvent.layout.height;
+
+        if (width > 0 && height > 0) {
+            this.setState({
+                containerRatio: width / height,
+            });
         }
     }
 }

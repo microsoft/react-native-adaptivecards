@@ -35,6 +35,8 @@ export default class App extends React.Component {
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.bingMap} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
+                <AdaptiveCards adaptiveCard={mockData.bingFact} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
+                {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.dinning} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.vocabulary} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />

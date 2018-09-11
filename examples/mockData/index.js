@@ -26,6 +26,7 @@ var fact = require('./fact.json');
 var vocabulary = require('./vocabulary.json');
 var dinning = require('./dinning.json');
 var bingMap = require('./bingMap.json');
+var bingFact = require('./bingFact.json');
 
 exports["default"] = {
     adaptiveUpdate: adaptiveUpdate,
@@ -54,4 +55,5 @@ exports["default"] = {
     dinning: dinning,
     bingMap: bingMap,
     peopleSuggestion: peopleSuggestion,
+    bingFact: bingFact,
 };
