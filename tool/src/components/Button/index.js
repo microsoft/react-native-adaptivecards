@@ -15,7 +15,7 @@ class Button extends React.Component {
     }
 
     render() {
-        const className = 'button' + (this.props.name === this.props.mode ? ' active' : '');
+        const className = 'button' + (this.props.name === this.props.mode ? ' active ' : ' ') + this.props.additionalClass;
         return (
             <div className={className} onClick={this.handleClick} >{this.props.desc}</div>
         )
@@ -27,10 +27,12 @@ Button.propTypes = {
     name: PropTypes.string,
     mode: PropTypes.string,
     clickHandler: PropTypes.func,
+    additionalClass: PropTypes.string,
 };
 
 Button.defaultProps = {
-    desc: 'button'
+    desc: 'button',
+    additionalClass: '',
 };
 
 const mapStateToProps = (state) => {
