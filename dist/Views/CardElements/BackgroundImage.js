@@ -18,7 +18,7 @@ export class BackgroundImageView extends React.Component {
             if (model && model.context) {
                 let handler = model.context.errorHandler;
                 if (handler) {
-                    handler(error);
+                    handler(`AdaptiveCard >> Image Load Failed >> ${error.message}`);
                 }
             }
         };

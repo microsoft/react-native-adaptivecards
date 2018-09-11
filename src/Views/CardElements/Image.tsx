@@ -136,7 +136,7 @@ export class ImageView extends React.Component<IProps, IState> {
             if (model && model.context) {
                 let handler = model.context.errorHandler;
                 if (handler) {
-                    handler(error);
+                    handler(`AdaptiveCard >> Image Load Failed >> ${error.message}`);
                 }
             }
         });
