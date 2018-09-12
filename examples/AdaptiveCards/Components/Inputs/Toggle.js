@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { Switch, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 export class Toggle extends React.Component {
     constructor() {
@@ -32,22 +31,15 @@ export class Toggle extends React.Component {
                         flexWrap: StyleManager.getWrap(true),
                         paddingRight: 16,
                     } }, this.props.title),
-                React.createElement(Icon, { name: this.radioIcon, size: 24, color: this.radioColor, style: {
-                        paddingTop: 4,
-                    } }))));
+                React.createElement(Switch, { onTintColor: this.switchOnColor, tintColor: this.switchOffColor, value: this.props.checked, onValueChange: this.onClick }))));
     }
     get color() {
         return StyleManager.getCheckboxTitleColor(this.props.theme);
     }
-    get radioColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
+    get switchOffColor() {
+        return StyleManager.getCheckboxBoxColor(this.props.theme, false);
     }
-    get radioIcon() {
-        if (this.props.checked) {
-            return 'toggle-on';
-        }
-        else {
-            return 'toggle-off';
-        }
+    get switchOnColor() {
+        return StyleManager.getCheckboxBoxColor(this.props.theme, true);
     }
 }

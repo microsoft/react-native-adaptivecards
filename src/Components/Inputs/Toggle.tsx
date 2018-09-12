@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {
+    Switch,
     Text,
     TouchableWithoutFeedback,
     View
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps<T> {
@@ -47,13 +47,11 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                     >
                         {this.props.title}
                     </Text>
-                    <Icon
-                        name={this.radioIcon}
-                        size={24}
-                        color={this.radioColor}
-                        style={{
-                            paddingTop: 4,
-                        }}
+                    <Switch
+                        onTintColor={this.switchOnColor}
+                        tintColor={this.switchOffColor}
+                        value={this.props.checked}
+                        onValueChange={this.onClick}
                     />
                 </View>
             </TouchableWithoutFeedback>
@@ -70,15 +68,11 @@ export class Toggle<T> extends React.Component<IProps<T>> {
         return StyleManager.getCheckboxTitleColor(this.props.theme);
     }
 
-    private get radioColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
+    private get switchOffColor() {
+        return StyleManager.getCheckboxBoxColor(this.props.theme, false);
     }
 
-    private get radioIcon() {
-        if (this.props.checked) {
-            return 'toggle-on';
-        } else {
-            return 'toggle-off';
-        }
+    private get switchOnColor() {
+        return StyleManager.getCheckboxBoxColor(this.props.theme, true);
     }
 }

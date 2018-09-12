@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleManager } from '../../Styles/StyleManager';
 export class Checkbox extends React.Component {
     constructor() {
@@ -45,10 +45,10 @@ export class Checkbox extends React.Component {
     }
     get radioIcon() {
         if (this.props.checked) {
-            return 'checkbox-marked';
+            return 'check-box';
         }
         else {
-            return 'checkbox-blank-outline';
+            return 'check-box-outline-blank';
         }
     }
 }

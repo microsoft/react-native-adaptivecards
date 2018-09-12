@@ -5,7 +5,7 @@ import {
     View
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps<T> {
@@ -77,9 +77,9 @@ export class Checkbox<T> extends React.Component<IProps<T>> {
 
     private get radioIcon() {
         if (this.props.checked) {
-            return 'checkbox-marked';
+            return 'check-box';
         } else {
-            return 'checkbox-blank-outline';
+            return 'check-box-outline-blank';
         }
     }
 }
