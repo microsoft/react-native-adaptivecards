@@ -150,10 +150,30 @@
         "emphasis": {
             "color": "#000000",
             "focusColor": "#000000",
-            "backgroundColor": "#FFFFFF",
+            "backgroundColor": "#F3F3F3",
             "focusBackgroundColor": "#FFFFFF",
-            "borderColor": "#FFFFFF",
+            "borderColor": "#F3F3F3",
             "focusBorderColor": "#006ae2"
+        }
+    },
+    "checkbox": {
+        "default": {
+            "title": {
+                "color": "#000000"
+            },
+            "box": {
+                "checked": "#006ae2",
+                "unchecked": "#d3d3d3"
+            }
+        },
+        "emphasis": {
+            "title": {
+                "color": "#000000"
+            },
+            "box": {
+                "checked": "#006ae2",
+                "unchecked": "#d3d3d3"
+            }
         }
     }
 }

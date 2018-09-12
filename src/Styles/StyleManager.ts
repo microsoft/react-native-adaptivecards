@@ -167,6 +167,28 @@ export class StyleManager {
         return themeConfig.focusBorderColor;
     }
 
+    public static getCheckboxTitleColor(theme: 'default' | 'emphasis') {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.checkbox[theme];
+        if (!themeConfig) {
+            themeConfig = config.checkbox.default;
+        }
+        return themeConfig.title.color;
+    }
+
+    public static getCheckboxBoxColor(theme: 'default' | 'emphasis', focused: boolean) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.checkbox[theme];
+        if (!themeConfig) {
+            themeConfig = config.checkbox.default;
+        }
+        if (focused) {
+            return themeConfig.box.checked;
+        } else {
+            return themeConfig.box.unchecked;
+        }
+    }
+
     public static get inSetImageSize() {
         return HostContext.getInstance().getConfig().imageSet.imageSize;
     }

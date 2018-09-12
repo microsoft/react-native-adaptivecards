@@ -147,6 +147,27 @@ export class StyleManager {
         }
         return themeConfig.focusBorderColor;
     }
+    static getCheckboxTitleColor(theme) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.checkbox[theme];
+        if (!themeConfig) {
+            themeConfig = config.checkbox.default;
+        }
+        return themeConfig.title.color;
+    }
+    static getCheckboxBoxColor(theme, focused) {
+        let config = HostContext.getInstance().getConfig();
+        let themeConfig = config.checkbox[theme];
+        if (!themeConfig) {
+            themeConfig = config.checkbox.default;
+        }
+        if (focused) {
+            return themeConfig.box.checked;
+        }
+        else {
+            return themeConfig.box.unchecked;
+        }
+    }
     static get inSetImageSize() {
         return HostContext.getInstance().getConfig().imageSet.imageSize;
     }

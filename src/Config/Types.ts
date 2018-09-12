@@ -592,6 +592,111 @@ export class InputConfig {
     }
 }
 
+export class CheckboxColorConfig {
+    public checked: string;
+    public unchecked: string;
+
+    constructor(json?: any) {
+        if (json) {
+            this.checked = json['checked'];
+            this.unchecked = json['unchecked'];
+        }
+    }
+
+    public combine(...args: CheckboxColorConfig[]): CheckboxColorConfig {
+        if (args) {
+            return args.reduce((prev, current) => {
+                if (current) {
+                    let combined = new CheckboxColorConfig();
+                    combined.unchecked = current.unchecked !== undefined ? current.unchecked : prev.unchecked;
+                    combined.checked = current.checked !== undefined ? current.checked : prev.checked;
+                    return combined;
+                }
+                return prev;
+            }, this);
+        }
+        return this;
+    }
+}
+
+export class CheckboxTitleConfig {
+    public color: string;
+
+    constructor(json?: any) {
+        if (json) {
+            this.color = json['color'];
+        }
+    }
+
+    public combine(...args: CheckboxTitleConfig[]): CheckboxTitleConfig {
+        if (args) {
+            return args.reduce((prev, current) => {
+                if (current) {
+                    let combined = new CheckboxTitleConfig();
+                    combined.color = current.color !== undefined ? current.color : prev.color;
+                    return combined;
+                }
+                return prev;
+            }, this);
+        }
+        return this;
+    }
+}
+
+export class CheckboxThemeConfig {
+    public title: CheckboxTitleConfig;
+    public box: CheckboxColorConfig;
+
+    constructor(json?: any) {
+        if (json) {
+            this.title = new CheckboxTitleConfig(json['title']);
+            this.box = new CheckboxColorConfig(json['box']);
+        }
+    }
+
+    public combine(...args: CheckboxThemeConfig[]): CheckboxThemeConfig {
+        if (args) {
+            return args.reduce((prev, current) => {
+                if (current) {
+                    let combined = new CheckboxThemeConfig();
+                    combined.title = prev.title !== undefined ? prev.title.combine(current.title) : current.title;
+                    combined.box = prev.box !== undefined ? prev.box.combine(current.box) : current.box;
+                    return combined;
+                }
+                return prev;
+            }, this);
+        }
+        return this;
+    }
+}
+
+export class CheckboxConfig {
+    public default: CheckboxThemeConfig;
+    public emphasis: CheckboxThemeConfig;
+
+    constructor(json?: any) {
+        if (json) {
+            this.default = new CheckboxThemeConfig(json['default']);
+            this.emphasis = new CheckboxThemeConfig(json['emphasis']);
+        }
+    }
+
+    public combine(...args: CheckboxConfig[]): CheckboxConfig {
+        if (args) {
+            return args.reduce((prev, current) => {
+                if (current) {
+                    let combined = new CheckboxConfig();
+                    combined.default = prev.default !== undefined ? prev.default.combine(current.default) : current.default;
+                    combined.emphasis = prev.emphasis !== undefined ? prev.emphasis.combine(current.emphasis) : current.emphasis;
+                    return combined;
+                }
+                return prev;
+            }, this);
+        }
+        return this;
+    }
+}
+
 export class MediaConfig {
     public defaultPosterUrl: string;
     public playButtonUrl: string;
@@ -634,6 +739,7 @@ export class HostConfig {
     public factSet: FactSetConfig;
     public media: MediaConfig;
     public input: InputConfig;
+    public checkbox: CheckboxConfig;
     public mode: 'release' | 'debug';
 
     constructor(json?: any) {
@@ -652,6 +758,7 @@ export class HostConfig {
             this.factSet = new FactSetConfig(json['factSet']);
             this.media = new MediaConfig(json['media']);
             this.input = new InputConfig(json['input']);
+            this.checkbox = new CheckboxConfig(json['checkbox']);
             this.mode = json['mode'];
         }
     }
@@ -678,6 +785,7 @@ export class HostConfig {
                     combined.factSet = prev.factSet !== undefined ? prev.factSet.combine(current.factSet) : current.factSet;
                     combined.media = prev.media !== undefined ? prev.media.combine(current.media) : current.media;
                     combined.input = prev.input !== undefined ? prev.input.combine(current.input) : current.input;
+                    combined.checkbox = prev.checkbox !== undefined ? prev.checkbox.combine(current.checkbox) : current.checkbox;
                     combined.mode = current.mode !== undefined ? current.mode : prev.mode;
                     return combined;
                 }

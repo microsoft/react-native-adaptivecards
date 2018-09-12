@@ -29,27 +29,29 @@ export class Toggle extends React.Component<IProps> {
                             alignContent: 'center',
                             alignItems: 'center',
                             alignSelf: 'stretch',
+                            paddingTop: 18,
                         }
                     ]}
                 >
-                    <Icon
-                        name={this.radioIcon}
-                        size={24}
-                        color={this.radioColor}
-                    />
                     <Text
                         style={{
                             color: this.color,
                             fontSize: StyleManager.getFontSize('default'),
                             fontWeight: StyleManager.getFontWeight('default'),
                             textAlign: StyleManager.getTextAlign('left'),
-                            flexWrap: StyleManager.getWrap(false),
-                            paddingLeft: 12,
-                            paddingRight: 12,
+                            width: 0,
+                            flex: 1,
+                            flexWrap: StyleManager.getWrap(true),
+                            paddingRight: 16,
                         }}
                     >
                         {this.props.title}
                     </Text>
+                    <Icon
+                        name={this.radioIcon}
+                        size={24}
+                        color={this.radioColor}
+                    />
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -62,15 +64,11 @@ export class Toggle extends React.Component<IProps> {
     }
 
     private get color() {
-        return StyleManager.getColor('default', this.props.theme, false);
+        return StyleManager.getCheckboxTitleColor(this.props.theme);
     }
 
     private get radioColor() {
-        if (this.props.checked) {
-            return StyleManager.getColor('accent', this.props.theme, false);
-        } else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
-        }
+        return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
     }
 
     private get radioIcon() {

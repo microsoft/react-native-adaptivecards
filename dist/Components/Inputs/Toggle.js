@@ -19,29 +19,26 @@ export class Toggle extends React.Component {
                         alignContent: 'center',
                         alignItems: 'center',
                         alignSelf: 'stretch',
+                        paddingTop: 18,
                     }
                 ] },
-                React.createElement(Icon, { name: this.radioIcon, size: 24, color: this.radioColor }),
                 React.createElement(Text, { style: {
                         color: this.color,
                         fontSize: StyleManager.getFontSize('default'),
                         fontWeight: StyleManager.getFontWeight('default'),
                         textAlign: StyleManager.getTextAlign('left'),
-                        flexWrap: StyleManager.getWrap(false),
-                        paddingLeft: 12,
-                        paddingRight: 12,
-                    } }, this.props.title))));
+                        width: 0,
+                        flex: 1,
+                        flexWrap: StyleManager.getWrap(true),
+                        paddingRight: 16,
+                    } }, this.props.title),
+                React.createElement(Icon, { name: this.radioIcon, size: 24, color: this.radioColor }))));
     }
     get color() {
-        return StyleManager.getColor('default', this.props.theme, false);
+        return StyleManager.getCheckboxTitleColor(this.props.theme);
     }
     get radioColor() {
-        if (this.props.checked) {
-            return StyleManager.getColor('accent', this.props.theme, false);
-        }
-        else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
-        }
+        return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
     }
     get radioIcon() {
         if (this.props.checked) {

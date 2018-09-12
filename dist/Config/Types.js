@@ -464,6 +464,92 @@ export class InputConfig {
         return this;
     }
 }
+export class CheckboxColorConfig {
+    constructor(json) {
+        if (json) {
+            this.checked = json['checked'];
+            this.unchecked = json['unchecked'];
+        }
+    }
+    combine(...args) {
+        if (args) {
+            return args.reduce((prev, current) => {
+                if (current) {
+                    let combined = new CheckboxColorConfig();
+                    combined.unchecked = current.unchecked !== undefined ? current.unchecked : prev.unchecked;
+                    combined.checked = current.checked !== undefined ? current.checked : prev.checked;
+                    return combined;
+                }
+                return prev;
+            }, this);
+        }
+        return this;
+    }
+}
+export class CheckboxTitleConfig {
+    constructor(json) {
+        if (json) {
+            this.color = json['color'];
+        }
+    }
+    combine(...args) {
+        if (args) {
+            return args.reduce((prev, current) => {
+                if (current) {
+                    let combined = new CheckboxTitleConfig();
+                    combined.color = current.color !== undefined ? current.color : prev.color;
+                    return combined;
+                }
+                return prev;
+            }, this);
+        }
+        return this;
+    }
+}
+export class CheckboxThemeConfig {
+    constructor(json) {
+        if (json) {
+            this.title = new CheckboxTitleConfig(json['title']);
+            this.box = new CheckboxColorConfig(json['box']);
+        }
+    }
+    combine(...args) {
+        if (args) {
+            return args.reduce((prev, current) => {
+                if (current) {
+                    let combined = new CheckboxThemeConfig();
+                    combined.title = prev.title !== undefined ? prev.title.combine(current.title) : current.title;
+                    combined.box = prev.box !== undefined ? prev.box.combine(current.box) : current.box;
+                    return combined;
+                }
+                return prev;
+            }, this);
+        }
+        return this;
+    }
+}
+export class CheckboxConfig {
+    constructor(json) {
+        if (json) {
+            this.default = new CheckboxThemeConfig(json['default']);
+            this.emphasis = new CheckboxThemeConfig(json['emphasis']);
+        }
+    }
+    combine(...args) {
+        if (args) {
+            return args.reduce((prev, current) => {
+                if (current) {
+                    let combined = new CheckboxConfig();
+                    combined.default = prev.default !== undefined ? prev.default.combine(current.default) : current.default;
+                    combined.emphasis = prev.emphasis !== undefined ? prev.emphasis.combine(current.emphasis) : current.emphasis;
+                    return combined;
+                }
+                return prev;
+            }, this);
+        }
+        return this;
+    }
+}
 export class MediaConfig {
     constructor(json) {
         if (json) {
@@ -503,6 +589,7 @@ export class HostConfig {
             this.factSet = new FactSetConfig(json['factSet']);
             this.media = new MediaConfig(json['media']);
             this.input = new InputConfig(json['input']);
+            this.checkbox = new CheckboxConfig(json['checkbox']);
             this.mode = json['mode'];
         }
     }
@@ -528,6 +615,7 @@ export class HostConfig {
                     combined.factSet = prev.factSet !== undefined ? prev.factSet.combine(current.factSet) : current.factSet;
                     combined.media = prev.media !== undefined ? prev.media.combine(current.media) : current.media;
                     combined.input = prev.input !== undefined ? prev.input.combine(current.input) : current.input;
+                    combined.checkbox = prev.checkbox !== undefined ? prev.checkbox.combine(current.checkbox) : current.checkbox;
                     combined.mode = current.mode !== undefined ? current.mode : prev.mode;
                     return combined;
                 }
