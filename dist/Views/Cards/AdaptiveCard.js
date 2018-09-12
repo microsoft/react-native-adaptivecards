@@ -11,11 +11,15 @@ export class AdaptiveCardView extends React.Component {
         super(props);
         this.showSubCard = (card) => {
             console.log('Show Card');
-            if (card) {
-                this.setState({
-                    subCard: card
-                });
-            }
+            this.setState({
+                subCard: undefined,
+            }, () => {
+                if (card) {
+                    this.setState({
+                        subCard: card
+                    });
+                }
+            });
             return Promise.resolve(true);
         };
         this.onLayout = (event) => {

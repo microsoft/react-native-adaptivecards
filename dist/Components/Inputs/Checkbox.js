@@ -7,6 +7,7 @@ export class Checkbox extends React.Component {
         super(...arguments);
         this.onClick = () => {
             console.log('Checkbox clicked');
+            console.log(this.props.value);
             if (this.props.onClick) {
                 this.props.onClick(this.props.value);
             }

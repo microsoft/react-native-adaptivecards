@@ -133,11 +133,15 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
 
     private showSubCard = (card: CardModel) => {
         console.log('Show Card');
-        if (card) {
-            this.setState({
-                subCard: card
-            });
-        }
+        this.setState({
+            subCard: undefined,
+        }, () => {
+            if (card) {
+                this.setState({
+                    subCard: card
+                });
+            }
+        });
         return Promise.resolve(true);
     }
 

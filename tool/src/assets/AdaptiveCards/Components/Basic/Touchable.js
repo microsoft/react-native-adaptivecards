@@ -9,13 +9,14 @@ var __rest = (this && this.__rest) || function (s, e) {
 };
 import * as React from 'react';
 import { DeviceEventEmitter, Platform, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native';
+import { ConfigManager } from '../../Config/ConfigManager';
 import { Guid } from '../../Shared/Guid';
 export class Touchable extends React.Component {
     constructor(props) {
         super(props);
         this.onPress = (data) => {
             if (!this.state.disabled) {
-                if (this.props.oneTime) {
+                if (this.props.oneTime && ConfigManager.getInstance().getConfig().mode !== 'debug') {
                     this.setState({
                         disabled: true,
                     });

@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import { ConfigManager } from '../../Config/ConfigManager';
 import { Guid } from '../../Shared/Guid';
 
 interface IProps {
@@ -117,7 +118,7 @@ export class Touchable extends React.Component<IProps, IState> {
 
     private onPress = (data: any) => {
         if (!this.state.disabled) {
-            if (this.props.oneTime) {
+            if (this.props.oneTime && ConfigManager.getInstance().getConfig().mode !== 'debug') {
                 this.setState({
                     disabled: true,
                 });

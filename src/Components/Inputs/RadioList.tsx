@@ -46,6 +46,7 @@ export class RadioList<T extends { title: string, value: V }, V> extends React.C
     }
 
     private onChoose = (value: V) => {
+        console.log(value);
         if (this.props.onChoose) {
             this.props.onChoose(value);
         }

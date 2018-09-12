@@ -62,6 +62,7 @@ export class Checkbox<T> extends React.Component<IProps<T>> {
 
     private onClick = () => {
         console.log('Checkbox clicked');
+        console.log(this.props.value);
         if (this.props.onClick) {
             this.props.onClick(this.props.value);
         }

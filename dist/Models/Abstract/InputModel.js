@@ -15,6 +15,7 @@ export class InputModel extends ContentModel {
             }
         };
         this.storeListener = (field) => {
+            console.log(field);
             if (field) {
                 this.value = field.value;
                 if (this.onStoreUpdate) {
