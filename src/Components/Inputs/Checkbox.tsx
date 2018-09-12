@@ -5,7 +5,7 @@ import {
     View
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps<T> {
@@ -16,7 +16,7 @@ interface IProps<T> {
     onClick: (value: T) => void;
 }
 
-export class Toggle<T> extends React.Component<IProps<T>> {
+export class Checkbox<T> extends React.Component<IProps<T>> {
     public render() {
         return (
             <TouchableWithoutFeedback
@@ -33,6 +33,14 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                         }
                     ]}
                 >
+                    <Icon
+                        name={this.radioIcon}
+                        size={24}
+                        color={this.radioColor}
+                        style={{
+                            paddingTop: 4,
+                        }}
+                    />
                     <Text
                         style={{
                             color: this.color,
@@ -42,25 +50,18 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                             width: 0,
                             flex: 1,
                             flexWrap: StyleManager.getWrap(true),
-                            paddingRight: 16,
+                            paddingLeft: 16,
                         }}
                     >
                         {this.props.title}
                     </Text>
-                    <Icon
-                        name={this.radioIcon}
-                        size={24}
-                        color={this.radioColor}
-                        style={{
-                            paddingTop: 4,
-                        }}
-                    />
                 </View>
             </TouchableWithoutFeedback>
         );
     }
 
     private onClick = () => {
+        console.log('Checkbox clicked');
         if (this.props.onClick) {
             this.props.onClick(this.props.value);
         }
@@ -76,9 +77,9 @@ export class Toggle<T> extends React.Component<IProps<T>> {
 
     private get radioIcon() {
         if (this.props.checked) {
-            return 'toggle-on';
+            return 'checkbox-marked';
         } else {
-            return 'toggle-off';
+            return 'checkbox-blank-outline';
         }
     }
 }

@@ -4,7 +4,7 @@ import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ToggleInputView extends React.Component {
     constructor(props) {
         super(props);
-        this.onClick = (index) => {
+        this.onClick = (value) => {
             const { model } = this.props;
             if (model && model.isSchemaCheckPassed) {
                 if (this.state.checked) {
@@ -44,6 +44,6 @@ export class ToggleInputView extends React.Component {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
         }
-        return (React.createElement(Toggle, { index: 0, title: model.title, checked: this.state.checked, theme: theme, onClick: this.onClick }));
+        return (React.createElement(Toggle, { title: model.title, value: model.value, checked: this.state.checked, theme: theme, onClick: this.onClick }));
     }
 }

@@ -7,7 +7,7 @@ export class Toggle extends React.Component {
         super(...arguments);
         this.onClick = () => {
             if (this.props.onClick) {
-                this.props.onClick(this.props.index);
+                this.props.onClick(this.props.value);
             }
         };
     }
@@ -32,7 +32,9 @@ export class Toggle extends React.Component {
                         flexWrap: StyleManager.getWrap(true),
                         paddingRight: 16,
                     } }, this.props.title),
-                React.createElement(Icon, { name: this.radioIcon, size: 24, color: this.radioColor }))));
+                React.createElement(Icon, { name: this.radioIcon, size: 24, color: this.radioColor, style: {
+                        paddingTop: 4,
+                    } }))));
     }
     get color() {
         return StyleManager.getCheckboxTitleColor(this.props.theme);

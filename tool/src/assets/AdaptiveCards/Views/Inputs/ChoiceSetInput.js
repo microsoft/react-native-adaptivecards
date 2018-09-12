@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Button } from '../../Components/Inputs/Button';
+import { CheckList } from '../../Components/Inputs/CheckList';
 import { ChoicePanel } from '../../Components/Inputs/ChoicePanel';
+import { RadioList } from '../../Components/Inputs/RadioList';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ChoiceSetView extends React.Component {
@@ -17,13 +19,12 @@ export class ChoiceSetView extends React.Component {
             }
         };
         this.onStoreUpdate = (value) => {
-            console.log(value);
             this.setState({
                 value: value,
                 selected: this.props.model.parseSelected(),
             });
         };
-        this.onPress = () => {
+        this.onButtonPress = () => {
             this.setState({
                 focused: !this.state.focused,
             }, () => {
@@ -68,14 +69,43 @@ export class ChoiceSetView extends React.Component {
         }
     }
     render() {
-        const { model, index, theme } = this.props;
+        const { model, theme } = this.props;
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
         }
+        if (model.style === 'compact') {
+            return this.renderChoicePanel();
+        }
+        else {
+            if (model.isMultiSelect) {
+                return this.renderCheckList();
+            }
+            else {
+                return this.renderRadioList();
+            }
+        }
+    }
+    renderChoicePanel() {
+        const { model, index } = this.props;
         return ([
-            React.createElement(Button, { key: 'ChoiceSetInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPress }),
+            React.createElement(Button, { key: 'ChoiceSetInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onButtonPress }),
             React.createElement(ChoicePanel, { key: 'DatePanel' + index, choices: model.choices, selected: this.state.selected, show: this.state.focused, onChoose: this.onValueChange })
         ]);
+    }
+    renderCheckList() {
+        const { model, theme } = this.props;
+        return (React.createElement(CheckList, { choices: model.choices, selected: this.state.selected, onChoose: this.onValueChange, theme: theme }));
+    }
+    renderRadioList() {
+        const { model, theme } = this.props;
+        let selected;
+        if (this.state.selected && this.state.selected.length > 0) {
+            selected = this.state.selected[0];
+        }
+        else {
+            selected = undefined;
+        }
+        return (React.createElement(RadioList, { choices: model.choices, selected: selected, onChoose: this.onValueChange, theme: theme }));
     }
     get fontSize() {
         return StyleManager.getFontSize('default');

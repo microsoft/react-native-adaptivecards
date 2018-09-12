@@ -33,7 +33,7 @@ export class ChoicePanel<T extends { title: string, value: V }, V> extends React
                 </ModalBox>
             );
         } else {
-            return undefined;
+            return null;
         }
     }
 

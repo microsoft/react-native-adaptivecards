@@ -54,8 +54,8 @@ export class ToggleInputView extends React.Component<IProps, IState> {
 
         return (
             <Toggle
-                index={0}
                 title={model.title}
+                value={model.value}
                 checked={this.state.checked}
                 theme={theme}
                 onClick={this.onClick}
@@ -63,7 +63,7 @@ export class ToggleInputView extends React.Component<IProps, IState> {
         );
     }
 
-    private onClick = (index: number) => {
+    private onClick = (value: string) => {
         const { model } = this.props;
 
         if (model && model.isSchemaCheckPassed) {

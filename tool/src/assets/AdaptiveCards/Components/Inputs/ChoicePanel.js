@@ -35,7 +35,7 @@ export class ChoicePanel extends React.Component {
                     React.createElement(FlatList, { data: this.props.choices, renderItem: this.renderChoice, keyExtractor: this.extractKey, ItemSeparatorComponent: this.renderSeparator }))));
         }
         else {
-            return undefined;
+            return null;
         }
     }
 }

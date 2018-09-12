@@ -1,7 +1,9 @@
 import * as React from 'react';
 
 import { Button } from '../../Components/Inputs/Button';
+import { CheckList } from '../../Components/Inputs/CheckList';
 import { ChoicePanel } from '../../Components/Inputs/ChoicePanel';
+import { RadioList } from '../../Components/Inputs/RadioList';
 import { ChoiceSetModel } from '../../Models/Inputs/ChoiceSet';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
@@ -54,11 +56,25 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { model, index, theme } = this.props;
+        const { model, theme } = this.props;
 
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
         }
+
+        if (model.style === 'compact') {
+            return this.renderChoicePanel();
+        } else {
+            if (model.isMultiSelect) {
+                return this.renderCheckList();
+            } else {
+                return this.renderRadioList();
+            }
+        }
+    }
+
+    private renderChoicePanel() {
+        const { model, index } = this.props;
 
         return (
             [
@@ -80,7 +96,7 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
                     paddingRight={this.paddingHorizontal}
                     paddingTop={this.paddingVertical}
                     paddingBottom={this.paddingVertical}
-                    onPress={this.onPress}
+                    onPress={this.onButtonPress}
                 />,
                 <ChoicePanel
                     key={'DatePanel' + index}
@@ -90,6 +106,39 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
                     onChoose={this.onValueChange}
                 />
             ]
+        );
+    }
+
+    private renderCheckList() {
+        const { model, theme } = this.props;
+
+        return (
+            <CheckList
+                choices={model.choices}
+                selected={this.state.selected}
+                onChoose={this.onValueChange}
+                theme={theme}
+            />
+        );
+    }
+
+    private renderRadioList() {
+        const { model, theme } = this.props;
+
+        let selected: string;
+        if (this.state.selected && this.state.selected.length > 0) {
+            selected = this.state.selected[0];
+        } else {
+            selected = undefined;
+        }
+
+        return (
+            <RadioList
+                choices={model.choices}
+                selected={selected}
+                onChoose={this.onValueChange}
+                theme={theme}
+            />
         );
     }
 
@@ -106,14 +155,13 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
     }
 
     private onStoreUpdate = (value: string) => {
-        console.log(value);
         this.setState({
             value: value,
             selected: this.props.model.parseSelected(),
         });
     }
 
-    private onPress = () => {
+    private onButtonPress = () => {
         this.setState({
             focused: !this.state.focused,
         }, () => {

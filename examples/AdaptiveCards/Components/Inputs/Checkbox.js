@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StyleManager } from '../../Styles/StyleManager';
-export class Toggle extends React.Component {
+export class Checkbox extends React.Component {
     constructor() {
         super(...arguments);
         this.onClick = () => {
+            console.log('Checkbox clicked');
             if (this.props.onClick) {
                 this.props.onClick(this.props.value);
             }
@@ -22,6 +23,9 @@ export class Toggle extends React.Component {
                         paddingTop: 18,
                     }
                 ] },
+                React.createElement(Icon, { name: this.radioIcon, size: 24, color: this.radioColor, style: {
+                        paddingTop: 4,
+                    } }),
                 React.createElement(Text, { style: {
                         color: this.color,
                         fontSize: StyleManager.getFontSize('default'),
@@ -30,11 +34,8 @@ export class Toggle extends React.Component {
                         width: 0,
                         flex: 1,
                         flexWrap: StyleManager.getWrap(true),
-                        paddingRight: 16,
-                    } }, this.props.title),
-                React.createElement(Icon, { name: this.radioIcon, size: 24, color: this.radioColor, style: {
-                        paddingTop: 4,
-                    } }))));
+                        paddingLeft: 16,
+                    } }, this.props.title))));
     }
     get color() {
         return StyleManager.getCheckboxTitleColor(this.props.theme);
@@ -44,10 +45,10 @@ export class Toggle extends React.Component {
     }
     get radioIcon() {
         if (this.props.checked) {
-            return 'toggle-on';
+            return 'checkbox-marked';
         }
         else {
-            return 'toggle-off';
+            return 'checkbox-blank-outline';
         }
     }
 }
