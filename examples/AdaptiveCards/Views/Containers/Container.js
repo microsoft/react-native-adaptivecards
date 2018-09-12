@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
+import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { BackgroundImageView } from '../CardElements/BackgroundImage';
 import { ContentFactory } from '../Factories/ContentFactory';
@@ -9,7 +10,7 @@ export class ContainerView extends React.Component {
     constructor() {
         super(...arguments);
         this.renderTouchableBlock = (backgroundColor) => {
-            return (React.createElement(Touchable, { onPress: this.onPress, accessibilityComponentType: 'button', style: {
+            return (React.createElement(Touchable, { onPress: this.onPress, oneTime: this.hasOneTimeAction, accessibilityComponentType: 'button', style: {
                     flex: this.flex,
                     alignSelf: 'stretch',
                     justifyContent: this.justifyContent,
@@ -70,6 +71,9 @@ export class ContainerView extends React.Component {
         else {
             return this.renderNonTouchableBlock(backgroundColor);
         }
+    }
+    get hasOneTimeAction() {
+        return this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
     get justifyContent() {
         const { model } = this.props;

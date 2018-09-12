@@ -29,6 +29,7 @@ export interface IButtonProps {
         marginRight?: number;
     };
     onPress: () => void;
+    oneTime?: boolean;
     color?: string;
     backgroundColor?: string;
     fontFamily?: string;
@@ -64,6 +65,7 @@ export class Button extends React.Component<IButtonProps> {
             <Touchable
                 testId={this.props.title}
                 onPress={this.props.onPress}
+                oneTime={this.props.oneTime}
                 accessibilityLabel={'Button ' + this.props.title}
                 style={[
                     {

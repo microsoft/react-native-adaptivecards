@@ -4,6 +4,7 @@ import { Button } from '../../Components/Inputs/Button';
 import { OpenUrlActionModel } from '../../Models/Actions/OpenUrlAction';
 import { ShowCardActionModel } from '../../Models/Actions/ShowCardAction';
 import { SubmitActionModel } from '../../Models/Actions/SubmitAction';
+import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
@@ -38,6 +39,7 @@ export class ActionView extends React.Component<IProps> {
                 onPress={this.onPress}
                 marginTop={StyleManager.actionDirection === 'vertically' ? this.spacing : 0}
                 marginLeft={StyleManager.actionDirection === 'horizontal' ? this.spacing : 0}
+                oneTime={this.isOneTimeAction}
                 style={{
                     borderLeftWidth: this.leftBorderWidth,
                     borderLeftColor: StyleManager.separatorColor,
@@ -59,6 +61,10 @@ export class ActionView extends React.Component<IProps> {
                 }
             );
         }
+    }
+
+    private get isOneTimeAction() {
+        return this.props.model && this.props.model.type === ActionType.Submit;
     }
 
     private get leftBorderWidth() {

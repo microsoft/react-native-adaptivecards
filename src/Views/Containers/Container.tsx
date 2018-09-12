@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
 import { ContainerModel } from '../../Models/Containers/Container';
+import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { BackgroundImageView } from '../CardElements/BackgroundImage';
 import { ContentFactory } from '../Factories/ContentFactory';
@@ -34,6 +35,7 @@ export class ContainerView extends React.Component<IProps> {
         return (
             <Touchable
                 onPress={this.onPress}
+                oneTime={this.hasOneTimeAction}
                 accessibilityComponentType='button'
                 style={{
                     flex: this.flex,
@@ -112,6 +114,10 @@ export class ContainerView extends React.Component<IProps> {
                 }
             );
         }
+    }
+
+    private get hasOneTimeAction() {
+        return this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
 
     private get justifyContent() {

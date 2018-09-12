@@ -7,7 +7,7 @@ export class Button extends React.Component {
         super(props);
     }
     render() {
-        return (React.createElement(Touchable, { testId: this.props.title, onPress: this.props.onPress, accessibilityLabel: 'Button ' + this.props.title, style: [
+        return (React.createElement(Touchable, { testId: this.props.title, onPress: this.props.onPress, oneTime: this.props.oneTime, accessibilityLabel: 'Button ' + this.props.title, style: [
                 {
                     flex: this.props.flex,
                     width: this.props.width,

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
+import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { ColumnView } from './Column';
@@ -8,7 +9,7 @@ export class ColumnSetView extends React.Component {
     constructor() {
         super(...arguments);
         this.renderTouchableBlock = () => {
-            return (React.createElement(Touchable, { onPress: this.onPress, style: {
+            return (React.createElement(Touchable, { onPress: this.onPress, oneTime: this.hasOneTimeAction, style: {
                     flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',
@@ -61,6 +62,9 @@ export class ColumnSetView extends React.Component {
         else {
             return this.renderNonTouchableBlock();
         }
+    }
+    get hasOneTimeAction() {
+        return this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
     get flex() {
         const { model } = this.props;

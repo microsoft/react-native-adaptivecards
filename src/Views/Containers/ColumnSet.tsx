@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
 import { ColumnSetModel } from '../../Models/Containers/ColumnSet';
+import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { ColumnView } from './Column';
@@ -31,6 +32,7 @@ export class ColumnSetView extends React.Component<IProps> {
         return (
             <Touchable
                 onPress={this.onPress}
+                oneTime={this.hasOneTimeAction}
                 style={{
                     flex: this.flex,
                     flexDirection: 'row',
@@ -100,6 +102,10 @@ export class ColumnSetView extends React.Component<IProps> {
                 }
             );
         }
+    }
+
+    private get hasOneTimeAction() {
+        return this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
 
     private get flex() {

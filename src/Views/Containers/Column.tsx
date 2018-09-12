@@ -2,6 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
 import { ColumnModel } from '../../Models/Containers/Column';
+import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { BackgroundImageView } from '../CardElements/BackgroundImage';
 import { ContentFactory } from '../Factories/ContentFactory';
@@ -34,6 +35,7 @@ export class ColumnView extends React.Component<IProps> {
         return (
             <Touchable
                 onPress={this.onPress}
+                oneTime={this.hasOneTimeAction}
                 style={{
                     flex: this.flex,
                     flexDirection: 'column',
@@ -50,15 +52,15 @@ export class ColumnView extends React.Component<IProps> {
 
     private renderNonTouchableBlock = (backgroundColor: string) => {
         return (
-            <View style={{
-                flex: this.flex,
-                flexDirection: 'column',
-                alignSelf: this.alignSelf,
-                justifyContent: this.justifyContent,
-                marginLeft: this.spacing,
-                backgroundColor: backgroundColor
-            }}
-
+            <View
+                style={{
+                    flex: this.flex,
+                    flexDirection: 'column',
+                    alignSelf: this.alignSelf,
+                    justifyContent: this.justifyContent,
+                    marginLeft: this.spacing,
+                    backgroundColor: backgroundColor
+                }}
             >
                 {this.renderContent()}
             </View>
@@ -113,6 +115,10 @@ export class ColumnView extends React.Component<IProps> {
                 }
             );
         }
+    }
+
+    private get hasOneTimeAction() {
+        return this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
 
     private get justifyContent() {
