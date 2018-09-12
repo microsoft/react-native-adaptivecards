@@ -6,7 +6,7 @@ export class ModalBox extends React.Component {
     }
     render() {
         if (Platform.OS === 'web') {
-            return undefined;
+            return null;
         }
         return (React.createElement(Modal, { visible: this.props.show, animationType: 'fade', transparent: true, onRequestClose: this.props.onRequestClose },
             React.createElement(TouchableWithoutFeedback, { onPress: this.props.onPressBackground },

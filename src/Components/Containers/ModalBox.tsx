@@ -15,7 +15,7 @@ export class ModalBox extends React.Component<IProps> {
     public render() {
 
         if (Platform.OS === 'web') {
-            return undefined;
+            return null;
         }
 
         return (
