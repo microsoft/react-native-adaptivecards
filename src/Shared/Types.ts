@@ -9,7 +9,7 @@ export interface ITreeNode<T> {
 
 export abstract class TreeNode<T extends TreeNode<T>> implements ITreeNode<T> {
     public parent: T;
-    
+
     constructor(parent: T) {
         this.parent = parent;
     }

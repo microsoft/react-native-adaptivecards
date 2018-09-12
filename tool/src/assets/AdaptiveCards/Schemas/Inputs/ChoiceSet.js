@@ -13,7 +13,7 @@ export class ChoiceSetSchema extends SchemaElement {
                 isRequired: true,
             },
             'isMultiSelect': {
-                name: 'min',
+                name: 'isMultiSelect',
                 isRequired: false,
                 accepts: [true, false],
             },

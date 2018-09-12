@@ -1,34 +1,32 @@
-import { ChoiceSetModel } from '../../Models/Inputs/ChoiceSet';
+import { ToggleInputModel } from '../../Models/Inputs/ToggleInput';
 import { SchemaElement, SchemaRule } from '../SchemaValidator';
 
-export class ChoiceSetSchema extends SchemaElement<ChoiceSetModel> {
-    public rules: SchemaRule<ChoiceSetModel>[] = [];
+export class ToggleInputSchema extends SchemaElement<ToggleInputModel> {
+    public rules: SchemaRule<ToggleInputModel>[] = [];
     protected propsSchemas = {
-        'choices': {
-            name: 'choices',
-            isRequired: true,
-        },
         'id': {
             name: 'id',
             isRequired: true,
         },
-        'isMultiSelect': {
-            name: 'isMultiSelect',
-            isRequired: false,
-            accepts: [true, false],
-        },
-        'style': {
-            name: 'style',
-            isRequired: false,
-            accepts: ['compact', 'expanded'],
+        'title': {
+            name: 'title',
+            isRequired: true,
         },
         'type': {
             name: 'type',
             isRequired: true,
-            accepts: ['Input.ChoiceSet'],
+            accepts: ['Input.Toggle'],
         },
         'value': {
             name: 'value',
+            isRequired: false,
+        },
+        'valueOff': {
+            name: 'valueOff',
+            isRequired: false,
+        },
+        'valueOn': {
+            name: 'valueOn',
             isRequired: false,
         },
         'spacing': {

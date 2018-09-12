@@ -22,6 +22,8 @@
     "expo": "^27.0.1",
     "react": "16.3.1",
     "react-native": "~0.55.4",
-    "react-native-svg-uri": "^1.2.3"
+    "react-native-svg-uri": "^1.2.3",
+    "react-native-vector-icons": "^5.0.0",
+    "@expo/vector-icons": "^6.3.1"
   }
 }

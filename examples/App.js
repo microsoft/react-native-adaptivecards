@@ -31,6 +31,8 @@ export default class App extends React.Component {
                     padding: 10,
                     backgroundColor: 'white',
                 }}>
+                <AdaptiveCards adaptiveCard={mockData.inputs} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
+                {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.peoplePicker} onCallback={this.onCallback} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.bingMap} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
@@ -49,7 +51,7 @@ export default class App extends React.Component {
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={BingAnswer.heightOfEiffelTower} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={BingAnswer.highestMountionInTheWorld} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
+                <AdaptiveCards adaptiveCard={BingAnswer.highestMountainInTheWorld} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={BingAnswer.latestNews} onSubmit={this.onSubmit} overrideStyle={cardOverrideStyle} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}

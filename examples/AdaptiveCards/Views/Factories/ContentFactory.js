@@ -14,6 +14,7 @@ import { NumberInputView } from '../Inputs/NumberInput';
 import { PeoplePickerView } from '../Inputs/PeoplePicker';
 import { TextInputView } from '../Inputs/TextInput';
 import { TimeInputView } from '../Inputs/TimeInput';
+import { ToggleInputView } from '../Inputs/ToggleInput';
 export class ContentFactory {
     static createView(model, index, theme) {
         if (model) {
@@ -55,6 +56,9 @@ export class ContentFactory {
                     return (React.createElement(TimeInputView, { key: 'TimeInputView' + index, model: model, index: index, theme: theme }));
                 case ContentType.ChoiceSetInput:
                     return (React.createElement(ChoiceSetView, { key: 'ChoiceSetView' + index, model: model, index: index, theme: theme }));
+                case ContentType.ToggleInput:
+                    console.log(model.type);
+                    return (React.createElement(ToggleInputView, { key: 'ToggleInputView' + index, model: model, index: index, theme: theme }));
                 case ContentType.PeoplePicker:
                     return (React.createElement(PeoplePickerView, { key: 'PeoplePickerView' + index, model: model, index: index, theme: theme }));
                 default:

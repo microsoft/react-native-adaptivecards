@@ -69,7 +69,7 @@ export class CardRootView extends React.Component<IAdaptiveCardProps> {
                 <AdaptiveCardView
                     index={0}
                     model={new CardModel(this.props.adaptiveCard, undefined, this.rootCardContext)}
-                    theme={'default'}
+                    theme='default'
                     style={this.props.style}
                 />
             </View>

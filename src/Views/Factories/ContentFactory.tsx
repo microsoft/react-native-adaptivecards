@@ -14,6 +14,7 @@ import { NumberInputModel } from '../../Models/Inputs/NumberInput';
 import { PeoplePickerModel } from '../../Models/Inputs/PeoplePicker';
 import { TextInputModel } from '../../Models/Inputs/TextInput';
 import { TimeInputModel } from '../../Models/Inputs/TimeInput';
+import { ToggleInputModel } from '../../Models/Inputs/ToggleInput';
 import { ContentType } from '../../Shared/Types';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
@@ -28,6 +29,7 @@ import { NumberInputView } from '../Inputs/NumberInput';
 import { PeoplePickerView } from '../Inputs/PeoplePicker';
 import { TextInputView } from '../Inputs/TextInput';
 import { TimeInputView } from '../Inputs/TimeInput';
+import { ToggleInputView } from '../Inputs/ToggleInput';
 
 export class ContentFactory {
     public static createView(model: ContentModel, index: number, theme: 'default' | 'emphasis'): JSX.Element[] {
@@ -153,6 +155,16 @@ export class ContentFactory {
                         <ChoiceSetView
                             key={'ChoiceSetView' + index}
                             model={model as ChoiceSetModel}
+                            index={index}
+                            theme={theme}
+                        />
+                    );
+                case ContentType.ToggleInput:
+                    console.log(model.type);
+                    return (
+                        <ToggleInputView
+                            key={'ToggleInputView' + index}
+                            model={model as ToggleInputModel}
                             index={index}
                             theme={theme}
                         />

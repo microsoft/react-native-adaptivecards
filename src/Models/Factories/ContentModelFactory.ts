@@ -16,73 +16,77 @@ import { NumberInputModel } from '../Inputs/NumberInput';
 import { PeoplePickerModel } from '../Inputs/PeoplePicker';
 import { TextInputModel } from '../Inputs/TextInput';
 import { TimeInputModel } from '../Inputs/TimeInput';
+import { ToggleInputModel } from '../Inputs/ToggleInput';
 
 export class ContentModelFactory {
     public static create(json: any, parent: AbstractModel, context: CardContext): ContentModel {
         if (!json) {
             return null;
         }
-        let cardElement: ContentModel;
+        let model: ContentModel;
         switch (json.type) {
             case ContentType.Image:
-                cardElement = new ImageModel(json, parent, context);
+                model = new ImageModel(json, parent, context);
                 break;
             case ContentType.TextBlock:
-                cardElement = new TextBlockModel(json, parent, context);
+                model = new TextBlockModel(json, parent, context);
                 break;
             case ContentType.Column:
-                cardElement = new ColumnModel(json, parent, context);
+                model = new ColumnModel(json, parent, context);
                 break;
             case ContentType.ColumnSet:
-                cardElement = new ColumnSetModel(json, parent, context);
+                model = new ColumnSetModel(json, parent, context);
                 break;
             case ContentType.Container:
-                cardElement = new ContainerModel(json, parent, context);
+                model = new ContainerModel(json, parent, context);
                 break;
             case ContentType.FactSet:
-                cardElement = new FactSetModel(json, parent, context);
+                model = new FactSetModel(json, parent, context);
                 break;
             case ContentType.ImageSet:
-                cardElement = new ImageSetModel(json, parent, context);
+                model = new ImageSetModel(json, parent, context);
                 break;
             case ContentType.TextInput:
-                cardElement = new TextInputModel(json, parent, context);
+                model = new TextInputModel(json, parent, context);
                 break;
             case ContentType.DateInput:
-                cardElement = new DateInputModel(json, parent, context);
+                model = new DateInputModel(json, parent, context);
                 break;
             case ContentType.TimeInput:
-                cardElement = new TimeInputModel(json, parent, context);
+                model = new TimeInputModel(json, parent, context);
                 break;
             case ContentType.NumberInput:
-                cardElement = new NumberInputModel(json, parent, context);
-                break;
-            case ContentType.PeoplePicker:
-                cardElement = new PeoplePickerModel(json, parent, context);
+                model = new NumberInputModel(json, parent, context);
                 break;
             case ContentType.ChoiceSetInput:
-                cardElement = new ChoiceSetModel(json, parent, context);
+                model = new ChoiceSetModel(json, parent, context);
+                break;
+            case ContentType.ToggleInput:
+                model = new ToggleInputModel(json, parent, context);
+                break;
+            case ContentType.PeoplePicker:
+                model = new PeoplePickerModel(json, parent, context);
                 break;
             case ContentType.AdaptiveCard:
-                cardElement = new CardModel(json, parent, CardContext.createInstance(context));
+                model = new CardModel(json, parent, CardContext.createInstance(context));
                 break;
             default:
-                cardElement = null;
+                model = null;
                 break;
         }
-        return cardElement;
+        return model;
     }
 
     public static createSet(json: any, parent: AbstractModel, context: CardContext): Array<ContentModel> {
-        let cardElementSet: Array<ContentModel> = [];
+        let modelSet: Array<ContentModel> = [];
         if (json && json.length > 0) {
             json.forEach((item: any) => {
-                let cardElement: ContentModel = ContentModelFactory.create(item, parent, context);
-                if (cardElement) {
-                    cardElementSet.push(cardElement);
+                let model: ContentModel = ContentModelFactory.create(item, parent, context);
+                if (model) {
+                    modelSet.push(model);
                 }
             });
         }
-        return cardElementSet;
+        return modelSet;
     }
 }
