@@ -43,3 +43,9 @@ export function removeCard(id) {
         id
     }
 }
+
+export function loadDefaultPayload() {
+    return {
+        type: Constants.LOAD_DEFAULT_PAYLOAD
+    }
+}

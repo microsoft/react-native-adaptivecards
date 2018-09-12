@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Modal, TouchableWithoutFeedback, View } from 'react-native';
+import {Modal, Platform, TouchableWithoutFeedback, View} from 'react-native';
 
 interface IProps {
     show: boolean;
@@ -13,6 +13,11 @@ export class ModalBox extends React.Component<IProps> {
     }
 
     public render() {
+
+        if (Platform.OS === 'web') {
+            return undefined;
+        }
+
         return (
             <Modal
                 visible={this.props.show}

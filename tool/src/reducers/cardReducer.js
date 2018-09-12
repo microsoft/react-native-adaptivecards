@@ -1,41 +1,60 @@
 import * as Constants from '../Constants'
 import config from '../static/config'
 import cards from "../static/adaptive-card";
-import {uuid, stringifyJson} from "../utils/common";
+import {uuid, stringifyJson, parseJson} from "../utils/common";
 
-const loadSampleCards = () => {
-    return cards.map((item) => { return {...item, card: stringifyJson(item.card), selected: true, id: uuid()}});
-};
+const defaultSampleCards = cards.map((item) => { return {...item, card: stringifyJson(item.card), selected: true, id: uuid()}});
 
-const sampleCards = loadSampleCards();
-
-export default function reducer(state={
-    cards: sampleCards,
-    cardId: sampleCards ? sampleCards[0].id : '',
+const default_state = {
+    cards: defaultSampleCards,
+    cardId: defaultSampleCards ? defaultSampleCards[0].id : '',
     config: stringifyJson(config),
     mode: 'config'
-}, action) {
+};
 
+const initial_state = loadLocalStorage();
+
+export default function reducer(state=initial_state, action) {
+    let newState = {...state};
     switch (action.type) {
         case Constants.SET_MODE:
-            return {...state, mode: action.mode};
+            newState.mode = action.mode;
+            break;
         case Constants.MODIFY_CONFIG:
-            return {...state, config: action.config};
+            newState.config = action.config;
+            break;
         case Constants.MODIFY_CARD:
-            return {...state, cards: state.cards.map((item) => {return item.id === action.id ? {...item, card: action.card} : item})};
+            newState.cards = state.cards.map((item) => {return item.id === action.id ? {...item, card: action.card} : item});
+            break;
         case Constants.SET_CARD_SELECTED:
-            return {...state, cardId: action.id, cards: state.cards.map((item) => {return item.id === action.id ? {...item, selected: action.selected} : item})};
+            newState.cardId = action.id;
+            newState.cards = state.cards.map((item) => {return item.id === action.id ? {...item, selected: action.selected} : item});
+            break;
         case Constants.REMOVE_CARD:
-            return {
-                ...state,
-                cards: state.cards.filter((item) => item.id !== action.id),
-                cardId: action.id !== state.cardId ? state.cardId : ''
-            };
+            newState.cardId = action.id !== state.cardId ? state.cardId : '';
+            newState.cards = state.cards.filter((item) => item.id !== action.id);
+            break;
         case Constants.ADD_CARD:
-            let newState = {...state, cards: state.cards.concat({name: action.name, card: '', selected: true, id: uuid()}), mode: 'card'};
+            newState.mode = 'card';
+            newState.cards = state.cards.concat({name: action.name, card: '', selected: true, id: uuid()});
             newState.cardId = newState.cards[newState.cards.length-1].id;
-            return newState;
+            break;
+        case Constants.LOAD_DEFAULT_PAYLOAD:
+            newState = default_state;
+            break;
+        default:
+            break;
     }
 
-    return state;
+    localStorage.setItem('state', stringifyJson(newState));
+    return newState;
 }
+
+function loadLocalStorage() {
+    const localStorageState = parseJson(localStorage.getItem('state'));
+    console.log(localStorageState);
+    if (localStorageState && ['mode', 'cards', 'cardId', 'config'] in localStorageState) {
+        return localStorageState;
+    }
+    return default_state;
+};

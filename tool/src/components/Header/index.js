@@ -3,25 +3,32 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Button from '../Button/index'
-import { setMode } from '../../actions/cardActions';
+import { setMode, loadDefaultPayload } from '../../actions/cardActions';
 import './Header.css';
 
 class Header extends React.Component {
 
     constructor(props) {
         super(props);
-        this.handleClick = this.handleClick.bind(this)
+        this.setMode = this.setMode.bind(this);
+        this.loadDefaultPayload = this.loadDefaultPayload.bind(this);
     }
 
-    handleClick(mode) {
+    setMode(mode) {
         this.props.setMode(mode);
+    }
+
+    loadDefaultPayload() {
+        this.props.loadDefaultPayload();
     }
 
     render() {
         return (
             <div className="header">
-                <Button desc="Card editor" name="card" clickHandler={this.handleClick} />
-                <Button desc="Config editor" name="config" clickHandler={this.handleClick} />
+                <Button desc="Card editor" name="card" clickHandler={this.setMode} />
+                <Button desc="Config editor" name="config" clickHandler={this.setMode} />
+                <Button desc="Load default" name="load_default" clickHandler={this.loadDefaultPayload}
+                        additionalClass="fr"/>
             </div>
         )
     }
@@ -39,7 +46,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setMode: (mode) => dispatch(setMode(mode))
+        setMode: (mode) => dispatch(setMode(mode)),
+        loadDefaultPayload: () => dispatch(loadDefaultPayload())
     };
 };
 

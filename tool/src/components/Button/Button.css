@@ -1,6 +1,5 @@
 .button {
     display: inline-block;
-    /*border: 1px solid #0078D7;*/
 
     padding: 6px 10px 6px 10px;
     margin: auto 4px;
@@ -18,6 +17,7 @@
     border-radius: 5px;
 
     transition: background-color 0.2s;
+
 }
 
 .active {
@@ -26,4 +26,8 @@
 
 .button:hover {
     background-color: #dbe2ef;
+}
+
+.button:active {
+    transform: translateY(2px);
 }

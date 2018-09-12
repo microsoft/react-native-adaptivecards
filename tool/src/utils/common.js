@@ -8,7 +8,7 @@ export function uuid() {
 }
 
 export function parseJson(jsonString) {
-    let jsonObject = {};
+    let jsonObject = null;
     try {
         jsonObject = JSON.parse(jsonString);
     } catch (e) {
@@ -17,9 +17,6 @@ export function parseJson(jsonString) {
     return jsonObject;
 }
 
-/**
- * @return {string}
- */
 export function stringifyJson(jsonObject) {
     return JSON.stringify(jsonObject, null, 4);
 }
