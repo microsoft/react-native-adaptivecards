@@ -76,8 +76,8 @@ export class InputBox extends React.Component<IProps, IState> {
                 placeholder={this.props.placeholder}
                 value={this.props.value}
                 returnKeyType={this.props.returnKeyType}
-                underlineColorAndroid={'transparent'}
-                importantForAccessibility={'no-hide-descendants'}
+                underlineColorAndroid='transparent'
+                importantForAccessibility='no-hide-descendants'
                 onChangeText={this.onValueChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}

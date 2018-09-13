@@ -1,4 +1,6 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { EmailUtils } from '../../Utils/EmailUtils';
+import { StringUtils } from '../../Utils/StringUtils';
 import { InputModel } from '../Abstract/InputModel';
 import { CallbackActionModel } from '../Actions/CallbackAction';
 import { CardModel } from '../Cards/Card';
@@ -9,8 +11,14 @@ export class PeoplePickerModel extends InputModel {
         this.onInput = (value) => {
             if (value !== undefined) {
                 this.input = value;
-                if (this.callback) {
-                    this.callback.onAction(this.onCallbackResponse, undefined);
+                let contact = {};
+                if (this.tryExtractContactFromInput(value, contact)) {
+                    this.onSuggestionSelect(contact);
+                }
+                else {
+                    if (this.callback) {
+                        this.callback.onAction(this.onCallbackResponse, undefined);
+                    }
                 }
             }
         };
@@ -19,7 +27,7 @@ export class PeoplePickerModel extends InputModel {
             if (field) {
                 let currentValue = JSON.parse(field.value);
                 if (currentValue) {
-                    let index = currentValue.findIndex(v => v.Address === address);
+                    let index = currentValue.findIndex(v => StringUtils.normalize(v.Address) === StringUtils.normalize(address));
                     if (index >= 0) {
                         currentValue.splice(index, 1);
                         this.context.form.write({
@@ -38,8 +46,14 @@ export class PeoplePickerModel extends InputModel {
                 if (field) {
                     let currentValue = JSON.parse(field.value);
                     if (currentValue) {
-                        if (data && currentValue.findIndex(v => v.Address === data.Address) < 0) {
-                            currentValue.push(data);
+                        if (data) {
+                            let index = currentValue.findIndex(v => StringUtils.normalize(v.Address) === StringUtils.normalize(data.Address));
+                            if (index < 0) {
+                                currentValue.push(data);
+                            }
+                            else {
+                                currentValue[index] = data;
+                            }
                             this.context.form.write({
                                 id: this.id,
                                 value: JSON.stringify(currentValue),
@@ -65,6 +79,22 @@ export class PeoplePickerModel extends InputModel {
             if (this.onSuggestionReady) {
                 this.onSuggestionReady(this.suggestionCard);
             }
+        };
+        this.tryExtractContactFromInput = (input, contact) => {
+            if (input) {
+                let length = input.length;
+                if (length > 0) {
+                    if (input[length - 1] === ' ' || input[length - 1] === ';') {
+                        let subString = input.substr(0, length - 1).trim();
+                        if (EmailUtils.isEmail(subString)) {
+                            contact.Name = subString;
+                            contact.Address = subString;
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         };
         this.callback = new CallbackActionModel(json.callback, this, this.context);
         this.placeholder = json.placeholder;

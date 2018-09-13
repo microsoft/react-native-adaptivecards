@@ -11,6 +11,7 @@ import {
     View
 } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { EmailUtils } from '../../Utils/EmailUtils';
 import { Label } from '../Basic/Label';
 import { SeparateLine } from '../Basic/SeparateLine';
 
@@ -148,6 +149,8 @@ export class LabelInput extends React.Component<IProps, IState> {
                     },
                     this.props.style
                 ]}
+                autoCorrect={false}
+                autoCapitalize='none'
                 multiline={this.isMultiLine}
                 numberOfLines={this.props.numberOfLines}
                 keyboardType={this.props.keyboardType}
@@ -155,12 +158,13 @@ export class LabelInput extends React.Component<IProps, IState> {
                 placeholder={this.props.placeholder}
                 value={this.props.value}
                 returnKeyType={this.props.returnKeyType}
-                underlineColorAndroid={'transparent'}
-                importantForAccessibility={'no-hide-descendants'}
+                underlineColorAndroid='transparent'
+                importantForAccessibility='no-hide-descendants'
                 onChangeText={this.onValueChange}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 onKeyPress={this.onKeyPress}
+                onSubmitEditing={this.onSubmitEditing}
             />
         );
     }
@@ -219,6 +223,17 @@ export class LabelInput extends React.Component<IProps, IState> {
                         this.props.onLabelRemove(this.state.labelFocusIndex);
                     }
                 }
+            }
+        }
+        if (e.nativeEvent.key === 'Enter') {
+            this.onSubmitEditing();
+        }
+    }
+
+    private onSubmitEditing = () => {
+        if (EmailUtils.isEmail(this.props.value)) {
+            if (this.props.onRequestSuggestion) {
+                this.props.onRequestSuggestion(this.props.value + ' ');
             }
         }
     }

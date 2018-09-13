@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ScrollView, TextInput, View } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { EmailUtils } from '../../Utils/EmailUtils';
 import { Label } from '../Basic/Label';
 import { SeparateLine } from '../Basic/SeparateLine';
 export class LabelInput extends React.Component {
@@ -41,6 +42,16 @@ export class LabelInput extends React.Component {
                             this.props.onLabelRemove(this.state.labelFocusIndex);
                         }
                     }
+                }
+            }
+            if (e.nativeEvent.key === 'Enter') {
+                this.onSubmitEditing();
+            }
+        };
+        this.onSubmitEditing = () => {
+            if (EmailUtils.isEmail(this.props.value)) {
+                if (this.props.onRequestSuggestion) {
+                    this.props.onRequestSuggestion(this.props.value + ' ');
                 }
             }
         };
@@ -131,7 +142,7 @@ export class LabelInput extends React.Component {
                     paddingLeft: this.paddingHorizontal,
                 },
                 this.props.style
-            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
+            ], autoCorrect: false, autoCapitalize: 'none', multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, onKeyPress: this.onKeyPress, onSubmitEditing: this.onSubmitEditing }));
     }
     renderSuggestions() {
         if (this.props.suggestionView) {

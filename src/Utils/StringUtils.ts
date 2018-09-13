@@ -14,4 +14,11 @@ export class StringUtils {
         }
         return valueString;
     }
+
+    public static normalize(str: string) {
+        if (str) {
+            return str.toLocaleLowerCase();
+        }
+        return str;
+    }
 }
