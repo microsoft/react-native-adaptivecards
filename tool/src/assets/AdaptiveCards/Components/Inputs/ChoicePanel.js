@@ -27,10 +27,15 @@ export class ChoicePanel extends React.Component {
                 this.props.onChoose(value);
             }
         };
+        this.onClose = () => {
+            if (this.props.onClose) {
+                this.props.onClose();
+            }
+        };
     }
     render() {
         if (this.props.choices) {
-            return (React.createElement(ModalBox, { show: this.props.show },
+            return (React.createElement(ModalBox, { show: this.props.show, onBackgroundPress: this.onClose },
                 React.createElement(Card, { flex: 0, fit: 'content' },
                     React.createElement(FlatList, { data: this.props.choices, renderItem: this.renderChoice, keyExtractor: this.extractKey, ItemSeparatorComponent: this.renderSeparator }))));
         }

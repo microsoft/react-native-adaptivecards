@@ -25,7 +25,12 @@ export class ChoiceSetView extends React.Component {
                 selected: this.props.model.parseSelected(),
             });
         };
-        this.onButtonPress = () => {
+        this.onPanelClose = () => {
+            this.setState({
+                focused: !this.state.focused,
+            });
+        };
+        this.onPanelButtonPress = () => {
             this.setState({
                 focused: !this.state.focused,
             }, () => {
@@ -45,7 +50,7 @@ export class ChoiceSetView extends React.Component {
                     }
                 }
             });
-            console.log('DateInput onPress');
+            console.log('ChoiceSet onPress');
         };
         this.mounted = false;
         const { model } = this.props;
@@ -89,8 +94,8 @@ export class ChoiceSetView extends React.Component {
     renderChoicePanel() {
         const { model, index } = this.props;
         return ([
-            React.createElement(Button, { key: 'ChoiceSetInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onButtonPress }),
-            React.createElement(ChoicePanel, { key: 'DatePanel' + index, choices: model.choices, selected: this.state.selected, show: this.state.focused, onChoose: this.onValueChange })
+            React.createElement(Button, { key: 'ChoiceSetInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPanelButtonPress }),
+            React.createElement(ChoicePanel, { key: 'DatePanel' + index, choices: model.choices, selected: this.state.selected, show: this.state.focused, onChoose: this.onValueChange, onClose: this.onPanelClose })
         ]);
     }
     renderCheckList() {

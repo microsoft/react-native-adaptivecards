@@ -96,7 +96,7 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
                     paddingRight={this.paddingHorizontal}
                     paddingTop={this.paddingVertical}
                     paddingBottom={this.paddingVertical}
-                    onPress={this.onButtonPress}
+                    onPress={this.onPanelButtonPress}
                 />,
                 <ChoicePanel
                     key={'DatePanel' + index}
@@ -104,6 +104,7 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
                     selected={this.state.selected}
                     show={this.state.focused}
                     onChoose={this.onValueChange}
+                    onClose={this.onPanelClose}
                 />
             ]
         );
@@ -162,7 +163,13 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
         });
     }
 
-    private onButtonPress = () => {
+    private onPanelClose = () => {
+        this.setState({
+            focused: !this.state.focused,
+        });
+    }
+
+    private onPanelButtonPress = () => {
         this.setState({
             focused: !this.state.focused,
         }, () => {
@@ -182,7 +189,7 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
                 }
             }
         });
-        console.log('DateInput onPress');
+        console.log('ChoiceSet onPress');
     }
 
     private get fontSize() {

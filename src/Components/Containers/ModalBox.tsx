@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {Modal, Platform, TouchableWithoutFeedback, View} from 'react-native';
+import { Modal, Platform, TouchableWithoutFeedback, View } from 'react-native';
 
 interface IProps {
     show: boolean;
-    onPressBackground?: () => void;
+    onBackgroundPress?: () => void;
     onRequestClose?: () => void;
 }
 
@@ -26,7 +26,7 @@ export class ModalBox extends React.Component<IProps> {
                 onRequestClose={this.props.onRequestClose}
             >
                 <TouchableWithoutFeedback
-                    onPress={this.props.onPressBackground}
+                    onPress={this.onBackgroundPress}
                 >
                     <View
                         style={[
@@ -39,27 +39,35 @@ export class ModalBox extends React.Component<IProps> {
                                 backgroundColor: 'rgba(0, 0, 0, 0.3)'
                             }
                         ]}
-                    />
-                </TouchableWithoutFeedback>
-                <View
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignContent: 'center',
-                        alignItems: 'center'
-                    }}
-                >
-                    <View
-                        style={[
-                            {
-                                width: '85%',
-                            }
-                        ]}
                     >
-                        {this.props.children}
+                        <View
+                            style={{
+                                flex: 1,
+                                justifyContent: 'center',
+                                alignContent: 'center',
+                                alignItems: 'center'
+                            }}
+                        >
+                            <View
+                                style={[
+                                    {
+                                        width: '85%',
+                                    }
+                                ]}
+                            >
+                                {this.props.children}
+                            </View>
+                        </View>
                     </View>
-                </View>
+                </TouchableWithoutFeedback>
             </Modal>
         );
+    }
+
+    private onBackgroundPress = () => {
+        console.log('ModalBox background onPress');
+        if (this.props.onBackgroundPress) {
+            this.props.onBackgroundPress();
+        }
     }
 }

@@ -10,6 +10,7 @@ interface IProps<T extends { title: string, value: V }, V> {
     selected: V[];
     show: boolean;
     onChoose: (value: V) => void;
+    onClose: () => void;
 }
 
 export class ChoicePanel<T extends { title: string, value: V }, V> extends React.Component<IProps<T, V>> {
@@ -18,6 +19,7 @@ export class ChoicePanel<T extends { title: string, value: V }, V> extends React
             return (
                 <ModalBox
                     show={this.props.show}
+                    onBackgroundPress={this.onClose}
                 >
                     <Card
                         flex={0}
@@ -69,6 +71,12 @@ export class ChoicePanel<T extends { title: string, value: V }, V> extends React
     private onChoose = (value: V) => {
         if (this.props.onChoose) {
             this.props.onChoose(value);
+        }
+    }
+
+    private onClose = () => {
+        if (this.props.onClose) {
+            this.props.onClose();
         }
     }
 }
