@@ -6,8 +6,16 @@ export class SeparateLine extends React.PureComponent {
         return (React.createElement(View, { style: {
                 backgroundColor: StyleManager.separatorColor,
                 height: StyleManager.separatorThickness,
-                marginTop: StyleManager.separatorSpacing,
-                marginBottom: StyleManager.separatorSpacing,
+                marginTop: this.margin,
+                marginBottom: this.margin,
             } }));
+    }
+    get margin() {
+        if (this.props.height && this.props.height > 0) {
+            return this.props.height / 2;
+        }
+        else {
+            return StyleManager.separatorSpacing;
+        }
     }
 }

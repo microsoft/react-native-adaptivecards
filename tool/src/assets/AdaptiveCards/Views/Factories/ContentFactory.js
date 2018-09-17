@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SeparateLine } from '../../Components/Basic/SeparateLine';
 import { ContentType } from '../../Shared/Types';
+import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
 import { AdaptiveCardView } from '../Cards/AdaptiveCard';
@@ -20,8 +21,12 @@ export class ContentFactory {
         if (model) {
             let elementView = ContentFactory.createElement(model, index, theme);
             if (index > 0 && model.separator) {
+                let height = undefined;
+                if (model.spacing) {
+                    height = StyleManager.getSpacing(model.spacing);
+                }
                 return [
-                    React.createElement(SeparateLine, { key: 'SeparateLine' + index }),
+                    React.createElement(SeparateLine, { height: height, key: 'SeparateLine' + index }),
                     elementView
                 ];
             }

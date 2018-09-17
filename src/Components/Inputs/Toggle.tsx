@@ -12,6 +12,7 @@ interface IProps<T> {
     title: string;
     value: T;
     checked: boolean;
+    marginTop?: number;
     theme: 'default' | 'emphasis';
     onClick: (value: T) => void;
 }
@@ -29,7 +30,7 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                             alignContent: 'center',
                             alignItems: 'center',
                             alignSelf: 'stretch',
-                            paddingTop: 18,
+                            marginTop: this.props.marginTop,
                         }
                     ]}
                 >

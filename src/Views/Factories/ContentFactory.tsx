@@ -16,6 +16,7 @@ import { TextInputModel } from '../../Models/Inputs/TextInput';
 import { TimeInputModel } from '../../Models/Inputs/TimeInput';
 import { ToggleInputModel } from '../../Models/Inputs/ToggleInput';
 import { ContentType } from '../../Shared/Types';
+import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
 import { TextBlockView } from '../CardElements/TextBlock';
 import { AdaptiveCardView } from '../Cards/AdaptiveCard';
@@ -36,8 +37,13 @@ export class ContentFactory {
         if (model) {
             let elementView = ContentFactory.createElement(model, index, theme);
             if (index > 0 && model.separator) {
+                let height: number = undefined;
+                if (model.spacing) {
+                    height = StyleManager.getSpacing(model.spacing);
+                }
                 return [
                     <SeparateLine
+                        height={height}
                         key={'SeparateLine' + index}
                     />,
                     elementView

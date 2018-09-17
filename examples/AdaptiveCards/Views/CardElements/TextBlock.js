@@ -19,9 +19,12 @@ export class TextBlockView extends React.Component {
             }, numberOfLines: model.maxLines }, model.text));
     }
     get spacing() {
+        if (this.props.model.separator) {
+            return 0;
+        }
         if (this.props.index !== undefined && this.props.index > 0) {
             return StyleManager.getSpacing(this.props.model.spacing);
         }
-        return StyleManager.getSpacing('default');
+        return 0;
     }
 }

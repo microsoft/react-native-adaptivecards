@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Toggle } from '../../Components/Inputs/Toggle';
+import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ToggleInputView extends React.Component {
     constructor(props) {
@@ -44,6 +45,15 @@ export class ToggleInputView extends React.Component {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
         }
-        return (React.createElement(Toggle, { title: model.title, value: model.value, checked: this.state.checked, theme: theme, onClick: this.onClick }));
+        return (React.createElement(Toggle, { title: model.title, value: model.value, checked: this.state.checked, theme: theme, marginTop: this.spacing, onClick: this.onClick }));
+    }
+    get spacing() {
+        if (this.props.model.separator) {
+            return 0;
+        }
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.model.spacing);
+        }
+        return 0;
     }
 }

@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { Toggle } from '../../Components/Inputs/Toggle';
 import { ToggleInputModel } from '../../Models/Inputs/ToggleInput';
+import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
@@ -58,6 +59,7 @@ export class ToggleInputView extends React.Component<IProps, IState> {
                 value={model.value}
                 checked={this.state.checked}
                 theme={theme}
+                marginTop={this.spacing}
                 onClick={this.onClick}
             />
         );
@@ -79,5 +81,16 @@ export class ToggleInputView extends React.Component<IProps, IState> {
         this.setState({
             checked: value === this.props.model.valueOn
         });
+    }
+
+    private get spacing() {
+        if (this.props.model.separator) {
+            return 0;
+        }
+
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.model.spacing);
+        }
+        return 0;
     }
 }

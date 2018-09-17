@@ -18,7 +18,7 @@ export class Toggle extends React.Component {
                         alignContent: 'center',
                         alignItems: 'center',
                         alignSelf: 'stretch',
-                        paddingTop: 18,
+                        marginTop: this.props.marginTop,
                     }
                 ] },
                 React.createElement(Text, { style: {
