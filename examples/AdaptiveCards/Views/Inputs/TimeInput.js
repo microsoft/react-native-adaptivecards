@@ -136,6 +136,6 @@ export class TimeInputView extends React.Component {
         if (this.props.index !== undefined && this.props.index > 0) {
             return StyleManager.getSpacing(this.props.model.spacing);
         }
-        return 0;
+        return StyleManager.getSpacing('default');
     }
 }

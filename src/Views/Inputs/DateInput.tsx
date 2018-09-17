@@ -202,6 +202,6 @@ export class DateInputView extends React.Component<IProps, IState> {
         if (this.props.index !== undefined && this.props.index > 0) {
             return StyleManager.getSpacing(this.props.model.spacing);
         }
-        return 0;
+        return StyleManager.getSpacing('default');
     }
 }

@@ -178,7 +178,9 @@ export class LabelInput extends React.Component<IProps, IState> {
                 <ScrollView
                     key={1}
                     style={{
-                        maxHeight: 200
+                        maxHeight: 200,
+                        paddingLeft: 1,
+                        paddingRight: 1,
                     }}
                 >
                     {this.props.suggestionView}

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { LabelInput } from '../../Components/Inputs/LabelInput';
 import { CardModel } from '../../Models/Cards/Card';
 import { PeoplePickerModel } from '../../Models/Inputs/PeoplePicker';
+import { StyleManager } from '../../Styles/StyleManager';
 import { NumberUtils } from '../../Utils/NumberUtils';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
@@ -67,6 +68,7 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                 value={this.state.value}
                 focused={this.state.inputFocused}
                 labels={this.labels}
+                marginTop={this.spacing}
                 suggestionView={ContentFactory.createElement(this.state.suggestionCard, 0, theme)}
                 onRequestSuggestion={this.onRequestSuggestion}
                 onFocus={this.onFocus}
@@ -144,5 +146,12 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
                 title: contact.Name
             };
         });
+    }
+
+    private get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.model.spacing);
+        }
+        return StyleManager.getSpacing('default');
     }
 }

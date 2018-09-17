@@ -152,13 +152,6 @@ export class ImageView extends React.Component<IProps, IState> {
         }
     }
 
-    private get spacing() {
-        if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
-        }
-        return 0;
-    }
-
     private get flex() {
         const { model, size } = this.props;
 
@@ -171,5 +164,12 @@ export class ImageView extends React.Component<IProps, IState> {
             return 1;
         }
         return 0;
+    }
+
+    private get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.model.spacing);
+        }
+        return StyleManager.getSpacing('default');
     }
 }

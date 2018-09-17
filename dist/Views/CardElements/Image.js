@@ -91,12 +91,6 @@ export class ImageView extends React.Component {
         }
         return null;
     }
-    get spacing() {
-        if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
-        }
-        return 0;
-    }
     get flex() {
         const { model, size } = this.props;
         if (!model) {
@@ -107,5 +101,11 @@ export class ImageView extends React.Component {
             return 1;
         }
         return 0;
+    }
+    get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.model.spacing);
+        }
+        return StyleManager.getSpacing('default');
     }
 }

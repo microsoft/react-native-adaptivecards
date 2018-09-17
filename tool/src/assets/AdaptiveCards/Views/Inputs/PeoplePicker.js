@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { LabelInput } from '../../Components/Inputs/LabelInput';
+import { StyleManager } from '../../Styles/StyleManager';
 import { NumberUtils } from '../../Utils/NumberUtils';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
@@ -87,7 +88,7 @@ export class PeoplePickerView extends React.Component {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
         }
-        return (React.createElement(LabelInput, { placeholder: model.placeholder, value: this.state.value, focused: this.state.inputFocused, labels: this.labels, suggestionView: ContentFactory.createElement(this.state.suggestionCard, 0, theme), onRequestSuggestion: this.onRequestSuggestion, onFocus: this.onFocus, onBlur: this.onBlur, onLabelRemove: this.onContactLabelRemove }));
+        return (React.createElement(LabelInput, { placeholder: model.placeholder, value: this.state.value, focused: this.state.inputFocused, labels: this.labels, marginTop: this.spacing, suggestionView: ContentFactory.createElement(this.state.suggestionCard, 0, theme), onRequestSuggestion: this.onRequestSuggestion, onFocus: this.onFocus, onBlur: this.onBlur, onLabelRemove: this.onContactLabelRemove }));
     }
     get labels() {
         return this.state.selected.map((contact) => {
@@ -95,5 +96,11 @@ export class PeoplePickerView extends React.Component {
                 title: contact.Name
             };
         });
+    }
+    get spacing() {
+        if (this.props.index !== undefined && this.props.index > 0) {
+            return StyleManager.getSpacing(this.props.model.spacing);
+        }
+        return StyleManager.getSpacing('default');
     }
 }

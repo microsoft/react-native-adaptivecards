@@ -156,6 +156,6 @@ export class ContainerView extends React.Component<IProps> {
         if (this.props.index !== undefined && this.props.index > 0) {
             return StyleManager.getSpacing(this.props.model.spacing);
         }
-        return 0;
+        return StyleManager.getSpacing('default');
     }
 }
