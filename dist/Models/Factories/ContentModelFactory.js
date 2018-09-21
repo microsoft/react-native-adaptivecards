@@ -8,6 +8,7 @@ import { ColumnSetModel } from '../Containers/ColumnSet';
 import { ContainerModel } from '../Containers/Container';
 import { FactSetModel } from '../Containers/FactSet';
 import { ImageSetModel } from '../Containers/ImageSet';
+import { CounterModel } from '../Customs/Microsoft.Counter';
 import { ChoiceSetModel } from '../Inputs/ChoiceSet';
 import { DateInputModel } from '../Inputs/DateInput';
 import { NumberInputModel } from '../Inputs/NumberInput';
@@ -18,60 +19,44 @@ import { ToggleInputModel } from '../Inputs/ToggleInput';
 export class ContentModelFactory {
     static create(json, parent, context) {
         if (!json) {
-            return null;
+            return undefined;
         }
-        let model;
         switch (json.type) {
             case ContentType.Image:
-                model = new ImageModel(json, parent, context);
-                break;
+                return new ImageModel(json, parent, context);
             case ContentType.TextBlock:
-                model = new TextBlockModel(json, parent, context);
-                break;
+                return new TextBlockModel(json, parent, context);
             case ContentType.Column:
-                model = new ColumnModel(json, parent, context);
-                break;
+                return new ColumnModel(json, parent, context);
             case ContentType.ColumnSet:
-                model = new ColumnSetModel(json, parent, context);
-                break;
+                return new ColumnSetModel(json, parent, context);
             case ContentType.Container:
-                model = new ContainerModel(json, parent, context);
-                break;
+                return new ContainerModel(json, parent, context);
             case ContentType.FactSet:
-                model = new FactSetModel(json, parent, context);
-                break;
+                return new FactSetModel(json, parent, context);
             case ContentType.ImageSet:
-                model = new ImageSetModel(json, parent, context);
-                break;
+                return new ImageSetModel(json, parent, context);
             case ContentType.TextInput:
-                model = new TextInputModel(json, parent, context);
-                break;
+                return new TextInputModel(json, parent, context);
             case ContentType.DateInput:
-                model = new DateInputModel(json, parent, context);
-                break;
+                return new DateInputModel(json, parent, context);
             case ContentType.TimeInput:
-                model = new TimeInputModel(json, parent, context);
-                break;
+                return new TimeInputModel(json, parent, context);
             case ContentType.NumberInput:
-                model = new NumberInputModel(json, parent, context);
-                break;
+                return new NumberInputModel(json, parent, context);
             case ContentType.ChoiceSetInput:
-                model = new ChoiceSetModel(json, parent, context);
-                break;
+                return new ChoiceSetModel(json, parent, context);
             case ContentType.ToggleInput:
-                model = new ToggleInputModel(json, parent, context);
-                break;
+                return new ToggleInputModel(json, parent, context);
             case ContentType.PeoplePicker:
-                model = new PeoplePickerModel(json, parent, context);
-                break;
+                return new PeoplePickerModel(json, parent, context);
+            case ContentType.Counter:
+                return new CounterModel(json, parent, context);
             case ContentType.AdaptiveCard:
-                model = new CardModel(json, parent, CardContext.createInstance(context));
-                break;
+                return new CardModel(json, parent, CardContext.createInstance(context));
             default:
-                model = null;
-                break;
+                return undefined;
         }
-        return model;
     }
     static createSet(json, parent, context) {
         let modelSet = [];

@@ -24,6 +24,8 @@ interface IState {
 }
 
 export class ImageView extends React.Component<IProps, IState> {
+    private mounted: boolean;
+
     constructor(props: IProps) {
         super(props);
 
@@ -35,6 +37,8 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     public componentDidMount() {
+        this.mounted = true;
+
         const { model, size, maxWidth, maxHeight } = this.props;
 
         if (model) {
@@ -52,6 +56,17 @@ export class ImageView extends React.Component<IProps, IState> {
                 this.onImageSize,
                 this.onImageSizeError
             );
+        }
+    }
+
+    public componentWillUnmount() {
+        this.mounted = false;
+    }
+
+    // tslint:disable-next-line:max-line-length
+    public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) {
+        if (this.mounted) {
+            super.setState(state, callback);
         }
     }
 

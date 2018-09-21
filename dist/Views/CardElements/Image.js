@@ -70,6 +70,7 @@ export class ImageView extends React.Component {
         };
     }
     componentDidMount() {
+        this.mounted = true;
         const { model, size, maxWidth, maxHeight } = this.props;
         if (model) {
             if (model.context) {
@@ -79,6 +80,14 @@ export class ImageView extends React.Component {
                 }
             }
             ImageUtils.fetchSize(model.url, size || model.size, { width: maxWidth, height: maxHeight }, this.onImageSize, this.onImageSizeError);
+        }
+    }
+    componentWillUnmount() {
+        this.mounted = false;
+    }
+    setState(state, callback) {
+        if (this.mounted) {
+            super.setState(state, callback);
         }
     }
     render() {

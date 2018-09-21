@@ -1,0 +1,25 @@
+{
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0",
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "Counter",
+            "weight": "bolder",
+            "size": "medium"
+        },
+        {
+            "type": "Microsoft.Counter",
+            "value": 600,
+            "format": "Timer",
+            "delay": 5
+        },
+        {
+            "type": "Microsoft.Counter",
+            "value": 600,
+            "format": "CountDown",
+            "delay": 5
+        }
+    ]
+}

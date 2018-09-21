@@ -8,6 +8,7 @@ import { ColumnSetModel } from '../../Models/Containers/ColumnSet';
 import { ContainerModel } from '../../Models/Containers/Container';
 import { FactSetModel } from '../../Models/Containers/FactSet';
 import { ImageSetModel } from '../../Models/Containers/ImageSet';
+import { CounterModel } from '../../Models/Customs/Microsoft.Counter';
 import { ChoiceSetModel } from '../../Models/Inputs/ChoiceSet';
 import { DateInputModel } from '../../Models/Inputs/DateInput';
 import { NumberInputModel } from '../../Models/Inputs/NumberInput';
@@ -24,6 +25,7 @@ import { ColumnSetView } from '../Containers/ColumnSet';
 import { ContainerView } from '../Containers/Container';
 import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
+import { CounterView } from '../Customs/Microsoft.Counter';
 import { ChoiceSetView } from '../Inputs/ChoiceSetInput';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
@@ -180,6 +182,15 @@ export class ContentFactory {
                         <PeoplePickerView
                             key={'PeoplePickerView' + index}
                             model={model as PeoplePickerModel}
+                            index={index}
+                            theme={theme}
+                        />
+                    );
+                case ContentType.Counter:
+                    return (
+                        <CounterView
+                            key={'CounterView' + index}
+                            model={model as CounterModel}
                             index={index}
                             theme={theme}
                         />

@@ -8,25 +8,18 @@ export class ActionModelFactory {
         if (!json) {
             return undefined;
         }
-        let action;
         switch (json.type) {
             case ActionType.OpenUrl:
-                action = new OpenUrlActionModel(json, parent, context);
-                break;
+                return new OpenUrlActionModel(json, parent, context);
             case ActionType.Submit:
-                action = new SubmitActionModel(json, parent, context);
-                break;
+                return new SubmitActionModel(json, parent, context);
             case ActionType.ShowCard:
-                action = new ShowCardActionModel(json, parent, context);
-                break;
+                return new ShowCardActionModel(json, parent, context);
             case ActionType.Select:
-                action = new SelectActionModel(json, parent, context);
-                break;
+                return new SelectActionModel(json, parent, context);
             default:
-                action = undefined;
-                break;
+                return undefined;
         }
-        return action;
     }
     static createSet(json, parent, context) {
         let actionSet = [];

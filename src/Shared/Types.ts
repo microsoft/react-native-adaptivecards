@@ -63,6 +63,7 @@ export enum ContentType {
     Column = 'Column',
     ColumnSet = 'ColumnSet',
     Container = 'Container',
+    Counter = 'Microsoft.Counter',
     FactSet = 'FactSet',
     Image = 'Image',
     ImageSet = 'ImageSet',

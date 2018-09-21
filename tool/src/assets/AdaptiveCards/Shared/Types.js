@@ -33,6 +33,7 @@ export var ContentType;
     ContentType["Column"] = "Column";
     ContentType["ColumnSet"] = "ColumnSet";
     ContentType["Container"] = "Container";
+    ContentType["Counter"] = "Microsoft.Counter";
     ContentType["FactSet"] = "FactSet";
     ContentType["Image"] = "Image";
     ContentType["ImageSet"] = "ImageSet";

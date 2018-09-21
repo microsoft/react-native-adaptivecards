@@ -31,6 +31,8 @@ export default class App extends React.Component {
                     padding: 10,
                     backgroundColor: 'white',
                 }}>
+                <AdaptiveCards adaptiveCard={mockData.counter} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
+                {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.inputs} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.peoplePicker} onCallback={this.onCallback} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} />

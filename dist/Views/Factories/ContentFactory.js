@@ -9,6 +9,7 @@ import { ColumnSetView } from '../Containers/ColumnSet';
 import { ContainerView } from '../Containers/Container';
 import { FactSetView } from '../Containers/FactSet';
 import { ImageSetView } from '../Containers/ImageSet';
+import { CounterView } from '../Customs/Microsoft.Counter';
 import { ChoiceSetView } from '../Inputs/ChoiceSetInput';
 import { DateInputView } from '../Inputs/DateInput';
 import { NumberInputView } from '../Inputs/NumberInput';
@@ -66,6 +67,8 @@ export class ContentFactory {
                     return (React.createElement(ToggleInputView, { key: 'ToggleInputView' + index, model: model, index: index, theme: theme }));
                 case ContentType.PeoplePicker:
                     return (React.createElement(PeoplePickerView, { key: 'PeoplePickerView' + index, model: model, index: index, theme: theme }));
+                case ContentType.Counter:
+                    return (React.createElement(CounterView, { key: 'CounterView' + index, model: model, index: index, theme: theme }));
                 default:
                     return null;
             }
