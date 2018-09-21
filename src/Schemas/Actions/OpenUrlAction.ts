@@ -17,5 +17,14 @@ export class OpenUrlActionSchema extends SchemaElement<OpenUrlActionModel> {
             name: 'url',
             isRequired: true,
         },
+        '-ms-method': {
+            name: '-ms-method',
+            isRequired: false,
+            accepts: ['GET', 'POST'],
+        },
+        '-ms-data': {
+            name: '-ms-data',
+            isRequired: false,
+        }
     };
 }

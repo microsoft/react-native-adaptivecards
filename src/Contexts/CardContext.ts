@@ -9,7 +9,7 @@ export class CardContext extends TreeNode<CardContext> {
     private onWarning?: (warning: any) => void;
     private onFocus?: () => void;
     private onBlur?: () => void;
-    private onOpenUrlAction?: (url: string) => Promise<any>;
+    private onOpenUrlAction?: (url: string, method: string, data: any) => Promise<any>;
     private onShowCardAction?: (card: CardModel) => Promise<any>;
     private onSubmitAction?: (data: any) => Promise<any>;
     private onCallbackAction?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
@@ -55,7 +55,7 @@ export class CardContext extends TreeNode<CardContext> {
         this.onBlur = handler;
     }
 
-    public registerOpenUrlActionHandler(handler: (url: string) => Promise<any>) {
+    public registerOpenUrlActionHandler(handler: (url: string, method: string, data: any) => Promise<any>) {
         this.onOpenUrlAction = handler;
     }
 
@@ -127,7 +127,7 @@ export class CardContext extends TreeNode<CardContext> {
         return undefined;
     }
 
-    public get openUrlActionHandler() : (url: string) => Promise<any> {
+    public get openUrlActionHandler(): (url: string, method: string, data: any) => Promise<any> {
         let context = this.findRequiredContext(context => context.onOpenUrlAction !== undefined);
         if (context) {
             return context.onOpenUrlAction;

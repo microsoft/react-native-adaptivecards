@@ -13,7 +13,7 @@ export interface IAdaptiveCardProps {
     config?: any;
     style?: any;
     onSubmit?: (data: any) => Promise<any>;
-    onOpenUrl?: (url: string) => Promise<any>;
+    onOpenUrl?: (url: string, method: string, data: any) => Promise<any>;
     onCallback?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
     onFocus?: () => void;
     onBlur?: () => void;

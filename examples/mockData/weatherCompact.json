@@ -121,7 +121,8 @@
             "selectAction": {
                 "type": "Action.OpenUrl",
                 "url": "https://www.bing.com/search?q=seattle+weather&elv=AXXfrEiqqD9r3GuelwApulq*CTgdM9fHsiB5XxuFECMD2NmeVOniG06Q3tEeftHc*XcVTvozsOCVVX9svbR8o*f*6a2S0kvZIYL0ELuq05MP",
-                "title": "Open In Bing"
+                "title": "Open In Bing",
+                "-ms-method": "GET"
             }
         }
     ],

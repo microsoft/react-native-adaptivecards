@@ -1,23 +1,41 @@
-import { Linking } from 'react-native';
 import { ActionModel } from '../Abstract/ActionModel';
 export class OpenUrlActionModel extends ActionModel {
     constructor(json, parent, context) {
         super(json, parent, context);
         this.onAction = (onSuccess, onError) => {
-            if (this.context) {
-                let handler = this.context.openUrlActionHandler;
-                if (handler) {
-                    handler(this.url).then(onSuccess).catch(onError);
-                    return;
+            if (this.context && this.context.form) {
+                if (this.context.form.isValid()) {
+                    console.log('Form valid');
+                    let handler = this.context.openUrlActionHandler;
+                    if (handler) {
+                        handler(this.url, this.method, this.populateFormData(this.context)).then(onSuccess).catch(onError);
+                    }
+                }
+                else {
+                    console.log('Form invalid');
                 }
             }
-            Linking.canOpenURL(this.url).then((supported) => {
-                if (supported) {
-                    Linking.openURL(this.url).then(onSuccess).catch(onError);
-                }
-            });
+        };
+        this.populateFormData = (context) => {
+            let data = Object.assign({}, (this.data || {}));
+            if (context && context.form) {
+                data = context.form.read().reduce((prev, current) => {
+                    if (current.id) {
+                        if (current.value) {
+                            prev[current.id] = current.value;
+                        }
+                        else {
+                            prev[current.id] = '';
+                        }
+                    }
+                    return prev;
+                }, data);
+            }
+            return data;
         };
         this.url = json.url;
         this.title = json.title;
+        this.method = json['-ms-method'];
+        this.data = json['-ms-data'];
     }
 }
