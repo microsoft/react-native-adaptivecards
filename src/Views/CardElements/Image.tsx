@@ -39,24 +39,7 @@ export class ImageView extends React.Component<IProps, IState> {
     public componentDidMount() {
         this.mounted = true;
 
-        const { model, size, maxWidth, maxHeight } = this.props;
-
-        if (model) {
-            if (model.context) {
-                let handler = model.context.infoHandler;
-                if (handler) {
-                    handler(`AdaptiveCard >> Start load img >> ${model.url}`);
-                }
-            }
-
-            ImageUtils.fetchSize(
-                model.url,
-                size || model.size,
-                { width: maxWidth, height: maxHeight },
-                this.onImageSize,
-                this.onImageSizeError
-            );
-        }
+        setTimeout(this.fetchImageSize, 500);
     }
 
     public componentWillUnmount() {
@@ -164,6 +147,27 @@ export class ImageView extends React.Component<IProps, IState> {
                 width: size.width,
                 height: size.height,
             });
+        }
+    }
+
+    private fetchImageSize = () => {
+        const { model, size, maxWidth, maxHeight } = this.props;
+
+        if (model) {
+            if (model.context) {
+                let handler = model.context.infoHandler;
+                if (handler) {
+                    handler(`AdaptiveCard >> Start load img >> ${model.url}`);
+                }
+            }
+
+            ImageUtils.fetchSize(
+                model.url,
+                size || model.size,
+                { width: maxWidth, height: maxHeight },
+                this.onImageSize,
+                this.onImageSizeError
+            );
         }
     }
 
