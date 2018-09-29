@@ -28,6 +28,7 @@ var dinning = require('./dinning.json');
 var bingMap = require('./bingMap.json');
 var bingFact = require('./bingFact.json');
 var counter = require('./counter.json');
+var button = require('./button.json');
 
 exports["default"] = {
     adaptiveUpdate: adaptiveUpdate,
@@ -58,4 +59,5 @@ exports["default"] = {
     peopleSuggestion: peopleSuggestion,
     bingFact: bingFact,
     counter: counter,
+    button: button,
 };

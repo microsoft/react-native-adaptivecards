@@ -38,7 +38,9 @@ export class DatePanel extends React.Component<IProps> {
                             mode='date'
                             onDateChange={this.onDateChange}
                         />
-                        <ButtonGroup>
+                        <ButtonGroup
+                            hasSpacing={true}
+                        >
                             {this.renderCancelButton()}
                             {this.renderSaveButton()}
                         </ButtonGroup>

@@ -64,7 +64,7 @@ export class AdaptiveCardView extends React.Component {
         if (!model || !model.actions || model.actions.length === 0) {
             return undefined;
         }
-        return (React.createElement(ButtonGroup, null, this.renderActions()));
+        return (React.createElement(ButtonGroup, { hasSpacing: model && model.body && model.body.length > 0 }, this.renderActions()));
     }
     renderActions() {
         const { model, theme } = this.props;

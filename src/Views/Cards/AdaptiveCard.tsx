@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LayoutChangeEvent, StyleProp, View, ViewStyle} from 'react-native';
+import { LayoutChangeEvent, StyleProp, View, ViewStyle } from 'react-native';
 import { ButtonGroup } from '../../Components/Containers/ButtonGroup';
 import { Card } from '../../Components/Containers/Card';
 import { CardModel } from '../../Models/Cards/Card';
@@ -91,7 +91,9 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         }
 
         return (
-            <ButtonGroup>
+            <ButtonGroup
+                hasSpacing={model && model.body && model.body.length > 0}
+            >
                 {this.renderActions()}
             </ButtonGroup>
         );

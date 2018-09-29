@@ -38,7 +38,9 @@ export class TimePanel extends React.Component<IProps> {
                             mode='time'
                             onDateChange={this.onTimeChangeIos}
                         />
-                        <ButtonGroup>
+                        <ButtonGroup
+                            hasSpacing={true}
+                        >
                             {this.renderCancelButton()}
                             {this.renderSaveButton()}
                         </ButtonGroup>

@@ -40,7 +40,7 @@ export class TimePanel extends React.Component {
             return (React.createElement(ModalBox, { show: this.show },
                 React.createElement(Card, { flex: 0, fit: 'content' },
                     React.createElement(DatePickerIOS, { date: TimeUtils.extractTime(this.props.value), mode: 'time', onDateChange: this.onTimeChangeIos }),
-                    React.createElement(ButtonGroup, null,
+                    React.createElement(ButtonGroup, { hasSpacing: true },
                         this.renderCancelButton(),
                         this.renderSaveButton()))));
         }
