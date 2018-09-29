@@ -22,24 +22,27 @@ export class ImageBackground extends React.Component {
                 });
             }
         };
+        this.fetchImageSize = () => {
+            const { url } = this.props;
+            if (url) {
+                Image.getSize(url, (width, height) => {
+                    if (width > 0 && height > 0) {
+                        this.setState({
+                            imgRatio: width / height,
+                        });
+                    }
+                }, (error) => {
+                    this.onError(error);
+                });
+            }
+        };
         this.state = {
             containerRatio: 1,
             imgRatio: 1,
         };
     }
     componentDidMount() {
-        const { url } = this.props;
-        if (url) {
-            Image.getSize(url, (width, height) => {
-                if (width > 0 && height > 0) {
-                    this.setState({
-                        imgRatio: width / height,
-                    });
-                }
-            }, (error) => {
-                this.onError(error);
-            });
-        }
+        setTimeout(this.fetchImageSize, 500);
     }
     render() {
         return (React.createElement(View, { style: [
