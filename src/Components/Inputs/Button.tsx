@@ -29,7 +29,7 @@ export interface IButtonProps {
         marginRight?: number;
     };
     onPress: () => void;
-    oneTime?: boolean;
+    disabled?: boolean;
     color?: string;
     backgroundColor?: string;
     fontFamily?: string;
@@ -65,7 +65,7 @@ export class Button extends React.Component<IButtonProps> {
             <Touchable
                 testId={this.props.title}
                 onPress={this.props.onPress}
-                oneTime={this.props.oneTime}
+                disabled={this.props.disabled}
                 accessibilityLabel={'Button ' + this.props.title}
                 style={[
                     {
@@ -87,11 +87,12 @@ export class Button extends React.Component<IButtonProps> {
                     }, this.props.style
                 ]}
             >
-                <View style={{
-                    flexDirection: this.layoutDirection,
-                    flex: 0,
-                    justifyContent: this.props.textVerticalAlign,
-                }} pointerEvents='none'
+                <View
+                    style={{
+                        flexDirection: this.layoutDirection,
+                        flex: 0,
+                        justifyContent: this.props.textVerticalAlign,
+                    }} pointerEvents='none'
                 >
                     {this.renderIcon()}
                     {this.renderTitle()}

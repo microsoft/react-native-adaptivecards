@@ -8,7 +8,6 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-import { ConfigManager } from '../../Config/ConfigManager';
 import { Guid } from '../../Shared/Guid';
 
 interface IProps {
@@ -20,17 +19,12 @@ interface IProps {
     accessibilityComponentType?: 'none' | 'button' | 'radiobutton_checked' | 'radiobutton_unchecked';
     hitSlop?: object;
     activeOpacity?: number;
-    oneTime?: boolean;
     onPress: (data: any) => void;
     onLongPress?: (data: any) => void;
     onLayout?: (event: LayoutChangeEvent) => void;
 }
 
-interface IState {
-    disabled: boolean;
-}
-
-export class Touchable extends React.Component<IProps, IState> {
+export class Touchable extends React.Component<IProps> {
     private testId: string;
 
     constructor(props: IProps) {
@@ -55,14 +49,6 @@ export class Touchable extends React.Component<IProps, IState> {
         }
     }
 
-    public componentDidUpdate(prevProps: IProps, prevState: IState) {
-        if (prevState.disabled !== this.props.disabled) {
-            this.setState({
-                disabled: this.props.disabled
-            });
-        }
-    }
-
     public render() {
         const {
             onLongPress,
@@ -72,13 +58,14 @@ export class Touchable extends React.Component<IProps, IState> {
             activeOpacity,
             hitSlop,
             style,
+            disabled,
             ...otherProps
         } = this.props;
 
         if (Platform.OS === 'android') {
             return (
                 <TouchableNativeFeedback
-                    disabled={this.state.disabled}
+                    disabled={disabled}
                     onPress={this.onPress}
                     onLongPress={onLongPress}
                     accessible={true}
@@ -98,7 +85,7 @@ export class Touchable extends React.Component<IProps, IState> {
         } else {
             return (
                 <TouchableOpacity
-                    disabled={this.state.disabled}
+                    disabled={disabled}
                     onPress={this.onPress}
                     onLongPress={onLongPress}
                     accessible={true}
@@ -117,13 +104,7 @@ export class Touchable extends React.Component<IProps, IState> {
     }
 
     private onPress = (data: any) => {
-        if (!this.state.disabled) {
-            if (this.props.oneTime && ConfigManager.getInstance().getConfig().mode !== 'debug') {
-                this.setState({
-                    disabled: true,
-                });
-            }
-
+        if (!this.props.disabled) {
             if (this.props.onPress) {
                 this.props.onPress(data);
             }

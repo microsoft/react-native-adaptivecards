@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
+import { ConfigManager } from '../../Config/ConfigManager';
 import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { BackgroundImageView } from '../CardElements/BackgroundImage';
 import { ContentFactory } from '../Factories/ContentFactory';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ColumnView extends React.Component {
-    constructor() {
-        super(...arguments);
+    constructor(props) {
+        super(props);
         this.renderTouchableBlock = (backgroundColor) => {
-            return (React.createElement(Touchable, { onPress: this.onPress, oneTime: this.hasOneTimeAction, style: {
+            return (React.createElement(Touchable, { onPress: this.onPress, disabled: this.state.disabled, style: {
                     flex: this.flex,
                     flexDirection: 'column',
                     alignSelf: this.alignSelf,
@@ -55,10 +56,18 @@ export class ColumnView extends React.Component {
             if (model && model.selectAction && model.selectAction.onAction) {
                 model.selectAction.onAction(() => {
                     console.log('Action Success');
+                    if (this.hasOneTimeAction) {
+                        this.setState({
+                            disabled: true,
+                        });
+                    }
                 }, (error) => {
                     console.log('Action Failed >> ', error);
                 });
             }
+        };
+        this.state = {
+            disabled: false,
         };
     }
     render() {
@@ -75,7 +84,7 @@ export class ColumnView extends React.Component {
         }
     }
     get hasOneTimeAction() {
-        return this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
+        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
     get justifyContent() {
         const { model } = this.props;

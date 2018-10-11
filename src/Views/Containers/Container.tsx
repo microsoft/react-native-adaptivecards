@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Touchable } from '../../Components/Basic/Touchable';
+import { ConfigManager } from '../../Config/ConfigManager';
 import { ContainerModel } from '../../Models/Containers/Container';
 import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -14,7 +15,19 @@ interface IProps {
     theme: 'emphasis' | 'default';
 }
 
-export class ContainerView extends React.Component<IProps> {
+interface IState {
+    disabled: boolean;
+}
+
+export class ContainerView extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
+        super(props);
+
+        this.state = {
+            disabled: false,
+        };
+    }
+
     public render() {
         const { model, theme } = this.props;
 
@@ -35,7 +48,7 @@ export class ContainerView extends React.Component<IProps> {
         return (
             <Touchable
                 onPress={this.onPress}
-                oneTime={this.hasOneTimeAction}
+                disabled={this.state.disabled}
                 accessibilityComponentType='button'
                 style={{
                     flex: this.flex,
@@ -108,6 +121,11 @@ export class ContainerView extends React.Component<IProps> {
             model.selectAction.onAction(
                 () => {
                     console.log('Action Success');
+                    if (this.hasOneTimeAction) {
+                        this.setState({
+                            disabled: true
+                        });
+                    }
                 },
                 (error) => {
                     console.log('Action Failed >> ', error);
@@ -117,7 +135,8 @@ export class ContainerView extends React.Component<IProps> {
     }
 
     private get hasOneTimeAction() {
-        return this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
+        // tslint:disable-next-line:max-line-length
+        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
 
     private get justifyContent() {

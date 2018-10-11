@@ -13,6 +13,7 @@ export class SubmitActionModel extends ActionModel {
                 }
                 else {
                     console.log('Form invalid');
+                    onError('Form invalid');
                 }
             }
         };

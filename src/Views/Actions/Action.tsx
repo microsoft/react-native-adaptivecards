@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Button } from '../../Components/Inputs/Button';
+import { ConfigManager } from '../../Config/ConfigManager';
 import { OpenUrlActionModel } from '../../Models/Actions/OpenUrlAction';
 import { ShowCardActionModel } from '../../Models/Actions/ShowCardAction';
 import { SubmitActionModel } from '../../Models/Actions/SubmitAction';
@@ -14,7 +15,19 @@ interface IProps {
     theme: 'default' | 'emphasis';
 }
 
-export class ActionView extends React.Component<IProps> {
+interface IState {
+    disabled: boolean;
+}
+
+export class ActionView extends React.Component<IProps, IState> {
+    constructor(props: IProps) {
+        super(props);
+
+        this.state = {
+            disabled: false,
+        };
+    }
+
     public render() {
         const { model, theme } = this.props;
 
@@ -37,9 +50,9 @@ export class ActionView extends React.Component<IProps> {
                 paddingLeft={16}
                 paddingRight={16}
                 onPress={this.onPress}
+                disabled={this.state.disabled}
                 marginTop={StyleManager.actionDirection === 'vertically' ? this.spacing : 0}
                 marginLeft={StyleManager.actionDirection === 'horizontal' ? this.spacing : 0}
-                oneTime={this.isOneTimeAction}
                 style={{
                     borderLeftWidth: this.leftBorderWidth,
                     borderLeftColor: StyleManager.separatorColor,
@@ -55,6 +68,11 @@ export class ActionView extends React.Component<IProps> {
             model.onAction(
                 () => {
                     console.log('Action Success');
+                    if (this.isOneTimeAction) {
+                        this.setState({
+                            disabled: true,
+                        });
+                    }
                 },
                 (error) => {
                     console.log('Action Failed >> ', error);
@@ -64,7 +82,8 @@ export class ActionView extends React.Component<IProps> {
     }
 
     private get isOneTimeAction() {
-        return this.props.model && this.props.model.type === ActionType.Submit;
+        // tslint:disable-next-line:max-line-length
+        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model && this.props.model.type === ActionType.Submit;
     }
 
     private get leftBorderWidth() {
