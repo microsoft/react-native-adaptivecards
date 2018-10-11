@@ -35,7 +35,16 @@ export class PeoplePickerModel extends InputModel {
         this.suggestionContext.registerSelectActionHandler(this.onSuggestionSelect);
     }
 
-    public isValueValid = (value?: string) => true;
+    public isValueValid = (value?: string) => {
+        let field = this.context.form.read(this.id);
+        if (field) {
+            let currentValue = JSON.parse(field.value) as Array<any>;
+            if (currentValue) {
+                return currentValue.length !== 0;
+            }
+        }
+        return false;
+    }
 
     public onInput = (value: string) => {
         if (value !== undefined) {

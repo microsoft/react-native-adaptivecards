@@ -7,7 +7,16 @@ import { CardModel } from '../Cards/Card';
 export class PeoplePickerModel extends InputModel {
     constructor(json, parent, context) {
         super(json, parent, context);
-        this.isValueValid = (value) => true;
+        this.isValueValid = (value) => {
+            let field = this.context.form.read(this.id);
+            if (field) {
+                let currentValue = JSON.parse(field.value);
+                if (currentValue) {
+                    return currentValue.length !== 0;
+                }
+            }
+            return false;
+        };
         this.onInput = (value) => {
             if (value !== undefined) {
                 this.input = value;

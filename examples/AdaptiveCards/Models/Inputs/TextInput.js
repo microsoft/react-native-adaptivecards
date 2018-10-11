@@ -5,7 +5,7 @@ export class TextInputModel extends InputModel {
         this.isValueValid = (value) => {
             let target = value !== undefined ? value : this.value;
             if (this.maxLength) {
-                if (target !== undefined && target.length > this.maxLength) {
+                if (target && target.length > this.maxLength) {
                     return false;
                 }
             }

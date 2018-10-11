@@ -24,7 +24,7 @@ export class TextInputModel extends InputModel {
         let target = value !== undefined ? value : this.value;
         // TODO:: verify styles.
         if (this.maxLength) {
-            if (target !== undefined && target.length > this.maxLength) {
+            if (target && target.length > this.maxLength) {
                 return false;
             }
         }
