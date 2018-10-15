@@ -25,6 +25,7 @@ interface IState {
 
 export class ImageView extends React.Component<IProps, IState> {
     private mounted: boolean;
+    private timer: NodeJS.Timer;
 
     constructor(props: IProps) {
         super(props);
@@ -39,7 +40,8 @@ export class ImageView extends React.Component<IProps, IState> {
     public componentDidMount() {
         this.mounted = true;
 
-        setTimeout(this.fetchImageSize, 500);
+        setTimeout(this.fetchImageSize, 200);
+        this.timer = setTimeout(this.fetchImageSize, 1500);
     }
 
     public componentWillUnmount() {
@@ -134,18 +136,30 @@ export class ImageView extends React.Component<IProps, IState> {
             if (model && model.context) {
                 let handler = model.context.errorHandler;
                 if (handler) {
-                    handler(`AdaptiveCard >> Image Load Failed >> ${error.message}`);
+                    handler(`AdaptiveCard >> Image Get Size Failed >> ${model.url} >> ${error.message}`);
                 }
             }
         });
     }
 
     private onImageSize = (size: Dimension) => {
+        if (this.timer !== undefined) {
+            clearTimeout(this.timer);
+            this.timer = undefined;
+        }
         if (size) {
             this.setState({
                 loaded: true,
                 width: size.width,
                 height: size.height,
+            }, () => {
+                const { model } = this.props;
+                if (model && model.context) {
+                    let handler = model.context.infoHandler;
+                    if (handler) {
+                        handler(`AdaptiveCard >> Image Get Size Success >> ${model.url}`);
+                    }
+                }
             });
         }
     }
@@ -157,7 +171,7 @@ export class ImageView extends React.Component<IProps, IState> {
             if (model.context) {
                 let handler = model.context.infoHandler;
                 if (handler) {
-                    handler(`AdaptiveCard >> Start load img >> ${model.url}`);
+                    handler(`AdaptiveCard >> Start Load Image >> ${model.url}`);
                 }
             }
 

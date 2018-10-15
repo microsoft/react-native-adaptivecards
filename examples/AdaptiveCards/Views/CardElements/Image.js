@@ -49,17 +49,29 @@ export class ImageView extends React.Component {
                 if (model && model.context) {
                     let handler = model.context.errorHandler;
                     if (handler) {
-                        handler(`AdaptiveCard >> Image Load Failed >> ${error.message}`);
+                        handler(`AdaptiveCard >> Image Get Size Failed >> ${model.url} >> ${error.message}`);
                     }
                 }
             });
         };
         this.onImageSize = (size) => {
+            if (this.timer !== undefined) {
+                clearTimeout(this.timer);
+                this.timer = undefined;
+            }
             if (size) {
                 this.setState({
                     loaded: true,
                     width: size.width,
                     height: size.height,
+                }, () => {
+                    const { model } = this.props;
+                    if (model && model.context) {
+                        let handler = model.context.infoHandler;
+                        if (handler) {
+                            handler(`AdaptiveCard >> Image Get Size Success >> ${model.url}`);
+                        }
+                    }
                 });
             }
         };
@@ -69,7 +81,7 @@ export class ImageView extends React.Component {
                 if (model.context) {
                     let handler = model.context.infoHandler;
                     if (handler) {
-                        handler(`AdaptiveCard >> Start load img >> ${model.url}`);
+                        handler(`AdaptiveCard >> Start Load Image >> ${model.url}`);
                     }
                 }
                 ImageUtils.fetchSize(model.url, size || model.size, { width: maxWidth, height: maxHeight }, this.onImageSize, this.onImageSizeError);
@@ -83,7 +95,8 @@ export class ImageView extends React.Component {
     }
     componentDidMount() {
         this.mounted = true;
-        setTimeout(this.fetchImageSize, 500);
+        setTimeout(this.fetchImageSize, 200);
+        this.timer = setTimeout(this.fetchImageSize, 1500);
     }
     componentWillUnmount() {
         this.mounted = false;
