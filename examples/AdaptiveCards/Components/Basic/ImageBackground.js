@@ -26,6 +26,10 @@ export class ImageBackground extends React.Component {
             const { url } = this.props;
             if (url) {
                 Image.getSize(url, (width, height) => {
+                    if (this.timer !== undefined) {
+                        clearTimeout(this.timer);
+                        this.timer = undefined;
+                    }
                     if (width > 0 && height > 0) {
                         this.setState({
                             imgRatio: width / height,
@@ -42,7 +46,8 @@ export class ImageBackground extends React.Component {
         };
     }
     componentDidMount() {
-        setTimeout(this.fetchImageSize, 500);
+        setTimeout(this.fetchImageSize, 300);
+        this.timer = setTimeout(this.fetchImageSize, 1500);
     }
     render() {
         return (React.createElement(View, { style: [
