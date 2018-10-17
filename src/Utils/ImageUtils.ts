@@ -8,7 +8,13 @@ export class ImageUtils {
         if (UrlUtils.isSvgXml(url) || UrlUtils.isDeepLink(url)) {
             ImageUtils.fetchSizeFromConfig(size, contract, onSize);
         } else {
-            ImageUtils.fetchSizeFromImage(url, size, contract, onSize, onError);
+            let realUrl: string;
+            if (/\?[a-zA-Z]+=/.test(url)) {
+                realUrl = url + '&ms_cox_timestamp=' + (new Date()).getTime();
+            } else {
+                realUrl = url + '?ms_cox_timestamp=' + (new Date()).getTime();
+            }
+            ImageUtils.fetchSizeFromImage(realUrl, size, contract, onSize, onError);
         }
     }
 

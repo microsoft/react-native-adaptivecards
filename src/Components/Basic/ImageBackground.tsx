@@ -111,8 +111,14 @@ export class ImageBackground extends React.Component<IProps, IState> {
         const { url } = this.props;
 
         if (url) {
+            let realUrl: string;
+            if (/\?[a-zA-Z]+=/.test(url)) {
+                realUrl = url + '&ms_cox_timestamp=' + (new Date()).getTime();
+            } else {
+                realUrl = url + '?ms_cox_timestamp=' + (new Date()).getTime();
+            }
             Image.getSize(
-                url,
+                realUrl,
                 (width, height) => {
                     if (this.timer !== undefined) {
                         clearTimeout(this.timer);
