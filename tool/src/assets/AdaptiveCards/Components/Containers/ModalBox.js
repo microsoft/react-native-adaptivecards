@@ -9,12 +9,18 @@ export class ModalBox extends React.Component {
                 this.props.onBackgroundPress();
             }
         };
+        this.onRequestClose = () => {
+            console.log('ModalBox onRequestClose');
+            if (this.props.onRequestClose) {
+                this.props.onRequestClose();
+            }
+        };
     }
     render() {
         if (Platform.OS === 'web') {
             return null;
         }
-        return (React.createElement(Modal, { visible: this.props.show, animationType: 'fade', transparent: true, onRequestClose: this.props.onRequestClose },
+        return (React.createElement(Modal, { visible: this.props.show, animationType: 'fade', transparent: true, onRequestClose: this.onRequestClose },
             React.createElement(TouchableWithoutFeedback, { onPress: this.onBackgroundPress },
                 React.createElement(View, { style: [
                         {

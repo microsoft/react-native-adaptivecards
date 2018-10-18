@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { ImageBlock } from '../Basic/ImageBlock';
+import { Image } from '../Basic/Image';
 import { Touchable } from '../Basic/Touchable';
 export class Button extends React.Component {
     constructor(props) {
@@ -37,7 +37,7 @@ export class Button extends React.Component {
     renderIcon() {
         if (this.props.icon && this.props.icon.url) {
             if (this.props.icon.type === 'img') {
-                return (React.createElement(ImageBlock, { url: this.props.icon.url, width: this.props.icon.width, height: this.props.icon.height, marginTop: this.props.icon.marginTop, marginRight: this.props.icon.marginRight, marginBottom: this.props.icon.marginBottom, marginLeft: this.props.icon.marginLeft }));
+                return (React.createElement(Image, { url: this.props.icon.url, width: this.props.icon.width, height: this.props.icon.height, marginTop: this.props.icon.marginTop, marginRight: this.props.icon.marginRight, marginBottom: this.props.icon.marginBottom, marginLeft: this.props.icon.marginLeft }));
             }
             else {
                 return (React.createElement(Text, { style: {

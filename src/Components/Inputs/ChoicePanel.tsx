@@ -3,17 +3,16 @@ import { FlatList, ListRenderItemInfo } from 'react-native';
 import { SeparateLine } from '../Basic/SeparateLine';
 import { Card } from '../Containers/Card';
 import { ModalBox } from '../Containers/ModalBox';
-import { Choice } from './Choice';
+import { Choice, IChoice } from './Choice';
 
-interface IProps<T extends { title: string, value: V }, V> {
-    choices: T[];
-    selected: V[];
+interface IProps<T> {
+    choices: IChoice<T>[];
     show: boolean;
-    onChoose: (value: V) => void;
+    onChoose: (value: T) => void;
     onClose: () => void;
 }
 
-export class ChoicePanel<T extends { title: string, value: V }, V> extends React.Component<IProps<T, V>> {
+export class ChoicePanel<T> extends React.Component<IProps<T>> {
     public render() {
         if (this.props.choices) {
             return (
@@ -39,7 +38,7 @@ export class ChoicePanel<T extends { title: string, value: V }, V> extends React
         }
     }
 
-    private renderChoice = (info: ListRenderItemInfo<T>) => {
+    private renderChoice = (info: ListRenderItemInfo<IChoice<T>>) => {
         if (!info.item) {
             return undefined;
         }
@@ -48,8 +47,8 @@ export class ChoicePanel<T extends { title: string, value: V }, V> extends React
             <Choice
                 title={info.item.title}
                 value={info.item.value}
+                selected={info.item.selected}
                 onChoose={this.onChoose}
-                selected={this.isValueSelected(info.item.value)}
             />
         );
     }
@@ -60,15 +59,11 @@ export class ChoicePanel<T extends { title: string, value: V }, V> extends React
         );
     }
 
-    private extractKey = (item: T, index: number) => {
-        return `value: ${item.value}, index: ${index}`;
+    private extractKey = (item: IChoice<T>, index: number) => {
+        return `value: ${item.value}, index: ${index}, selected: ${item.selected}`;
     }
 
-    private isValueSelected = (value: V) => {
-        return this.props.selected && this.props.selected.indexOf(value) >= 0;
-    }
-
-    private onChoose = (value: V) => {
+    private onChoose = (value: T) => {
         if (this.props.onChoose) {
             this.props.onChoose(value);
         }

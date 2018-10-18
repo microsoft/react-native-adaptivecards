@@ -1,20 +1,18 @@
 import * as React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
-import { Checkbox } from './Checkbox';
+import { Checkbox, ICheckable } from './CheckBox';
 
-interface IProps<T extends { title: string, value: V }, V> {
-    choices: T[];
-    selected: V[];
-    onChoose: (value: V) => void;
+interface IProps<T> {
+    choices: ICheckable<T>[];
+    onCheck: (value: T) => void;
     theme: 'default' | 'emphasis';
 }
 
-export class CheckList<T extends { title: string, value: V }, V> extends React.Component<IProps<T, V>> {
+export class CheckList<T> extends React.Component<IProps<T>> {
     public render() {
         if (this.props.choices) {
             return (
                 <FlatList
-                    extraData={this.props.selected}
                     data={this.props.choices}
                     renderItem={this.renderCheckItem}
                     keyExtractor={this.extractKey}
@@ -25,29 +23,25 @@ export class CheckList<T extends { title: string, value: V }, V> extends React.C
         }
     }
 
-    private renderCheckItem = (info: ListRenderItemInfo<T>) => {
+    private renderCheckItem = (info: ListRenderItemInfo<ICheckable<T>>) => {
         return (
             <Checkbox
                 title={info.item.title}
                 value={info.item.value}
-                checked={this.isValueSelected(info.item.value)}
+                checked={info.item.checked}
                 theme={this.props.theme}
-                onClick={this.onChoose}
+                onCheck={this.onChoose}
             />
         );
     }
 
-    private extractKey = (item: T, index: number) => {
-        return `value: ${item.value}, index: ${index} checked:${this.props.selected.indexOf(item.value) > 0}`;
+    private extractKey = (item: ICheckable<T>, index: number) => {
+        return `value: ${item.value}, index: ${index} checked:${item.checked}`;
     }
 
-    private isValueSelected = (value: V) => {
-        return this.props.selected && this.props.selected.indexOf(value) >= 0;
-    }
-
-    private onChoose = (value: V) => {
-        if (this.props.onChoose) {
-            this.props.onChoose(value);
+    private onChoose = (value: T) => {
+        if (this.props.onCheck) {
+            this.props.onCheck(value);
         }
     }
 }

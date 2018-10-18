@@ -1,33 +1,37 @@
 import * as React from 'react';
 import { StyleProp, Text, View, ViewStyle } from 'react-native';
-import { ImageBlock } from '../Basic/ImageBlock';
+import { Image } from '../Basic/Image';
 import { Touchable } from '../Basic/Touchable';
 
-export interface IButtonProps {
+interface IButtonIcon {
+    url: string;
+    type: 'img';
+    width?: number;
+    height?: number;
+    position?: 'left' | 'top' | 'right' | 'bottom';
+    marginTop?: number;
+    marginBottom?: number;
+    marginLeft?: number;
+    marginRight?: number;
+}
+
+interface IButtonSymbol {
+    url: string;
+    type: 'symbol';
+    fontFamily?: string;
+    color?: string;
+    width?: number;
+    height?: number;
+    position?: 'left' | 'top' | 'right' | 'bottom';
+    marginTop?: number;
+    marginBottom?: number;
+    marginLeft?: number;
+    marginRight?: number;
+}
+
+interface IProps {
     title: string;
-    icon?: {
-        url: string;
-        type: 'img';
-        width?: number;
-        height?: number;
-        position?: 'left' | 'top' | 'right' | 'bottom';
-        marginTop?: number;
-        marginBottom?: number;
-        marginLeft?: number;
-        marginRight?: number;
-    } | {
-        url: string;
-        type: 'symbol';
-        fontFamily?: string;
-        color?: string;
-        width?: number;
-        height?: number;
-        position?: 'left' | 'top' | 'right' | 'bottom';
-        marginTop?: number;
-        marginBottom?: number;
-        marginLeft?: number;
-        marginRight?: number;
-    };
+    icon?: IButtonIcon | IButtonSymbol;
     onPress: () => void;
     disabled?: boolean;
     color?: string;
@@ -55,8 +59,8 @@ export interface IButtonProps {
     style?: StyleProp<ViewStyle>;
 }
 
-export class Button extends React.Component<IButtonProps> {
-    constructor(props: IButtonProps) {
+export class Button extends React.Component<IProps> {
+    constructor(props: IProps) {
         super(props);
     }
 
@@ -105,7 +109,7 @@ export class Button extends React.Component<IButtonProps> {
         if (this.props.icon && this.props.icon.url) {
             if (this.props.icon.type === 'img') {
                 return (
-                    <ImageBlock
+                    <Image
                         url={this.props.icon.url}
                         width={this.props.icon.width}
                         height={this.props.icon.height}

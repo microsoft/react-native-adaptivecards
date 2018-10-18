@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TextInput, } from 'react-native';
-import { StyleManager } from '../../Styles/StyleManager';
+import { StyleConfig } from '../../Styles/StyleConfig';
 export class InputBox extends React.Component {
     constructor(props) {
         super(props);
@@ -73,10 +73,10 @@ export class InputBox extends React.Component {
         return this.fontSize * 1.2;
     }
     get fontSize() {
-        return StyleManager.getFontSize('default');
+        return StyleConfig.getFontSize('default');
     }
     get fontWeight() {
-        return StyleManager.getFontWeight('default');
+        return StyleConfig.getFontWeight('default');
     }
     get paddingVertical() {
         return 12;
@@ -95,26 +95,26 @@ export class InputBox extends React.Component {
     }
     get color() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusColor(this.props.theme);
+            return StyleConfig.getInputFocusColor(this.props.theme);
         }
         else {
-            return StyleManager.getInputColor(this.props.theme);
+            return StyleConfig.getInputColor(this.props.theme);
         }
     }
     get backgroundColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
+            return StyleConfig.getInputFocusBackgroundColor(this.props.theme);
         }
         else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
+            return StyleConfig.getInputBackgroundColor(this.props.theme);
         }
     }
     get borderColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBorderColor(this.props.theme);
+            return StyleConfig.getInputFocusBorderColor(this.props.theme);
         }
         else {
-            return StyleManager.getInputBorderColor(this.props.theme);
+            return StyleConfig.getInputBorderColor(this.props.theme);
         }
     }
 }

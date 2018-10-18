@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { StyleManager } from '../../Styles/StyleManager';
+import { StyleConfig } from '../../Styles/StyleConfig';
 export class RadioBox extends React.Component {
     constructor() {
         super(...arguments);
         this.onClick = () => {
             console.log('RadioBox clicked');
-            if (this.props.onClick) {
-                this.props.onClick(this.props.value);
+            if (this.props.onActive) {
+                this.props.onActive(this.props.value);
             }
         };
     }
@@ -28,23 +28,23 @@ export class RadioBox extends React.Component {
                     } }),
                 React.createElement(Text, { style: {
                         color: this.color,
-                        fontSize: StyleManager.getFontSize('default'),
-                        fontWeight: StyleManager.getFontWeight('default'),
-                        textAlign: StyleManager.getTextAlign('left'),
+                        fontSize: StyleConfig.getFontSize('default'),
+                        fontWeight: StyleConfig.getFontWeight('default'),
+                        textAlign: StyleConfig.getTextAlign('left'),
                         width: 0,
                         flex: 1,
-                        flexWrap: StyleManager.getWrap(true),
+                        flexWrap: StyleConfig.getWrap(true),
                         paddingLeft: 16,
                     } }, this.props.title))));
     }
     get color() {
-        return StyleManager.getCheckboxTitleColor(this.props.theme);
+        return StyleConfig.getCheckboxTitleColor(this.props.theme);
     }
     get radioColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
+        return StyleConfig.getCheckboxBoxColor(this.props.theme, this.props.activated);
     }
     get radioIcon() {
-        if (this.props.checked) {
+        if (this.props.activated) {
             return 'radio-button-checked';
         }
         else {

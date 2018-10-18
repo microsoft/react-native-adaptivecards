@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import { StyleManager } from '../../Styles/StyleManager';
+import { StyleConfig } from '../../Styles/StyleConfig';
 
 interface IProps {
     height?: number;
@@ -10,12 +10,12 @@ interface IProps {
 export class SeparateLine extends React.PureComponent<IProps> {
     public render() {
         return (
-            <View style={{
-                backgroundColor: StyleManager.separatorColor,
-                height: StyleManager.separatorThickness,
-                marginTop: this.margin,
-                marginBottom: this.margin,
-            }}
+            <View
+                style={{
+                    backgroundColor: StyleConfig.separatorColor,
+                    height: StyleConfig.separatorThickness,
+                    marginVertical: this.margin,
+                }}
             />
         );
     }
@@ -27,7 +27,7 @@ export class SeparateLine extends React.PureComponent<IProps> {
         if (this.props.height && this.props.height > 0) {
             return this.props.height / 2;
         } else {
-            return StyleManager.separatorSpacing;
+            return StyleConfig.separatorSpacing;
         }
     }
 }

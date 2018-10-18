@@ -1,13 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import { StyleManager } from '../../Styles/StyleManager';
+import { StyleConfig } from '../../Styles/StyleConfig';
 export class SeparateLine extends React.PureComponent {
     render() {
         return (React.createElement(View, { style: {
-                backgroundColor: StyleManager.separatorColor,
-                height: StyleManager.separatorThickness,
-                marginTop: this.margin,
-                marginBottom: this.margin,
+                backgroundColor: StyleConfig.separatorColor,
+                height: StyleConfig.separatorThickness,
+                marginVertical: this.margin,
             } }));
     }
     get margin() {
@@ -18,7 +17,7 @@ export class SeparateLine extends React.PureComponent {
             return this.props.height / 2;
         }
         else {
-            return StyleManager.separatorSpacing;
+            return StyleConfig.separatorSpacing;
         }
     }
 }

@@ -6,15 +6,18 @@ import {
     View
 } from 'react-native';
 
-import { StyleManager } from '../../Styles/StyleManager';
+import { StyleConfig } from '../../Styles/StyleConfig';
 
-interface IProps<T> {
+export interface ISwitchable<T> {
     title: string;
     value: T;
-    checked: boolean;
+    activated: boolean;
+}
+
+interface IProps<T> extends ISwitchable<T> {
     marginTop?: number;
     theme: 'default' | 'emphasis';
-    onClick: (value: T) => void;
+    onSwitch: (value: T) => void;
 }
 
 export class Toggle<T> extends React.Component<IProps<T>> {
@@ -37,12 +40,12 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                     <Text
                         style={{
                             color: this.color,
-                            fontSize: StyleManager.getFontSize('default'),
-                            fontWeight: StyleManager.getFontWeight('default'),
-                            textAlign: StyleManager.getTextAlign('left'),
+                            fontSize: StyleConfig.getFontSize('default'),
+                            fontWeight: StyleConfig.getFontWeight('default'),
+                            textAlign: StyleConfig.getTextAlign('left'),
                             width: 0,
                             flex: 1,
-                            flexWrap: StyleManager.getWrap(true),
+                            flexWrap: StyleConfig.getWrap(true),
                             paddingRight: 16,
                         }}
                     >
@@ -51,7 +54,7 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                     <Switch
                         onTintColor={this.switchOnColor}
                         tintColor={this.switchOffColor}
-                        value={this.props.checked}
+                        value={this.props.activated}
                         onValueChange={this.onClick}
                     />
                 </View>
@@ -60,20 +63,20 @@ export class Toggle<T> extends React.Component<IProps<T>> {
     }
 
     private onClick = () => {
-        if (this.props.onClick) {
-            this.props.onClick(this.props.value);
+        if (this.props.onSwitch) {
+            this.props.onSwitch(this.props.value);
         }
     }
 
     private get color() {
-        return StyleManager.getCheckboxTitleColor(this.props.theme);
+        return StyleConfig.getCheckboxTitleColor(this.props.theme);
     }
 
     private get switchOffColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, false);
+        return StyleConfig.getCheckboxBoxColor(this.props.theme, false);
     }
 
     private get switchOnColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, true);
+        return StyleConfig.getCheckboxBoxColor(this.props.theme, true);
     }
 }

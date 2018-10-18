@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { StyleManager } from '../../Styles/StyleManager';
+import { StyleConfig } from '../../Styles/StyleConfig';
 export class ButtonGroup extends React.Component {
     render() {
         return (React.createElement(View, { style: [
@@ -14,16 +14,16 @@ export class ButtonGroup extends React.Component {
     get topStyles() {
         if (this.props.hasSpacing) {
             return {
-                marginTop: StyleManager.actionSetSpacing,
+                marginTop: StyleConfig.actionSetSpacing,
                 paddingTop: 12,
                 justifyContent: 'center',
-                borderTopWidth: StyleManager.separatorThickness,
-                borderTopColor: StyleManager.separatorColor
+                borderTopWidth: StyleConfig.separatorThickness,
+                borderTopColor: StyleConfig.separatorColor
             };
         }
         return {};
     }
     get flexDirection() {
-        return StyleManager.actionDirection === 'vertically' ? 'column' : 'row';
+        return StyleConfig.actionDirection === 'vertically' ? 'column' : 'row';
     }
 }

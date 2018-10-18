@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import { DatePickerAndroid, DatePickerIOS, Platform } from 'react-native';
-import { StyleManager } from '../../Styles/StyleManager';
-import { TimeUtils } from '../../Utils/TimeUtils';
+import { StyleConfig } from '../../Styles/StyleConfig';
+import { TimeUtils } from '../../Utils/Time';
 import { ButtonGroup } from '../Containers/ButtonGroup';
 import { Card } from '../Containers/Card';
 import { ModalBox } from '../Containers/ModalBox';
@@ -28,6 +28,8 @@ export class DatePanel extends React.Component<IProps> {
             return (
                 <ModalBox
                     show={this.show}
+                    onBackgroundPress={this.onCancel}
+                    onRequestClose={this.onSave}
                 >
                     <Card
                         flex={0}
@@ -56,10 +58,10 @@ export class DatePanel extends React.Component<IProps> {
             <Button
                 flex={1}
                 title='Cancel'
-                color={StyleManager.getColor('accent', 'default', false)}
-                fontSize={StyleManager.getFontSize('default')}
-                fontWeight={StyleManager.getFontWeight('bolder')}
-                backgroundColor={StyleManager.getBackgroundColor('default')}
+                color={StyleConfig.getColor('accent', 'default', false)}
+                fontSize={StyleConfig.getFontSize('default')}
+                fontWeight={StyleConfig.getFontWeight('bolder')}
+                backgroundColor={StyleConfig.getBackgroundColor('default')}
                 textHorizontalAlign='center'
                 textVerticalAlign='center'
                 paddingTop={6}
@@ -76,10 +78,10 @@ export class DatePanel extends React.Component<IProps> {
             <Button
                 flex={1}
                 title='Save'
-                color={StyleManager.getColor('accent', 'default', false)}
-                fontSize={StyleManager.getFontSize('default')}
-                fontWeight={StyleManager.getFontWeight('bolder')}
-                backgroundColor={StyleManager.getBackgroundColor('default')}
+                color={StyleConfig.getColor('accent', 'default', false)}
+                fontSize={StyleConfig.getFontSize('default')}
+                fontWeight={StyleConfig.getFontWeight('bolder')}
+                backgroundColor={StyleConfig.getBackgroundColor('default')}
                 textHorizontalAlign='center'
                 textVerticalAlign='center'
                 paddingTop={6}
@@ -89,7 +91,7 @@ export class DatePanel extends React.Component<IProps> {
                 onPress={this.onSave}
                 style={{
                     borderLeftWidth: 1,
-                    borderLeftColor: StyleManager.separatorColor,
+                    borderLeftColor: StyleConfig.separatorColor,
                 }}
             />
         );

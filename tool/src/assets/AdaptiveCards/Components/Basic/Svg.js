@@ -5,14 +5,7 @@ export class Svg extends React.Component {
         super(props);
     }
     render() {
-        return (React.createElement(WebView, { source: { html: this.html }, scalesPageToFit: true, scrollEnabled: false, style: [
-                {
-                    flex: 1,
-                    alignSelf: 'stretch',
-                    backgroundColor: 'transparent',
-                },
-                this.props.style
-            ] }));
+        return (React.createElement(WebView, { source: { html: this.html }, scalesPageToFit: true, scrollEnabled: false, style: this.props.style }));
     }
     get html() {
         return (`<html>

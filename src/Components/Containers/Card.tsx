@@ -1,35 +1,7 @@
 import * as React from 'react';
-import {LayoutChangeEvent, Platform, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import { StyleManager } from '../../Styles/StyleManager';
-import { ImageBackground } from '../Basic/ImageBackground';
-
-const styles = StyleSheet.create({
-    cardContainer: {
-        backgroundColor: '#fff',
-        borderRadius: 4,
-        ...Platform.select({
-            ios: {
-                borderWidth: StyleSheet.hairlineWidth,
-                borderColor: 'rgba(0, 0, 0, .1)',
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 0 },
-                shadowRadius: 3,
-                shadowOpacity: .08,
-            },
-            android: {
-                elevation: 2,
-            },
-            web: {
-                borderWidth: 0.5,
-                borderColor: 'rgba(0, 0, 0, .1)',
-                shadowColor: '#000',
-                shadowOffset: { width: 0, height: 0 },
-                shadowRadius: 3,
-                shadowOpacity: .08,
-            }
-        }),
-    },
-});
+import { LayoutChangeEvent, Platform, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleConfig } from '../../Styles/StyleConfig';
+import { Background } from '../Basic/Background';
 
 interface IProps {
     flex?: number;
@@ -45,13 +17,35 @@ export class Card extends React.Component<IProps> {
         return (
             <View
                 style={[
-                    styles.cardContainer,
                     {
                         flex: this.props.flex,
+                        backgroundColor: '#fff',
+                        borderRadius: 4,
+                        ...Platform.select({
+                            ios: {
+                                borderWidth: StyleSheet.hairlineWidth,
+                                borderColor: 'rgba(0, 0, 0, .1)',
+                                shadowColor: '#000',
+                                shadowOffset: { width: 0, height: 0 },
+                                shadowRadius: 3,
+                                shadowOpacity: .08,
+                            },
+                            android: {
+                                elevation: 2,
+                            },
+                            web: {
+                                borderWidth: 0.5,
+                                borderColor: 'rgba(0, 0, 0, .1)',
+                                shadowColor: '#000',
+                                shadowOffset: { width: 0, height: 0 },
+                                shadowRadius: 3,
+                                shadowOpacity: .08,
+                            }
+                        }),
                     },
                     this.props.style,
                 ]}
-                onLayout={this.props.onLayout}
+                onLayout={this.onLayout}
             >
                 {this.renderCardContent()}
             </View>
@@ -61,11 +55,11 @@ export class Card extends React.Component<IProps> {
     private renderCardContent() {
         if (this.props.backgroundImageUrl) {
             return (
-                <ImageBackground
+                <Background
                     url={this.props.backgroundImageUrl}
                     containerStyle={{
                         flex: this.contentFlex,
-                        backgroundColor: StyleManager.getBackgroundColor(this.props.theme),
+                        backgroundColor: StyleConfig.getBackgroundColor(this.props.theme),
                         borderRadius: 4,
                         overflow: 'hidden',
                     }}
@@ -76,18 +70,15 @@ export class Card extends React.Component<IProps> {
                     >
                         {this.props.children}
                     </View>
-                </ImageBackground>
+                </Background>
             );
         } else {
             return (
                 <View
                     style={{
                         flex: this.contentFlex,
-                        backgroundColor: StyleManager.getBackgroundColor(this.props.theme),
-                        paddingTop: 12,
-                        paddingRight: 12,
-                        paddingBottom: 12,
-                        paddingLeft: 12,
+                        backgroundColor: StyleConfig.getBackgroundColor(this.props.theme),
+                        padding: 12,
                         borderRadius: 4,
                         overflow: 'hidden'
                     }}
@@ -95,6 +86,12 @@ export class Card extends React.Component<IProps> {
                     {this.props.children}
                 </View>
             );
+        }
+    }
+
+    private onLayout = (event: LayoutChangeEvent) => {
+        if (this.props.onLayout) {
+            this.props.onLayout(event);
         }
     }
 

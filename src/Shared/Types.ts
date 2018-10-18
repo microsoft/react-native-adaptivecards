@@ -1,49 +1,81 @@
-export interface ITreeNode<T> {
-    parent: T;
-    ancestors: T[];
-    ancestorsAndSelf: T[];
-    children: T[];
-    descends: T[];
-    descendsAndSelf: T[];
+export interface IContext<T> {
+    model: T;
+    registerModelUpdateHandler(handler: (model: T) => void): void;
+    registerViewUpdateHandler(handler: () => void): void;
+    updateModel(model: T): void;
+    updateView(): void;
 }
 
-export abstract class TreeNode<T extends TreeNode<T>> implements ITreeNode<T> {
-    public parent: T;
-
-    constructor(parent: T) {
-        this.parent = parent;
-    }
-
-    public get ancestors(): T[] {
-        if (this.parent) {
-            return [this.parent, ...this.parent.ancestors];
-        }
-        return [];
-    }
-
-    public get ancestorsAndSelf(): T[] {
-        return [this as any, ...this.ancestors];
-    }
-
-    public abstract get children(): T[];
-
-    public get descends(): T[] {
-        return this.children.reduce(
-            (prev, current) => {
-                return prev.concat(current.descends);
-            },
-            this.children.slice()
-        );
-    }
-
-    public get descendsAndSelf(): T[] {
-        return [this  as any, ...this.descends];
-    }
+export interface ITreeNode {
+    parent: ITreeNode;
+    ancestors: ITreeNode[];
+    ancestorsAndSelf: ITreeNode[];
+    children: ITreeNode[];
+    descends: ITreeNode[];
+    descendsAndSelf: ITreeNode[];
+    equals(node: ITreeNode): boolean;
+    replaceChild(oldChild: ITreeNode, newChild: ITreeNode): void;
+    removeChild(child: ITreeNode): void;
+    insertChild(child: ITreeNode): void;
+    insertSibling(sibling: ITreeNode, position: 'before' | 'after'): void;
+    remove(): void;
+    replace(newNode: ITreeNode): void;
 }
 
-export interface ValidationResult {
-    isValid: boolean;
+export enum ViewActionType {
+    OpenUrl = 'Action.OpenUrl',
+    Submit = 'Action.Submit',
+    ShowCard = 'Action.ShowCard',
+}
+
+export enum PureActionType {
+    Select = 'Action.Select',
+    Callback = 'Action.Callback',
+}
+
+export type ActionType = ViewActionType | PureActionType;
+
+export enum InputType {
+    TextInput = 'Input.Text',
+    NumberInput = 'Input.Number',
+    DateInput = 'Input.Date',
+    TimeInput = 'Input.Time',
+    ToggleInput = 'Input.Toggle',
+    ChoiceSet = 'Input.ChoiceSet',
+    Choice = 'Input.Choice',
+    PeoplePicker = 'Input.PeoplePicker',
+}
+
+export enum ElementType {
+    TextBlock = 'TextBlock',
+    Media = 'Media',
+    Counter = 'Microsoft.Counter',
+    Fact = 'Fact',
+}
+
+export enum PlainContainerType {
+    FactSet = 'FactSet',
+    ImageSet = 'ImageSet',
+}
+
+export enum SelectableContainerType {
+    Image = 'Image',
+    Column = 'Column',
+    ColumnSet = 'ColumnSet',
+    Container = 'Container',
+    AdaptiveCard = 'AdaptiveCard',
+}
+
+export type BlockType = PlainContainerType | SelectableContainerType | ElementType | InputType;
+
+export interface IMessage {
+    level: 'info' | 'success' | 'warning' | 'error';
     message: string;
+}
+
+export interface IResult<T> {
+    message: IMessage;
+    data: T; 
 }
 
 export interface Dimension {
@@ -51,29 +83,7 @@ export interface Dimension {
     height: number;
 }
 
-export enum ActionType {
-    OpenUrl = 'Action.OpenUrl',
-    Select = 'Action.Select',
-    Submit = 'Action.Submit',
-    ShowCard = 'Action.ShowCard',
-    Callback = 'Action.Callback',
-}
-
-export enum ContentType {
-    Column = 'Column',
-    ColumnSet = 'ColumnSet',
-    Container = 'Container',
-    Counter = 'Microsoft.Counter',
-    FactSet = 'FactSet',
-    Image = 'Image',
-    ImageSet = 'ImageSet',
-    TextBlock = 'TextBlock',
-    TextInput = 'Input.Text',
-    NumberInput = 'Input.Number',
-    DateInput = 'Input.Date',
-    TimeInput = 'Input.Time',
-    ToggleInput = 'Input.Toggle',
-    ChoiceSetInput = 'Input.ChoiceSet',
-    PeoplePicker = 'Input.PeoplePicker',
-    AdaptiveCard = 'AdaptiveCard',
+export interface ISelectable<T> {
+    title: string;
+    value: T;
 }

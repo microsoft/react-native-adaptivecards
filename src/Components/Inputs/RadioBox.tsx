@@ -6,14 +6,16 @@ import {
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { StyleManager } from '../../Styles/StyleManager';
+import { ISelectable } from '../../Shared/Types';
+import { StyleConfig } from '../../Styles/StyleConfig';
 
-interface IProps<T> {
-    title: string;
-    value: T;
-    checked: boolean;
+export interface IRadio<T> extends ISelectable<T> {
+    activated: boolean;
+}
+
+interface IProps<T> extends IRadio<T> {
     theme: 'default' | 'emphasis';
-    onClick: (value: T) => void;
+    onActive: (value: T) => void;
 }
 
 export class RadioBox<T> extends React.Component<IProps<T>> {
@@ -44,12 +46,12 @@ export class RadioBox<T> extends React.Component<IProps<T>> {
                     <Text
                         style={{
                             color: this.color,
-                            fontSize: StyleManager.getFontSize('default'),
-                            fontWeight: StyleManager.getFontWeight('default'),
-                            textAlign: StyleManager.getTextAlign('left'),
+                            fontSize: StyleConfig.getFontSize('default'),
+                            fontWeight: StyleConfig.getFontWeight('default'),
+                            textAlign: StyleConfig.getTextAlign('left'),
                             width: 0,
                             flex: 1,
-                            flexWrap: StyleManager.getWrap(true),
+                            flexWrap: StyleConfig.getWrap(true),
                             paddingLeft: 16,
                         }}
                     >
@@ -62,21 +64,21 @@ export class RadioBox<T> extends React.Component<IProps<T>> {
 
     private onClick = () => {
         console.log('RadioBox clicked');
-        if (this.props.onClick) {
-            this.props.onClick(this.props.value);
+        if (this.props.onActive) {
+            this.props.onActive(this.props.value);
         }
     }
 
     private get color() {
-        return StyleManager.getCheckboxTitleColor(this.props.theme);
+        return StyleConfig.getCheckboxTitleColor(this.props.theme);
     }
 
     private get radioColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
+        return StyleConfig.getCheckboxBoxColor(this.props.theme, this.props.activated);
     }
 
     private get radioIcon() {
-        if (this.props.checked) {
+        if (this.props.activated) {
             return 'radio-button-checked';
         } else {
             return 'radio-button-unchecked';

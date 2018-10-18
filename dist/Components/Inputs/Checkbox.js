@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { StyleManager } from '../../Styles/StyleManager';
+import { StyleConfig } from '../../Styles/StyleConfig';
 export class Checkbox extends React.Component {
     constructor() {
         super(...arguments);
         this.onClick = () => {
             console.log('Checkbox clicked');
             console.log(this.props.value);
-            if (this.props.onClick) {
-                this.props.onClick(this.props.value);
+            if (this.props.onCheck) {
+                this.props.onCheck(this.props.value);
             }
         };
     }
@@ -29,20 +29,20 @@ export class Checkbox extends React.Component {
                     } }),
                 React.createElement(Text, { style: {
                         color: this.color,
-                        fontSize: StyleManager.getFontSize('default'),
-                        fontWeight: StyleManager.getFontWeight('default'),
-                        textAlign: StyleManager.getTextAlign('left'),
+                        fontSize: StyleConfig.getFontSize('default'),
+                        fontWeight: StyleConfig.getFontWeight('default'),
+                        textAlign: StyleConfig.getTextAlign('left'),
                         width: 0,
                         flex: 1,
-                        flexWrap: StyleManager.getWrap(true),
+                        flexWrap: StyleConfig.getWrap(true),
                         paddingLeft: 16,
                     } }, this.props.title))));
     }
     get color() {
-        return StyleManager.getCheckboxTitleColor(this.props.theme);
+        return StyleConfig.getCheckboxTitleColor(this.props.theme);
     }
     get radioColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
+        return StyleConfig.getCheckboxBoxColor(this.props.theme, this.props.checked);
     }
     get radioIcon() {
         if (this.props.checked) {

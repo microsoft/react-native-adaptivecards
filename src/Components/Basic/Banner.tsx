@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
-import { StyleManager } from '../../Styles/StyleManager';
+import { StyleConfig } from '../../Styles/StyleConfig';
 
 interface IProps {
     title: string;
@@ -11,17 +11,12 @@ interface IProps {
 export class Banner extends React.Component<IProps> {
     public render() {
         return (
-            <View style={{
-                backgroundColor: this.backgroundColor,
-                paddingTop: 8,
-                paddingRight: 8,
-                paddingBottom: 8,
-                paddingLeft: 8,
-                marginTop: 4,
-                marginRight: 4,
-                marginBottom: 4,
-                marginLeft: 4
-            }}
+            <View
+                style={{
+                    backgroundColor: this.backgroundColor,
+                    padding: 8,
+                    margin: 4,
+                }}
             >
                 <Text
                     style={{
@@ -38,19 +33,19 @@ export class Banner extends React.Component<IProps> {
     private get backgroundColor() {
         switch (this.props.level) {
             case 'info':
-                return StyleManager.getColor('accent', this.props.theme, false);
+                return StyleConfig.getColor('accent', this.props.theme, false);
             case 'warning':
-                return StyleManager.getColor('warning', this.props.theme, false);
+                return StyleConfig.getColor('warning', this.props.theme, false);
             case 'error':
-                return StyleManager.getColor('attention', this.props.theme, false);
+                return StyleConfig.getColor('attention', this.props.theme, false);
             case 'success':
-                return StyleManager.getColor('good', this.props.theme, false);
+                return StyleConfig.getColor('good', this.props.theme, false);
             default:
-                return StyleManager.getColor('accent', this.props.theme, false);
+                return StyleConfig.getColor('accent', this.props.theme, false);
         }
     }
 
     private get color() {
-        return StyleManager.getColor('light', this.props.theme, false);
+        return StyleConfig.getColor('light', this.props.theme, false);
     }
 }
