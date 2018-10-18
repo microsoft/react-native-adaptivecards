@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { Text } from 'react-native';
 
+import { HostConfig } from '../../Configs/Types';
+import { IChoice } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { Touchable } from '../Basic/Touchable';
 
-interface IProps<T> {
-    title: string;
-    value: T;
-    selected: boolean;
-    onChoose: (value: T) => void;
+interface IProps<T> extends IChoice<T> {
+    index: number;
+    config: HostConfig;
+    onSelect: (index: number) => void;
 }
 
 export class Choice<T> extends React.Component<IProps<T>> {
@@ -17,17 +18,16 @@ export class Choice<T> extends React.Component<IProps<T>> {
             <Touchable
                 onPress={this.onChoose}
                 style={{
-                    paddingTop: StyleManager.separatorSpacing,
-                    paddingBottom: StyleManager.separatorSpacing,
+                    paddingTop: StyleManager.getSeparatorSpacing(this.props.config),
+                    paddingBottom: StyleManager.getSeparatorSpacing(this.props.config),
                 }}
             >
                 <Text
                     style={{
                         color: this.color,
-                        fontSize: StyleManager.getFontSize('default'),
+                        fontSize: this.fontSize,
                         lineHeight: this.lineHeight,
-                        fontWeight: StyleManager.getFontWeight('default'),
-                        backgroundColor: this.backgroundColor,
+                        fontWeight: StyleManager.getFontWeight('default', this.props.config),
                         textAlign: StyleManager.getTextAlign('left'),
                         flexWrap: StyleManager.getWrap(false),
                     }}
@@ -39,8 +39,8 @@ export class Choice<T> extends React.Component<IProps<T>> {
     }
 
     private onChoose = () => {
-        if (this.props.onChoose) {
-            this.props.onChoose(this.props.value);
+        if (this.props.onSelect) {
+            this.props.onSelect(this.props.index);
         }
     }
 
@@ -49,22 +49,14 @@ export class Choice<T> extends React.Component<IProps<T>> {
     }
 
     private get fontSize() {
-        return StyleManager.getFontSize('default');
+        return StyleManager.getFontSize('default', this.props.config);
     }
 
     private get color() {
         if (this.props.selected) {
-            return StyleManager.getColor('accent', 'emphasis', true);
+            return StyleManager.getColor('accent', 'default', false, this.props.config);
         } else {
-            return StyleManager.getColor('default', 'default', false);
-        }
-    }
-
-    private get backgroundColor() {
-        if (this.props.selected) {
-            return StyleManager.getBackgroundColor('emphasis');
-        } else {
-            return StyleManager.getBackgroundColor('default');
+            return StyleManager.getColor('default', 'default', false, this.props.config);
         }
     }
 }

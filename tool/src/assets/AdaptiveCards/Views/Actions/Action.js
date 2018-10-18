@@ -1,43 +1,22 @@
 import * as React from 'react';
 import { Button } from '../../Components/Inputs/Button';
-import { ConfigManager } from '../../Config/ConfigManager';
-import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ActionView extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super(...arguments);
         this.onPress = () => {
-            const { model } = this.props;
-            if (model && model.onAction) {
-                model.onAction(() => {
-                    console.log('Action Success');
-                    if (this.isOneTimeAction) {
-                        this.setState({
-                            disabled: true,
-                        });
-                    }
-                }, (error) => {
-                    console.log('Action Failed >> ', error);
-                });
+            const { model, context } = this.props;
+            if (model && context && model.onAction) {
+                model.onAction(context);
             }
-        };
-        this.state = {
-            disabled: false,
         };
     }
     render() {
-        const { model, theme } = this.props;
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
-        }
-        return (React.createElement(Button, { flex: 1, title: this.title, color: StyleManager.getColor('accent', theme, false), fontSize: StyleManager.getFontSize('default'), fontWeight: StyleManager.getFontWeight('bolder'), backgroundColor: StyleManager.getBackgroundColor(theme), textHorizontalAlign: 'center', textVerticalAlign: 'center', paddingTop: 6, paddingBottom: 6, paddingLeft: 16, paddingRight: 16, onPress: this.onPress, disabled: this.state.disabled, marginTop: StyleManager.actionDirection === 'vertically' ? this.spacing : 0, marginLeft: StyleManager.actionDirection === 'horizontal' ? this.spacing : 0, style: {
+        const { model, theme, context } = this.props;
+        return (React.createElement(Button, { flex: 1, title: this.title, color: StyleManager.getColor('accent', theme, false, context.config), fontSize: StyleManager.getFontSize('default', context.config), fontWeight: StyleManager.getFontWeight('bolder', context.config), backgroundColor: StyleManager.getBackgroundColor(theme, context.config), textHorizontalAlign: 'center', textVerticalAlign: 'center', paddingTop: 6, paddingBottom: 6, paddingLeft: 16, paddingRight: 16, onPress: this.onPress, disabled: !model.enabled, marginTop: StyleManager.getActionDirection(context.config) === 'vertically' ? this.spacing : 0, marginLeft: StyleManager.getActionDirection(context.config) === 'horizontal' ? this.spacing : 0, style: {
                 borderLeftWidth: this.leftBorderWidth,
-                borderLeftColor: StyleManager.separatorColor,
+                borderLeftColor: StyleManager.getSeparatorColor(context.config),
             } }));
-    }
-    get isOneTimeAction() {
-        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model && this.props.model.type === ActionType.Submit;
     }
     get leftBorderWidth() {
         if (this.props.index !== undefined && this.props.index > 0) {
@@ -47,7 +26,7 @@ export class ActionView extends React.Component {
     }
     get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.actionSpacing;
+            return StyleManager.getActionSpacing(this.props.context.config);
         }
         return 0;
     }

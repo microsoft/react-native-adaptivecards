@@ -1,27 +1,33 @@
 import { StyleSheet } from 'react-native';
-import { HostContext } from '../Contexts/HostContext';
+import { ConfigManager } from '../Configs/ConfigManager';
 export class StyleManager {
-    static getSpacing(spacing) {
+    static getSpacing(spacing, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         if (spacing === 'none') {
             return 0;
         }
-        let config = HostContext.getInstance().getConfig();
         let spacingConfig = config.spacing[spacing];
         if (!spacingConfig) {
             return config.spacing.default;
         }
         return spacingConfig;
     }
-    static getFontSize(size) {
-        let config = HostContext.getInstance().getConfig();
+    static getFontSize(size, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let fontSize = config.fontSize[size];
         if (!fontSize) {
             return config.fontSize.default;
         }
         return fontSize;
     }
-    static getFontWeight(weight) {
-        let config = HostContext.getInstance().getConfig();
+    static getFontWeight(weight, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let fontWeight = config.fontWeight[weight];
         if (!fontWeight) {
             return config.fontWeight.default;
@@ -52,8 +58,10 @@ export class StyleManager {
         }
         return 'nowrap';
     }
-    static getImageSize(size) {
-        let config = HostContext.getInstance().getConfig();
+    static getImageSize(size, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         if (size === undefined) {
             return 'auto';
         }
@@ -62,8 +70,10 @@ export class StyleManager {
         }
         return size;
     }
-    static getColor(color, theme, isSubtle) {
-        let config = HostContext.getInstance().getConfig();
+    static getColor(color, theme, isSubtle, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.container[theme];
         if (!themeConfig) {
             themeConfig = config.container.default;
@@ -79,84 +89,106 @@ export class StyleManager {
             return colorConfig.default;
         }
     }
-    static getBackgroundColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getBackgroundColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.container[theme];
         if (!themeConfig) {
             return config.container.default.background;
         }
         return themeConfig.background;
     }
-    static getFactTitleColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getFactTitleColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let color = config.factSet.title.color;
         let isSubtle = config.factSet.title.isSubtle;
-        return StyleManager.getColor(color, theme, isSubtle);
+        return StyleManager.getColor(color, theme, isSubtle, config);
     }
-    static getFactValueColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getFactValueColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let color = config.factSet.value.color;
         let isSubtle = config.factSet.value.isSubtle;
-        return StyleManager.getColor(color, theme, isSubtle);
+        return StyleManager.getColor(color, theme, isSubtle, config);
     }
-    static getInputColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getInputColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.input[theme];
         if (!themeConfig) {
             themeConfig = config.input.default;
         }
         return themeConfig.color;
     }
-    static getInputFocusColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getInputFocusColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.input[theme];
         if (!themeConfig) {
             themeConfig = config.input.default;
         }
         return themeConfig.focusColor;
     }
-    static getInputBackgroundColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getInputBackgroundColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.input[theme];
         if (!themeConfig) {
             themeConfig = config.input.default;
         }
         return themeConfig.backgroundColor;
     }
-    static getInputFocusBackgroundColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getInputFocusBackgroundColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.input[theme];
         if (!themeConfig) {
             themeConfig = config.input.default;
         }
         return themeConfig.focusBackgroundColor;
     }
-    static getInputBorderColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getInputBorderColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.input[theme];
         if (!themeConfig) {
             themeConfig = config.input.default;
         }
         return themeConfig.borderColor;
     }
-    static getInputFocusBorderColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getInputFocusBorderColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.input[theme];
         if (!themeConfig) {
             themeConfig = config.input.default;
         }
         return themeConfig.focusBorderColor;
     }
-    static getCheckboxTitleColor(theme) {
-        let config = HostContext.getInstance().getConfig();
+    static getCheckboxTitleColor(theme, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.checkbox[theme];
         if (!themeConfig) {
             themeConfig = config.checkbox.default;
         }
         return themeConfig.title.color;
     }
-    static getCheckboxBoxColor(theme, focused) {
-        let config = HostContext.getInstance().getConfig();
+    static getCheckboxBoxColor(theme, focused, config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
         let themeConfig = config.checkbox[theme];
         if (!themeConfig) {
             themeConfig = config.checkbox.default;
@@ -168,64 +200,124 @@ export class StyleManager {
             return themeConfig.box.unchecked;
         }
     }
-    static get inSetImageSize() {
-        return HostContext.getInstance().getConfig().imageSet.imageSize;
+    static getInSetImageSize(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.imageSet.imageSize;
     }
-    static get inSetImageMaxHeight() {
-        return HostContext.getInstance().getConfig().imageSet.maxImageHeight;
+    static getInSetImageMaxHeight(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.imageSet.maxImageHeight;
     }
-    static get factSetSpacing() {
-        return HostContext.getInstance().getConfig().factSet.margin;
+    static getFactSetSpacing(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.factSet.margin;
     }
-    static get factTitleFontSize() {
-        return StyleManager.getFontSize(HostContext.getInstance().getConfig().factSet.title.size);
+    static getFactTitleFontSize(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return StyleManager.getFontSize(config.factSet.title.size, config);
     }
-    static get factTitleFontWeight() {
-        return StyleManager.getFontWeight(HostContext.getInstance().getConfig().factSet.title.weight);
+    static getFactTitleFontWeight(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return StyleManager.getFontWeight(config.factSet.title.weight, config);
     }
-    static get factTitleWrap() {
-        return StyleManager.getWrap(HostContext.getInstance().getConfig().factSet.title.wrap);
+    static getFactTitleWrap(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return StyleManager.getWrap(config.factSet.title.wrap);
     }
-    static get factValueFontSize() {
-        return StyleManager.getFontSize(HostContext.getInstance().getConfig().factSet.value.size);
+    static getFactValueFontSize(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return StyleManager.getFontSize(config.factSet.value.size, config);
     }
-    static get factValueFontWeight() {
-        return StyleManager.getFontWeight(HostContext.getInstance().getConfig().factSet.value.weight);
+    static getFactValueFontWeight(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return StyleManager.getFontWeight(config.factSet.value.weight, config);
     }
-    static get factValueWrap() {
-        return StyleManager.getWrap(HostContext.getInstance().getConfig().factSet.value.wrap);
+    static getFactValueWrap(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return StyleManager.getWrap(config.factSet.value.wrap);
     }
-    static get fontFamily() {
-        return HostContext.getInstance().getConfig().fontFamily;
+    static getFontFamily(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.fontFamily;
     }
-    static get separatorThickness() {
-        return HostContext.getInstance().getConfig().separator.thickness * StyleSheet.hairlineWidth;
+    static getSeparatorThickness(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.separator.thickness * StyleSheet.hairlineWidth;
     }
-    static get separatorColor() {
-        return HostContext.getInstance().getConfig().separator.color;
+    static getSeparatorColor(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.separator.color;
     }
-    static get separatorSpacing() {
-        return HostContext.getInstance().getConfig().separator.spacing;
+    static getSeparatorSpacing(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.separator.spacing;
     }
-    static get maxActions() {
-        return HostContext.getInstance().getConfig().action.capacity;
+    static getMaxActions(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.action.capacity;
     }
-    static get actionSetSpacing() {
-        return StyleManager.getSpacing(HostContext.getInstance().getConfig().action.actionSetSpacing);
+    static getActionSetSpacing(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return StyleManager.getSpacing(config.action.actionSetSpacing, config);
     }
-    static get actionSpacing() {
-        return HostContext.getInstance().getConfig().action.actionSpacing;
+    static getActionSpacing(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.action.actionSpacing;
     }
-    static get actionDirection() {
-        return HostContext.getInstance().getConfig().action.direction;
+    static getActionDirection(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.action.direction;
     }
-    static get actionAlignment() {
-        return HostContext.getInstance().getConfig().action.align;
+    static getActionAlignment(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.action.align;
     }
-    static get subCardSpacing() {
-        return HostContext.getInstance().getConfig().action.showCard.margin;
+    static getSubCardSpacing(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.action.showCard.margin;
     }
-    static get subCardTheme() {
-        return HostContext.getInstance().getConfig().action.showCard.style;
+    static getSubCardTheme(config) {
+        if (!config) {
+            config = ConfigManager.getInstance().getConfig();
+        }
+        return config.action.showCard.style;
     }
 }

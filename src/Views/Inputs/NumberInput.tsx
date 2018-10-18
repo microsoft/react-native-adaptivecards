@@ -1,69 +1,22 @@
 import * as React from 'react';
+
 import { InputBox } from '../../Components/Inputs/InputBox';
-import { NumberInputModel } from '../../Models/Inputs/NumberInput';
+import { NumberInputNode } from '../../Models/Nodes/Inputs/NumberInput';
+import { IViewProps } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { NumberUtils } from '../../Utils/NumberUtils';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps {
-    index: number;
-    model: NumberInputModel;
-    theme: 'default' | 'emphasis';
+interface IProps extends IViewProps<NumberInputNode> {
 }
 
-interface IState {
-    value: string;
-}
-
-export class NumberInputView extends React.Component<IProps, IState> {
-    private mounted: boolean;
-
-    constructor(props: IProps) {
-        super(props);
-
-        const { model } = this.props;
-
-        if (model && model.isValueValid) {
-            model.onStoreUpdate = this.onStoreUpdate;
-            let defaultValue = model.value;
-            if (defaultValue === undefined) {
-                defaultValue = '';
-            }
-
-            if (NumberUtils.isNumber(model.value.toString())) {
-                this.state = {
-                    value: model.value.toString(),
-                };
-                this.props.model.onInput(this.state.value);
-            }
-        }
-    }
-
-    public componentDidMount() {
-        this.mounted = true;
-    }
-
-    public componentWillUnmount() {
-        this.mounted = false;
-    }
-
-    public setState(state: IState, callback?: () => void): void {
-        if (this.mounted) {
-            super.setState(state, callback);
-        }
-    }
-
+export class NumberInputView extends React.Component<IProps> {
     public render() {
-        const { model, theme } = this.props;
-
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        }
+        const { model, context, theme } = this.props;
 
         return (
             <InputBox
                 placeholder={model.placeholder}
-                value={this.state.value}
+                value={model.value}
+                config={context.config}
                 onValueChange={this.onValueChange}
                 onBlur={this.onBlur}
                 onFocus={this.onFocus}
@@ -74,11 +27,10 @@ export class NumberInputView extends React.Component<IProps, IState> {
     }
 
     private onBlur = () => {
-        console.log('NumberInputView onBlur');
-        const { model } = this.props;
+        const { model, context } = this.props;
 
         if (model) {
-            let callback = model.context.blurHandler;
+            let callback = context.host.onBlur;
             if (callback) {
                 callback();
             }
@@ -86,12 +38,10 @@ export class NumberInputView extends React.Component<IProps, IState> {
     }
 
     private onFocus = () => {
-        console.log('NumberInputView onFocus');
-
-        const { model } = this.props;
+        const { model, context } = this.props;
 
         if (model) {
-            let callback = model.context.focusHandler;
+            let callback = context.host.onFocus;
             if (callback) {
                 callback();
             }
@@ -99,17 +49,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
     }
 
     private onValueChange = (value: string) => {
-        this.setState({
-            value: value
-        }, () => {
-            this.props.model.onInput(this.state.value);
-        });
-    }
-
-    private onStoreUpdate = (value: string) => {
-        this.setState({
-            value: value
-        });
+        this.props.model.onInput(value, this.props.context);
     }
 
     private get spacing() {
@@ -118,7 +58,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
         }
 
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing, this.props.context.config);
         }
         return 0;
     }

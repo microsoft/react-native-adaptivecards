@@ -1,21 +1,11 @@
 import * as React from 'react';
-import { ImageBlock } from '../../Components/Basic/ImageBlock';
+import { Image } from '../../Components/Basic/Image';
 import { StyleManager } from '../../Styles/StyleManager';
-import { ImageUtils } from '../../Utils/ImageUtils';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
+import { ImageUtils } from '../../Utils/Image';
+import { SelectActionView } from '../CardProps/SelectAction';
 export class ImageView extends React.Component {
     constructor(props) {
         super(props);
-        this.onPress = () => {
-            const { model } = this.props;
-            if (model && model.selectAction && model.selectAction.onAction) {
-                model.selectAction.onAction(() => {
-                    console.log('Action Success');
-                }, (error) => {
-                    console.log('Action Failed >> ', error);
-                });
-            }
-        };
         this.onLayout = (event) => {
             let ratio = this.state.width > 0 && this.state.height > 0 ? this.state.width / this.state.height : 1;
             let width = event.nativeEvent.layout.width;
@@ -27,9 +17,9 @@ export class ImageView extends React.Component {
             }
         };
         this.onImageLoad = () => {
-            const { model } = this.props;
-            if (model && model.context) {
-                let handler = model.context.infoHandler;
+            const { model, context } = this.props;
+            if (model && context) {
+                let handler = context.host.onInfo;
                 if (handler) {
                     handler(`AdaptiveCard >> Image Load Success >> ${model.url}`);
                 }
@@ -45,9 +35,9 @@ export class ImageView extends React.Component {
             this.setState({
                 loaded: false,
             }, () => {
-                const { model } = this.props;
-                if (model && model.context) {
-                    let handler = model.context.errorHandler;
+                const { model, context } = this.props;
+                if (model && context) {
+                    let handler = context.host.onError;
                     if (handler) {
                         handler(`AdaptiveCard >> Image Get Size Failed >> ${model.url} >> ${error.message}`);
                     }
@@ -61,9 +51,9 @@ export class ImageView extends React.Component {
                     width: size.width,
                     height: size.height,
                 }, () => {
-                    const { model } = this.props;
-                    if (model && model.context) {
-                        let handler = model.context.infoHandler;
+                    const { model, context } = this.props;
+                    if (model && context) {
+                        let handler = context.host.onInfo;
                         if (handler) {
                             handler(`AdaptiveCard >> Image Get Size Success >> ${model.url}`);
                         }
@@ -72,15 +62,15 @@ export class ImageView extends React.Component {
             }
         };
         this.fetchImageSize = () => {
-            const { model, size, maxWidth, maxHeight } = this.props;
+            const { model, context, size, maxWidth, maxHeight } = this.props;
             if (model) {
-                if (model.context) {
-                    let handler = model.context.infoHandler;
+                if (context) {
+                    let handler = context.host.onInfo;
                     if (handler) {
                         handler(`AdaptiveCard >> Start Load Image >> ${model.url}`);
                     }
                 }
-                ImageUtils.fetchSize(model.url, size || model.size, { width: maxWidth, height: maxHeight }, this.onImageSize, this.onImageSizeError);
+                ImageUtils.fetchSize(model.url, size || model.size, { width: maxWidth, height: maxHeight }, context.config, this.onImageSize, this.onImageSizeError);
             }
         };
         this.state = {
@@ -102,21 +92,26 @@ export class ImageView extends React.Component {
         }
     }
     render() {
-        const { model, spacing, theme } = this.props;
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.url + ' is not valid', theme, 'error');
-        }
+        const { model, context, spacing, theme } = this.props;
         if (this.state.loaded) {
-            return (React.createElement(ImageBlock, { url: model.url, alt: model.alt, flex: this.flex, alignSelf: StyleManager.getHorizontalAlign(model.horizontalAlignment), width: this.state.width, height: this.state.height, onPress: model.selectAction ? this.onPress : undefined, onLayout: this.onLayout, onLoad: this.onImageLoad, onError: this.onImageError, marginTop: this.spacing, marginLeft: spacing, mode: model.style === 'person' ? 'avatar' : 'default' }));
+            return (React.createElement(SelectActionView, { index: 0, theme: theme, model: model.selectAction, context: context, onLayout: this.onLayout, style: {
+                    flex: this.flex,
+                    alignContent: 'center',
+                    alignItems: 'center',
+                    alignSelf: StyleManager.getHorizontalAlign(model.horizontalAlignment),
+                    marginTop: this.spacing,
+                    marginLeft: spacing,
+                } },
+                React.createElement(Image, { url: model.url, host: context.config.baseUrl, alt: model.alt, width: this.state.width, height: this.state.height, onLoad: this.onImageLoad, onError: this.onImageError, mode: model.style === 'person' ? 'avatar' : 'default' })));
         }
         return null;
     }
     get flex() {
-        const { model, size } = this.props;
+        const { model, size, context } = this.props;
         if (!model) {
             return undefined;
         }
-        let finalSize = StyleManager.getImageSize(size || model.size);
+        let finalSize = StyleManager.getImageSize(size || model.size, context.config);
         if (finalSize === 'stretch') {
             return 1;
         }
@@ -127,7 +122,7 @@ export class ImageView extends React.Component {
             return 0;
         }
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing, this.context.config);
         }
         return 0;
     }

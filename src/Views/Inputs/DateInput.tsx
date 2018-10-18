@@ -1,68 +1,39 @@
 import * as React from 'react';
+
 import { Button } from '../../Components/Inputs/Button';
 import { DatePanel } from '../../Components/Inputs/DatePanel';
-import { DateInputModel } from '../../Models/Inputs/DateInput';
+import { safe } from '../../Components/Shared/Safe';
+import { DateInputNode } from '../../Models/Nodes/Inputs/DateInput';
+import { IViewProps } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps {
-    index: number;
-    model: DateInputModel;
-    theme: 'default' | 'emphasis';
+interface IProps extends IViewProps<DateInputNode> {
 }
 
 interface IState {
-    value: string;
     focused: boolean;
 }
 
+@safe
 export class DateInputView extends React.Component<IProps, IState> {
-    private mounted: boolean;
     private tempValue = '';
 
     constructor(props: IProps) {
         super(props);
 
-        this.mounted = false;
-
-        const { model } = this.props;
-
-        if (model && model.isValueValid) {
-            model.onStoreUpdate = this.onStoreUpdate;
-            this.state = {
-                focused: false,
-                value: model.value
-            };
-            model.onInput(this.state.value);
-        }
-    }
-
-    public componentDidMount() {
-        this.mounted = true;
-    }
-
-    public componentWillUnmount() {
-        this.mounted = false;
-    }
-
-    // tslint:disable-next-line:max-line-length
-    public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) {
-        if (this.mounted) {
-            super.setState(state, callback);
-        }
+        this.state = {
+            focused: false,
+        };
     }
 
     public render() {
-        const { model, index, theme } = this.props;
+        const { model, context, index } = this.props;
 
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        }
         return (
             [
                 <Button
                     key={'DateInputButton' + index}
-                    title={this.state.value}
+                    title={model.value}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
                     borderColor={this.borderColor}
@@ -82,8 +53,9 @@ export class DateInputView extends React.Component<IProps, IState> {
                 />,
                 <DatePanel
                     key={'DatePanel' + index}
-                    value={this.state.value}
+                    value={model.value}
                     show={this.state.focused}
+                    config={context.config}
                     onValueChange={this.onValueChange}
                     onSave={this.onSave}
                     onCancel={this.onCancel}
@@ -100,62 +72,54 @@ export class DateInputView extends React.Component<IProps, IState> {
         this.setState({
             focused: false,
         }, () => {
-            this.tempValue = this.state.value;
+            const { model, context } = this.props;
+            this.tempValue = model.value;
+
+            let callback = context.host.onBlur;
+            if (callback) {
+                callback();
+            }
         });
     }
 
     private onSave = () => {
         this.setState({
-            value: this.tempValue,
             focused: false,
         }, () => {
-            const { model } = this.props;
+            const { model, context } = this.props;
 
             if (model) {
-                model.onInput(this.state.value);
-                let callback = model.context.blurHandler;
-                if (callback) {
-                    callback();
-                }
+                model.onInput(this.tempValue, context);
+
+                context.host.onBlur();
             }
         });
     }
 
     private onPress = () => {
-        this.setState({
-            focused: !this.state.focused,
-        }, () => {
-            const { model } = this.props;
+        const { model, context } = this.props;
 
-            if (model) {
+        if (model) {
+            this.tempValue = model.value;
+
+            this.setState({
+                focused: !this.state.focused,
+            }, () => {
                 if (this.state.focused) {
-                    let callback = model.context.focusHandler;
-                    if (callback) {
-                        callback();
-                    }
+                    context.host.onFocus();
                 } else {
-                    let callback = model.context.blurHandler;
-                    if (callback) {
-                        callback();
-                    }
+                    context.host.onBlur();
                 }
-            }
-        });
-        console.log('DateInput onPress');
-    }
-
-    private onStoreUpdate = (value: string) => {
-        this.setState({
-            value: value
-        });
+            });
+        }
     }
 
     private get fontSize() {
-        return StyleManager.getFontSize('default');
+        return StyleManager.getFontSize('default', this.props.context.config);
     }
 
     private get fontWeight() {
-        return StyleManager.getFontWeight('default');
+        return StyleManager.getFontWeight('default', this.props.context.config);
     }
 
     private get paddingVertical() {
@@ -176,25 +140,25 @@ export class DateInputView extends React.Component<IProps, IState> {
 
     private get color() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusColor(this.props.theme);
+            return StyleManager.getInputFocusColor(this.props.theme, this.props.context.config);
         } else {
-            return StyleManager.getInputColor(this.props.theme);
+            return StyleManager.getInputColor(this.props.theme, this.props.context.config);
         }
     }
 
     private get backgroundColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
+            return StyleManager.getInputFocusBackgroundColor(this.props.theme, this.props.context.config);
         } else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
+            return StyleManager.getInputBackgroundColor(this.props.theme, this.props.context.config);
         }
     }
 
     private get borderColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBorderColor(this.props.theme);
+            return StyleManager.getInputFocusBorderColor(this.props.theme, this.props.context.config);
         } else {
-            return StyleManager.getInputBorderColor(this.props.theme);
+            return StyleManager.getInputBorderColor(this.props.theme, this.props.context.config);
         }
     }
 
@@ -204,7 +168,7 @@ export class DateInputView extends React.Component<IProps, IState> {
         }
 
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing, this.props.context.config);
         }
         return 0;
     }

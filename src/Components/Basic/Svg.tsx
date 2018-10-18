@@ -3,10 +3,8 @@ import { StyleProp, ViewStyle, WebView } from 'react-native';
 
 interface IProps {
     url: string;
-    alt?: string;
+    alt: string;
     style?: StyleProp<ViewStyle>;
-    width?: number;
-    height?: number;
 }
 
 export class Svg extends React.Component<IProps> {
@@ -20,15 +18,7 @@ export class Svg extends React.Component<IProps> {
                 source={{ html: this.html }}
                 scalesPageToFit={true}
                 scrollEnabled={false}
-                style={[
-                    {
-                        
-                        flex: 1,
-                        alignSelf: 'stretch',
-                        backgroundColor: 'transparent',
-                    },
-                    this.props.style
-                ]}
+                style={this.props.style}
             />
         );
     }

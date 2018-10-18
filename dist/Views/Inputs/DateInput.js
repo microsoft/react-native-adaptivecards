@@ -1,9 +1,15 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 import * as React from 'react';
 import { Button } from '../../Components/Inputs/Button';
 import { DatePanel } from '../../Components/Inputs/DatePanel';
+import { safe } from '../../Components/Shared/Safe';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
-export class DateInputView extends React.Component {
+let DateInputView = class DateInputView extends React.Component {
     constructor(props) {
         super(props);
         this.tempValue = '';
@@ -14,88 +20,57 @@ export class DateInputView extends React.Component {
             this.setState({
                 focused: false,
             }, () => {
-                this.tempValue = this.state.value;
+                const { model, context } = this.props;
+                this.tempValue = model.value;
+                let callback = context.host.onBlur;
+                if (callback) {
+                    callback();
+                }
             });
         };
         this.onSave = () => {
             this.setState({
-                value: this.tempValue,
                 focused: false,
             }, () => {
-                const { model } = this.props;
+                const { model, context } = this.props;
                 if (model) {
-                    model.onInput(this.state.value);
-                    let callback = model.context.blurHandler;
-                    if (callback) {
-                        callback();
-                    }
+                    model.onInput(this.tempValue, context);
+                    context.host.onBlur();
                 }
             });
         };
         this.onPress = () => {
-            this.setState({
-                focused: !this.state.focused,
-            }, () => {
-                const { model } = this.props;
-                if (model) {
+            const { model, context } = this.props;
+            if (model) {
+                this.tempValue = model.value;
+                this.setState({
+                    focused: !this.state.focused,
+                }, () => {
                     if (this.state.focused) {
-                        let callback = model.context.focusHandler;
-                        if (callback) {
-                            callback();
-                        }
+                        context.host.onFocus();
                     }
                     else {
-                        let callback = model.context.blurHandler;
-                        if (callback) {
-                            callback();
-                        }
+                        context.host.onBlur();
                     }
-                }
-            });
-            console.log('DateInput onPress');
+                });
+            }
         };
-        this.onStoreUpdate = (value) => {
-            this.setState({
-                value: value
-            });
+        this.state = {
+            focused: false,
         };
-        this.mounted = false;
-        const { model } = this.props;
-        if (model && model.isValueValid) {
-            model.onStoreUpdate = this.onStoreUpdate;
-            this.state = {
-                focused: false,
-                value: model.value
-            };
-            model.onInput(this.state.value);
-        }
-    }
-    componentDidMount() {
-        this.mounted = true;
-    }
-    componentWillUnmount() {
-        this.mounted = false;
-    }
-    setState(state, callback) {
-        if (this.mounted) {
-            super.setState(state, callback);
-        }
     }
     render() {
-        const { model, index, theme } = this.props;
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        }
+        const { model, context, index } = this.props;
         return ([
-            React.createElement(Button, { key: 'DateInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPress }),
-            React.createElement(DatePanel, { key: 'DatePanel' + index, value: this.state.value, show: this.state.focused, onValueChange: this.onValueChange, onSave: this.onSave, onCancel: this.onCancel })
+            React.createElement(Button, { key: 'DateInputButton' + index, title: model.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPress }),
+            React.createElement(DatePanel, { key: 'DatePanel' + index, value: model.value, show: this.state.focused, config: context.config, onValueChange: this.onValueChange, onSave: this.onSave, onCancel: this.onCancel })
         ]);
     }
     get fontSize() {
-        return StyleManager.getFontSize('default');
+        return StyleManager.getFontSize('default', this.props.context.config);
     }
     get fontWeight() {
-        return StyleManager.getFontWeight('default');
+        return StyleManager.getFontWeight('default', this.props.context.config);
     }
     get paddingVertical() {
         return 12;
@@ -111,26 +86,26 @@ export class DateInputView extends React.Component {
     }
     get color() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusColor(this.props.theme);
+            return StyleManager.getInputFocusColor(this.props.theme, this.props.context.config);
         }
         else {
-            return StyleManager.getInputColor(this.props.theme);
+            return StyleManager.getInputColor(this.props.theme, this.props.context.config);
         }
     }
     get backgroundColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
+            return StyleManager.getInputFocusBackgroundColor(this.props.theme, this.props.context.config);
         }
         else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
+            return StyleManager.getInputBackgroundColor(this.props.theme, this.props.context.config);
         }
     }
     get borderColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBorderColor(this.props.theme);
+            return StyleManager.getInputFocusBorderColor(this.props.theme, this.props.context.config);
         }
         else {
-            return StyleManager.getInputBorderColor(this.props.theme);
+            return StyleManager.getInputBorderColor(this.props.theme, this.props.context.config);
         }
     }
     get spacing() {
@@ -138,8 +113,12 @@ export class DateInputView extends React.Component {
             return 0;
         }
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing, this.props.context.config);
         }
         return 0;
     }
-}
+};
+DateInputView = __decorate([
+    safe
+], DateInputView);
+export { DateInputView };

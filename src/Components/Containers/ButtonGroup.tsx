@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { View } from 'react-native';
+import { HostConfig } from '../../Configs/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps {
     hasSpacing: boolean;
+    config: HostConfig;
 }
 
 export class ButtonGroup extends React.Component<IProps> {
@@ -26,17 +28,17 @@ export class ButtonGroup extends React.Component<IProps> {
     private get topStyles() : any {
         if (this.props.hasSpacing) {
             return {
-                marginTop: StyleManager.actionSetSpacing,
+                marginTop: StyleManager.getActionSetSpacing(this.props.config),
                 paddingTop: 12,
                 justifyContent: 'center',
-                borderTopWidth: StyleManager.separatorThickness,
-                borderTopColor: StyleManager.separatorColor
+                borderTopWidth: StyleManager.getSeparatorThickness(this.props.config),
+                borderTopColor: StyleManager.getSeparatorColor(this.props.config),
             };
         }
         return {};
     }
 
     private get flexDirection() {
-        return StyleManager.actionDirection === 'vertically' ? 'column' : 'row';
+        return StyleManager.getActionDirection(this.props.config) === 'vertically' ? 'column' : 'row';
     }
 }

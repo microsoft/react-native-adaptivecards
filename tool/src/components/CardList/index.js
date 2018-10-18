@@ -21,7 +21,7 @@ class CardList extends React.Component {
                     className="scrollbar"
                     {...this.props}>
                     <div className="card-list-inner">
-                        {cards.map(card => <Card key={card.id} adaptiveCard={card.card} config={config}/>)}
+                        {cards.map(card => <Card key={card.id} payload={card.card} config={config}/>)}
                     </div>
                 </Scrollbars>
             </div>

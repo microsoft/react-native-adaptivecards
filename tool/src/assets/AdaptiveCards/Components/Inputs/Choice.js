@@ -6,22 +6,21 @@ export class Choice extends React.Component {
     constructor() {
         super(...arguments);
         this.onChoose = () => {
-            if (this.props.onChoose) {
-                this.props.onChoose(this.props.value);
+            if (this.props.onSelect) {
+                this.props.onSelect(this.props.index);
             }
         };
     }
     render() {
         return (React.createElement(Touchable, { onPress: this.onChoose, style: {
-                paddingTop: StyleManager.separatorSpacing,
-                paddingBottom: StyleManager.separatorSpacing,
+                paddingTop: StyleManager.getSeparatorSpacing(this.props.config),
+                paddingBottom: StyleManager.getSeparatorSpacing(this.props.config),
             } },
             React.createElement(Text, { style: {
                     color: this.color,
-                    fontSize: StyleManager.getFontSize('default'),
+                    fontSize: this.fontSize,
                     lineHeight: this.lineHeight,
-                    fontWeight: StyleManager.getFontWeight('default'),
-                    backgroundColor: this.backgroundColor,
+                    fontWeight: StyleManager.getFontWeight('default', this.props.config),
                     textAlign: StyleManager.getTextAlign('left'),
                     flexWrap: StyleManager.getWrap(false),
                 } }, this.props.title)));
@@ -30,22 +29,14 @@ export class Choice extends React.Component {
         return this.fontSize * 1.2;
     }
     get fontSize() {
-        return StyleManager.getFontSize('default');
+        return StyleManager.getFontSize('default', this.props.config);
     }
     get color() {
         if (this.props.selected) {
-            return StyleManager.getColor('accent', 'emphasis', true);
+            return StyleManager.getColor('accent', 'default', false, this.props.config);
         }
         else {
-            return StyleManager.getColor('default', 'default', false);
-        }
-    }
-    get backgroundColor() {
-        if (this.props.selected) {
-            return StyleManager.getBackgroundColor('emphasis');
-        }
-        else {
-            return StyleManager.getBackgroundColor('default');
+            return StyleManager.getColor('default', 'default', false, this.props.config);
         }
     }
 }

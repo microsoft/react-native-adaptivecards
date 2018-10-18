@@ -1,21 +1,23 @@
 import * as React from 'react';
 import {
-    AccessibilityTraits,
+    AccessibilityTrait,
     DeviceEventEmitter,
     LayoutChangeEvent,
     Platform,
+    StyleProp,
     TouchableNativeFeedback,
     TouchableOpacity,
-    View
+    View,
+    ViewStyle
 } from 'react-native';
 import { Guid } from '../../Shared/Guid';
 
 interface IProps {
     testId?: string;
     disabled?: boolean;
-    style?: object;
+    style?: StyleProp<ViewStyle>;
     accessibilityLabel?: string;
-    accessibilityTraits?: AccessibilityTraits | AccessibilityTraits[];
+    accessibilityTraits?: AccessibilityTrait | AccessibilityTrait[];
     accessibilityComponentType?: 'none' | 'button' | 'radiobutton_checked' | 'radiobutton_unchecked';
     hitSlop?: object;
     activeOpacity?: number;
@@ -31,10 +33,6 @@ export class Touchable extends React.Component<IProps> {
         super(props);
 
         this.testId = this.props.testId + Guid.newGuid();
-
-        this.state = {
-            disabled: this.props.disabled
-        };
     }
 
     public componentDidMount() {
@@ -59,7 +57,6 @@ export class Touchable extends React.Component<IProps> {
             hitSlop,
             style,
             disabled,
-            ...otherProps
         } = this.props;
 
         if (Platform.OS === 'android') {
@@ -79,8 +76,9 @@ export class Touchable extends React.Component<IProps> {
                 >
                     <View
                         style={style}
-                        {...otherProps}
-                    />
+                    >
+                        {this.props.children}
+                    </View>
                 </TouchableNativeFeedback>);
         } else {
             return (
@@ -97,7 +95,7 @@ export class Touchable extends React.Component<IProps> {
                     accessibilityTraits={accessibilityTraits === undefined ? 'button' : accessibilityTraits}
                     onLayout={this.props.onLayout}
                 >
-                    {otherProps.children}
+                    {this.props.children}
                 </TouchableOpacity>
             );
         }

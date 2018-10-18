@@ -73,10 +73,10 @@ export class InputBox extends React.Component {
         return this.fontSize * 1.2;
     }
     get fontSize() {
-        return StyleManager.getFontSize('default');
+        return StyleManager.getFontSize('default', this.props.config);
     }
     get fontWeight() {
-        return StyleManager.getFontWeight('default');
+        return StyleManager.getFontWeight('default', this.props.config);
     }
     get paddingVertical() {
         return 12;
@@ -95,26 +95,26 @@ export class InputBox extends React.Component {
     }
     get color() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusColor(this.props.theme);
+            return StyleManager.getInputFocusColor(this.props.theme, this.props.config);
         }
         else {
-            return StyleManager.getInputColor(this.props.theme);
+            return StyleManager.getInputColor(this.props.theme, this.props.config);
         }
     }
     get backgroundColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
+            return StyleManager.getInputFocusBackgroundColor(this.props.theme, this.props.config);
         }
         else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
+            return StyleManager.getInputBackgroundColor(this.props.theme, this.props.config);
         }
     }
     get borderColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBorderColor(this.props.theme);
+            return StyleManager.getInputFocusBorderColor(this.props.theme, this.props.config);
         }
         else {
-            return StyleManager.getInputBorderColor(this.props.theme);
+            return StyleManager.getInputBorderColor(this.props.theme, this.props.config);
         }
     }
 }
