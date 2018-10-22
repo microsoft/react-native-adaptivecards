@@ -55,10 +55,6 @@ export class ImageView extends React.Component {
             });
         };
         this.onImageSize = (size) => {
-            if (this.timer !== undefined) {
-                clearTimeout(this.timer);
-                this.timer = undefined;
-            }
             if (size) {
                 this.setState({
                     loaded: true,
@@ -95,8 +91,7 @@ export class ImageView extends React.Component {
     }
     componentDidMount() {
         this.mounted = true;
-        setTimeout(this.fetchImageSize, 200);
-        this.timer = setTimeout(this.fetchImageSize, 1500);
+        this.fetchImageSize();
     }
     componentWillUnmount() {
         this.mounted = false;

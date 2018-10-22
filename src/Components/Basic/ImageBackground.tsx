@@ -33,7 +33,6 @@ interface IState {
 }
 
 export class ImageBackground extends React.Component<IProps, IState> {
-    private timer: NodeJS.Timer;
 
     constructor(props: IProps) {
         super(props);
@@ -45,8 +44,7 @@ export class ImageBackground extends React.Component<IProps, IState> {
     }
 
     public componentDidMount() {
-        setTimeout(this.fetchImageSize, 300);
-        this.timer = setTimeout(this.fetchImageSize, 1500);
+        this.fetchImageSize();
     }
 
     public render() {
@@ -111,19 +109,9 @@ export class ImageBackground extends React.Component<IProps, IState> {
         const { url } = this.props;
 
         if (url) {
-            let realUrl: string;
-            if (/\?[a-zA-Z]+=/.test(url)) {
-                realUrl = url + '&ms_cox_timestamp=' + (new Date()).getTime();
-            } else {
-                realUrl = url + '?ms_cox_timestamp=' + (new Date()).getTime();
-            }
             Image.getSize(
-                realUrl,
+                url,
                 (width, height) => {
-                    if (this.timer !== undefined) {
-                        clearTimeout(this.timer);
-                        this.timer = undefined;
-                    }
                     if (width > 0 && height > 0) {
                         this.setState({
                             imgRatio: width / height,

@@ -25,7 +25,6 @@ interface IState {
 
 export class ImageView extends React.Component<IProps, IState> {
     private mounted: boolean;
-    private timer: NodeJS.Timer;
 
     constructor(props: IProps) {
         super(props);
@@ -40,8 +39,7 @@ export class ImageView extends React.Component<IProps, IState> {
     public componentDidMount() {
         this.mounted = true;
 
-        setTimeout(this.fetchImageSize, 200);
-        this.timer = setTimeout(this.fetchImageSize, 1500);
+        this.fetchImageSize();
     }
 
     public componentWillUnmount() {
@@ -143,10 +141,6 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     private onImageSize = (size: Dimension) => {
-        if (this.timer !== undefined) {
-            clearTimeout(this.timer);
-            this.timer = undefined;
-        }
         if (size) {
             this.setState({
                 loaded: true,
