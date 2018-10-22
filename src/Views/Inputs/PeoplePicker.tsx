@@ -31,6 +31,7 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
         if (model && model.isValueValid) {
             model.onStoreUpdate = this.onStoreUpdate;
             model.onSuggestionReady = this.onSuggestionReady;
+            model.onSelect = this.onSuggestionSelected;
             this.state = {
                 value: '',
                 inputFocused: false,
@@ -123,6 +124,12 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
             if (model.onInput) {
                 model.onInput(this.state.value);
             }
+        });
+    }
+
+    private onSuggestionSelected = () => {
+        this.setState({
+            suggestionCard: undefined,
         });
     }
 

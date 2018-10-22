@@ -68,6 +68,9 @@ export class PeoplePickerModel extends InputModel {
                                 value: JSON.stringify(currentValue),
                                 isValid: true,
                             });
+                            if (this.onSelect) {
+                                this.onSelect();
+                            }
                             return Promise.resolve(data);
                         }
                     }

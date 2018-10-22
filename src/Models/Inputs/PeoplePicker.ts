@@ -13,6 +13,7 @@ export class PeoplePickerModel extends InputModel {
     public callback: CallbackActionModel;
     public selected: string;
     public onSuggestionReady: (card: CardModel) => void;
+    public onSelect: () => void;
 
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(json, parent, context);
@@ -97,6 +98,9 @@ export class PeoplePickerModel extends InputModel {
                             value: JSON.stringify(currentValue),
                             isValid: true,
                         });
+                        if (this.onSelect) {
+                            this.onSelect();
+                        }
                         return Promise.resolve(data);
                     }
                 }

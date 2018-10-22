@@ -48,6 +48,11 @@ export class PeoplePickerView extends React.Component {
                 }
             });
         };
+        this.onSuggestionSelected = () => {
+            this.setState({
+                suggestionCard: undefined,
+            });
+        };
         this.onSuggestionReady = (card) => {
             this.setState({
                 suggestionCard: card,
@@ -64,6 +69,7 @@ export class PeoplePickerView extends React.Component {
         if (model && model.isValueValid) {
             model.onStoreUpdate = this.onStoreUpdate;
             model.onSuggestionReady = this.onSuggestionReady;
+            model.onSelect = this.onSuggestionSelected;
             this.state = {
                 value: '',
                 inputFocused: false,
