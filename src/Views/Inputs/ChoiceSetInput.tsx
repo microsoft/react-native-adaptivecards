@@ -80,7 +80,7 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
             [
                 <Button
                     key={'ChoiceSetInputButton' + index}
-                    title={this.state.value}
+                    title={this.title}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
                     borderColor={this.borderColor}
@@ -190,6 +190,16 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
             }
         });
         console.log('ChoiceSet onPress');
+    }
+
+    private get title() {
+        if (this.state.selected) {
+            return this.state.selected.reduce((prev, value, index) => {
+                let suffix = index === this.state.selected.length - 1 ? '' : ',';
+                return prev + this.props.model.choices.find(choice => choice.value === value).title + suffix;
+            }, '');
+        }
+        return '';
     }
 
     private get fontSize() {

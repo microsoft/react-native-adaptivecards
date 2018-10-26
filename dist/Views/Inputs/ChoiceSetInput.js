@@ -94,7 +94,7 @@ export class ChoiceSetView extends React.Component {
     renderChoicePanel() {
         const { model, index } = this.props;
         return ([
-            React.createElement(Button, { key: 'ChoiceSetInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPanelButtonPress }),
+            React.createElement(Button, { key: 'ChoiceSetInputButton' + index, title: this.title, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPanelButtonPress }),
             React.createElement(ChoicePanel, { key: 'DatePanel' + index, choices: model.choices, selected: this.state.selected, show: this.state.focused, onChoose: this.onValueChange, onClose: this.onPanelClose })
         ]);
     }
@@ -112,6 +112,15 @@ export class ChoiceSetView extends React.Component {
             selected = undefined;
         }
         return (React.createElement(RadioList, { choices: model.choices, selected: selected, onChoose: this.onValueChange, theme: theme }));
+    }
+    get title() {
+        if (this.state.selected) {
+            return this.state.selected.reduce((prev, value, index) => {
+                let suffix = index === this.state.selected.length - 1 ? '' : ',';
+                return prev + this.props.model.choices.find(choice => choice.value === value).title + suffix;
+            }, '');
+        }
+        return '';
     }
     get fontSize() {
         return StyleManager.getFontSize('default');
