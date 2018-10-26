@@ -12,15 +12,25 @@ export class Choice extends React.Component {
         };
     }
     render() {
-        return (React.createElement(Touchable, { onPress: this.onChoose },
+        return (React.createElement(Touchable, { onPress: this.onChoose, style: {
+                paddingTop: StyleManager.separatorSpacing,
+                paddingBottom: StyleManager.separatorSpacing,
+            } },
             React.createElement(Text, { style: {
                     color: this.color,
                     fontSize: StyleManager.getFontSize('default'),
+                    lineHeight: this.lineHeight,
                     fontWeight: StyleManager.getFontWeight('default'),
                     backgroundColor: this.backgroundColor,
                     textAlign: StyleManager.getTextAlign('left'),
                     flexWrap: StyleManager.getWrap(false),
                 } }, this.props.title)));
+    }
+    get lineHeight() {
+        return this.fontSize * 1.2;
+    }
+    get fontSize() {
+        return StyleManager.getFontSize('default');
     }
     get color() {
         if (this.props.selected) {

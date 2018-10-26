@@ -16,11 +16,16 @@ export class Choice<T> extends React.Component<IProps<T>> {
         return (
             <Touchable
                 onPress={this.onChoose}
+                style={{
+                    paddingTop: StyleManager.separatorSpacing,
+                    paddingBottom: StyleManager.separatorSpacing,
+                }}
             >
                 <Text
                     style={{
                         color: this.color,
                         fontSize: StyleManager.getFontSize('default'),
+                        lineHeight: this.lineHeight,
                         fontWeight: StyleManager.getFontWeight('default'),
                         backgroundColor: this.backgroundColor,
                         textAlign: StyleManager.getTextAlign('left'),
@@ -37,6 +42,14 @@ export class Choice<T> extends React.Component<IProps<T>> {
         if (this.props.onChoose) {
             this.props.onChoose(this.props.value);
         }
+    }
+
+    private get lineHeight() {
+        return this.fontSize * 1.2;
+    }
+
+    private get fontSize() {
+        return StyleManager.getFontSize('default');
     }
 
     private get color() {

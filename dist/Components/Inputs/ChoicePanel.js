@@ -14,7 +14,7 @@ export class ChoicePanel extends React.Component {
             return (React.createElement(Choice, { title: info.item.title, value: info.item.value, onChoose: this.onChoose, selected: this.isValueSelected(info.item.value) }));
         };
         this.renderSeparator = () => {
-            return (React.createElement(SeparateLine, null));
+            return (React.createElement(SeparateLine, { noMargin: true }));
         };
         this.extractKey = (item, index) => {
             return `value: ${item.value}, index: ${index}`;

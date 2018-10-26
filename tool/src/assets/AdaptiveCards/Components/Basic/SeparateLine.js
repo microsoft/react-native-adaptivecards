@@ -11,6 +11,9 @@ export class SeparateLine extends React.PureComponent {
             } }));
     }
     get margin() {
+        if (this.props.noMargin) {
+            return 0;
+        }
         if (this.props.height && this.props.height > 0) {
             return this.props.height / 2;
         }

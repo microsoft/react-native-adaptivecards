@@ -56,7 +56,7 @@ export class ChoicePanel<T extends { title: string, value: V }, V> extends React
 
     private renderSeparator = () => {
         return (
-            <SeparateLine />
+            <SeparateLine noMargin={true}/>
         );
     }
 
