@@ -18,13 +18,23 @@ interface IState {
 
 export class CounterView extends React.Component<IProps, IState> {
     private mounted: boolean;
+    private startTime: number;
+    private endTime: number;
 
     constructor(props: IProps) {
         super(props);
 
         const { model } = this.props;
 
-        if (model.isSchemaCheckPassed) {
+        if (model && model.isSchemaCheckPassed) {
+            this.startTime = Date.now();
+            if (model.delay && model.delay > 0) {
+                this.startTime = this.startTime + model.delay * 1000;
+            }
+            this.endTime = this.startTime;
+            if (model.value && model.value > 0) {
+                this.endTime = this.startTime + model.value * 1000;
+            }
             this.state = {
                 remains: model.value
             };
@@ -34,13 +44,7 @@ export class CounterView extends React.Component<IProps, IState> {
     public componentDidMount() {
         this.mounted = true;
 
-        const { model } = this.props;
-
-        if (model.delay && model.delay > 0) {
-            setTimeout(this.start, model.delay * 1000);
-        } else {
-            this.start();
-        }
+        this.countDown();
     }
 
     public componentWillUnmount() {
@@ -80,27 +84,19 @@ export class CounterView extends React.Component<IProps, IState> {
         );
     }
 
-    private start = () => {
-        if (this.state && this.state.remains > 0) {
-            setInterval(() => {
-                if (this.state.remains > 0) {
-                    this.setState({
-                        remains: this.state.remains - 1
-                    });
-                } else {
-                    clearInterval();
-                    if (this.props.model.callback) {
-                        this.props.model.callback.onAction(
-                            () => {
-                                console.log('Timer Callback Success');
-                            },
-                            () => {
-                                console.log('Timer Callback Failed');
-                            }
-                        );
-                    }
-                }
-            }, 1000);
+    private countDown = () => {
+        let now = Date.now();
+        console.log(this.startTime, this.endTime, now);
+        if (this.startTime < now) {
+            let remains = Math.floor((this.endTime - now) / 1000);
+            if (remains >= 0) {
+                this.setState({
+                    remains: remains,
+                });
+            }
+        }
+        if (this.endTime > now) {
+            setTimeout(this.countDown, 1000);
         }
     }
 
