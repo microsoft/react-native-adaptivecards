@@ -3,12 +3,12 @@
   "description": "React Native implementation of AdaptiveCards.",
   "version": "0.1.0",
   "repository": {
-    "url": "git+https://msasg.visualstudio.com/DefaultCollection/Bing_Cortana/_git/react-native-adaptivecards",
+    "url": "git+https://github.com/Microsoft/react-native-adaptivecards",
     "type": "git"
   },
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "author": "@microsoft",
+  "private": false,
+  "license": "MIT",
   "files": [
     "dist/"
   ],
