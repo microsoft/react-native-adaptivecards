@@ -39,7 +39,7 @@ import { CardRoot } from 'react-native-adaptivecards';
 | Prop          | default                                     |  Type     | Description              |
 | ------------- | -------------------------------------------:| ---------:| ------------------------:|
 | payload  | -                                           | object    | Json object based on AdaptiveCards schema. |
-| config | [{...}](./src/View/Configs/Types.ts)  | object    | Host config used to override the default config.        |
+| config | [{...}](./src/Configs/default.json)  | object    | Host config used to override the default config.        |
 
 ### Develope
 
