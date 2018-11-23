@@ -1,23 +1,27 @@
 import * as React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
+
+import { HostConfig } from '../../Configs/Types';
+import { Guid } from '../../Shared/Guid';
+import { IChoice } from '../../Shared/Types';
 import { RadioBox } from './RadioBox';
 
-interface IProps<T extends { title: string, value: V }, V> {
-    choices: T[];
-    selected: V;
-    onChoose: (value: V) => void;
+interface IProps<T> {
+    choices: IChoice<T>[];
     theme: 'default' | 'emphasis';
+    config: HostConfig;
+    onChoose: (index: number) => void;
 }
 
-export class RadioList<T extends { title: string, value: V }, V> extends React.Component<IProps<T, V>> {
+export class RadioList<T> extends React.Component<IProps<T>> {
     public render() {
         if (this.props.choices) {
             return (
                 <FlatList
-                    extraData={this.props.selected}
                     data={this.props.choices}
-                    renderItem={this.renderCheckItem}
+                    renderItem={this.renderRadioBox}
                     keyExtractor={this.extractKey}
+                    extraData={Guid.newGuid()}
                 />
             );
         } else {
@@ -25,30 +29,27 @@ export class RadioList<T extends { title: string, value: V }, V> extends React.C
         }
     }
 
-    private renderCheckItem = (info: ListRenderItemInfo<T>) => {
+    private renderRadioBox = (info: ListRenderItemInfo<IChoice<T>>) => {
         return (
             <RadioBox
+                index={info.index}
                 title={info.item.title}
                 value={info.item.value}
-                checked={this.isValueSelected(info.item.value)}
+                config={this.props.config}
+                selected={info.item.selected}
                 theme={this.props.theme}
-                onClick={this.onChoose}
+                onCheck={this.onChoose}
             />
         );
     }
 
-    private extractKey = (item: T, index: number) => {
-        return `value: ${item.value}, index: ${index}, checked:${this.props.selected === item.value}`;
+    private extractKey = (item: IChoice<T>, index: number) => {
+        return `value: ${item.value}, index: ${index}, checked:${item.selected}`;
     }
 
-    private isValueSelected = (value: V) => {
-        return this.props.selected && this.props.selected === value;
-    }
-
-    private onChoose = (value: V) => {
-        console.log(value);
+    private onChoose = (index: number) => {
         if (this.props.onChoose) {
-            this.props.onChoose(value);
+            this.props.onChoose(index);
         }
     }
 }

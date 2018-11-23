@@ -1,24 +1,18 @@
 import * as React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
-import { ImageModel } from '../../Models/CardElements/Image';
-import { ImageSetModel } from '../../Models/Containers/ImageSet';
+
+import { ImageNode } from '../../Models/Nodes/CardElements/Image';
+import { ImageSetNode } from '../../Models/Nodes/Containers/ImageSet';
+import { IViewProps } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { ImageView } from '../CardElements/Image';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps {
-    index: number;
-    model: ImageSetModel;
-    theme: 'default' | 'emphasis';
+interface IProps extends IViewProps<ImageSetNode> {
 }
 
 export class ImageSetView extends React.Component<IProps> {
     public render() {
-        const { model, theme } = this.props;
-
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        }
+        const { model } = this.props;
 
         return (
             <FlatList
@@ -33,12 +27,12 @@ export class ImageSetView extends React.Component<IProps> {
         );
     }
 
-    private keyExtractor = (item: ImageModel, index: number) => {
+    private keyExtractor = (item: ImageNode, index: number) => {
         return `url: ${item.url}, index: ${index}`;
     }
 
-    private renderImage = (info: ListRenderItemInfo<ImageModel>) => {
-        const { model, theme } = this.props;
+    private renderImage = (info: ListRenderItemInfo<ImageNode>) => {
+        const { model, context, theme } = this.props;
 
         if (!model) {
             return undefined;
@@ -49,16 +43,26 @@ export class ImageSetView extends React.Component<IProps> {
                 key={info.index}
                 index={0}
                 model={info.item}
+                context={context}
                 size={this.size}
-                maxHeight={StyleManager.inSetImageMaxHeight}
+                maxHeight={StyleManager.getInSetImageMaxHeight(context.config)}
                 spacing={this.getImageSpacing(info.index)}
                 theme={theme}
+                
             />
         );
     }
 
+    private getImageSpacing(index: number) {
+        if (index > 0) {
+            return StyleManager.getSpacing('default', this.props.context.config);
+        } else {
+            return 0;
+        }
+    }
+
     private get size() {
-        const { model } = this.props;
+        const { model, context } = this.props;
 
         if (!model) {
             return 'auto';
@@ -68,15 +72,7 @@ export class ImageSetView extends React.Component<IProps> {
             return model.imageSize;
         }
 
-        return StyleManager.inSetImageSize;
-    }
-
-    private getImageSpacing(index: number) {
-        if (index > 0) {
-            return StyleManager.getSpacing('default');
-        } else {
-            return 0;
-        }
+        return StyleManager.getInSetImageSize(context.config);
     }
 
     private get spacing() {
@@ -85,7 +81,7 @@ export class ImageSetView extends React.Component<IProps> {
         }
 
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing, this.props.context.config);
         }
         return 0;
     }

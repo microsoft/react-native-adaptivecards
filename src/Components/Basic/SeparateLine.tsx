@@ -1,33 +1,35 @@
 import React from 'react';
 import { View } from 'react-native';
+import { HostConfig } from '../../Configs/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps {
     height?: number;
-    noMargin?: boolean;
+    hasSpacing?: boolean;
+    config: HostConfig;
 }
 
-export class SeparateLine extends React.PureComponent<IProps> {
+export class SeparateLine extends React.Component<IProps> {
     public render() {
         return (
-            <View style={{
-                backgroundColor: StyleManager.separatorColor,
-                height: StyleManager.separatorThickness,
-                marginTop: this.margin,
-                marginBottom: this.margin,
-            }}
+            <View
+                style={{
+                    backgroundColor: StyleManager.getSeparatorColor(this.props.config),
+                    height: StyleManager.getSeparatorThickness(this.props.config),
+                    marginVertical: this.margin,
+                }}
             />
         );
     }
 
     private get margin() {
-        if (this.props.noMargin) {
+        if (this.props.hasSpacing === false) {
             return 0;
         }
         if (this.props.height && this.props.height > 0) {
             return this.props.height / 2;
         } else {
-            return StyleManager.separatorSpacing;
+            return StyleManager.getSeparatorSpacing(this.props.config);
         }
     }
 }

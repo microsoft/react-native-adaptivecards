@@ -5,13 +5,16 @@ export class Toggle extends React.Component {
     constructor() {
         super(...arguments);
         this.onClick = () => {
-            if (this.props.onClick) {
-                this.props.onClick(this.props.value);
+            this.onSwitchValueChange(!this.props.activated);
+        };
+        this.onSwitchValueChange = (value) => {
+            if (this.props.onValueChange) {
+                this.props.onValueChange(value);
             }
         };
     }
     render() {
-        return (React.createElement(TouchableWithoutFeedback, { onPress: this.onClick },
+        return (React.createElement(TouchableWithoutFeedback, { disabled: true, onPress: this.onClick },
             React.createElement(View, { style: [
                     {
                         flexDirection: 'row',
@@ -23,23 +26,26 @@ export class Toggle extends React.Component {
                 ] },
                 React.createElement(Text, { style: {
                         color: this.color,
-                        fontSize: StyleManager.getFontSize('default'),
-                        fontWeight: StyleManager.getFontWeight('default'),
+                        fontSize: StyleManager.getFontSize('default', this.props.config),
+                        fontWeight: StyleManager.getFontWeight('default', this.props.config),
                         textAlign: StyleManager.getTextAlign('left'),
                         width: 0,
                         flex: 1,
                         flexWrap: StyleManager.getWrap(true),
                         paddingRight: 16,
                     } }, this.props.title),
-                React.createElement(Switch, { onTintColor: this.switchOnColor, tintColor: this.switchOffColor, value: this.props.checked, onValueChange: this.onClick }))));
+                React.createElement(Switch, { trackColor: {
+                        true: this.switchOnColor,
+                        false: this.switchOffColor,
+                    }, value: this.props.activated, onValueChange: this.onSwitchValueChange }))));
     }
     get color() {
-        return StyleManager.getCheckboxTitleColor(this.props.theme);
+        return StyleManager.getCheckboxTitleColor(this.props.theme, this.props.config);
     }
     get switchOffColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, false);
+        return StyleManager.getCheckboxBoxColor(this.props.theme, false, this.props.config);
     }
     get switchOnColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, true);
+        return StyleManager.getCheckboxBoxColor(this.props.theme, true, this.props.config);
     }
 }

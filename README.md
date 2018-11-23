@@ -11,13 +11,13 @@ React Native renderer for [AdaptiveCards](http://adaptivecards.io/).
 1. Installation
 
   ```bash
-  $ npm install git+https://msasg.visualstudio.com/DefaultCollection/Bing_Cortana/_git/react-native-adaptivecards
+  $ npm install react-native-adaptivecards
   ```
 
   or by Yarn
 
   ```bash
-  $ yarn add git+https://msasg.visualstudio.com/DefaultCollection/Bing_Cortana/_git/react-native-adaptivecards
+  $ yarn add react-native-adaptivecards
   ```
 
 2. Impementation
@@ -40,6 +40,15 @@ import AdaptiveCard from 'react-native-adaptivecards';
 | ------------- | -------------------------------------------:| ---------:| ------------------------:|
 | adaptiveCard  | -                                           | object    | Json object based on AdaptiveCards schema |
 | overrideStyle | [{...}](./src/View/Styles/styleConfig.d.ts)  | object    | Customized styles        |
+
+### Develope
+
+```bash
+$ brew install watchman
+$ yarn global add gulp-cli
+$ yarn all
+$ yarn run-ios
+```
 
 ### Examples
 

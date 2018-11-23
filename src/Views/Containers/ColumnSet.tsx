@@ -1,24 +1,15 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { Touchable } from '../../Components/Basic/Touchable';
-import { ConfigManager } from '../../Config/ConfigManager';
-import { ColumnSetModel } from '../../Models/Containers/ColumnSet';
-import { ActionType } from '../../Shared/Types';
+
+import { ColumnSetNode } from '../../Models/Nodes/Containers/ColumnSet';
+import { IViewProps } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
+import { SelectActionView } from '../CardProps/SelectAction';
 import { ColumnView } from './Column';
 
-interface IProps {
-    index: number;
-    model: ColumnSetModel;
-    theme: 'default' | 'emphasis';
+interface IProps extends IViewProps<ColumnSetNode> {
 }
 
-interface IState {
-    disabled: boolean;
-}
-
-export class ColumnSetView extends React.Component<IProps, IState> {
+export class ColumnSetView extends React.Component<IProps> {
     constructor(props: IProps) {
         super(props);
 
@@ -28,24 +19,15 @@ export class ColumnSetView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { model, theme } = this.props;
+        const { model, context, theme } = this.props;
 
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        }
-
-        if (model.selectAction) {
-            return this.renderTouchableBlock();
-        } else {
-            return this.renderNonTouchableBlock();
-        }
-    }
-
-    private renderTouchableBlock = () => {
         return (
-            <Touchable
-                onPress={this.onPress}
-                disabled={this.state.disabled}
+            <SelectActionView
+                index={0}
+                theme={theme}
+                model={model.selectAction}
+                context={context}
+                
                 style={{
                     flex: this.flex,
                     flexDirection: 'row',
@@ -55,23 +37,7 @@ export class ColumnSetView extends React.Component<IProps, IState> {
                 }}
             >
                 {this.renderContent()}
-            </Touchable>
-        );
-    }
-
-    private renderNonTouchableBlock = () => {
-        return (
-            <View
-                style={{
-                    flex: this.flex,
-                    flexDirection: 'row',
-                    alignSelf: 'stretch',
-                    justifyContent: 'flex-start',
-                    marginTop: this.spacing
-                }}
-            >
-                {this.renderContent()}
-            </View>
+            </SelectActionView>
         );
     }
 
@@ -86,7 +52,7 @@ export class ColumnSetView extends React.Component<IProps, IState> {
     }
 
     private renderColumns = () => {
-        const { model } = this.props;
+        const { model, context } = this.props;
 
         if (!model || !model.columns || model.columns.length === 0) {
             return undefined;
@@ -97,34 +63,11 @@ export class ColumnSetView extends React.Component<IProps, IState> {
                 key={index}
                 index={index}
                 model={column}
+                context={context}
                 theme={this.props.theme}
+                
             />
         ));
-    }
-
-    private onPress = () => {
-        const { model } = this.props;
-
-        if (model && model.selectAction && model.selectAction.onAction) {
-            model.selectAction.onAction(
-                () => {
-                    console.log('Action Success');
-                    if (this.hasOneTimeAction) {
-                        this.setState({
-                            disabled: true,
-                        });
-                    }
-                },
-                (error) => {
-                    console.log('Action Failed >> ', error);
-                }
-            );
-        }
-    }
-
-    private get hasOneTimeAction() {
-        // tslint:disable-next-line:max-line-length
-        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
 
     private get flex() {
@@ -147,7 +90,7 @@ export class ColumnSetView extends React.Component<IProps, IState> {
         }
 
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing, this.props.context.config);
         }
         return 0;
     }

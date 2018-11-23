@@ -1,20 +1,18 @@
 import * as React from 'react';
 import { LayoutChangeEvent } from 'react-native';
-import { ImageBlock } from '../../Components/Basic/ImageBlock';
-import { ImageModel } from '../../Models/CardElements/Image';
-import { Dimension } from '../../Shared/Types';
-import { StyleManager } from '../../Styles/StyleManager';
-import { ImageUtils } from '../../Utils/ImageUtils';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps {
-    index: number;
-    model: ImageModel;
+import { Image } from '../../Components/Basic/Image';
+import { ImageNode } from '../../Models/Nodes/CardElements/Image';
+import { Dimension, IViewProps } from '../../Shared/Types';
+import { StyleManager } from '../../Styles/StyleManager';
+import { ImageUtils } from '../../Utils/Image';
+import { SelectActionView } from '../CardProps/SelectAction';
+
+interface IProps extends IViewProps<ImageNode> {
     size?: 'auto' | 'stretch' | 'small' | 'medium' | 'large';
     spacing?: number;
     maxWidth?: number;
     maxHeight?: number;
-    theme: 'emphasis' | 'default';
 }
 
 interface IState {
@@ -54,47 +52,40 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { model, spacing, theme } = this.props;
-
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.url + ' is not valid', theme, 'error');
-        }
+        const { model, context, spacing, theme } = this.props;
 
         if (this.state.loaded) {
             return (
-                <ImageBlock
-                    url={model.url}
-                    alt={model.alt}
-                    flex={this.flex}
-                    alignSelf={StyleManager.getHorizontalAlign(model.horizontalAlignment)}
-                    width={this.state.width}
-                    height={this.state.height}
-                    onPress={model.selectAction ? this.onPress : undefined}
+                <SelectActionView
+                    index={0}
+                    theme={theme}
+                    model={model.selectAction}
+                    context={context}
+                    
                     onLayout={this.onLayout}
-                    onLoad={this.onImageLoad}
-                    onError={this.onImageError}
-                    marginTop={this.spacing}
-                    marginLeft={spacing}
-                    mode={model.style === 'person' ? 'avatar' : 'default'}
-                />
+                    style={{
+                        flex: this.flex,
+                        alignContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: StyleManager.getHorizontalAlign(model.horizontalAlignment),
+                        marginTop: this.spacing,
+                        marginLeft: spacing,
+                    }}
+                >
+                    <Image
+                        url={model.url}
+                        host={context.config.baseUrl}
+                        alt={model.alt}
+                        width={this.state.width}
+                        height={this.state.height}
+                        onLoad={this.onImageLoad}
+                        onError={this.onImageError}
+                        mode={model.style === 'person' ? 'avatar' : 'default'}
+                    />
+                </SelectActionView>
             );
         }
         return null;
-    }
-
-    private onPress = () => {
-        const { model } = this.props;
-
-        if (model && model.selectAction && model.selectAction.onAction) {
-            model.selectAction.onAction(
-                () => {
-                    console.log('Action Success');
-                },
-                (error) => {
-                    console.log('Action Failed >> ', error);
-                }
-            );
-        }
     }
 
     private onLayout = (event: LayoutChangeEvent) => {
@@ -109,9 +100,9 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     private onImageLoad = () => {
-        const { model } = this.props;
-        if (model && model.context) {
-            let handler = model.context.infoHandler;
+        const { model, context } = this.props;
+        if (model && context) {
+            let handler = context.host.onInfo;
             if (handler) {
                 handler(`AdaptiveCard >> Image Load Success >> ${model.url}`);
             }
@@ -130,9 +121,9 @@ export class ImageView extends React.Component<IProps, IState> {
         this.setState({
             loaded: false,
         }, () => {
-            const { model } = this.props;
-            if (model && model.context) {
-                let handler = model.context.errorHandler;
+            const { model, context } = this.props;
+            if (model && context) {
+                let handler = context.host.onError;
                 if (handler) {
                     handler(`AdaptiveCard >> Image Get Size Failed >> ${model.url} >> ${error.message}`);
                 }
@@ -147,9 +138,9 @@ export class ImageView extends React.Component<IProps, IState> {
                 width: size.width,
                 height: size.height,
             }, () => {
-                const { model } = this.props;
-                if (model && model.context) {
-                    let handler = model.context.infoHandler;
+                const { model, context } = this.props;
+                if (model && context) {
+                    let handler = context.host.onInfo;
                     if (handler) {
                         handler(`AdaptiveCard >> Image Get Size Success >> ${model.url}`);
                     }
@@ -159,11 +150,11 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     private fetchImageSize = () => {
-        const { model, size, maxWidth, maxHeight } = this.props;
+        const { model, context, size, maxWidth, maxHeight } = this.props;
 
         if (model) {
-            if (model.context) {
-                let handler = model.context.infoHandler;
+            if (context) {
+                let handler = context.host.onInfo;
                 if (handler) {
                     handler(`AdaptiveCard >> Start Load Image >> ${model.url}`);
                 }
@@ -173,6 +164,7 @@ export class ImageView extends React.Component<IProps, IState> {
                 model.url,
                 size || model.size,
                 { width: maxWidth, height: maxHeight },
+                context.config,
                 this.onImageSize,
                 this.onImageSizeError
             );
@@ -180,13 +172,13 @@ export class ImageView extends React.Component<IProps, IState> {
     }
 
     private get flex() {
-        const { model, size } = this.props;
+        const { model, size, context } = this.props;
 
         if (!model) {
             return undefined;
         }
 
-        let finalSize = StyleManager.getImageSize(size || model.size);
+        let finalSize = StyleManager.getImageSize(size || model.size, context.config);
         if (finalSize === 'stretch') {
             return 1;
         }
@@ -199,7 +191,8 @@ export class ImageView extends React.Component<IProps, IState> {
         }
 
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+
+            return StyleManager.getSpacing(this.props.model.spacing, this.context.config);
         }
         return 0;
     }

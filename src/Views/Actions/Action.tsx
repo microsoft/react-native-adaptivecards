@@ -1,48 +1,25 @@
 import * as React from 'react';
 
 import { Button } from '../../Components/Inputs/Button';
-import { ConfigManager } from '../../Config/ConfigManager';
-import { OpenUrlActionModel } from '../../Models/Actions/OpenUrlAction';
-import { ShowCardActionModel } from '../../Models/Actions/ShowCardAction';
-import { SubmitActionModel } from '../../Models/Actions/SubmitAction';
-import { ActionType } from '../../Shared/Types';
+import { ViewAction } from '../../Models/Props/Abstract/ViewAction';
+import { IViewProps } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
-interface IProps {
-    index: number;
-    model: OpenUrlActionModel | ShowCardActionModel | SubmitActionModel;
-    theme: 'default' | 'emphasis';
+interface IProps extends IViewProps<ViewAction> {
 }
 
-interface IState {
-    disabled: boolean;
-}
-
-export class ActionView extends React.Component<IProps, IState> {
-    constructor(props: IProps) {
-        super(props);
-
-        this.state = {
-            disabled: false,
-        };
-    }
-
+export class ActionView extends React.Component<IProps> {
     public render() {
-        const { model, theme } = this.props;
-
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
-        }
+        const { model, theme, context } = this.props;
 
         return (
             <Button
                 flex={1}
                 title={this.title}
-                color={StyleManager.getColor('accent', theme, false)}
-                fontSize={StyleManager.getFontSize('default')}
-                fontWeight={StyleManager.getFontWeight('bolder')}
-                backgroundColor={StyleManager.getBackgroundColor(theme)}
+                color={StyleManager.getColor('accent', theme, false, context.config)}
+                fontSize={StyleManager.getFontSize('default', context.config)}
+                fontWeight={StyleManager.getFontWeight('bolder', context.config)}
+                backgroundColor={StyleManager.getBackgroundColor(theme, context.config)}
                 textHorizontalAlign='center'
                 textVerticalAlign='center'
                 paddingTop={6}
@@ -50,40 +27,23 @@ export class ActionView extends React.Component<IProps, IState> {
                 paddingLeft={16}
                 paddingRight={16}
                 onPress={this.onPress}
-                disabled={this.state.disabled}
-                marginTop={StyleManager.actionDirection === 'vertically' ? this.spacing : 0}
-                marginLeft={StyleManager.actionDirection === 'horizontal' ? this.spacing : 0}
+                disabled={!model.enabled}
+                marginTop={StyleManager.getActionDirection(context.config) === 'vertically' ? this.spacing : 0}
+                marginLeft={StyleManager.getActionDirection(context.config) === 'horizontal' ? this.spacing : 0}
                 style={{
                     borderLeftWidth: this.leftBorderWidth,
-                    borderLeftColor: StyleManager.separatorColor,
+                    borderLeftColor: StyleManager.getSeparatorColor(context.config),
                 }}
             />
         );
     }
 
     private onPress = () => {
-        const { model } = this.props;
+        const { model, context } = this.props;
 
-        if (model && model.onAction) {
-            model.onAction(
-                () => {
-                    console.log('Action Success');
-                    if (this.isOneTimeAction) {
-                        this.setState({
-                            disabled: true,
-                        });
-                    }
-                },
-                (error) => {
-                    console.log('Action Failed >> ', error);
-                }
-            );
+        if (model && context && model.onAction) {
+            model.onAction(context);
         }
-    }
-
-    private get isOneTimeAction() {
-        // tslint:disable-next-line:max-line-length
-        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model && this.props.model.type === ActionType.Submit;
     }
 
     private get leftBorderWidth() {
@@ -95,7 +55,7 @@ export class ActionView extends React.Component<IProps, IState> {
 
     private get spacing() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.actionSpacing;
+            return StyleManager.getActionSpacing(this.props.context.config);
         }
         return 0;
     }

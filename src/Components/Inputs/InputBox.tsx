@@ -6,6 +6,7 @@ import {
     TextInput,
     TextStyle,
 } from 'react-native';
+import { HostConfig } from '../../Configs/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps {
@@ -23,6 +24,7 @@ interface IProps {
     marginLeft?: number;
     marginRight?: number;
     style?: StyleProp<TextStyle>;
+    config: HostConfig;
     onValueChange?: (input: string) => void;
     onFocus?: () => void;
     onBlur?: () => void;
@@ -129,11 +131,11 @@ export class InputBox extends React.Component<IProps, IState> {
     }
 
     private get fontSize() {
-        return StyleManager.getFontSize('default');
+        return StyleManager.getFontSize('default', this.props.config);
     }
 
     private get fontWeight() {
-        return StyleManager.getFontWeight('default');
+        return StyleManager.getFontWeight('default', this.props.config);
     }
 
     private get paddingVertical() {
@@ -157,25 +159,25 @@ export class InputBox extends React.Component<IProps, IState> {
 
     private get color() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusColor(this.props.theme);
+            return StyleManager.getInputFocusColor(this.props.theme, this.props.config);
         } else {
-            return StyleManager.getInputColor(this.props.theme);
+            return StyleManager.getInputColor(this.props.theme, this.props.config);
         }
     }
 
     private get backgroundColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBackgroundColor(this.props.theme);
+            return StyleManager.getInputFocusBackgroundColor(this.props.theme, this.props.config);
         } else {
-            return StyleManager.getInputBackgroundColor(this.props.theme);
+            return StyleManager.getInputBackgroundColor(this.props.theme, this.props.config);
         }
     }
 
     private get borderColor() {
         if (this.state.focused) {
-            return StyleManager.getInputFocusBorderColor(this.props.theme);
+            return StyleManager.getInputFocusBorderColor(this.props.theme, this.props.config);
         } else {
-            return StyleManager.getInputBorderColor(this.props.theme);
+            return StyleManager.getInputBorderColor(this.props.theme, this.props.config);
         }
     }
 }

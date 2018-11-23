@@ -1,8 +1,9 @@
 import * as React from 'react';
-
 import { DatePickerIOS, Platform, TimePickerAndroid } from 'react-native';
+
+import { HostConfig } from '../../Configs/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { TimeUtils } from '../../Utils/TimeUtils';
+import { TimeUtils } from '../../Utils/Time';
 import { ButtonGroup } from '../Containers/ButtonGroup';
 import { Card } from '../Containers/Card';
 import { ModalBox } from '../Containers/ModalBox';
@@ -11,6 +12,7 @@ import { Button } from './Button';
 interface IProps {
     value: string;
     show: boolean;
+    config: HostConfig;
     onValueChange: (value: string) => void;
     onSave: () => void;
     onCancel: () => void;
@@ -28,10 +30,13 @@ export class TimePanel extends React.Component<IProps> {
             return (
                 <ModalBox
                     show={this.show}
+                    onBackgroundPress={this.onCancel}
+                    onRequestClose={this.onSave}
                 >
                     <Card
                         flex={0}
                         fit='content'
+                        config={this.props.config}
                     >
                         <DatePickerIOS
                             date={TimeUtils.extractTime(this.props.value)}
@@ -40,6 +45,7 @@ export class TimePanel extends React.Component<IProps> {
                         />
                         <ButtonGroup
                             hasSpacing={true}
+                            config={this.props.config}
                         >
                             {this.renderCancelButton()}
                             {this.renderSaveButton()}
@@ -56,10 +62,10 @@ export class TimePanel extends React.Component<IProps> {
             <Button
                 flex={1}
                 title='Cancel'
-                color={StyleManager.getColor('accent', 'default', false)}
-                fontSize={StyleManager.getFontSize('default')}
-                fontWeight={StyleManager.getFontWeight('bolder')}
-                backgroundColor={StyleManager.getBackgroundColor('default')}
+                color={StyleManager.getColor('accent', 'default', false, this.props.config)}
+                fontSize={StyleManager.getFontSize('default', this.props.config)}
+                fontWeight={StyleManager.getFontWeight('bolder', this.props.config)}
+                backgroundColor={StyleManager.getBackgroundColor('default', this.props.config)}
                 textHorizontalAlign='center'
                 textVerticalAlign='center'
                 paddingTop={6}
@@ -76,10 +82,10 @@ export class TimePanel extends React.Component<IProps> {
             <Button
                 flex={1}
                 title='Save'
-                color={StyleManager.getColor('accent', 'default', false)}
-                fontSize={StyleManager.getFontSize('default')}
-                fontWeight={StyleManager.getFontWeight('bolder')}
-                backgroundColor={StyleManager.getBackgroundColor('default')}
+                color={StyleManager.getColor('accent', 'default', false, this.props.config)}
+                fontSize={StyleManager.getFontSize('default', this.props.config)}
+                fontWeight={StyleManager.getFontWeight('bolder', this.props.config)}
+                backgroundColor={StyleManager.getBackgroundColor('default', this.props.config)}
                 textHorizontalAlign='center'
                 textVerticalAlign='center'
                 paddingTop={6}
@@ -89,7 +95,7 @@ export class TimePanel extends React.Component<IProps> {
                 onPress={this.onSave}
                 style={{
                     borderLeftWidth: 1,
-                    borderLeftColor: StyleManager.separatorColor,
+                    borderLeftColor: StyleManager.getSeparatorColor(this.props.config),
                 }}
             />
         );

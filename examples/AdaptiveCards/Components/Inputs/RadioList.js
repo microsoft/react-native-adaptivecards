@@ -1,28 +1,25 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
+import { Guid } from '../../Shared/Guid';
 import { RadioBox } from './RadioBox';
 export class RadioList extends React.Component {
     constructor() {
         super(...arguments);
-        this.renderCheckItem = (info) => {
-            return (React.createElement(RadioBox, { title: info.item.title, value: info.item.value, checked: this.isValueSelected(info.item.value), theme: this.props.theme, onClick: this.onChoose }));
+        this.renderRadioBox = (info) => {
+            return (React.createElement(RadioBox, { index: info.index, title: info.item.title, value: info.item.value, config: this.props.config, selected: info.item.selected, theme: this.props.theme, onCheck: this.onChoose }));
         };
         this.extractKey = (item, index) => {
-            return `value: ${item.value}, index: ${index}, checked:${this.props.selected === item.value}`;
+            return `value: ${item.value}, index: ${index}, checked:${item.selected}`;
         };
-        this.isValueSelected = (value) => {
-            return this.props.selected && this.props.selected === value;
-        };
-        this.onChoose = (value) => {
-            console.log(value);
+        this.onChoose = (index) => {
             if (this.props.onChoose) {
-                this.props.onChoose(value);
+                this.props.onChoose(index);
             }
         };
     }
     render() {
         if (this.props.choices) {
-            return (React.createElement(FlatList, { extraData: this.props.selected, data: this.props.choices, renderItem: this.renderCheckItem, keyExtractor: this.extractKey }));
+            return (React.createElement(FlatList, { data: this.props.choices, renderItem: this.renderRadioBox, keyExtractor: this.extractKey, extraData: Guid.newGuid() }));
         }
         else {
             return null;

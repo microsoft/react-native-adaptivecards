@@ -36,8 +36,8 @@
   "devDependencies": {
     "@types/lodash": "latest",
     "@types/react": "latest",
-    "@types/react-native": "^0.55.28",
-    "@types/react-native-vector-icons": "^4.6.3",
+    "@types/react-native": "^0.57.11",
+    "@types/react-native-vector-icons": "^4.6.4",
     "del": "latest",
     "gulp": "latest",
     "gulp-imagemin": "latest",
@@ -51,6 +51,6 @@
   },
   "dependencies": {
     "lodash": "latest",
-    "react-native-vector-icons": "^5.0.0"
+    "react-native-vector-icons": "latest"
   }
 }

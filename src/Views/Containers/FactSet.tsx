@@ -1,25 +1,16 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { FactSetModel } from '../../Models/Containers/FactSet';
+
+import { FactSetNode } from '../../Models/Nodes/Containers/FactSet';
+import { IViewProps } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 import { FactView } from './Fact';
 
-interface IProps {
-    index: number;
-    model: FactSetModel;
-    theme: 'default' | 'emphasis';
+interface IProps extends IViewProps<FactSetNode> {
 }
 
 export class FactSetView extends React.Component<IProps> {
     public render() {
-
-        const { model, theme } = this.props;
-
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        }
-
         return (
             <View
                 style={{
@@ -34,7 +25,7 @@ export class FactSetView extends React.Component<IProps> {
     }
 
     private renderFacts = () => {
-        const { model, theme } = this.props;
+        const { model, context, theme } = this.props;
 
         if (!model || !model.facts || model.facts.length === 0) {
             return undefined;
@@ -42,9 +33,12 @@ export class FactSetView extends React.Component<IProps> {
 
         return model.facts.map((fact, index) => (
             <FactView
+                index={0}
                 key={index}
                 model={fact}
+                context={context}
                 theme={theme}
+                
             />
         ));
     }
@@ -55,7 +49,7 @@ export class FactSetView extends React.Component<IProps> {
         }
 
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing, this.props.context.config);
         }
         return 0;
     }

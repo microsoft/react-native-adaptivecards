@@ -1,25 +1,16 @@
 import * as React from 'react';
-import { View } from 'react-native';
-import { Touchable } from '../../Components/Basic/Touchable';
-import { ConfigManager } from '../../Config/ConfigManager';
-import { ContainerModel } from '../../Models/Containers/Container';
-import { ActionType } from '../../Shared/Types';
+
+import { ContainerNode } from '../../Models/Nodes/Containers/Container';
+import { IViewProps } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
-import { BackgroundImageView } from '../CardElements/BackgroundImage';
-import { ContentFactory } from '../Factories/ContentFactory';
-import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
+import { BackgroundImageView } from '../CardProps/Background';
+import { SelectActionView } from '../CardProps/SelectAction';
+import { Factory as ViewFactory } from '../Factory';
 
-interface IProps {
-    index: number;
-    model: ContainerModel;
-    theme: 'emphasis' | 'default';
+interface IProps extends IViewProps<ContainerNode> {
 }
 
-interface IState {
-    disabled: boolean;
-}
-
-export class ContainerView extends React.Component<IProps, IState> {
+export class ContainerView extends React.Component<IProps> {
     constructor(props: IProps) {
         super(props);
 
@@ -29,27 +20,17 @@ export class ContainerView extends React.Component<IProps, IState> {
     }
 
     public render() {
-        const { model, theme } = this.props;
+        const { model, context, theme } = this.props;
 
-        if (!model || !model.isSchemaCheckPassed) {
-            return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
-        }
+        let backgroundColor = StyleManager.getBackgroundColor(model.style, context.config);
 
-        let backgroundColor = StyleManager.getBackgroundColor(model.style);
-
-        if (model.selectAction) {
-            return this.renderTouchableBlock(backgroundColor);
-        } else {
-            return this.renderNonTouchableBlock(backgroundColor);
-        }
-    }
-
-    private renderTouchableBlock = (backgroundColor: string) => {
         return (
-            <Touchable
-                onPress={this.onPress}
-                disabled={this.state.disabled}
-                accessibilityComponentType='button'
+            <SelectActionView
+                index={0}
+                theme={theme}
+                model={model.selectAction}
+                context={context}
+                
                 style={{
                     flex: this.flex,
                     alignSelf: 'stretch',
@@ -59,28 +40,12 @@ export class ContainerView extends React.Component<IProps, IState> {
                 }}
             >
                 {this.renderContent()}
-            </Touchable>
-        );
-    }
-
-    private renderNonTouchableBlock = (backgroundColor: string) => {
-        return (
-            <View
-                style={{
-                    flex: this.flex,
-                    alignSelf: 'stretch',
-                    justifyContent: this.justifyContent,
-                    marginTop: this.spacing,
-                    backgroundColor: backgroundColor,
-                }}
-            >
-                {this.renderContent()}
-            </View>
+            </SelectActionView>
         );
     }
 
     private renderContent = () => {
-        const { model, theme } = this.props;
+        const { model, context, theme } = this.props;
 
         if (!model) {
             return undefined;
@@ -91,8 +56,11 @@ export class ContainerView extends React.Component<IProps, IState> {
         if (background && background.url) {
             return (
                 <BackgroundImageView
+                    index={0}
                     model={background}
+                    context={context}
                     theme={theme}
+                    
                 >
                     {this.renderItems()}
                 </BackgroundImageView>
@@ -102,41 +70,17 @@ export class ContainerView extends React.Component<IProps, IState> {
     }
 
     private renderItems = () => {
-        const { model } = this.props;
+        const { model, context } = this.props;
 
         if (!model) {
             return undefined;
         }
 
         if (model.items) {
-            return model.items.map((content, index) => ContentFactory.createView(content, index, model.style || this.props.theme));
+            // tslint:disable-next-line:max-line-length
+            return model.items.map((content, index) => ViewFactory.createView(content, context, index, model.style || this.props.theme));
         }
         return undefined;
-    }
-
-    private onPress = () => {
-        const { model } = this.props;
-
-        if (model && model.selectAction && model.selectAction.onAction) {
-            model.selectAction.onAction(
-                () => {
-                    console.log('Action Success');
-                    if (this.hasOneTimeAction) {
-                        this.setState({
-                            disabled: true
-                        });
-                    }
-                },
-                (error) => {
-                    console.log('Action Failed >> ', error);
-                }
-            );
-        }
-    }
-
-    private get hasOneTimeAction() {
-        // tslint:disable-next-line:max-line-length
-        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model.selectAction && this.props.model.selectAction.type === ActionType.Submit;
     }
 
     private get justifyContent() {
@@ -177,7 +121,7 @@ export class ContainerView extends React.Component<IProps, IState> {
         }
 
         if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.getSpacing(this.props.model.spacing);
+            return StyleManager.getSpacing(this.props.model.spacing, this.props.context.config);
         }
         return 0;
     }

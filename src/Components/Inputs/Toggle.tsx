@@ -5,22 +5,26 @@ import {
     TouchableWithoutFeedback,
     View
 } from 'react-native';
-
+import { HostConfig } from '../../Configs/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 
-interface IProps<T> {
+export interface ISwitchable {
     title: string;
-    value: T;
-    checked: boolean;
-    marginTop?: number;
-    theme: 'default' | 'emphasis';
-    onClick: (value: T) => void;
+    activated: boolean;
 }
 
-export class Toggle<T> extends React.Component<IProps<T>> {
+interface IProps extends ISwitchable {
+    marginTop?: number;
+    theme: 'default' | 'emphasis';
+    config: HostConfig;
+    onValueChange: (value: boolean) => void;
+}
+
+export class Toggle extends React.Component<IProps> {
     public render() {
         return (
             <TouchableWithoutFeedback
+                disabled={true}
                 onPress={this.onClick}
             >
                 <View
@@ -37,8 +41,8 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                     <Text
                         style={{
                             color: this.color,
-                            fontSize: StyleManager.getFontSize('default'),
-                            fontWeight: StyleManager.getFontWeight('default'),
+                            fontSize: StyleManager.getFontSize('default', this.props.config),
+                            fontWeight: StyleManager.getFontWeight('default', this.props.config),
                             textAlign: StyleManager.getTextAlign('left'),
                             width: 0,
                             flex: 1,
@@ -49,10 +53,12 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                         {this.props.title}
                     </Text>
                     <Switch
-                        onTintColor={this.switchOnColor}
-                        tintColor={this.switchOffColor}
-                        value={this.props.checked}
-                        onValueChange={this.onClick}
+                        trackColor={{
+                            true: this.switchOnColor,
+                            false: this.switchOffColor,
+                        }}
+                        value={this.props.activated}
+                        onValueChange={this.onSwitchValueChange}
                     />
                 </View>
             </TouchableWithoutFeedback>
@@ -60,20 +66,24 @@ export class Toggle<T> extends React.Component<IProps<T>> {
     }
 
     private onClick = () => {
-        if (this.props.onClick) {
-            this.props.onClick(this.props.value);
+        this.onSwitchValueChange(!this.props.activated);
+    }
+
+    private onSwitchValueChange = (value: boolean) => {
+        if (this.props.onValueChange) {
+            this.props.onValueChange(value);
         }
     }
 
     private get color() {
-        return StyleManager.getCheckboxTitleColor(this.props.theme);
+        return StyleManager.getCheckboxTitleColor(this.props.theme, this.props.config);
     }
 
     private get switchOffColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, false);
+        return StyleManager.getCheckboxBoxColor(this.props.theme, false, this.props.config);
     }
 
     private get switchOnColor() {
-        return StyleManager.getCheckboxBoxColor(this.props.theme, true);
+        return StyleManager.getCheckboxBoxColor(this.props.theme, true, this.props.config);
     }
 }

@@ -1,0 +1,180 @@
+{
+    "baseUrl": "https://www.bing.com/",
+    "mode": "debug",
+    "choiceSetInputValueSeparator": ",",
+    "supportsInteractivity": true,
+    "fontFamily": "Roboto",
+    "spacing": {
+        "small": 3,
+        "default": 8,
+        "medium": 20,
+        "large": 30,
+        "extraLarge": 40,
+        "padding": 10
+    },
+    "separator": {
+        "lineThickness": 1,
+        "lineColor": "#00000015",
+        "spacing": 12
+    },
+    "fontSizes": {
+        "small": 12,
+        "default": 14,
+        "medium": 17,
+        "large": 21,
+        "extraLarge": 44
+    },
+    "fontWeights": {
+        "lighter": 200,
+        "default": 400,
+        "bolder": 500
+    },
+    "imageSizes": {
+        "small": 12,
+        "medium": 36,
+        "large": 64
+    },
+    "containerStyles": {
+        "default": {
+            "foregroundColors": {
+                "default": {
+                    "default": "#000000DE",
+                    "subtle": "#0000008A"
+                },
+                "dark": {
+                    "default": "#000000",
+                    "subtle": "#00000066"
+                },
+                "light": {
+                    "default": "#FFFFFF",
+                    "subtle": "#FFFFFF33"
+                },
+                "accent": {
+                    "default": "#006ae2",
+                    "subtle": "#006ae2b2"
+                },
+                "good": {
+                    "default": "#048e2e",
+                    "subtle": "#048e2eb2"
+                },
+                "warning": {
+                    "default": "#eb7b07",
+                    "subtle": "#eb7b07b2"
+                },
+                "attention": {
+                    "default": "#c80000",
+                    "subtle": "#c80000b2"
+                }
+            },
+            "backgroundColor": "#FFFFFF00"
+        },
+        "emphasis": {
+            "foregroundColors": {
+                "default": {
+                    "default": "#000000",
+                    "subtle": "#00000066"
+                },
+                "dark": {
+                    "default": "#000000",
+                    "subtle": "#00000066"
+                },
+                "light": {
+                    "default": "#FFFFFF",
+                    "subtle": "#FFFFFF33"
+                },
+                "accent": {
+                    "default": "#006ae2",
+                    "subtle": "#006ae2b2"
+                },
+                "good": {
+                    "default": "#048e2e",
+                    "subtle": "#048e2eb2"
+                },
+                "warning": {
+                    "default": "#eb7b07",
+                    "subtle": "#eb7b07b2"
+                },
+                "attention": {
+                    "default": "#c80000",
+                    "subtle": "#c80000b2"
+                }
+            },
+            "backgroundColor": "#FFFFFF00"
+        }
+    },
+    "actions": {
+        "maxActions": 2,
+        "spacing": "large",
+        "buttonSpacing": 0,
+        "showCard": {
+            "actionMode": "inline",
+            "inlineTopMargin": 16,
+            "style": "emphasis"
+        },
+        "preExpandSingleShowCardAction": false,
+        "actionsOrientation": "horizontal",
+        "actionAlignment": "left"
+    },
+    "adaptiveCard": {
+        "allowCustomStyle": false
+    },
+    "imageSet": {
+        "imageSize": "medium",
+        "maxImageHeight": 100
+    },
+    "factSet": {
+        "title": {
+            "size": "default",
+            "color": "default",
+            "isSubtle": false,
+            "weight": "bolder",
+            "warp": true
+        },
+        "value": {
+            "size": "default",
+            "color": "default",
+            "isSubtle": false,
+            "weight": "default",
+            "warp": true
+        },
+        "spacing": 10
+    },
+    "input": {
+        "default": {
+            "color": "#000000",
+            "focusColor": "#000000",
+            "backgroundColor": "#F3F3F3",
+            "focusBackgroundColor": "#FFFFFF",
+            "borderColor": "#F3F3F3",
+            "focusBorderColor": "#006ae2"
+        },
+        "emphasis": {
+            "color": "#000000",
+            "focusColor": "#000000",
+            "backgroundColor": "#F3F3F3",
+            "focusBackgroundColor": "#FFFFFF",
+            "borderColor": "#F3F3F3",
+            "focusBorderColor": "#006ae2"
+        }
+    },
+    "checkbox": {
+        "default": {
+            "title": {
+                "color": "#000000"
+            },
+            "box": {
+                "checked": "#006ae2",
+                "unchecked": "#d3d3d3"
+            }
+        },
+        "emphasis": {
+            "title": {
+                "color": "#000000"
+            },
+            "box": {
+                "checked": "#006ae2",
+                "unchecked": "#d3d3d3"
+            }
+        }
+    }
+}
