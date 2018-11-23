@@ -25,21 +25,21 @@ React Native renderer for [AdaptiveCards](http://adaptivecards.io/).
 - Import to the component where you want to show an AdaptiveCards
 
 ```ts
-import AdaptiveCard from 'react-native-adaptivecards';
+import { CardRoot } from 'react-native-adaptivecards';
 ```
 
 - Send initial props
 
 ```jsx
-    <AdaptiveCard adaptiveCard={} overrideStyle={} />
+    <CardRoot payload={} config={} />
 ```
 
 ### Properties
 
 | Prop          | default                                     |  Type     | Description              |
 | ------------- | -------------------------------------------:| ---------:| ------------------------:|
-| adaptiveCard  | -                                           | object    | Json object based on AdaptiveCards schema |
-| overrideStyle | [{...}](./src/View/Styles/styleConfig.d.ts)  | object    | Customized styles        |
+| payload  | -                                           | object    | Json object based on AdaptiveCards schema. |
+| config | [{...}](./src/View/Configs/Types.ts)  | object    | Host config used to override the default config.        |
 
 ### Develope
 
