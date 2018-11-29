@@ -49,7 +49,7 @@ export class ContainerView extends React.Component<IProps, IState> {
             <Touchable
                 onPress={this.onPress}
                 disabled={this.state.disabled}
-                accessibilityComponentType='button'
+                accessibilityRole='button'
                 style={{
                     flex: this.flex,
                     alignSelf: 'stretch',

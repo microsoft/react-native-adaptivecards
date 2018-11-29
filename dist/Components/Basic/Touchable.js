@@ -36,13 +36,13 @@ export class Touchable extends React.Component {
         }
     }
     render() {
-        const _a = this.props, { onLongPress, accessibilityLabel, accessibilityTraits, accessibilityComponentType, activeOpacity, hitSlop, style, disabled } = _a, otherProps = __rest(_a, ["onLongPress", "accessibilityLabel", "accessibilityTraits", "accessibilityComponentType", "activeOpacity", "hitSlop", "style", "disabled"]);
+        const _a = this.props, { onLongPress, accessibilityLabel, accessibilityRole, activeOpacity, hitSlop, style, disabled } = _a, otherProps = __rest(_a, ["onLongPress", "accessibilityLabel", "accessibilityRole", "activeOpacity", "hitSlop", "style", "disabled"]);
         if (Platform.OS === 'android') {
-            return (React.createElement(TouchableNativeFeedback, { disabled: disabled, onPress: this.onPress, onLongPress: onLongPress, accessible: true, testID: this.testId, useForeground: true, hitSlop: hitSlop, background: TouchableNativeFeedback.SelectableBackground(), accessibilityLabel: accessibilityLabel, accessibilityComponentType: accessibilityComponentType === undefined ? 'button' : accessibilityComponentType, onLayout: this.props.onLayout },
+            return (React.createElement(TouchableNativeFeedback, { disabled: disabled, onPress: this.onPress, onLongPress: onLongPress, accessible: true, testID: this.testId, useForeground: true, hitSlop: hitSlop, background: TouchableNativeFeedback.SelectableBackground(), accessibilityLabel: accessibilityLabel, accessibilityRole: accessibilityRole === undefined ? 'button' : accessibilityRole, onLayout: this.props.onLayout },
                 React.createElement(View, Object.assign({ style: style }, otherProps))));
         }
         else {
-            return (React.createElement(TouchableOpacity, { disabled: disabled, onPress: this.onPress, onLongPress: onLongPress, accessible: true, testID: this.testId, activeOpacity: activeOpacity, style: style, hitSlop: hitSlop, accessibilityLabel: accessibilityLabel, accessibilityTraits: accessibilityTraits === undefined ? 'button' : accessibilityTraits, onLayout: this.props.onLayout }, otherProps.children));
+            return (React.createElement(TouchableOpacity, { disabled: disabled, onPress: this.onPress, onLongPress: onLongPress, accessible: true, testID: this.testId, activeOpacity: activeOpacity, style: style, hitSlop: hitSlop, accessibilityLabel: accessibilityLabel, accessibilityRole: accessibilityRole === undefined ? 'button' : accessibilityRole, onLayout: this.props.onLayout }, otherProps.children));
         }
     }
 }

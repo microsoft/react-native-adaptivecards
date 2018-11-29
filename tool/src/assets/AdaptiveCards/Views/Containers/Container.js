@@ -11,7 +11,7 @@ export class ContainerView extends React.Component {
     constructor(props) {
         super(props);
         this.renderTouchableBlock = (backgroundColor) => {
-            return (React.createElement(Touchable, { onPress: this.onPress, disabled: this.state.disabled, accessibilityComponentType: 'button', style: {
+            return (React.createElement(Touchable, { onPress: this.onPress, disabled: this.state.disabled, accessibilityRole: 'button', style: {
                     flex: this.flex,
                     alignSelf: 'stretch',
                     justifyContent: this.justifyContent,

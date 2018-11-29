@@ -34,7 +34,7 @@ export class ImageBlock extends React.Component {
         }
     }
     renderTouchableBlock() {
-        return (React.createElement(Touchable, { onPress: this.props.onPress, onLayout: this.props.onLayout, style: {
+        return (React.createElement(Touchable, { onPress: this.props.onPress, onLayout: this.props.onLayout, accessibilityRole: 'button', style: {
                 flex: this.props.flex,
                 alignContent: 'center',
                 alignItems: 'center',

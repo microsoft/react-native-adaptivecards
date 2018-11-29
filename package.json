@@ -1,7 +1,7 @@
 {
   "name": "react-native-adaptivecards",
   "description": "React Native implementation of AdaptiveCards.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "url": "git+https://github.com/Microsoft/react-native-adaptivecards",
     "type": "git"
@@ -36,8 +36,8 @@
   "devDependencies": {
     "@types/lodash": "latest",
     "@types/react": "latest",
-    "@types/react-native": "^0.55.28",
-    "@types/react-native-vector-icons": "^4.6.3",
+    "@types/react-native": "^0.57.15",
+    "@types/react-native-vector-icons": "^4.6.4",
     "del": "latest",
     "gulp": "latest",
     "gulp-imagemin": "latest",
@@ -51,6 +51,6 @@
   },
   "dependencies": {
     "lodash": "latest",
-    "react-native-vector-icons": "^5.0.0"
+    "react-native-vector-icons": "^6.1.0"
   }
 }

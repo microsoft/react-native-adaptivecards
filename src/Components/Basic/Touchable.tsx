@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-    AccessibilityTraits,
+    AccessibilityRole,
     DeviceEventEmitter,
     LayoutChangeEvent,
     Platform,
@@ -15,8 +15,7 @@ interface IProps {
     disabled?: boolean;
     style?: object;
     accessibilityLabel?: string;
-    accessibilityTraits?: AccessibilityTraits | AccessibilityTraits[];
-    accessibilityComponentType?: 'none' | 'button' | 'radiobutton_checked' | 'radiobutton_unchecked';
+    accessibilityRole?: AccessibilityRole;
     hitSlop?: object;
     activeOpacity?: number;
     onPress: (data: any) => void;
@@ -53,8 +52,7 @@ export class Touchable extends React.Component<IProps> {
         const {
             onLongPress,
             accessibilityLabel,
-            accessibilityTraits,
-            accessibilityComponentType,
+            accessibilityRole,
             activeOpacity,
             hitSlop,
             style,
@@ -74,7 +72,7 @@ export class Touchable extends React.Component<IProps> {
                     hitSlop={hitSlop}
                     background={TouchableNativeFeedback.SelectableBackground()}
                     accessibilityLabel={accessibilityLabel}
-                    accessibilityComponentType={accessibilityComponentType === undefined ? 'button' : accessibilityComponentType}
+                    accessibilityRole={accessibilityRole === undefined ? 'button' : accessibilityRole}
                     onLayout={this.props.onLayout}
                 >
                     <View
@@ -94,7 +92,7 @@ export class Touchable extends React.Component<IProps> {
                     style={style}
                     hitSlop={hitSlop}
                     accessibilityLabel={accessibilityLabel}
-                    accessibilityTraits={accessibilityTraits === undefined ? 'button' : accessibilityTraits}
+                    accessibilityRole={accessibilityRole === undefined ? 'button' : accessibilityRole}
                     onLayout={this.props.onLayout}
                 >
                     {otherProps.children}

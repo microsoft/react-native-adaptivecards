@@ -59,6 +59,7 @@ export class ImageBlock extends React.Component<IProps, IState> {
             <Touchable
                 onPress={this.props.onPress}
                 onLayout={this.props.onLayout}
+                accessibilityRole='button'
                 style={{
                     flex: this.props.flex,
                     alignContent: 'center',

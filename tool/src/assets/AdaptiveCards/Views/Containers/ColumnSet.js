@@ -10,7 +10,7 @@ export class ColumnSetView extends React.Component {
     constructor(props) {
         super(props);
         this.renderTouchableBlock = () => {
-            return (React.createElement(Touchable, { onPress: this.onPress, disabled: this.state.disabled, style: {
+            return (React.createElement(Touchable, { onPress: this.onPress, disabled: this.state.disabled, accessibilityRole: 'button', style: {
                     flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',

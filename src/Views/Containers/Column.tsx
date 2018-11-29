@@ -49,6 +49,7 @@ export class ColumnView extends React.Component<IProps, IState> {
             <Touchable
                 onPress={this.onPress}
                 disabled={this.state.disabled}
+                accessibilityRole='button'
                 style={{
                     flex: this.flex,
                     flexDirection: 'column',
