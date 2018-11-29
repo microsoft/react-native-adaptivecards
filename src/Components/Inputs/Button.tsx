@@ -66,7 +66,7 @@ export class Button extends React.Component<IButtonProps> {
                 testId={this.props.title}
                 onPress={this.props.onPress}
                 disabled={this.props.disabled}
-                accessibilityLabel={'Button ' + this.props.title}
+                accessibilityLabel={this.props.title}
                 style={[
                     {
                         flex: this.props.flex,
