@@ -34,10 +34,10 @@
     "silent": true
   },
   "devDependencies": {
-    "@types/lodash": "latest",
-    "@types/react": "latest",
-    "@types/react-native": "^0.57.11",
+    "@types/react": "^16.7.7",
+    "@types/react-native": "^0.57.13",
     "@types/react-native-vector-icons": "^4.6.4",
+    "@types/xmldom": "^0.1.29",
     "del": "latest",
     "gulp": "latest",
     "gulp-imagemin": "latest",
@@ -50,7 +50,7 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "lodash": "latest",
-    "react-native-vector-icons": "latest"
+    "react-native-vector-icons": "^6.1.0",
+    "react-native-svg-component": "^0.1.6"
   }
 }

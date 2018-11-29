@@ -5,10 +5,10 @@ import {
     StyleProp,
     View
 } from 'react-native';
+import { Svg } from 'react-native-svg-component';
 
 import { UrlUtils } from '../../Utils/Url';
 import { safe } from '../Shared/Safe';
-import { Svg } from './Svg';
 
 interface IProps {
     url: string;
@@ -86,8 +86,6 @@ export class Image extends React.Component<IProps, IState> {
                     key='SVG'
                     style={[
                         {
-                            width: this.props.width,
-                            height: this.props.height,
                             overflow: 'hidden',
                         },
                         this.borderRadius,
@@ -95,8 +93,10 @@ export class Image extends React.Component<IProps, IState> {
                     ]}
                 >
                     <Svg
-                        url={this.props.url}
+                        source={{uri: this.props.url}}
                         alt={this.props.alt}
+                        width={this.props.width}
+                        height={this.props.height}
                     />
                 </View>
             );

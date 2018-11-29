@@ -1788,6 +1788,17 @@ cross-spawn@^5.0.1, cross-spawn@^5.1.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
+cross-spawn@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-6.0.5.tgz#4a5ec7c64dfae22c3a14124dbacdee846d80cbc4"
+  integrity sha512-eTVLrBSt7fjbDygz805pMnstIs2VTBNkRm0qxZd+M7A5XDdxVRWO5MxGBXZhjY4cqLYLdtrGqRf8mBPmzwSpWQ==
+  dependencies:
+    nice-try "^1.0.4"
+    path-key "^2.0.1"
+    semver "^5.5.0"
+    shebang-command "^1.2.0"
+    which "^1.2.9"
+
 debug@2.6.9, debug@^2.1.2, debug@^2.2.0, debug@^2.3.3, debug@^2.6.8, debug@^2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -2259,10 +2270,10 @@ expo-sms@~1.1.0:
     expo-core "~1.2.0"
     expo-permissions-interface "~1.2.0"
 
-expo@^31.0.5:
-  version "31.0.5"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-31.0.5.tgz#7b6975b7372aab3503cd5c2207091ad4947426ad"
-  integrity sha512-hPLVBOM/DBWsGLx4Yqc9LY0JhwzTIaW91amMgPkm+i2e1l9+Th+2mUj1Gik1EXqlQw54VSCe5zfsGIhou/bQMg==
+expo@^31.0.6:
+  version "31.0.6"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-31.0.6.tgz#3e1d8d617c959e7218aabf9ff523703183dfdbaf"
+  integrity sha512-MFMzLusP+CL3Y7agTmryk7mRwZBjze7Ahf+6qgLkPPhajqGA4kekp8vgAT5t9g76Gl7ZVkvWZGXKHwux4sBT2w==
   dependencies:
     "@babel/runtime" "^7.1.2"
     "@expo/vector-icons" "^8.0.0"
@@ -2274,6 +2285,7 @@ expo@^31.0.5:
     "@types/uuid-js" "^0.7.1"
     "@types/websql" "^0.0.27"
     babel-preset-expo "^5.0.0"
+    cross-spawn "^6.0.5"
     expo-ads-admob "~1.1.0"
     expo-analytics-segment "~1.1.0"
     expo-asset "~1.1.1"
@@ -3748,6 +3760,11 @@ negotiator@0.6.1:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
   integrity sha1-KzJxhOiZIQEXeyhWP7XnECrNDKk=
 
+nice-try@^1.0.4:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
+  integrity sha512-1nh45deeb5olNY7eX82BkPO7SSxR5SSYJiPTrTdFUVYwAl8CKMA5N9PjTYkHiRjisVcxcQ1HXdLhx2qxxJzLNQ==
+
 node-fetch@^1.0.1:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
@@ -4054,7 +4071,7 @@ path-is-absolute@^1.0.0, path-is-absolute@^1.0.1:
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
   integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
 
-path-key@^2.0.0:
+path-key@^2.0.0, path-key@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
   integrity sha1-QRyttXTFoUDTpLGRDUDYDMn0C0A=
@@ -4281,7 +4298,15 @@ react-native-screens@1.0.0-alpha.15:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.15.tgz#5b5a0041310b46f12048fda1908d52e7290ec18f"
   integrity sha512-S2OM/ieD+Krk+0/Z2Vz2rTUWYud5hJgCRZqXRtqEfMgEcGI4FBopXp7mwXCGbA2PFLjZwZSwLlsZ6RX30WnjRw==
 
-react-native-svg@8.0.8:
+react-native-svg-component@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-svg-component/-/react-native-svg-component-0.1.6.tgz#86be3a123758df7fac4f85a83443450b1df17793"
+  integrity sha512-WuExhAsYUJy7t+xns8+jrePb+jcjFKD0J9MJp3ASBaw9pnRIbiqdbArYsuAIcGuasFOsCJ4g1LRdtzVEVJSxnA==
+  dependencies:
+    react-native-svg "^8.0.8"
+    xmldom "^0.1.27"
+
+react-native-svg@8.0.8, react-native-svg@^8.0.8:
   version "8.0.8"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-8.0.8.tgz#5d4c636751d9db2d98a9b3cfc4ef45c4eac65d60"
   integrity sha512-a5q7896HJztH3XBa4MouuBcwhOvDsJXRZB/PPvEMvc4NhudIDXDUKpwd9V7Hm6beDjg5CjFIdE/c92jnVo+0CA==
@@ -5336,7 +5361,7 @@ xmldoc@^0.4.0:
   dependencies:
     sax "~1.1.1"
 
-xmldom@0.1.x:
+xmldom@0.1.x, xmldom@^0.1.27:
   version "0.1.27"
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
   integrity sha1-1QH5ezvbQDr4757MIFcxh6rawOk=
