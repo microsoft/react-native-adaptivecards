@@ -2,6 +2,7 @@ import { ElementType, InputType, PlainContainerType, SelectableContainerType } f
 import { BlockNode } from './Abstract/BlockNode';
 import { ViewNode } from './Abstract/ViewNode';
 import { ImageNode } from './CardElements/Image';
+import { MediaNode } from './CardElements/Media';
 import { TextBlockNode } from './CardElements/TextBlock';
 import { AdaptiveCardNode } from './Cards/AdaptiveCard';
 import { ColumnNode } from './Containers/Column';
@@ -27,6 +28,8 @@ export class NodeFactory {
                 return new ImageNode(parent, payload);
             case ElementType.TextBlock:
                 return new TextBlockNode(parent, payload);
+            case ElementType.Media:
+                return new MediaNode(parent, payload);
             case SelectableContainerType.Column:
                 return new ColumnNode(parent, payload);
             case SelectableContainerType.ColumnSet:

@@ -12,13 +12,11 @@ var tsProject = typescript.createProject('tsconfig.json');
 var path = {
     src: './src/',
     dist: './dist/',
-    example: './examples/AdaptiveCards/',
-    tool: './tool/src/assets/AdaptiveCards/',
 };
 
 // Clean destination folder
 gulp.task('clean', function () {
-    return del([path.dist, path.example, path.tool]);
+    return del([path.dist]);
 });
 
 // Minify images in place
@@ -26,12 +24,10 @@ gulp.task('minify-img', function () {
     return gulp.src(path.src + 'Assets/**/*.png')
         .pipe(imagemin())
         .pipe(gulp.dest(path.dist + 'Assets'))
-        .pipe(gulp.dest(path.example + 'Assets'))
         .pipe(rename(function(opt) {
             opt.basename = opt.basename.replace(/@[^.]*/, '');
             return opt;
         }))
-        .pipe(gulp.dest(path.tool + 'Assets'));
 });
 
 // Checks your TypeScript code for readability, maintainability, and functionality errors.
@@ -51,8 +47,11 @@ gulp.task('lint-ts', function () {
 gulp.task('copy-json', function () {
     gulp.src(path.src + '**/*.json')
         .pipe(gulp.dest(path.dist))
-        .pipe(gulp.dest(path.example))
-        .pipe(gulp.dest(path.tool));
+});
+
+gulp.task('copy-definition', function () {
+    gulp.src(path.src + '**/*.d.ts')
+        .pipe(gulp.dest(path.dist))
 });
 
 gulp.task('compile-ts', function () {
@@ -60,8 +59,6 @@ gulp.task('compile-ts', function () {
         .pipe(tsProject());
     return tsResult.js
         .pipe(gulp.dest(path.dist))
-        .pipe(gulp.dest(path.example))
-        .pipe(gulp.dest(path.tool));
 
 });
 
@@ -70,6 +67,7 @@ gulp.task('default', function (cb) {
         'minify-img',
         'lint-ts',
         'compile-ts',
+        'copy-definition',
         'copy-json',
     ], cb);
 });

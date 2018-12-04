@@ -1,7 +1,0 @@
-# js vendor file with import/require
-src/assets/**
-
-# dependencies
-node_modules/
-
-dist

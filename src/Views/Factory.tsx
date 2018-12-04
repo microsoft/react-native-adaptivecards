@@ -4,6 +4,7 @@ import { SeparateLine } from '../Components/Basic/SeparateLine';
 import { CardContext } from '../Contexts/CardContext';
 import { BlockNode } from '../Models/Nodes/Abstract/BlockNode';
 import { ImageNode } from '../Models/Nodes/CardElements/Image';
+import { MediaNode } from '../Models/Nodes/CardElements/Media';
 import { TextBlockNode } from '../Models/Nodes/CardElements/TextBlock';
 import { AdaptiveCardNode } from '../Models/Nodes/Cards/AdaptiveCard';
 import { ColumnSetNode } from '../Models/Nodes/Containers/ColumnSet';
@@ -19,6 +20,7 @@ import { ToggleInputNode } from '../Models/Nodes/Inputs/ToggleInput';
 import { ElementType, InputType, PlainContainerType, SelectableContainerType } from '../Shared/Types';
 import { StyleManager } from '../Styles/StyleManager';
 import { ImageView } from './CardElements/Image';
+import { MediaView } from './CardElements/Media';
 import { TextBlockView } from './CardElements/TextBlock';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
 import { ColumnSetView } from './Containers/ColumnSet';
@@ -68,7 +70,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case ElementType.TextBlock:
@@ -79,7 +80,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case SelectableContainerType.Image:
@@ -90,7 +90,16 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
+                        />
+                    );
+                case ElementType.Media:
+                    return (
+                        <MediaView
+                            key={'MediaView' + index}
+                            model={model as MediaNode}
+                            context={context}
+                            index={index}
+                            theme={theme}
                         />
                     );
                 case SelectableContainerType.Container:
@@ -101,7 +110,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case SelectableContainerType.ColumnSet:
@@ -112,7 +120,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case PlainContainerType.FactSet:
@@ -123,7 +130,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case PlainContainerType.ImageSet:
@@ -134,7 +140,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case InputType.TextInput:
@@ -145,7 +150,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case InputType.NumberInput:
@@ -156,7 +160,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case InputType.DateInput:
@@ -167,7 +170,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case InputType.TimeInput:
@@ -178,7 +180,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case InputType.ChoiceSet:
@@ -189,7 +190,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 case InputType.ToggleInput:
@@ -200,7 +200,6 @@ export class Factory {
                             context={context}
                             index={index}
                             theme={theme}
-                            
                         />
                     );
                 // case InputType.PeoplePicker:

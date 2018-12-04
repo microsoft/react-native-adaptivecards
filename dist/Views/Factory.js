@@ -3,6 +3,7 @@ import { SeparateLine } from '../Components/Basic/SeparateLine';
 import { ElementType, InputType, PlainContainerType, SelectableContainerType } from '../Shared/Types';
 import { StyleManager } from '../Styles/StyleManager';
 import { ImageView } from './CardElements/Image';
+import { MediaView } from './CardElements/Media';
 import { TextBlockView } from './CardElements/TextBlock';
 import { AdaptiveCardView } from './Cards/AdaptiveCard';
 import { ColumnSetView } from './Containers/ColumnSet';
@@ -42,6 +43,8 @@ export class Factory {
                     return (React.createElement(TextBlockView, { key: 'TextBlockView' + index, model: model, context: context, index: index, theme: theme }));
                 case SelectableContainerType.Image:
                     return (React.createElement(ImageView, { key: 'ImageView' + index, model: model, context: context, index: index, theme: theme }));
+                case ElementType.Media:
+                    return (React.createElement(MediaView, { key: 'MediaView' + index, model: model, context: context, index: index, theme: theme }));
                 case SelectableContainerType.Container:
                     return (React.createElement(ContainerView, { key: 'ContainerView' + index, model: model, context: context, index: index, theme: theme }));
                 case SelectableContainerType.ColumnSet:
