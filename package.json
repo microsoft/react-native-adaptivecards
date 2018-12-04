@@ -1,7 +1,7 @@
 {
   "name": "react-native-adaptivecards",
   "description": "React Native implementation of AdaptiveCards.",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "repository": {
     "url": "git+https://github.com/Microsoft/react-native-adaptivecards",
     "type": "git"
@@ -50,7 +50,7 @@
     "typescript": "latest"
   },
   "dependencies": {
-    "react-native-vector-icons": "^6.1.0",
-    "react-native-svg-component": "^0.1.6"
+    "react-native-svg-component": "^0.1.6",
+    "react-native-vector-icons": "^6.1.0"
   }
 }
