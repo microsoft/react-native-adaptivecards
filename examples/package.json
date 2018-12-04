@@ -11,9 +11,11 @@
   "dependencies": {
     "@babel/runtime": "7.1.5",
     "schedule": "^0.4.0",
-    "expo": "^31.0.5",
+    "expo": "^31.0.6",
     "react": "16.6.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
+    "react-native-svg-component": "^0.1.6",
+    "react-native-svg": "8.0.8"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0"

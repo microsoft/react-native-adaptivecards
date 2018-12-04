@@ -6,9 +6,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import * as React from 'react';
 import { Image as ReactNativeImage, View } from 'react-native';
+import { Svg } from 'react-native-svg-component';
 import { UrlUtils } from '../../Utils/Url';
 import { safe } from '../Shared/Safe';
-import { Svg } from './Svg';
 let Image = class Image extends React.Component {
     constructor(props) {
         super(props);
@@ -62,14 +62,12 @@ let Image = class Image extends React.Component {
         if (UrlUtils.isSvgXml(this.props.url)) {
             return (React.createElement(View, { key: 'SVG', style: [
                     {
-                        width: this.props.width,
-                        height: this.props.height,
                         overflow: 'hidden',
                     },
                     this.borderRadius,
                     this.props.style
                 ] },
-                React.createElement(Svg, { url: this.props.url, alt: this.props.alt })));
+                React.createElement(Svg, { source: { uri: this.props.url }, alt: this.props.alt, width: this.props.width, height: this.props.height })));
         }
         else {
             if (UrlUtils.isDeepLink(this.props.url)) {
