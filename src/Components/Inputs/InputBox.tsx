@@ -74,6 +74,7 @@ export class InputBox extends React.Component<IProps, IState> {
                 keyboardType={this.props.keyboardType}
                 blurOnSubmit={!this.isMultiLine}
                 placeholder={this.props.placeholder}
+                placeholderTextColor={this.placeholderColor}
                 value={this.props.value}
                 returnKeyType={this.props.returnKeyType}
                 underlineColorAndroid='transparent'
@@ -177,5 +178,9 @@ export class InputBox extends React.Component<IProps, IState> {
         } else {
             return StyleManager.getInputBorderColor(this.props.theme);
         }
+    }
+
+    private get placeholderColor() {
+        return StyleManager.getInputBorderColor(this.props.theme);
     }
 }

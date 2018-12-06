@@ -49,8 +49,10 @@ export class Toggle<T> extends React.Component<IProps<T>> {
                         {this.props.title}
                     </Text>
                     <Switch
-                        onTintColor={this.switchOnColor}
-                        tintColor={this.switchOffColor}
+                        trackColor={{
+                            true: this.switchOnColor,
+                            false: this.switchOffColor,
+                        }}
                         value={this.props.checked}
                         onValueChange={this.onClick}
                     />

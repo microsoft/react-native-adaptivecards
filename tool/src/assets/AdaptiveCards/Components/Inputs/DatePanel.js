@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DatePickerAndroid, DatePickerIOS, Platform } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
 import { TimeUtils } from '../../Utils/TimeUtils';
 import { ButtonGroup } from '../Containers/ButtonGroup';
 import { Card } from '../Containers/Card';
@@ -19,6 +20,11 @@ export class DatePanel extends React.Component {
                 this.props.onSave();
             }
         };
+        this.onShow = () => {
+            if (this.panel) {
+                AccessibilityUtils.focusComponent(this.panel);
+            }
+        };
         this.onDateChange = (date) => {
             if (this.props.onValueChange) {
                 this.props.onValueChange(TimeUtils.getDateString(date));
@@ -32,8 +38,8 @@ export class DatePanel extends React.Component {
     }
     render() {
         if (Platform.OS === 'ios') {
-            return (React.createElement(ModalBox, { show: this.show },
-                React.createElement(Card, { flex: 0, fit: 'content' },
+            return (React.createElement(ModalBox, { show: this.show, onShow: this.onShow, onRequestClose: this.onCancel },
+                React.createElement(Card, { flex: 0, fit: 'content', ref: ref => this.panel = ref },
                     React.createElement(DatePickerIOS, { date: TimeUtils.extractDate(this.props.value), mode: 'date', onDateChange: this.onDateChange }),
                     React.createElement(ButtonGroup, { hasSpacing: true },
                         this.renderCancelButton(),

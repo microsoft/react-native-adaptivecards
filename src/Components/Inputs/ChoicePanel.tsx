@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
+import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
 import { SeparateLine } from '../Basic/SeparateLine';
 import { Card } from '../Containers/Card';
 import { ModalBox } from '../Containers/ModalBox';
@@ -14,16 +15,20 @@ interface IProps<T extends { title: string, value: V }, V> {
 }
 
 export class ChoicePanel<T extends { title: string, value: V }, V> extends React.Component<IProps<T, V>> {
+    private panel: Card;
     public render() {
         if (this.props.choices) {
             return (
                 <ModalBox
                     show={this.props.show}
+                    onShow={this.onShow}
+                    onRequestClose={this.onClose}
                     onBackgroundPress={this.onClose}
                 >
                     <Card
                         flex={0}
                         fit='content'
+                        ref={ref => this.panel = ref}
                     >
                         <FlatList
                             data={this.props.choices}
@@ -77,6 +82,12 @@ export class ChoicePanel<T extends { title: string, value: V }, V> extends React
     private onClose = () => {
         if (this.props.onClose) {
             this.props.onClose();
+        }
+    }
+
+    private onShow = () => {
+        if (this.panel) {
+            AccessibilityUtils.focusComponent(this.panel);
         }
     }
 }

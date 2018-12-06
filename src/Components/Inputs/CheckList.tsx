@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
-import { Checkbox } from './Checkbox';
+import { Checkbox } from './CheckBox';
 
 interface IProps<T extends { title: string, value: V }, V> {
     choices: T[];

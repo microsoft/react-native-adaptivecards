@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DatePickerIOS, Platform, TimePickerAndroid } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
 import { TimeUtils } from '../../Utils/TimeUtils';
 import { ButtonGroup } from '../Containers/ButtonGroup';
 import { Card } from '../Containers/Card';
@@ -17,6 +18,11 @@ export class TimePanel extends React.Component {
         this.onSave = () => {
             if (this.props.onSave) {
                 this.props.onSave();
+            }
+        };
+        this.onShow = () => {
+            if (this.panel) {
+                AccessibilityUtils.focusComponent(this.panel);
             }
         };
         this.onTimeChangeIos = (date) => {
@@ -37,8 +43,8 @@ export class TimePanel extends React.Component {
     }
     render() {
         if (Platform.OS === 'ios') {
-            return (React.createElement(ModalBox, { show: this.show },
-                React.createElement(Card, { flex: 0, fit: 'content' },
+            return (React.createElement(ModalBox, { show: this.show, onShow: this.onShow },
+                React.createElement(Card, { flex: 0, fit: 'content', ref: ref => this.panel = ref },
                     React.createElement(DatePickerIOS, { date: TimeUtils.extractTime(this.props.value), mode: 'time', onDateChange: this.onTimeChangeIos }),
                     React.createElement(ButtonGroup, { hasSpacing: true },
                         this.renderCancelButton(),

@@ -6,6 +6,7 @@ import { ChoicePanel } from '../../Components/Inputs/ChoicePanel';
 import { RadioList } from '../../Components/Inputs/RadioList';
 import { ChoiceSetModel } from '../../Models/Inputs/ChoiceSet';
 import { StyleManager } from '../../Styles/StyleManager';
+import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
@@ -22,6 +23,7 @@ interface IState {
 
 export class ChoiceSetView extends React.Component<IProps, IState> {
     private mounted: boolean;
+    private button: Button;
 
     constructor(props: IProps) {
         super(props);
@@ -97,6 +99,7 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
                     paddingTop={this.paddingVertical}
                     paddingBottom={this.paddingVertical}
                     onPress={this.onPanelButtonPress}
+                    ref={ref => this.button = ref}
                 />,
                 <ChoicePanel
                     key={'DatePanel' + index}
@@ -166,6 +169,10 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
     private onPanelClose = () => {
         this.setState({
             focused: !this.state.focused,
+        }, () => {
+            if (this.button) {
+                AccessibilityUtils.focusComponent(this.button);
+            }
         });
     }
 

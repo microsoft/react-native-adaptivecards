@@ -31,7 +31,10 @@ export class Toggle extends React.Component {
                         flexWrap: StyleManager.getWrap(true),
                         paddingRight: 16,
                     } }, this.props.title),
-                React.createElement(Switch, { onTintColor: this.switchOnColor, tintColor: this.switchOffColor, value: this.props.checked, onValueChange: this.onClick }))));
+                React.createElement(Switch, { trackColor: {
+                        true: this.switchOnColor,
+                        false: this.switchOffColor,
+                    }, value: this.props.checked, onValueChange: this.onClick }))));
     }
     get color() {
         return StyleManager.getCheckboxTitleColor(this.props.theme);

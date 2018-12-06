@@ -3,6 +3,7 @@ import { Button } from '../../Components/Inputs/Button';
 import { DatePanel } from '../../Components/Inputs/DatePanel';
 import { DateInputModel } from '../../Models/Inputs/DateInput';
 import { StyleManager } from '../../Styles/StyleManager';
+import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
@@ -19,6 +20,7 @@ interface IState {
 export class DateInputView extends React.Component<IProps, IState> {
     private mounted: boolean;
     private tempValue = '';
+    private button: Button;
 
     constructor(props: IProps) {
         super(props);
@@ -28,6 +30,7 @@ export class DateInputView extends React.Component<IProps, IState> {
         const { model } = this.props;
 
         if (model && model.isValueValid) {
+            this.tempValue = model.value;
             model.onStoreUpdate = this.onStoreUpdate;
             this.state = {
                 focused: false,
@@ -79,6 +82,7 @@ export class DateInputView extends React.Component<IProps, IState> {
                     paddingTop={this.paddingVertical}
                     paddingBottom={this.paddingVertical}
                     onPress={this.onPress}
+                    ref={ref => this.button = ref}
                 />,
                 <DatePanel
                     key={'DatePanel' + index}
@@ -102,6 +106,9 @@ export class DateInputView extends React.Component<IProps, IState> {
         }, () => {
             this.tempValue = this.state.value;
         });
+        if (this.button) {
+            AccessibilityUtils.focusComponent(this.button);
+        }
     }
 
     private onSave = () => {
@@ -117,6 +124,10 @@ export class DateInputView extends React.Component<IProps, IState> {
                 if (callback) {
                     callback();
                 }
+            }
+
+            if (this.button) {
+                AccessibilityUtils.focusComponent(this.button);
             }
         });
     }

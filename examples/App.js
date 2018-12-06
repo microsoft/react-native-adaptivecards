@@ -1,6 +1,5 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import SvgUri from 'react-native-svg-uri';
 
 import AdaptiveCards from './AdaptiveCards';
 import mockData from './mockData';

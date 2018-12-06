@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
+import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
 import { SeparateLine } from '../Basic/SeparateLine';
 import { Card } from '../Containers/Card';
 import { ModalBox } from '../Containers/ModalBox';
@@ -32,11 +33,16 @@ export class ChoicePanel extends React.Component {
                 this.props.onClose();
             }
         };
+        this.onShow = () => {
+            if (this.panel) {
+                AccessibilityUtils.focusComponent(this.panel);
+            }
+        };
     }
     render() {
         if (this.props.choices) {
-            return (React.createElement(ModalBox, { show: this.props.show, onBackgroundPress: this.onClose },
-                React.createElement(Card, { flex: 0, fit: 'content' },
+            return (React.createElement(ModalBox, { show: this.props.show, onShow: this.onShow, onRequestClose: this.onClose, onBackgroundPress: this.onClose },
+                React.createElement(Card, { flex: 0, fit: 'content', ref: ref => this.panel = ref },
                     React.createElement(FlatList, { data: this.props.choices, renderItem: this.renderChoice, keyExtractor: this.extractKey, ItemSeparatorComponent: this.renderSeparator }))));
         }
         else {

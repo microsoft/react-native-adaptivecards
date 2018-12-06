@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FlatList } from 'react-native';
-import { Checkbox } from './Checkbox';
+import { Checkbox } from './CheckBox';
 export class CheckList extends React.Component {
     constructor() {
         super(...arguments);

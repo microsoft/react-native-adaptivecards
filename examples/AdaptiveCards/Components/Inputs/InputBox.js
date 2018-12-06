@@ -54,7 +54,7 @@ export class InputBox extends React.Component {
                     paddingLeft: this.paddingHorizontal,
                 },
                 this.props.style
-            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur }));
+            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, placeholderTextColor: this.placeholderColor, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur }));
     }
     validateInput() {
         if (this.props.validateInput) {
@@ -116,5 +116,8 @@ export class InputBox extends React.Component {
         else {
             return StyleManager.getInputBorderColor(this.props.theme);
         }
+    }
+    get placeholderColor() {
+        return StyleManager.getInputBorderColor(this.props.theme);
     }
 }

@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { DatePickerAndroid, DatePickerIOS, Platform } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
+import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
 import { TimeUtils } from '../../Utils/TimeUtils';
 import { ButtonGroup } from '../Containers/ButtonGroup';
 import { Card } from '../Containers/Card';
@@ -17,6 +18,7 @@ interface IProps {
 }
 
 export class DatePanel extends React.Component<IProps> {
+    private panel: Card;
     public componentDidUpdate(prevProps: IProps) {
         if (Platform.OS === 'android' && this.props.show && !prevProps.show) {
             this.showPickerAndroid();
@@ -28,10 +30,13 @@ export class DatePanel extends React.Component<IProps> {
             return (
                 <ModalBox
                     show={this.show}
+                    onShow={this.onShow}
+                    onRequestClose={this.onCancel}
                 >
                     <Card
                         flex={0}
                         fit='content'
+                        ref={ref => this.panel = ref}
                     >
                         <DatePickerIOS
                             date={TimeUtils.extractDate(this.props.value)}
@@ -127,6 +132,12 @@ export class DatePanel extends React.Component<IProps> {
     private onSave = () => {
         if (this.props.onSave) {
             this.props.onSave();
+        }
+    }
+
+    private onShow = () => {
+        if (this.panel) {
+            AccessibilityUtils.focusComponent(this.panel);
         }
     }
 

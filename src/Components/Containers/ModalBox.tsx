@@ -3,6 +3,7 @@ import { Modal, Platform, TouchableWithoutFeedback, View } from 'react-native';
 
 interface IProps {
     show: boolean;
+    onShow: () => void;
     onBackgroundPress?: () => void;
     onRequestClose?: () => void;
 }
@@ -23,7 +24,8 @@ export class ModalBox extends React.Component<IProps> {
                 visible={this.props.show}
                 animationType={'fade'}
                 transparent={true}
-                onRequestClose={this.props.onRequestClose}
+                onRequestClose={this.onRequestClose}
+                onShow={this.onShow}
             >
                 <TouchableWithoutFeedback
                     onPress={this.onBackgroundPress}
@@ -65,9 +67,20 @@ export class ModalBox extends React.Component<IProps> {
     }
 
     private onBackgroundPress = () => {
-        console.log('ModalBox background onPress');
         if (this.props.onBackgroundPress) {
             this.props.onBackgroundPress();
+        }
+    }
+    
+    private onRequestClose = () => {
+        if (this.props.onRequestClose) {
+            this.props.onRequestClose();
+        }
+    }
+
+    private onShow = () => {
+        if (this.props.onShow) {
+            this.props.onShow();
         }
     }
 }

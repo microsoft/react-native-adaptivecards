@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Button } from '../../Components/Inputs/Button';
 import { DatePanel } from '../../Components/Inputs/DatePanel';
 import { StyleManager } from '../../Styles/StyleManager';
+import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class DateInputView extends React.Component {
     constructor(props) {
@@ -16,6 +17,9 @@ export class DateInputView extends React.Component {
             }, () => {
                 this.tempValue = this.state.value;
             });
+            if (this.button) {
+                AccessibilityUtils.focusComponent(this.button);
+            }
         };
         this.onSave = () => {
             this.setState({
@@ -29,6 +33,9 @@ export class DateInputView extends React.Component {
                     if (callback) {
                         callback();
                     }
+                }
+                if (this.button) {
+                    AccessibilityUtils.focusComponent(this.button);
                 }
             });
         };
@@ -62,6 +69,7 @@ export class DateInputView extends React.Component {
         this.mounted = false;
         const { model } = this.props;
         if (model && model.isValueValid) {
+            this.tempValue = model.value;
             model.onStoreUpdate = this.onStoreUpdate;
             this.state = {
                 focused: false,
@@ -87,7 +95,7 @@ export class DateInputView extends React.Component {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
         }
         return ([
-            React.createElement(Button, { key: 'DateInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPress }),
+            React.createElement(Button, { key: 'DateInputButton' + index, title: this.state.value, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPress, ref: ref => this.button = ref }),
             React.createElement(DatePanel, { key: 'DatePanel' + index, value: this.state.value, show: this.state.focused, onValueChange: this.onValueChange, onSave: this.onSave, onCancel: this.onCancel })
         ]);
     }
