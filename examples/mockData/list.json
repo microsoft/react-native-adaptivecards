@@ -1,0 +1,1327 @@
+{
+    "type": "AdaptiveCard",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Filter by time"
+                                },
+                                {
+                                    "type": "Input.ChoiceSet",
+                                    "id": "time",
+                                    "value": "Upto next 2 weeks",
+                                    "style": "compact",
+                                    "isMultiSelect": false,
+                                    "choices": [
+                                        {
+                                            "title": "Upto next 2 weeks",
+                                            "value": "Upto next 2 weeks"
+                                        },
+                                        {
+                                            "title": "Today",
+                                            "value": "Today"
+                                        },
+                                        {
+                                            "title": "Tomorrow",
+                                            "value": "Tomorrow"
+                                        },
+                                        {
+                                            "title": "This saturday",
+                                            "value": "This saturday"
+                                        },
+                                        {
+                                            "title": "This sunday",
+                                            "value": "This sunday"
+                                        },
+                                        {
+                                            "title": "This weekend",
+                                            "value": "This weekend"
+                                        },
+                                        {
+                                            "title": "This week",
+                                            "value": "This week"
+                                        },
+                                        {
+                                            "title": "Next week",
+                                            "value": "Next week"
+                                        },
+                                        {
+                                            "title": "This month",
+                                            "value": "This month"
+                                        },
+                                        {
+                                            "title": "Next month",
+                                            "value": "Next month"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Filter by category"
+                                },
+                                {
+                                    "type": "Input.ChoiceSet",
+                                    "id": "event_type",
+                                    "value": "Music",
+                                    "style": "compact",
+                                    "isMultiSelect": false,
+                                    "choices": [
+                                        {
+                                            "title": "Music",
+                                            "value": "Music"
+                                        },
+                                        {
+                                            "title": "SportsOutdoors",
+                                            "value": "SportsOutdoors"
+                                        },
+                                        {
+                                            "title": "PerformingArts",
+                                            "value": "PerformingArts"
+                                        },
+                                        {
+                                            "title": "Comedy",
+                                            "value": "Comedy"
+                                        },
+                                        {
+                                            "title": "Community",
+                                            "value": "Community"
+                                        },
+                                        {
+                                            "title": "VisualArts",
+                                            "value": "VisualArts"
+                                        },
+                                        {
+                                            "title": "ArtsCrafts",
+                                            "value": "ArtsCrafts"
+                                        },
+                                        {
+                                            "title": "BusinessTech",
+                                            "value": "BusinessTech"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "items": [
+                        {
+                            "type": "Container",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Sort by"
+                                },
+                                {
+                                    "type": "Input.ChoiceSet",
+                                    "id": "sort",
+                                    "value": "relevance",
+                                    "style": "compact",
+                                    "isMultiSelect": false,
+                                    "choices": [
+                                        {
+                                            "title": "relevance",
+                                            "value": "relevance"
+                                        },
+                                        {
+                                            "title": "date",
+                                            "value": "date"
+                                        },
+                                        {
+                                            "title": "popularity",
+                                            "value": "popularity"
+                                        },
+                                        {
+                                            "title": "distance",
+                                            "value": "distance"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.40e55faa61ef258919763d54681fe11e&pid=LocInterest",
+                                    "altText": "/th?id=OLE.40e55faa61ef258919763d54681fe11e&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Annie - Seattle"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/6/2018 7:30:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "The 5th Avenue Theatre"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "(Multiple dates)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "9e31785e-069a-409a-9e65-d168b4c2d176",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "1"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.1bad578b1795d7c736d0dc3e881f01ee&pid=LocInterest",
+                                    "altText": "/th?id=OLE.1bad578b1795d7c736d0dc3e881f01ee&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Minnesota Vikings at Seattle Seahawks (Monday Night Football)"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/10/2018 5:15:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Clock-Out Lounge"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "304bbb50-854a-4b95-a180-75a2ac2c8032",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "2"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.7327d2a4db31233fdac049ec0c7ffaad&pid=LocInterest",
+                                    "altText": "/th?id=OLE.7327d2a4db31233fdac049ec0c7ffaad&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Celtic Nights"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/11/2018 7:30:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Benaroya Hall"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "26cc9b74-2e12-4fd6-ba73-0297d3edaba9",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "3"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.c7db1f793ca38292f34b798987cda037&pid=LocInterest",
+                                    "altText": "/th?id=OLE.c7db1f793ca38292f34b798987cda037&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Seattle Symphony - The Winds: The Nutcracker"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/7/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Benaroya Hall"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "(Multiple dates)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "33e8ac0f-30b2-413c-9868-8e0b37aecf13",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "4"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.e276108958766e4a0d7b4b9dd7ac6814&pid=LocInterest",
+                                    "altText": "/th?id=OLE.e276108958766e4a0d7b4b9dd7ac6814&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Seattle University Redhawks Mens Basketball at Washington Huskies Mens Basketball"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/9/2018 6:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Alaska Airlines Arena"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "7b0269e0-3d85-422b-adf4-b360ea297c5b",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "5"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.4712b2da4a381aa3249cd08621463bc4&pid=LocInterest",
+                                    "altText": "/th?id=OLE.4712b2da4a381aa3249cd08621463bc4&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Whitey Morgan Tickets (21+ Event)"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/6/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Neumos"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "1f194a51-e74c-4277-83d9-33a1e80637e8",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "6"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.53260461816851245a59969beb3eaea4&pid=LocInterest",
+                                    "altText": "/th?id=OLE.53260461816851245a59969beb3eaea4&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Rosanne Cash"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/7/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "The Moore Theatre"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "844b6916-8ab3-4aaa-b554-9a5808bb55f7",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "7"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.06a6acfdea2b62c8ef8d4c70b6e04a4f&pid=LocInterest",
+                                    "altText": "/th?id=OLE.06a6acfdea2b62c8ef8d4c70b6e04a4f&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "� MARMALADE � Seattle's longest running LEGENDARY FUNK/IMPROV night! EVERY THURSDAY!"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/6/2018 9:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "High Dive"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "(Multiple dates)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "115318d8-874a-4719-bb00-c8b17c734510",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "8"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.4eae4b494e059b1727791a5014ae1ff8&pid=LocInterest",
+                                    "altText": "/th?id=OLE.4eae4b494e059b1727791a5014ae1ff8&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Blind Boys of Alabama Christmas Show with Opener Liz Vice"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/7/2018 12:00:00 AM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Dimitriou's Jazz Alley"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "(Multiple dates)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "a800f700-748b-4cc7-ace3-992fedeef672",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "9"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.1189300590e14c28a0283edcbca13b5e&pid=LocInterest",
+                                    "altText": "/th?id=OLE.1189300590e14c28a0283edcbca13b5e&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "KEXP Yule Benefit featuring Moby with PNB Orchestra"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/6/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "McCaw Hall"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "3f8c8e39-dd2d-445b-80ab-ae7fdcf27a7f",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "10"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.53ff798a60ba2e8006ed731664bcfd36&pid=LocInterest",
+                                    "altText": "/th?id=OLE.53ff798a60ba2e8006ed731664bcfd36&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Bon Iver & TU Dance - Come Through"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/6/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "The Paramount Theatre"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "(Multiple dates)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "e85f1c17-7611-402b-b063-7a28c33bac4a",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "11"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.e1b3b88715ac8cbf4ca7b62e732b80e3&pid=LocInterest",
+                                    "altText": "/th?id=OLE.e1b3b88715ac8cbf4ca7b62e732b80e3&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Mark O'Connor & Friends - An Appalachian Christmas - Seattle, WA"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/13/2018 7:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "The Moore Theatre"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "8a720339-660e-44e9-a9f6-2a281badb08c",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "12"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.59748e1e12871978b142c4687336f526&pid=LocInterest",
+                                    "altText": "/th?id=OLE.59748e1e12871978b142c4687336f526&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Band Of Friends (A Celebration Of Rory Gallagher)"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/13/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Funhouse Seattle"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "56478b6c-ed4e-4d84-984c-e2b1d544bd42",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "13"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.f57cd1f9994b10a7c46f2aa7d97beb12&pid=LocInterest",
+                                    "altText": "/th?id=OLE.f57cd1f9994b10a7c46f2aa7d97beb12&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "George Clinton with Parliament Funkadelic"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/11/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "STG - The Neptune Theatre"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "c01f47aa-ac26-4229-92a5-0159144a3465",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "14"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.6a069c39227de3a4b393d5ccfb672d2d&pid=LocInterest",
+                                    "altText": "/th?id=OLE.6a069c39227de3a4b393d5ccfb672d2d&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Atreyu with Memphis May Fire"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/7/2018 7:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "El Corazon"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "3f9c43d7-b5d6-4f90-b6dd-b924c685577b",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "15"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.a6aad580967dcc8ff98ef7cfbe92f2b6&pid=LocInterest",
+                                    "altText": "/th?id=OLE.a6aad580967dcc8ff98ef7cfbe92f2b6&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Fucked Up with Narrow Head"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/11/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "The Crocodile"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "c06f00db-787c-4f79-845d-de4cc276a137",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "16"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.d4b4f4d32f0e7bfe9da74051b4260fcf&pid=LocInterest",
+                                    "altText": "/th?id=OLE.d4b4f4d32f0e7bfe9da74051b4260fcf&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Minus The Bear with Tera Melos"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/14/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "The Showbox"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "(Multiple dates)"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "4935a95d-90c1-4d8d-bb60-58d513d89933",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "17"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.2aec03d719c870d6ab57f5acbebbbce8&pid=LocInterest",
+                                    "altText": "/th?id=OLE.2aec03d719c870d6ab57f5acbebbbce8&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Brother Ali with Busdriver (21+)"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/12/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Chop Suey"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "af266351-e161-4a70-adfb-45065cc8213d",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "18"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.910447c393bc5d8442cbc57241d5a2c2&pid=LocInterest",
+                                    "altText": "/th?id=OLE.910447c393bc5d8442cbc57241d5a2c2&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "Ice Cube"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/12/2018 9:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "The Showbox"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "edd7aaf9-e15b-4a3a-ab9c-88abd14b527b",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "19"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        },
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "size": "large",
+                                    "url": "http://www.bing.com/th?id=OLE.d1f9ca15303a6a514b3d38f5b9446cde&pid=LocInterest",
+                                    "altText": "/th?id=OLE.d1f9ca15303a6a514b3d38f5b9446cde&pid=LocInterest"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "size": "medium",
+                                    "text": "John Legend - A Legendary Christmas"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "isSubtle": true,
+                                    "text": "12/18/2018 8:00:00 PM"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "size": "small",
+                                    "text": "Washington Music Theater"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "selectAction": {
+                "type": "Action.Submit",
+                "id": "7ca904e5-1928-4cb8-ac48-302d2ae5d4fc",
+                "data": {
+                    "notification": {
+                        "domain": "events",
+                        "intent": "show_event_details",
+                        "slots": {
+                            "position_ref": "20"
+                        }
+                    }
+                },
+                "title": "show detail"
+            }
+        }
+    ]
+}

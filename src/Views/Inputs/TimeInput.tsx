@@ -65,6 +65,7 @@ export class TimeInputView extends React.Component<IProps, IState> {
                 <Button
                     key={'TimeInputButton' + index}
                     title={this.state.value}
+                    accessibilityLabel={model.placeholder}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
                     borderColor={this.borderColor}

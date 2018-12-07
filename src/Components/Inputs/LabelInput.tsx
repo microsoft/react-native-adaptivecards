@@ -73,6 +73,7 @@ export class LabelInput extends React.Component<IProps, IState> {
     public render() {
         return (
             <View
+                accessibilityLabel={this.props.placeholder}
                 style={{
                     flex: this.props.flex,
                 }}

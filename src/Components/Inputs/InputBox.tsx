@@ -45,6 +45,7 @@ export class InputBox extends React.Component<IProps, IState> {
     public render() {
         return (
             <TextInput
+                accessibilityLabel={this.props.placeholder}
                 style={[
                     {
                         flex: this.props.flex,

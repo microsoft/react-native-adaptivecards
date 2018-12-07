@@ -31,7 +31,7 @@ export class InputBox extends React.Component {
         };
     }
     render() {
-        return (React.createElement(TextInput, { style: [
+        return (React.createElement(TextInput, { accessibilityLabel: this.props.placeholder, style: [
                 {
                     flex: this.props.flex,
                     color: this.color,

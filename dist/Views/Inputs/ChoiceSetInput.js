@@ -99,7 +99,7 @@ export class ChoiceSetView extends React.Component {
     renderChoicePanel() {
         const { model, index } = this.props;
         return ([
-            React.createElement(Button, { key: 'ChoiceSetInputButton' + index, title: this.title, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPanelButtonPress, ref: ref => this.button = ref }),
+            React.createElement(Button, { key: 'ChoiceSetInputButton' + index, title: this.title, accessibilityLabel: model.placeholder, color: this.color, backgroundColor: this.backgroundColor, borderColor: this.borderColor, borderRadius: 4, borderWidth: 1, height: this.height, fontSize: this.fontSize, fontWeight: this.fontWeight, textHorizontalAlign: 'center', textVerticalAlign: 'center', marginTop: this.spacing, paddingLeft: this.paddingHorizontal, paddingRight: this.paddingHorizontal, paddingTop: this.paddingVertical, paddingBottom: this.paddingVertical, onPress: this.onPanelButtonPress, ref: ref => this.button = ref }),
             React.createElement(ChoicePanel, { key: 'DatePanel' + index, choices: model.choices, selected: this.state.selected, show: this.state.focused, onChoose: this.onValueChange, onClose: this.onPanelClose })
         ]);
     }

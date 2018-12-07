@@ -66,6 +66,7 @@ export class DateInputView extends React.Component<IProps, IState> {
                 <Button
                     key={'DateInputButton' + index}
                     title={this.state.value}
+                    accessibilityLabel={model.placeholder}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
                     borderColor={this.borderColor}

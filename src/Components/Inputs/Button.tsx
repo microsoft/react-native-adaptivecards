@@ -29,6 +29,7 @@ export interface IButtonProps {
         marginRight?: number;
     };
     onPress: () => void;
+    accessibilityLabel?: string;
     disabled?: boolean;
     color?: string;
     backgroundColor?: string;
@@ -66,7 +67,7 @@ export class Button extends React.Component<IButtonProps> {
                 testId={this.props.title}
                 onPress={this.props.onPress}
                 disabled={this.props.disabled}
-                accessibilityLabel={this.props.title}
+                accessibilityLabel={this.props.accessibilityLabel ? this.props.accessibilityLabel : this.props.title}
                 style={[
                     {
                         flex: this.props.flex,

@@ -92,7 +92,7 @@ export class LabelInput extends React.Component {
         }
     }
     render() {
-        return (React.createElement(View, { style: {
+        return (React.createElement(View, { accessibilityLabel: this.props.placeholder, style: {
                 flex: this.props.flex,
             } },
             this.renderInputArea(),

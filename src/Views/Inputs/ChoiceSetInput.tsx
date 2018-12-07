@@ -83,6 +83,7 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
                 <Button
                     key={'ChoiceSetInputButton' + index}
                     title={this.title}
+                    accessibilityLabel={model.placeholder}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
                     borderColor={this.borderColor}
