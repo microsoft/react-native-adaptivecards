@@ -120,7 +120,7 @@ export class LabelInput extends React.Component {
         if (this.props.labels) {
             return this.props.labels.map((label, index) => {
                 console.log(index, this.props.labels.length, this.state.labelFocusIndex);
-                return (React.createElement(Label, { key: 'Label' + index, index: index, title: label.title, focused: index === this.state.labelFocusIndex, theme: 'default', onPress: this.onLabelPress }, label.title));
+                return (React.createElement(Label, { key: 'Label' + index, index: index, title: label.title, focused: index === this.state.labelFocusIndex, theme: 'default', accessibilityLabel: `${this.props.placeholder} ${label.title}`, onPress: this.onLabelPress }, label.title));
             });
         }
         return undefined;

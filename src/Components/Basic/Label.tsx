@@ -7,6 +7,7 @@ interface IProps {
     title: string;
     focused: boolean;
     theme: 'default' | 'emphasis';
+    accessibilityLabel: string;
     onPress: (index: number) => void;
 }
 
@@ -15,6 +16,8 @@ export class Label extends React.Component<IProps> {
         if (this.props.title) {
             return (
                 <TouchableWithoutFeedback
+                    accessibilityLabel={this.props.accessibilityLabel}
+                    accessible={true}
                     onPress={this.onPress}
                 >
                     <View

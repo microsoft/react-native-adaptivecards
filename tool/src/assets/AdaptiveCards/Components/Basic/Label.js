@@ -12,7 +12,7 @@ export class Label extends React.Component {
     }
     render() {
         if (this.props.title) {
-            return (React.createElement(TouchableWithoutFeedback, { onPress: this.onPress },
+            return (React.createElement(TouchableWithoutFeedback, { accessibilityLabel: this.props.accessibilityLabel, accessible: true, onPress: this.onPress },
                 React.createElement(View, { style: {
                         backgroundColor: this.backgroundColor,
                         paddingTop: this.paddingVertical - 6,

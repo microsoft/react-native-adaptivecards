@@ -51,7 +51,7 @@ export class DateInputView extends React.Component<IProps, IState> {
     // tslint:disable-next-line:max-line-length
     public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) {
         if (this.mounted) {
-            super.setState(state, callback);
+            super.setState(state as IState, callback);
         }
     }
 
@@ -66,7 +66,7 @@ export class DateInputView extends React.Component<IProps, IState> {
                 <Button
                     key={'DateInputButton' + index}
                     title={this.state.value}
-                    accessibilityLabel={model.placeholder}
+                    accessibilityLabel={`${model.placeholder} ${model.value}`}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
                     borderColor={this.borderColor}

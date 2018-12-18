@@ -119,6 +119,7 @@ export class LabelInput extends React.Component<IProps, IState> {
                         title={label.title}
                         focused={index === this.state.labelFocusIndex}
                         theme={'default'}
+                        accessibilityLabel={`${this.props.placeholder} ${label.title}`}
                         onPress={this.onLabelPress}
                     >
                         {label.title}
