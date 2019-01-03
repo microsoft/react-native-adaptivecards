@@ -27,7 +27,6 @@ export class LabelInput extends React.Component {
             }
         };
         this.onKeyPress = (e) => {
-            console.log(e.nativeEvent.key, this.props.labels.length, this.state.labelFocusIndex);
             if (e.nativeEvent.key === 'Backspace') {
                 if (this.props.value === '') {
                     if (this.labelLength === this.state.labelFocusIndex) {
@@ -119,7 +118,6 @@ export class LabelInput extends React.Component {
     renderLabels() {
         if (this.props.labels) {
             return this.props.labels.map((label, index) => {
-                console.log(index, this.props.labels.length, this.state.labelFocusIndex);
                 return (React.createElement(Label, { key: 'Label' + index, index: index, title: label.title, focused: index === this.state.labelFocusIndex, theme: 'default', accessibilityLabel: `${this.props.placeholder} ${label.title}`, onPress: this.onLabelPress }, label.title));
             });
         }
@@ -142,7 +140,7 @@ export class LabelInput extends React.Component {
                     paddingLeft: this.paddingHorizontal,
                 },
                 this.props.style
-            ], autoCorrect: false, autoCapitalize: 'none', multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, onKeyPress: this.onKeyPress, onSubmitEditing: this.onSubmitEditing }));
+            ], autoCorrect: false, autoCapitalize: 'none', multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, placeholderTextColor: this.placeholderColor, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, onKeyPress: this.onKeyPress, onSubmitEditing: this.onSubmitEditing }));
     }
     renderSuggestions() {
         if (this.props.suggestionView) {
@@ -214,5 +212,8 @@ export class LabelInput extends React.Component {
         else {
             return StyleManager.getInputBorderColor(this.props.theme);
         }
+    }
+    get placeholderColor() {
+        return StyleManager.getInputBorderColor(this.props.theme);
     }
 }

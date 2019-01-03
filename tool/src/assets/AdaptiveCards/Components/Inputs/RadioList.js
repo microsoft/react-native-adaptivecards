@@ -14,7 +14,6 @@ export class RadioList extends React.Component {
             return this.props.selected && this.props.selected === value;
         };
         this.onChoose = (value) => {
-            console.log(value);
             if (this.props.onChoose) {
                 this.props.onChoose(value);
             }

@@ -59,7 +59,6 @@ export class PeoplePickerView extends React.Component {
             });
         };
         this.onStoreUpdate = (value) => {
-            console.log(value);
             this.setState({
                 selected: JSON.parse(value),
                 value: '',

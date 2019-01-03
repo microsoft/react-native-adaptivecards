@@ -140,7 +140,6 @@ export class PeoplePickerView extends React.Component<IProps, IState> {
     }
 
     private onStoreUpdate = (value: string) => {
-        console.log(value);
         this.setState({
             selected: JSON.parse(value),
             value: '',

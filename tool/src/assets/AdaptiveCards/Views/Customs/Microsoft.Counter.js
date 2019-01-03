@@ -8,7 +8,6 @@ export class CounterView extends React.Component {
         super(props);
         this.countDown = () => {
             let now = Date.now();
-            console.log(this.startTime, this.endTime, now);
             if (this.startTime < now) {
                 let remains = Math.floor((this.endTime - now) / 1000);
                 if (remains >= 0) {

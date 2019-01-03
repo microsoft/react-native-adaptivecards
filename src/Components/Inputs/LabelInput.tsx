@@ -111,7 +111,6 @@ export class LabelInput extends React.Component<IProps, IState> {
     private renderLabels() {
         if (this.props.labels) {
             return this.props.labels.map((label, index) => {
-                console.log(index, this.props.labels.length, this.state.labelFocusIndex);
                 return (
                     <Label
                         key={'Label' + index}
@@ -158,6 +157,7 @@ export class LabelInput extends React.Component<IProps, IState> {
                 keyboardType={this.props.keyboardType}
                 blurOnSubmit={!this.isMultiLine}
                 placeholder={this.props.placeholder}
+                placeholderTextColor={this.placeholderColor}
                 value={this.props.value}
                 returnKeyType={this.props.returnKeyType}
                 underlineColorAndroid='transparent'
@@ -213,7 +213,6 @@ export class LabelInput extends React.Component<IProps, IState> {
     }
 
     private onKeyPress = (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-        console.log(e.nativeEvent.key, this.props.labels.length, this.state.labelFocusIndex);
         if (e.nativeEvent.key === 'Backspace') {
             if (this.props.value === '') {
                 if (this.labelLength === this.state.labelFocusIndex) {
@@ -325,5 +324,9 @@ export class LabelInput extends React.Component<IProps, IState> {
         } else {
             return StyleManager.getInputBorderColor(this.props.theme);
         }
+    }
+
+    private get placeholderColor() {
+        return StyleManager.getInputBorderColor(this.props.theme);
     }
 }

@@ -63,7 +63,6 @@ export class ContentFactory {
                 case ContentType.ChoiceSetInput:
                     return (React.createElement(ChoiceSetView, { key: 'ChoiceSetView' + index, model: model, index: index, theme: theme }));
                 case ContentType.ToggleInput:
-                    console.log(model.type);
                     return (React.createElement(ToggleInputView, { key: 'ToggleInputView' + index, model: model, index: index, theme: theme }));
                 case ContentType.PeoplePicker:
                     return (React.createElement(PeoplePickerView, { key: 'PeoplePickerView' + index, model: model, index: index, theme: theme }));

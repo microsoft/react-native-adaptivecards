@@ -20,7 +20,6 @@ export class ChoiceSetView extends React.Component {
             }
         };
         this.onStoreUpdate = (value) => {
-            console.log(value);
             this.setState({
                 value: value,
                 selected: this.props.model.parseSelected(),

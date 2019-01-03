@@ -53,7 +53,7 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
     // tslint:disable-next-line:max-line-length
     public setState<K extends keyof IState>(state: ((prevState: Readonly<IState>, props: Readonly<IProps>) => (Pick<IState, K> | IState | null)) | (Pick<IState, K> | IState | null), callback?: () => void) {
         if (this.mounted) {
-            super.setState(state, callback);
+            super.setState(state as any, callback);
         }
     }
 
@@ -160,7 +160,6 @@ export class ChoiceSetView extends React.Component<IProps, IState> {
     }
 
     private onStoreUpdate = (value: string) => {
-        console.log(value);
         this.setState({
             value: value,
             selected: this.props.model.parseSelected(),

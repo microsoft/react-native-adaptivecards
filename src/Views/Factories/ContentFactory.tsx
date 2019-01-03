@@ -168,7 +168,6 @@ export class ContentFactory {
                         />
                     );
                 case ContentType.ToggleInput:
-                    console.log(model.type);
                     return (
                         <ToggleInputView
                             key={'ToggleInputView' + index}
