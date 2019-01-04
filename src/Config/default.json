@@ -1,5 +1,5 @@
 {
-    "mode": "debug",
+    "mode": "release",
     "choiceSetInputValueSeparator": ",",
     "supportsInteractivity": true,
     "fontFamily": "Roboto",

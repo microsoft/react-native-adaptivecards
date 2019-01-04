@@ -1,0 +1,125 @@
+{
+    "body": [
+        {
+            "items": [
+                {
+                    "weight": "bolder",
+                    "size": "medium",
+                    "text": "Publish Adaptive Card schema",
+                    "type": "TextBlock"
+                },
+                {
+                    "columns": [
+                        {
+                            "items": [
+                                {
+                                    "url": "https://pbs.twimg.com/profile_images/3647943215/d7f12830b3c17a5a9e4afcc370e3a37e_400x400.jpeg",
+                                    "style": "person",
+                                    "size": "small",
+                                    "type": "Image"
+                                }
+                            ],
+                            "width": "auto",
+                            "type": "Column"
+                        },
+                        {
+                            "items": [
+                                {
+                                    "wrap": true,
+                                    "weight": "bolder",
+                                    "text": "Matt Hidinger",
+                                    "type": "TextBlock"
+                                },
+                                {
+                                    "separation": "none",
+                                    "spacing": "none",
+                                    "wrap": true,
+                                    "isSubtle": true,
+                                    "text": "Created {{DATE(2017-02-14T06:08:39Z,SHORT)}}",
+                                    "type": "TextBlock"
+                                }
+                            ],
+                            "width": "stretch",
+                            "type": "Column"
+                        }
+                    ],
+                    "type": "ColumnSet"
+                }
+            ],
+            "type": "Container"
+        },
+        {
+            "items": [
+                {
+                    "wrap": true,
+                    "text": "Now that we have defined the main rules and features of the format, we need to produce a schema and publish it to GitHub. The schema will be the starting point of our reference documentation.",
+                    "type": "TextBlock"
+                },
+                {
+                    "facts": [
+                        {
+                            "value": "Adaptive Card",
+                            "title": "Board:"
+                        },
+                        {
+                            "value": "Backlog",
+                            "title": "List:"
+                        },
+                        {
+                            "value": "Matt Hidinger",
+                            "title": "Assigned to:"
+                        },
+                        {
+                            "value": "Not set",
+                            "title": "Due date:"
+                        }
+                    ],
+                    "type": "FactSet"
+                }
+            ],
+            "type": "Container"
+        }
+    ],
+    "actions": [
+        {
+            "title": "Set due date",
+            "card": {
+                "style": "emphasis",
+                "actions": [
+                    {
+                        "title": "OK",
+                        "type": "Action.Submit"
+                    }
+                ],
+                "body": [
+                    {
+                        "id": "dueDate",
+                        "type": "Input.Date"
+                    },
+                    {
+                        "isMultiline": true,
+                        "placeholder": "Add a comment",
+                        "id": "comment",
+                        "type": "Input.Text"
+                    }
+                ],
+                "type": "AdaptiveCard"
+            },
+            "type": "Action.ShowCard"
+        },
+        {
+            "title": "View",
+            "url": "http://adaptivecards.io",
+            "type": "Action.OpenUrl"
+        },
+        {
+            "title": "Submit",
+            "data": "payload",
+            "id": "bsw",
+            "type": "Action.Submit"
+        }
+    ],
+    "speak": "this card is loaded from a file",
+    "version": "1.0",
+    "type": "AdaptiveCard"
+}

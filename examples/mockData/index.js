@@ -30,6 +30,7 @@ var bingFact = require('./bingFact.json');
 var counter = require('./counter.json');
 var button = require('./button.json');
 var list = require('./list.json');
+var third = require('./3rd.json');
 
 exports["default"] = {
     adaptiveUpdate: adaptiveUpdate,
@@ -62,4 +63,5 @@ exports["default"] = {
     counter: counter,
     button: button,
     list: list,
+    third: third,
 };

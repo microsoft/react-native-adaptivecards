@@ -20,7 +20,7 @@ export class CardSchema extends SchemaElement {
             },
             'version': {
                 name: 'version',
-                isRequired: true,
+                isRequired: false,
             },
             'fallbackText': {
                 name: 'fallbackText',
