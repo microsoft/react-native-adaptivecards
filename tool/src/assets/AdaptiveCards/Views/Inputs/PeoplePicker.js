@@ -18,6 +18,7 @@ export class PeoplePickerView extends React.Component {
             }, () => {
                 const { model } = this.props;
                 if (model) {
+                    model.onBlur();
                     let callback = model.context.blurHandler;
                     if (callback) {
                         callback();

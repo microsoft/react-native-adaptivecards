@@ -142,7 +142,7 @@
         "default": {
             "color": "#000000",
             "focusColor": "#000000",
-            "backgroundColor": "#F3F3F3",
+            "backgroundColor": "#FFFFFF",
             "focusBackgroundColor": "#FFFFFF",
             "borderColor": "#757575",
             "focusBorderColor": "#006ae2"
@@ -150,7 +150,7 @@
         "emphasis": {
             "color": "#000000",
             "focusColor": "#000000",
-            "backgroundColor": "#F3F3F3",
+            "backgroundColor": "#FFFFFF",
             "focusBackgroundColor": "#FFFFFF",
             "borderColor": "#757575",
             "focusBorderColor": "#006ae2"

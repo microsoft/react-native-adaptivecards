@@ -51,13 +51,20 @@ export class PeoplePickerModel extends InputModel {
         if (value !== undefined) {
             this.input = value;
             let contact: any = {};
-            if (this.tryExtractContactFromInput(value, contact)) {
+            if (this.tryExtractContactFromInput(value, contact, false)) {
                 this.onSuggestionSelect(contact);
             } else {
                 if (this.callback) {
                     this.callback.onAction(this.onCallbackResponse, undefined);
                 }
             }
+        }
+    }
+
+    public onBlur = () => {
+        let contact: any = {};
+        if (this.input && this.tryExtractContactFromInput(this.input, contact, true)) {
+            this.onSuggestionSelect(contact);
         }
     }
 
@@ -125,13 +132,13 @@ export class PeoplePickerModel extends InputModel {
         }
     }
 
-    private tryExtractContactFromInput = (input: string, contact: { Name: string, Address: string }) => {
+    private tryExtractContactFromInput = (input: string, contact: { Name: string, Address: string }, captureBlur: boolean) => {
         if (input) {
             let length = input.length;
 
             if (length > 0) {
-                if (input[length - 1] === ' ' || input[length - 1] === ';') {
-                    let subString = input.substr(0, length - 1).trim();
+                if (captureBlur || input[length - 1] === ' ' || input[length - 1] === ';' || input[length - 1] === ',') {
+                    let subString = input.substr(0, captureBlur ? length : length - 1).trim();
                     if (EmailUtils.isEmail(subString)) {
                         contact.Name = subString;
                         contact.Address = subString;
