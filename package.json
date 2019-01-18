@@ -1,56 +1,58 @@
 {
-  "name": "react-native-adaptivecards",
-  "description": "React Native implementation of AdaptiveCards.",
-  "version": "0.2.1",
-  "repository": {
-    "url": "git+https://github.com/Microsoft/react-native-adaptivecards",
-    "type": "git"
-  },
-  "author": "@microsoft",
-  "private": false,
-  "license": "MIT",
-  "files": [
-    "dist/"
-  ],
-  "main": "dist/index",
-  "scripts": {
-    "pre-commit": "yarn build",
-    "devtools": "react-devtools",
-    "build": "gulp",
-    "src": "yarn",
-    "example": "cd examples && yarn",
-    "tool": "cd tool && yarn",
-    "all": "yarn src && yarn example && yarn tool",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "run-device": "yarn build && cd examples && yarn start",
-    "run-ios": "yarn build && cd examples && yarn ios",
-    "run-android": "yarn build && cd examples && yarn android",
-    "run-tool": "yarn build && cd tool && yarn dev"
-  },
-  "pre-commit": {
-    "run": [
-      "pre-commit"
+    "name": "react-native-adaptivecards",
+    "description": "React Native implementation of AdaptiveCards.",
+    "version": "0.2.1",
+    "repository": {
+        "url": "git+https://github.com/Microsoft/react-native-adaptivecards",
+        "type": "git"
+    },
+    "author": "@microsoft",
+    "private": false,
+    "license": "MIT",
+    "files": [
+        "dist/"
     ],
-    "silent": true
-  },
-  "devDependencies": {
-    "@types/react": "^16.7.7",
-    "@types/react-native": "^0.57.13",
-    "@types/react-native-vector-icons": "^4.6.4",
-    "@types/xmldom": "^0.1.29",
-    "del": "latest",
-    "gulp": "latest",
-    "gulp-imagemin": "latest",
-    "gulp-rename": "^1.4.0",
-    "gulp-tslint": "latest",
-    "gulp-typescript": "latest",
-    "react-devtools": "latest",
-    "run-sequence": "latest",
-    "tslint": "latest",
-    "typescript": "latest"
-  },
-  "dependencies": {
-    "react-native-svg-component": "^0.1.6",
-    "react-native-vector-icons": "^6.1.0"
-  }
+    "main": "dist/index.js",
+    "types": "dist/module.d.ts",
+    "scripts": {
+        "pre-commit": "yarn build",
+        "devtools": "react-devtools",
+        "build": "gulp",
+        "src": "yarn",
+        "example": "cd examples && yarn",
+        "all": "yarn src && yarn example",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "yarn build && cd examples && yarn start"
+    },
+    "pre-commit": {
+        "run": [
+            "pre-commit"
+        ],
+        "silent": true
+    },
+    "devDependencies": {
+        "@types/react": "^16.7.20",
+        "@types/react-native": "^0.57.28",
+        "@types/react-native-vector-icons": "^4.6.4",
+        "@types/xmldom": "^0.1.29",
+        "del": "latest",
+        "gulp": "latest",
+        "gulp-imagemin": "latest",
+        "gulp-rename": "^1.4.0",
+        "gulp-tslint": "latest",
+        "gulp-typescript": "latest",
+        "react-devtools": "latest",
+        "run-sequence": "latest",
+        "tslint": "latest",
+        "typescript": "latest"
+    },
+    "peerDependencies": {
+        "react": "16.7.0",
+        "react-native": "^0.57.8",
+        "react-native-svg": "^9.0.0",
+        "react-native-vector-icons": "^6.1.0"
+    },
+    "dependencies": {
+        "react-native-svg-component": "^0.1.8"
+    }
 }
