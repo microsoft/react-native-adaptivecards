@@ -3,7 +3,7 @@ export class UrlUtils {
         return url && /^(((http)s*)|(ftp)):/.test(url);
     }
     static isEncodedData(url) {
-        return url && /^data:/.test(url);
+        return (url && /^data:/.test(url)) || (url && /^file:/.test(url));
     }
     static isSvgXml(url) {
         return url && /(^data:image\/svg\+xml)|(\.svg$)/.test(url);
