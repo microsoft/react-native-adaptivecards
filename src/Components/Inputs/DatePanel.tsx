@@ -104,15 +104,16 @@ export class DatePanel extends React.Component<IProps> {
         if (Platform.OS === 'android') {
             const today = TimeUtils.extractDate(this.props.value);
             try {
-                const { action, year, month, day } = await DatePickerAndroid.open({
+                const result = await DatePickerAndroid.open({
                     date: today,
                 });
-                if (action === DatePickerAndroid.dateSetAction) {
-                    let newDate = new Date(year, month, day);
+                if (result.action === DatePickerAndroid.dateSetAction) {
+
+                    let newDate = new Date(result.year, result.month, result.day);
                     this.onDateChange(newDate);
                     this.onSave();
                 }
-                if (action === DatePickerAndroid.dismissedAction) {
+                if (result.action === DatePickerAndroid.dismissedAction) {
                     this.setState({
                         showDatePicker: false
                     }, this.onCancel);

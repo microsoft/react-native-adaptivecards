@@ -213,7 +213,7 @@ export class LabelInput extends React.Component<IProps, IState> {
     }
 
     private onKeyPress = (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => {
-        if (e.nativeEvent.key === 'Backspace') {
+        if ((e as any).nativeEvent.key === 'Backspace') {
             if (this.props.value === '') {
                 if (this.labelLength === this.state.labelFocusIndex) {
                     if (this.state.labelFocusIndex > 0) {
@@ -228,7 +228,7 @@ export class LabelInput extends React.Component<IProps, IState> {
                 }
             }
         }
-        if (e.nativeEvent.key === 'Enter') {
+        if ((e as any).nativeEvent.key === 'Enter') {
             this.onSubmitEditing();
         }
     }

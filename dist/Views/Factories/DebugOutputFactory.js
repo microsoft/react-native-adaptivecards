@@ -6,6 +6,6 @@ export class DebugOutputFactory {
         if (HostContext.getInstance().getConfig().mode === 'debug') {
             return (React.createElement(Banner, { title: info, theme: theme, level: level }));
         }
-        return undefined;
+        return null;
     }
 }

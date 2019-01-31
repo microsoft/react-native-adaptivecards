@@ -65,16 +65,16 @@ export class TimePanel extends React.Component {
         if (Platform.OS === 'android') {
             const now = TimeUtils.extractTime(this.props.value);
             try {
-                const { action, hour, minute } = await TimePickerAndroid.open({
+                const result = await TimePickerAndroid.open({
                     hour: now.getHours(),
                     minute: now.getMinutes(),
                     is24Hour: true
                 });
-                if (action === TimePickerAndroid.timeSetAction) {
-                    this.onTimeChange(hour, minute);
+                if (result.action === TimePickerAndroid.timeSetAction) {
+                    this.onTimeChange(result.hour, result.minute);
                     this.onSave();
                 }
-                if (action === TimePickerAndroid.dismissedAction) {
+                if (result.action === TimePickerAndroid.dismissedAction) {
                     this.setState({
                         showTimePicker: false
                     }, this.onCancel);

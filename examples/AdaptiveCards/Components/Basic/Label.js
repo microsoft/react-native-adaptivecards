@@ -30,7 +30,7 @@ export class Label extends React.Component {
                             color: this.color,
                         } }, this.props.title))));
         }
-        return undefined;
+        return null;
     }
     get fontSize() {
         return StyleManager.getFontSize('default');

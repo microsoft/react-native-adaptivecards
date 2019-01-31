@@ -14,6 +14,6 @@ export class DebugOutputFactory {
                 />
             );
         }
-        return undefined;
+        return null;
     }
 }

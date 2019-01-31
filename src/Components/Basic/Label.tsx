@@ -46,7 +46,7 @@ export class Label extends React.Component<IProps> {
                 </TouchableWithoutFeedback>
             );
         }
-        return undefined;
+        return null;
     }
 
     private onPress = () => {
