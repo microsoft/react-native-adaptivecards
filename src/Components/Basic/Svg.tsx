@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleProp, ViewStyle, WebView } from 'react-native';
+import { Platform, StyleProp, ViewStyle, WebView } from 'react-native';
 
 interface IProps {
     url: string;
@@ -52,7 +52,11 @@ export class Svg extends React.Component<IProps> {
 
     private get src() {
         if (this.props.url) {
-            return this.props.url.replace('"', '\'');
+            let url = this.props.url.replace('"', '\'');
+            if (Platform.OS === 'android') {
+                return encodeURI(url);
+            }
+            return url;
         }
         return '';
     }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { WebView } from 'react-native';
+import { Platform, WebView } from 'react-native';
 export class Svg extends React.Component {
     constructor(props) {
         super(props);
@@ -30,7 +30,11 @@ export class Svg extends React.Component {
     }
     get src() {
         if (this.props.url) {
-            return this.props.url.replace('"', '\'');
+            let url = this.props.url.replace('"', '\'');
+            if (Platform.OS === 'android') {
+                return encodeURI(url);
+            }
+            return url;
         }
         return '';
     }
