@@ -14,6 +14,7 @@ export class ModalBox extends React.Component {
             }
         };
         this.onShow = () => {
+            console.log('Modal OnShow');
             if (this.props.onShow) {
                 this.props.onShow();
             }

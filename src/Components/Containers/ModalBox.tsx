@@ -79,6 +79,7 @@ export class ModalBox extends React.Component<IProps> {
     }
 
     private onShow = () => {
+        console.log('Modal OnShow');
         if (this.props.onShow) {
             this.props.onShow();
         }
