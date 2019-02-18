@@ -3,11 +3,10 @@ var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
 var rename = require('gulp-rename');
 var gulpTslint = require('gulp-tslint');
-var runSequence = require('run-sequence');
-var typescript = require('gulp-typescript');
+var ts = require('gulp-typescript');
 var tslint = require('tslint');
 
-var tsProject = typescript.createProject('tsconfig.json');
+var tsProject = ts.createProject('tsconfig.json');
 
 var path = {
     src: './src/',
@@ -15,27 +14,23 @@ var path = {
     example: './examples/AdaptiveCards/',
     tool: './tool/src/assets/AdaptiveCards/',
 };
-
-// Clean destination folder
-gulp.task('clean', function () {
+function clean() {
     return del([path.dist, path.example, path.tool]);
-});
+}
 
-// Minify images in place
-gulp.task('minify-img', function () {
+function minifyImage() {
     return gulp.src(path.src + 'Assets/**/*.png')
         .pipe(imagemin())
         .pipe(gulp.dest(path.dist + 'Assets'))
         .pipe(gulp.dest(path.example + 'Assets'))
-        .pipe(rename(function(opt) {
+        .pipe(gulp.dest(path.tool + 'Assets'))
+        .pipe(rename(function (opt) {
             opt.basename = opt.basename.replace(/@[^.]*/, '');
             return opt;
-        }))
-        .pipe(gulp.dest(path.tool + 'Assets'));
-});
+        }));
+}
 
-// Checks your TypeScript code for readability, maintainability, and functionality errors.
-gulp.task('lint-ts', function () {
+function lintTs() {
     var program = tslint.Linter.createProgram('./tsconfig.json');
     return gulp.src([path.src + '**/*.ts', path.src + '**/*.tsx'])
         .pipe(gulpTslint({
@@ -45,31 +40,41 @@ gulp.task('lint-ts', function () {
         .pipe(gulpTslint.report({
             emitError: true
         }));
-});
+}
 
-// Copy .json files
-gulp.task('copy-json', function () {
-    gulp.src(path.src + '**/*.json')
+function copyJson() {
+    return gulp.src(path.src + '**/*.json')
         .pipe(gulp.dest(path.dist))
         .pipe(gulp.dest(path.example))
         .pipe(gulp.dest(path.tool));
-});
+}
 
-gulp.task('compile-ts', function () {
+function copyDefinition() {
+    return gulp.src(path.src + '**/*.d.ts')
+        .pipe(gulp.dest(path.dist))
+        .pipe(gulp.dest(path.example))
+        .pipe(gulp.dest(path.tool));
+}
+
+function compileTs() {
     var tsResult = tsProject.src()
         .pipe(tsProject());
-    return tsResult.js
+    return tsResult
         .pipe(gulp.dest(path.dist))
         .pipe(gulp.dest(path.example))
         .pipe(gulp.dest(path.tool));
+}
 
-});
-
-gulp.task('default', function (cb) {
-    runSequence('clean', [
-        'minify-img',
-        'lint-ts',
-        'compile-ts',
-        'copy-json',
-    ], cb);
-});
+exports.clean = clean;
+exports.minifyImage = minifyImage;
+exports.lintTs = lintTs;
+exports.copyJson = copyJson;
+exports.compileTs = compileTs;
+exports.copyDefinition = copyDefinition;
+exports.build = gulp.series(
+    lintTs,
+    clean,
+    compileTs,
+    gulp.parallel(minifyImage, copyJson),
+);
+exports.default = exports.build;

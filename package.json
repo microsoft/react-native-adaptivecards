@@ -12,7 +12,8 @@
   "files": [
     "dist/"
   ],
-  "main": "dist/index",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "pre-commit": "yarn build",
     "devtools": "react-devtools",
@@ -34,23 +35,23 @@
     "silent": true
   },
   "devDependencies": {
-    "@types/lodash": "latest",
-    "@types/react": "latest",
-    "@types/react-native": "^0.57.35",
+    "@types/lodash": "^4.14.121",
+    "@types/react": "^16.8.3",
+    "@types/react-native": "^0.57.36",
     "@types/react-native-vector-icons": "^4.6.4",
     "del": "latest",
-    "gulp": "latest",
+    "gulp": "^4.0.0",
     "gulp-imagemin": "latest",
     "gulp-rename": "^1.4.0",
     "gulp-tslint": "latest",
-    "gulp-typescript": "latest",
-    "react-devtools": "latest",
+    "gulp-typescript": "^5.0.0",
+    "react-devtools": "^3.6.0",
     "run-sequence": "latest",
-    "tslint": "latest",
-    "typescript": "latest"
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3"
   },
   "dependencies": {
     "lodash": "latest",
-    "react-native-vector-icons": "^6.2.0"
+    "react-native-vector-icons": "^6.3.0"
   }
 }
