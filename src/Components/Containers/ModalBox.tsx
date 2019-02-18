@@ -29,6 +29,7 @@ export class ModalBox extends React.Component<IProps> {
             >
                 <TouchableWithoutFeedback
                     onPress={this.onBackgroundPress}
+                    accessible={false}
                 >
                     <View
                         style={[
