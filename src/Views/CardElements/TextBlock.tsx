@@ -14,7 +14,7 @@ interface IProps {
 export class TextBlockView extends React.Component<IProps> {
     public render() {
         const { model, theme } = this.props;
-
+                      
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
         }
@@ -32,6 +32,8 @@ export class TextBlockView extends React.Component<IProps> {
                     marginTop: this.spacing
                 }}
                 numberOfLines={model.maxLines}
+                numberOfLines={this.lines}
+                ellipsizeMode={this.ellipsis}
             >
                 {model.text}
             </Text>
@@ -47,5 +49,19 @@ export class TextBlockView extends React.Component<IProps> {
             return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
+    }
+
+    private get lines() {
+        if (this.props.model.wrap) {
+            return this.props.model.maxLines;
+        }
+        return 1;
+    }
+
+    private get ellipsis() {
+        if (this.props.model.wrap) {
+            return 'clip';
+        }
+        return 'tail';
     }
 }

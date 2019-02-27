@@ -15,8 +15,8 @@ export class TextBlockView extends React.Component {
                 backgroundColor: 'transparent',
                 textAlign: StyleManager.getTextAlign(model.horizontalAlignment),
                 flexWrap: StyleManager.getWrap(model.wrap),
-                marginTop: this.spacing
-            }, numberOfLines: model.maxLines }, model.text));
+                marginTop: this.spacing,
+            }, numberOfLines: this.lines, ellipsizeMode: this.ellipsis }, model.text));
     }
     get spacing() {
         if (this.props.model.separator) {
@@ -26,5 +26,17 @@ export class TextBlockView extends React.Component {
             return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
+    }
+    get lines() {
+        if (this.props.model.wrap) {
+            return this.props.model.maxLines;
+        }
+        return 1;
+    }
+    get ellipsis() {
+        if (this.props.model.wrap) {
+            return 'clip';
+        }
+        return 'tail';
     }
 }

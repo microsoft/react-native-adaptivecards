@@ -8,5 +8,7 @@ interface IProps {
 export declare class TextBlockView extends React.Component<IProps> {
     render(): JSX.Element;
     private readonly spacing;
+    private readonly lines;
+    private readonly ellipsis;
 }
 export {};
