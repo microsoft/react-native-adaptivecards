@@ -13,8 +13,7 @@ interface IProps {
 
 export class TextBlockView extends React.Component<IProps> {
     public render() {
-        const { model, theme } = this.props;
-                      
+        const { model, theme } = this.props;             
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
         }
