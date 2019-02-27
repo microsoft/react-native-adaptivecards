@@ -31,7 +31,6 @@ export class TextBlockView extends React.Component<IProps> {
                     flexWrap: StyleManager.getWrap(model.wrap),
                     marginTop: this.spacing
                 }}
-                numberOfLines={model.maxLines}
                 numberOfLines={this.lines}
                 ellipsizeMode={this.ellipsis}
             >
