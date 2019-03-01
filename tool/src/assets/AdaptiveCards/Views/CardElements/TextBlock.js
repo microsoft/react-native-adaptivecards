@@ -15,7 +15,7 @@ export class TextBlockView extends React.Component {
                 backgroundColor: 'transparent',
                 textAlign: StyleManager.getTextAlign(model.horizontalAlignment),
                 flexWrap: StyleManager.getWrap(model.wrap),
-                marginTop: this.spacing,
+                marginTop: this.spacing
             }, numberOfLines: this.lines, ellipsizeMode: this.ellipsis }, model.text));
     }
     get spacing() {

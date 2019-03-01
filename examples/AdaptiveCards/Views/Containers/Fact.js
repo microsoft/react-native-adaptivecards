@@ -18,7 +18,9 @@ export class FactView extends React.Component {
                     fontWeight: StyleManager.factTitleFontWeight,
                     flexWrap: StyleManager.factTitleWrap,
                     marginRight: 16,
-                } }, model.title),
+                    width: this.props.titleWidth,
+                    maxWidth: '30%'
+                }, onLayout: this.props.onLayoutTitle }, model.title),
             React.createElement(Text, { style: {
                     color: StyleManager.getFactValueColor(theme),
                     fontSize: StyleManager.factValueFontSize,

@@ -5,9 +5,16 @@ interface IProps {
     model: FactSetModel;
     theme: 'default' | 'emphasis';
 }
-export declare class FactSetView extends React.Component<IProps> {
+interface IState {
+    width: number | string;
+}
+export declare class FactSetView extends React.Component<IProps, IState> {
+    private factCount;
+    private widths;
+    constructor(props: IProps);
     render(): JSX.Element;
     private renderFacts;
     private readonly spacing;
+    private onLayoutTitle;
 }
 export {};
