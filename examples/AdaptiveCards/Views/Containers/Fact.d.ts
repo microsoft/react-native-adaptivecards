@@ -5,7 +5,7 @@ interface IProps {
     model: FactModel;
     theme: 'default' | 'emphasis';
     titleWidth: number | string;
-    onLayoutTitle?: (event: LayoutChangeEvent) => void;
+    onTitleLayout?: (event: LayoutChangeEvent) => void;
 }
 export declare class FactView extends React.Component<IProps> {
     render(): JSX.Element;

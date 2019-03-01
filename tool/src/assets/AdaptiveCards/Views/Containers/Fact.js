@@ -20,7 +20,7 @@ export class FactView extends React.Component {
                     marginRight: 16,
                     width: this.props.titleWidth,
                     maxWidth: '30%'
-                }, onLayout: this.props.onLayoutTitle }, model.title),
+                }, onLayout: this.props.onTitleLayout }, model.title),
             React.createElement(Text, { style: {
                     color: StyleManager.getFactValueColor(theme),
                     fontSize: StyleManager.factValueFontSize,

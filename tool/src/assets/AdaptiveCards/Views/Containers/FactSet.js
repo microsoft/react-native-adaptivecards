@@ -12,9 +12,9 @@ export class FactSetView extends React.Component {
             if (!model || !model.facts || model.facts.length === 0) {
                 return undefined;
             }
-            return model.facts.map((fact, index) => (React.createElement(FactView, { key: index, model: fact, theme: theme, titleWidth: this.state.width, onLayoutTitle: this.onLayoutTitle })));
+            return model.facts.map((fact, index) => (React.createElement(FactView, { key: index, model: fact, theme: theme, titleWidth: this.state.width, onTitleLayout: this.onTitleLayout })));
         };
-        this.onLayoutTitle = (event) => {
+        this.onTitleLayout = (event) => {
             let currWidth = event.nativeEvent.layout.width;
             this.widths.push(currWidth);
             if (this.widths.length > 0 && this.widths.length === this.factCount) {

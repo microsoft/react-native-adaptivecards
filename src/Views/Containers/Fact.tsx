@@ -8,7 +8,7 @@ interface IProps {
     model: FactModel;
     theme: 'default' | 'emphasis';
     titleWidth: number | string;
-    onLayoutTitle?: (event: LayoutChangeEvent) => void;
+    onTitleLayout?: (event: LayoutChangeEvent) => void;
 }
 
 export class FactView extends React.Component<IProps> {
@@ -37,7 +37,7 @@ export class FactView extends React.Component<IProps> {
                         width: this.props.titleWidth,
                         maxWidth: '30%'
                     }}
-                    onLayout={this.props.onLayoutTitle}
+                    onLayout={this.props.onTitleLayout}
                 >
                     {model.title}
                 </Text>

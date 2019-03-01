@@ -63,7 +63,7 @@ export class FactSetView extends React.Component<IProps, IState> {
                 model={fact}
                 theme={theme}
                 titleWidth={this.state.width}
-                onLayoutTitle={this.onLayoutTitle}
+                onTitleLayout={this.onTitleLayout}
             />
         ));
     }
@@ -79,7 +79,7 @@ export class FactSetView extends React.Component<IProps, IState> {
         return 0;
     }
     
-    private onLayoutTitle = (event: LayoutChangeEvent) => {
+    private onTitleLayout = (event: LayoutChangeEvent) => {
         let currWidth: number = event.nativeEvent.layout.width;
         this.widths.push(currWidth);
         
