@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { LayoutChangeEvent, View } from 'react-native';
 import { FactSetModel } from '../../Models/Containers/FactSet';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
@@ -11,7 +11,22 @@ interface IProps {
     theme: 'default' | 'emphasis';
 }
 
-export class FactSetView extends React.Component<IProps> {
+interface IState {
+    width: number | string;
+}
+
+export class FactSetView extends React.Component<IProps, IState> {
+    private factCount: number;
+    private widths: number[] = [];
+
+    constructor(props: IProps) {
+        super(props);
+
+        this.state = {
+            width: 'auto',
+        };
+    }
+
     public render() {
 
         const { model, theme } = this.props;
@@ -19,6 +34,8 @@ export class FactSetView extends React.Component<IProps> {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.id + ' is not valid', theme, 'error');
         }
+
+        this.factCount = model.facts.length;
 
         return (
             <View
@@ -45,6 +62,8 @@ export class FactSetView extends React.Component<IProps> {
                 key={index}
                 model={fact}
                 theme={theme}
+                titleWidth={this.state.width}
+                onTitleLayout={this.onTitleLayout}
             />
         ));
     }
@@ -58,5 +77,17 @@ export class FactSetView extends React.Component<IProps> {
             return StyleManager.getSpacing(this.props.model.spacing);
         }
         return 0;
+    }
+    
+    private onTitleLayout = (event: LayoutChangeEvent) => {
+        let currWidth: number = event.nativeEvent.layout.width;
+        this.widths.push(currWidth);
+        
+        if (this.widths.length > 0 && this.widths.length === this.factCount) {
+            this.widths.sort();
+            this.setState({
+                width: this.widths[this.widths.length - 1]
+            });
+        }
     }
 }
