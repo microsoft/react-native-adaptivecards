@@ -4,6 +4,7 @@ import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps {
     hasSpacing: boolean;
+    flexDirection: 'row' | 'column' | 'row-reverse' | 'column-reverse';
 }
 
 export class ButtonGroup extends React.Component<IProps> {
@@ -12,7 +13,7 @@ export class ButtonGroup extends React.Component<IProps> {
             <View
                 style={[
                     {
-                        flexDirection: this.flexDirection,
+                        flexDirection: this.props.flexDirection,
                         alignSelf: 'stretch',
                     },
                     this.topStyles
@@ -34,9 +35,5 @@ export class ButtonGroup extends React.Component<IProps> {
             };
         }
         return {};
-    }
-
-    private get flexDirection() {
-        return StyleManager.actionDirection === 'vertically' ? 'column' : 'row';
     }
 }

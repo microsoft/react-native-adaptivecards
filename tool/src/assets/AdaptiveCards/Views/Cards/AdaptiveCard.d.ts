@@ -21,5 +21,6 @@ export declare class AdaptiveCardView extends React.Component<IProps, IState> {
     private showSubCard;
     private onLayout;
     private readonly minHeight;
+    private readonly buttonFlexDirection;
 }
 export {};

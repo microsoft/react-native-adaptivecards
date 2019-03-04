@@ -41,7 +41,7 @@ export class DatePanel extends React.Component {
             return (React.createElement(ModalBox, { show: this.show, onShow: this.onShow, onRequestClose: this.onCancel },
                 React.createElement(Card, { flex: 0, fit: 'content', ref: ref => this.panel = ref },
                     React.createElement(DatePickerIOS, { date: TimeUtils.extractDate(this.props.value), mode: 'date', onDateChange: this.onDateChange }),
-                    React.createElement(ButtonGroup, { hasSpacing: true },
+                    React.createElement(ButtonGroup, { hasSpacing: true, flexDirection: 'row' },
                         this.renderCancelButton(),
                         this.renderSaveButton()))));
         }

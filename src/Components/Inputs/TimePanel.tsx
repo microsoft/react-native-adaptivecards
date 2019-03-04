@@ -44,6 +44,7 @@ export class TimePanel extends React.Component<IProps> {
                         />
                         <ButtonGroup
                             hasSpacing={true}
+                            flexDirection={'row'}
                         >
                             {this.renderCancelButton()}
                             {this.renderSaveButton()}
