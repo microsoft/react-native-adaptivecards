@@ -46,7 +46,7 @@ export class TimePanel extends React.Component {
             return (React.createElement(ModalBox, { show: this.show, onShow: this.onShow },
                 React.createElement(Card, { flex: 0, fit: 'content', ref: ref => this.panel = ref },
                     React.createElement(DatePickerIOS, { date: TimeUtils.extractTime(this.props.value), mode: 'time', onDateChange: this.onTimeChangeIos }),
-                    React.createElement(ButtonGroup, { hasSpacing: true },
+                    React.createElement(ButtonGroup, { hasSpacing: true, flexDirection: 'row' },
                         this.renderCancelButton(),
                         this.renderSaveButton()))));
         }

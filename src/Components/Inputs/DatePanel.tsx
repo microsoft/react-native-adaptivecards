@@ -45,6 +45,7 @@ export class DatePanel extends React.Component<IProps> {
                         />
                         <ButtonGroup
                             hasSpacing={true}
+                            flexDirection={'row'}
                         >
                             {this.renderCancelButton()}
                             {this.renderSaveButton()}

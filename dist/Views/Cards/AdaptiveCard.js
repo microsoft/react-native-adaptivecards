@@ -64,21 +64,15 @@ export class AdaptiveCardView extends React.Component {
         if (!model || !model.actions || model.actions.length === 0) {
             return undefined;
         }
-        return (React.createElement(ButtonGroup, { hasSpacing: model && model.body && model.body.length > 0 }, this.renderActions()));
+        return (React.createElement(ButtonGroup, { hasSpacing: model && model.body && model.body.length > 0, flexDirection: this.buttonFlexDirection }, this.renderActions()));
     }
     renderActions() {
         const { model, theme } = this.props;
         if (!model || !model.actions) {
             return undefined;
         }
-        let capacity = StyleManager.maxActions;
         return model.actions.map((action, index) => {
-            if (index < capacity) {
-                return ActionFactory.createAction(action, index, theme);
-            }
-            else {
-                return undefined;
-            }
+            return ActionFactory.createAction(action, index, theme);
         });
     }
     renderSubCard() {
@@ -101,5 +95,9 @@ export class AdaptiveCardView extends React.Component {
             }
         }
         return undefined;
+    }
+    get buttonFlexDirection() {
+        const { model } = this.props;
+        return model.actions.length > 2 ? 'column' : 'row';
     }
 }

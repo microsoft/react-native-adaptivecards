@@ -5,7 +5,7 @@ export class ButtonGroup extends React.Component {
     render() {
         return (React.createElement(View, { style: [
                 {
-                    flexDirection: this.flexDirection,
+                    flexDirection: this.props.flexDirection,
                     alignSelf: 'stretch',
                 },
                 this.topStyles
@@ -22,8 +22,5 @@ export class ButtonGroup extends React.Component {
             };
         }
         return {};
-    }
-    get flexDirection() {
-        return StyleManager.actionDirection === 'vertically' ? 'column' : 'row';
     }
 }

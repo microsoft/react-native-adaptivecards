@@ -93,6 +93,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         return (
             <ButtonGroup
                 hasSpacing={model && model.body && model.body.length > 0}
+                flexDirection={this.buttonFlexDirection}
             >
                 {this.renderActions()}
             </ButtonGroup>
@@ -106,14 +107,8 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
             return undefined;
         }
 
-        let capacity = StyleManager.maxActions;
-
         return model.actions.map((action, index) => {
-            if (index < capacity) {
-                return ActionFactory.createAction(action, index, theme);
-            } else {
-                return undefined;
-            }
+            return ActionFactory.createAction(action, index, theme);
         });
     }
 
@@ -167,5 +162,11 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
             }
         }
         return undefined;
+    }
+
+    private get buttonFlexDirection() {
+        const { model } = this.props;
+
+        return model.actions.length > 2 ? 'column' : 'row';
     }
 }
