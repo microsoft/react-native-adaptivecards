@@ -1,7 +1,7 @@
 {
   "name": "react-native-adaptivecards",
   "description": "React Native implementation of AdaptiveCards.",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "repository": {
     "url": "git+https://github.com/Microsoft/react-native-adaptivecards",
     "type": "git"
