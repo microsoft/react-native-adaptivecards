@@ -108,7 +108,7 @@ export class AdaptiveCardView extends React.Component<IProps, IState> {
         }
 
         return model.actions.map((action, index) => {
-            return ActionFactory.createAction(action, index, theme);
+            return ActionFactory.createAction(action, index, this.buttonFlexDirection, theme);
         });
     }
 

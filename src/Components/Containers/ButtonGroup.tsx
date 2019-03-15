@@ -4,7 +4,7 @@ import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps {
     hasSpacing: boolean;
-    flexDirection: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+    flexDirection: 'row' | 'column';
 }
 
 export class ButtonGroup extends React.Component<IProps> {
@@ -28,7 +28,7 @@ export class ButtonGroup extends React.Component<IProps> {
         if (this.props.hasSpacing) {
             return {
                 marginTop: StyleManager.actionSetSpacing,
-                paddingTop: 12,
+                paddingTop: this.props.flexDirection === 'row' ? 12 : 0,
                 justifyContent: 'center',
                 borderTopWidth: StyleManager.separatorThickness,
                 borderTopColor: StyleManager.separatorColor

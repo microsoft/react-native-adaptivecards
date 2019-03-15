@@ -15,7 +15,7 @@ export class ButtonGroup extends React.Component {
         if (this.props.hasSpacing) {
             return {
                 marginTop: StyleManager.actionSetSpacing,
-                paddingTop: 12,
+                paddingTop: this.props.flexDirection === 'row' ? 12 : 0,
                 justifyContent: 'center',
                 borderTopWidth: StyleManager.separatorThickness,
                 borderTopColor: StyleManager.separatorColor

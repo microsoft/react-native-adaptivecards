@@ -12,6 +12,7 @@ import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 interface IProps {
     index: number;
     model: OpenUrlActionModel | ShowCardActionModel | SubmitActionModel;
+    direction: 'row' | 'column';
     theme: 'default' | 'emphasis';
 }
 
@@ -45,18 +46,13 @@ export class ActionView extends React.Component<IProps, IState> {
                 backgroundColor={StyleManager.getBackgroundColor(theme)}
                 textHorizontalAlign='center'
                 textVerticalAlign='center'
-                paddingTop={6}
-                paddingBottom={6}
+                paddingTop={12}
+                paddingBottom={12}
                 paddingLeft={16}
                 paddingRight={16}
                 onPress={this.onPress}
                 disabled={this.state.disabled}
-                marginTop={StyleManager.actionDirection === 'vertically' ? this.spacing : 0}
-                marginLeft={StyleManager.actionDirection === 'horizontal' ? this.spacing : 0}
-                style={{
-                    borderLeftWidth: this.leftBorderWidth,
-                    borderLeftColor: StyleManager.separatorColor,
-                }}
+                style={this.borderStyle}
             />
         );
     }
@@ -86,18 +82,30 @@ export class ActionView extends React.Component<IProps, IState> {
         return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model && this.props.model.type === ActionType.Submit;
     }
 
-    private get leftBorderWidth() {
+    private get borderWidth() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return 1;
+            return StyleManager.separatorThickness;
         }
         return 0;
     }
 
-    private get spacing() {
-        if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.actionSpacing;
+    private get borderStyle() {
+        switch (this.props.direction) {
+            case 'column':
+                return {
+                    paddingTop: 16,
+                    paddingBottom: 16,
+                    borderTopWidth: this.borderWidth,
+                    borderTopColor: StyleManager.separatorColor,
+                };
+            default:
+                return {
+                    paddingTop: 6,
+                    paddingBottom: 6,
+                    borderLeftWidth: this.borderWidth,
+                    borderLeftColor: StyleManager.separatorColor,
+                };
         }
-        return 0;
     }
 
     // As lots of the skill team is violate the rule that title is required in all actions,
