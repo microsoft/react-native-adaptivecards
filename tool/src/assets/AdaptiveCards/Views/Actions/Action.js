@@ -31,25 +31,34 @@ export class ActionView extends React.Component {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
         }
-        return (React.createElement(Button, { flex: 1, title: this.title, color: StyleManager.getColor('accent', theme, false), fontSize: StyleManager.getFontSize('default'), fontWeight: StyleManager.getFontWeight('bolder'), backgroundColor: StyleManager.getBackgroundColor(theme), textHorizontalAlign: 'center', textVerticalAlign: 'center', paddingTop: 6, paddingBottom: 6, paddingLeft: 16, paddingRight: 16, onPress: this.onPress, disabled: this.state.disabled, marginTop: StyleManager.actionDirection === 'vertically' ? this.spacing : 0, marginLeft: StyleManager.actionDirection === 'horizontal' ? this.spacing : 0, style: {
-                borderLeftWidth: this.leftBorderWidth,
-                borderLeftColor: StyleManager.separatorColor,
-            } }));
+        return (React.createElement(Button, { flex: 1, title: this.title, color: StyleManager.getColor('accent', theme, false), fontSize: StyleManager.getFontSize('default'), fontWeight: StyleManager.getFontWeight('bolder'), backgroundColor: StyleManager.getBackgroundColor(theme), textHorizontalAlign: 'center', textVerticalAlign: 'center', paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16, onPress: this.onPress, disabled: this.state.disabled, style: this.borderStyle }));
     }
     get isOneTimeAction() {
         return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model && this.props.model.type === ActionType.Submit;
     }
-    get leftBorderWidth() {
+    get borderWidth() {
         if (this.props.index !== undefined && this.props.index > 0) {
-            return 1;
+            return StyleManager.separatorThickness;
         }
         return 0;
     }
-    get spacing() {
-        if (this.props.index !== undefined && this.props.index > 0) {
-            return StyleManager.actionSpacing;
+    get borderStyle() {
+        switch (this.props.direction) {
+            case 'column':
+                return {
+                    paddingTop: 16,
+                    paddingBottom: 16,
+                    borderTopWidth: this.borderWidth,
+                    borderTopColor: StyleManager.separatorColor,
+                };
+            default:
+                return {
+                    paddingTop: 6,
+                    paddingBottom: 6,
+                    borderLeftWidth: this.borderWidth,
+                    borderLeftColor: StyleManager.separatorColor,
+                };
         }
-        return 0;
     }
     get title() {
         const { model } = this.props;

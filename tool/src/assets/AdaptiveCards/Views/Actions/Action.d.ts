@@ -5,6 +5,7 @@ import { SubmitActionModel } from '../../Models/Actions/SubmitAction';
 interface IProps {
     index: number;
     model: OpenUrlActionModel | ShowCardActionModel | SubmitActionModel;
+    direction: 'row' | 'column';
     theme: 'default' | 'emphasis';
 }
 interface IState {
@@ -15,8 +16,8 @@ export declare class ActionView extends React.Component<IProps, IState> {
     render(): JSX.Element;
     private onPress;
     private readonly isOneTimeAction;
-    private readonly leftBorderWidth;
-    private readonly spacing;
+    private readonly borderWidth;
+    private readonly borderStyle;
     private readonly title;
 }
 export {};

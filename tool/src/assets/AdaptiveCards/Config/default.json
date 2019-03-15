@@ -104,7 +104,7 @@
     "actions": {
         "maxActions": 2,
         "spacing": "large",
-        "buttonSpacing": 0,
+        "buttonSpacing": 12,
         "showCard": {
             "actionMode": "inline",
             "inlineTopMargin": 16,
