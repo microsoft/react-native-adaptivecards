@@ -31,6 +31,7 @@ var counter = require('./counter.json');
 var button = require('./button.json');
 var list = require('./list.json');
 var third = require('./3rd.json');
+var markdown = require('./markdown.json');
 
 exports["default"] = {
     adaptiveUpdate: adaptiveUpdate,
@@ -64,4 +65,5 @@ exports["default"] = {
     button: button,
     list: list,
     third: third,
+    markdown: markdown,
 };

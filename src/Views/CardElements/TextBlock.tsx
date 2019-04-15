@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { Markdown } from '../../Components/Basic/Markdown/Markdown';
 
 import { TextBlockModel } from '../../Models/CardElements/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -19,7 +19,7 @@ export class TextBlockView extends React.Component<IProps> {
         }
 
         return (
-            <Text
+            <Markdown
                 accessible={true}
                 style={{
                     color: StyleManager.getColor(model.color, this.props.theme, model.isSubtle),
@@ -34,7 +34,7 @@ export class TextBlockView extends React.Component<IProps> {
                 ellipsizeMode={this.ellipsis}
             >
                 {model.text}
-            </Text>
+            </Markdown>
         );
     }
 

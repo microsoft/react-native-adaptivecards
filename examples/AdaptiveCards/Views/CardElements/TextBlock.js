@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { Markdown } from '../../Components/Basic/Markdown/Markdown';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class TextBlockView extends React.Component {
@@ -8,7 +8,7 @@ export class TextBlockView extends React.Component {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
         }
-        return (React.createElement(Text, { accessible: true, style: {
+        return (React.createElement(Markdown, { accessible: true, style: {
                 color: StyleManager.getColor(model.color, this.props.theme, model.isSubtle),
                 fontSize: StyleManager.getFontSize(model.size),
                 fontWeight: StyleManager.getFontWeight(model.weight),
