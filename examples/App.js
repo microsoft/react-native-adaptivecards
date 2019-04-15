@@ -32,6 +32,8 @@ export default class App extends React.Component {
                 }}>
                 <AdaptiveCards adaptiveCard={mockData.third} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
                 {this.renderGap()}
+                <AdaptiveCards adaptiveCard={mockData.markdown} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
+                {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.button} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.counter} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
