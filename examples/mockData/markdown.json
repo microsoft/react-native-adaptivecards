@@ -5,6 +5,10 @@
     "body": [
         {
             "type": "TextBlock",
+            "text": ""
+        },
+        {
+            "type": "TextBlock",
             "text": "This is some **bold** text"
         },
         {
@@ -18,12 +22,12 @@
         },
         {
             "type": "TextBlock",
-            "text": "1. Numbered\r2. List\r",
+            "text": "1. [Adaptive Cards](http://adaptivecards.io)\r2. List\r",
             "wrap": true
         },
         {
             "type": "TextBlock",
-            "text": "Check out [Adaptive Cards](http://adaptivecards.io)"
+            "text": "Check out [Adaptive Cards](http://adaptivecards.io) or [**Adaptive** _Cards_](http://adaptivecards.io)"
         }
     ]
 }

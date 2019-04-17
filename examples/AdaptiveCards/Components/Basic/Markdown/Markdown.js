@@ -57,6 +57,9 @@ export class Markdown extends React.Component {
         return (React.createElement(Text, { key: key, accessible: accessible, style: mergestyle, numberOfLines: numberOfLines, ellipsizeMode: ellipsizeMode }, typeof node === 'string' ? node : this.renderNode(node, key, mergestyle)));
     }
     renderNode(node, key, style) {
+        if (node === undefined) {
+            return undefined;
+        }
         if (Array.isArray(node)) {
             return node.map((item, index) => {
                 let childKey = key + index.toString();
