@@ -11,8 +11,8 @@ export const Rules = {
         links: /\[([^\]<>]+)\]\(([^ \)<>]+)( "[^\(\)\"]+")?\)/
     },
     parse(text) {
-        if (!text || !text.length || typeof text !== 'string') {
-            return;
+        if (typeof text !== 'string') {
+            return undefined;
         }
         text = text.replace(CR_NEWLINE_R, '\n')
             .replace(FORMFEED_R, '')
@@ -84,7 +84,7 @@ export const Rules = {
                     type: Types.orderlist,
                     data: orderItems,
                 });
-                unorderItems = [];
+                orderItems = [];
             }
             if (unorderItems.length) {
                 out.push({

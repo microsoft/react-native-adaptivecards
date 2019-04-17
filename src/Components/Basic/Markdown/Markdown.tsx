@@ -31,22 +31,22 @@ export class Markdown extends React.Component<IProps> {
                     ? this.props.children.join('') 
                     : this.props.children;
         if (typeof child === 'string') {
-        nodes = Rules.parse(child);  
+            nodes = Rules.parse(child);  
         }
         
         let content = this.renderNode(nodes, 'markdown');
         return (
-        <View>
-            {content}
-        </View>
+            <View>
+                {content}
+            </View>
         );
     }
 
-        private renderList(data: [], key: string, order: boolean): JSX.Element {
+    private renderList(data: [], key: string, order: boolean): JSX.Element {
         if (!Array.isArray(data)) {
         return (
-            <Text>{'List should be array!'}</Text>
-        );
+                <Text>{'List should be array!'}</Text>
+            );
         }
 
         let listItems = data.map((node, index) => {
@@ -104,6 +104,10 @@ export class Markdown extends React.Component<IProps> {
     }
 
     private renderNode(node: any, key: string, style?: StyleProp<TextStyle>): any {
+        if (node === undefined) {
+            return undefined;
+        }
+
         if (Array.isArray(node)) {
             return node.map((item, index) => {
                 let childKey: string = key + index.toString();

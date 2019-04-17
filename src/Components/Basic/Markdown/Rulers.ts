@@ -14,8 +14,8 @@ export const Rules = {
     },
   
     parse(text: string) : any {
-        if (!text || !text.length || typeof text !== 'string') {
-            return;
+        if (typeof text !== 'string') {
+            return undefined;
         }
         
         // Turn various crazy whitespace into easy to process things
@@ -67,27 +67,27 @@ export const Rules = {
                 if ((listItem = this.regexobject.listItem.exec(helper[i])) !== null) {
                     if ((listItem[0].trim().substr(0, 1) === '*') || (listItem[0].trim().substr(0, 1) === '-')) {
                         if (orderItems.length) {
-                        out.push({
-                            type: Types.orderlist,
-                            data: orderItems,
-                        });
-                        orderItems = [];
+                            out.push({
+                                type: Types.orderlist,
+                                data: orderItems,
+                            });
+                            orderItems = [];
                         }
                         unorderItems.push({
-                        type: Types.itemcontent,
-                        data: listItem[6].trim(),
+                            type: Types.itemcontent,
+                            data: listItem[6].trim(),
                         });
                     } else {
                         if (unorderItems.length) {
-                        out.push({
-                            type: Types.unorderlist,
-                            data: unorderItems,
-                        });
-                        unorderItems = [];
+                            out.push({
+                                type: Types.unorderlist,
+                                data: unorderItems,
+                            });
+                            unorderItems = [];
                         }
                         orderItems.push({
-                        type: Types.itemcontent,
-                        data: listItem[6].trim(),
+                            type: Types.itemcontent,
+                            data: listItem[6].trim(),
                         });
                     }
                 }
@@ -98,7 +98,7 @@ export const Rules = {
                     type: Types.orderlist,
                     data: orderItems,
                 });
-                unorderItems = [];
+                orderItems = [];
             }
 
             if (unorderItems.length) {
