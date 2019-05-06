@@ -1,21 +1,13 @@
 {
   "expo": {
     "name": "react-native-adaptivecards",
-    "description": "This project is really great.",
+    "description": "Demos of using AdaptiveCards.io in React Native",
     "slug": "react-native-adaptivecards",
-    "privacy": "public",
-    "sdkVersion": "32.0.0",
-    "platforms": ["ios", "android"],
     "version": "1.0.0",
-    "orientation": "portrait",
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
+    "sdkVersion": "32.0.0",
+    "packagerOpts": {
+      "config": "./metro.config.js",
+      "projectRoots": ""
     }
   }
 }

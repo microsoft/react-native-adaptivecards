@@ -1,21 +1,24 @@
 {
   "name": "adaptive-cards-example",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "App.js",
   "private": true,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
-    "ios": "expo start --ios",
-    "eject": "expo eject",
-    "postinstall": "rm -rf node_modules/react-native/local-cli/core/__fixtures__"
+    "ios": "expo start --ios"
   },
   "dependencies": {
+    "@expo/vector-icons": "^10.0.1",
     "expo": "^32.0.6",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.3.tar.gz"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0",
-    "babel-plugin-module-resolver": "^3.2.0"
+    "babel-plugin-module-resolver": "^3.2.0",
+    "babel-preset-expo": "^5.1.1",
+    "escape-string-regexp": "^2.0.0"
+  },
+  "resolutions": {
+    "**/@expo/vector-icons": "10.0.1"
   }
 }

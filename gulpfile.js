@@ -11,18 +11,16 @@ var tsProject = ts.createProject('tsconfig.json');
 var path = {
     src: './src/',
     dist: './dist/',
-    example: './examples/AdaptiveCards/',
     tool: './tool/src/assets/AdaptiveCards/',
 };
 function clean() {
-    return del([path.dist, path.example, path.tool]);
+    return del([path.dist, path.tool]);
 }
 
 function minifyImage() {
     return gulp.src(path.src + 'Assets/**/*.png')
         .pipe(imagemin())
         .pipe(gulp.dest(path.dist + 'Assets'))
-        .pipe(gulp.dest(path.example + 'Assets'))
         .pipe(gulp.dest(path.tool + 'Assets'))
         .pipe(rename(function (opt) {
             opt.basename = opt.basename.replace(/@[^.]*/, '');
@@ -45,14 +43,12 @@ function lintTs() {
 function copyJson() {
     return gulp.src(path.src + '**/*.json')
         .pipe(gulp.dest(path.dist))
-        .pipe(gulp.dest(path.example))
         .pipe(gulp.dest(path.tool));
 }
 
 function copyDefinition() {
     return gulp.src(path.src + '**/*.d.ts')
         .pipe(gulp.dest(path.dist))
-        .pipe(gulp.dest(path.example))
         .pipe(gulp.dest(path.tool));
 }
 
@@ -61,7 +57,6 @@ function compileTs() {
         .pipe(tsProject());
     return tsResult
         .pipe(gulp.dest(path.dist))
-        .pipe(gulp.dest(path.example))
         .pipe(gulp.dest(path.tool));
 }
 

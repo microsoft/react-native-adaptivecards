@@ -1,7 +1,8 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
+import { registerRootComponent } from 'expo';
 
-import AdaptiveCards from './AdaptiveCards';
+import AdaptiveCards from 'react-native-adaptivecards';
 import mockData from './mockData';
 import BingAnswer from './mockData/BingAnswer2';
 
@@ -137,3 +138,5 @@ export default class App extends React.Component {
         return Promise.resolve(mockData.peopleSuggestion);
     }
 }
+
+registerRootComponent(App);
