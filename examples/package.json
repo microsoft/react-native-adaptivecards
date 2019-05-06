@@ -1,21 +1,21 @@
 {
-  "name": "empty-project-template",
+  "name": "adaptive-cards-example",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "postinstall": "rm -rf node_modules/react-native/local-cli/core/__fixtures__"
   },
   "dependencies": {
-    "@babel/runtime": "7.1.5",
-    "schedule": "^0.4.0",
-    "expo": "^31.0.5",
-    "react": "16.6.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz"
+    "expo": "^32.0.6",
+    "react": "16.5.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^5.0.0",
+    "babel-plugin-module-resolver": "^3.2.0"
   }
 }
