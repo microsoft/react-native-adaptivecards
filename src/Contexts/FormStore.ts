@@ -51,7 +51,7 @@ export class FormStore {
     public isValid(id: string): boolean;
     public isValid(id?: string): boolean {
         if (id === undefined) {
-            return Object.keys(this.fields).reduce((prev, id) => {
+            return Object.keys(this.fields).reduce((prev: boolean, id) => {
                 if (id && this.fields[id]) {
                     prev = prev && this.fields[id].isValid;
                 }
