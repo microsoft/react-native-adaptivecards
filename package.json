@@ -50,8 +50,10 @@
     "tslint": "^5.12.1",
     "typescript": "^3.3.3"
   },
+  "peerDependencies": {
+    "react-native-vector-icons": "*"
+  },
   "dependencies": {
-    "lodash": "latest",
-    "react-native-vector-icons": "^6.3.0"
+    "lodash": "latest"
   }
 }
