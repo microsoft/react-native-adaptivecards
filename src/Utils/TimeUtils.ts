@@ -21,6 +21,23 @@ export class TimeUtils {
         return undefined;
     }
 
+    public static convertTime(value: string): string {
+        if (TimeUtils.isTime(value)) {
+            let parts: string[] = value.split(':');
+            let nHour: number = Number(parts[0]);
+            let part: string = nHour < 12 ? 'AM' : 'PM';
+            nHour = nHour % 12 || 12;
+            let hour: string = (nHour + '').length === 1 ? `0${nHour}` : nHour + '';
+            return (
+                `${hour}:` +
+                `${parts[1]}` +
+                `${part}`
+            );
+        }
+
+        return undefined;
+    }
+
     public static extractTime(value: string) {
         if (TimeUtils.isTime(value)) {
             let parts = value.split(':');

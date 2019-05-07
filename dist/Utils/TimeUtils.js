@@ -16,6 +16,19 @@ export class TimeUtils {
         }
         return undefined;
     }
+    static convertTime(value) {
+        if (TimeUtils.isTime(value)) {
+            let parts = value.split(':');
+            let nHour = Number(parts[0]);
+            let part = nHour < 12 ? 'AM' : 'PM';
+            nHour = nHour % 12 || 12;
+            let hour = (nHour + '').length === 1 ? `0${nHour}` : nHour + '';
+            return (`${hour}:` +
+                `${parts[1]}` +
+                `${part}`);
+        }
+        return undefined;
+    }
     static extractTime(value) {
         if (TimeUtils.isTime(value)) {
             let parts = value.split(':');
