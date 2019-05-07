@@ -4,6 +4,7 @@ import { TimePanel } from '../../Components/Inputs/TimePanel';
 import { TimeInputModel } from '../../Models/Inputs/TimeInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
+import { TimeUtils } from '../../Utils/TimeUtils';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
@@ -64,7 +65,7 @@ export class TimeInputView extends React.Component<IProps, IState> {
             [
                 <Button
                     key={'TimeInputButton' + index}
-                    title={this.state.value}
+                    title={TimeUtils.convertTime(this.state.value)}
                     accessibilityLabel={`${model.placeholder} ${model.value}`}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
