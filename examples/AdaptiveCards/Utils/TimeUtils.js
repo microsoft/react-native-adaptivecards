@@ -14,7 +14,7 @@ export class TimeUtils {
             let parts = value.split('-');
             return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
         }
-        return undefined;
+        return new Date();
     }
     static convertTime(value) {
         if (TimeUtils.isTime(value)) {
@@ -24,17 +24,17 @@ export class TimeUtils {
             nHour = nHour % 12 || 12;
             let hour = (nHour + '').length === 1 ? `0${nHour}` : nHour + '';
             return (`${hour}:` +
-                `${parts[1]}` +
+                `${parts[1]} ` +
                 `${part}`);
         }
-        return undefined;
+        return value;
     }
     static extractTime(value) {
         if (TimeUtils.isTime(value)) {
             let parts = value.split(':');
             return new Date(2020, 0, 1, Number(parts[0]), Number(parts[1]));
         }
-        return undefined;
+        return new Date();
     }
     static getDateString(date) {
         if (date) {

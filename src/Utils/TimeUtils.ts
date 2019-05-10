@@ -18,7 +18,7 @@ export class TimeUtils {
             let parts = value.split('-');
             return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
         }
-        return undefined;
+        return new Date();
     }
 
     public static convertTime(value: string): string {
@@ -30,12 +30,12 @@ export class TimeUtils {
             let hour: string = (nHour + '').length === 1 ? `0${nHour}` : nHour + '';
             return (
                 `${hour}:` +
-                `${parts[1]}` +
+                `${parts[1]} ` +
                 `${part}`
             );
         }
-
-        return undefined;
+        // do nothing if value format is illegal
+        return value;
     }
 
     public static extractTime(value: string) {
@@ -43,7 +43,7 @@ export class TimeUtils {
             let parts = value.split(':');
             return new Date(2020, 0, 1, Number(parts[0]), Number(parts[1]));
         }
-        return undefined;
+        return new Date();
     }
 
     public static getDateString(date: Date) {
