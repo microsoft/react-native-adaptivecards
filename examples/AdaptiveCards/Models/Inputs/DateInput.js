@@ -16,6 +16,9 @@ export class DateInputModel extends InputModel {
         };
         this.max = json.max;
         this.min = json.min;
+        if (!this.value && !this.placeholder) {
+            this.value = TimeUtils.getDateString(new Date());
+        }
         if (this.context.form) {
             this.context.form.registerListener(this.id, this.storeListener);
             this.onInput(this.value);

@@ -65,7 +65,7 @@ export class TimeInputView extends React.Component<IProps, IState> {
             [
                 <Button
                     key={'TimeInputButton' + index}
-                    title={TimeUtils.convertTime(this.state.value)}
+                    title={TimeUtils.convertTime(this.state.value || model.placeholder)}
                     accessibilityLabel={`${model.placeholder} ${model.value}`}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
@@ -114,7 +114,7 @@ export class TimeInputView extends React.Component<IProps, IState> {
 
     private onSave = () => {
         this.setState({
-            value: this.tempValue,
+            value: this.tempValue || TimeUtils.getTimeString(new Date()),
             focused: false,
         }, () => {
             const { model } = this.props;

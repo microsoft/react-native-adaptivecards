@@ -4,6 +4,7 @@ import { DatePanel } from '../../Components/Inputs/DatePanel';
 import { DateInputModel } from '../../Models/Inputs/DateInput';
 import { StyleManager } from '../../Styles/StyleManager';
 import { AccessibilityUtils } from '../../Utils/AccessibilityUtils';
+import { TimeUtils } from '../../Utils/TimeUtils';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
 interface IProps {
@@ -65,7 +66,7 @@ export class DateInputView extends React.Component<IProps, IState> {
             [
                 <Button
                     key={'DateInputButton' + index}
-                    title={this.state.value}
+                    title={this.state.value || model.placeholder}
                     accessibilityLabel={`${model.placeholder} ${model.value}`}
                     color={this.color}
                     backgroundColor={this.backgroundColor}
@@ -114,7 +115,7 @@ export class DateInputView extends React.Component<IProps, IState> {
 
     private onSave = () => {
         this.setState({
-            value: this.tempValue,
+            value: this.tempValue || TimeUtils.getDateString(new Date()),
             focused: false,
         }, () => {
             const { model } = this.props;
