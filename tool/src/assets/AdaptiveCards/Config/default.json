@@ -19,7 +19,7 @@
     "fontSizes": {
         "small": 12,
         "default": 14,
-        "medium": 17,
+        "medium": 18,
         "large": 21,
         "extraLarge": 44
     },
@@ -98,7 +98,7 @@
                     "subtle": "#c80000b2"
                 }
             },
-            "backgroundColor": "#FFFFFF00"
+            "backgroundColor": "#000000D0"
         }
     },
     "actions": {
