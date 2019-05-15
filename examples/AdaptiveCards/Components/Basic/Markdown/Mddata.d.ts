@@ -18,3 +18,7 @@ export interface TextData {
 export interface LinkData extends TextData {
     link: string;
 }
+export declare var NUM_TO_LongDay: string[];
+export declare var NUM_TO_ShortDay: string[];
+export declare var NUM_TO_LongMonth: string[];
+export declare var NUM_TO_ShortMonth: string[];

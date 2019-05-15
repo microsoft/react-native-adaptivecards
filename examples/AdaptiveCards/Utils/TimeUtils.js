@@ -16,18 +16,32 @@ export class TimeUtils {
         }
         return new Date();
     }
-    static convertTime(value) {
-        if (TimeUtils.isTime(value)) {
-            let parts = value.split(':');
-            let nHour = Number(parts[0]);
-            let part = nHour < 12 ? 'AM' : 'PM';
-            nHour = nHour % 12 || 12;
-            let hour = (nHour + '').length === 1 ? `0${nHour}` : nHour + '';
-            return (`${hour}:` +
-                `${parts[1]} ` +
-                `${part}`);
+    static isValidDate(year, month, day) {
+        return (month > 0 && month < 13 &&
+            year && year.toString().length === 4 &&
+            day > 0 &&
+            day <= (new Date(year, month, 0)).getDate());
+    }
+    static isValidTime(hour, minute, second) {
+        return (hour >= 0 && hour < 24
+            && minute >= 0 && minute < 60
+            && second >= 0 && second < 60)
+            || (hour === 24 && minute === 0 && second === 0);
+    }
+    static convertTime(time) {
+        let parts = time.split(':');
+        let nHour = Number(parts[0]);
+        let nMinute = Number(parts[1]);
+        if (!TimeUtils.isValidTime(nHour, nMinute, 0)) {
+            return time;
         }
-        return value;
+        let part = nHour < 12 ? 'AM' : 'PM';
+        nHour = nHour % 12 || 12;
+        let hour = (nHour + '').length === 1 ? `0${nHour}` : nHour + '';
+        let minute = (nMinute + '').length === 1 ? `0${nMinute}` : nMinute + '';
+        return (`${hour}:` +
+            `${minute} ` +
+            `${part}`);
     }
     static extractTime(value) {
         if (TimeUtils.isTime(value)) {
