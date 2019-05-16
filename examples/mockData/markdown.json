@@ -116,8 +116,6 @@
             "text": "COMPACT: {{DATE(1990-12-31T15:59:60-08:00, COMPACT)}} at {{TIME(1990-12-31T15:59:60-08:00)}}",
             "wrap": true
         },
-    
-    
         {
             "type": "TextBlock",
             "text": "See [RFC3339](https://tools.ietf.org/html/rfc3339) 5.8 re NL time inexact match.",

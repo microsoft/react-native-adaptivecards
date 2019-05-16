@@ -23,10 +23,9 @@ export class TimeUtils {
             day <= (new Date(year, month, 0)).getDate());
     }
     static isValidTime(hour, minute, second) {
-        return (hour >= 0 && hour < 24
+        return hour >= 0 && hour < 24
             && minute >= 0 && minute < 60
-            && second >= 0 && second < 60)
-            || (hour === 24 && minute === 0 && second === 0);
+            && second >= 0 && second <= 60;
     }
     static convertTime(time) {
         let parts = time.split(':');

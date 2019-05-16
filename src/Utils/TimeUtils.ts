@@ -34,7 +34,7 @@ export class TimeUtils {
     public static isValidTime(hour: number, minute: number, second: number) {
         return hour >= 0 && hour < 24 
             && minute >= 0 && minute < 60 
-            && second >= 0 && second < 60; 
+            && second >= 0 && second <= 60; 
     }
 
     public static convertTime(time: string): string {

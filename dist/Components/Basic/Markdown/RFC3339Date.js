@@ -8,7 +8,7 @@ var DateType;
     DateType[DateType["TIME"] = 3] = "TIME";
 })(DateType || (DateType = {}));
 const DATE = '(\\d{4})-(\\d{2})-(\\d{2})';
-const TIME = '(\\d{2}):(\\d{2})?:(\\d{2})(|\\.\\d{0,3})($|Z|([+-])(\\d{2}):(\\d{2})?)';
+const TIME = '(\\d{2}):(\\d{2})?:(\\d{2})(\\.\\d+)?($|Z|([+-])(\\d{2}):(\\d{2})?)';
 const DATE_TIME = DATE + 'T' + TIME;
 const DATE_PREFIX = '\\{\\{DATE\\(';
 const TIME_PREFIX = '\\{\\{TIME\\(';
@@ -57,6 +57,9 @@ export class RFC3339Date {
         }
     }
     static convertDateToString(date, dateType) {
+        if (!date) {
+            return undefined;
+        }
         let year = date.getFullYear().toString();
         let month = this.getMonthWithType(date, dateType);
         let day = this.getDayWithType(date, dateType);
@@ -75,7 +78,7 @@ export class RFC3339Date {
         }
     }
     static convertTimeToString(date, dateType) {
-        if (dateType !== DateType.TIME) {
+        if (dateType !== DateType.TIME || !date) {
             return undefined;
         }
         let hour = date.getHours();
@@ -98,8 +101,11 @@ export class RFC3339Date {
             var tzMin = +regData[11];
             var tzOffset = new Date().getTimezoneOffset() + (tz === 'Z' ? 0 : (tzHour * 60 + tzMin) * flag);
             let dateTime;
-            if (!TimeUtils.isValidDate(year, month, day) || !TimeUtils.isValidTime(hour, minute, second)) {
+            if (!TimeUtils.isValidDate(year, month, day)) {
                 dateTime = 'Invalid Date';
+            }
+            else if (!TimeUtils.isValidTime(hour, minute, second)) {
+                dateTime = 'Invalid Time';
             }
             else {
                 let date = new Date(year, month - 1, day, hour, minute - tzOffset, second);

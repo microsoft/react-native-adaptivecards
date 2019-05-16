@@ -14,7 +14,7 @@ enum DateType {
 }
 
 const DATE = '(\\d{4})-(\\d{2})-(\\d{2})';
-const TIME = '(\\d{2}):(\\d{2})?:(\\d{2})(|\\.\\d{0,3})($|Z|([+-])(\\d{2}):(\\d{2})?)';
+const TIME = '(\\d{2}):(\\d{2})?:(\\d{2})(\\.\\d+)?($|Z|([+-])(\\d{2}):(\\d{2})?)';
 
 const DATE_TIME = DATE + 'T' + TIME;
 
@@ -80,6 +80,10 @@ export class RFC3339Date {
     }
 
     private static convertDateToString(date: Date, dateType: DateType): string {
+        if (!date) {
+            return undefined;
+        }
+
         let year = date.getFullYear().toString();
         let month = this.getMonthWithType(date, dateType);
         let day = this.getDayWithType(date, dateType);
@@ -104,9 +108,10 @@ export class RFC3339Date {
     }
 
     private static convertTimeToString(date: Date, dateType: DateType): string {
-        if (dateType !== DateType.TIME) {
+        if (dateType !== DateType.TIME || !date) {
             return undefined;
         }
+
         let hour = date.getHours();
         let minute = date.getMinutes();
 
@@ -129,7 +134,6 @@ export class RFC3339Date {
         var flag   = regData[9] === '-' ? -1 : 1;
         var tzHour = +regData[10];
         var tzMin  = +regData[11];
-
         var tzOffset = new Date().getTimezoneOffset() + (tz === 'Z' ? 0 : (tzHour * 60 + tzMin) * flag);
 
         let dateTime: string;
