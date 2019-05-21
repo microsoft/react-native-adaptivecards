@@ -99,7 +99,7 @@ export class RFC3339Date {
             var flag = regData[9] === '-' ? -1 : 1;
             var tzHour = +regData[10];
             var tzMin = +regData[11];
-            var tzOffset = new Date().getTimezoneOffset() + (tz === 'Z' ? 0 : (tzHour * 60 + tzMin) * flag);
+            var tzOffset = (tz === 'Z' ? 0 : (tzHour * 60 + tzMin) * flag);
             let dateTime;
             if (!TimeUtils.isValidDate(year, month, day)) {
                 dateTime = 'Invalid Date';
@@ -108,7 +108,7 @@ export class RFC3339Date {
                 dateTime = 'Invalid Time';
             }
             else {
-                let date = new Date(year, month - 1, day, hour, minute - tzOffset, second);
+                let date = new Date(Date.UTC(year, month - 1, day, hour, minute - tzOffset, second));
                 dateTime = func(date, dateType);
             }
             let tail = text.slice(regData.index + regData[0].length, text.length);
