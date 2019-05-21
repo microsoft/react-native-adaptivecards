@@ -28,6 +28,115 @@
         {
             "type": "TextBlock",
             "text": "Check out [Adaptive Cards](http://adaptivecards.io) or [**Adaptive** _Cards_](http://adaptivecards.io)"
+        },
+        {
+            "type": "TextBlock",
+            "text": "This represents 20 minutes and 50.52 seconds after the 23rd hour of April 12th, 1985 in UTC.",
+            "weight": "bolder",
+             "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "LONG: {{DATE(1985-04-12T23:20:50.52Z, LONG)}} at {{TIME(1985-04-12T23:20:50.52Z)}}",
+             "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "SHORT: {{DATE(1985-04-12T23:20:50.52Z, SHORT)}} at {{TIME(1985-04-12T23:20:50.52Z)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "COMPACT: {{DATE(1985-04-12T23:20:50.52Z, COMPACT)}} at {{TIME(1985-04-12T23:20:50.52Z)}}",
+            "wrap": true
+        },
+    
+        {
+            "type": "TextBlock",
+            "text": "This represents 39 minutes and 57 seconds after the 16th hour of December 19th, 1996 with an offset of -08:00 from UTC (Pacific Standard Time).  Note that this is equivalent to 1996-12-20T00:39:57Z in UTC.",    
+            "weight": "bolder", 
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "LONG: {{DATE(1996-12-19T16:39:57-08:00, LONG)}} at {{TIME(1996-12-19T16:39:57-08:00)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "SHORT: {{DATE(1996-12-19T16:39:57-08:00, SHORT)}} at {{TIME(1996-12-19T16:39:57-08:00)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "COMPACT: {{DATE(1996-12-19T16:39:57-08:00, COMPACT)}} at {{TIME(1996-12-19T16:39:57-08:00)}}",
+            "wrap": true
+        },
+    
+        {
+            "type": "TextBlock",
+            "text": "This represents the leap second inserted at the end of 1990.",
+            "weight": "bolder",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "LONG: {{DATE(1990-12-31T23:59:60Z, LONG)}} at {{TIME(1990-12-31T23:59:60Z)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "SHORT: {{DATE(1990-12-31T23:59:60Z, SHORT)}} at {{TIME(1990-12-31T23:59:60Z)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "COMPACT: {{DATE(1990-12-31T23:59:60Z, COMPACT)}} at {{TIME(1990-12-31T23:59:60Z)}}",
+            "wrap": true
+        },
+    
+        {
+            "type": "TextBlock",
+            "text": "This represents the same leap second in Pacific Standard Time, 8 hours behind UTC.",
+            "weight": "bolder",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "LONG: {{DATE(1990-12-31T15:59:60-08:00, LONG)}} at {{TIME(1990-12-31T15:59:60-08:00)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "SHORT: {{DATE(1990-12-31T15:59:60-08:00, SHORT)}} at {{TIME(1990-12-31T15:59:60-08:00)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "COMPACT: {{DATE(1990-12-31T15:59:60-08:00, COMPACT)}} at {{TIME(1990-12-31T15:59:60-08:00)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "See [RFC3339](https://tools.ietf.org/html/rfc3339) 5.8 re NL time inexact match.",
+            "weight": "bolder",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "LONG: {{DATE(1937-01-01T12:00:27.87+00:20, LONG)}} at {{TIME(1937-01-01T12:00:27.87+00:20)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "SHORT: {{DATE(1937-01-01T12:00:27.87+00:20, SHORT)}} at {{TIME(1937-01-01T12:00:27.87+00:20)}}",
+            "wrap": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "COMPACT: {{DATE(1937-01-01T12:00:27.87+00:20, COMPACT)}} at {{TIME(1937-01-01T12:00:27.87+00:20)}}",
+            "wrap": true
         }
+        
     ]
 }

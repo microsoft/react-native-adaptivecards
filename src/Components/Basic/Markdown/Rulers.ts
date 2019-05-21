@@ -1,4 +1,5 @@
 import { RegData, Types} from './Mddata';
+import { RFC3339Date } from './RFC3339Date';
 
 var CR_NEWLINE_R = /\r\n?/g;
 var TAB_R = /\t/g;
@@ -23,6 +24,7 @@ export const Rules = {
                 .replace(FORMFEED_R, '')
                 .replace(TAB_R, '    ');
         
+        text = RFC3339Date.parseRFC3339(text).toString();
         // parse list
         let out = this.execType(text, this.parseList.bind(this));
         // parse link

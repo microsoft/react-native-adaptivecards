@@ -21,21 +21,41 @@ export class TimeUtils {
         return new Date();
     }
 
-    public static convertTime(value: string): string {
-        if (TimeUtils.isTime(value)) {
-            let parts: string[] = value.split(':');
-            let nHour: number = Number(parts[0]);
-            let part: string = nHour < 12 ? 'AM' : 'PM';
-            nHour = nHour % 12 || 12;
-            let hour: string = (nHour + '').length === 1 ? `0${nHour}` : nHour + '';
-            return (
-                `${hour}:` +
-                `${parts[1]} ` +
-                `${part}`
-            );
+    public static isValidDate(year: number, month: number, day: number) { 
+        return (
+            month > 0 && month < 13 &&
+            year && year.toString().length === 4 &&
+            day > 0 &&
+            // Is it a valid day of the month?
+            day <= (new Date(year, month, 0)).getDate()
+        );
+    }
+
+    public static isValidTime(hour: number, minute: number, second: number) {
+        return hour >= 0 && hour < 24 
+            && minute >= 0 && minute < 60 
+            && second >= 0 && second <= 60; 
+    }
+
+    public static convertTime(time: string): string {
+        let parts: string[] = time.split(':');
+        let nHour: number = Number(parts[0]);
+        let nMinute: number = Number(parts[1]);
+
+        if (!TimeUtils.isValidTime(nHour, nMinute, 0)) {
+            // do nothing if time format is invalid
+            return time;
         }
-        // do nothing if value format is illegal
-        return value;
+
+        let part: string = nHour < 12 ? 'AM' : 'PM';
+        nHour = nHour % 12 || 12;
+        let hour: string = (nHour + '').length === 1 ? `0${nHour}` : nHour + '';
+        let minute: string = (nMinute + '').length === 1 ? `0${nMinute}` : nMinute + '';
+        return (
+            `${hour}:` +
+            `${minute} ` +
+            `${part}`
+        );
     }
 
     public static extractTime(value: string) {
