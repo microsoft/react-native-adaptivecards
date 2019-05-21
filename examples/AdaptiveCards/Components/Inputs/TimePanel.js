@@ -45,7 +45,7 @@ export class TimePanel extends React.Component {
         if (Platform.OS === 'ios') {
             return (React.createElement(ModalBox, { show: this.show, onShow: this.onShow },
                 React.createElement(Card, { flex: 0, fit: 'content', ref: ref => this.panel = ref },
-                    React.createElement(DatePickerIOS, { date: TimeUtils.extractTime(this.props.value), mode: 'time', onDateChange: this.onTimeChangeIos }),
+                    React.createElement(DatePickerIOS, { date: TimeUtils.extractTime(this.props.value) || new Date(), mode: 'time', onDateChange: this.onTimeChangeIos }),
                     React.createElement(ButtonGroup, { hasSpacing: true, flexDirection: 'row' },
                         this.renderCancelButton(),
                         this.renderSaveButton()))));
@@ -63,7 +63,7 @@ export class TimePanel extends React.Component {
     }
     async showPickerAndroid() {
         if (Platform.OS === 'android') {
-            const now = TimeUtils.extractTime(this.props.value);
+            const now = TimeUtils.extractTime(this.props.value) || new Date();
             try {
                 const result = await TimePickerAndroid.open({
                     hour: now.getHours(),

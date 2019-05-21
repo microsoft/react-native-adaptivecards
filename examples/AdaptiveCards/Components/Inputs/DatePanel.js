@@ -40,7 +40,7 @@ export class DatePanel extends React.Component {
         if (Platform.OS === 'ios') {
             return (React.createElement(ModalBox, { show: this.show, onShow: this.onShow, onRequestClose: this.onCancel },
                 React.createElement(Card, { flex: 0, fit: 'content', ref: ref => this.panel = ref },
-                    React.createElement(DatePickerIOS, { date: TimeUtils.extractDate(this.props.value), mode: 'date', onDateChange: this.onDateChange }),
+                    React.createElement(DatePickerIOS, { date: TimeUtils.extractDate(this.props.value) || new Date(), mode: 'date', onDateChange: this.onDateChange }),
                     React.createElement(ButtonGroup, { hasSpacing: true, flexDirection: 'row' },
                         this.renderCancelButton(),
                         this.renderSaveButton()))));
@@ -58,7 +58,7 @@ export class DatePanel extends React.Component {
     }
     async showPickerAndroid() {
         if (Platform.OS === 'android') {
-            const today = TimeUtils.extractDate(this.props.value);
+            const today = TimeUtils.extractDate(this.props.value) || new Date();
             try {
                 const result = await DatePickerAndroid.open({
                     date: today,
