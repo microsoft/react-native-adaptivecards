@@ -18,7 +18,7 @@ export class TimeUtils {
             let parts = value.split('-');
             return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
         }
-        return new Date();
+        return undefined;
     }
 
     public static isValidDate(year: number, month: number, day: number) { 
@@ -63,7 +63,7 @@ export class TimeUtils {
             let parts = value.split(':');
             return new Date(2020, 0, 1, Number(parts[0]), Number(parts[1]));
         }
-        return new Date();
+        return undefined;
     }
 
     public static getDateString(date: Date) {
