@@ -38,7 +38,7 @@ export class TimePanel extends React.Component<IProps> {
                         ref={ref => this.panel = ref}
                     >
                         <DatePickerIOS
-                            date={TimeUtils.extractTime(this.props.value)}
+                            date={TimeUtils.extractTime(this.props.value) || new Date()}
                             mode='time'
                             onDateChange={this.onTimeChangeIos}
                         />
@@ -102,7 +102,7 @@ export class TimePanel extends React.Component<IProps> {
 
     private async showPickerAndroid() {
         if (Platform.OS === 'android') {
-            const now = TimeUtils.extractTime(this.props.value);
+            const now = TimeUtils.extractTime(this.props.value) || new Date();
             try {
                 const result = await TimePickerAndroid.open({
                     hour: now.getHours(),
