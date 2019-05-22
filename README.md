@@ -46,5 +46,5 @@ import AdaptiveCard from 'react-native-adaptivecards';
 ```bash
 $ cd examples
 $ yarn
-$ react-native run-ios
+$ yarn ios
 ```
