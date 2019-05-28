@@ -8,6 +8,7 @@ import {
     TextInput,
     TextInputKeyPressEventData,
     TextStyle,
+    TouchableWithoutFeedback,
     View
 } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
@@ -131,43 +132,57 @@ export class LabelInput extends React.Component<IProps, IState> {
 
     private renderInputBox() {
         return (
-            <TextInput
-                ref={ref => this.inputBox = ref}
-                style={[
-                    {
+            <TouchableWithoutFeedback 
+                style={{
+                    flex: 1,
+                }}
+                onPress={this.focusInput}
+                accessible={true}
+                accessibilityLabel={this.props.value ? this.props.value : this.props.placeholder}
+                accessibilityHint={'double tap to activate'} >
+                <View 
+                    style={{
                         flex: 1,
-                        color: this.color,
-                        fontSize: this.fontSize,
-                        lineHeight: this.lineHeight,
-                        fontWeight: this.fontWeight,
-                        backgroundColor: this.backgroundColor,
-                        borderRadius: 4,
-                        height: this.height - 2,
-                        paddingTop: this.paddingVertical,
                         paddingRight: this.paddingHorizontal,
-                        paddingBottom: this.paddingVertical,
                         paddingLeft: this.paddingHorizontal,
-                    },
-                    this.props.style
-                ]}
-                autoCorrect={false}
-                autoCapitalize='none'
-                multiline={this.isMultiLine}
-                numberOfLines={this.props.numberOfLines}
-                keyboardType={this.props.keyboardType}
-                blurOnSubmit={!this.isMultiLine}
-                placeholder={this.props.placeholder}
-                placeholderTextColor={this.placeholderColor}
-                value={this.props.value}
-                returnKeyType={this.props.returnKeyType}
-                underlineColorAndroid='transparent'
-                importantForAccessibility='no-hide-descendants'
-                onChangeText={this.onValueChange}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                onKeyPress={this.onKeyPress}
-                onSubmitEditing={this.onSubmitEditing}
-            />
+                    }}>
+                    <TextInput
+                    ref={ref => this.inputBox = ref}
+                        style={[
+                            {
+                                flex: 1,
+                                color: this.color,
+                                fontSize: this.fontSize,
+                                lineHeight: this.lineHeight,
+                                fontWeight: this.fontWeight,
+                                backgroundColor: this.backgroundColor,
+                                borderRadius: 4,
+                                height: this.height,
+                                paddingTop: this.paddingVertical,
+                                paddingBottom: this.paddingVertical,
+                            },
+                            this.props.style
+                        ]}
+                        autoCorrect={false}
+                        autoCapitalize='none'
+                        multiline={this.isMultiLine}
+                        numberOfLines={this.props.numberOfLines}
+                        keyboardType={this.props.keyboardType}
+                        blurOnSubmit={!this.isMultiLine}
+                        placeholder={this.props.placeholder}
+                        placeholderTextColor={this.placeholderColor}
+                        value={this.props.value}
+                        returnKeyType={this.props.returnKeyType}
+                        underlineColorAndroid='transparent'
+                        importantForAccessibility='no-hide-descendants'
+                        onChangeText={this.onValueChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        onKeyPress={this.onKeyPress}
+                        onSubmitEditing={this.onSubmitEditing}
+                    />
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 
@@ -248,6 +263,12 @@ export class LabelInput extends React.Component<IProps, IState> {
                 this.props.onBlur();
             }
         });
+    }
+
+    private focusInput = () => {
+        if (this.inputBox) {
+            this.inputBox.focus();
+        }
     }
 
     private onFocus = () => {
