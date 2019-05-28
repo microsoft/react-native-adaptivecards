@@ -24,8 +24,10 @@ interface IState {
     focused: boolean;
 }
 export declare class InputBox extends React.Component<IProps, IState> {
+    private textInputRef;
     constructor(props: IProps);
     render(): JSX.Element;
+    private focusInput;
     private onValueChange;
     private onBlur;
     private onFocus;

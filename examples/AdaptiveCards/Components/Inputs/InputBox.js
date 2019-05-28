@@ -1,9 +1,14 @@
 import * as React from 'react';
-import { TextInput, } from 'react-native';
+import { TextInput, TouchableWithoutFeedback, View, } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 export class InputBox extends React.Component {
     constructor(props) {
         super(props);
+        this.focusInput = () => {
+            if (this.textInputRef) {
+                this.textInputRef.focus();
+            }
+        };
         this.onValueChange = (value) => {
             if (this.props.onValueChange) {
                 this.props.onValueChange(value);
@@ -31,30 +36,32 @@ export class InputBox extends React.Component {
         };
     }
     render() {
-        return (React.createElement(TextInput, { accessibilityLabel: this.props.placeholder, style: [
-                {
-                    flex: this.props.flex,
-                    color: this.color,
-                    fontSize: this.fontSize,
-                    lineHeight: this.lineHeight,
-                    fontWeight: this.fontWeight,
-                    backgroundColor: this.backgroundColor,
-                    width: this.props.width,
-                    height: this.props.height || this.height,
-                    borderColor: this.borderColor,
-                    borderWidth: 0,
-                    borderBottomWidth: 1,
-                    marginTop: this.props.marginTop,
-                    marginRight: this.props.marginRight,
-                    marginBottom: this.props.marginBottom,
-                    marginLeft: this.props.marginLeft,
-                    paddingTop: this.paddingVertical,
-                    paddingRight: this.paddingHorizontal,
-                    paddingBottom: this.paddingVertical,
-                    paddingLeft: this.paddingHorizontal,
-                },
-                this.props.style
-            ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, placeholderTextColor: this.placeholderColor, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur }));
+        return (React.createElement(TouchableWithoutFeedback, { onPress: this.focusInput, accessibilityLabel: this.props.value ? this.props.value : this.props.placeholder, accessibilityHint: 'double tap to activate' },
+            React.createElement(View, null,
+                React.createElement(TextInput, { style: [
+                        {
+                            flex: this.props.flex,
+                            color: this.color,
+                            fontSize: this.fontSize,
+                            lineHeight: this.lineHeight,
+                            fontWeight: this.fontWeight,
+                            backgroundColor: this.backgroundColor,
+                            width: this.props.width,
+                            height: this.props.height || this.height,
+                            borderColor: this.borderColor,
+                            borderWidth: 0,
+                            borderBottomWidth: 1,
+                            marginTop: this.props.marginTop,
+                            marginRight: this.props.marginRight,
+                            marginBottom: this.props.marginBottom,
+                            marginLeft: this.props.marginLeft,
+                            paddingTop: this.paddingVertical,
+                            paddingRight: this.paddingHorizontal,
+                            paddingBottom: this.paddingVertical,
+                            paddingLeft: this.paddingHorizontal,
+                        },
+                        this.props.style
+                    ], multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, placeholderTextColor: this.placeholderColor, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, ref: (ref) => this.textInputRef }))));
     }
     validateInput() {
         if (this.props.validateInput) {
