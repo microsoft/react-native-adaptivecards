@@ -5,6 +5,8 @@ import {
     StyleProp,
     TextInput,
     TextStyle,
+    TouchableWithoutFeedback,
+    View,
 } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 
@@ -34,6 +36,7 @@ interface IState {
 }
 
 export class InputBox extends React.Component<IProps, IState> {
+    private textInputRef: TextInput;
     constructor(props: IProps) {
         super(props);
 
@@ -44,47 +47,60 @@ export class InputBox extends React.Component<IProps, IState> {
 
     public render() {
         return (
-            <TextInput
-                accessibilityLabel={this.props.placeholder}
-                style={[
-                    {
-                        flex: this.props.flex,
-                        color: this.color,
-                        fontSize: this.fontSize,
-                        lineHeight: this.lineHeight,
-                        fontWeight: this.fontWeight,
-                        backgroundColor: this.backgroundColor,
-                        width: this.props.width,
-                        height: this.props.height || this.height,
-                        borderColor: this.borderColor,
-                        borderWidth: 0,
-                        borderBottomWidth: 1,
-                        marginTop: this.props.marginTop,
-                        marginRight: this.props.marginRight,
-                        marginBottom: this.props.marginBottom,
-                        marginLeft: this.props.marginLeft,
-                        paddingTop: this.paddingVertical,
-                        paddingRight: this.paddingHorizontal,
-                        paddingBottom: this.paddingVertical,
-                        paddingLeft: this.paddingHorizontal,
-                    },
-                    this.props.style
-                ]}
-                multiline={this.isMultiLine}
-                numberOfLines={this.props.numberOfLines}
-                keyboardType={this.props.keyboardType}
-                blurOnSubmit={!this.isMultiLine}
-                placeholder={this.props.placeholder}
-                placeholderTextColor={this.placeholderColor}
-                value={this.props.value}
-                returnKeyType={this.props.returnKeyType}
-                underlineColorAndroid='transparent'
-                importantForAccessibility='no-hide-descendants'
-                onChangeText={this.onValueChange}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-            />
+            <TouchableWithoutFeedback 
+                onPress={this.focusInput} 
+                accessibilityLabel={this.props.value ? this.props.value : this.props.placeholder}
+                accessibilityHint={'double tap to activate'} >
+                <View >
+                    <TextInput
+                        style={[
+                            {
+                                flex: this.props.flex,
+                                color: this.color,
+                                fontSize: this.fontSize,
+                                lineHeight: this.lineHeight,
+                                fontWeight: this.fontWeight,
+                                backgroundColor: this.backgroundColor,
+                                width: this.props.width,
+                                height: this.props.height || this.height,
+                                borderColor: this.borderColor,
+                                borderWidth: 0,
+                                borderBottomWidth: 1,
+                                marginTop: this.props.marginTop,
+                                marginRight: this.props.marginRight,
+                                marginBottom: this.props.marginBottom,
+                                marginLeft: this.props.marginLeft,
+                                paddingTop: this.paddingVertical,
+                                paddingRight: this.paddingHorizontal,
+                                paddingBottom: this.paddingVertical,
+                                paddingLeft: this.paddingHorizontal,
+                            },
+                            this.props.style
+                        ]}
+                        multiline={this.isMultiLine}
+                        numberOfLines={this.props.numberOfLines}
+                        keyboardType={this.props.keyboardType}
+                        blurOnSubmit={!this.isMultiLine}
+                        placeholder={this.props.placeholder}
+                        placeholderTextColor={this.placeholderColor}
+                        value={this.props.value}
+                        returnKeyType={this.props.returnKeyType}
+                        underlineColorAndroid='transparent'
+                        importantForAccessibility='no-hide-descendants'
+                        onChangeText={this.onValueChange}
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        ref={(ref) => this.textInputRef}
+                    />
+                </View>
+            </TouchableWithoutFeedback>
         );
+    }
+
+    private focusInput = () => {
+        if (this.textInputRef) {
+            this.textInputRef.focus();
+        }
     }
 
     private onValueChange = (value: string) => {

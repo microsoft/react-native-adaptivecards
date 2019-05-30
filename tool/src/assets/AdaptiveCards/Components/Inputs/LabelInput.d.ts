@@ -43,6 +43,7 @@ export declare class LabelInput extends React.Component<IProps, IState> {
     private onKeyPress;
     private onSubmitEditing;
     private onBlur;
+    private focusInput;
     private onFocus;
     private validateInput;
     private readonly labelLength;

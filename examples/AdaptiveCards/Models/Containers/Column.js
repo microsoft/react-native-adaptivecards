@@ -11,15 +11,12 @@ export class ColumnModel extends ScopeModel {
         this.width = 'auto';
         this.verticalContentAlignment = json.verticalContentAlignment;
         if (json.width) {
-            if (typeof json.width === 'string') {
+            let columnWidth = parseInt(json.width, 10);
+            if (isNaN(columnWidth)) {
                 this.width = json.width.toLowerCase() === 'stretch' ? 'stretch' : 'auto';
             }
-            else if (typeof json.width === 'number') {
-                let columnWidth = parseInt(json.width, 10);
-                if (columnWidth < 0) {
-                    columnWidth = 0;
-                }
-                this.width = columnWidth;
+            else {
+                this.width = columnWidth < 0 ? 0 : columnWidth;
             }
         }
         if (json.backgroundImage) {

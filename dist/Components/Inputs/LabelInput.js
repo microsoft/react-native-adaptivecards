@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScrollView, TextInput, View } from 'react-native';
+import { ScrollView, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 import { StyleManager } from '../../Styles/StyleManager';
 import { EmailUtils } from '../../Utils/EmailUtils';
 import { Label } from '../Basic/Label';
@@ -61,6 +61,11 @@ export class LabelInput extends React.Component {
                     this.props.onBlur();
                 }
             });
+        };
+        this.focusInput = () => {
+            if (this.inputBox) {
+                this.inputBox.focus();
+            }
         };
         this.onFocus = () => {
             this.setState({
@@ -124,23 +129,29 @@ export class LabelInput extends React.Component {
         return undefined;
     }
     renderInputBox() {
-        return (React.createElement(TextInput, { ref: ref => this.inputBox = ref, style: [
-                {
+        return (React.createElement(TouchableWithoutFeedback, { style: {
+                flex: 1,
+            }, onPress: this.focusInput, accessible: true, accessibilityLabel: this.props.value ? this.props.value : this.props.placeholder, accessibilityHint: 'double tap to activate' },
+            React.createElement(View, { style: {
                     flex: 1,
-                    color: this.color,
-                    fontSize: this.fontSize,
-                    lineHeight: this.lineHeight,
-                    fontWeight: this.fontWeight,
-                    backgroundColor: this.backgroundColor,
-                    borderRadius: 4,
-                    height: this.height - 2,
-                    paddingTop: this.paddingVertical,
                     paddingRight: this.paddingHorizontal,
-                    paddingBottom: this.paddingVertical,
                     paddingLeft: this.paddingHorizontal,
-                },
-                this.props.style
-            ], autoCorrect: false, autoCapitalize: 'none', multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, placeholderTextColor: this.placeholderColor, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, onKeyPress: this.onKeyPress, onSubmitEditing: this.onSubmitEditing }));
+                } },
+                React.createElement(TextInput, { ref: ref => this.inputBox = ref, style: [
+                        {
+                            flex: 1,
+                            color: this.color,
+                            fontSize: this.fontSize,
+                            lineHeight: this.lineHeight,
+                            fontWeight: this.fontWeight,
+                            backgroundColor: this.backgroundColor,
+                            borderRadius: 4,
+                            height: this.height,
+                            paddingTop: this.paddingVertical,
+                            paddingBottom: this.paddingVertical,
+                        },
+                        this.props.style
+                    ], autoCorrect: false, autoCapitalize: 'none', multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, placeholderTextColor: this.placeholderColor, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, onKeyPress: this.onKeyPress, onSubmitEditing: this.onSubmitEditing }))));
     }
     renderSuggestions() {
         if (this.props.suggestionView) {
