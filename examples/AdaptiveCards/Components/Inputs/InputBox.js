@@ -36,7 +36,7 @@ export class InputBox extends React.Component {
         };
     }
     render() {
-        return (React.createElement(TouchableWithoutFeedback, { onPress: this.focusInput, accessibilityLabel: this.props.value ? this.props.value : this.props.placeholder, accessibilityHint: 'double tap to activate' },
+        return (React.createElement(TouchableWithoutFeedback, { onPress: this.focusInput, accessibilityLabel: this.props.value ? this.props.value : this.props.placeholder, accessibilityHint: 'edit box double tap to activate' },
             React.createElement(View, null,
                 React.createElement(TextInput, { style: [
                         {

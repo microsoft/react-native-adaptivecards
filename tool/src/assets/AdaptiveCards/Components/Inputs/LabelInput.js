@@ -96,7 +96,7 @@ export class LabelInput extends React.Component {
         }
     }
     render() {
-        return (React.createElement(View, { accessibilityLabel: this.props.placeholder, style: {
+        return (React.createElement(View, { style: {
                 flex: this.props.flex,
             } },
             this.renderInputArea(),
@@ -131,7 +131,7 @@ export class LabelInput extends React.Component {
     renderInputBox() {
         return (React.createElement(TouchableWithoutFeedback, { style: {
                 flex: 1,
-            }, onPress: this.focusInput, accessible: true, accessibilityLabel: this.props.value ? this.props.value : this.props.placeholder, accessibilityHint: 'double tap to activate' },
+            }, onPress: this.focusInput, accessible: true, accessibilityLabel: this.props.value ? this.props.value : this.props.placeholder, accessibilityHint: 'edit box double tap to activate' },
             React.createElement(View, { style: {
                     flex: 1,
                     paddingRight: this.paddingHorizontal,
