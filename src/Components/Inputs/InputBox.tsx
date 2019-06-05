@@ -50,7 +50,7 @@ export class InputBox extends React.Component<IProps, IState> {
             <TouchableWithoutFeedback 
                 onPress={this.focusInput} 
                 accessibilityLabel={this.props.value ? this.props.value : this.props.placeholder}
-                accessibilityHint={'double tap to activate'} >
+                accessibilityHint={'edit box double tap to activate'} >
                 <View >
                     <TextInput
                         style={[

@@ -74,7 +74,6 @@ export class LabelInput extends React.Component<IProps, IState> {
     public render() {
         return (
             <View
-                accessibilityLabel={this.props.placeholder}
                 style={{
                     flex: this.props.flex,
                 }}
@@ -139,7 +138,7 @@ export class LabelInput extends React.Component<IProps, IState> {
                 onPress={this.focusInput}
                 accessible={true}
                 accessibilityLabel={this.props.value ? this.props.value : this.props.placeholder}
-                accessibilityHint={'double tap to activate'} >
+                accessibilityHint={'edit box double tap to activate'} >
                 <View 
                     style={{
                         flex: 1,
