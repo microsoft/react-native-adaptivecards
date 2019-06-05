@@ -19,12 +19,13 @@ export class ColumnModel extends ScopeModel {
         this.items = ContentModelFactory.createSet(json.items, this, this.context);
         this.style = json.style;
         this.height = json.height;
-        this.width = 'auto';
         this.verticalContentAlignment = json.verticalContentAlignment;
         if (json.width) {
             let columnWidth = parseInt(json.width, 10);
             if (isNaN(columnWidth)) {
-                this.width = json.width.toLowerCase() === 'stretch' ? 'stretch' : 'auto';
+                if (json.width.toLowerCase() === 'auto' || json.width.toLowerCase() === 'stretch') {
+                    this.width = json.width.toLowerCase();
+                }
             } else {
                 this.width = columnWidth < 0 ? 0 : columnWidth;
             }
