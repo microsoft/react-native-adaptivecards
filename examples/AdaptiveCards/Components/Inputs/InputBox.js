@@ -36,7 +36,7 @@ export class InputBox extends React.Component {
         };
     }
     render() {
-        return (React.createElement(TouchableWithoutFeedback, { onPress: this.focusInput, accessibilityLabel: this.props.value ? this.props.value : this.props.placeholder, accessibilityHint: 'edit box double tap to activate' },
+        return (React.createElement(TouchableWithoutFeedback, { onPress: this.focusInput, accessibilityLabel: this.accessibilityLabel, accessibilityHint: 'edit box double tap to activate' },
             React.createElement(View, null,
                 React.createElement(TextInput, { style: [
                         {
@@ -71,6 +71,17 @@ export class InputBox extends React.Component {
             else {
                 console.log('Input: invalid');
             }
+        }
+    }
+    get accessibilityLabel() {
+        if (this.props.value) {
+            return this.props.value.toLocaleLowerCase();
+        }
+        else if (this.props.placeholder) {
+            return this.props.placeholder.toLocaleLowerCase();
+        }
+        else {
+            return '';
         }
     }
     get isMultiLine() {

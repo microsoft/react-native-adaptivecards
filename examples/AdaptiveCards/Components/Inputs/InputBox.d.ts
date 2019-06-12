@@ -32,6 +32,7 @@ export declare class InputBox extends React.Component<IProps, IState> {
     private onBlur;
     private onFocus;
     private validateInput;
+    private readonly accessibilityLabel;
     private readonly isMultiLine;
     private readonly lineHeight;
     private readonly fontSize;

@@ -51,7 +51,6 @@ export class Touchable extends React.Component<IProps> {
     public render() {
         const {
             onLongPress,
-            accessibilityLabel,
             accessibilityRole,
             activeOpacity,
             hitSlop,
@@ -71,7 +70,7 @@ export class Touchable extends React.Component<IProps> {
                     useForeground={true}
                     hitSlop={hitSlop}
                     background={TouchableNativeFeedback.SelectableBackground()}
-                    accessibilityLabel={accessibilityLabel}
+                    accessibilityLabel={this.accessibilityLabel}
                     accessibilityRole={accessibilityRole === undefined ? 'button' : accessibilityRole}
                     onLayout={this.props.onLayout}
                 >
@@ -91,13 +90,23 @@ export class Touchable extends React.Component<IProps> {
                     activeOpacity={activeOpacity}
                     style={style}
                     hitSlop={hitSlop}
-                    accessibilityLabel={accessibilityLabel}
+                    accessibilityLabel={this.accessibilityLabel}
                     accessibilityRole={accessibilityRole === undefined ? 'button' : accessibilityRole}
                     onLayout={this.props.onLayout}
                 >
                     {otherProps.children}
                 </TouchableOpacity>
             );
+        }
+    }
+
+    // sometimes upper case, like 'ADD', will not regard as a word by accessibility
+    // here to convert accessibility label to lower case.
+    private get accessibilityLabel() {
+        if (this.props.accessibilityLabel) {
+            return this.props.accessibilityLabel.toLocaleLowerCase();
+        } else {
+            return '';
         }
     }
 
