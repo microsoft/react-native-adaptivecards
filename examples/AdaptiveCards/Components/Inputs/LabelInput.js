@@ -131,7 +131,7 @@ export class LabelInput extends React.Component {
     renderInputBox() {
         return (React.createElement(TouchableWithoutFeedback, { style: {
                 flex: 1,
-            }, onPress: this.focusInput, accessible: true, accessibilityLabel: this.props.value ? this.props.value : this.props.placeholder, accessibilityHint: 'edit box double tap to activate' },
+            }, onPress: this.focusInput, accessible: true, accessibilityLabel: this.accessibilityLabel, accessibilityHint: 'edit box double tap to activate' },
             React.createElement(View, { style: {
                     flex: 1,
                     paddingRight: this.paddingHorizontal,
@@ -174,6 +174,17 @@ export class LabelInput extends React.Component {
             else {
                 console.log('Input: invalid');
             }
+        }
+    }
+    get accessibilityLabel() {
+        if (this.props.value) {
+            return this.props.value.toLocaleLowerCase();
+        }
+        else if (this.props.placeholder) {
+            return this.props.placeholder.toLocaleLowerCase();
+        }
+        else {
+            return '';
         }
     }
     get labelLength() {

@@ -49,7 +49,7 @@ export class InputBox extends React.Component<IProps, IState> {
         return (
             <TouchableWithoutFeedback 
                 onPress={this.focusInput} 
-                accessibilityLabel={this.props.value ? this.props.value : this.props.placeholder}
+                accessibilityLabel={this.accessibilityLabel}
                 accessibilityHint={'edit box double tap to activate'} >
                 <View >
                     <TextInput
@@ -135,6 +135,16 @@ export class InputBox extends React.Component<IProps, IState> {
             } else {
                 console.log('Input: invalid');
             }
+        }
+    }
+
+    private get accessibilityLabel() {
+        if (this.props.value) {
+            return this.props.value.toLocaleLowerCase();
+        } else if (this.props.placeholder) {
+            return this.props.placeholder.toLocaleLowerCase();
+        } else {
+            return '';
         }
     }
 

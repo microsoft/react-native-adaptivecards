@@ -18,6 +18,7 @@ export declare class Touchable extends React.Component<IProps> {
     componentDidMount(): void;
     componentWillUnmount(): void;
     render(): JSX.Element;
+    private readonly accessibilityLabel;
     private onPress;
 }
 export {};

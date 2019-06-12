@@ -46,6 +46,7 @@ export declare class LabelInput extends React.Component<IProps, IState> {
     private focusInput;
     private onFocus;
     private validateInput;
+    private readonly accessibilityLabel;
     private readonly labelLength;
     private readonly isMultiLine;
     private readonly fontSize;

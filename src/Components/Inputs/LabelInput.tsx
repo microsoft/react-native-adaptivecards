@@ -137,7 +137,7 @@ export class LabelInput extends React.Component<IProps, IState> {
                 }}
                 onPress={this.focusInput}
                 accessible={true}
-                accessibilityLabel={this.props.value ? this.props.value : this.props.placeholder}
+                accessibilityLabel={this.accessibilityLabel}
                 accessibilityHint={'edit box double tap to activate'} >
                 <View 
                     style={{
@@ -287,6 +287,16 @@ export class LabelInput extends React.Component<IProps, IState> {
             } else {
                 console.log('Input: invalid');
             }
+        }
+    }
+
+    private get accessibilityLabel() {
+        if (this.props.value) {
+            return this.props.value.toLocaleLowerCase();
+        } else if (this.props.placeholder) {
+            return this.props.placeholder.toLocaleLowerCase();
+        } else {
+            return '';
         }
     }
 
