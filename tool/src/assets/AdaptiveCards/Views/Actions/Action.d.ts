@@ -15,7 +15,6 @@ export declare class ActionView extends React.Component<IProps, IState> {
     constructor(props: IProps);
     render(): JSX.Element;
     private onPress;
-    private readonly isOneTimeAction;
     private readonly borderWidth;
     private readonly borderStyle;
     private readonly title;

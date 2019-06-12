@@ -114,8 +114,9 @@
         },
         {
             "title": "Submit",
-            "data": "payload",
-            "id": "bsw",
+            "data": {
+                "id": "bsw"
+            },
             "type": "Action.Submit"
         }
     ],

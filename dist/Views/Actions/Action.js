@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Button } from '../../Components/Inputs/Button';
-import { ConfigManager } from '../../Config/ConfigManager';
-import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 export class ActionView extends React.Component {
@@ -12,11 +10,6 @@ export class ActionView extends React.Component {
             if (model && model.onAction) {
                 model.onAction(() => {
                     console.log('Action Success');
-                    if (this.isOneTimeAction) {
-                        this.setState({
-                            disabled: true,
-                        });
-                    }
                 }, (error) => {
                     console.log('Action Failed >> ', error);
                 });
@@ -32,9 +25,6 @@ export class ActionView extends React.Component {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.title + ' is not valid', theme, 'error');
         }
         return (React.createElement(Button, { flex: 1, title: this.title, color: StyleManager.getColor('accent', theme, false), fontSize: StyleManager.getFontSize('default'), fontWeight: StyleManager.getFontWeight('bolder'), backgroundColor: StyleManager.getBackgroundColor(theme), textHorizontalAlign: 'center', textVerticalAlign: 'center', paddingTop: 12, paddingBottom: 12, paddingLeft: 16, paddingRight: 16, onPress: this.onPress, disabled: this.state.disabled, style: this.borderStyle }));
-    }
-    get isOneTimeAction() {
-        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model && this.props.model.type === ActionType.Submit;
     }
     get borderWidth() {
         if (this.props.index !== undefined && this.props.index > 0) {
