@@ -1,11 +1,9 @@
 import * as React from 'react';
 
 import { Button } from '../../Components/Inputs/Button';
-import { ConfigManager } from '../../Config/ConfigManager';
 import { OpenUrlActionModel } from '../../Models/Actions/OpenUrlAction';
 import { ShowCardActionModel } from '../../Models/Actions/ShowCardAction';
 import { SubmitActionModel } from '../../Models/Actions/SubmitAction';
-import { ActionType } from '../../Shared/Types';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
 
@@ -64,22 +62,12 @@ export class ActionView extends React.Component<IProps, IState> {
             model.onAction(
                 () => {
                     console.log('Action Success');
-                    if (this.isOneTimeAction) {
-                        this.setState({
-                            disabled: true,
-                        });
-                    }
                 },
                 (error) => {
                     console.log('Action Failed >> ', error);
                 }
             );
         }
-    }
-
-    private get isOneTimeAction() {
-        // tslint:disable-next-line:max-line-length
-        return ConfigManager.getInstance().getConfig().mode === 'release' && this.props.model && this.props.model.type === ActionType.Submit;
     }
 
     private get borderWidth() {
