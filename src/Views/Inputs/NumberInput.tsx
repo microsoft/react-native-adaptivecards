@@ -107,7 +107,7 @@ export class NumberInputView extends React.Component<IProps, IState> {
     }
 
     private onStoreUpdate = (value: string) => {
-        if (value) {
+        if (value !== null && value !== undefined) {
             this.setState({
                 value: value.toString()
             });
