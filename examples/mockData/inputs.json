@@ -52,7 +52,7 @@
             "placeholder": "Quantity",
             "min": -15,
             "max": 15,
-            "value": 0,
+            "value": 1,
             "id": "NumVal"
         },
         {

@@ -107,9 +107,11 @@ export class NumberInputView extends React.Component<IProps, IState> {
     }
 
     private onStoreUpdate = (value: string) => {
-        this.setState({
-            value: value
-        });
+        if (value) {
+            this.setState({
+                value: value.toString()
+            });
+        }
     }
 
     private get spacing() {

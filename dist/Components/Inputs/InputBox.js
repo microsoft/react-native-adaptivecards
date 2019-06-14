@@ -74,10 +74,10 @@ export class InputBox extends React.Component {
         }
     }
     get accessibilityLabel() {
-        if (this.props.value) {
+        if (this.props.value && typeof this.props.value === 'string') {
             return this.props.value.toLocaleLowerCase();
         }
-        else if (this.props.placeholder) {
+        else if (this.props.placeholder && typeof this.props.placeholder === 'string') {
             return this.props.placeholder.toLocaleLowerCase();
         }
         else {
