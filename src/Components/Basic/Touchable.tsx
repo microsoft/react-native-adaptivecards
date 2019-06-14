@@ -103,7 +103,7 @@ export class Touchable extends React.Component<IProps> {
     // sometimes upper case, like 'ADD', will not regard as a word by accessibility
     // here to convert accessibility label to lower case.
     private get accessibilityLabel() {
-        if (this.props.accessibilityLabel) {
+        if (this.props.accessibilityLabel && typeof this.props.accessibilityLabel === 'string') {
             return this.props.accessibilityLabel.toLocaleLowerCase();
         } else {
             return '';

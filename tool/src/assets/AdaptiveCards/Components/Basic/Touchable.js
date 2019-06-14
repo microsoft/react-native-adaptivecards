@@ -46,7 +46,7 @@ export class Touchable extends React.Component {
         }
     }
     get accessibilityLabel() {
-        if (this.props.accessibilityLabel) {
+        if (this.props.accessibilityLabel && typeof this.props.accessibilityLabel === 'string') {
             return this.props.accessibilityLabel.toLocaleLowerCase();
         }
         else {
