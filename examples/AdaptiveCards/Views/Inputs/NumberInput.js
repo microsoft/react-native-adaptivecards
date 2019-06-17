@@ -34,7 +34,7 @@ export class NumberInputView extends React.Component {
             });
         };
         this.onStoreUpdate = (value) => {
-            if (value) {
+            if (value !== null && value !== undefined) {
                 this.setState({
                     value: value.toString()
                 });
