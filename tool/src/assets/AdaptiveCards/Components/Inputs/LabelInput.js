@@ -134,6 +134,9 @@ export class LabelInput extends React.Component {
             }, onPress: this.focusInput, accessible: true, accessibilityLabel: this.accessibilityLabel, accessibilityHint: 'edit box double tap to activate' },
             React.createElement(View, { style: {
                     flex: 1,
+                    height: this.height,
+                    paddingTop: this.paddingVertical,
+                    paddingBottom: this.paddingVertical,
                     paddingRight: this.paddingHorizontal,
                     paddingLeft: this.paddingHorizontal,
                 } },
@@ -146,9 +149,6 @@ export class LabelInput extends React.Component {
                             fontWeight: this.fontWeight,
                             backgroundColor: this.backgroundColor,
                             borderRadius: 4,
-                            height: this.height,
-                            paddingTop: this.paddingVertical,
-                            paddingBottom: this.paddingVertical,
                         },
                         this.props.style
                     ], autoCorrect: false, autoCapitalize: 'none', multiline: this.isMultiLine, numberOfLines: this.props.numberOfLines, keyboardType: this.props.keyboardType, blurOnSubmit: !this.isMultiLine, placeholder: this.props.placeholder, placeholderTextColor: this.placeholderColor, value: this.props.value, returnKeyType: this.props.returnKeyType, underlineColorAndroid: 'transparent', importantForAccessibility: 'no-hide-descendants', onChangeText: this.onValueChange, onFocus: this.onFocus, onBlur: this.onBlur, onKeyPress: this.onKeyPress, onSubmitEditing: this.onSubmitEditing }))));
