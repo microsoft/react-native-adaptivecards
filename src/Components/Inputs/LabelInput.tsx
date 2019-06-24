@@ -142,6 +142,9 @@ export class LabelInput extends React.Component<IProps, IState> {
                 <View 
                     style={{
                         flex: 1,
+                        height: this.height,
+                        paddingTop: this.paddingVertical,
+                        paddingBottom: this.paddingVertical,
                         paddingRight: this.paddingHorizontal,
                         paddingLeft: this.paddingHorizontal,
                     }}>
@@ -156,9 +159,6 @@ export class LabelInput extends React.Component<IProps, IState> {
                                 fontWeight: this.fontWeight,
                                 backgroundColor: this.backgroundColor,
                                 borderRadius: 4,
-                                height: this.height,
-                                paddingTop: this.paddingVertical,
-                                paddingBottom: this.paddingVertical,
                             },
                             this.props.style
                         ]}
