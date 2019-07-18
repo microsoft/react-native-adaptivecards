@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from './AbstractModel';
 
 export class ContentModel extends AbstractModel {
@@ -9,7 +10,7 @@ export class ContentModel extends AbstractModel {
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(json, parent, context);
         this.id = json.id;
-        this.spacing = json.spacing;
+        this.spacing = StringUtils.normalize(json.spacing);
         this.separator = json.separator;
     }
 }

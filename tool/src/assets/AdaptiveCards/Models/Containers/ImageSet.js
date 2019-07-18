@@ -1,10 +1,11 @@
+import { StringUtils } from '../../Utils/StringUtils';
 import { ContentModel } from '../Abstract/ContentModel';
 import { ImageModel } from '../CardElements/Image';
 export class ImageSetModel extends ContentModel {
     constructor(json, parent, context) {
         super(json, parent, context);
         this.images = [];
-        this.imageSize = json.imageSize;
+        this.imageSize = StringUtils.normalize(json.imageSize);
         this.images = [];
         if (json.images) {
             json.images.forEach((item) => {

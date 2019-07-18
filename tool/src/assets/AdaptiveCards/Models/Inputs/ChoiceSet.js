@@ -1,3 +1,4 @@
+import { StringUtils } from '../../Utils/StringUtils';
 import { InputModel } from '../Abstract/InputModel';
 import { ChoiceInputModel } from './ChoiceInput';
 export class ChoiceSetModel extends InputModel {
@@ -71,7 +72,7 @@ export class ChoiceSetModel extends InputModel {
             });
         }
         this.isMultiSelect = json.isMultiSelect;
-        this.style = json.style;
+        this.style = StringUtils.normalize(json.style);
         if (this.context.form) {
             this.context.form.registerListener(this.id, this.storeListener);
             this.onInput(this.value);

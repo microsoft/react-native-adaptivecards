@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { ContentModel } from '../Abstract/ContentModel';
 import { ScopeModel } from '../Abstract/ScopeModel';
@@ -17,19 +18,10 @@ export class ColumnModel extends ScopeModel {
         super(json, parent, context);
 
         this.items = ContentModelFactory.createSet(json.items, this, this.context);
-        this.style = json.style;
-        this.height = json.height;
-        this.verticalContentAlignment = json.verticalContentAlignment;
-        if (json.width) {
-            let columnWidth = parseInt(json.width, 10);
-            if (isNaN(columnWidth)) {
-                if (json.width.toLowerCase() === 'auto' || json.width.toLowerCase() === 'stretch') {
-                    this.width = json.width.toLowerCase();
-                }
-            } else {
-                this.width = columnWidth < 0 ? 0 : columnWidth;
-            }
-        }
+        this.style = StringUtils.normalize(json.style);
+        this.height = StringUtils.normalize(json.height);
+        this.verticalContentAlignment = StringUtils.normalize(json.verticalContentAlignment, 'top');
+        this.width = StringUtils.normalize(json.width);
 
         if (json.backgroundImage) {
             this.backgroundImage = new BackgroundImageModel(json.backgroundImage, this, this.context);

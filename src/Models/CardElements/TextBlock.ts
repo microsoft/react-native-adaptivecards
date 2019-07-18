@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { ContentModel } from '../Abstract/ContentModel';
 
@@ -16,12 +17,12 @@ export class TextBlockModel extends ContentModel {
         super(json, parent, context);
 
         this.text = json.text;
-        this.color = json.color;
-        this.horizontalAlignment = json.horizontalAlignment;
+        this.color = StringUtils.normalize(json.color);
+        this.horizontalAlignment = StringUtils.normalize(json.horizontalAlignment);
         this.isSubtle = json.isSubtle || false;
         this.maxLines = json.maxLines;
-        this.size = json.size;
-        this.weight = json.weight;
+        this.size = StringUtils.normalize(json.size);
+        this.weight = StringUtils.normalize(json.weight);
         this.wrap = json.wrap || false;
     }
 }
