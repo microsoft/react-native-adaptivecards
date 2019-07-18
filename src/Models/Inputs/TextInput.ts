@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { InputModel } from '../Abstract/InputModel';
 
@@ -12,7 +13,7 @@ export class TextInputModel extends InputModel {
 
         this.isMultiline = json.isMultiline || false;
         this.maxLength = json.maxLength;
-        this.style = json.style;
+        this.style = StringUtils.toLowerCase(json.style);
 
         if (this.context.form) {
             this.context.form.registerListener(this.id, this.storeListener);

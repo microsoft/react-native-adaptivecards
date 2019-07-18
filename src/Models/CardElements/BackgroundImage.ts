@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 
 export class BackgroundImageModel extends AbstractModel {
@@ -12,8 +13,8 @@ export class BackgroundImageModel extends AbstractModel {
         super(json, parent, context);
 
         this.url = json.url;
-        this.mode = json.mode;
-        this.horizontalAlignment = json.horizontalAlignment;
-        this.verticalAlignment = json.verticalAlignment;
+        this.mode = StringUtils.toLowerCase(json.mode);
+        this.horizontalAlignment = StringUtils.toLowerCase(json.horizontalAlignment);
+        this.verticalAlignment = StringUtils.toLowerCase(json.verticalAlignment);
     }
 }

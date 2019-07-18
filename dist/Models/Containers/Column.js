@@ -1,3 +1,4 @@
+import { StringUtils } from '../../Utils/StringUtils';
 import { ScopeModel } from '../Abstract/ScopeModel';
 import { BackgroundImageModel } from '../CardElements/BackgroundImage';
 import { ContentModelFactory } from '../Factories/ContentModelFactory';
@@ -6,20 +7,18 @@ export class ColumnModel extends ScopeModel {
         super(json, parent, context);
         this.items = [];
         this.items = ContentModelFactory.createSet(json.items, this, this.context);
-        this.style = json.style;
-        this.height = json.height;
-        this.width = 'auto';
-        this.verticalContentAlignment = json.verticalContentAlignment;
+        this.style = StringUtils.toLowerCase(json.style);
+        this.height = StringUtils.toLowerCase(json.height);
+        this.verticalContentAlignment = StringUtils.toLowerCase(json.verticalContentAlignment);
         if (json.width) {
-            if (typeof json.width === 'string') {
-                this.width = json.width.toLowerCase() === 'stretch' ? 'stretch' : 'auto';
-            }
-            else if (typeof json.width === 'number') {
-                let columnWidth = parseInt(json.width, 10);
-                if (columnWidth < 0) {
-                    columnWidth = 0;
+            let columnWidth = parseInt(json.width, 10);
+            if (isNaN(columnWidth)) {
+                if (json.width.toLowerCase() === 'auto' || json.width.toLowerCase() === 'stretch') {
+                    this.width = json.width.toLowerCase();
                 }
-                this.width = columnWidth;
+            }
+            else {
+                this.width = columnWidth < 0 ? 0 : columnWidth;
             }
         }
         if (json.backgroundImage) {

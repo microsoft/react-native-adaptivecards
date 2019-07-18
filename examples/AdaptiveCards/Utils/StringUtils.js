@@ -21,4 +21,10 @@ export class StringUtils {
         }
         return str;
     }
+    static toLowerCase(str, defaultValue = '') {
+        if (str) {
+            return str.toLocaleLowerCase();
+        }
+        return defaultValue;
+    }
 }

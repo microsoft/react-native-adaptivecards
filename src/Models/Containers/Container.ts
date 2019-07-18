@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { ContentModel } from '../Abstract/ContentModel';
 import { ScopeModel } from '../Abstract/ScopeModel';
@@ -15,10 +16,10 @@ export class ContainerModel extends ScopeModel {
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(json, parent, context);
 
-        this.style = json.style;
+        this.style = StringUtils.toLowerCase(json.style);
         this.items = ContentModelFactory.createSet(json.items, this, this.context);
-        this.height = json.height;
-        this.verticalContentAlignment = json.verticalContentAlignment;
+        this.height = StringUtils.toLowerCase(json.height);
+        this.verticalContentAlignment = StringUtils.toLowerCase(json.verticalContentAlignment);
 
         if (json.backgroundImage) {
             this.backgroundImage = new BackgroundImageModel(json.backgroundImage, this, this.context);

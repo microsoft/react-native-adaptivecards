@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { ActionModel } from '../Abstract/ActionModel';
 import { ContentModel } from '../Abstract/ContentModel';
@@ -14,7 +15,7 @@ export class CounterModel extends ContentModel {
         super(json, parent, context);
 
         this.value = json.value;
-        this.format = json.format;
+        this.format = StringUtils.toLowerCase(json.format);
         this.delay = json.delay;
         this.callback = ActionModelFactory.create(json.callback, this, context);
     }

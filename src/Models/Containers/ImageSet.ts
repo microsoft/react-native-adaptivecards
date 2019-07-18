@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { ContentModel } from '../Abstract/ContentModel';
 import { ImageModel } from '../CardElements/Image';
@@ -10,7 +11,7 @@ export class ImageSetModel extends ContentModel {
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(json, parent, context);
 
-        this.imageSize = json.imageSize;
+        this.imageSize = StringUtils.toLowerCase(json.imageSize);
         this.images = [];
         if (json.images) {
             json.images.forEach((item: any) => {

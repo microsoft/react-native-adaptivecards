@@ -1,3 +1,4 @@
+import { StringUtils } from '../../Utils/StringUtils';
 import { InputModel } from '../Abstract/InputModel';
 export class TextInputModel extends InputModel {
     constructor(json, parent, context) {
@@ -13,7 +14,7 @@ export class TextInputModel extends InputModel {
         };
         this.isMultiline = json.isMultiline || false;
         this.maxLength = json.maxLength;
-        this.style = json.style;
+        this.style = StringUtils.toLowerCase(json.style);
         if (this.context.form) {
             this.context.form.registerListener(this.id, this.storeListener);
             this.onInput(this.value);

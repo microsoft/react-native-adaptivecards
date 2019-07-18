@@ -1,5 +1,6 @@
 import { CardContext } from '../../Contexts/CardContext';
 import { FormField } from '../../Contexts/FormStore';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { InputModel } from '../Abstract/InputModel';
 import { ChoiceInputModel } from './ChoiceInput';
@@ -24,7 +25,7 @@ export class ChoiceSetModel extends InputModel {
             });
         }
         this.isMultiSelect = json.isMultiSelect;
-        this.style = json.style;
+        this.style = StringUtils.toLowerCase(json.style);
 
         if (this.context.form) {
             this.context.form.registerListener(this.id, this.storeListener);
