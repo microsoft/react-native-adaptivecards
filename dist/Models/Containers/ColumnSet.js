@@ -1,10 +1,11 @@
+import { StringUtils } from '../../Utils/StringUtils';
 import { ScopeModel } from '../Abstract/ScopeModel';
 import { ColumnModel } from './Column';
 export class ColumnSetModel extends ScopeModel {
     constructor(json, parent, context) {
         super(json, parent, context);
         this.columns = [];
-        this.height = json.height;
+        this.height = StringUtils.normalize(json.height);
         this.columns = [];
         if (json.columns) {
             json.columns.forEach((item) => {

@@ -15,10 +15,15 @@ export class StringUtils {
         return valueString;
     }
 
-    public static normalize(str: string) {
-        if (str) {
-            return str.toLocaleLowerCase();
+    public static normalize(value: string | number, defaultValue: string = ''): any {
+        if (value) {
+            if (typeof value === 'number') {
+                return value < 0 ? 0 : value;
+            }
+            if (typeof value === 'string') {
+                return value.toLocaleLowerCase();
+            }
         }
-        return str;
+        return defaultValue;
     }
 }
