@@ -1,3 +1,5 @@
+import { StringUtils } from '../Utils/StringUtils';
+
 export type SchemaRule<T> = (value: T) => SchemaResult;
 
 export interface SchemaProperty<T> {
@@ -132,7 +134,11 @@ export class SchemaValidator {
 
             // Check if the value of this props is acceptable.
             if (schema.accepts && schema.accepts.length > 0) {
-                if (value !== undefined && schema.accepts.indexOf(value) < 0) {
+                let normalizedValue = value;
+                if (schema.name !== 'type') {
+                    normalizedValue = StringUtils.normalize(value, value);
+                }
+                if (value !== undefined && schema.accepts.indexOf(normalizedValue) < 0) {
                     // tslint:disable-next-line:max-line-length
                     result = result.combine(new SchemaResult(false, new SchemaMessage('Error', `Value of ${schema.name} is not acceptable.`)));
                 }
