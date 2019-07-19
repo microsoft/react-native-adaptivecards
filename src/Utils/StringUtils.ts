@@ -15,7 +15,7 @@ export class StringUtils {
         return valueString;
     }
 
-    public static normalize(value: string | number, defaultValue: string = ''): any {
+    public static normalize(value: any, defaultValue?: any): any {
         if (value) {
             if (typeof value === 'number') {
                 return value < 0 ? 0 : value;

@@ -1,3 +1,4 @@
+import { StringUtils } from '../Utils/StringUtils';
 export class SchemaElement {
     get requiredProps() {
         if (this.propsSchemas) {
@@ -98,7 +99,11 @@ export class SchemaValidator {
                 }
             }
             if (schema.accepts && schema.accepts.length > 0) {
-                if (value !== undefined && schema.accepts.indexOf(value) < 0) {
+                let normalizedValue = value;
+                if (schema.name !== 'type') {
+                    normalizedValue = StringUtils.normalize(value, value);
+                }
+                if (value !== undefined && schema.accepts.indexOf(normalizedValue) < 0) {
                     result = result.combine(new SchemaResult(false, new SchemaMessage('Error', `Value of ${schema.name} is not acceptable.`)));
                 }
             }
