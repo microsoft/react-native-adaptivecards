@@ -7,6 +7,7 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
     public readonly rawData: any;
     public context: CardContext;
     protected schemaCheckResult: SchemaResult;
+    public path: string;
 
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(parent);
@@ -17,12 +18,39 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
         this.type = json.type || this.type;
 
         this.schemaCheckResult = this.shallowCheckSchema(json);
+        // this.schemaCheckResult = this.deepCheckSchema();
 
         if (this.context) {
             this.context.fit = 'content';
         }
 
         this.outputSchemaMessage();
+
+        if (parent === undefined) {
+
+            if (this.type === undefined) {
+                this.path = 'undefined type >>';
+            } else {
+                this.path = this.type + ' >> ';
+            }
+
+        } else {
+            if (this.type === undefined) {
+                this.path = parent.path + 'undefined type >>';
+            } else {
+                this.path = parent.path + this.type + ' >> ';
+            }
+
+        }
+
+        let temp = undefined;
+        if (parent !== undefined) {
+            temp = parent.type;
+        }
+        console.log(``);
+        console.log(`the parent of ${this.type} is ${temp}`);
+        console.log(`${this.path}`);
+        console.log(``);
     }
 
     protected outputSchemaMessage() {
@@ -81,6 +109,10 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
 
     public get isSchemaCheckPassed() {
         return this.schemaCheckResult.isValid;
+    }
+
+    public get getSchemaCheckResult() {
+        return this.schemaCheckResult;
     }
 
     public get children(): AbstractModel[] {

@@ -6,6 +6,7 @@ import Sample from '../Sample/index'
 import './SampleList.css'
 import { setMode, setCardSelected, modifyCard, addCard, removeCard } from '../../actions/cardActions'
 
+
 class SampleList extends React.Component {
 
     constructor(props) {

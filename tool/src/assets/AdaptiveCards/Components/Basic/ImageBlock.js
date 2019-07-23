@@ -74,8 +74,8 @@ export class ImageBlock extends React.Component {
             return undefined;
         }
         let source = this.props.mode === 'avatar' ?
-            require('../../Assets/Images/Placeholders/avatar_default.png') :
-            require('../../Assets/Images/Placeholders/image_default.png');
+            require('../../Assets/Images/Placeholders/avatar_default@3X.png') :
+            require('../../Assets/Images/Placeholders/image_default@3X.png');
         return (React.createElement(Image, { source: source, accessible: !!this.props.alt, accessibilityLabel: this.props.alt, style: [
                 {
                     maxHeight: '100%',

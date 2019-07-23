@@ -2,6 +2,8 @@
     flex: 0 1 15%;
     padding: 10px 0 10px 0;
     border-right: aliceblue 1px solid;
+    min-width: 15%;
+    display: flex;
 }
 
 .sample-list-inner {

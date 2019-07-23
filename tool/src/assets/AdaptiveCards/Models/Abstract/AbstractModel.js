@@ -11,6 +11,30 @@ export class AbstractModel extends TreeNode {
             this.context.fit = 'content';
         }
         this.outputSchemaMessage();
+        if (parent === undefined) {
+            if (this.type === undefined) {
+                this.path = 'undefined type >>';
+            }
+            else {
+                this.path = this.type + ' >> ';
+            }
+        }
+        else {
+            if (this.type === undefined) {
+                this.path = parent.path + 'undefined type >>';
+            }
+            else {
+                this.path = parent.path + this.type + ' >> ';
+            }
+        }
+        let temp = undefined;
+        if (parent !== undefined) {
+            temp = parent.type;
+        }
+        console.log(``);
+        console.log(`the parent of ${this.type} is ${temp}`);
+        console.log(`${this.path}`);
+        console.log(``);
     }
     outputSchemaMessage() {
         if (this.context) {
@@ -64,6 +88,9 @@ export class AbstractModel extends TreeNode {
     }
     get isSchemaCheckPassed() {
         return this.schemaCheckResult.isValid;
+    }
+    get getSchemaCheckResult() {
+        return this.schemaCheckResult;
     }
     get children() {
         return [];

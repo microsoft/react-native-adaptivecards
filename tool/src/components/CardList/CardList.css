@@ -1,5 +1,5 @@
 .card-list {
-    flex: 1;
+    flex: auto;
     padding: 15px 0 15px 0;
 }
 
