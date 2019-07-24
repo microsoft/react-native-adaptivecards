@@ -1,7 +1,6 @@
 import React from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { connect } from 'react-redux';
-
 import './CardList.css';
 import Card from '../../components/Card'
 import { parseJson } from '../../utils/common'

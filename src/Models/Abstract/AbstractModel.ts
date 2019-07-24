@@ -6,16 +6,15 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
     public readonly type: string;
     public readonly rawData: any;
     public context: CardContext;
-    protected schemaCheckResult: SchemaResult;
+    public schemaCheckResult: SchemaResult;
+    public path: string[] = [];
 
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(parent);
 
         this.context = context;
         this.rawData = json;
-
         this.type = json.type || this.type;
-
         this.schemaCheckResult = this.shallowCheckSchema(json);
 
         if (this.context) {
@@ -23,6 +22,21 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
         }
 
         this.outputSchemaMessage();
+
+        if (parent === undefined) {
+            if (this.type === undefined) {
+                this.path.push('undefined type');
+            } else {
+                this.path.push(this.type);
+            }
+        } else {
+            this.path = parent.path.slice(0);
+            if (this.type === undefined) {
+                this.path.push('undefined type');
+            } else {
+                this.path.push(this.type);
+            }
+        }
     }
 
     protected outputSchemaMessage() {

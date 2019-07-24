@@ -70,7 +70,7 @@ export class SchemaValidator {
             }, new SchemaResult(true)));
             return result;
         }
-        return new SchemaResult(true, new SchemaMessage('Warning', `No Schema available for ${JSON.stringify(json)}`));
+        return new SchemaResult(true, new SchemaMessage('Warning', `No Schema available for the type, check type!`));
     }
     static deepCheckElement(model, schema) {
         if (schema) {
@@ -98,14 +98,11 @@ export class SchemaValidator {
                     result = result.combine(new SchemaResult(false, new SchemaMessage('Error', `Required property ${schema.name} is null or undefined`)));
                 }
             }
-            if (schema.accepts && schema.accepts.length > 0) {
-                let normalizedValue = value;
-                if (schema.name !== 'type') {
-                    normalizedValue = StringUtils.normalize(value, value);
-                }
-                if (value !== undefined && schema.accepts.indexOf(normalizedValue) < 0) {
-                    result = result.combine(new SchemaResult(false, new SchemaMessage('Error', `Value of ${schema.name} is not acceptable.`)));
-                }
+            if (schema.accepts &&
+                schema.accepts.length > 0 &&
+                value !== undefined &&
+                schema.accepts.findIndex(item => StringUtils.normalize(item) === StringUtils.normalize(value)) < 0) {
+                result = result.combine(new SchemaResult(false, new SchemaMessage('Error', `Value of ${schema.name} is not acceptable.`)));
             }
             if (schema.rules && schema.rules.length > 0) {
                 result = result.combine(this.checkRules(value, schema.rules));

@@ -3,6 +3,7 @@ import { TreeNode } from '../../Shared/Types';
 export class AbstractModel extends TreeNode {
     constructor(json, parent, context) {
         super(parent);
+        this.path = [];
         this.context = context;
         this.rawData = json;
         this.type = json.type || this.type;
@@ -11,6 +12,23 @@ export class AbstractModel extends TreeNode {
             this.context.fit = 'content';
         }
         this.outputSchemaMessage();
+        if (parent === undefined) {
+            if (this.type === undefined) {
+                this.path.push('undefined type');
+            }
+            else {
+                this.path.push(this.type);
+            }
+        }
+        else {
+            this.path = parent.path.slice(0);
+            if (this.type === undefined) {
+                this.path.push('undefined type');
+            }
+            else {
+                this.path.push(this.type);
+            }
+        }
     }
     outputSchemaMessage() {
         if (this.context) {

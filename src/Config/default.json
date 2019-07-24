@@ -8,7 +8,7 @@
         "default": 8,
         "medium": 20,
         "large": 30,
-        "extraLarge": 40,
+        "extralarge": 40,
         "padding": 10
     },
     "separator": {
@@ -21,7 +21,7 @@
         "default": 14,
         "medium": 18,
         "large": 21,
-        "extraLarge": 44
+        "extralarge": 44
     },
     "fontWeights": {
         "lighter": 200,

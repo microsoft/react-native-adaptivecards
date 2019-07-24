@@ -4,7 +4,7 @@ import { AbstractModel } from './AbstractModel';
 
 export class ContentModel extends AbstractModel {
     public id: string;
-    public spacing: 'none' | 'default' | 'small' | 'medium' | 'large' | 'extraLarge' | 'padding';
+    public spacing: 'none' | 'default' | 'small' | 'medium' | 'large' | 'extralarge' | 'padding';
     public separator: boolean;
 
     constructor(json: any, parent: AbstractModel, context: CardContext) {

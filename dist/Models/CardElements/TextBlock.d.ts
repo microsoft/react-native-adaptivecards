@@ -7,7 +7,7 @@ export declare class TextBlockModel extends ContentModel {
     horizontalAlignment?: 'left' | 'center' | 'right';
     isSubtle?: boolean;
     maxLines?: number;
-    size?: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
+    size?: 'default' | 'small' | 'medium' | 'large' | 'extralarge';
     weight?: 'default' | 'lighter' | 'bolder';
     wrap?: boolean;
     constructor(json: any, parent: AbstractModel, context: CardContext);

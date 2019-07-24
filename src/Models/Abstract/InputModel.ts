@@ -32,7 +32,6 @@ export abstract class InputModel extends ContentModel {
     }
 
     public storeListener = (field: FormField) => {
-        console.log(field);
         if (field) {
             this.value = field.value;
             if (this.onStoreUpdate) {

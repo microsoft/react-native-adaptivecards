@@ -36,7 +36,7 @@ export class PeoplePickerSchema extends SchemaElement {
             'spacing': {
                 name: 'spacing',
                 isRequired: false,
-                accepts: ['none', 'small', 'default', 'medium', 'large', 'extraLarge', 'padding'],
+                accepts: ['none', 'small', 'default', 'medium', 'large', 'extralarge', 'padding'],
             },
             'separator': {
                 name: 'separator',

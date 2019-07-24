@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { HostContext } from '../Contexts/HostContext';
 
 export class StyleManager {
-    public static getSpacing(spacing: 'small' | 'default' | 'medium' | 'large' | 'extraLarge' | 'padding' | 'none') {
+    public static getSpacing(spacing: 'small' | 'default' | 'medium' | 'large' | 'extralarge' | 'padding' | 'none') {
         if (spacing === 'none') {
             return 0;
         }
@@ -14,7 +14,7 @@ export class StyleManager {
         return spacingConfig;
     }
 
-    public static getFontSize(size: 'small' | 'default' | 'medium' | 'large' | 'extraLarge') {
+    public static getFontSize(size: 'small' | 'default' | 'medium' | 'large' | 'extralarge') {
         let config = HostContext.getInstance().getConfig();
         let fontSize = config.fontSize[size];
         if (!fontSize) {

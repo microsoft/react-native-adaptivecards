@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import adaptiveCardSchema from '../../static/adaptive-card'
 import { modifyCard, modifyConfig } from '../../actions/cardActions'
 import './Editor.css'
+import parseJson from '../../Constants'
 
 class Editor extends React.Component {
 
@@ -34,6 +35,17 @@ class Editor extends React.Component {
     }
 
     onChange(newValue) {
+        // console.log(`the type of the new value is ${typeof newValue}`);
+        // let jsonObject = parseJson(newValue);
+        // if (jsonObject){
+        //     if (this.props.mode === 'card') {
+        //         this.props.modifyCard(this.props.cardId, newValue);
+        //     }
+        //     else {
+        //         this.props.modifyConfig(newValue);
+        //     }
+        // } 
+        // console.log(`the xxxxxxxxx type of the value we got in onchang is ${typeof newValue}`)
         if (this.props.mode === 'card') {
             this.props.modifyCard(this.props.cardId, newValue);
         }
