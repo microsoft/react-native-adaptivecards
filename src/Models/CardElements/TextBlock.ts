@@ -9,7 +9,7 @@ export class TextBlockModel extends ContentModel {
     public horizontalAlignment?: 'left' | 'center' | 'right';
     public isSubtle?: boolean;
     public maxLines?: number;
-    public size?: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
+    public size?: 'default' | 'small' | 'medium' | 'large' | 'extralarge';
     public weight?: 'default' | 'lighter' | 'bolder';
     public wrap?: boolean;
 

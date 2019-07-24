@@ -33,7 +33,7 @@ export class TextBlockSchema extends SchemaElement {
             'size': {
                 name: 'size',
                 isRequired: false,
-                accepts: ['small', 'default', 'medium', 'large', 'extraLarge'],
+                accepts: ['small', 'default', 'medium', 'large', 'extralarge'],
             },
             'text': {
                 name: 'text',
@@ -61,7 +61,7 @@ export class TextBlockSchema extends SchemaElement {
             'spacing': {
                 name: 'spacing',
                 isRequired: false,
-                accepts: ['none', 'small', 'default', 'medium', 'large', 'extraLarge', 'padding'],
+                accepts: ['none', 'small', 'default', 'medium', 'large', 'extralarge', 'padding'],
             },
             'separator': {
                 name: 'separator',

@@ -6,18 +6,18 @@ export class JsonValidator {
         const card = new CardModel(json, undefined, context);
         return card.isSchemaCheckPassed;
     }
-    static getSchemaCheckResult(Json) {
+    static getSchemaCheckResult(json) {
         const context = CardContext.createInstance();
-        const card = new CardModel(Json, undefined, context);
+        const card = new CardModel(json, undefined, context);
         return card.schemaCheckResult;
     }
-    static getDescendsAndSelf(Json) {
+    static getDescendsAndSelf(json) {
         const context = CardContext.createInstance();
-        const card = new CardModel(Json, undefined, context);
+        const card = new CardModel(json, undefined, context);
         return card.descendsAndSelf;
     }
-    static getSchemaCheckMessage(Json) {
-        let checkResult = this.getSchemaCheckResult(Json);
+    static getSchemaCheckMessage(json) {
+        let checkResult = this.getSchemaCheckResult(json);
         let outputMessage = [];
         if (checkResult && checkResult.messages) {
             checkResult.messages.forEach((message) => {

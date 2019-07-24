@@ -1,6 +1,6 @@
 export declare class StyleManager {
-    static getSpacing(spacing: 'small' | 'default' | 'medium' | 'large' | 'extraLarge' | 'padding' | 'none'): number;
-    static getFontSize(size: 'small' | 'default' | 'medium' | 'large' | 'extraLarge'): number;
+    static getSpacing(spacing: 'small' | 'default' | 'medium' | 'large' | 'extralarge' | 'padding' | 'none'): number;
+    static getFontSize(size: 'small' | 'default' | 'medium' | 'large' | 'extralarge'): number;
     static getFontWeight(weight: 'lighter' | 'default' | 'bolder'): "normal" | "bold" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
     static getTextAlign(align: 'left' | 'center' | 'right'): "left" | "center" | "right";
     static getHorizontalAlign(align: 'left' | 'center' | 'right'): "center" | "flex-start" | "flex-end";

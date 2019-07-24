@@ -133,15 +133,12 @@ export class SchemaValidator {
             }
 
             // Check if the value of this props is acceptable.
-            if (schema.accepts && schema.accepts.length > 0) {
-                let normalizedValue = value;
-                if (schema.name !== 'type') {
-                    normalizedValue = StringUtils.normalize(value, value);
-                }
-                if (value !== undefined && schema.accepts.indexOf(normalizedValue) < 0) {
-                    // tslint:disable-next-line:max-line-length
-                    result = result.combine(new SchemaResult(false, new SchemaMessage('Error', `Value of ${schema.name} is not acceptable.`)));
-                }
+            if (schema.accepts &&
+                schema.accepts.length > 0 &&
+                value !== undefined &&
+                schema.accepts.findIndex(item => StringUtils.normalize(item) === StringUtils.normalize(value)) < 0) {
+                // tslint:disable-next-line:max-line-length
+                result = result.combine(new SchemaResult(false, new SchemaMessage('Error', `Value of ${schema.name} is not acceptable.`)));
             }
 
             // Check if the prop meet rules.

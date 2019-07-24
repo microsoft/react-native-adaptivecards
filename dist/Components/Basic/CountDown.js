@@ -7,7 +7,7 @@ export class CountDown extends React.Component {
         if (remains >= 0) {
             return (React.createElement(Text, { style: {
                     color: StyleManager.getColor('default', theme, false),
-                    fontSize: StyleManager.getFontSize('extraLarge'),
+                    fontSize: StyleManager.getFontSize('extralarge'),
                     fontWeight: StyleManager.getFontWeight('default'),
                     backgroundColor: 'transparent',
                     textAlign: StyleManager.getTextAlign('center'),

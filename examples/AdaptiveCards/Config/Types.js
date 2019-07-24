@@ -5,7 +5,7 @@ export class SpacingConfig {
             this.small = json['small'];
             this.medium = json['medium'];
             this.large = json['large'];
-            this.extraLarge = json['extraLarge'];
+            this.extralarge = json['extralarge'];
             this.padding = json['padding'];
         }
     }
@@ -18,7 +18,7 @@ export class SpacingConfig {
                     combined.small = current.small !== undefined ? current.small : prev.small;
                     combined.medium = current.medium !== undefined ? current.medium : prev.medium;
                     combined.large = current.large !== undefined ? current.large : prev.large;
-                    combined.extraLarge = current.extraLarge !== undefined ? current.extraLarge : prev.extraLarge;
+                    combined.extralarge = current.extralarge !== undefined ? current.extralarge : prev.extralarge;
                     combined.padding = current.padding !== undefined ? current.padding : prev.padding;
                     return combined;
                 }
@@ -59,7 +59,7 @@ export class FontSizeConfig {
             this.small = json['small'];
             this.medium = json['medium'];
             this.large = json['large'];
-            this.extraLarge = json['extraLarge'];
+            this.extralarge = json['extralarge'];
         }
     }
     combine(...args) {
@@ -71,7 +71,7 @@ export class FontSizeConfig {
                     combined.small = current.small !== undefined ? current.small : prev.small;
                     combined.medium = current.medium !== undefined ? current.medium : prev.medium;
                     combined.large = current.large !== undefined ? current.large : prev.large;
-                    combined.extraLarge = current.extraLarge !== undefined ? current.extraLarge : prev.extraLarge;
+                    combined.extralarge = current.extralarge !== undefined ? current.extralarge : prev.extralarge;
                     return combined;
                 }
                 return prev;

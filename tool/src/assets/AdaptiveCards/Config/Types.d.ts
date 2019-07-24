@@ -3,7 +3,7 @@ export declare class SpacingConfig {
     small: number;
     medium: number;
     large: number;
-    extraLarge: number;
+    extralarge: number;
     padding: number;
     constructor(json?: any);
     combine(...args: SpacingConfig[]): SpacingConfig;
@@ -20,7 +20,7 @@ export declare class FontSizeConfig {
     small: number;
     medium: number;
     large: number;
-    extraLarge: number;
+    extralarge: number;
     constructor(json?: any);
     combine(...args: FontSizeConfig[]): FontSizeConfig;
 }
@@ -76,7 +76,7 @@ export declare class ShowCardActionConfig {
 }
 export declare class ActionConfig {
     capacity: number;
-    actionSetSpacing: 'default' | 'small' | 'medium' | 'large' | 'extraLarge' | 'padding';
+    actionSetSpacing: 'default' | 'small' | 'medium' | 'large' | 'extralarge' | 'padding';
     actionSpacing: number;
     showCard: ShowCardActionConfig;
     cardExpanding: boolean;
@@ -99,7 +99,7 @@ export declare class ImageSetConfig {
     combine(...args: ImageSetConfig[]): ImageSetConfig;
 }
 export declare class FactValueConfig {
-    size: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
+    size: 'default' | 'small' | 'medium' | 'large' | 'extralarge';
     color: 'default' | 'accent' | 'attention' | 'good' | 'warning';
     isSubtle: boolean;
     weight: 'default' | 'lighter' | 'bolder';
@@ -108,7 +108,7 @@ export declare class FactValueConfig {
     combine(...args: FactValueConfig[]): FactValueConfig;
 }
 export declare class FactTitleConfig {
-    size: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
+    size: 'default' | 'small' | 'medium' | 'large' | 'extralarge';
     color: 'default' | 'accent' | 'attention' | 'good' | 'warning';
     isSubtle: boolean;
     weight: 'default' | 'lighter' | 'bolder';

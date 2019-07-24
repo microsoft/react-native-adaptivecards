@@ -5,7 +5,7 @@ export class SpacingConfig {
     public small: number;
     public medium: number;
     public large: number;
-    public extraLarge: number;
+    public extralarge: number;
     public padding: number;
 
     constructor(json?: any) {
@@ -14,7 +14,7 @@ export class SpacingConfig {
             this.small = json['small'];
             this.medium = json['medium'];
             this.large = json['large'];
-            this.extraLarge = json['extraLarge'];
+            this.extralarge = json['extralarge'];
             this.padding = json['padding'];
         }
     }
@@ -28,7 +28,7 @@ export class SpacingConfig {
                     combined.small = current.small !== undefined ? current.small : prev.small;
                     combined.medium = current.medium !== undefined ? current.medium : prev.medium;
                     combined.large = current.large !== undefined ? current.large : prev.large;
-                    combined.extraLarge = current.extraLarge !== undefined ? current.extraLarge : prev.extraLarge;
+                    combined.extralarge = current.extralarge !== undefined ? current.extralarge : prev.extralarge;
                     combined.padding = current.padding !== undefined ? current.padding : prev.padding;
                     return combined;
                 }
@@ -74,7 +74,7 @@ export class FontSizeConfig {
     public small: number;
     public medium: number;
     public large: number;
-    public extraLarge: number;
+    public extralarge: number;
 
     constructor(json?: any) {
         if (json) {
@@ -82,7 +82,7 @@ export class FontSizeConfig {
             this.small = json['small'];
             this.medium = json['medium'];
             this.large = json['large'];
-            this.extraLarge = json['extraLarge'];
+            this.extralarge = json['extralarge'];
         }
     }
 
@@ -95,7 +95,7 @@ export class FontSizeConfig {
                     combined.small = current.small !== undefined ? current.small : prev.small;
                     combined.medium = current.medium !== undefined ? current.medium : prev.medium;
                     combined.large = current.large !== undefined ? current.large : prev.large;
-                    combined.extraLarge = current.extraLarge !== undefined ? current.extraLarge : prev.extraLarge;
+                    combined.extralarge = current.extralarge !== undefined ? current.extralarge : prev.extralarge;
                     return combined;
                 }
                 return prev;
@@ -322,7 +322,7 @@ export class ShowCardActionConfig {
 
 export class ActionConfig {
     public capacity: number;
-    public actionSetSpacing: 'default' | 'small' | 'medium' | 'large' | 'extraLarge' | 'padding';
+    public actionSetSpacing: 'default' | 'small' | 'medium' | 'large' | 'extralarge' | 'padding';
     public actionSpacing: number;
     public showCard: ShowCardActionConfig;
     public cardExpanding: boolean;
@@ -420,7 +420,7 @@ export class ImageSetConfig {
 }
 
 export class FactValueConfig {
-    public size: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
+    public size: 'default' | 'small' | 'medium' | 'large' | 'extralarge';
     public color: 'default' | 'accent' | 'attention' | 'good' | 'warning';
     public isSubtle: boolean;
     public weight: 'default' | 'lighter' | 'bolder';
@@ -457,7 +457,7 @@ export class FactValueConfig {
 }
 
 export class FactTitleConfig {
-    public size: 'default' | 'small' | 'medium' | 'large' | 'extraLarge';
+    public size: 'default' | 'small' | 'medium' | 'large' | 'extralarge';
     public color: 'default' | 'accent' | 'attention' | 'good' | 'warning';
     public isSubtle: boolean;
     public weight: 'default' | 'lighter' | 'bolder';

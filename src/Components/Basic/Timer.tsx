@@ -16,7 +16,7 @@ export class Timer extends React.Component<IProps> {
                 <Text
                     style={{
                         color: StyleManager.getColor('default', theme, false),
-                        fontSize: StyleManager.getFontSize('extraLarge'),
+                        fontSize: StyleManager.getFontSize('extralarge'),
                         fontWeight: StyleManager.getFontWeight('default'),
                         backgroundColor: 'transparent',
                         textAlign: StyleManager.getTextAlign('center'),
