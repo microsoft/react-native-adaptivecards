@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { ScopeModel } from '../Abstract/ScopeModel';
 
@@ -14,9 +15,9 @@ export class ImageModel extends ScopeModel {
 
         this.url = json.url;
         this.alt = json.altText;
-        this.horizontalAlignment = json.horizontalAlignment;
-        this.size = json.size;
-        this.style = json.style;
+        this.horizontalAlignment = StringUtils.normalize(json.horizontalAlignment);
+        this.size = StringUtils.normalize(json.size);
+        this.style = StringUtils.normalize(json.style);
     }
 
     public get children() {

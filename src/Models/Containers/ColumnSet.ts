@@ -1,4 +1,5 @@
 import { CardContext } from '../../Contexts/CardContext';
+import { StringUtils } from '../../Utils/StringUtils';
 import { AbstractModel } from '../Abstract/AbstractModel';
 import { ScopeModel } from '../Abstract/ScopeModel';
 import { ColumnModel } from './Column';
@@ -10,7 +11,7 @@ export class ColumnSetModel extends ScopeModel {
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(json, parent, context);
 
-        this.height = json.height;
+        this.height = StringUtils.normalize(json.height);
 
         this.columns = [];
         if (json.columns) {
