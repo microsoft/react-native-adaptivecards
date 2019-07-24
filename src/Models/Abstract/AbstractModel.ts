@@ -14,9 +14,7 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
 
         this.context = context;
         this.rawData = json;
-
         this.type = json.type || this.type;
-
         this.schemaCheckResult = this.shallowCheckSchema(json);
 
         if (this.context) {
@@ -26,13 +24,11 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
         this.outputSchemaMessage();
 
         if (parent === undefined) {
-        
             if (this.type === undefined) {
                 this.path.push('undefined type');
             } else {
                 this.path.push(this.type);
             }
-
         } else {
             this.path = parent.path.slice(0);
             if (this.type === undefined) {
@@ -41,7 +37,6 @@ export abstract class AbstractModel extends TreeNode<AbstractModel> {
                 this.path.push(this.type);
             }
         }
-
     }
 
     protected outputSchemaMessage() {

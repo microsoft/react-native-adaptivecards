@@ -9,20 +9,20 @@ export class JsonValidator {
         return card.isSchemaCheckPassed;
     }
 
-    public static getSchemaCheckResult(Json: any) {
+    public static getSchemaCheckResult(json: any) {
         const context = CardContext.createInstance();
-        const card = new CardModel(Json, undefined, context);
+        const card = new CardModel(json, undefined, context);
         return card.schemaCheckResult;
     }
 
-    public static getDescendsAndSelf(Json: any) {
+    public static getDescendsAndSelf(json: any) {
         const context = CardContext.createInstance();
-        const card = new CardModel(Json, undefined, context);
+        const card = new CardModel(json, undefined, context);
         return card.descendsAndSelf;
     }
 
-    public static getSchemaCheckMessage(Json: any) {
-        let checkResult = this.getSchemaCheckResult(Json);
+    public static getSchemaCheckMessage(json: any) {
+        let checkResult = this.getSchemaCheckResult(json);
         let outputMessage: string[] = [];
 
         if (checkResult && checkResult.messages) {
