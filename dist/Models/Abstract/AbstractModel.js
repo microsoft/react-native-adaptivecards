@@ -3,6 +3,7 @@ import { TreeNode } from '../../Shared/Types';
 export class AbstractModel extends TreeNode {
     constructor(json, parent, context) {
         super(parent);
+        this.path = [];
         this.context = context;
         this.rawData = json;
         this.type = json.type || this.type;
@@ -13,28 +14,21 @@ export class AbstractModel extends TreeNode {
         this.outputSchemaMessage();
         if (parent === undefined) {
             if (this.type === undefined) {
-                this.path = 'undefined type >>';
+                this.path.push('undefined type');
             }
             else {
-                this.path = this.type + ' >> ';
+                this.path.push(this.type);
             }
         }
         else {
+            this.path = parent.path.slice(0);
             if (this.type === undefined) {
-                this.path = parent.path + 'undefined type >>';
+                this.path.push('undefined type');
             }
             else {
-                this.path = parent.path + this.type + ' >> ';
+                this.path.push(this.type);
             }
         }
-        let temp = undefined;
-        if (parent !== undefined) {
-            temp = parent.type;
-        }
-        console.log(``);
-        console.log(`the parent of ${this.type} is ${temp}`);
-        console.log(`${this.path}`);
-        console.log(``);
     }
     outputSchemaMessage() {
         if (this.context) {
@@ -88,9 +82,6 @@ export class AbstractModel extends TreeNode {
     }
     get isSchemaCheckPassed() {
         return this.schemaCheckResult.isValid;
-    }
-    get getSchemaCheckResult() {
-        return this.schemaCheckResult;
     }
     get children() {
         return [];

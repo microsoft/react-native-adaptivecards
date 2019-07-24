@@ -19,10 +19,12 @@ class ErrorMessage extends React.Component {
         else {
             let component = JsonValidator.getDescendsAndSelf(json);
             component.forEach(com => {
-                let temp_res = com.getSchemaCheckResult;
+                let temp_res = com.schemaCheckResult;
                 if (temp_res.messages.length > 0) {
                     temp_res.messages.forEach(mes => {
-                        mes.message = com.path + mes.message
+                        let temp_path = com.path.join(' >> ');
+                        temp_path = temp_path + ' >> ';
+                        mes.message = temp_path + mes.message
                     })
                     result = result.combine(temp_res)
                 }

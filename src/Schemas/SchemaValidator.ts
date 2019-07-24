@@ -99,7 +99,6 @@ export class SchemaValidator {
 
             return result;
         }
-        // return new SchemaResult(true, new SchemaMessage('Warning', `No Schema available for ${JSON.stringify(json)}`));
         return new SchemaResult(true, new SchemaMessage('Warning', `No Schema available for the type, check type!`));
     }
 

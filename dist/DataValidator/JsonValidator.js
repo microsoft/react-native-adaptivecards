@@ -1,45 +1,45 @@
 import { CardContext } from '../Contexts/CardContext';
 import { CardModel } from '../Models/Cards/Card';
 export class JsonValidator {
-    static isSchemaValid(Json) {
-        let context = CardContext.createInstance();
-        let card = new CardModel(Json, undefined, context);
+    static isSchemaValid(json) {
+        const context = CardContext.createInstance();
+        const card = new CardModel(json, undefined, context);
         return card.isSchemaCheckPassed;
     }
     static getSchemaCheckResult(Json) {
-        let context = CardContext.createInstance();
-        let card = new CardModel(Json, undefined, context);
-        return card.getSchemaCheckResult;
+        const context = CardContext.createInstance();
+        const card = new CardModel(Json, undefined, context);
+        return card.schemaCheckResult;
     }
     static getDescendsAndSelf(Json) {
-        let context = CardContext.createInstance();
-        let card = new CardModel(Json, undefined, context);
+        const context = CardContext.createInstance();
+        const card = new CardModel(Json, undefined, context);
         return card.descendsAndSelf;
     }
     static getSchemaCheckMessage(Json) {
         let checkResult = this.getSchemaCheckResult(Json);
-        let output_message = [];
+        let outputMessage = [];
         if (checkResult && checkResult.messages) {
             checkResult.messages.forEach((message) => {
                 switch (message.level) {
                     case 'Info':
-                        output_message = output_message.concat(`Info >> ${message.message}  `);
+                        outputMessage = outputMessage.concat(`Info >> ${message.message}  `);
                         break;
                     case 'Warning':
-                        output_message = output_message.concat(`Warning >> ${message.message}  `);
+                        outputMessage = outputMessage.concat(`Warning >> ${message.message}  `);
                         break;
                     case 'Error':
-                        output_message = output_message.concat(`Error >> ${message.message}  `);
+                        outputMessage = outputMessage.concat(`Error >> ${message.message}  `);
                         break;
                     default:
-                        output_message = output_message.concat(`Unknown message >> ${message.message}  `);
+                        outputMessage = outputMessage.concat(`Unknown message >> ${message.message}  `);
                         break;
                 }
             });
         }
-        if (output_message.length < 1) {
-            output_message = output_message.concat(`Valid Data`);
+        if (outputMessage.length < 1) {
+            outputMessage = outputMessage.concat(`Valid Data`);
         }
-        return [checkResult.isValid, output_message];
+        return [checkResult.isValid, outputMessage];
     }
 }
