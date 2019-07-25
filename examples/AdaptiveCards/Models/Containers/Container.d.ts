@@ -10,5 +10,5 @@ export declare class ContainerModel extends ScopeModel {
     style: 'default' | 'emphasis';
     backgroundImage: BackgroundImageModel;
     constructor(json: any, parent: AbstractModel, context: CardContext);
-    readonly children: (ContentModel | import("../Actions/OpenUrlAction").OpenUrlActionModel | import("../Actions/SubmitAction").SubmitActionModel | BackgroundImageModel)[];
+    readonly children: AbstractModel[];
 }
