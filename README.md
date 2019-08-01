@@ -4,6 +4,8 @@ React Native renderer for [AdaptiveCards](http://adaptivecards.io/).
 
 ![Sample Screenshot](./screenshot.gif "Sample Screenshot")
 
+Online renderer and debugging tool can be found [here](https://microsoft.github.io/react-native-adaptivecards/)
+
 ## Getting Started
 
 ### Basic Usage

@@ -62,4 +62,5 @@
   }
   .Pane2 {
     background-color: white;
+    overflow: auto;
   }

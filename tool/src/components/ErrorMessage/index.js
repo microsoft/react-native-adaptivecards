@@ -32,10 +32,10 @@ class ErrorMessage extends React.Component {
         }
 
         return (
-            <div>
+            <div className="error-list">
                 <Alert message={`Input data is ${result.isValid ? "valid" : "invalid"}`} type={result.isValid ? "success" : "error"} />
                 {
-                    result.messages.map(mes => <Alert message={mes.level + ' : ' + mes.message} type={mes.level.charAt(0).toLowerCase()+mes.level.slice(1)} />)
+                    result.messages.map(mes => <Alert message={mes.level + ' : ' + mes.message} type={mes.level.charAt(0).toLowerCase() + mes.level.slice(1)} />)
                 }
             </div>
         );
