@@ -23,7 +23,7 @@ class ErrorMessage extends React.Component {
                 if (temp_res.messages.length > 0) {
                     temp_res.messages.forEach(mes => {
                         let temp_path = com.path.join(' >> ');
-                        temp_path = temp_path + ' >> ';
+                        temp_path = temp_path + ' : ';
                         mes.message = temp_path + mes.message
                     })
                     result = result.combine(temp_res)
@@ -32,10 +32,10 @@ class ErrorMessage extends React.Component {
         }
 
         return (
-            <div>
+            <div className="error-list">
                 <Alert message={`Input data is ${result.isValid ? "valid" : "invalid"}`} type={result.isValid ? "success" : "error"} />
                 {
-                    result.messages.map(mes => <Alert message={mes.level + ' : ' + mes.message} type={mes.level.charAt(0).toLowerCase()+mes.level.slice(1)} />)
+                    result.messages.map(mes => <Alert message={mes.level + ' : ' + mes.message} type={mes.level.charAt(0).toLowerCase() + mes.level.slice(1)} />)
                 }
             </div>
         );

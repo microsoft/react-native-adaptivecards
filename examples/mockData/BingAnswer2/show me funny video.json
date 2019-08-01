@@ -1,110 +1,128 @@
 {
-	"body": [{
-		"items": [{
-			"items": [{
-				"horizontalAlignment": "left",
-				"size": "medium",
-				"text": "I pulled up some videos for you.",
-				"type": "TextBlock"
-			}],
+	"body": [
+		{
+			"items": [
+				{
+					"items": [
+						{
+							"horizontalAlignment": "left",
+							"size": "medium",
+							"text": "I pulled up some videos for you.",
+							"type": "TextBlock"
+						}
+					],
+					"type": "Container"
+				},
+				{
+					"type": "ImageSet",
+					"imageSize": "large",
+					"images": [
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(1)&apiq=iD62mXlb4KNauRjt_E9UROu6DwvZwObCZSakjF6V3kDdZnIPjdFf65FA5ce-Bz0douF_D-_aZBPyOVQwkbjccyHZocsx70BYePpaJa0FfP69-GmL9V10vWp8pYFc_6c7g6MN76sMXDvOj55A6ds6fxy_710l7UpCNGNBWHg7tR8",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=8CD31B9AA3A933A0C3DC8CD31B9AA3A933A0C3DC",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(2)&apiq=fsXoznpNDg_7TJo0WPdjkuVJxLu28uSYsePeatcIkOasjqjMmNtyhvHXZtpZswR2L4YI_JlRjCoAibKCRDKjcaHfgrcjLc5RTVL026NdmhYcvzR5cOnap5fLtvfALZ5l6X0m_b-Wy3q2su_1EKfoQergs-IMeiBUHQUMz41pFXI",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=869AD1E6AF9AFE43B95C869AD1E6AF9AFE43B95C",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(3)&apiq=_4e_fXjFIe9yq67UBrPhDVe4cDFdighb2MALF8SE4WPNF9V7HEKbMQXdZqojYBMM3M6qq6GD1KvGSHXTZdeViVY8pNn9z6BLp5XedNB6OM5yijd78Usb22YoS47Zah1TKbKh_-QFooCKQQLOGr-xfjCr985I91L1U51DGeNcXAE",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=7D153AAECB5572518D4E7D153AAECB5572518D4E",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(4)&apiq=lR3YzZB9AjVWnyjsXM1rPvKwQAAOIhPry5WXujKJB87zAmqHAxnEpowEcPAMuWcYZGEJMMNrTutwN_n0qahuYNX-aQymTU4ozkdwESYqNX70h9ikqjvyrufPM_s1yx-6n0GsqemlP_29lBKa8Ua2pH7M2UDm9YIkGSLYcyAV488",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=130A5D6B3FB6EEAB1DB4130A5D6B3FB6EEAB1DB4",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(5)&apiq=VcZ29-uX6Zn1hbNuYqiT96wcOG_dVtbbGzmfKzC2WsFf_lygrUwu-bWCv0bMiNKKk8k8PXEW6dU5SplIdfLMI6XP5htQpKBHQURejFnPmh2sKyvBs7x5YhWk3ennGKNWkv3RKTwLMdIelRIAjyv0g7CvaaHQ5j0ZWQGJ-B32MPs",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=E304D30753C588475ED9E304D30753C588475ED9",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(6)&apiq=h9RrJkZl5TpddjvHlmw-8I6tPDMP9GU1RvHjZxYPt6Obe7ecv0UWlsR6ohYc3zqSqAvg7VHDCRX0wCIrDGZmzUtvfRoAinxrYLW852rweQPjl4EFU3o1gHL3D6Jal0cYwIfJlzj8idrOsAxxXX-n3rx4uFUSWnX8-SPr65q0boU",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=2BF5041CA11ECB1C285A2BF5041CA11ECB1C285A",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(7)&apiq=nzai8brt8nRWeSnvg9b_U7FoP4jLPZQ6qr6Buo4-qtbp0QUFaSBHZtE3xElmY0cmol6tCBepNZfTjkyVcDQ2lUVqClyWpVX9ElQZ7f_bdd-kPT7QcJTWBvsr8NYami8j5K5Yxm4b_3fvdKtCk2BvHTf53__y2cV9geXvOWZRweo",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=780FFA49BBE15674BEB5780FFA49BBE15674BEB5",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(8)&apiq=7hOQHQMjxeT24X-DBRQdTQlaYCgDGLQSCdy1mIxZwBlA82NQfO2KoVhrAZKqhosk1dtc1vGl8s0ooY1cmvtLyfnXXCiFbOSsPD6WMdnZai6Ztpv9hTVjTuoer2e5Ypj7ZLO3Ut6D_Sv0_1EPkVRPP7xS3K3jKS3R--MLCEEM-Xc",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=5FB81F052B1972A1B0DF5FB81F052B1972A1B0DF",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(9)&apiq=g8oa86AvGXITnZ0mIXDl7mhzA3HYW87I0szMSHN2wMumJWb2m-QCY9SSGLrVfbn832sm-lHophpb0ZejXL6tETSjnwCD2rzu_tug6WH1J9KkXD6ZG57JkAEtWqtDc0QdEA7tUMeoyMZUoHvauk-z3H-09fMUsprhtbLszv1XBG4",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=D209EAB70A7EEEF0E595D209EAB70A7EEEF0E595",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						},
+						{
+							"horizontalAlignment": "center",
+							"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(10)&apiq=UmTFSu7bro7AKRlz65HtRu2bJpvjOAnhHKf4U-wxgJIsVAtRLrrzthFzdxcpyVFeZ_7S_jiE-V4PtG1OncEmu0UzFlhZcNOmLaHjcbQS-zKBIs153whGzc_9I-Rz_gPqM_ItNmgGtsnyUUE_cH6HSh1gFbqmyhxmdCPdKdXMFEg",
+							"selectAction": {
+								"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=F04635C67694D36BE27DF04635C67694D36BE27D",
+								"type": "Action.OpenUrl"
+							},
+							"size": "large",
+							"type": "Image"
+						}
+					]
+				}
+			],
 			"type": "Container"
-		}, {
-			"type": "ImageSet",
-            "imageSize": "large",
-            "images": [{
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(1)&apiq=iD62mXlb4KNauRjt_E9UROu6DwvZwObCZSakjF6V3kDdZnIPjdFf65FA5ce-Bz0douF_D-_aZBPyOVQwkbjccyHZocsx70BYePpaJa0FfP69-GmL9V10vWp8pYFc_6c7g6MN76sMXDvOj55A6ds6fxy_710l7UpCNGNBWHg7tR8",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=8CD31B9AA3A933A0C3DC8CD31B9AA3A933A0C3DC",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(2)&apiq=fsXoznpNDg_7TJo0WPdjkuVJxLu28uSYsePeatcIkOasjqjMmNtyhvHXZtpZswR2L4YI_JlRjCoAibKCRDKjcaHfgrcjLc5RTVL026NdmhYcvzR5cOnap5fLtvfALZ5l6X0m_b-Wy3q2su_1EKfoQergs-IMeiBUHQUMz41pFXI",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=869AD1E6AF9AFE43B95C869AD1E6AF9AFE43B95C",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(3)&apiq=_4e_fXjFIe9yq67UBrPhDVe4cDFdighb2MALF8SE4WPNF9V7HEKbMQXdZqojYBMM3M6qq6GD1KvGSHXTZdeViVY8pNn9z6BLp5XedNB6OM5yijd78Usb22YoS47Zah1TKbKh_-QFooCKQQLOGr-xfjCr985I91L1U51DGeNcXAE",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=7D153AAECB5572518D4E7D153AAECB5572518D4E",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(4)&apiq=lR3YzZB9AjVWnyjsXM1rPvKwQAAOIhPry5WXujKJB87zAmqHAxnEpowEcPAMuWcYZGEJMMNrTutwN_n0qahuYNX-aQymTU4ozkdwESYqNX70h9ikqjvyrufPM_s1yx-6n0GsqemlP_29lBKa8Ua2pH7M2UDm9YIkGSLYcyAV488",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=130A5D6B3FB6EEAB1DB4130A5D6B3FB6EEAB1DB4",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(5)&apiq=VcZ29-uX6Zn1hbNuYqiT96wcOG_dVtbbGzmfKzC2WsFf_lygrUwu-bWCv0bMiNKKk8k8PXEW6dU5SplIdfLMI6XP5htQpKBHQURejFnPmh2sKyvBs7x5YhWk3ennGKNWkv3RKTwLMdIelRIAjyv0g7CvaaHQ5j0ZWQGJ-B32MPs",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=E304D30753C588475ED9E304D30753C588475ED9",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(6)&apiq=h9RrJkZl5TpddjvHlmw-8I6tPDMP9GU1RvHjZxYPt6Obe7ecv0UWlsR6ohYc3zqSqAvg7VHDCRX0wCIrDGZmzUtvfRoAinxrYLW852rweQPjl4EFU3o1gHL3D6Jal0cYwIfJlzj8idrOsAxxXX-n3rx4uFUSWnX8-SPr65q0boU",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=2BF5041CA11ECB1C285A2BF5041CA11ECB1C285A",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(7)&apiq=nzai8brt8nRWeSnvg9b_U7FoP4jLPZQ6qr6Buo4-qtbp0QUFaSBHZtE3xElmY0cmol6tCBepNZfTjkyVcDQ2lUVqClyWpVX9ElQZ7f_bdd-kPT7QcJTWBvsr8NYami8j5K5Yxm4b_3fvdKtCk2BvHTf53__y2cV9geXvOWZRweo",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=780FFA49BBE15674BEB5780FFA49BBE15674BEB5",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(8)&apiq=7hOQHQMjxeT24X-DBRQdTQlaYCgDGLQSCdy1mIxZwBlA82NQfO2KoVhrAZKqhosk1dtc1vGl8s0ooY1cmvtLyfnXXCiFbOSsPD6WMdnZai6Ztpv9hTVjTuoer2e5Ypj7ZLO3Ut6D_Sv0_1EPkVRPP7xS3K3jKS3R--MLCEEM-Xc",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=5FB81F052B1972A1B0DF5FB81F052B1972A1B0DF",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(9)&apiq=g8oa86AvGXITnZ0mIXDl7mhzA3HYW87I0szMSHN2wMumJWb2m-QCY9SSGLrVfbn832sm-lHophpb0ZejXL6tETSjnwCD2rzu_tug6WH1J9KkXD6ZG57JkAEtWqtDc0QdEA7tUMeoyMZUoHvauk-z3H-09fMUsprhtbLszv1XBG4",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=D209EAB70A7EEEF0E595D209EAB70A7EEEF0E595",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}, {
-				"horizontalAlignment": "center",
-				"url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=5fb92d425feb4256a43488385bedcd87&contentid=4iGnn4jTP0RW2RJDfyje0g&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=9D23B5BAB6700EACC1C285EDD136DD3F&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=5630AB740C3E4BA99B22DAB98B296FA6&expire=1531634360&seemorefilter=MultimediaKifVideoAnswer_Video&s=.apiScreenshotItem%3anth-child(10)&apiq=UmTFSu7bro7AKRlz65HtRu2bJpvjOAnhHKf4U-wxgJIsVAtRLrrzthFzdxcpyVFeZ_7S_jiE-V4PtG1OncEmu0UzFlhZcNOmLaHjcbQS-zKBIs153whGzc_9I-Rz_gPqM_ItNmgGtsnyUUE_cH6HSh1gFbqmyhxmdCPdKdXMFEg",
-				"selectAction": {
-					"url": "https://www.bing.com/videos/search?q=Show%20me%20funny%20video.&view=detail&mid=F04635C67694D36BE27DF04635C67694D36BE27D",
-					"type": "Action.OpenUrl"
-				},
-				"size": "large",
-				"type": "Image"
-			}]
-		}],
-		"type": "Container"
-	}],
+		}
+	],
 	"version": "1.0",
 	"type": "AdaptiveCard"
 }

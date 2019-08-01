@@ -17,15 +17,14 @@ export default class App extends React.Component {
                 <div className="main-page">
                     <SampleList />
                     <div style={{display: 'flex', flex: 1}}>
-                        <SplitPane split="vertical" defaultSize="72%" style={{ position: 'relative' }}>
+                        <SplitPane split="vertical" defaultSize="72%" style={{ position: 'relative'}}>
                             <Editor />
-                            <SplitPane split="horizontal" defaultSize="60%">
+                            <SplitPane split="horizontal" defaultSize="60%"  >
                                 <CardList />
                                 <ErrorMessage />
                             </SplitPane>
                         </SplitPane>
                     </div>
-
                 </div>
             </div>
         );

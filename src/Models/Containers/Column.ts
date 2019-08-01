@@ -30,9 +30,13 @@ export class ColumnModel extends ScopeModel {
     }
 
     public get children() {
+        let result = [...this.items] as AbstractModel[];
         if (this.selectAction) {
-            return [...this.items, this.selectAction, this.backgroundImage];
+            result = result.concat(this.selectAction);
         }
-        return this.items;
+        if (this.backgroundImage) {
+            result = result.concat(this.backgroundImage);
+        }
+        return result;
     }
 }
