@@ -14,6 +14,7 @@ export class ColumnSetView extends React.Component {
                     flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',
+                    alignItems: 'stretch',
                     justifyContent: 'flex-start',
                     marginTop: this.spacing,
                 } }, this.renderContent()));
@@ -23,6 +24,7 @@ export class ColumnSetView extends React.Component {
                     flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',
+                    alignItems: 'stretch',
                     justifyContent: 'flex-start',
                     marginTop: this.spacing
                 } }, this.renderContent()));
