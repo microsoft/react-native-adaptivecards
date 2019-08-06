@@ -32,6 +32,8 @@ var button = require('./button.json');
 var list = require('./list.json');
 var third = require('./3rd.json');
 var markdown = require('./markdown.json');
+var outlookCard1 = require('./outlookCard1.json');
+var outlookCard2 = require('./outlookCard2.json');
 
 exports["default"] = {
     adaptiveUpdate: adaptiveUpdate,
@@ -66,4 +68,6 @@ exports["default"] = {
     list: list,
     third: third,
     markdown: markdown,
+    outlookCard1: outlookCard1,
+    outlookCard2: outlookCard2
 };

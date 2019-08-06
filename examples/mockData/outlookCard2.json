@@ -1,0 +1,162 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.0",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "separator": true,
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "verticalContentAlignment": "center",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUGpdCZPe_EFMcQ6hUec4hqTD0IdfCqkc-KkI0a_pLgqzI-L81",
+                                    "size": "small",
+                                    "style": "person"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "Input.Text",
+                                    "id": "input1",
+                                    "title": "New Input.Toggle",
+                                    "value": "Grabbing some time"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "verticalContentAlignment": "center",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ97nynHETPkcHfpv-X_8-2yxyjRAeheGcsaCnVJv0jAi_qBc7PWg",
+                                    "size": "small",
+                                    "style": "person"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "Input.Text",
+                                    "id": "input2",
+                                    "title": "New Input.Toggle",
+                                    "value": "Charlotte Watson"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "ColumnSet",
+                    "separator":true,
+                    "spacing":"extraLarge",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Date",
+                                    "isSubtle": true,
+                                    "size": "Small"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Mon, Mar 18",
+                                    "size": "Small"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Tomorrow",
+                                    "size": "Small",
+                                    "isSubtle": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "separator":true,
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "TextBlock",
+                                                    "text": "Tomorrow",
+                                                    "size": "Small",
+                                                    "isSubtle": true
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "Image",
+                                                    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTHwEoIzFCtWyPHONZVqSDwLS9LSJFajsB6rZ7UWUPug8l8JlAbg",
+                                                    "size": "Small",
+                                                    "style": "Person"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "width": "auto",
+                                            "items": [
+                                                {
+                                                    "type": "Image",
+                                                    "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAUVBMVEX///8zZsyouuYmX8oSV8jJ1O8JVcgqYcswZMtfg9QrYsv7/P4SWMhbgNTk6vdBb89JdNBPeNH3+f1Te9Ly9fs/bs5Fcs85as3t8frDz+6svOdMzX33AAADGUlEQVR4nO2Zi3aaQBRFmaqRSjSNbdLH/39oGbEGhTDAzJR7Dmd/gGv22uO9oEUhhBBCCCGEEEIIIYQQQgghhBBCCCGE4OL3aekTZGa3Pfxa+gxZ2T2VJbXibls6V5a8ihdBZsWrIK/iTbBWdIyKLUFf8cfS50nOnaBzB8emWK8J55gVd88PgrXiTybFTkG2ig/fQb6KvQWZFD8p2Cielz5dAj4teFF8w684KOjc05+lDxjLwBX1bL8sfcBYAgUJBLuL/u6K4guuvCCBYGCK4gvST1EJgiPBpQ8YS0CQYIpq0YPDX1BDBpy1F5SgefgF6deEfpMBZ+2PagRXVFMUHP6CEgSH/3WJfsho0YOz9iEjQfNIcOkDxsIvqEUPDn9B+u8g/dvEygsSCGrIgMNfUH++gLP2R7X/cUVPVc5PNzBFT8/HjJ9uQXBTbr5m+3Qbgs5lU7QiWCvmuah2BDNVNPC6dBPMUtHAom8JZqhoYNHfCSavaK1g8oqWhkwWRZuCCRWtCiZTtCuYaNxYFkxS0bZggooG1kRx3AwdIbKijd9kvu8HFWMqWijoCSjOr2jgUe1KpooGfpO5kaWigSnaIoOile/gP5Ir2iroSaxoTzDxuLEoWBSv6Soa+E2ml2QVrQ2ZDxJVtLPouySpaGnRd3mNfwy3OWQ+iFa0LhitaF8wUhFBMKg4NG4wBCMqogjOrmh30XeZtfotL/ouAcW+ikgFPd+mVsT5Dl6pJl5Uq28TQ0yqCFfQU01QhBQsJlREGzI3xlZELegJKDZLA7agZ0xFG3++zCa0NI7YBT2BivvjHlwwqDjoZ/6KNlTvg4roBT2BiviCsxVxBGdeVCTBWRWxBGdUxJiibSYqohX0TFJEFJykiCk4QRFVcLQiruBIRWTBUYrYgiMU0QWL4vwyqIgvGKjIIDhYEe9RrZ/q/cBc0FO99CryCNYXta8iyxVt6KnIVNBzflRkE+wo8gnWim8HbsG7ipyCrYpcU7TNtSJrQc+lIrPgpSLvFW04O3LB+ulm6QMIIYQQQgghhBBCCCGEEEIIIcSa+QvWES566jm/3AAAAABJRU5ErkJggg==",
+                                                    "size": "Small",
+                                                    "style": "Person"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "2:00 - 3:00",
+                                    "size": "Small"
+                                },
+                                {
+                                    "type": "TextBlock",
+                                    "text": "Duration: 1 hour",
+                                    "size": "Small",
+                                    "isSubtle": true
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

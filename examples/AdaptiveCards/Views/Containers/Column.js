@@ -107,10 +107,7 @@ export class ColumnView extends React.Component {
         if (!model) {
             return 'flex-start';
         }
-        if (model.height === 'stretch') {
-            return 'stretch';
-        }
-        return 'flex-start';
+        return 'stretch';
     }
     get flex() {
         const { model } = this.props;

@@ -51,6 +51,7 @@ export class ColumnSetView extends React.Component<IProps, IState> {
                     flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',
+                    alignItems: 'stretch',
                     justifyContent: 'flex-start',
                     marginTop: this.spacing,
                 }}
@@ -67,6 +68,7 @@ export class ColumnSetView extends React.Component<IProps, IState> {
                     flex: this.flex,
                     flexDirection: 'row',
                     alignSelf: 'stretch',
+                    alignItems: 'stretch',
                     justifyContent: 'flex-start',
                     marginTop: this.spacing
                 }}
