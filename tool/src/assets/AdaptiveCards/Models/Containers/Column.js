@@ -10,7 +10,21 @@ export class ColumnModel extends ScopeModel {
         this.style = StringUtils.normalize(json.style);
         this.height = StringUtils.normalize(json.height);
         this.verticalContentAlignment = StringUtils.normalize(json.verticalContentAlignment, 'top');
-        this.width = StringUtils.normalize(json.width);
+        if (typeof json.width === 'number') {
+            this.width = json.width < 0 ? 0 : json.width;
+        }
+        else if (typeof json.width === 'string') {
+            let columnWidth = parseInt(json.width, 10);
+            if (isNaN(columnWidth)) {
+                let jsonLowerCase = json.width.toLowerCase();
+                if (jsonLowerCase === 'auto' || jsonLowerCase === 'stretch') {
+                    this.width = jsonLowerCase;
+                }
+            }
+            else {
+                this.width = columnWidth < 0 ? 0 : columnWidth;
+            }
+        }
         if (json.backgroundImage) {
             this.backgroundImage = new BackgroundImageModel(json.backgroundImage, this, this.context);
             this.context.fit = 'background';
