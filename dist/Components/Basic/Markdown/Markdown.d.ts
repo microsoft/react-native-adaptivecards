@@ -10,6 +10,7 @@ export declare class Markdown extends React.Component<IProps> {
     private renderListBullet;
     private renderLink;
     private renderText;
+    private renderImage;
     private renderNode;
     private openUrl;
 }

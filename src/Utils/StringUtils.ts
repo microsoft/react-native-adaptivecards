@@ -16,14 +16,12 @@ export class StringUtils {
     }
 
     public static normalize(value: any, defaultValue?: any): any {
-        if (value) {
-            if (typeof value === 'number') {
-                return value < 0 ? 0 : value;
-            }
-            if (typeof value === 'string') {
-                return value.toLocaleLowerCase();
-            }
+        if (value === null || value === undefined) {
+            return defaultValue;
         }
-        return defaultValue;
+        if (typeof value === 'string') {
+            return value.toLowerCase();
+        }
+        return value;
     }
 }

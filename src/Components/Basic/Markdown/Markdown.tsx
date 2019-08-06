@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { LinkData, TextData, Types } from './Mddata';
+import { ImageData, LinkData, MarkdownTypes, TextData } from './MarkdownTypes';
+
+import { FitImage } from './FitImage';
 
 import { merge } from 'lodash';
 import { Rules } from './Rulers';
@@ -13,6 +15,7 @@ import {
     TextStyle,
     View,
 } from 'react-native';
+import { StyleManager } from '../../../Styles/StyleManager';
 
 var mergedStyles: any;
 
@@ -21,7 +24,6 @@ interface IProps extends TextProps {
 }
 
 export class Markdown extends React.Component<IProps> {
-
     public render() {     
         // merge Styles with customization markdown style
         mergedStyles = merge({}, Styles, this.props.markdownStyles);
@@ -31,7 +33,8 @@ export class Markdown extends React.Component<IProps> {
                     ? this.props.children.join('') 
                     : this.props.children;
         if (typeof child === 'string') {
-            nodes = Rules.parse(child);  
+            let rules: Rules = new Rules(child, mergedStyles);
+            nodes = rules.parse();  
         }
         
         let content = this.renderNode(nodes, 'markdown');
@@ -51,7 +54,7 @@ export class Markdown extends React.Component<IProps> {
 
         let listItems = data.map((node, index) => {
             const childKey = key + index.toString();
-            return this.renderListItem(node, childKey, index, order);
+            return this.renderListItem((node as TextData), childKey, index, order);
         });
 
         return (
@@ -61,9 +64,9 @@ export class Markdown extends React.Component<IProps> {
         );
     }
 
-    private renderListItem(node: any, key: string, index: number, ordered: boolean): JSX.Element {
+    private renderListItem(node: TextData, key: string, index: number, ordered: boolean): JSX.Element {
         return (
-            <View style={mergedStyles.listItem} key={key + '_listItem'}>
+            <View style={node.style} key={key + '_listItem'}>
                 {this.renderListBullet(ordered, key, index)}
                 {this.renderNode(node, key)}
             </View>
@@ -80,16 +83,16 @@ export class Markdown extends React.Component<IProps> {
     }
 
     private renderLink(node: LinkData, key: string, style: StyleProp<TextStyle>): JSX.Element {
-        let mergestyle: StyleProp<TextStyle> = merge({}, style, mergedStyles.link);
+        let mergestyle: StyleProp<TextStyle> = merge({}, style, node.style);
         return (
             <Text key={key} style={mergestyle} onPress={() => this.openUrl(node.link)} >{this.renderNode(node.data, key, mergestyle)}</Text>
         );
     }
 
     // render simple text.
-    private renderText(node: TextData | string, key: string, markdownStyles: StyleProp<TextStyle>): JSX.Element {
+    private renderText(node: TextData | string, key: string, styles: StyleProp<TextStyle>): JSX.Element {
         const { accessible, style, numberOfLines, ellipsizeMode } = this.props; 
-        let mergestyle: StyleProp<TextStyle> = merge({}, style, markdownStyles);
+        let mergestyle: StyleProp<TextStyle> = merge({}, style, styles);
         return (
             <Text
                 key={key}
@@ -100,6 +103,12 @@ export class Markdown extends React.Component<IProps> {
             >
                 {typeof node === 'string' ? node : this.renderNode(node, key, mergestyle)}
             </Text>
+        );
+    }
+
+    private renderImage(node: ImageData, key: string): JSX.Element {
+        return (
+            <FitImage key={key} source={node.link} label={node.label} maxHeight={StyleManager.inSetImageMaxHeight} />
         );
     }
 
@@ -116,20 +125,22 @@ export class Markdown extends React.Component<IProps> {
         } else {
             // merge style that from upper node to current node.
             switch (node.type) {
-                case Types.simple: 
-                    return this.renderText(node.data, key + '_simple', style);
-                case Types.bold: 
-                    return this.renderText(node.data, key + '_bold', style ? merge({}, style, mergedStyles.bold) : mergedStyles.bold);
-                case Types.italic: 
-                    return this.renderText(node.data, key + '_italic', style ? merge({}, style, mergedStyles.italic) : mergedStyles.italic);
-                case Types.itemcontent: 
-                    return this.renderText(node.data, key + '_link', style);
-                case Types.hyperlinks: 
-                    return this.renderLink((node as LinkData), key + '_link', style);
-                case Types.orderlist: 
-                    return this.renderList(node.data, key + '_orderlist', true);
-                case Types.unorderlist: 
-                    return this.renderList(node.data, key + '_unorderlist', false);
+                case MarkdownTypes.Simple: 
+                case MarkdownTypes.Bold: 
+                case MarkdownTypes.Italic: 
+                case MarkdownTypes.BoldItalic:
+                case MarkdownTypes.Delete:  
+                case MarkdownTypes.ItemContent: 
+                case MarkdownTypes.Heading:
+                    return this.renderText(node.data, key + node.type, style ? merge({}, style, node.style) : node.style);
+                case MarkdownTypes.HyperLink: 
+                    return this.renderLink((node as LinkData), key + node.type, style ? merge({}, style, node.style) : node.style);
+                case MarkdownTypes.OrderList: 
+                    return this.renderList(node.data, key + node.type, true);
+                case MarkdownTypes.UnorderList: 
+                    return this.renderList(node.data, key + node.type, false);
+                case MarkdownTypes.ImageLink: 
+                    return this.renderImage((node as ImageData), key + node.type);
                 case undefined/* string */: 
                     if (typeof node === 'string') {
                         return this.renderText(node, key + '_string', style);
@@ -143,8 +154,16 @@ export class Markdown extends React.Component<IProps> {
     }
 
     private openUrl = (url: string) => {
-        Linking.openURL(url).catch(error =>
-            console.warn('An error occurred: ', error),
-        );
+        if (!url) {
+            console.error('this is an empty url');
+        } else {
+            Linking.canOpenURL(url).then(supported => { 
+                if (!supported) {
+                    console.error('url not supported ' + url);
+                } else {
+                    Linking.openURL(url);
+                }
+            }).catch(err => console.error('An error occurred', err));
+        }
     }
 }

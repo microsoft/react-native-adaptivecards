@@ -1,5 +1,5 @@
 import { TimeUtils } from '../../../Utils/TimeUtils';
-import { NUM_TO_LongDay, NUM_TO_LongMonth, NUM_TO_ShortDay, NUM_TO_ShortMonth, } from './Mddata';
+import { NormalizeDate } from './MarkdownTypes';
 var DateType;
 (function (DateType) {
     DateType[DateType["COMPACT"] = 0] = "COMPACT";
@@ -35,9 +35,9 @@ export class RFC3339Date {
     static getMonthWithType(date, dateType) {
         switch (dateType) {
             case DateType.SHORT:
-                return NUM_TO_ShortMonth[date.getMonth()];
+                return NormalizeDate.NUM_TO_SHORT_MONTH[date.getMonth()];
             case DateType.LONG:
-                return NUM_TO_LongMonth[date.getMonth()];
+                return NormalizeDate.NUM_TO_LONG_MONTH[date.getMonth()];
             case DateType.COMPACT:
                 return (date.getMonth() + 1).toString();
             default:
@@ -47,9 +47,9 @@ export class RFC3339Date {
     static getDayWithType(date, dateType) {
         switch (dateType) {
             case DateType.SHORT:
-                return NUM_TO_ShortDay[date.getDay()];
+                return NormalizeDate.NUM_TO_SHORT_DAY[date.getDay()];
             case DateType.LONG:
-                return NUM_TO_LongDay[date.getDay()];
+                return NormalizeDate.NUM_TO_LONG_DAY[date.getDay()];
             case DateType.COMPACT:
                 return date.getDate().toString();
             default:
