@@ -1,180 +1,176 @@
-import { RegData, Types} from './Mddata';
+import { 
+    ImageData, LinkData, Markdown_Formatter_Config, MarkdownFormatter, MarkdownTypes, TextData
+} from './MarkdownTypes';
 import { RFC3339Date } from './RFC3339Date';
 
-var CR_NEWLINE_R = /\r\n?/g;
-var TAB_R = /\t/g;
-var FORMFEED_R = /\f/g;
+const CR_NEWLINE_R = /\r\n?/g;
+const TAB_R = /\t/g;
+const FORMFEED_R = /\f/g;
+const SPECIAL_CHAR_REGEX = /[\\]/g;
+const LIST_ITME = /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/;
 
-export const Rules = {
-    regexobject: {
-        bold: /\*\*([^\n*]+)\*\*/,
-        italic: /_([^\n_]+)_/,
-        lists: /^((\s*((\*|\-)|\d(\.|\))) [^\n]+))+/gm,
-        listItem: /^((\s*)((\*|\-)|\d(\.|\))) ([^\n]+))/,
-        links: /\[([^\]<>]+)\]\(([^ \)<>]+)( "[^\(\)\"]+")?\)/
-    },
-  
-    parse(text: string) : any {
-        if (typeof text !== 'string') {
+export class Rules {
+    public text: string;
+    public styles: any;
+
+    constructor(text: string, styles?: any) {
+        this.text = text;
+        this.styles = styles;
+    }
+
+    public parse() : any {
+        if (typeof this.text !== 'string') {
             return undefined;
         }
+
+        let out: any = this.text;
+        out = this.preprocessor(out);        
+        out = RFC3339Date.parseRFC3339(out).toString();
         
-        // Turn various crazy whitespace into easy to process things
-        text = text.replace(CR_NEWLINE_R, '\n')
-                .replace(FORMFEED_R, '')
-                .replace(TAB_R, '    ');
-        
-        text = RFC3339Date.parseRFC3339(text).toString();
-        // parse list
-        let out = this.execType(text, this.parseList.bind(this));
-        // parse link
-        out = this.execType(out, this.parseLink.bind(this));
-        // parse normal text
-        out = this.execType(out, this.parseText.bind(this));
+        for (var i = 0; i < Markdown_Formatter_Config.length; ++i) {
+            out = this.execData(out, Markdown_Formatter_Config[i], false);    
+        }
 
         return out;
-    },
+    }
 
-    execType(data: any, func: any): any {
+    // Turn various crazy whitespace into easy to process things
+    private preprocessor(text: string): string {
+        return text.replace(CR_NEWLINE_R, '\n')
+                .replace(FORMFEED_R, '')
+                .replace(TAB_R, '    ')
+                .replace(SPECIAL_CHAR_REGEX, '');
+    }
+
+    private execData(data: any, markdownFormatter: MarkdownFormatter, isAlreadySimpleText?: boolean): any {
         if (typeof data === 'string') {
-            return func(data);
+            if (markdownFormatter.isSimpleText && !isAlreadySimpleText) {
+                return this.parseSimpleText(data, markdownFormatter);
+            } else {
+                return this.parseText(data, markdownFormatter);
+            }
         } else if (Array.isArray(data)) {
-            return data.map(e => this.execType(e, func));
+            return data.map(e => this.execData(e, markdownFormatter, isAlreadySimpleText));
         } else if (typeof data === 'object') {
-            data.data = this.execType(data.data, func);
+            data.data = this.execData(data.data, markdownFormatter, data.type === MarkdownTypes.Simple ? true : isAlreadySimpleText);
             return data;
+        } else {
+            return null;
         }
-    },
+    }
 
-    // Recursive can't express the tree structure, so instead use the loop
-    parseList(text: string) {
+    // regard text as a group, so it will render continue in current line
+    private parseSimpleText(text: string, markdownFormatter: MarkdownFormatter) {
         let out = [];
-        let stra;
-        while ((stra = this.regexobject.lists.exec(text)) !== null) {
-            let before = text.slice(0, stra.index).trim();
-            if (before.length) {
-                out.push({
-                // regard text that left is simple text
-                type: Types.simple,
-                data: before,
-                });
-            }
-
-            let helper = stra[0].split('\n');
-            let listItem: RegExpExecArray | null;
-            let orderItems = [];
-            let unorderItems = [];
-            // list may include order and unorder item, and separate them.
-            for (let i = 0; i < helper.length; i++) {
-                if ((listItem = this.regexobject.listItem.exec(helper[i])) !== null) {
-                    if ((listItem[0].trim().substr(0, 1) === '*') || (listItem[0].trim().substr(0, 1) === '-')) {
-                        if (orderItems.length) {
-                            out.push({
-                                type: Types.orderlist,
-                                data: orderItems,
-                            });
-                            orderItems = [];
-                        }
-                        unorderItems.push({
-                            type: Types.itemcontent,
-                            data: listItem[6].trim(),
-                        });
-                    } else {
-                        if (unorderItems.length) {
-                            out.push({
-                                type: Types.unorderlist,
-                                data: unorderItems,
-                            });
-                            unorderItems = [];
-                        }
-                        orderItems.push({
-                            type: Types.itemcontent,
-                            data: listItem[6].trim(),
-                        });
-                    }
-                }
-            }
-
-            if (orderItems.length) {
-                out.push({
-                    type: Types.orderlist,
-                    data: orderItems,
-                });
-                orderItems = [];
-            }
-
-            if (unorderItems.length) {
-                out.push({
-                    type: Types.unorderlist,
-                    data: unorderItems,
-                });
-                unorderItems = [];
-            }
-
-            text = text.slice(stra.index + stra[0].length, text.length).trim();
-        }
-        
         if (text.length) {
             out.push({
-                type: Types.simple,
-                data: text.trim(),
+                type: MarkdownTypes.Simple,
+                data: this.parseText(text, markdownFormatter),
             });
         }
 
         return out;
-    },
+    }
 
-    parseLink(text: string): any {
-        if (this.regexobject.links.exec(text) === null) {
+    private parseText(text: string, markdownFormatter: MarkdownFormatter) {
+        if (markdownFormatter.pattern.exec(text) === null) {
             return text;
         }
 
-        const out = [];
-        let regData: RegExpExecArray | null;
-
-        while ((regData = this.regexobject.links.exec(text)) !== null) {
-            if (!regData || regData.length < 3) {
-                break;
-            }
-            
+        let out = [];
+        let regData: RegExpExecArray;
+        while ((regData = markdownFormatter.pattern.exec(text)) !== null) {
             if (regData.index > 0) {
                 out.push(text.slice(0, regData.index));
             }
-            
-            out.push({
-                type: Types.hyperlinks,
-                link: regData[2],
-                data: regData[1],
-            });
-            text = text.slice(regData.index + regData[0].length);
-        }
 
-        if (text.length) {
-        out.push(text);
-        }
+            switch (markdownFormatter.type) {
+                case MarkdownTypes.Heading:
+                    let headingData: TextData = {
+                        type: MarkdownTypes.Heading,
+                        data: regData[2],
+                        style: this.styles[`h${regData[1].length}`],
+                    };
+                    out.push(headingData);  
+                    break;
+                case MarkdownTypes.ImageLink:
+                    let imageLinkData: ImageData = {
+                        type: MarkdownTypes.ImageLink,
+                        link: regData[2],
+                        label: regData[1],
+                        data: '',
+                    };
+        
+                    out.push(imageLinkData);
+                    break;
+                case MarkdownTypes.HyperLink:
+                    let linkData: LinkData = {
+                        type: MarkdownTypes.HyperLink,
+                        link: regData[2],
+                        data: regData[1],
+                        style: this.styles.link,
+                    };
+                    out.push(linkData);
+                    break;
+                case MarkdownTypes.OrderList:
+                case MarkdownTypes.UnorderList:
+                    let helper = regData[0].split('\n');
+                    let listItem: RegExpExecArray | null;
+                    let items = [];
+                    // list may include order and unorder item, and separate them.
+                    for (let i = 0; i < helper.length; i++) {
+                        if ((listItem = LIST_ITME.exec(helper[i])) !== null) {
+                            let item: TextData = {
+                                type: MarkdownTypes.ItemContent,
+                                data: listItem[6].trim(),
+                                style: this.styles.listItem
+                            };
+                            items.push(item);
+                        }
+                    }
 
-        return out;
-    },
-
-    /* bold and italic */
-    parseText(text: string) : any {
-        if (this.findNextType(text) === null) {
-            return text;
-        }
-
-        const out = [];
-        let regData: RegData | null;
-        while ((regData = this.findNextType(text)) !== null) {
-            if (regData.data.index > 0) {
-                out.push(text.slice(0, regData.data.index));
+                    if (items.length) {
+                        out.push({
+                            type: markdownFormatter.type,
+                            data: items,
+                        });
+                    }
+                    break;
+                case MarkdownTypes.BoldItalic:
+                    let textData: TextData = {
+                        type: MarkdownTypes.BoldItalic,
+                        data: this.parseText(regData[2], markdownFormatter),
+                        style: this.styles.bolditalic,
+                    };
+                    if (regData[1] === '~~') {
+                        textData.type = MarkdownTypes.Delete;
+                        textData.style = this.styles.delete;
+                    } else {
+                        switch (regData[1].length) {
+                            case 1:
+                                textData.type = MarkdownTypes.Italic;
+                                textData.style = this.styles.italic;
+                                break;
+                            case 2:
+                                textData.type = MarkdownTypes.Bold;
+                                textData.style = this.styles.bold;
+                                break;
+                            case 3:
+                            default:
+                                break;
+                        }
+                    }
+                    
+                    out.push(textData);
+                    break;
+                default:
+                    break;             
             }
-
-            out.push({
-                type: regData.type,
-                data: this.parseText(regData.data[1]),
-            });
-
-            text = text.slice(regData.data.index + regData.data[0].length);
+            
+            text = text.slice(regData.index + regData[0].length);
+            if (!markdownFormatter.isSimpleText) {
+                text = text.trim();
+            }
         }
 
         if (text.length) {
@@ -182,46 +178,5 @@ export const Rules = {
         }
 
         return out;
-    },
-
-    findNextType(text: string) {
-        let boldData: RegData | null = this.findBold(text);
-        let italicData: RegData | null = this.findItalic(text);
-        
-        const data = [];
-        if (boldData) {
-            data.push(boldData);
-        }
-        
-        if (italicData) {
-            data.push(italicData);
-        }
-        
-        let sortedData = data.sort(function(a: RegData, b: RegData) {
-            return a.data.index - b.data.index;
-        });
-
-        return sortedData.length ? sortedData[0] : null;
-    },
-
-    findBold(text: string) {
-        return this.find(Rules.regexobject.bold, Types.bold, text);
-    },
-
-    findItalic(text: string) {
-        return this.find(this.regexobject.italic, Types.italic, text);
-    },
-
-    find(reg : RegExp, type: Types, text: string) {
-        let regRes = reg.exec(text);
-        if (regRes) {
-            let ret: RegData = {
-                type: type,
-                data: regRes,
-            };
-            return ret; 
-        }
-
-        return null;
-  },
-};
+    }
+}
