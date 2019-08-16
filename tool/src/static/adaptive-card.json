@@ -138,308 +138,64 @@
     }
   },
   {
-    "name": "Latest news",
-    "card": {
-      "body": [
-        {
-          "items": [
-            {
-              "items": [
-                {
-                  "horizontalAlignment": "center",
-                  "size": "medium",
-                  "text": "Here's the latest npr podcast.",
-                  "type": "TextBlock"
-                }
-              ],
-              "type": "Container"
-            },
-            {
-              "items": [
-                {
-                  "horizontalAlignment": "center",
-                  "url": "https://www.bingapis.com/widget/apiscreenshotproxy?input=2&setlang=en-us&cc=us&cardbranded=true&screenshotstyle=small&imageformat=jpeg&imagequality=20&conversation=true&answercount=1&promote=suggestedReplies&extendcortana=1&addfeaturesnoexpansion=adaptivecard&adaptivecard=true&responseformat=html&apicache=0425c04c3a6841f390f5c1ad60162df2&contentid=QwSQQwZoigUS7jBAJf06fw&apiversion=v7&w=285&z=3&scale=300&mkt=en-US&clientid=70629021414711DB08FDA4208821ECA2&ua=Mozilla%2f5.0+(Windows+NT+10.0%3b+Win64%3b+x64%3b+Cortana+1.7.17.14393%3b+10.0.0.0.14393.82)+AppleWebKit%2f537.36+(KHTML%2c+like+Gecko)+Chrome%2f51.0.2704.79+Safari%2f537.36+Edge%2f14.14393&sessionId=FD8E39E4387647E39553938ED0D06304&expire=1531631022&seemorefilter=NewsAnswerV2_CategoryNews&s=.apiScreenshotItem%3anth-child(1)&apiq=7RdTLqXz9yex6SGLYcr3UCYnqjwm1RaE6GIdqncgRpnI0DK7TL9Qor9yDD4HL10zgx_GNi4OVrBZMiR7PhDIe0JGXYk14hZUaAMlk8hGhvmvxJ2Ke0QOAi7fE6K6YWsCCaQKuAjsifYz5K0NN14dlrrbKhCy5pwjKNmKO-VWO8Y",
-                  "selectAction": {
-                    "url": "http://www.ibtimes.com/study-finds-young-people-no-longer-getting-news-facebook-2691001",
-                    "title": "View",
-                    "type": "Action.OpenUrl"
-                  },
-                  "size": "auto",
-                  "type": "Image"
-                }
-              ],
-              "type": "Container"
-            }
-          ],
-          "type": "Container"
-        }
-      ],
-      "version": "1.0",
-      "type": "AdaptiveCard"
-    }
-  },
-  {
     "name": "Restaurant",
     "card": {
       "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
       "type": "AdaptiveCard",
       "version": "0.5",
-      "body": [{
-        "speak": "Tom's Pie is a Pizza restaurant which is rated 9.3 by customers.",
-        "type": "ColumnSet",
-        "columns": [{
-          "type": "Column",
-          "width": 2,
-          "items": [{
-            "type": "TextBlock",
-            "text": "PIZZA"
-          },
-            {
-              "type": "TextBlock",
-              "text": "Tom's Pie",
-              "weight": "bolder",
-              "size": "extraLarge",
-              "spacing": "none"
-            },
-            {
-              "type": "TextBlock",
-              "text": "4.2 ★★★☆ (93) · $$",
-              "isSubtle": true,
-              "spacing": "none"
-            },
-            {
-              "type": "TextBlock",
-              "text": "**Matt H. said** \"I'm compelled to give this place 5 stars due to the number of times I've chosen to eat here this past year!\"",
-              "size": "small",
-              "wrap": true
-            }
-          ]
-        },
-          {
-            "type": "Column",
-            "width": 1,
-            "items": [{
-              "type": "Image",
-              "url": "http://res.cloudinary.com/sagacity/image/upload/c_crop,h_670,w_635,x_0,y_0/c_scale,w_640/v1397425743/Untitled-4_lviznp.jpg",
-              "size": "auto"
-            }]
-          }
-        ]
-      }],
-      "actions": [{
-        "type": "Action.OpenUrl",
-        "title": "More Info",
-        "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-      }]
-    }
-  },
-  {
-    "name": "Inputs",
-    "card": {
-      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-      "type": "AdaptiveCard",
-      "version": "1.0",
       "body": [
         {
-          "type": "TextBlock",
-          "size": "medium",
-          "weight": "bolder",
-          "text": "Input.Text elements",
-          "horizontalAlignment": "center"
-        },
-        {
-          "type": "Input.Text",
-          "placeholder": "Name",
-          "style": "text",
-          "maxLength": 0,
-          "id": "SimpleVal"
-        },
-        {
-          "type": "Input.Text",
-          "placeholder": "Homepage",
-          "style": "url",
-          "maxLength": 0,
-          "id": "UrlVal"
-        },
-        {
-          "type": "Input.Text",
-          "placeholder": "Email",
-          "style": "email",
-          "maxLength": 0,
-          "id": "EmailVal"
-        },
-        {
-          "type": "Input.Text",
-          "placeholder": "Phone",
-          "style": "tel",
-          "maxLength": 0,
-          "id": "TelVal"
-        },
-        {
-          "type": "Input.Text",
-          "placeholder": "Comments",
-          "style": "text",
-          "isMultiline": true,
-          "maxLength": 0,
-          "id": "MultiLineVal",
-          "value": "test"
-        },
-        {
-          "type": "Input.Number",
-          "placeholder": "Quantity",
-          "min": -15,
-          "max": 15,
-          "value": 0,
-          "id": "NumVal"
-        },
-        {
-          "type": "Input.Date",
-          "placeholder": "Due Date",
-          "id": "DateVal",
-          "min": "2017-08-20",
-          "max": "2018-08-20",
-          "value": "2017-09-20"
-        },
-        {
-          "type": "Input.Time",
-          "placeholder": "Start time",
-          "id": "TimeVal",
-          "min": "16:00",
-          "max": "19:00",
-          "value": "16:59"
-        },
-        {
-          "type": "TextBlock",
-          "size": "medium",
-          "weight": "bolder",
-          "text": "Input.ChoiceSet",
-          "horizontalAlignment": "center"
-        },
-        {
-          "type": "TextBlock",
-          "text": "What color do you want? (compact)"
-        },
-        {
-          "type": "Input.ChoiceSet",
-          "id": "CompactSelectVal",
-          "style": "compact",
-          "placeholder": "Pick a color",
-          "value": "1",
-          "choices": [
+          "speak": "Tom's Pie is a Pizza restaurant which is rated 9.3 by customers.",
+          "type": "ColumnSet",
+          "columns": [
             {
-              "title": "Red",
-              "value": "1"
+              "type": "Column",
+              "width": 2,
+              "items": [
+                {
+                  "type": "TextBlock",
+                  "text": "PIZZA"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "Tom's Pie",
+                  "weight": "bolder",
+                  "size": "extraLarge",
+                  "spacing": "none"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "4.2 ★★★☆ (93) · $$",
+                  "isSubtle": true,
+                  "spacing": "none"
+                },
+                {
+                  "type": "TextBlock",
+                  "text": "**Matt H. said** \"I'm compelled to give this place 5 stars due to the number of times I've chosen to eat here this past year!\"",
+                  "size": "small",
+                  "wrap": true
+                }
+              ]
             },
             {
-              "title": "Green",
-              "value": "2"
-            },
-            {
-              "title": "Blue",
-              "value": "3"
+              "type": "Column",
+              "width": 1,
+              "items": [
+                {
+                  "type": "Image",
+                  "url": "http://res.cloudinary.com/sagacity/image/upload/c_crop,h_670,w_635,x_0,y_0/c_scale,w_640/v1397425743/Untitled-4_lviznp.jpg",
+                  "size": "auto"
+                }
+              ]
             }
           ]
-        },
-        {
-          "type": "TextBlock",
-          "text": "What color do you want? (expanded)"
-        },
-        {
-          "type": "Input.ChoiceSet",
-          "id": "SingleSelectVal",
-          "style": "expanded",
-          "value": "1",
-          "choices": [
-            {
-              "title": "Red",
-              "value": "1"
-            },
-            {
-              "title": "Green",
-              "value": "2"
-            },
-            {
-              "title": "Blue",
-              "value": "3"
-            }
-          ]
-        },
-        {
-          "type": "TextBlock",
-          "text": "What colors do you want? (multiselect)"
-        },
-        {
-          "type": "Input.ChoiceSet",
-          "id": "MultiSelectVal",
-          "isMultiSelect": true,
-          "value": "1,3",
-          "choices": [
-            {
-              "title": "Red",
-              "value": "1"
-            },
-            {
-              "title": "Green",
-              "value": "2"
-            },
-            {
-              "title": "Blue",
-              "value": "3"
-            }
-          ]
-        },
-        {
-          "type": "TextBlock",
-          "size": "medium",
-          "weight": "bolder",
-          "text": "Input.Toggle",
-          "horizontalAlignment": "center"
-        },
-        {
-          "type": "Input.Toggle",
-          "title": "I accept the terms and conditions (True/False)",
-          "valueOn": "true",
-          "valueOff": "false",
-          "id": "AcceptsTerms"
-        },
-        {
-          "type": "Input.Toggle",
-          "title": "Red cars are better than other cars",
-          "valueOn": "RedCars",
-          "valueOff": "NotRedCars",
-          "id": "ColorPreference"
         }
       ],
       "actions": [
         {
-          "type": "Action.Submit",
-          "title": "Submit",
-          "data": {
-            "id": "1234567890"
-          }
-        },
-        {
-          "type": "Action.ShowCard",
-          "title": "Show Card",
-          "card": {
-            "version": "1.0",
-            "type": "AdaptiveCard",
-            "body": [
-              {
-                "type": "Input.Text",
-                "placeholder": "enter comment",
-                "style": "text",
-                "maxLength": 0,
-                "id": "CommentVal"
-              }
-            ],
-            "actions": [
-              {
-                "type": "Action.Submit",
-                "title": "OK"
-              }
-            ]
-          }
+          "type": "Action.OpenUrl",
+          "title": "More Info",
+          "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
         }
       ]
     }
@@ -451,167 +207,18 @@
       "type": "AdaptiveCard",
       "version": "0.5",
       "backgroundImage": "https://download-ssl.msgamestudios.com/content/mgs/ce/production/SolitaireWin10/dev/adapative_card_assets/v1/card_background.png",
-      "body": [{
-        "type": "ColumnSet",
-        "columns": [{
-          "type": "Column",
-          "width": 1,
-          "items": [{
-            "type": "Image",
-            "url": "https://download-ssl.msgamestudios.com/content/mgs/ce/production/SolitaireWin10/dev/adapative_card_assets/v1/tile_spider.png",
-            "size": "stretch"
-          }]
-        },
-          {
-            "type": "Column",
-            "width": 1,
-            "items": [{
-              "type": "TextBlock",
-              "text": "Click here to play another game of Spider in Microsoft Solitaire Collection!",
-              "color": "light",
-              "weight": "bolder",
-              "wrap": true,
-              "size": "default",
-              "horizontalAlignment": "center"
-            }]
-          }
-        ]
-      }]
-    }
-  },
-  {
-    "name": "StockUpdate",
-    "card": {
-      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-      "type": "AdaptiveCard",
-      "version": "0.5",
-      "speak": "Microsoft stock is trading at $62.30 a share, which is down .32%",
-      "body": [{
-        "type": "Container",
-        "items": [{
-          "type": "TextBlock",
-          "text": "Microsoft Corp (NASDAQ: MSFT)",
-          "size": "medium",
-          "isSubtle": true
-        },
-          {
-            "type": "TextBlock",
-            "text": "September 19, 4:00 PM EST",
-            "isSubtle": true
-          }
-        ]
-      },
-        {
-          "type": "Container",
-          "spacing": "none",
-          "items": [{
-            "type": "ColumnSet",
-            "columns": [{
-              "type": "Column",
-              "width": "stretch",
-              "items": [{
-                "type": "TextBlock",
-                "text": "75.30",
-                "size": "extraLarge"
-              },
-                {
-                  "type": "TextBlock",
-                  "text": "▼ 0.20 (0.32%)",
-                  "size": "small",
-                  "color": "attention",
-                  "spacing": "none"
-                }
-              ]
-            },
-              {
-                "type": "Column",
-                "width": "auto",
-                "items": [{
-                  "type": "FactSet",
-                  "facts": [{
-                    "title": "Open",
-                    "value": "62.24"
-                  },
-                    {
-                      "title": "High",
-                      "value": "62.98"
-                    },
-                    {
-                      "title": "Low",
-                      "value": "62.20"
-                    }
-                  ]
-                }]
-              }
-            ]
-          }]
-        }
-      ]
-    }
-  },
-  {
-    "name": "Input form",
-    "card": {
-      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-      "type": "AdaptiveCard",
-      "version": "1.0",
       "body": [
         {
           "type": "ColumnSet",
           "columns": [
             {
               "type": "Column",
-              "width": 2,
+              "width": 1,
               "items": [
                 {
-                  "type": "TextBlock",
-                  "text": "Tell us about yourself",
-                  "weight": "bolder",
-                  "size": "medium"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "We just need a few more details to get you booked for the trip of a lifetime!",
-                  "isSubtle": true,
-                  "wrap": true
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "Don't worry, we'll never share or sell your information.",
-                  "isSubtle": true,
-                  "wrap": true,
-                  "size": "small"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "Your name",
-                  "wrap": true
-                },
-                {
-                  "type": "Input.Text",
-                  "id": "myName",
-                  "placeholder": "Last, First"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "Your email",
-                  "wrap": true
-                },
-                {
-                  "type": "Input.Text",
-                  "id": "myEmail",
-                  "placeholder": "youremail@example.com",
-                  "style": "email"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "Phone Number"
-                },
-                {
-                  "type": "Input.Text",
-                  "id": "myTel",
-                  "placeholder": "xxx.xxx.xxxx",
-                  "style": "tel"
+                  "type": "Image",
+                  "url": "https://download-ssl.msgamestudios.com/content/mgs/ce/production/SolitaireWin10/dev/adapative_card_assets/v1/tile_spider.png",
+                  "size": "stretch"
                 }
               ]
             },
@@ -620,247 +227,17 @@
               "width": 1,
               "items": [
                 {
-                  "type": "Image",
-                  "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Diver_Silhouette%2C_Great_Barrier_Reef.jpg",
-                  "size": "stretch"
+                  "type": "TextBlock",
+                  "text": "Click here to play another game of Spider in Microsoft Solitaire Collection!",
+                  "color": "light",
+                  "weight": "bolder",
+                  "wrap": true,
+                  "size": "default",
+                  "horizontalAlignment": "center"
                 }
               ]
             }
           ]
-        }
-      ],
-      "actions": [
-        {
-          "type": "Action.Submit",
-          "title": "Submit",
-          "data": {
-            "myData": "Test"
-          }
-        }
-      ]
-    }
-  },
-  {
-    "name": "Image gallery",
-    "card": {
-      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-      "type": "AdaptiveCard",
-      "version": "1.0",
-      "body": [
-        {
-          "type": "TextBlock",
-          "text": "Here are some cool photos",
-          "size": "large"
-        },
-        {
-          "type": "TextBlock",
-          "text": "Sorry some of them are repeats",
-          "size": "medium",
-          "weight": "lighter"
-        },
-        {
-          "type": "ImageSet",
-          "imageSize": "large",
-          "images": [
-            {
-              "type": "Image",
-              "url": "https://connectorsdemo.azurewebsites.net/images/MicrosoftSurface_024_Cafe_OH-06315_VS_R1c.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "https://connectorsdemo.azurewebsites.net/images/WIN12_Scene_01.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "https://connectorsdemo.azurewebsites.net/images/WIN12_Anthony_02.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "http://images4.fanpop.com/image/photos/14700000/So-cute-puppies-14749028-1600-1200.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "http://images4.fanpop.com/image/photos/22000000/Cute-Puppies-puppies-22040876-1280-800.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "https://1.bp.blogspot.com/-4PGB-FXZrCI/UXmYyvR92eI/AAAAAAAAAYc/B_mRdYv24kU/s1600/alaskan_malamute_puppies(1).jpg"
-            },
-            {
-              "type": "Image",
-              "url": "https://4.bp.blogspot.com/-inMkTgEoMj4/T6LG__DWGaI/AAAAAAAAAJg/6kLgDyHeOc8/s1600/Cute-Puppy-puppies-15813268-1024-768.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "http://cutepuppydog.net/wallpapers/cute-puppies9.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "http://images1.fanpop.com/images/photos/1900000/Puppies-3-dogs-1993812-1024-768.jpg"
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    "name": "Food order",
-    "card": {
-      "type": "AdaptiveCard",
-      "version": "1.0",
-      "body": [
-        {
-          "type": "TextBlock",
-          "text": "Your registration is almost complete",
-          "size": "medium",
-          "weight": "bolder"
-        },
-        {
-          "type": "TextBlock",
-          "text": "What type of food do you prefer?",
-          "wrap": true
-        },
-        {
-          "type": "ImageSet",
-          "imageSize": "large",
-          "images": [
-            {
-              "type": "Image",
-              "url": "https://contososcubabot.azurewebsites.net/assets/steak.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "https://contososcubabot.azurewebsites.net/assets/chicken.jpg"
-            },
-            {
-              "type": "Image",
-              "url": "https://contososcubabot.azurewebsites.net/assets/tofu.jpg"
-            }
-          ]
-        }
-      ],
-      "actions": [
-        {
-          "type": "Action.ShowCard",
-          "title": "Steak",
-          "card": {
-            "type": "AdaptiveCard",
-            "version": "1.0",
-            "body": [
-              {
-                "type": "TextBlock",
-                "text": "How would you like your steak prepared?",
-                "size": "medium",
-                "wrap": true
-              },
-              {
-                "type": "Input.ChoiceSet",
-                "id": "SteakTemp",
-                "style": "expanded",
-                "choices": [
-                  {
-                    "title": "Rare",
-                    "value": "rare"
-                  },
-                  {
-                    "title": "Medium-Rare",
-                    "value": "medium-rare"
-                  },
-                  {
-                    "title": "Well-done",
-                    "value": "well-done"
-                  }
-                ]
-              },
-              {
-                "type": "Input.Text",
-                "id": "1",
-                "isMultiline": true,
-                "placeholder": "Any other preparation requestes?"
-              }
-            ],
-            "actions": [
-              {
-                "type": "Action.Submit",
-                "title": "OK"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Action.ShowCard",
-          "title": "Chicken",
-          "card": {
-            "type": "AdaptiveCard",
-            "version": "1.0",
-            "body": [
-              {
-                "type": "TextBlock",
-                "text": "Do you have any allergies?",
-                "size": "medium",
-                "wrap": true
-              },
-              {
-                "type": "Input.ChoiceSet",
-                "id": "ChickenAllergy",
-                "style": "expanded",
-                "isMultiSelect": true,
-                "choices": [
-                  {
-                    "title": "I'm allergic to peanuts",
-                    "value": "peanut"
-                  }
-                ]
-              },
-              {
-                "type": "Input.Text",
-                "id": "2",
-                "isMultiline": true,
-                "placeholder": "Any other preparation requestes?"
-              }
-            ],
-            "actions": [
-              {
-                "type": "Action.Submit",
-                "title": "OK"
-              }
-            ]
-          }
-        },
-        {
-          "type": "Action.ShowCard",
-          "title": "Tofu (Vegetarian)",
-          "card": {
-            "type": "AdaptiveCard",
-            "version": "1.0",
-            "body": [
-              {
-                "type": "TextBlock",
-                "text": "Would you like it prepared vegan?",
-                "size": "medium",
-                "wrap": true
-              },
-              {
-                "type": "Input.Toggle",
-                "id": "Vegetarian",
-                "title": "Please prepare it vegan",
-                "valueOn": "vegan",
-                "valueOff": "notVegan"
-              },
-              {
-                "type": "Input.Text",
-                "id": "3",
-                "isMultiline": true,
-                "placeholder": "Any other preparation requestes?"
-              }
-            ],
-            "actions": [
-              {
-                "type": "Action.Submit",
-                "title": "OK"
-              }
-            ]
-          }
         }
       ]
     }
@@ -1076,236 +453,574 @@
     }
   },
   {
-    "name": "Flight update",
+    "name": "outlook card 1",
+    "card": {
+      "type": "AdaptiveCard",
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "version": "1.0",
+      "body": [
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "data:image/png;base64,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",
+                      "size": "large",
+                      "style": "person"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "Contoso Year Planning",
+                      "weight": "bolder",
+                      "wrap": true,
+                      "size": "medium"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "spacing": "none",
+                      "text": "12:30PM - 1:30PM",
+                      "wrap": true
+                    },
+                    {
+                      "type": "ColumnSet",
+                      "columns": [
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "Image",
+                              "url": "data:image/png;base64,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",
+                              "size": "small",
+                              "style": "person"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "stretch",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "spacing": "none",
+                              "text": "Conf room 3560",
+                              "isSubtle": true,
+                              "wrap": true,
+                              "size": "small"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs0WtjmOj9HHwXx6BUoOM34ULU5UzZj-erLyUxDiKcgSs2o5J5hg",
+                      "size": "small",
+                      "style": "person"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJANj-YddJxPxhhvF2TXtsW-PEbpe3drCMdhVE6QJYbK1zqpgnEg",
+                      "size": "small",
+                      "style": "person"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAhFBMVEX///8irDgAqCYbqzMApyIOqSwcqzQAph6l2awSqS76/vsFqCjX7trf8uJavWjx+vK848HO69KFzI6U0pxiv25MuFvF58k2skn2/PdvxHrh8+S24bye1qVTu2IqsEDn9+p/yoiNz5VCtVOq27G34LzI58w9tE8ysUWByophwG/T7dZsxHhSW6v9AAAES0lEQVR4nO3c23qiOgAFYA0kCAh4xBOi1anuse//fhvtOFVbW1GSFZn133DL+kKOJGk0iIiIiIiIiIiIiIiIiIiIiIiIiP5xQZJE6WzdylrrTneajNHvU6mgve69rZquK0QoZRgK15Pb+aSfLtBvVoloPRjJ0HdU84xyfCnUqpc+eWFO+7kbXoY7zekLL+48bcjxr9iT19MdOcLpReh3vUeSbYXzY7x3vhi8ot+3rKCvwp+L77QgV130O5eydmWJeO8ZvfnzfKvdlSib770ce8/R5gT/iTLf5yk5StFvf4P2tvQH+kG5S/T7/yjz7i3AP8W4sbs2JgP3oXwFx1+jU3xjMfIfDVhwe+gcV+1uGMHcQkzQSa54vbsNvRQOrOw2OmFF+QpyGKDjfNatMGARMUbn+SS6axhzXWhbXUy2VdXBI/GCznQmGFbRTZxzreoX3x4YqV3l7dCxPmQPj2S+opoJOthR5OkIWEz9B+hkR6tbVyvKEpZUxX6lPeF5RCu+00hHK/OH/xudbu939R3FB9eCSX+qpR09Uiv8ADWvejBzDt/YzCoej15SI3AhBhu9RVgUYgub8JfmIiwobMK57iIsmtMOMmBbfxE21RyZsKezLzySyBVUfeO104TAubDe3v5IDXEJJyY+0qLDaKMCBvob0gPZRyWsdgHxOgfWmvY1zpvOuKhpYqxrbn9JgOZQSW4oIKwiRkb6ij1Uf6F74nRCYhK+mGpoioqI2eNnqL8/JMRsJxqaakqLhJAZVGCsKS3qYYZIODZXDZs+ZPPCWNPfii8TQv6XLgwmdCBr31NjHX6REPJbv20yIWR2Uf+E5oalqK+0/i1N/XuL+vf49R+11X/k/Q/Mnuo/Aza4ihFCAppciQItCSdbUwlhy/q1XxE2uKqP2ti+M/VnBvYDMVBmfq/h/q41BmYqoovbLJwa6RGRe9sCIwmROxUay9rvNjGxVoPdMWSi08fu+mp0tNdElUMDGth9GYJ3X+rfQbuFb4PWvQsaXYRFTdS7k30DL8KiOa37aYRGpDGh/4ZOd5Dpm0T5VpwK0niyy5pDltpO59nxje61tHSKKrfkG92baDkla9OtQ+NR9VXRw/yNuWbxzZVl9wmX6EwXdhVXRWnNGeC/0mpvjZhbMFq7VOXhCytv/mg0uhVdT7O/vQWd5Yp2s5oWVSzRSa6q5hYlz647P86N44ebVEfM0Cm+93LzdZBfkyPYIadbdTcPdBvKXVrZiJ4Let69xSjzJ7nksz2869YvP7T3orZPZnnpFscRA7vvE7wwzlSp6uh4sU1zpZuMW86tzaqSbmzRjUkldGIpfwypfLHtTdGvercoG7rfhvSFmjzvbdfvplksvND/vKnBkcLLlx2L1mIeEM2WG+WHh0vnC2HxdPI4S+uR7q/F7rXTOlin3XbNwhEREREREREREREREREREREREREREREREREREREREVEN/A9DEkaCuFWZYwAAAABJRU5ErkJggg==",
+                      "size": "small",
+                      "style": "person"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "outlook card 2",
+    "card": {
+      "type": "AdaptiveCard",
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "version": "1.0",
+      "body": [
+        {
+          "type": "Container",
+          "items": [
+            {
+              "type": "ColumnSet",
+              "separator": true,
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "verticalContentAlignment": "center",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUGpdCZPe_EFMcQ6hUec4hqTD0IdfCqkc-KkI0a_pLgqzI-L81",
+                      "size": "small",
+                      "style": "person"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "Input.Text",
+                      "id": "input1",
+                      "title": "New Input.Toggle",
+                      "value": "Grabbing some time"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "ColumnSet",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "auto",
+                  "verticalContentAlignment": "center",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ97nynHETPkcHfpv-X_8-2yxyjRAeheGcsaCnVJv0jAi_qBc7PWg",
+                      "size": "small",
+                      "style": "person"
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "Input.Text",
+                      "id": "input2",
+                      "title": "New Input.Toggle",
+                      "value": "Charlotte Watson"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "ColumnSet",
+              "separator": true,
+              "spacing": "extraLarge",
+              "columns": [
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "Date",
+                      "isSubtle": true,
+                      "size": "Small"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "Mon, Mar 18",
+                      "size": "Small"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "Tomorrow",
+                      "size": "Small",
+                      "isSubtle": true
+                    }
+                  ]
+                },
+                {
+                  "type": "Column",
+                  "width": "stretch",
+                  "separator": true,
+                  "items": [
+                    {
+                      "type": "ColumnSet",
+                      "columns": [
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "TextBlock",
+                              "text": "Tomorrow",
+                              "size": "Small",
+                              "isSubtle": true
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "Image",
+                              "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTHwEoIzFCtWyPHONZVqSDwLS9LSJFajsB6rZ7UWUPug8l8JlAbg",
+                              "size": "Small",
+                              "style": "Person"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "Column",
+                          "width": "auto",
+                          "items": [
+                            {
+                              "type": "Image",
+                              "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAUVBMVEX///8zZsyouuYmX8oSV8jJ1O8JVcgqYcswZMtfg9QrYsv7/P4SWMhbgNTk6vdBb89JdNBPeNH3+f1Te9Ly9fs/bs5Fcs85as3t8frDz+6svOdMzX33AAADGUlEQVR4nO2Zi3aaQBRFmaqRSjSNbdLH/39oGbEGhTDAzJR7Dmd/gGv22uO9oEUhhBBCCCGEEEIIIYQQQgghhBBCCCGE4OL3aekTZGa3Pfxa+gxZ2T2VJbXibls6V5a8ihdBZsWrIK/iTbBWdIyKLUFf8cfS50nOnaBzB8emWK8J55gVd88PgrXiTybFTkG2ig/fQb6KvQWZFD8p2Cielz5dAj4teFF8w684KOjc05+lDxjLwBX1bL8sfcBYAgUJBLuL/u6K4guuvCCBYGCK4gvST1EJgiPBpQ8YS0CQYIpq0YPDX1BDBpy1F5SgefgF6deEfpMBZ+2PagRXVFMUHP6CEgSH/3WJfsho0YOz9iEjQfNIcOkDxsIvqEUPDn9B+u8g/dvEygsSCGrIgMNfUH++gLP2R7X/cUVPVc5PNzBFT8/HjJ9uQXBTbr5m+3Qbgs5lU7QiWCvmuah2BDNVNPC6dBPMUtHAom8JZqhoYNHfCSavaK1g8oqWhkwWRZuCCRWtCiZTtCuYaNxYFkxS0bZggooG1kRx3AwdIbKijd9kvu8HFWMqWijoCSjOr2jgUe1KpooGfpO5kaWigSnaIoOile/gP5Ir2iroSaxoTzDxuLEoWBSv6Soa+E2ml2QVrQ2ZDxJVtLPouySpaGnRd3mNfwy3OWQ+iFa0LhitaF8wUhFBMKg4NG4wBCMqogjOrmh30XeZtfotL/ouAcW+ikgFPd+mVsT5Dl6pJl5Uq28TQ0yqCFfQU01QhBQsJlREGzI3xlZELegJKDZLA7agZ0xFG3++zCa0NI7YBT2BivvjHlwwqDjoZ/6KNlTvg4roBT2BiviCsxVxBGdeVCTBWRWxBGdUxJiibSYqohX0TFJEFJykiCk4QRFVcLQiruBIRWTBUYrYgiMU0QWL4vwyqIgvGKjIIDhYEe9RrZ/q/cBc0FO99CryCNYXta8iyxVt6KnIVNBzflRkE+wo8gnWim8HbsG7ipyCrYpcU7TNtSJrQc+lIrPgpSLvFW04O3LB+ulm6QMIIYQQQgghhBBCCCGEEEIIIcSa+QvWES566jm/3AAAAABJRU5ErkJggg==",
+                              "size": "Small",
+                              "style": "Person"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "2:00 - 3:00",
+                      "size": "Small"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "Duration: 1 hour",
+                      "size": "Small",
+                      "isSubtle": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "name": "markdown",
     "card": {
       "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
       "type": "AdaptiveCard",
       "version": "1.0",
-      "speak": "Flight KL0605 to San Fransisco has been delayed.It will not leave until 10:10 AM.",
+      "body": [
+        {
+          "type": "TextBlock",
+          "text": ""
+        },
+        {
+          "type": "TextBlock",
+          "text": "This is some **bold** text"
+        },
+        {
+          "type": "TextBlock",
+          "text": "This is some _italic_ text"
+        },
+        {
+          "type": "TextBlock",
+          "text": "- Bullet \r- List \r",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "1. [Adaptive Cards](http://adaptivecards.io)\r2. List\r",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "Check out [Adaptive Cards](http://adaptivecards.io) or [**Adaptive** _Cards_](http://adaptivecards.io)"
+        },
+        {
+          "type": "TextBlock",
+          "text": "This represents 20 minutes and 50.52 seconds after the 23rd hour of April 12th, 1985 in UTC.",
+          "weight": "bolder",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "LONG: {{DATE(1985-04-12T23:20:50.52Z, LONG)}} at {{TIME(1985-04-12T23:20:50.52Z)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "SHORT: {{DATE(1985-04-12T23:20:50.52Z, SHORT)}} at {{TIME(1985-04-12T23:20:50.52Z)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "COMPACT: {{DATE(1985-04-12T23:20:50.52Z, COMPACT)}} at {{TIME(1985-04-12T23:20:50.52Z)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "This represents 39 minutes and 57 seconds after the 16th hour of December 19th, 1996 with an offset of -08:00 from UTC (Pacific Standard Time).  Note that this is equivalent to 1996-12-20T00:39:57Z in UTC.",
+          "weight": "bolder",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "LONG: {{DATE(1996-12-19T16:39:57-08:00, LONG)}} at {{TIME(1996-12-19T16:39:57-08:00)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "SHORT: {{DATE(1996-12-19T16:39:57-08:00, SHORT)}} at {{TIME(1996-12-19T16:39:57-08:00)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "COMPACT: {{DATE(1996-12-19T16:39:57-08:00, COMPACT)}} at {{TIME(1996-12-19T16:39:57-08:00)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "This represents the leap second inserted at the end of 1990.",
+          "weight": "bolder",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "LONG: {{DATE(1990-12-31T23:59:60Z, LONG)}} at {{TIME(1990-12-31T23:59:60Z)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "SHORT: {{DATE(1990-12-31T23:59:60Z, SHORT)}} at {{TIME(1990-12-31T23:59:60Z)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "COMPACT: {{DATE(1990-12-31T23:59:60Z, COMPACT)}} at {{TIME(1990-12-31T23:59:60Z)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "This represents the same leap second in Pacific Standard Time, 8 hours behind UTC.",
+          "weight": "bolder",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "LONG: {{DATE(1990-12-31T15:59:60-08:00, LONG)}} at {{TIME(1990-12-31T15:59:60-08:00)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "SHORT: {{DATE(1990-12-31T15:59:60-08:00, SHORT)}} at {{TIME(1990-12-31T15:59:60-08:00)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "COMPACT: {{DATE(1990-12-31T15:59:60-08:00, COMPACT)}} at {{TIME(1990-12-31T15:59:60-08:00)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "See [RFC3339](https://tools.ietf.org/html/rfc3339) 5.8 re NL time inexact match.",
+          "weight": "bolder",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "LONG: {{DATE(1937-01-01T12:00:27.87+00:20, LONG)}} at {{TIME(1937-01-01T12:00:27.87+00:20)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "SHORT: {{DATE(1937-01-01T12:00:27.87+00:20, SHORT)}} at {{TIME(1937-01-01T12:00:27.87+00:20)}}",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "COMPACT: {{DATE(1937-01-01T12:00:27.87+00:20, COMPACT)}} at {{TIME(1937-01-01T12:00:27.87+00:20)}}",
+          "wrap": true
+        }
+      ]
+    }
+  },
+  {
+    "name": "Bing Fact",
+    "card": {
+      "type": "AdaptiveCard",
+      "version": "1.0",
       "body": [
         {
           "type": "ColumnSet",
+          "height": "stretch",
           "columns": [
             {
               "type": "Column",
-              "width": "auto",
-              "items": [
-                {
-                  "type": "Image",
-                  "size": "medium",
-                  "url": "https://messagecardplayground.azurewebsites.net/assets/Airplane.png"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "stretch",
+              "width": "2",
               "items": [
                 {
                   "type": "TextBlock",
-                  "text": "Flight Status",
-                  "horizontalAlignment": "right",
-                  "isSubtle": true
+                  "size": "small",
+                  "isSubtle": true,
+                  "text": "United States · 成立日期",
+                  "wrap": true
+                },
+                {
+                  "type": "Container",
+                  "height": "stretch",
+                  "items": []
                 },
                 {
                   "type": "TextBlock",
-                  "text": "DELAYED",
-                  "horizontalAlignment": "right",
-                  "spacing": "none",
                   "size": "large",
-                  "color": "attention"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "separator": true,
-          "spacing": "medium",
-          "columns": [
-            {
-              "type": "Column",
-              "width": "stretch",
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Passengers",
-                  "isSubtle": true,
-                  "weight": "bolder"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "Sarah Hum",
-                  "spacing": "small"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "Jeremy Goldberg",
-                  "spacing": "small"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "Evan Litvak",
-                  "spacing": "small"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "auto",
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Seat",
-                  "horizontalAlignment": "right",
-                  "isSubtle": true,
-                  "weight": "bolder"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "14A",
-                  "horizontalAlignment": "right",
-                  "spacing": "small"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "14B",
-                  "horizontalAlignment": "right",
-                  "spacing": "small"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "14C",
-                  "horizontalAlignment": "right",
-                  "spacing": "small"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "ColumnSet",
-          "spacing": "medium",
-          "separator": true,
-          "columns": [
-            {
-              "type": "Column",
-              "width": 1,
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Flight",
-                  "isSubtle": true,
-                  "weight": "bolder"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "KL0605",
-                  "spacing": "small"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": 1,
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Departs",
-                  "isSubtle": true,
-                  "horizontalAlignment": "center",
-                  "weight": "bolder"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "10:10 AM",
-                  "color": "attention",
                   "weight": "bolder",
-                  "horizontalAlignment": "center",
-                  "spacing": "small"
+                  "text": "Jul 4, 1776",
+                  "wrap": true,
+                  "maxLines": 2,
+                  "textStyle": "display"
+                },
+                {
+                  "type": "Container",
+                  "height": "stretch",
+                  "items": []
                 }
               ]
             },
             {
               "type": "Column",
-              "width": 1,
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "Arrives",
-                  "isSubtle": true,
-                  "horizontalAlignment": "right",
-                  "weight": "bolder"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "12:00 AM",
-                  "color": "attention",
-                  "horizontalAlignment": "right",
-                  "weight": "bolder",
-                  "spacing": "small"
-                }
-              ]
+              "backgroundImage": {
+                "type": "BackgroundImage",
+                "mode": "stretch",
+                "url": "https://www.bing.com/th?id=AMMS_ae5846a10190e76d928e9b9b3dfb9833",
+                "horizontalAlignment": "center"
+              },
+              "width": "1",
+              "items": [],
+              "spacing": "padding"
             }
-          ]
-        },
+          ],
+          "selectAction": {
+            "type": "Action.OpenUrl",
+            "url": "https://www.bing.com/search?q=When+is+USA+founded&elv=AXXfrEiqqD9r3GuelwApuloujdgjdAymapdCEmHlXR2jJ6MT!YffY0lUXFpOj6OorD8xpjmZGNyPKIJ90TG*oxhJaE88MKA28yu2D2NbehOy",
+            "title": "Open In Bing"
+          }
+        }
+      ],
+      "-ms-attribution": {
+        "text": "Bing",
+        "icon": "https://www.bing.com/rms/rms%20answers%20Api%20BingLogo/ic/ef0cff20/d50405d4.png"
+      },
+      "-ms-source": "Bing",
+      "-ms-height": "fixed"
+    }
+  },
+  {
+    "name": "sport game update",
+    "card": {
+      "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "1.0",
+      "speak": "The Seattle Seahawks beat the Carolina Panthers 40-7",
+      "body": [
         {
-          "type": "ColumnSet",
-          "spacing": "medium",
-          "separator": true,
-          "columns": [
+          "type": "Container",
+          "items": [
             {
-              "type": "Column",
-              "width": 1,
-              "items": [
+              "type": "ColumnSet",
+              "columns": [
                 {
-                  "type": "TextBlock",
-                  "text": "Amsterdam",
-                  "isSubtle": true
+                  "type": "Column",
+                  "width": "auto",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "http://adaptivecards.io/content/cats/3.png",
+                      "size": "medium"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "SHADES",
+                      "horizontalAlignment": "center",
+                      "weight": "bolder"
+                    }
+                  ]
                 },
                 {
-                  "type": "TextBlock",
-                  "text": "AMS",
-                  "size": "extraLarge",
-                  "color": "accent",
-                  "spacing": "none"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": "auto",
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": " "
+                  "type": "Column",
+                  "width": "stretch",
+                  "separator": true,
+                  "spacing": "medium",
+                  "items": [
+                    {
+                      "type": "TextBlock",
+                      "text": "Dec 4",
+                      "horizontalAlignment": "center"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "Final",
+                      "spacing": "none",
+                      "horizontalAlignment": "center"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "7 - 40",
+                      "size": "extraLarge",
+                      "horizontalAlignment": "center"
+                    }
+                  ]
                 },
                 {
-                  "type": "Image",
-                  "url": "http://messagecardplayground.azurewebsites.net/assets/airplane.png",
-                  "size": "medium",
-                  "horizontalAlignment": "center"
-                }
-              ]
-            },
-            {
-              "type": "Column",
-              "width": 1,
-              "items": [
-                {
-                  "type": "TextBlock",
-                  "text": "San Francisco",
-                  "isSubtle": true,
-                  "horizontalAlignment": "right"
-                },
-                {
-                  "type": "TextBlock",
-                  "text": "SFO",
-                  "horizontalAlignment": "right",
-                  "size": "extraLarge",
-                  "color": "accent",
-                  "spacing": "none"
+                  "type": "Column",
+                  "width": "auto",
+                  "separator": true,
+                  "spacing": "medium",
+                  "items": [
+                    {
+                      "type": "Image",
+                      "url": "http://adaptivecards.io/content/cats/2.png",
+                      "size": "medium",
+                      "horizontalAlignment": "center"
+                    },
+                    {
+                      "type": "TextBlock",
+                      "text": "SKINS",
+                      "horizontalAlignment": "center",
+                      "weight": "bolder"
+                    }
+                  ]
                 }
               ]
             }
