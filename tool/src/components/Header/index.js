@@ -22,13 +22,19 @@ class Header extends React.Component {
         this.props.loadDefaultPayload();
     }
 
+    openGitHUb() {
+        window.open("https://github.com/microsoft/react-native-adaptivecards/", "_blank");
+    }
+
     render() {
         return (
             <div className="header">
                 <Button desc="Card editor" name="card" clickHandler={this.setMode} />
                 <Button desc="Config editor" name="config" clickHandler={this.setMode} />
+                <Button desc="GitHub" name="GitHub" clickHandler={this.openGitHUb}
+                    additionalClass="fr" />
                 <Button desc="Load default" name="load_default" clickHandler={this.loadDefaultPayload}
-                        additionalClass="fr"/>
+                    additionalClass="fr" />
             </div>
         )
     }
