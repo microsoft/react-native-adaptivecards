@@ -11,6 +11,5 @@ export declare class Checkbox<T> extends React.Component<IProps<T>> {
     private onClick;
     private readonly color;
     private readonly radioColor;
-    private readonly radioIcon;
 }
 export {};

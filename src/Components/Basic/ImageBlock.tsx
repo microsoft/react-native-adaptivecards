@@ -6,8 +6,9 @@ import {
     StyleProp,
     View
 } from 'react-native';
+import { Svg } from 'react-native-svg-component';
+
 import { UrlUtils } from '../../Utils/UrlUtils';
-import { Svg } from './Svg';
 import { Touchable } from './Touchable';
 
 interface IProps {
@@ -151,7 +152,9 @@ export class ImageBlock extends React.Component<IProps, IState> {
                     ]}
                 >
                     <Svg
-                        url={this.props.url}
+                        source={{ uri:  this.props.url}}
+                        width={this.props.width}
+                        height={this.props.height}
                     />
                 </View>
             );
