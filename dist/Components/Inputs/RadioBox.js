@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Radio } from 'react-native-common-ui';
 import { StyleManager } from '../../Styles/StyleManager';
 export class RadioBox extends React.Component {
     constructor() {
@@ -23,8 +23,8 @@ export class RadioBox extends React.Component {
                         paddingTop: 18,
                     }
                 ] },
-                React.createElement(Icon, { name: this.radioIcon, size: 24, color: this.radioColor, style: {
-                        paddingTop: 4,
+                React.createElement(Radio, { checked: this.props.checked, width: 24, height: 24, color: this.radioColor, style: {
+                        marginRight: 4
                     } }),
                 React.createElement(Text, { style: {
                         color: this.color,
@@ -42,13 +42,5 @@ export class RadioBox extends React.Component {
     }
     get radioColor() {
         return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
-    }
-    get radioIcon() {
-        if (this.props.checked) {
-            return 'radio-button-checked';
-        }
-        else {
-            return 'radio-button-unchecked';
-        }
     }
 }

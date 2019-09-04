@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { LayoutChangeEvent } from 'react-native';
+
 import { ImageBlock } from '../../Components/Basic/ImageBlock';
 import { ImageModel } from '../../Models/CardElements/Image';
 import { Dimension } from '../../Shared/Types';

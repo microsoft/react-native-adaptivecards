@@ -4,8 +4,8 @@ import {
     TouchableWithoutFeedback,
     View
 } from 'react-native';
+import { CheckBox } from 'react-native-common-ui';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { StyleManager } from '../../Styles/StyleManager';
 
 interface IProps<T> {
@@ -33,12 +33,13 @@ export class Checkbox<T> extends React.Component<IProps<T>> {
                         }
                     ]}
                 >
-                    <Icon
-                        name={this.radioIcon}
-                        size={24}
+                    <CheckBox
+                        checked={this.props.checked}
+                        width={24} 
+                        height={24} 
                         color={this.radioColor}
                         style={{
-                            paddingTop: 4,
+                            marginRight: 4
                         }}
                     />
                     <Text
@@ -74,13 +75,5 @@ export class Checkbox<T> extends React.Component<IProps<T>> {
 
     private get radioColor() {
         return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
-    }
-
-    private get radioIcon() {
-        if (this.props.checked) {
-            return 'check-box';
-        } else {
-            return 'check-box-outline-blank';
-        }
     }
 }

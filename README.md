@@ -14,12 +14,16 @@ Online renderer and debugging tool can be found [here](https://microsoft.github.
 
   ```bash
   $ npm install react-native-adaptivecards
+  $ npm install react-native-svg
+  $ react-native link react-native-svg
   ```
 
   or by Yarn
 
   ```bash
   $ yarn add react-native-adaptivecards
+  $ yarn add react-native-svg
+  $ react-native link react-native-svg
   ```
 
 2. Implementation

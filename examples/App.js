@@ -31,11 +31,11 @@ export default class App extends React.Component {
                     backgroundColor: 'white',
                 }}>
 
-                <AdaptiveCards adaptiveCard={mockData.third} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
+                <AdaptiveCards adaptiveCard={mockData.weatherCompact} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.outlookCard1} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
+                <AdaptiveCards adaptiveCard={mockData.imageGallery} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
                 {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.outlookCard2} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
+                <AdaptiveCards adaptiveCard={mockData.inputs} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
                 {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.markdown} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
                 {this.renderGap()}

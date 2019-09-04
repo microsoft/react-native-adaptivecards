@@ -50,8 +50,13 @@
     "tslint": "^5.12.1",
     "typescript": "^3.3.3"
   },
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-native": "^0.59.10",
+    "react-native-svg": "^9.8.4"
+  },
   "dependencies": {
-    "lodash": "latest",
-    "react-native-vector-icons": "^6.3.0"
+    "react-native-common-ui": "0.1.6",
+    "react-native-svg-component": "0.2.0"
   }
 }
