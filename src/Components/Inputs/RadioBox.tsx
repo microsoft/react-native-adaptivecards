@@ -4,7 +4,6 @@ import {
     TouchableWithoutFeedback,
     View
 } from 'react-native';
-import { Radio } from 'react-native-common-ui';
 
 import { StyleManager } from '../../Styles/StyleManager';
 
@@ -33,15 +32,7 @@ export class RadioBox<T> extends React.Component<IProps<T>> {
                         }
                     ]}
                 >
-                    <Radio
-                        checked={this.props.checked}
-                        width={24} 
-                        height={24} 
-                        color={this.radioColor}
-                        style={{
-                            marginRight: 4
-                        }}
-                    />
+                    {this.props.checked ? this.renderCheckedRadio() : this.renderUncheckedRadio()}
                     <Text
                         style={{
                             color: this.color,
@@ -58,6 +49,45 @@ export class RadioBox<T> extends React.Component<IProps<T>> {
                     </Text>
                 </View>
             </TouchableWithoutFeedback>
+        );
+    }
+
+    private renderCheckedRadio = () => {
+        return (
+            <View
+                style={{
+                    width: 18,
+                    height: 18,
+                    borderWidth: 1,
+                    borderColor: this.radioColor,
+                    borderRadius: 9,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
+            >
+                <View
+                    style={{
+                        width: 10,
+                        height: 10,
+                        backgroundColor: this.radioColor,
+                        borderRadius: 5
+                    }}
+                />
+            </View>
+        );
+    }
+
+    private renderUncheckedRadio = () => {
+        return (
+            <View
+                style={{
+                    width: 18,
+                    height: 18,
+                    borderWidth: 1,
+                    borderColor: this.radioColor,
+                    borderRadius: 9
+                }}
+            />
         );
     }
 

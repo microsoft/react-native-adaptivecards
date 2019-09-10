@@ -56,7 +56,7 @@ export class FormStore {
                     prev = prev && this.fields[id].isValid;
                 }
                 return prev;
-            }, true);
+            }, true as boolean);
         } else {
             let field = this.read(id);
             if (field) {

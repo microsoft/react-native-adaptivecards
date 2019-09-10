@@ -1,10 +1,50 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { CheckBox } from 'react-native-common-ui';
 import { StyleManager } from '../../Styles/StyleManager';
 export class Checkbox extends React.Component {
     constructor() {
         super(...arguments);
+        this.renderCheckedBox = () => {
+            return (React.createElement(View, { style: {
+                    height: 18,
+                    width: 18,
+                    borderWidth: 2,
+                    borderColor: this.checkboxColor,
+                    backgroundColor: this.props.checked ? this.checkboxColor : 'transparent',
+                    borderRadius: 2,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                } },
+                React.createElement(View, { style: {
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transform: [{ rotate: '45deg' }, { translateY: -2 }, { translateX: -1.5 }]
+                    } },
+                    React.createElement(View, { style: {
+                            width: 6,
+                            height: 2,
+                            borderRadius: 1,
+                            backgroundColor: 'white',
+                            transform: [{ translateY: 7 }]
+                        } }),
+                    React.createElement(View, { style: {
+                            width: 12,
+                            height: 2,
+                            borderRadius: 1,
+                            backgroundColor: 'white',
+                            transform: [{ translateX: 3 }, { rotate: '90deg' }]
+                        } }))));
+        };
+        this.renderUncheckedBox = () => {
+            return (React.createElement(View, { style: {
+                    width: 18,
+                    height: 18,
+                    borderWidth: 2,
+                    borderColor: this.checkboxColor,
+                    borderRadius: 2
+                } }));
+        };
         this.onClick = () => {
             console.log('Checkbox clicked');
             console.log(this.props.value);
@@ -24,9 +64,7 @@ export class Checkbox extends React.Component {
                         paddingTop: 18,
                     }
                 ] },
-                React.createElement(CheckBox, { checked: this.props.checked, width: 24, height: 24, color: this.radioColor, style: {
-                        marginRight: 4
-                    } }),
+                this.props.checked ? this.renderCheckedBox() : this.renderUncheckedBox(),
                 React.createElement(Text, { style: {
                         color: this.color,
                         fontSize: StyleManager.getFontSize('default'),
@@ -41,7 +79,7 @@ export class Checkbox extends React.Component {
     get color() {
         return StyleManager.getCheckboxTitleColor(this.props.theme);
     }
-    get radioColor() {
+    get checkboxColor() {
         return StyleManager.getCheckboxBoxColor(this.props.theme, this.props.checked);
     }
 }

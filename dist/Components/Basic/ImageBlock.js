@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Image, View } from 'react-native';
-import { Svg } from 'react-native-svg-component';
 import { UrlUtils } from '../../Utils/UrlUtils';
+import { Svg } from './Svg';
 import { Touchable } from './Touchable';
 export class ImageBlock extends React.Component {
     constructor(props) {
@@ -98,7 +98,7 @@ export class ImageBlock extends React.Component {
                     this.borderRadius,
                     this.props.style
                 ] },
-                React.createElement(Svg, { source: { uri: this.props.url }, width: this.props.width, height: this.props.height })));
+                React.createElement(Svg, { url: this.props.url })));
         }
         else {
             if (UrlUtils.isDeepLink(this.props.url)) {
