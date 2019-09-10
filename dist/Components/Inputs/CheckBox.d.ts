@@ -8,8 +8,10 @@ interface IProps<T> {
 }
 export declare class Checkbox<T> extends React.Component<IProps<T>> {
     render(): JSX.Element;
+    private renderCheckedBox;
+    private renderUncheckedBox;
     private onClick;
     private readonly color;
-    private readonly radioColor;
+    private readonly checkboxColor;
 }
 export {};

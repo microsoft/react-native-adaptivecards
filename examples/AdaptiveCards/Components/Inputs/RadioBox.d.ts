@@ -8,6 +8,8 @@ interface IProps<T> {
 }
 export declare class RadioBox<T> extends React.Component<IProps<T>> {
     render(): JSX.Element;
+    private renderCheckedRadio;
+    private renderUncheckedRadio;
     private onClick;
     private readonly color;
     private readonly radioColor;

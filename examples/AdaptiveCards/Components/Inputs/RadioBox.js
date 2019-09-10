@@ -1,10 +1,35 @@
 import * as React from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Radio } from 'react-native-common-ui';
 import { StyleManager } from '../../Styles/StyleManager';
 export class RadioBox extends React.Component {
     constructor() {
         super(...arguments);
+        this.renderCheckedRadio = () => {
+            return (React.createElement(View, { style: {
+                    width: 18,
+                    height: 18,
+                    borderWidth: 1,
+                    borderColor: this.radioColor,
+                    borderRadius: 9,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                } },
+                React.createElement(View, { style: {
+                        width: 10,
+                        height: 10,
+                        backgroundColor: this.radioColor,
+                        borderRadius: 5
+                    } })));
+        };
+        this.renderUncheckedRadio = () => {
+            return (React.createElement(View, { style: {
+                    width: 18,
+                    height: 18,
+                    borderWidth: 1,
+                    borderColor: this.radioColor,
+                    borderRadius: 9
+                } }));
+        };
         this.onClick = () => {
             console.log('RadioBox clicked');
             if (this.props.onClick) {
@@ -23,9 +48,7 @@ export class RadioBox extends React.Component {
                         paddingTop: 18,
                     }
                 ] },
-                React.createElement(Radio, { checked: this.props.checked, width: 24, height: 24, color: this.radioColor, style: {
-                        marginRight: 4
-                    } }),
+                this.props.checked ? this.renderCheckedRadio() : this.renderUncheckedRadio(),
                 React.createElement(Text, { style: {
                         color: this.color,
                         fontSize: StyleManager.getFontSize('default'),

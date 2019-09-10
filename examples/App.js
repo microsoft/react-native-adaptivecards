@@ -31,21 +31,7 @@ export default class App extends React.Component {
                     backgroundColor: 'white',
                 }}>
 
-                <AdaptiveCards adaptiveCard={mockData.weatherCompact} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
-                {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.imageGallery} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
-                {this.renderGap()}
                 <AdaptiveCards adaptiveCard={mockData.inputs} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
-                {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.markdown} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
-                {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.bingFact} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
-                {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.flightItinerary} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
-                {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.sportsGameUpdate} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
-                {this.renderGap()}
-                <AdaptiveCards adaptiveCard={mockData.restaurant} onSubmit={this.onSubmit} onInfo={this.onInfo} onError={this.onError} onWarning={this.onWarning} onOpenUrl={this.onOpenUrl}/>
                 {this.renderGap()}
             </ScrollView>
         );
