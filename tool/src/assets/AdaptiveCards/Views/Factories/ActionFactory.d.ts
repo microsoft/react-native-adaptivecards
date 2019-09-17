@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import { OpenUrlActionModel } from '../../Models/Actions/OpenUrlAction';
 import { ShowCardActionModel } from '../../Models/Actions/ShowCardAction';
 import { SubmitActionModel } from '../../Models/Actions/SubmitAction';

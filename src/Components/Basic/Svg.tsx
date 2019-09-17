@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Platform, StyleProp, ViewStyle, WebView } from 'react-native';
+import { Platform, StyleProp, ViewStyle } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 interface IProps {
     url: string;
@@ -22,7 +23,7 @@ export class Svg extends React.Component<IProps> {
                 scrollEnabled={false}
                 style={[
                     {
-                        
+
                         flex: 1,
                         alignSelf: 'stretch',
                         backgroundColor: 'transparent',
@@ -36,16 +37,13 @@ export class Svg extends React.Component<IProps> {
     private get html() {
         return (
             `<html>
-                <head>
-                </head>
-                <body 
-                    style="margin:0; padding:0; overflow:hidden; background-color: 'transparent'; height:100%; width:100%;"
-                >
-                    <img src="${this.src}"
-                        alt="${this.alt}"
-                        style="position:fixed; top:0; left:0; background-color: 'transparent'; height:100%; width:100%;"
-                    />
-                </body>
+            <head>
+                <meta charset="UTF-8">
+                <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
+            </head>
+            <body style="margin: 0;">
+                <img src="${this.src}" alt="${this.alt}" />
+            </body>
             </html>`
         );
     }
