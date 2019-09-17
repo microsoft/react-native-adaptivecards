@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^3.20.5",
-    "lodash-es": "4.17.14",
+    "lodash-es": "4.17.15",
     "prop-types": "^15.6.2",
     "react": "16.3.1",
     "react-art": "16.3.1",
