@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { CardModel } from '../Models/Cards/Card';
 import { TreeNode } from '../Shared/Types';
 import { FormStore } from './FormStore';
@@ -13,6 +14,7 @@ export declare class CardContext extends TreeNode<CardContext> {
     private onSubmitAction?;
     private onCallbackAction?;
     private onSelectAction?;
+    private avatarFallbackRender?;
     readonly form: FormStore;
     readonly schemas: SchemaStore;
     readonly children: CardContext[];
@@ -31,6 +33,7 @@ export declare class CardContext extends TreeNode<CardContext> {
         [key: string]: string;
     }) => Promise<any>): void;
     registerSelectActionHandler(handler: (data: any) => Promise<any>): void;
+    registerAvatarFallbackRenderHandler(handler: (diameter: number, altText: string, url: string) => ReactNode): void;
     private findRequiredContext;
     readonly errorHandler: (error: any) => void;
     readonly infoHandler: (info: any) => void;
@@ -44,4 +47,5 @@ export declare class CardContext extends TreeNode<CardContext> {
         [key: string]: string;
     }) => Promise<any>;
     readonly selectActionHandler: (data: any) => Promise<any>;
+    readonly avatarFallbackRenderHandler: (diameter: number, altText: string, url: string) => ReactNode;
 }

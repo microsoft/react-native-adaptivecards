@@ -21,6 +21,7 @@ interface IProps {
     onLayout?: (event: LayoutChangeEvent) => void;
     onLoad?: (data: any) => void;
     onError?: (error: any) => void;
+    avatarFallbackRender?: (diameter: number, altText: string, url: string) => React.ReactNode;
 }
 interface IState {
     loaded: boolean;

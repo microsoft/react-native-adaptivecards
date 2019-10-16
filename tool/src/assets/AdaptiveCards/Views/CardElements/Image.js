@@ -80,7 +80,21 @@ export class ImageView extends React.Component {
                         handler(`AdaptiveCard >> Start Load Image >> ${model.url}`);
                     }
                 }
-                ImageUtils.fetchSize(model.url, size || model.size, { width: maxWidth, height: maxHeight }, this.onImageSize, this.onImageSizeError);
+                if (model.style === 'person' && model.context.avatarFallbackRenderHandler) {
+                    const definedSize = StyleManager.getImageSize(size || model.size);
+                    if (typeof definedSize === 'number') {
+                        this.onImageSize({
+                            width: definedSize,
+                            height: definedSize
+                        });
+                    }
+                    else {
+                        this.onImageSizeError(new Error('Avatar image size should be actual number.'));
+                    }
+                }
+                else {
+                    ImageUtils.fetchSize(model.url, size || model.size, { width: maxWidth, height: maxHeight }, this.onImageSize, this.onImageSizeError);
+                }
             }
         };
         this.state = {
@@ -107,7 +121,7 @@ export class ImageView extends React.Component {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.url + ' is not valid', theme, 'error');
         }
         if (this.state.loaded) {
-            return (React.createElement(ImageBlock, { url: model.url, alt: model.alt, flex: this.flex, alignSelf: StyleManager.getHorizontalAlign(model.horizontalAlignment), width: this.state.width, height: this.state.height, onPress: model.selectAction ? this.onPress : undefined, onLayout: this.onLayout, onLoad: this.onImageLoad, onError: this.onImageError, marginTop: this.spacing, marginLeft: spacing, mode: model.style === 'person' ? 'avatar' : 'default' }));
+            return (React.createElement(ImageBlock, { url: model.url, alt: model.alt, flex: this.flex, alignSelf: StyleManager.getHorizontalAlign(model.horizontalAlignment), width: this.state.width, height: this.state.height, onPress: model.selectAction ? this.onPress : undefined, onLayout: this.onLayout, onLoad: this.onImageLoad, onError: this.onImageError, marginTop: this.spacing, marginLeft: spacing, mode: model.style === 'person' ? 'avatar' : 'default', avatarFallbackRender: model.context && model.context.avatarFallbackRenderHandler }));
         }
         return null;
     }
