@@ -60,5 +60,10 @@ export declare class TextBlockSchema extends SchemaElement<TextBlockModel> {
             isRequired: boolean;
             accepts: boolean[];
         };
+        'isVisible': {
+            name: string;
+            isRequired: boolean;
+            accepts: boolean[];
+        };
     };
 }

@@ -16,6 +16,7 @@ export class CardContext extends TreeNode<CardContext> {
     private onCallbackAction?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
     private onSelectAction?: (data: any) => Promise<any>;
     private avatarFallbackRender?: (diameter: number, altText: string, url: string) => ReactNode;
+    private calendarFallbackRender?: (rawEvents: string) => ReactNode;
     public readonly form: FormStore;
     public readonly schemas: SchemaStore;
     public readonly children: CardContext[] = [];
@@ -79,6 +80,10 @@ export class CardContext extends TreeNode<CardContext> {
 
     public registerAvatarFallbackRenderHandler(handler: (diameter: number, altText: string, url: string) => ReactNode) {
         this.avatarFallbackRender = handler;
+    }
+
+    public registerCalendarFallbackRenderHandler(handler: (rawEvents: string) => ReactNode) {
+        this.calendarFallbackRender = handler;
     }
 
     private findRequiredContext(selector: (context: CardContext) => boolean): CardContext {
@@ -177,6 +182,14 @@ export class CardContext extends TreeNode<CardContext> {
         let context = this.findRequiredContext(context => context.avatarFallbackRender !== undefined);
         if (context) {
             return context.avatarFallbackRender;
+        }
+        return undefined;
+    }
+
+    public get calendarFallbackRenderHandler(): (rawEvents: string) => ReactNode {
+        let context = this.findRequiredContext(context => context.calendarFallbackRender !== undefined);
+        if (context) {
+            return context.calendarFallbackRender;
         }
         return undefined;
     }

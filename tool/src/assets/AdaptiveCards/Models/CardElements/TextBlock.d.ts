@@ -10,5 +10,6 @@ export declare class TextBlockModel extends ContentModel {
     size?: 'default' | 'small' | 'medium' | 'large' | 'extralarge';
     weight?: 'default' | 'lighter' | 'bolder';
     wrap?: boolean;
+    isVisible?: boolean;
     constructor(json: any, parent: AbstractModel, context: CardContext);
 }

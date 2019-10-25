@@ -15,6 +15,7 @@ export interface IAdaptiveCardProps {
     onInfo?: (info: any) => void;
     onWarning?: (warning: any) => void;
     avatarFallbackRender?: (diameter: number, altText: string, url: string) => ReactNode;
+    calendarFallbackRender?: (rawEvents: string) => ReactNode;
 }
 export declare class CardRootView extends React.Component<IAdaptiveCardProps> {
     rootCardContext: CardContext;

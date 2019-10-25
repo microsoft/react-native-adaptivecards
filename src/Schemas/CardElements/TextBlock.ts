@@ -4,7 +4,7 @@ import { SchemaElement, SchemaMessage, SchemaResult, SchemaRule } from '../Schem
 export class TextBlockSchema extends SchemaElement<TextBlockModel> {
     public rules: SchemaRule<TextBlockModel>[] = [
         (model: TextBlockModel) => {
-            if (model.maxLines && typeof(model.maxLines) !== 'number') {
+            if (model.maxLines && typeof (model.maxLines) !== 'number') {
                 return new SchemaResult(false, new SchemaMessage('Error', `Only number accepted.`));
             }
             return new SchemaResult(true);
@@ -65,6 +65,11 @@ export class TextBlockSchema extends SchemaElement<TextBlockModel> {
         },
         'separator': {
             name: 'separator',
+            isRequired: false,
+            accepts: [true, false],
+        },
+        'isVisible': {
+            name: 'isVisible',
             isRequired: false,
             accepts: [true, false],
         },

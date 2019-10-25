@@ -51,6 +51,9 @@ export class CardContext extends TreeNode {
     registerAvatarFallbackRenderHandler(handler) {
         this.avatarFallbackRender = handler;
     }
+    registerCalendarFallbackRenderHandler(handler) {
+        this.calendarFallbackRender = handler;
+    }
     findRequiredContext(selector) {
         if (selector) {
             if (selector(this)) {
@@ -136,6 +139,13 @@ export class CardContext extends TreeNode {
         let context = this.findRequiredContext(context => context.avatarFallbackRender !== undefined);
         if (context) {
             return context.avatarFallbackRender;
+        }
+        return undefined;
+    }
+    get calendarFallbackRenderHandler() {
+        let context = this.findRequiredContext(context => context.calendarFallbackRender !== undefined);
+        if (context) {
+            return context.calendarFallbackRender;
         }
         return undefined;
     }

@@ -11,5 +11,6 @@ export class TextBlockModel extends ContentModel {
         this.size = StringUtils.normalize(json.size);
         this.weight = StringUtils.normalize(json.weight);
         this.wrap = json.wrap || false;
+        this.isVisible = typeof json.isVisible === 'boolean' ? json.isVisible : true;
     }
 }

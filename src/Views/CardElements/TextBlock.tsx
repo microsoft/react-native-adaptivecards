@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Markdown } from '../../Components/Basic/Markdown/Markdown';
+import { View } from 'react-native';
 
+import { Markdown } from '../../Components/Basic/Markdown/Markdown';
 import { TextBlockModel } from '../../Models/CardElements/TextBlock';
 import { StyleManager } from '../../Styles/StyleManager';
 import { DebugOutputFactory } from '../Factories/DebugOutputFactory';
@@ -13,9 +14,15 @@ interface IProps {
 
 export class TextBlockView extends React.Component<IProps> {
     public render() {
-        const { model, theme } = this.props;             
+        const { model, theme } = this.props;
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
+        }
+
+        if (!model.isVisible && model.text && model.context && model.context.calendarFallbackRenderHandler) {
+            return <View style={{ marginTop: this.spacing }}>
+                {model.context.calendarFallbackRenderHandler(model.text)}
+            </View>;
         }
 
         return (

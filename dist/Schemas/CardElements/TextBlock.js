@@ -68,6 +68,11 @@ export class TextBlockSchema extends SchemaElement {
                 isRequired: false,
                 accepts: [true, false],
             },
+            'isVisible': {
+                name: 'isVisible',
+                isRequired: false,
+                accepts: [true, false],
+            },
         };
     }
 }

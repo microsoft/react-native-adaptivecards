@@ -12,6 +12,7 @@ export class TextBlockModel extends ContentModel {
     public size?: 'default' | 'small' | 'medium' | 'large' | 'extralarge';
     public weight?: 'default' | 'lighter' | 'bolder';
     public wrap?: boolean;
+    public isVisible?: boolean;
 
     constructor(json: any, parent: AbstractModel, context: CardContext) {
         super(json, parent, context);
@@ -24,5 +25,6 @@ export class TextBlockModel extends ContentModel {
         this.size = StringUtils.normalize(json.size);
         this.weight = StringUtils.normalize(json.weight);
         this.wrap = json.wrap || false;
+        this.isVisible = typeof json.isVisible === 'boolean' ? json.isVisible : true;
     }
 }

@@ -15,6 +15,7 @@ export declare class CardContext extends TreeNode<CardContext> {
     private onCallbackAction?;
     private onSelectAction?;
     private avatarFallbackRender?;
+    private calendarFallbackRender?;
     readonly form: FormStore;
     readonly schemas: SchemaStore;
     readonly children: CardContext[];
@@ -34,6 +35,7 @@ export declare class CardContext extends TreeNode<CardContext> {
     }) => Promise<any>): void;
     registerSelectActionHandler(handler: (data: any) => Promise<any>): void;
     registerAvatarFallbackRenderHandler(handler: (diameter: number, altText: string, url: string) => ReactNode): void;
+    registerCalendarFallbackRenderHandler(handler: (rawEvents: string) => ReactNode): void;
     private findRequiredContext;
     readonly errorHandler: (error: any) => void;
     readonly infoHandler: (info: any) => void;
@@ -48,4 +50,5 @@ export declare class CardContext extends TreeNode<CardContext> {
     }) => Promise<any>;
     readonly selectActionHandler: (data: any) => Promise<any>;
     readonly avatarFallbackRenderHandler: (diameter: number, altText: string, url: string) => ReactNode;
+    readonly calendarFallbackRenderHandler: (rawEvents: string) => ReactNode;
 }
