@@ -19,10 +19,14 @@ export class TextBlockView extends React.Component<IProps> {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
         }
 
-        if (!model.isVisible && model.text && model.context && model.context.calendarFallbackRenderHandler) {
-            return <View style={{ marginTop: this.spacing }}>
-                {model.context.calendarFallbackRenderHandler(model.text)}
-            </View>;
+        if (!model.isVisible) {
+            if (model.text && model.context && model.context.calendarFallbackRenderHandler) {
+                return <View style={{ marginTop: this.spacing }}>
+                    {model.context.calendarFallbackRenderHandler(model.text)}
+                </View>;
+            }
+
+            return null;
         }
 
         return (

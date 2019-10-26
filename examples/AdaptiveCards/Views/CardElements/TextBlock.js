@@ -9,8 +9,11 @@ export class TextBlockView extends React.Component {
         if (!model || !model.isSchemaCheckPassed) {
             return DebugOutputFactory.createDebugOutputBanner(model.type + '>>' + model.text + ' is not valid', theme, 'error');
         }
-        if (!model.isVisible && model.text && model.context && model.context.calendarFallbackRenderHandler) {
-            return React.createElement(View, { style: { marginTop: this.spacing } }, model.context.calendarFallbackRenderHandler(model.text));
+        if (!model.isVisible) {
+            if (model.text && model.context && model.context.calendarFallbackRenderHandler) {
+                return React.createElement(View, { style: { marginTop: this.spacing } }, model.context.calendarFallbackRenderHandler(model.text));
+            }
+            return null;
         }
         return (React.createElement(Markdown, { accessible: true, style: {
                 color: StyleManager.getColor(model.color, this.props.theme, model.isSubtle),
