@@ -17,6 +17,7 @@ export class TextBlockView extends React.Component<IProps> {
                 accessible={true}
                 style={{
                     color: StyleManager.getColor(model.color, this.props.theme, model.isSubtle, context.config),
+                    fontFamily: StyleManager.getFontFamily(context.config),
                     fontSize: StyleManager.getFontSize(model.size, context.config),
                     fontWeight: StyleManager.getFontWeight(model.weight, context.config),
                     backgroundColor: 'transparent',
