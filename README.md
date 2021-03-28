@@ -1,3 +1,12 @@
+# DEPRECATION NOTICE
+
+**This package is no longer in development.**
+
+**Please migrate to [adaptivecards-reactnative](https://www.npmjs.com/package/adaptivecards-reactnative)**
+
+============================================
+
+
 # Introduction
 
 React Native renderer for [AdaptiveCards](http://adaptivecards.io/).
