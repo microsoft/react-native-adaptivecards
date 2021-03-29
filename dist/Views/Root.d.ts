@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { CardContext } from '../Contexts/CardContext';
 export interface IAdaptiveCardProps {
     adaptiveCard: any;
@@ -14,6 +14,7 @@ export interface IAdaptiveCardProps {
     onError?: (error: any) => void;
     onInfo?: (info: any) => void;
     onWarning?: (warning: any) => void;
+    avatarFallbackRender?: (diameter: number, altText: string, url: string) => ReactNode;
 }
 export declare class CardRootView extends React.Component<IAdaptiveCardProps> {
     rootCardContext: CardContext;

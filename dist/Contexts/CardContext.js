@@ -48,6 +48,9 @@ export class CardContext extends TreeNode {
     registerSelectActionHandler(handler) {
         this.onSelectAction = handler;
     }
+    registerAvatarFallbackRenderHandler(handler) {
+        this.avatarFallbackRender = handler;
+    }
     findRequiredContext(selector) {
         if (selector) {
             if (selector(this)) {
@@ -126,6 +129,13 @@ export class CardContext extends TreeNode {
         let context = this.findRequiredContext(context => context.onSelectAction !== undefined);
         if (context) {
             return context.onSelectAction;
+        }
+        return undefined;
+    }
+    get avatarFallbackRenderHandler() {
+        let context = this.findRequiredContext(context => context.avatarFallbackRender !== undefined);
+        if (context) {
+            return context.avatarFallbackRender;
         }
         return undefined;
     }

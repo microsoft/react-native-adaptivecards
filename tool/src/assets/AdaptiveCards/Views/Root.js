@@ -18,6 +18,7 @@ export class CardRootView extends React.Component {
         this.rootCardContext.registerErrorHandler(this.props.onError);
         this.rootCardContext.registerInfoHandler(this.props.onInfo);
         this.rootCardContext.registerWarningHandler(this.props.onWarning);
+        this.rootCardContext.registerAvatarFallbackRenderHandler(this.props.avatarFallbackRender);
     }
     shouldComponentUpdate(nextProps) {
         if (JSON.stringify(nextProps) !== JSON.stringify(this.props)) {

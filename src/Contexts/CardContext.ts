@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { CardModel } from '../Models/Cards/Card';
 import { TreeNode } from '../Shared/Types';
 import { FormStore } from './FormStore';
@@ -14,6 +15,7 @@ export class CardContext extends TreeNode<CardContext> {
     private onSubmitAction?: (data: any) => Promise<any>;
     private onCallbackAction?: (url: string, parameters: { [key: string]: string }) => Promise<any>;
     private onSelectAction?: (data: any) => Promise<any>;
+    private avatarFallbackRender?: (diameter: number, altText: string, url: string) => ReactNode;
     public readonly form: FormStore;
     public readonly schemas: SchemaStore;
     public readonly children: CardContext[] = [];
@@ -75,6 +77,10 @@ export class CardContext extends TreeNode<CardContext> {
         this.onSelectAction = handler;
     }
 
+    public registerAvatarFallbackRenderHandler(handler: (diameter: number, altText: string, url: string) => ReactNode) {
+        this.avatarFallbackRender = handler;
+    }
+
     private findRequiredContext(selector: (context: CardContext) => boolean): CardContext {
         if (selector) {
             if (selector(this)) {
@@ -95,7 +101,7 @@ export class CardContext extends TreeNode<CardContext> {
         return undefined;
     }
 
-    public get infoHandler() : (info: any) => void {
+    public get infoHandler(): (info: any) => void {
         let context = this.findRequiredContext(context => context.onInfo !== undefined);
         if (context) {
             return context.onInfo;
@@ -103,7 +109,7 @@ export class CardContext extends TreeNode<CardContext> {
         return undefined;
     }
 
-    public get warningHandler() : (warning: any) => void {
+    public get warningHandler(): (warning: any) => void {
         let context = this.findRequiredContext(context => context.onWarning !== undefined);
         if (context) {
             return context.onWarning;
@@ -111,7 +117,7 @@ export class CardContext extends TreeNode<CardContext> {
         return undefined;
     }
 
-    public get focusHandler() : () => void {
+    public get focusHandler(): () => void {
         let context = this.findRequiredContext(context => context.onFocus !== undefined);
         if (context) {
             return context.onFocus;
@@ -163,6 +169,14 @@ export class CardContext extends TreeNode<CardContext> {
         let context = this.findRequiredContext(context => context.onSelectAction !== undefined);
         if (context) {
             return context.onSelectAction;
+        }
+        return undefined;
+    }
+
+    public get avatarFallbackRenderHandler(): (diameter: number, altText: string, url: string) => ReactNode {
+        let context = this.findRequiredContext(context => context.avatarFallbackRender !== undefined);
+        if (context) {
+            return context.avatarFallbackRender;
         }
         return undefined;
     }

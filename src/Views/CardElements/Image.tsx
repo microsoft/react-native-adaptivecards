@@ -76,6 +76,7 @@ export class ImageView extends React.Component<IProps, IState> {
                     marginTop={this.spacing}
                     marginLeft={spacing}
                     mode={model.style === 'person' ? 'avatar' : 'default'}
+                    avatarFallbackRender={model.context && model.context.avatarFallbackRenderHandler}
                 />
             );
         }
@@ -169,13 +170,25 @@ export class ImageView extends React.Component<IProps, IState> {
                 }
             }
 
-            ImageUtils.fetchSize(
-                model.url,
-                size || model.size,
-                { width: maxWidth, height: maxHeight },
-                this.onImageSize,
-                this.onImageSizeError
-            );
+            if (model.style === 'person' && model.context.avatarFallbackRenderHandler) {
+                const definedSize = StyleManager.getImageSize(size || model.size);
+                if (typeof definedSize === 'number') {
+                    this.onImageSize({
+                        width: definedSize,
+                        height: definedSize
+                    });
+                } else {
+                    this.onImageSizeError(new Error('Avatar image size should be actual number.'));
+                }
+            } else {
+                ImageUtils.fetchSize(
+                    model.url,
+                    size || model.size,
+                    { width: maxWidth, height: maxHeight },
+                    this.onImageSize,
+                    this.onImageSizeError
+                );
+            }
         }
     }
 

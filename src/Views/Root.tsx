@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
     View,
 } from 'react-native';
@@ -20,6 +20,7 @@ export interface IAdaptiveCardProps {
     onError?: (error: any) => void;
     onInfo?: (info: any) => void;
     onWarning?: (warning: any) => void;
+    avatarFallbackRender?: (diameter: number, altText: string, url: string) => ReactNode;
 }
 
 export class CardRootView extends React.Component<IAdaptiveCardProps> {
@@ -48,6 +49,7 @@ export class CardRootView extends React.Component<IAdaptiveCardProps> {
         this.rootCardContext.registerErrorHandler(this.props.onError);
         this.rootCardContext.registerInfoHandler(this.props.onInfo);
         this.rootCardContext.registerWarningHandler(this.props.onWarning);
+        this.rootCardContext.registerAvatarFallbackRenderHandler(this.props.avatarFallbackRender);
 
     }
 

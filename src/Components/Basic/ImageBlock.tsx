@@ -31,6 +31,7 @@ interface IProps {
     onLayout?: (event: LayoutChangeEvent) => void;
     onLoad?: (data: any) => void;
     onError?: (error: any) => void;
+    avatarFallbackRender?: (diameter: number, altText: string, url: string) => React.ReactNode;
 }
 
 interface IState {
@@ -137,7 +138,21 @@ export class ImageBlock extends React.Component<IProps, IState> {
     }
 
     private renderImage() {
-        if (UrlUtils.isSvgXml(this.props.url)) {
+        if (this.props.mode === 'avatar' && this.props.avatarFallbackRender) {
+            return <View
+                style={[
+                    {
+                        width: this.props.width,
+                        height: this.props.height,
+                        overflow: 'hidden',
+                    },
+                    this.borderRadius,
+                    this.props.style
+                ]}
+            >
+                {this.props.avatarFallbackRender(this.props.width, this.props.alt, this.props.url)}
+            </View>;
+        } else if (UrlUtils.isSvgXml(this.props.url)) {
             return (
                 <View
                     style={[

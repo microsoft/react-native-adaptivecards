@@ -88,7 +88,18 @@ export class ImageBlock extends React.Component {
             ], resizeMethod: 'resize', resizeMode: 'contain' }));
     }
     renderImage() {
-        if (UrlUtils.isSvgXml(this.props.url)) {
+        if (this.props.mode === 'avatar' && this.props.avatarFallbackRender) {
+            return React.createElement(View, { style: [
+                    {
+                        width: this.props.width,
+                        height: this.props.height,
+                        overflow: 'hidden',
+                    },
+                    this.borderRadius,
+                    this.props.style
+                ] }, this.props.avatarFallbackRender(this.props.width, this.props.alt, this.props.url));
+        }
+        else if (UrlUtils.isSvgXml(this.props.url)) {
             return (React.createElement(View, { style: [
                     {
                         width: this.props.width,
